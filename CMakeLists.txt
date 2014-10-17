@@ -852,7 +852,9 @@ function(
 
 	target_link_libraries(
 		${TARGETNAME}
+		PRIVATE
 		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
 	)
 
 	if(
@@ -860,6 +862,7 @@ function(
 	)
 		target_link_libraries(
 			${TARGETNAME}
+			PRIVATE
 			${X11_X11_LIB}
 		)
 	endif()
@@ -877,6 +880,7 @@ function(
 
 		target_link_libraries(
 			${TARGETNAME}
+			PRIVATE
 			${fcppt_filesystem_TARGET}
 		)
 	endif()
