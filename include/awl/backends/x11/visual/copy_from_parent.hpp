@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_VISUAL_COPY_FROM_PARENT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -28,24 +28,24 @@ class AWL_CLASS_SYMBOL copy_from_parent
 		copy_from_parent
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	copy_from_parent();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~copy_from_parent()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Visual *
 	get() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	XVisualInfo *
 	info() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	int
 	depth() const
 	override;

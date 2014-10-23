@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_EVENT_PROCESSOR_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_EVENT_PROCESSOR_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/event/message_fwd.hpp>
 #include <awl/backends/windows/event/processor_fwd.hpp>
@@ -34,30 +34,30 @@ class processor
 		processor
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	processor(
 		awl::backends::windows::system::object &,
 		awl::backends::windows::system::event::optional_processor_ref const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~processor();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	poll();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	next();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	attach(
 		awl::window::event::processor &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	detach(
 		awl::window::event::processor &

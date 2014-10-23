@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_EVENT_MESSAGE_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_EVENT_MESSAGE_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/event/message_fwd.hpp>
 
@@ -18,13 +18,13 @@ namespace event
 class message
 {
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	message(
 		MSG const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	MSG const &
 	get() const;
 private:

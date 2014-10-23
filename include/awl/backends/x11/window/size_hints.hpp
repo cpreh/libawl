@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_SIZE_HINTS_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_SIZE_HINTS_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/deleter.hpp>
 #include <awl/window/optional_dim.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -26,17 +26,17 @@ class size_hints
 		size_hints
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	size_hints(
 		awl::window::optional_dim const &exact_hint,
 		awl::window::optional_dim const &minimum_hint,
 		awl::window::optional_dim const &maximum_hint
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~size_hints();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	XSizeHints *
 	get() const;
 private:

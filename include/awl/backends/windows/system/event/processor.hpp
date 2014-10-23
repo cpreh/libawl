@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/event/object_fwd.hpp>
 #include <awl/backends/windows/event/type.hpp>
 #include <awl/backends/windows/system/event/callback.hpp>
@@ -33,10 +33,10 @@ class AWL_CLASS_SYMBOL processor
 		processor
 	);
 protected:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	processor();
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	virtual
 	~processor() = 0;
 

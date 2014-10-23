@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_COCOA_WINDOW_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/cocoa/event/processor_fwd.hpp>
 #include <awl/backends/cocoa/window/event/processor_fwd.hpp>
 #include <awl/window/bit_depth.hpp>
@@ -31,40 +31,40 @@ class AWL_CLASS_SYMBOL object
 FCPPT_NONCOPYABLE(
 		object);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	object(
 			awl::window::parameters const &);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	show();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::dim const
 	size() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	has_opengl() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::optional<awl::window::bit_depth::type> const
 	bit_depth() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::optional<awl::window::stencil_buffer::type> const
 	stencil_buffer() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::optional<awl::window::depth_buffer::type> const
 	depth_buffer() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	NSWindow *
 	window_handle();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~object();
 private:
 	friend class cocoa::window::event::processor;

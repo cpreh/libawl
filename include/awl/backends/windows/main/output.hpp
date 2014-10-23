@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_MAIN_OUTPUT_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_MAIN_OUTPUT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/main/output.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/io/ofstream.hpp>
@@ -29,13 +29,13 @@ class output
 		output
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	output(
 		fcppt::io::ostream &,
 		boost::filesystem::path const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~output()
 	override;
 private:

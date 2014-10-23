@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_WRAPPED_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object_fwd.hpp>
@@ -36,48 +36,48 @@ class AWL_CLASS_SYMBOL wrapped_object
 		wrapped_object
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	wrapped_object(
 		awl::backends::x11::display &,
 		awl::backends::x11::screen,
 		Window
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~wrapped_object()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	destroy()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	destroyed() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::x11::display &
 	display() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::x11::screen const
 	screen() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::x11::visual::object const &
 	visual() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Window
 	get() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::x11::window::class_hint const *
 	class_hint() const
 	override;

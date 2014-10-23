@@ -1,7 +1,7 @@
 #ifndef AWL_WINDOW_PARAMETERS_HPP_INCLUDED
 #define AWL_WINDOW_PARAMETERS_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/cursor/const_optional_object_ref.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
@@ -24,93 +24,93 @@ class parameters
 		parameters
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	parameters(
 		awl::visual::object const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	position(
 		awl::window::pos const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	size(
 		awl::window::dim const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	exact_size_hint(
 		awl::window::dim const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	minimum_size_hint(
 		awl::window::dim const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	maximum_size_hint(
 		awl::window::dim const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	title(
 		fcppt::string const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	class_name(
 		fcppt::string const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	cursor(
 		awl::cursor::const_optional_object_ref const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::visual::object const &
 	visual() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::optional_pos const
 	position() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::optional_dim const
 	size() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::optional_dim const
 	exact_size_hint() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::optional_dim const
 	minimum_size_hint() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::optional_dim const
 	maximum_size_hint() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::string const &
 	title() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::string const &
 	class_name() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::cursor::const_optional_object_ref const &
 	cursor() const;
 private:

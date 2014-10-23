@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_WRAPPED_CLASS_HINT_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_WRAPPED_CLASS_HINT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -28,26 +28,26 @@ class wrapped_class_hint
 		wrapped_class_hint
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	wrapped_class_hint(
 		Display *,
 		Window
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~wrapped_class_hint()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	has_data() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	std::string
 	res_name() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	std::string
 	res_class() const
 	override;

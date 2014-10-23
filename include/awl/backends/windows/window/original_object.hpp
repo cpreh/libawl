@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_ORIGINAL_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/wndclass_fwd.hpp>
 #include <awl/backends/windows/wndclass_remove_callback.hpp>
@@ -31,28 +31,28 @@ class AWL_CLASS_SYMBOL original_object
 		original_object
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	original_object(
 		awl::window::parameters const &,
 		awl::backends::windows::wndclass &,
 		awl::backends::windows::wndclass_remove_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_object()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	HWND
 	hwnd() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::windows::cursor::const_optional_object_ref const
 	cursor() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::visual::object const &
 	visual() const
 	override;

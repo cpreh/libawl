@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/event/object_fwd.hpp>
 #include <awl/backends/windows/event/type.hpp>
@@ -48,67 +48,67 @@ class AWL_CLASS_SYMBOL original_processor
 		original_processor
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	original_processor(
 		awl::backends::windows::system::object &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_processor();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	poll();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	quit(
 		awl::main::exit_code
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	running() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::main::exit_code const
 	exit_code() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	quit_callback(
 		awl::system::event::quit_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_callback(
 		awl::backends::windows::event::type,
 		windows::system::event::callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_handle_callback(
 		windows::system::event::handle_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	system::event::handle_unique_ptr
 	create_event_handle();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	process(
 		awl::backends::windows::event::object const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	poll_handles();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	next();
 private:

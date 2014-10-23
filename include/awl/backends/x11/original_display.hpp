@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_ORIGINAL_DISPLAY_HPP_INCLUDED
 #define AWL_BACKENDS_X11_ORIGINAL_DISPLAY_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -24,15 +24,15 @@ class original_display
 		original_display
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	original_display();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Display *
 	get() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_display()
 	override;
 private:

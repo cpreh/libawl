@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_SYSTEM_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SYSTEM_OBJECT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/system/object_fwd.hpp>
 #include <awl/system/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -24,10 +24,10 @@ class object
 		object
 	);
 protected:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	object();
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	virtual
 	~object();
 };

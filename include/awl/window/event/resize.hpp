@@ -1,7 +1,7 @@
 #ifndef AWL_WINDOW_EVENT_RESIZE_HPP_INCLUDED
 #define AWL_WINDOW_EVENT_RESIZE_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/event/resize_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
@@ -20,13 +20,13 @@ class resize
 		resize
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	resize(
 		awl::window::dim const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::dim const &
 	dim() const;
 private:

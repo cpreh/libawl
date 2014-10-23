@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/event/lparam.hpp>
 #include <awl/backends/windows/event/message_fwd.hpp>
 #include <awl/backends/windows/event/type.hpp>
@@ -55,70 +55,70 @@ class AWL_CLASS_SYMBOL original_processor
 		original_processor
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	original_processor(
 		awl::backends::windows::window::object &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_processor();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	poll();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	close_callback(
 		awl::window::event::close_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	destroy_callback(
 		awl::window::event::destroy_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	focus_in_callback(
 		awl::window::event::focus_in_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	focus_out_callback(
 		awl::window::event::focus_out_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	hide_callback(
 		awl::window::event::hide_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	resize_callback(
 		awl::window::event::resize_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	show_callback(
 		awl::window::event::show_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::object &
 	window() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::windows::window::object &
 	windows_window() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_callback(
 		awl::backends::windows::event::type,
@@ -138,7 +138,7 @@ public:
 		awl::backends::windows::event::type
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	windows::window::event::return_type const
 	execute_callback(
 		awl::backends::windows::event::type,

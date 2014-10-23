@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_VISUAL_NULL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_VISUAL_NULL_OBJECT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/visual/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -24,10 +24,10 @@ class null_object
 		null_object
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	null_object();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~null_object();
 private:
 	void

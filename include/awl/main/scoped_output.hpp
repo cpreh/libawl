@@ -1,7 +1,7 @@
 #ifndef AWL_MAIN_SCOPED_OUTPUT_HPP_INCLUDED
 #define AWL_MAIN_SCOPED_OUTPUT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/main/output_fwd.hpp>
 #include <awl/main/scoped_output_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -23,13 +23,13 @@ class scoped_output
 		scoped_output
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	scoped_output(
 		fcppt::io::ostream &,
 		boost::filesystem::path const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~scoped_output();
 private:
 	std::unique_ptr<

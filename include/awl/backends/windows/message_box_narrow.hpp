@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_MESSAGE_BOX_NARROW_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_MESSAGE_BOX_NARROW_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/window/const_optional_object_ref_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>

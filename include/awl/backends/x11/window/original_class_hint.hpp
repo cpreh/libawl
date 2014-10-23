@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_ORIGINAL_CLASS_HINT_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_ORIGINAL_CLASS_HINT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
@@ -29,26 +29,26 @@ class original_class_hint
 		original_class_hint
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	original_class_hint(
 		fcppt::string const &app_name,
 		fcppt::string const &class_name
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_class_hint()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	XClassHint *
 	get() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	std::string
 	res_name() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	std::string
 	res_class() const
 	override;

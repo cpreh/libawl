@@ -2,7 +2,7 @@
 #define AWL_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/event/processor_fwd.hpp>
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -19,7 +19,7 @@ class AWL_CLASS_SYMBOL processor
 		processor
 	);
 protected:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	processor();
 public:
 	virtual
@@ -42,7 +42,7 @@ public:
 		awl::window::event::processor &
 	) = 0;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	virtual
 	~processor() = 0;
 };

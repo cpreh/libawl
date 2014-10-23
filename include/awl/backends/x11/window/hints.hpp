@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_HINTS_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_HINTS_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xutil.h>
@@ -22,13 +22,13 @@ class hints
 		hints
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	hints();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~hints();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	XWMHints *
 	get() const;
 private:

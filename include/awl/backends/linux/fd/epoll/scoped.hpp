@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_LINUX_FD_EPOLL_SCOPED_HPP_INCLUDED
 #define AWL_BACKENDS_LINUX_FD_EPOLL_SCOPED_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/linux/fd/object.hpp>
 #include <awl/backends/linux/fd/epoll/scoped_fwd.hpp>
 #include <awl/backends/linux/fd/epoll/set_fwd.hpp>
@@ -25,13 +25,13 @@ class scoped
 		scoped
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	scoped(
 		awl::backends::linux::fd::epoll::set &,
 		awl::backends::linux::fd::object
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~scoped();
 private:
 	awl::backends::linux::fd::epoll::set &set_;

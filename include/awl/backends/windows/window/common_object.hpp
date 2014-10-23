@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_COMMON_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/object_fwd.hpp>
@@ -27,25 +27,25 @@ class AWL_CLASS_SYMBOL common_object
 		common_object
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	common_object();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~common_object();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	show();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::dim const
 	size() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::rect const
 	rect() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	equal_to(
 		awl::window::object const &

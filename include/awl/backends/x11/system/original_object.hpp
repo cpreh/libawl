@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_X11_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/original_display.hpp>
 #include <awl/backends/x11/screen.hpp>
@@ -30,36 +30,36 @@ class original_object
 public:
 	// NOTE: We could add a string specifying which display to connect
 	// to here
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	original_object();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_object()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::object_unique_ptr
 	create_window(
 		awl::window::parameters const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::visual::object_unique_ptr
 	default_visual()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::object_unique_ptr
 	focus_window()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::x11::display &
 	display()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::x11::screen const
 	screen() const
 	override;

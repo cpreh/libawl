@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_WRAPPED_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/cursor/const_optional_object_ref_fwd.hpp>
 #include <awl/backends/windows/window/common_object.hpp>
@@ -28,25 +28,25 @@ class AWL_CLASS_SYMBOL wrapped_object
 		wrapped_object
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	wrapped_object(
 		HWND
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~wrapped_object();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	HWND
 	hwnd() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::windows::cursor::const_optional_object_ref const
 	cursor() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::visual::object const &
 	visual() const
 	override;

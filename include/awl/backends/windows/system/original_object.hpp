@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/counted_wndclass.hpp>
 #include <awl/backends/windows/system/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
@@ -30,13 +30,13 @@ class original_object
 		original_object
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	original_object();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_object();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::object_unique_ptr
 	create_window(
 		awl::window::parameters const &

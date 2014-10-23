@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_CURSOR_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/cursor/object_fwd.hpp>
 #include <awl/cursor/object.hpp>
@@ -26,10 +26,10 @@ class AWL_CLASS_SYMBOL object
 		object
 	);
 protected:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	object();
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	virtual
 	~object() = 0;
 

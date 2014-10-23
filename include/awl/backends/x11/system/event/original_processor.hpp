@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/linux/fd/callback.hpp>
 #include <awl/backends/linux/fd/function.hpp>
 #include <awl/backends/linux/fd/object.hpp>
@@ -51,46 +51,46 @@ class AWL_CLASS_SYMBOL original_processor
 		original_processor
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	original_processor(
 		x11::system::object &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_processor()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	poll()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	quit(
 		awl::main::exit_code
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	running() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::main::exit_code const
 	exit_code() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	quit_callback(
 		awl::system::event::quit_callback const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_callback(
 		x11::system::event::opcode const &,
@@ -99,7 +99,7 @@ public:
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_fd_callback(
 		awl::backends::linux::fd::object const &,
@@ -107,14 +107,14 @@ public:
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	epoll(
 		awl::backends::linux::fd::optional_duration const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	process(
 		x11::event::object const &

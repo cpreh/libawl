@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_PIXMAP_ORIGINAL_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/pixmap/holder.hpp>
 #include <awl/backends/x11/pixmap/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -26,7 +26,7 @@ class AWL_CLASS_SYMBOL original_object
 		object
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	original_object(
 		awl::backends::x11::pixmap::holder_unique_ptr &&

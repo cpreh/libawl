@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_SCOPED_LOCAL_MEMORY_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SCOPED_LOCAL_MEMORY_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -19,13 +19,13 @@ class scoped_local_memory
 		scoped_local_memory
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	scoped_local_memory(
 		HLOCAL
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~scoped_local_memory();
 private:
 	HLOCAL const memory_;

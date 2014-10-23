@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_HOLDER_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_HOLDER_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -24,24 +24,24 @@ class holder
 		holder
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	holder(
 		x11::display &,
 		Window
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~holder();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	destroy();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	destroyed() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Window
 	get() const;
 private:

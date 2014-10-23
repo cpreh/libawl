@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/event/processor_fwd.hpp>
 #include <awl/backends/x11/system/object_fwd.hpp>
 #include <awl/backends/x11/system/event/optional_processor_ref.hpp>
@@ -32,34 +32,34 @@ class AWL_CLASS_SYMBOL processor
 		processor
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	processor(
 		awl::backends::x11::system::object &,
 		awl::backends::x11::system::event::optional_processor_ref const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~processor()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	poll()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	next()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	attach(
 		awl::window::event::processor &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	detach(
 		awl::window::event::processor &

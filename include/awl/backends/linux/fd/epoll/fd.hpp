@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_LINUX_FD_EPOLL_FD_HPP_INCLUDED
 #define AWL_BACKENDS_LINUX_FD_EPOLL_FD_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/linux/fd/object.hpp>
 #include <awl/backends/linux/fd/epoll/fd_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -24,10 +24,10 @@ class fd
 		fd
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fd();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~fd();
 
 	awl::backends::linux::fd::object const

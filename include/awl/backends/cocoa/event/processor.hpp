@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_COCOA_EVENT_PROCESSOR_HPP_INCLUDED
 #define AWL_BACKENDS_COCOA_EVENT_PROCESSOR_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/cocoa/system/object_fwd.hpp>
 #include <awl/backends/cocoa/system/event/optional_processor_ref.hpp>
 #include <awl/event/processor.hpp>
@@ -26,29 +26,29 @@ class processor
 FCPPT_NONCOPYABLE(
 	processor);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	processor(
 		cocoa::system::object &,
 		cocoa::system::event::optional_processor_ref const &);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~processor();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	poll();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	next();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	attach(
 		awl::window::event::processor &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	void
 	detach(
 		awl::window::event::processor &

@@ -2,7 +2,7 @@
 #define AWL_WINDOW_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/rect_fwd.hpp>
@@ -20,7 +20,7 @@ class AWL_CLASS_SYMBOL object
 		object
 	);
 protected:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	object();
 public:
 	virtual
@@ -45,7 +45,7 @@ public:
 	awl::visual::object const &
 	visual() const = 0;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	virtual
 	~object() = 0;
 };

@@ -2,7 +2,7 @@
 #define AWL_SYSTEM_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/system/object_fwd.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
@@ -21,7 +21,7 @@ class AWL_CLASS_SYMBOL object
 		object
 	);
 protected:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	object();
 public:
 	virtual
@@ -38,7 +38,7 @@ public:
 	awl::window::object_unique_ptr
 	focus_window() = 0;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	virtual
 	~object() = 0;
 };

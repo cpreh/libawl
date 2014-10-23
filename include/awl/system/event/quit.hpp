@@ -1,7 +1,7 @@
 #ifndef AWL_SYSTEM_EVENT_QUIT_HPP_INCLUDED
 #define AWL_SYSTEM_EVENT_QUIT_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/system/event/quit_fwd.hpp>
 
@@ -16,13 +16,13 @@ namespace event
 class quit
 {
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	quit(
 		awl::main::exit_code
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::main::exit_code const
 	exit_code() const;
 private:

@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_LINUX_FD_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/linux/fd/callback.hpp>
 #include <awl/backends/linux/fd/object.hpp>
 #include <awl/backends/linux/fd/optional_duration_fwd.hpp>
@@ -26,7 +26,7 @@ class AWL_CLASS_SYMBOL processor
 		processor
 	);
 protected:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	processor();
 public:
 	virtual
@@ -42,7 +42,7 @@ public:
 		awl::backends::linux::fd::optional_duration const &
 	) = 0;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	virtual
 	~processor() = 0;
 };

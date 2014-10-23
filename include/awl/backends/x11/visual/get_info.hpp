@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_VISUAL_GET_INFO_HPP_INCLUDED
 #define AWL_BACKENDS_X11_VISUAL_GET_INFO_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/visual/info_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -18,7 +18,7 @@ namespace x11
 namespace visual
 {
 
-AWL_SYMBOL
+AWL_DETAIL_SYMBOL
 awl::backends::x11::visual::info_unique_ptr
 get_info(
 	awl::backends::x11::display const &,

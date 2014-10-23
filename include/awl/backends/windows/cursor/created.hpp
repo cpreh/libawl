@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_CURSOR_CREATED_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/cursor/and_plane.hpp>
 #include <awl/backends/windows/cursor/created_fwd.hpp>
@@ -30,7 +30,7 @@ class AWL_CLASS_SYMBOL created
 		created
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	created(
 		awl::cursor::hotspot,
 		awl::backends::windows::cursor::dim,
@@ -38,10 +38,10 @@ public:
 		awl::backends::windows::cursor::xor_plane
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~created();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	HCURSOR
 	get() const;
 private:

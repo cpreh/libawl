@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/atom.hpp>
 #include <awl/backends/x11/event/object_fwd.hpp>
 #include <awl/backends/x11/window/object_fwd.hpp>
@@ -57,81 +57,81 @@ class AWL_CLASS_SYMBOL original_processor
 		original_processor
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	original_processor(
 		awl::backends::x11::window::object &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_processor()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	poll()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	close_callback(
 		awl::window::event::close_callback const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	destroy_callback(
 		awl::window::event::destroy_callback const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	focus_in_callback(
 		awl::window::event::focus_in_callback const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	focus_out_callback(
 		awl::window::event::focus_out_callback const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	hide_callback(
 		awl::window::event::hide_callback const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	resize_callback(
 		awl::window::event::resize_callback const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	show_callback(
 		awl::window::event::show_callback const &
 	)
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::window::object &
 	window() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	awl::backends::x11::window::object &
 	x11_window() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_callback(
 		awl::backends::x11::window::event::type,

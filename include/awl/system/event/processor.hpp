@@ -2,7 +2,7 @@
 #define AWL_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/system/event/quit_callback.hpp>
@@ -23,7 +23,7 @@ class AWL_CLASS_SYMBOL processor
 		processor
 	);
 protected:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	processor();
 public:
 	virtual
@@ -50,7 +50,7 @@ public:
 		awl::system::event::quit_callback const &
 	) = 0;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	virtual ~processor();
 };
 

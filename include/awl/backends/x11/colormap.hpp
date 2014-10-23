@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_COLORMAP_HPP_INCLUDED
 #define AWL_BACKENDS_X11_COLORMAP_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object_fwd.hpp>
@@ -24,21 +24,21 @@ class colormap
 		colormap
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	colormap(
 		awl::backends::x11::display &,
 		awl::backends::x11::screen,
 		awl::backends::x11::visual::object const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~colormap();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Colormap &
 	get();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Colormap const &
 	get() const;
 private:

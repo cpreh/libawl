@@ -267,10 +267,12 @@ configure_file(
 )
 
 fcppt_generate_symbol_header(
-	AWL_STATIC_LINK
-	awl
-	AWL
-	awl
+	STATIC_LINK_FLAG
+		AWL_STATIC_LINK
+	EXPORTS_NAME
+		awl
+	SYMBOL_NAME
+		AWL_DETAIL
 )
 
 include_directories(

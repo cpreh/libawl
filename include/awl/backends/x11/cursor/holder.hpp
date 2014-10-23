@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_CURSOR_HOLDER_HPP_INCLUDED
 #define AWL_BACKENDS_X11_CURSOR_HOLDER_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/cursor/holder_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -25,16 +25,16 @@ class holder
 		holder
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	holder(
 		awl::backends::x11::display const &,
 		Cursor
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~holder();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Cursor
 	get() const;
 private:

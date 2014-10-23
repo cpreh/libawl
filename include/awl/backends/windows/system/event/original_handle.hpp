@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_ORIGINAL_HANDLE_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_ORIGINAL_HANDLE_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/system/event/handle.hpp>
 #include <awl/backends/windows/system/event/handle_destroy_callback.hpp>
@@ -27,19 +27,19 @@ class original_handle
 		original_handle
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit original_handle(
 		system::event::handle_destroy_callback const &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~original_handle();
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	HANDLE
 	get() const;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	bool
 	ready() const;
 private:

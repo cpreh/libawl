@@ -1,7 +1,7 @@
 #ifndef AWL_EVENT_SCOPED_WINDOW_PROCESSOR_HPP_INCLUDED
 #define AWL_EVENT_SCOPED_WINDOW_PROCESSOR_HPP_INCLUDED
 
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/event/processor_fwd.hpp>
 #include <awl/event/scoped_window_processor_fwd.hpp>
 #include <awl/window/event/processor_fwd.hpp>
@@ -18,13 +18,13 @@ class scoped_window_processor
 		scoped_window_processor
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	scoped_window_processor(
 		awl::event::processor &,
 		awl::window::event::processor &
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~scoped_window_processor();
 private:
 	awl::event::processor &processor_;

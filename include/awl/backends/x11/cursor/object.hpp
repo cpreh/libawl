@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_CURSOR_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/cursor/holder_unique_ptr.hpp>
 #include <awl/backends/x11/cursor/object_fwd.hpp>
 #include <awl/cursor/object.hpp>
@@ -29,17 +29,17 @@ class AWL_CLASS_SYMBOL object
 		object
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	object(
 		awl::backends::x11::cursor::holder_unique_ptr &&
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~object()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Cursor
 	get() const;
 private:

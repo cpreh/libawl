@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_VISUAL_WRAPPED_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/symbol.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/visual/info_unique_ptr.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -29,27 +29,27 @@ class AWL_CLASS_SYMBOL wrapped
 		wrapped
 	);
 public:
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	explicit
 	wrapped(
 		awl::backends::x11::visual::info_unique_ptr &&
 	);
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	~wrapped()
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	Visual *
 	get() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	XVisualInfo *
 	info() const
 	override;
 
-	AWL_SYMBOL
+	AWL_DETAIL_SYMBOL
 	int
 	depth() const
 	override;
