@@ -423,7 +423,6 @@ set(
 	include/awl/backends/x11/pixmap/holder.hpp
 	include/awl/backends/x11/pixmap/holder_fwd.hpp
 	include/awl/backends/x11/pixmap/holder_unique_ptr.hpp
-	include/awl/backends/x11/pixmap/original_object.hpp
 	include/awl/backends/x11/pixmap/size.hpp
 	include/awl/backends/x11/screen.hpp
 	include/awl/backends/x11/system/event/callback.hpp
