@@ -17,7 +17,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
-#include <fcppt/math/dim/structure_cast.hpp>
+#include <fcppt/math/dim/to_unsigned.hpp>
 
 
 awl::backends::windows::window::common_object::common_object()
@@ -34,9 +34,7 @@ awl::window::dim const
 awl::backends::windows::window::common_object::size() const
 {
 	return
-		fcppt::math::dim::structure_cast<
-			awl::window::dim
-		>(
+		fcppt::math::dim::to_unsigned(
 			this->rect().size()
 		);
 }
