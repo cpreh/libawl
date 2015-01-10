@@ -10,6 +10,7 @@
 #include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/dim/structure_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -97,7 +98,8 @@ awl::backends::x11::window::common_object::size() const
 {
 	return
 		fcppt::math::dim::structure_cast<
-			awl::window::dim
+			awl::window::dim,
+			fcppt::cast::to_unsigned_fun
 		>(
 			this->rect().size()
 		);
