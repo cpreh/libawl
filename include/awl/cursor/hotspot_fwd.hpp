@@ -2,7 +2,7 @@
 #define AWL_CURSOR_HOTSPOT_FWD_HPP_INCLUDED
 
 #include <awl/cursor/size.hpp>
-#include <fcppt/math/vector/static.hpp>
+#include <fcppt/math/vector/static_fwd.hpp>
 
 
 namespace awl

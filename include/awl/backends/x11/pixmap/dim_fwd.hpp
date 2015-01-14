@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_PIXMAP_DIM_FWD_HPP_INCLUDED
 
 #include <awl/backends/x11/pixmap/size.hpp>
-#include <fcppt/math/dim/static.hpp>
+#include <fcppt/math/dim/static_fwd.hpp>
 
 
 namespace awl

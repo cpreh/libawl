@@ -2,7 +2,7 @@
 #define AWL_WINDOW_POS_FWD_HPP_INCLUDED
 
 #include <awl/window/unit.hpp>
-#include <fcppt/math/vector/static.hpp>
+#include <fcppt/math/vector/static_fwd.hpp>
 
 
 namespace awl

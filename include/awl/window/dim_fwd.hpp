@@ -2,7 +2,7 @@
 #define AWL_WINDOW_DIM_FWD_HPP_INCLUDED
 
 #include <awl/window/size.hpp>
-#include <fcppt/math/dim/static.hpp>
+#include <fcppt/math/dim/static_fwd.hpp>
 
 
 namespace awl

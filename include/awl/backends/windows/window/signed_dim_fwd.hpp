@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_WINDOW_SIGNED_DIM_FWD_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_WINDOW_SIGNED_DIM_FWD_HPP_INCLUDED
 
-#include <fcppt/math/dim/static.hpp>
+#include <fcppt/math/dim/static_fwd.hpp>
 
 
 namespace awl

@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_CURSOR_DIM_FWD_HPP_INCLUDED
 
 #include <awl/backends/windows/cursor/size.hpp>
-#include <fcppt/math/dim/static.hpp>
+#include <fcppt/math/dim/static_fwd.hpp>
 
 
 namespace awl
