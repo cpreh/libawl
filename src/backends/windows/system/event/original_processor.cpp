@@ -20,6 +20,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -45,7 +46,8 @@ awl::backends::windows::system::event::original_processor::original_processor(
 	quit_connection_(
 		this->register_callback(
 			fcppt::strong_typedef_construct_cast<
-				awl::backends::windows::event::type
+				awl::backends::windows::event::type,
+				fcppt::cast::to_unsigned_fun
 			>(
 				WM_QUIT
 			),

@@ -16,6 +16,7 @@
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
 
@@ -106,23 +107,25 @@ awl::backends::windows::window::common_object::show()
 	awl::backends::windows::event::post_message(
 		this->hwnd(),
 		fcppt::strong_typedef_construct_cast<
-			awl::backends::windows::event::type
+			awl::backends::windows::event::type,
+			fcppt::cast::to_unsigned_fun
 		>(
 			WM_SIZE
 		),
 		fcppt::strong_typedef_construct_cast<
-			awl::backends::windows::event::wparam
+			awl::backends::windows::event::wparam,
+			fcppt::cast::to_unsigned_fun
 		>(
 			SIZE_RESTORED
 		),
 		awl::backends::windows::event::lparam(
 			MAKELPARAM(
-				static_cast<
+				fcppt::cast::size<
 					WORD
 				>(
 					cur_size.w()
 				),
-				static_cast<
+				fcppt::cast::size<
 					WORD
 				>(
 					cur_size.h()

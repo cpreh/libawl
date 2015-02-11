@@ -33,6 +33,8 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assign/make_container.hpp>
+#include <fcppt/cast/size.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/find_opt.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -79,7 +81,8 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		>(
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type
+					awl::backends::windows::event::type,
+					fcppt::cast::to_unsigned_fun
 				>(
 					WM_CLOSE
 				),
@@ -92,7 +95,8 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		)(
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type
+					awl::backends::windows::event::type,
+					fcppt::cast::to_unsigned_fun
 				>(
 					WM_DESTROY
 				),
@@ -105,7 +109,8 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		)(
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type
+					awl::backends::windows::event::type,
+					fcppt::cast::to_unsigned_fun
 				>(
 					WM_SETFOCUS
 				),
@@ -118,7 +123,8 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		)(
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type
+					awl::backends::windows::event::type,
+					fcppt::cast::to_unsigned_fun
 				>(
 					WM_KILLFOCUS
 				),
@@ -131,7 +137,8 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		)(
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type
+					awl::backends::windows::event::type,
+					fcppt::cast::to_unsigned_fun
 				>(
 					WM_SIZE
 				),
@@ -144,7 +151,8 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		)(
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type
+					awl::backends::windows::event::type,
+					fcppt::cast::to_unsigned_fun
 				>(
 					WM_SHOWWINDOW
 				),
@@ -157,7 +165,8 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		)(
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type
+					awl::backends::windows::event::type,
+					fcppt::cast::to_unsigned_fun
 				>(
 					WM_SETCURSOR
 				),
@@ -375,7 +384,8 @@ awl::backends::windows::window::event::original_processor::allocate_user_message
 	// FIXME
 	return
 		fcppt::strong_typedef_construct_cast<
-			awl::backends::windows::event::type
+			awl::backends::windows::event::type,
+			fcppt::cast::to_unsigned_fun
 		>(
 			WM_USER
 		);
@@ -494,14 +504,14 @@ awl::backends::windows::window::event::original_processor::on_resize(
 	resize_signal_(
 		awl::window::event::resize(
 			awl::window::dim(
-				static_cast<
+				fcppt::cast::size<
 					awl::window::dim::value_type
 				>(
 					LOWORD(
 						_event.lparam().get()
 					)
 				),
-				static_cast<
+				fcppt::cast::size<
 					awl::window::dim::value_type
 				>(
 					HIWORD(
