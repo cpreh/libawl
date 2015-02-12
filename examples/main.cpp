@@ -9,10 +9,10 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
-#include <fcppt/time/sleep_any.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <cstdlib>
+#include <thread>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -47,7 +47,7 @@ try
 
 	window->show();
 
-	fcppt::time::sleep_any(
+	std::this_thread::sleep_for(
 		std::chrono::seconds(
 			1
 		)
