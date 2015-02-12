@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_WINDOWS_EVENT_MESSAGE_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_EVENT_MESSAGE_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/event/message_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

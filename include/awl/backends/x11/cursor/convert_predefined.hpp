@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_X11_CURSOR_CONVERT_PREDEFINED_HPP_INCLUDED
 #define AWL_BACKENDS_X11_CURSOR_CONVERT_PREDEFINED_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/cursor/shape.hpp>
 #include <awl/cursor/predefined_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

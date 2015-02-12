@@ -3,8 +3,8 @@
 
 #include <awl/detail/symbol.hpp>
 #include <awl/main/output_fwd.hpp>
-#include <fcppt/symbol/class.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/symbol/class.hpp>
 
 
 namespace awl

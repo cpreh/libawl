@@ -1,8 +1,8 @@
 #ifndef AWL_BACKENDS_WINDOWS_SCOPED_LOCAL_MEMORY_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SCOPED_LOCAL_MEMORY_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

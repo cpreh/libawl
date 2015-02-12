@@ -1,11 +1,11 @@
 #ifndef AWL_BACKENDS_WINDOWS_EVENT_POST_MESSAGE_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_EVENT_POST_MESSAGE_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/event/lparam.hpp>
 #include <awl/backends/windows/event/type.hpp>
 #include <awl/backends/windows/event/wparam.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

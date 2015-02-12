@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_LINUX_FD_EPOLL_CTL_HPP_INCLUDED
 #define AWL_BACKENDS_LINUX_FD_EPOLL_CTL_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/linux/fd/object.hpp>
 #include <awl/backends/linux/fd/epoll/fd_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sys/epoll.h>
 #include <fcppt/config/external_end.hpp>

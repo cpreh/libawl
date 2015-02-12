@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_X11_INTERN_ATOM_HPP_INCLUDED
 #define AWL_BACKENDS_X11_INTERN_ATOM_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/atom.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <string>
 #include <fcppt/config/external_end.hpp>

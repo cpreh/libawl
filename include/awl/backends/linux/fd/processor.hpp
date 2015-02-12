@@ -2,11 +2,11 @@
 #define AWL_BACKENDS_LINUX_FD_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/linux/fd/callback.hpp>
 #include <awl/backends/linux/fd/object.hpp>
 #include <awl/backends/linux/fd/optional_duration_fwd.hpp>
 #include <awl/backends/linux/fd/processor_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 

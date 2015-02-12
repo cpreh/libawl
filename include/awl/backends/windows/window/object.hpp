@@ -2,10 +2,10 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/cursor/const_optional_object_ref_fwd.hpp>
 #include <awl/backends/windows/window/object_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/window/object.hpp>
 #include <fcppt/noncopyable.hpp>
 

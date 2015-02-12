@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/window/event/optional_mask.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

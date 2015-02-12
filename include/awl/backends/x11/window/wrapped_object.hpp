@@ -2,7 +2,6 @@
 #define AWL_BACKENDS_X11_WINDOW_WRAPPED_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object_fwd.hpp>
@@ -11,6 +10,7 @@
 #include <awl/backends/x11/window/common_object.hpp>
 #include <awl/backends/x11/window/wrapped_class_hint.hpp>
 #include <awl/backends/x11/window/event/optional.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>

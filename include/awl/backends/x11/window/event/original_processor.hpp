@@ -2,7 +2,6 @@
 #define AWL_BACKENDS_X11_WINDOW_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/atom.hpp>
 #include <awl/backends/x11/event/object_fwd.hpp>
 #include <awl/backends/x11/window/object_fwd.hpp>
@@ -13,6 +12,7 @@
 #include <awl/backends/x11/window/event/processor.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
 #include <awl/backends/x11/window/event/wm_protocols.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/window/event/close_callback.hpp>
 #include <awl/window/event/close_signal.hpp>
 #include <awl/window/event/destroy_callback.hpp>

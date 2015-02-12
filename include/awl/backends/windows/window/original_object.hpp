@@ -2,13 +2,13 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_ORIGINAL_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/wndclass_fwd.hpp>
 #include <awl/backends/windows/wndclass_remove_callback.hpp>
 #include <awl/backends/windows/cursor/const_optional_object_ref.hpp>
 #include <awl/backends/windows/window/common_object.hpp>
 #include <awl/backends/windows/window/holder.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>

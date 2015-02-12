@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_X11_DEFAULT_SCREEN_HPP_INCLUDED
 #define AWL_BACKENDS_X11_DEFAULT_SCREEN_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

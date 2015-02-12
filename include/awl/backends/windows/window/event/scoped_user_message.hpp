@@ -1,10 +1,10 @@
 #ifndef AWL_BACKENDS_WINDOWS_WINDOW_EVENT_SCOPED_USER_MESSAGE_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_SCOPED_USER_MESSAGE_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/event/type.hpp>
 #include <awl/backends/windows/window/event/processor_fwd.hpp>
 #include <awl/backends/windows/window/event/scoped_user_message_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

@@ -1,8 +1,8 @@
 #ifndef AWL_BACKENDS_WINDOWS_CURSOR_CREATE_INVISIBLE_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_CURSOR_CREATE_INVISIBLE_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/cursor/object_unique_ptr.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

@@ -2,9 +2,9 @@
 #define AWL_BACKENDS_COCOA_WINDOW_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/cocoa/event/processor_fwd.hpp>
 #include <awl/backends/cocoa/window/event/processor_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/window/bit_depth.hpp>
 #include <awl/window/depth_buffer.hpp>
 #include <awl/window/object.hpp>

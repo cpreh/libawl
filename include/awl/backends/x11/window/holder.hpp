@@ -1,8 +1,8 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_HOLDER_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_HOLDER_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>

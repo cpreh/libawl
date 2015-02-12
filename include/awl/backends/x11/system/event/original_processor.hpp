@@ -2,7 +2,6 @@
 #define AWL_BACKENDS_X11_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/linux/fd/callback.hpp>
 #include <awl/backends/linux/fd/function.hpp>
 #include <awl/backends/linux/fd/object.hpp>
@@ -17,6 +16,7 @@
 #include <awl/backends/x11/system/event/opcode.hpp>
 #include <awl/backends/x11/system/event/processor.hpp>
 #include <awl/backends/x11/system/event/type.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/system/optional_exit_code.hpp>
 #include <awl/system/event/processor.hpp>

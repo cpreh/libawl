@@ -1,10 +1,10 @@
 #ifndef AWL_BACKENDS_WINDOWS_WINDOW_EVENT_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_OBJECT_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/event/lparam.hpp>
 #include <awl/backends/windows/event/wparam.hpp>
 #include <awl/backends/windows/window/event/object_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

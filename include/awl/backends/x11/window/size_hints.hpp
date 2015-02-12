@@ -1,8 +1,8 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_SIZE_HINTS_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_SIZE_HINTS_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/deleter.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/window/optional_dim.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>

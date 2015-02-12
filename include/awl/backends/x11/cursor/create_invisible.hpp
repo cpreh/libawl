@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_X11_CURSOR_CREATE_INVISIBLE_HPP_INCLUDED
 #define AWL_BACKENDS_X11_CURSOR_CREATE_INVISIBLE_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/cursor/object_unique_ptr.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

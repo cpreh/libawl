@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_WINDOWS_WINDOW_GET_RECT_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_WINDOW_GET_RECT_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/optional_rect_fwd.hpp>
 #include <awl/backends/windows/window/object_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 
 
 namespace awl

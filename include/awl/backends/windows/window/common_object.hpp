@@ -2,8 +2,8 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_COMMON_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/window/object.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/object_fwd.hpp>
 #include <awl/window/rect_fwd.hpp>

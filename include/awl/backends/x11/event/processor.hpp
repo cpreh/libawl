@@ -2,11 +2,11 @@
 #define AWL_BACKENDS_X11_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/event/processor_fwd.hpp>
 #include <awl/backends/x11/system/object_fwd.hpp>
 #include <awl/backends/x11/system/event/optional_processor_ref.hpp>
 #include <awl/backends/x11/window/event/processor_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/event/processor.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>

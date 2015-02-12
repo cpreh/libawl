@@ -1,8 +1,8 @@
 #ifndef AWL_WINDOW_PARAMETERS_HPP_INCLUDED
 #define AWL_WINDOW_PARAMETERS_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/cursor/const_optional_object_ref.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/optional_dim.hpp>

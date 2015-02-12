@@ -2,10 +2,10 @@
 #define AWL_BACKENDS_X11_SYSTEM_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/system/object_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/system/object.hpp>
 #include <fcppt/noncopyable.hpp>
 

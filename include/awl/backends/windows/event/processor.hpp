@@ -1,13 +1,13 @@
 #ifndef AWL_BACKENDS_WINDOWS_EVENT_PROCESSOR_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_EVENT_PROCESSOR_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/event/message_fwd.hpp>
 #include <awl/backends/windows/event/processor_fwd.hpp>
 #include <awl/backends/windows/system/object_fwd.hpp>
 #include <awl/backends/windows/system/event/optional_processor_ref_fwd.hpp>
 #include <awl/backends/windows/window/event/processor_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <awl/event/processor.hpp>
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/noncopyable.hpp>

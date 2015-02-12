@@ -1,12 +1,12 @@
 #ifndef AWL_BACKENDS_LINUX_FD_EPOLL_SET_HPP_INCLUDED
 #define AWL_BACKENDS_LINUX_FD_EPOLL_SET_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/linux/fd/object.hpp>
 #include <awl/backends/linux/fd/object_vector.hpp>
 #include <awl/backends/linux/fd/optional_duration_fwd.hpp>
 #include <awl/backends/linux/fd/epoll/fd.hpp>
 #include <awl/backends/linux/fd/epoll/set_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sys/epoll.h>

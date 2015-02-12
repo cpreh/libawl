@@ -2,9 +2,9 @@
 #define AWL_BACKENDS_X11_VISUAL_WRAPPED_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/visual/info_unique_ptr.hpp>
 #include <awl/backends/x11/visual/object.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>

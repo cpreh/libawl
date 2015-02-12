@@ -2,10 +2,10 @@
 #define AWL_BACKENDS_WINDOWS_CURSOR_SHARED_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/cursor/object.hpp>
 #include <awl/backends/windows/cursor/shared_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

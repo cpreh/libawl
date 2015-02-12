@@ -1,8 +1,8 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_EVENT_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_EVENT_OBJECT_HPP_INCLUDED
 
-#include <awl/detail/symbol.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
