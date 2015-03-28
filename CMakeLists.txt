@@ -765,40 +765,11 @@ fcppt_utils_add_source_groups(
 	"${AWL_FILES}"
 )
 
-option(
-	ENABLE_SHARED
-	"Build awl as a shared library"
-	TRUE
-)
-
-option(
-	ENABLE_STATIC
-	"Build awl as a static library"
-	FALSE
-)
-
-if(
-	NOT ENABLE_SHARED AND NOT ENABLE_STATIC
-)
-	message(
-		FATAL_ERROR
-		"You disabled both STATIC and SHARED"
-	)
-endif()
+fcppt_utils_static_shared()
 
 # choose a library to link the tests to
 if(
-	ENABLE_SHARED
-)
-	set(
-		AWL_DEFAULT_LINK_TARGET
-		awl
-	)
-endif()
-
-# static overrides shared
-if(
-	ENABLE_STATIC
+	FCPPT_UTILS_DEFAULT_LINK_STATIC
 )
 	set(
 		AWL_DEFAULT_LINK_TARGET
@@ -808,6 +779,11 @@ if(
 	set(
 		AWL_CONFIG_LINK_MACROS
 		"-D AWL_STATIC_LINK"
+	)
+else()
+	set(
+		AWL_DEFAULT_LINK_TARGET
+		awl
 	)
 endif()
 
