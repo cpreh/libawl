@@ -12,12 +12,6 @@ function(
 		${EXAMPLE_NAME}
 	)
 
-	target_compile_definitions(
-		${EXAMPLE_NAME}
-		PRIVATE
-		${AWL_CONFIG_LINK_MACROS}
-	)
-
 	target_include_directories(
 		${EXAMPLE_NAME}
 		PRIVATE
@@ -26,7 +20,8 @@ function(
 
 	target_link_libraries(
 		${EXAMPLE_NAME}
-		${AWL_DEFAULT_LINK_TARGET}
+		PRIVATE
+		${awl_TARGET}
 		${ADDITIONAL_DEPS}
 	)
 endfunction()

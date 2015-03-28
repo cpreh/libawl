@@ -264,9 +264,14 @@ configure_file(
 	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include/awl/config.hpp
 )
 
+set(
+	AWL_STATIC_LINK_FLAG
+	AWL_STATIC_LINK
+)
+
 fcppt_generate_symbol_header(
 	STATIC_LINK_FLAG
-		AWL_STATIC_LINK
+		${AWL_STATIC_LINK_FLAG}
 	EXPORTS_NAME
 		awl
 	SYMBOL_NAME
@@ -767,25 +772,9 @@ fcppt_utils_add_source_groups(
 
 fcppt_utils_static_shared()
 
-# choose a library to link the tests to
-if(
-	FCPPT_UTILS_DEFAULT_LINK_STATIC
+fcppt_utils_link_target(
+	awl
 )
-	set(
-		AWL_DEFAULT_LINK_TARGET
-		awl_static
-	)
-
-	set(
-		AWL_CONFIG_LINK_MACROS
-		"-D AWL_STATIC_LINK"
-	)
-else()
-	set(
-		AWL_DEFAULT_LINK_TARGET
-		awl
-	)
-endif()
 
 function(
 	MAKE_AWL_LIBRARY
@@ -810,7 +799,7 @@ function(
 	fcppt_utils_interface_static_link(
 		${TARGETNAME}
 		${VARIANT}
-		"AWL_STATIC_LINK"
+		${AWL_STATIC_LINK_FLAG}
 	)
 
 	target_include_directories(
@@ -835,6 +824,12 @@ function(
 	if(
 		AWL_X11_BACKEND
 	)
+		target_include_directories(
+			${TARGETNAME}
+			PRIVATE
+			${X11_INCLUDE_PATH}
+		)
+
 		target_link_libraries(
 			${TARGETNAME}
 			PRIVATE
@@ -850,7 +845,8 @@ function(
 		target_compile_definitions(
 			${TARGETNAME}
 			PUBLIC
-			"UNICODE;_UNICODE"
+			UNICODE
+			_UNICODE
 		)
 
 		target_link_libraries(
@@ -864,7 +860,9 @@ function(
 		AWL_COCOA_BACKEND
 	)
 		target_link_libraries(
-			${TARGETNAME} "-framework Cocoa"
+			${TARGETNAME}
+			PRIVATE
+			"-framework Cocoa"
 		)
 	endif()
 
@@ -876,8 +874,13 @@ endfunction()
 if(
 	ENABLE_STATIC
 )
+	fcppt_utils_static_link_name(
+		awl
+		STATIC_NAME
+	)
+
 	make_awl_library(
-		awl_static
+		${STATIC_NAME}
 		STATIC
 	)
 endif()
@@ -889,16 +892,6 @@ if(
 		awl
 		SHARED
 	)
-endif()
-
-if(
-	AWL_X11_BACKEND
-)
-	include_directories(
-		${FCPPT_UTILS_INCLUDE_SYSTEM}
-		${X11_INCLUDE_PATH}
-	)
-
 endif()
 
 option(
