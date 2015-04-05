@@ -19,7 +19,10 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/system/event/quit.hpp>
 #include <awl/system/event/quit_callback.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/find_opt.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/signal/unregister/base_impl.hpp>
@@ -125,12 +128,14 @@ awl::backends::x11::system::event::original_processor::running() const
 awl::main::exit_code const
 awl::backends::x11::system::event::original_processor::exit_code() const
 {
-	FCPPT_ASSERT_ERROR(
-		!this->running()
+	awl::main::exit_code const code(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			exit_code_
+		)
 	);
 
 	return
-		*exit_code_;
+		code;
 }
 
 fcppt::signal::auto_connection
@@ -218,20 +223,20 @@ awl::backends::x11::system::event::original_processor::epoll(
 		:
 		ready_fds
 	)
-	{
-		fd_signal_map::iterator const map_it(
-			fd_signals_.find(
+		fcppt::maybe_void(
+			fcppt::container::find_opt(
+				fd_signals_,
 				fd
+			),
+			[](
+				fd_signal &_signal
 			)
+			{
+				_signal(
+					awl::backends::linux::fd::event()
+				);
+			}
 		);
-
-		if(
-			map_it != fd_signals_.end()
-		)
-			map_it->second(
-				awl::backends::linux::fd::event()
-			);
-	}
 
 	return
 		!ready_fds.empty();
@@ -267,6 +272,7 @@ awl::backends::x11::system::event::original_processor::unregister_fd_signal(
 	awl::backends::linux::fd::object const &_fd
 )
 {
+	// TODO: Improve this!
 	fd_signal_map::iterator const it(
 		fd_signals_.find(
 			_fd

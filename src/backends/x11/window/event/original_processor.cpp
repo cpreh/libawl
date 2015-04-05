@@ -5,8 +5,8 @@
 #include <awl/backends/x11/window/event/callback.hpp>
 #include <awl/backends/x11/window/event/change_mask.hpp>
 #include <awl/backends/x11/window/event/filter.hpp>
+#include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
-#include <awl/backends/x11/window/event/optional_mask.hpp>
 #include <awl/backends/x11/window/event/original_processor.hpp>
 #include <awl/backends/x11/window/event/poll_mask.hpp>
 #include <awl/backends/x11/window/event/poll_type.hpp>
@@ -27,6 +27,7 @@
 #include <awl/window/event/resize_callback.hpp>
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
@@ -187,14 +188,14 @@ awl::backends::x11::window::event::original_processor::poll()
 
 	while(
 		awl::backends::x11::window::event::optional new_event =
-			event::poll_mask(
+			awl::backends::x11::window::event::poll_mask(
 				window_,
 				event_mask_
 			)
 	)
 	{
 		this->do_process(
-			*new_event
+			new_event.get_unsafe()
 		);
 
 		events_processed = true;
@@ -214,7 +215,7 @@ awl::backends::x11::window::event::original_processor::poll()
 		)
 		{
 			this->do_process(
-				*new_event
+				new_event.get_unsafe()
 			);
 
 			events_processed = true;
@@ -318,34 +319,39 @@ awl::backends::x11::window::event::original_processor::register_callback(
 	awl::backends::x11::window::event::callback const &_callback
 )
 {
-	awl::backends::x11::window::event::optional_mask const new_mask(
+	fcppt::maybe(
 		awl::backends::x11::window::event::to_mask(
 			_event_type
-		)
-	);
-
-	if(
-		new_mask
-	)
-	{
-		mask_count const count(
-			++mask_counts_[
-				*new_mask
-			]
-		);
-
-		if(
-			count == 1u
-		)
-			awl::backends::x11::window::event::change_mask(
-				window_,
-				event_mask_ |= *new_mask
-			);
-	}
-	else
-		++type_counts_[
+		),
+		[
+			this,
 			_event_type
-		];
+		]{
+			++type_counts_[
+				_event_type
+			];
+		},
+		[
+			this
+		](
+			awl::backends::x11::window::event::mask const _mask
+		)
+		{
+			mask_count const count(
+				++mask_counts_[
+					_mask
+				]
+			);
+
+			if(
+				count == 1u
+			)
+				awl::backends::x11::window::event::change_mask(
+					window_,
+					event_mask_ |= _mask
+				);
+		}
+	);
 
 	return
 		signals_[
@@ -378,7 +384,7 @@ awl::backends::x11::window::event::original_processor::do_process(
 )
 {
 	if(
-		event::filter(
+		awl::backends::x11::window::event::filter(
 			_event,
 			window_
 		)
@@ -399,49 +405,53 @@ awl::backends::x11::window::event::original_processor::unregister(
 	awl::backends::x11::window::event::type const _event_type
 )
 {
-	awl::backends::x11::window::event::optional_mask const old_mask(
+	fcppt::maybe(
 		awl::backends::x11::window::event::to_mask(
 			_event_type
-		)
-	);
-
-	if(
-		old_mask
-	)
-	{
-		mask_count const count(
-			--mask_counts_[
-				*old_mask
-			]
-		);
-
-		if(
-			count == 0u
-		)
-			awl::backends::x11::window::event::change_mask(
-				window_,
-				event_mask_ &= ~(*old_mask)
+		),
+		[
+			this,
+			_event_type
+		]{
+			// TODO: Improve this!
+			type_count_map::iterator const it(
+				type_counts_.find(
+					_event_type
+				)
 			);
-	}
-	else
-	{
-		type_count_map::iterator const it(
-			type_counts_.find(
-				_event_type
+
+			FCPPT_ASSERT_ERROR(
+				it != type_counts_.end()
+			);
+
+			if(
+				--it->second == 0u
 			)
-		);
-
-		FCPPT_ASSERT_ERROR(
-			it != type_counts_.end()
-		);
-
-		if(
-			--it->second == 0u
+				type_counts_.erase(
+					it
+				);
+		},
+		[
+			this
+		](
+			awl::backends::x11::window::event::mask const _old_mask
 		)
-			type_counts_.erase(
-				it
+		{
+			mask_count const count(
+				--mask_counts_[
+					_old_mask
+				]
 			);
-	}
+
+			if(
+				count == 0u
+			)
+				awl::backends::x11::window::event::change_mask(
+					window_,
+					event_mask_ &= ~(_old_mask)
+				);
+		}
+	);
 }
 
 void

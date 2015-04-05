@@ -5,8 +5,16 @@
 #include <awl/backends/x11/cursor/object.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/create.hpp>
+#include <awl/window/dim.hpp>
 #include <awl/window/optional_dim.hpp>
 #include <awl/window/optional_pos.hpp>
+#include <awl/window/pos.hpp>
+#include <awl/window/size.hpp>
+#include <awl/window/unit.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/literal.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
@@ -39,14 +47,40 @@ awl::backends::x11::window::create(
 
 	swa.event_mask = StructureNotifyMask | FocusChangeMask;
 
-	if(
-		_cursor
-	)
-	{
-		swa.cursor = _cursor->get();
+	fcppt::maybe_void(
+		_cursor,
+		[
+			&swa,
+			&value_mask
+		](
+			awl::backends::x11::cursor::object const &_opt_cursor
+		)
+		{
+			swa.cursor = _opt_cursor.get();
 
-		value_mask |= CWCursor;
-	}
+			value_mask |= CWCursor;
+		}
+	);
+
+	auto const position_default(
+		fcppt::const_(
+			fcppt::literal<
+				awl::window::unit
+			>(
+				0
+			)
+		)
+	);
+
+	auto const dim_default(
+		fcppt::const_(
+			fcppt::literal<
+				awl::window::size
+			>(
+				500
+			)
+		)
+	);
 
 	// always returns a handle
 	return
@@ -56,30 +90,50 @@ awl::backends::x11::window::create(
 				_display.get(),
 				_screen.get()
 			),
-			_position
-			?
-				_position->x()
-			:
-				0
-			,
-			_position
-			?
-				_position->y()
-			:
-				0
-			,
-			_dim
-			?
-				_dim->w()
-			:
-				1u
-			,
-			_dim
-			?
-				_dim->h()
-			:
-				1u
-			,
+			fcppt::maybe(
+				_position,
+				position_default,
+				[](
+					awl::window::pos const _pos
+				)
+				{
+					return
+						_pos.x();
+				}
+			),
+			fcppt::maybe(
+				_position,
+				position_default,
+				[](
+					awl::window::pos const _pos
+				)
+				{
+					return
+						_pos.y();
+				}
+			),
+			fcppt::maybe(
+				_dim,
+				dim_default,
+				[](
+					awl::window::dim const _d
+				)
+				{
+					return
+						_d.w();
+				}
+			),
+			fcppt::maybe(
+				_dim,
+				dim_default,
+				[](
+					awl::window::dim const _d
+				)
+				{
+					return
+						_d.h();
+				}
+			),
 			// border_width
 			0,
 			_visual.depth(),

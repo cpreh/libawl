@@ -1,9 +1,13 @@
 #include <awl/exception.hpp>
+#include <awl/backends/linux/fd/duration.hpp>
 #include <awl/backends/linux/fd/object.hpp>
 #include <awl/backends/linux/fd/object_vector.hpp>
 #include <awl/backends/linux/fd/optional_duration.hpp>
 #include <awl/backends/linux/fd/epoll/ctl.hpp>
 #include <awl/backends/linux/fd/epoll/set.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/make_int_range_count.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -59,7 +63,7 @@ awl::backends::linux::fd::epoll::set::remove(
 
 awl::backends::linux::fd::object_vector const &
 awl::backends::linux::fd::epoll::set::epoll(
-	awl::backends::linux::fd::optional_duration const &_duration
+	awl::backends::linux::fd::optional_duration const &_opt_duration
 )
 {
 	int const ret(
@@ -73,19 +77,27 @@ awl::backends::linux::fd::epoll::set::epoll(
 					events_.size()
 				)
 			),
-			_duration
-			?
-				fcppt::cast::truncation_check<
-					int
-				>(
-					std::chrono::duration_cast<
-						std::chrono::milliseconds
-					>(
-						*_duration
-					).count()
+			fcppt::maybe(
+				_opt_duration,
+				fcppt::const_(
+					-1
+				),
+				[](
+					awl::backends::linux::fd::duration const _duration
 				)
-			:
-				-1
+				{
+					return
+						fcppt::cast::truncation_check<
+							int
+						>(
+							std::chrono::duration_cast<
+								std::chrono::milliseconds
+							>(
+								_duration
+							).count()
+						);
+				}
+			)
 		)
 	);
 
@@ -105,9 +117,11 @@ awl::backends::linux::fd::epoll::set::epoll(
 	);
 
 	for(
-		unsigned index = 0;
-		index < ready;
-		++index
+		unsigned const index
+		:
+		fcppt::make_int_range_count(
+			ready
+		)
 	)
 	{
 		epoll_event const &event(

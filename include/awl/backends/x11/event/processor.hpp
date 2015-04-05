@@ -9,9 +9,11 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/event/processor.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_wrapper_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
-#include <map>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -66,10 +68,18 @@ public:
 	)
 	override;
 private:
-	typedef std::map<
+	typedef
+	fcppt::reference_wrapper<
+		awl::backends::x11::window::event::processor
+	>
+	window_event_processor_ref;
+
+	typedef
+	std::unordered_map<
 		Window,
-		awl::backends::x11::window::event::processor *
-	> window_processor_map;
+		window_event_processor_ref
+	>
+	window_processor_map;
 
 	awl::backends::x11::system::object &system_;
 

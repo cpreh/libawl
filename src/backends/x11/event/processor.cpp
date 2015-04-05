@@ -10,9 +10,15 @@
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/event/processor.hpp>
 #include <awl/window/event/processor_fwd.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/static_downcast_ptr.hpp>
+#include <fcppt/cast/try_dynamic.hpp>
+#include <fcppt/container/find_opt.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
 #include <utility>
@@ -51,17 +57,26 @@ awl::backends::x11::event::processor::poll()
 		more_messages
 	)
 	{
-		if(
-			system_processor_
-		)
-			more_messages =
-				system_processor_->poll();
+		fcppt::maybe_void(
+			system_processor_,
+			[
+				&more_messages
+			](
+				awl::backends::x11::system::event::processor &_system_processor
+			)
+			{
+				more_messages =
+					_system_processor.poll();
+			}
+		);
 
 		for(
-			auto &entry : window_processors_
+			auto &entry
+			:
+			window_processors_
 		)
 			more_messages =
-				entry.second->poll()
+				entry.second.get().poll()
 				||
 				more_messages;
 
@@ -73,45 +88,61 @@ awl::backends::x11::event::processor::poll()
 			break;
 	}
 
-	return events_processed;
+	return
+		events_processed;
 }
 
 void
 awl::backends::x11::event::processor::next()
 {
+	// TODO: This is a complicated check for pending events, move this into a function!
 	if(
-		system_processor_
-	)
-	{
-		if(
-			!system_processor_->running()
-		)
-			return;
-
-		if(
-			awl::backends::linux::fd::processor *linux_processor =
-				dynamic_cast<
-					awl::backends::linux::fd::processor *
-				>(
-					&*system_processor_
-				)
-		)
-		{
-			linux_processor->epoll(
-				awl::backends::linux::fd::optional_duration()
-			);
-
-			if(
-				!awl::backends::x11::event::pending(
-					system_.display()
-				)
+		fcppt::maybe(
+			system_processor_,
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				awl::backends::x11::system::event::processor &_system_processor
 			)
-				return;
-		}
-	}
+			{
+				return
+					!_system_processor.running()
+					||
+					fcppt::maybe(
+						fcppt::cast::try_dynamic<
+							awl::backends::linux::fd::processor &
+						>(
+							_system_processor
+						),
+						fcppt::const_(
+							false
+						),
+						[
+							this
+						](
+							awl::backends::linux::fd::processor &_linux_processor
+						)
+						{
+							_linux_processor.epoll(
+								awl::backends::linux::fd::optional_duration()
+							);
 
-	x11::event::object const event(
-		x11::event::next(
+							return
+								!awl::backends::x11::event::pending(
+									system_.display()
+								);
+						}
+					);
+			}
+		)
+	)
+		return;
+
+	awl::backends::x11::event::object const event(
+		awl::backends::x11::event::next(
 			system_.display()
 		)
 	);
@@ -122,28 +153,39 @@ awl::backends::x11::event::processor::next()
 		GenericEvent
 	)
 	{
-		if(
-			system_processor_
-		)
-			system_processor_->process(
-				event
-			);
+		fcppt::maybe_void(
+			system_processor_,
+			[
+				&event
+			](
+				awl::backends::x11::system::event::processor &_system_processor
+			)
+			{
+				_system_processor.process(
+					event
+				);
+			}
+		);
 
 		return;
 	}
 
-	window_processor_map::iterator const it(
-		window_processors_.find(
+	fcppt::maybe_void(
+		fcppt::container::find_opt(
+			window_processors_,
 			event.get().xany.window
+		),
+		[
+			&event
+		](
+			window_event_processor_ref const _processor
 		)
+		{
+			_processor.get().process(
+				event
+			);
+		}
 	);
-
-	if(
-		it != window_processors_.end()
-	)
-		it->second->process(
-			event
-		);
 }
 
 void
@@ -163,7 +205,9 @@ awl::backends::x11::event::processor::attach(
 		window_processors_.insert(
 			std::make_pair(
 				x11_processor.x11_window().get(),
-				&x11_processor
+				fcppt::make_ref(
+					x11_processor
+				)
 			)
 		).second
 	));
@@ -181,6 +225,8 @@ awl::backends::x11::event::processor::detach(
 			>(
 				_processor
 			).x11_window().get()
-		) == 1u
+		)
+		==
+		1u
 	);
 }

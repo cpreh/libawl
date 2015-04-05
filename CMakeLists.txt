@@ -127,6 +127,8 @@ set(
 	include/awl/main/exit_success.hpp
 	include/awl/main/function_context.hpp
 	include/awl/main/function_context_fwd.hpp
+	include/awl/main/optional_scoped_output_unique_ptr.hpp
+	include/awl/main/optional_scoped_output_unique_ptr_fwd.hpp
 	include/awl/main/output.hpp
 	include/awl/main/output_fwd.hpp
 	include/awl/main/output_unique_ptr.hpp

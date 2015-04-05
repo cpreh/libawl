@@ -1,6 +1,8 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/window/size_hints.hpp>
+#include <awl/window/dim.hpp>
 #include <awl/window/optional_dim.hpp>
+#include <fcppt/maybe_void.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -27,57 +29,71 @@ awl::backends::x11::window::size_hints::size_hints(
 
 	hints_->flags = 0;
 
-	if(
-		_exact_hint
-	)
-	{
-		hints_->base_width =
-			fcppt::cast::to_signed(
-				_exact_hint->w()
-			);
+	fcppt::maybe_void(
+		_exact_hint,
+		[
+			this
+		](
+			awl::window::dim const _hint
+		)
+		{
+			hints_->base_width =
+				fcppt::cast::to_signed(
+					_hint.w()
+				);
 
-		hints_->base_height =
-			fcppt::cast::to_signed(
-				_exact_hint->h()
-			);
+			hints_->base_height =
+				fcppt::cast::to_signed(
+					_hint.h()
+				);
 
-		hints_->flags |= PSize;
-	}
+			hints_->flags |= PSize;
+		}
+	);
 
-	if(
-		_minimum_hint
-	)
-	{
+	fcppt::maybe_void(
+		_minimum_hint,
+		[
+			this
+		](
+			awl::window::dim const _hint
+		)
+		{
+			hints_->min_width =
+				fcppt::cast::to_signed(
+					_hint.w()
+				);
 
-		hints_->min_width =
-			fcppt::cast::to_signed(
-				_minimum_hint->w()
-			);
+			hints_->min_height =
+				fcppt::cast::to_signed(
+					_hint.h()
+				);
 
-		hints_->min_height =
-			fcppt::cast::to_signed(
-				_minimum_hint->h()
-			);
+			hints_->flags |= PMinSize;
+		}
+	);
 
-		hints_->flags |= PMinSize;
-	}
+	fcppt::maybe_void(
+		_maximum_hint,
+		[
+			this
+		](
+			awl::window::dim const _hint
+		)
+		{
+			hints_->max_width =
+				fcppt::cast::to_signed(
+					_hint.w()
+				);
 
-	if(
-		_maximum_hint
-	)
-	{
-		hints_->max_width =
-			fcppt::cast::to_signed(
-				_maximum_hint->w()
-			);
+			hints_->max_height =
+				fcppt::cast::to_signed(
+					_hint.h()
+				);
 
-		hints_->max_height =
-			fcppt::cast::to_signed(
-				_maximum_hint->h()
-			);
-
-		hints_->flags |= PMaxSize;
-	}
+			hints_->flags |= PMaxSize;
+		}
+	);
 }
 
 XSizeHints *
