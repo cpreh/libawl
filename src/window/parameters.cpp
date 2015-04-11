@@ -32,7 +32,9 @@ awl::window::parameters::position(
 )
 {
 	position_ =
-		_position;
+		awl::window::optional_pos(
+			_position
+		);
 
 	return
 		*this;
@@ -44,7 +46,9 @@ awl::window::parameters::size(
 )
 {
 	size_ =
-		_size;
+		awl::window::optional_dim(
+			_size
+		);
 
 	return
 		*this;
@@ -56,7 +60,9 @@ awl::window::parameters::exact_size_hint(
 )
 {
 	exact_size_hint_ =
-		_exact_size_hint;
+		awl::window::optional_dim(
+			_exact_size_hint
+		);
 
 	return
 		*this;
@@ -68,7 +74,9 @@ awl::window::parameters::minimum_size_hint(
 )
 {
 	minimum_size_hint_ =
-		_minimum_size_hint;
+		awl::window::optional_dim(
+			_minimum_size_hint
+		);
 
 	return
 		*this;
@@ -80,7 +88,9 @@ awl::window::parameters::maximum_size_hint(
 )
 {
 	maximum_size_hint_ =
-		_maximum_size_hint;
+		awl::window::optional_dim(
+			_maximum_size_hint
+		);
 
 	return
 		*this;

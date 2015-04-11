@@ -17,6 +17,7 @@
 #include <awl/backends/x11/system/event/processor.hpp>
 #include <awl/backends/x11/system/event/type.hpp>
 #include <awl/main/exit_code.hpp>
+#include <awl/system/optional_exit_code.hpp>
 #include <awl/system/event/quit.hpp>
 #include <awl/system/event/quit_callback.hpp>
 #include <fcppt/maybe_void.hpp>
@@ -107,8 +108,10 @@ awl::backends::x11::system::event::original_processor::quit(
 	awl::main::exit_code const _exit_code
 )
 {
-	exit_code_
-		= _exit_code;
+	exit_code_ =
+		awl::system::optional_exit_code(
+			_exit_code
+		);
 
 	// TODO: can we integrate this in the message loop instead?
 	quit_signal_(
