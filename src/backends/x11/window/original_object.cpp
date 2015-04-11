@@ -101,11 +101,11 @@ awl::backends::x11::window::original_object::original_object(
 	);
 
 	if(
-		_params.exact_size_hint()
+		_params.exact_size_hint().has_value()
 	)
 		awl::backends::x11::window::transient_for_hint(
 			*this,
-			*x11::window::root(
+			*awl::backends::x11::window::root(
 				display_,
 				screen_
 			)

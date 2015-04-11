@@ -27,6 +27,7 @@
 #include <awl/window/event/resize_callback.hpp>
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assign/make_container.hpp>
@@ -184,22 +185,35 @@ awl::backends::x11::window::event::original_processor::~original_processor()
 bool
 awl::backends::x11::window::event::original_processor::poll()
 {
-	bool events_processed = false;
+	bool events_processed{
+		false
+	};
 
 	while(
-		awl::backends::x11::window::event::optional new_event =
+		fcppt::maybe(
 			awl::backends::x11::window::event::poll_mask(
 				window_,
 				event_mask_
+			),
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				awl::backends::x11::window::event::object const &_event
 			)
-	)
-	{
-		this->do_process(
-			new_event.get_unsafe()
-		);
+			{
+				this->do_process(
+					_event
+				);
 
+				return
+					true;
+			}
+		)
+	)
 		events_processed = true;
-	}
 
 	for(
 		auto const &item
@@ -207,21 +221,33 @@ awl::backends::x11::window::event::original_processor::poll()
 		type_counts_
 	)
 		while(
-			awl::backends::x11::window::event::optional new_event =
+			fcppt::maybe(
 				awl::backends::x11::window::event::poll_type(
 					window_,
 					item.first
+				),
+				fcppt::const_(
+					false
+				),
+				[
+					this
+				](
+					awl::backends::x11::window::event::object const &_event
 				)
+				{
+					this->do_process(
+						_event
+					);
+
+					return
+						true;
+				}
+			)
 		)
-		{
-			this->do_process(
-				new_event.get_unsafe()
-			);
-
 			events_processed = true;
-		}
 
-	return events_processed;
+	return
+		events_processed;
 }
 
 fcppt::signal::auto_connection
