@@ -2,7 +2,6 @@
 #include <awl/backends/windows/event/lparam.hpp>
 #include <awl/backends/windows/event/message.hpp>
 #include <awl/backends/windows/event/object.hpp>
-#include <awl/backends/windows/event/optional_message.hpp>
 #include <awl/backends/windows/event/peek.hpp>
 #include <awl/backends/windows/event/processor.hpp>
 #include <awl/backends/windows/event/type.hpp>
@@ -12,8 +11,14 @@
 #include <awl/backends/windows/system/event/processor.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/backends/windows/window/event/processor.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/maybe_void.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/container/find_opt.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <utility>
@@ -43,31 +48,48 @@ awl::backends::windows::event::processor::poll()
 		this->poll_messages()
 	);
 
-	if(
-		system_processor_
-	)
-		events_processed =
-			system_processor_->poll_handles()
-			|| events_processed;
+	fcppt::maybe_void(
+		system_processor_,
+		[
+			&events_processed
+		](
+			awl::backends::windows::system::event::processor &_processor
+		)
+		{
+			events_processed =
+				_processor.poll_handles()
+				||
+				events_processed;
+		}
+	);
 
-	return events_processed;
+	return
+		events_processed;
 }
 
 void
 awl::backends::windows::event::processor::next()
 {
-	if(
-		!system_processor_
-	)
-		this->do_process(
-			windows::event::get()
-		);
-	else
-	{
-		system_processor_->next();
+	fcppt::maybe(
+		system_processor_,
+		[
+			this
+		]{
+			this->do_process(
+				awl::backends::windows::event::get()
+			);
+		},
+		[
+			this
+		](
+			awl::backends::windows::system::event::processor &_processor
+		)
+		{
+			_processor.next();
 
-		this->poll_messages();
-	}
+			this->poll_messages();
+		}
+	);
 }
 
 void
@@ -87,7 +109,9 @@ awl::backends::windows::event::processor::attach(
 		window_processors_.insert(
 			std::make_pair(
 				windows_processor.windows_window().hwnd(),
-				&windows_processor
+				fcppt::make_ref(
+					windows_processor
+				)
 			)
 		).second
 	);
@@ -115,63 +139,90 @@ awl::backends::windows::event::processor::do_process(
 	awl::backends::windows::event::message const &_msg
 )
 {
-
 	if(
-		_msg.get().hwnd == NULL
+		_msg.get().hwnd
+		==
+		NULL
 	)
 	{
-		if(
-			system_processor_
-		)
-			system_processor_->process(
-				awl::backends::windows::event::object(
-					awl::backends::windows::event::type(
-						_msg.get().message
-					),
-					awl::backends::windows::event::wparam(
-						_msg.get().wParam
-					),
-					awl::backends::windows::event::lparam(
-						_msg.get().lParam
+		fcppt::maybe_void(
+			system_processor_,
+			[
+				&_msg
+			](
+				awl::backends::windows::system::event::processor &_processor
+			)
+			{
+				_processor.process(
+					awl::backends::windows::event::object(
+						awl::backends::windows::event::type(
+							_msg.get().message
+						),
+						awl::backends::windows::event::wparam(
+							_msg.get().wParam
+						),
+						awl::backends::windows::event::lparam(
+							_msg.get().lParam
+						)
 					)
-				)
-			);
+				);
+			}
+		);
 
 		return;
 	}
 
-	window_processor_map::iterator const it(
-		window_processors_.find(
+	fcppt::maybe_void(
+		fcppt::container::find_opt(
+			window_processors_,
 			_msg.get().hwnd
+		),
+		[
+			&_msg
+		](
+			window_processor_ref const _processor
 		)
+		{
+			_processor.get().process(
+				_msg
+			);
+		}
 	);
-
-	if(
-		it != window_processors_.end()
-	)
-		it->second->process(
-			_msg
-		);
 }
 
 bool
 awl::backends::windows::event::processor::poll_messages()
 {
-	bool events_processed = false;
+	bool events_processed{
+		false
+	};
 
 	while(
-		windows::event::optional_message const message =
-			windows::event::peek(
+		fcppt::maybe(
+			awl::backends::windows::event::peek(
 				NULL
+			),
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				awl::backends::windows::event::message const _message
 			)
+			{
+				this->do_process(
+					_message
+				);
+
+				return
+					true;
+			}
+		)
 	)
-	{
-		events_processed = true;
+		events_processed
+			= true;
 
-		this->do_process(
-			*message
-		);
-	}
-
-	return events_processed;
+	return
+		events_processed;
 }

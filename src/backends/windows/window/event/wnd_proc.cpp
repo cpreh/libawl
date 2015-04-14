@@ -16,8 +16,8 @@ awl::backends::windows::window::event::wnd_proc(
 	LPARAM const _lparam
 )
 {
-	awl::backends::windows::window::event::original_processor *const processor(
-		reinterpret_cast<
+	awl::backends::windows::window::event::original_processor &processor(
+		*reinterpret_cast<
 			awl::backends::windows::window::event::original_processor *
 		>(
 			::GetWindowLongPtr(
@@ -29,7 +29,7 @@ awl::backends::windows::window::event::wnd_proc(
 
 	{
 		awl::backends::windows::window::event::return_type const ret(
-			processor->execute_callback(
+			processor.execute_callback(
 				awl::backends::windows::event::type(
 					_msg
 				),
@@ -42,10 +42,12 @@ awl::backends::windows::window::event::wnd_proc(
 			)
 		);
 
+		// TODO!
 		if(
-			ret
+			ret.has_value()
 		)
-			return *ret;
+			return
+				ret.get_unsafe();
 	}
 
 	return

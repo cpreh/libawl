@@ -1,5 +1,4 @@
 #include <awl/exception.hpp>
-#include <awl/backends/windows/optional_rect.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/event/lparam.hpp>
 #include <awl/backends/windows/event/post_message.hpp>
@@ -13,6 +12,7 @@
 #include <awl/window/rect.hpp>
 #include <awl/window/unit.hpp>
 #include <fcppt/maybe.hpp>
+#include <fcppt/optional_to_exception.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
@@ -43,18 +43,19 @@ awl::backends::windows::window::common_object::size() const
 awl::window::rect const
 awl::backends::windows::window::common_object::rect() const
 {
-	awl::backends::windows::optional_rect const ret(
-		awl::backends::windows::window::get_client_rect(
-			*this
+	RECT const ret(
+		fcppt::optional_to_exception(
+			awl::backends::windows::window::get_client_rect(
+				*this
+			),
+			[]{
+				return
+					awl::exception{
+						FCPPT_TEXT("Can't get the window size because GetWindowRect failed!")
+					};
+			}
 		)
 	);
-
-	if(
-		!ret
-	)
-		throw awl::exception(
-			FCPPT_TEXT("Can't get the window size because GetWindowRect failed!")
-		);
 
 	return
 		awl::window::rect(
@@ -62,24 +63,24 @@ awl::backends::windows::window::common_object::rect() const
 				fcppt::cast::size<
 					awl::window::unit
 				>(
-					ret->left
+					ret.left
 				),
 				fcppt::cast::size<
 					awl::window::unit
 				>(
-					ret->top
+					ret.top
 				)
 			),
 			awl::window::rect::dim(
 				fcppt::cast::size<
 					awl::window::unit
 				>(
-					ret->right - ret->left
+					ret.right - ret.left
 				),
 				fcppt::cast::size<
 					awl::window::unit
 				>(
-					ret->bottom - ret->top
+					ret.bottom - ret.top
 				)
 			)
 		);

@@ -3,13 +3,15 @@
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/window/const_optional_object_ref.hpp>
 #include <awl/backends/windows/window/object.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
 
 void
 awl::backends::windows::message_box(
-	awl::backends::windows::window::const_optional_object_ref const &_window,
+	awl::backends::windows::window::const_optional_object_ref const &_opt_window,
 	fcppt::string const &_text,
 	fcppt::string const &_title,
 	UINT const _type
@@ -17,12 +19,21 @@ awl::backends::windows::message_box(
 {
 	if(
 		::MessageBox(
-			_window
-			?
-				_window->hwnd()
-			:
-				nullptr
-			,
+			fcppt::maybe(
+				_opt_window,
+				fcppt::const_<
+					HWND
+				>(
+					nullptr
+				),
+				[](
+					awl::backends::windows::window::object const &_window
+				)
+				{
+					return
+						_window.hwnd();
+				}
+			),
 			_text.c_str(),
 			_title.c_str(),
 			_type

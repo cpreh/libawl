@@ -12,8 +12,9 @@
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/optional_decl.hpp>
+#include <fcppt/reference_wrapper_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <map>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -73,10 +74,18 @@ private:
 
 	awl::backends::windows::system::event::optional_processor_ref const system_processor_;
 
-	typedef std::map<
+	typedef
+	fcppt::reference_wrapper<
+		awl::backends::windows::window::event::processor
+	>
+	window_processor_ref;
+
+	typedef
+	std::unordered_map<
 		HWND,
-		awl::backends::windows::window::event::processor *
-	> window_processor_map;
+		window_processor_ref
+	>
+	window_processor_map;
 
 	window_processor_map window_processors_;
 };

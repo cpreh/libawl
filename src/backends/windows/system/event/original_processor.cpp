@@ -3,7 +3,6 @@
 #include <awl/backends/windows/event/lparam.hpp>
 #include <awl/backends/windows/event/message.hpp>
 #include <awl/backends/windows/event/object.hpp>
-#include <awl/backends/windows/event/optional_message.hpp>
 #include <awl/backends/windows/event/peek.hpp>
 #include <awl/backends/windows/event/type.hpp>
 #include <awl/backends/windows/event/wparam.hpp>
@@ -11,13 +10,16 @@
 #include <awl/backends/windows/system/event/original_handle.hpp>
 #include <awl/backends/windows/system/event/original_processor.hpp>
 #include <awl/main/exit_code.hpp>
+#include <awl/system/optional_exit_code.hpp>
 #include <awl/system/event/quit.hpp>
 #include <awl/system/event/quit_callback.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/remove.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
@@ -69,41 +71,56 @@ awl::backends::windows::system::event::original_processor::~original_processor()
 bool
 awl::backends::windows::system::event::original_processor::poll()
 {
-	bool events_processed = false;
+	bool events_processed{
+		false
+	};
 
 	while(
-		awl::backends::windows::event::optional_message const message =
+		fcppt::maybe(
 			awl::backends::windows::event::peek(
 				reinterpret_cast<
 					HWND
 				>(
 					-1
 				)
-			)
-	)
-	{
-		this->do_process(
-			awl::backends::windows::event::type(
-				message->get().message
 			),
-			awl::backends::windows::system::event::object(
-				awl::backends::windows::event::wparam(
-					message->get().wParam
-				),
-				awl::backends::windows::event::lparam(
-					message->get().lParam
-				)
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				awl::backends::windows::event::message const &_message
 			)
-		);
+			{
+				this->do_process(
+					awl::backends::windows::event::type(
+						_message.get().message
+					),
+					awl::backends::windows::system::event::object(
+						awl::backends::windows::event::wparam(
+							_message.get().wParam
+						),
+						awl::backends::windows::event::lparam(
+							_message.get().lParam
+						)
+					)
+				);
 
-		events_processed = true;
-	}
+				return
+					true;
+			}
+		)
+	)
+		events_processed =
+			true;
 
 	events_processed =
 		this->poll_handles()
 		|| events_processed;
 
-	return events_processed;
+	return
+		events_processed;
 }
 
 void
@@ -126,12 +143,10 @@ awl::backends::windows::system::event::original_processor::running() const
 awl::main::exit_code const
 awl::backends::windows::system::event::original_processor::exit_code() const
 {
-	FCPPT_ASSERT_ERROR(
-		!this->running()
-	);
-
 	return
-		*exit_code_;
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			exit_code_
+		);
 }
 
 fcppt::signal::auto_connection
@@ -268,20 +283,24 @@ awl::backends::windows::system::event::original_processor::on_quit(
 	awl::backends::windows::system::event::object const &_event
 )
 {
-	exit_code_ =
-		awl::main::exit_code(
-			fcppt::cast::size<
-				int
-			>(
-				fcppt::cast::to_signed(
-					_event.wparam().get()
-				)
+	awl::main::exit_code const res_exit_code(
+		fcppt::cast::size<
+			int
+		>(
+			fcppt::cast::to_signed(
+				_event.wparam().get()
 			)
+		)
+	);
+
+	exit_code_ =
+		awl::system::optional_exit_code(
+			res_exit_code
 		);
 
 	quit_signal_(
 		awl::system::event::quit(
-			*exit_code_
+			res_exit_code
 		)
 	);
 }

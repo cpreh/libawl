@@ -9,7 +9,7 @@ awl::backends::windows::window::event::combine_result(
 )
 {
 	return
-		_a
+		_a.has_value()
 		?
 			_a
 		:

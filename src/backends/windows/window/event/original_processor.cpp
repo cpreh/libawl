@@ -1,10 +1,8 @@
 #include <awl/backends/windows/default_wnd_proc.hpp>
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/cursor/const_optional_object_ref.hpp>
 #include <awl/backends/windows/cursor/object.hpp>
 #include <awl/backends/windows/event/lparam.hpp>
 #include <awl/backends/windows/event/message.hpp>
-#include <awl/backends/windows/event/optional_message.hpp>
 #include <awl/backends/windows/event/peek.hpp>
 #include <awl/backends/windows/event/type.hpp>
 #include <awl/backends/windows/event/wparam.hpp>
@@ -29,8 +27,11 @@
 #include <awl/window/event/resize_callback.hpp>
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
+#include <fcppt/const.hpp>
 #include <fcppt/from_optional.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/maybe.hpp>
+#include <fcppt/optional_bind.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
@@ -216,7 +217,7 @@ awl::backends::windows::window::event::original_processor::~original_processor()
 
 	// FIXME: Where do we have to do this before we can destroy the cursor?
 	if(
-		window_.cursor()
+		window_.cursor().has_value()
 	)
 		::SetCursor(
 			nullptr
@@ -226,23 +227,38 @@ awl::backends::windows::window::event::original_processor::~original_processor()
 bool
 awl::backends::windows::window::event::original_processor::poll()
 {
-	bool events_processed = false;
+	bool events_processed{
+		false
+	};
 
 	while(
-		awl::backends::windows::event::optional_message const message =
+		fcppt::maybe(
 			awl::backends::windows::event::peek(
 				window_.hwnd()
+			),
+			fcppt::const_(
+				false
+			),
+			[
+				this
+			](
+				awl::backends::windows::event::message const &_message
 			)
+			{
+				this->do_process(
+					_message
+				);
+
+				return
+					true;
+			}
+		)
 	)
-	{
-		this->do_process(
-			*message
-		);
+		events_processed =
+			true;
 
-		events_processed = true;
-	}
-
-	return events_processed;
+	return
+		events_processed;
 }
 
 fcppt::signal::auto_connection
@@ -325,13 +341,15 @@ awl::backends::windows::window::event::original_processor::show_callback(
 awl::window::object &
 awl::backends::windows::window::event::original_processor::window() const
 {
-	return window_;
+	return
+		window_;
 }
 
 awl::backends::windows::window::object &
 awl::backends::windows::window::event::original_processor::windows_window() const
 {
-	return window_;
+	return
+		window_;
 }
 
 fcppt::signal::auto_connection
@@ -406,23 +424,28 @@ awl::backends::windows::window::event::original_processor::execute_callback(
 	awl::backends::windows::event::lparam const _lparam
 )
 {
-	signal_map::iterator const it(
-		signals_.find(
-			_type
-		)
-	);
-
 	return
-		it != signals_.end()
-		?
-			(it->second)(
-				awl::backends::windows::window::event::object(
-					_wparam,
-					_lparam
-				)
-		)
-		:
-			awl::backends::windows::window::event::return_type();
+		fcppt::optional_bind(
+			fcppt::container::find_opt(
+				signals_,
+				_type
+			),
+			[
+				_wparam,
+				_lparam
+			](
+				signal_type &_signal
+			)
+			{
+				return
+					_signal(
+						awl::backends::windows::window::event::object(
+							_wparam,
+							_lparam
+						)
+					);
+			}
+		);
 }
 
 void
@@ -556,26 +579,35 @@ awl::backends::windows::window::event::original_processor::on_setcursor(
 	awl::backends::windows::window::event::object const &_event
 )
 {
-	if(
-		window_.cursor()
-		&&
-		LOWORD(
-			_event.lparam().get()
-		)
-		==
-		HTCLIENT
-	)
-	{
-		::SetCursor(
-			window_.cursor()->get()
-		);
-
-		return
-			awl::backends::windows::window::event::return_type(
-				TRUE
-			);
-	}
-
 	return
-		awl::backends::windows::window::event::return_type();
+		fcppt::optional_bind(
+			window_.cursor(),
+			[
+				&_event
+			](
+				awl::backends::windows::cursor::object const &_cursor
+			)
+			{
+				if(
+					LOWORD(
+						_event.lparam().get()
+					)
+					==
+					HTCLIENT
+				)
+				{
+					::SetCursor(
+						_cursor.get()
+					);
+
+					return
+						awl::backends::windows::window::event::return_type(
+							TRUE
+						);
+				}
+
+				return
+					awl::backends::windows::window::event::return_type();
+			}
+		);
 }
