@@ -6,7 +6,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -41,7 +40,5 @@ awl::backends::x11::visual::get_info(
 		);
 
 	return
-		std::move(
-			ret
-		);
+		ret;
 }
