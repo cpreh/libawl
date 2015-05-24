@@ -206,6 +206,8 @@ set(
 	include/awl/window/object_unique_ptr.hpp
 	include/awl/window/optional_dim.hpp
 	include/awl/window/optional_dim_fwd.hpp
+	include/awl/window/optional_object_unique_ptr.hpp
+	include/awl/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/window/optional_pos.hpp
 	include/awl/window/optional_pos_fwd.hpp
 	include/awl/window/parameters.hpp
@@ -489,6 +491,8 @@ set(
 	include/awl/backends/x11/window/object.hpp
 	include/awl/backends/x11/window/object_fwd.hpp
 	include/awl/backends/x11/window/object_unique_ptr.hpp
+	include/awl/backends/x11/window/optional_object_unique_ptr.hpp
+	include/awl/backends/x11/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/backends/x11/window/original_class_hint.hpp
 	include/awl/backends/x11/window/original_object.hpp
 	include/awl/backends/x11/window/root.hpp

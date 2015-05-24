@@ -1,6 +1,6 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/window/original_class_hint.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
@@ -31,7 +31,7 @@ awl::backends::x11::window::original_class_hint::original_class_hint(
 :
 	awl::backends::x11::window::class_hint(),
 	impl_(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			impl
 		>()
 	),

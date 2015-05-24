@@ -14,7 +14,7 @@
 #include <awl/system/event/quit.hpp>
 #include <awl/system/event/quit_callback.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
@@ -189,7 +189,7 @@ awl::backends::windows::system::event::handle_unique_ptr
 awl::backends::windows::system::event::original_processor::create_event_handle()
 {
 	awl::backends::windows::system::event::handle_unique_ptr ret(
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			awl::backends::windows::system::event::original_handle
 		>(
 			std::bind(

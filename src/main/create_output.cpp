@@ -1,7 +1,8 @@
 #include <awl/main/create_output.hpp>
 #include <awl/main/output.hpp>
 #include <awl/main/output_unique_ptr.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/io/ostream.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
@@ -25,18 +26,21 @@ awl::main::create_output(
 #endif
 )
 {
-#if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
 	return
-		fcppt::make_unique_ptr<
-			awl::backends::windows::main::output
+		fcppt::unique_ptr_to_base<
+			awl::main::output
 		>(
-			_stream,
-			_path
-		);
+#if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
+			fcppt::make_unique_ptr_fcppt<
+				awl::backends::windows::main::output
+			>(
+				_stream,
+				_path
+			)
 #else
-	return
-		fcppt::make_unique_ptr<
-			awl::main::dummy_output
-		>();
+			fcppt::make_unique_ptr_fcppt<
+				awl::main::dummy_output
+			>()
 #endif
+		);
 }

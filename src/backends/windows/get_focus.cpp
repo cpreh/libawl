@@ -2,7 +2,7 @@
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/window/object_unique_ptr.hpp>
 #include <awl/backends/windows/window/wrapped_object.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 
 
 awl::backends::windows::window::object_unique_ptr
@@ -20,7 +20,7 @@ awl::backends::windows::get_focus()
 			awl::backends::windows::window::object_unique_ptr()
 		:
 			awl::backends::windows::window::object_unique_ptr(
-				fcppt::make_unique_ptr<
+				fcppt::make_unique_ptr_fcppt<
 					awl::backends::windows::window::wrapped_object
 				>(
 					ret

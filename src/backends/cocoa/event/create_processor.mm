@@ -2,7 +2,7 @@
 #include <awl/backends/cocoa/event/processor.hpp>
 #include <awl/backends/cocoa/system/event/processor.hpp>
 #include <awl/backends/cocoa/system/object.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/static_optional_cast.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 
@@ -15,7 +15,7 @@ awl::backends::cocoa::event::create_processor(
 {
 	return
 		awl::event::processor_unique_ptr(
-			fcppt::make_unique_ptr<
+			fcppt::make_unique_ptr_fcppt<
 				awl::backends::cocoa::event::processor
 			>(
 				fcppt::cast::static_downcast<

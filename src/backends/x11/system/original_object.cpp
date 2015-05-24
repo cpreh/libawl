@@ -5,11 +5,20 @@
 #include <awl/backends/x11/system/original_object.hpp>
 #include <awl/backends/x11/visual/default.hpp>
 #include <awl/backends/x11/visual/object.hpp>
+#include <awl/backends/x11/window/object_unique_ptr.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
+#include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
+#include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
+#include <awl/window/optional_object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 awl::backends::x11::system::original_object::original_object()
@@ -33,8 +42,10 @@ awl::backends::x11::system::original_object::create_window(
 )
 {
 	return
-		awl::window::object_unique_ptr(
-			fcppt::make_unique_ptr<
+		fcppt::unique_ptr_to_base<
+			awl::window::object
+		>(
+			fcppt::make_unique_ptr_fcppt<
 				awl::backends::x11::window::original_object
 			>(
 				display_,
@@ -48,7 +59,9 @@ awl::visual::object_unique_ptr
 awl::backends::x11::system::original_object::default_visual()
 {
 	return
-		awl::visual::object_unique_ptr(
+		fcppt::unique_ptr_to_base<
+			awl::visual::object
+		>(
 			awl::backends::x11::visual::default_(
 				display_,
 				screen_
@@ -56,26 +69,41 @@ awl::backends::x11::system::original_object::default_visual()
 		);
 }
 
-awl::window::object_unique_ptr
+awl::window::optional_object_unique_ptr
 awl::backends::x11::system::original_object::focus_window()
 {
 	return
-		awl::window::object_unique_ptr(
+		fcppt::optional_bind_construct(
 			awl::backends::x11::get_input_focus(
 				display_,
 				screen_
+			),
+			[](
+				awl::backends::x11::window::object_unique_ptr &&_window
 			)
+			{
+				return
+					fcppt::unique_ptr_to_base<
+						awl::window::object
+					>(
+						std::move(
+							_window
+						)
+					);
+			}
 		);
 }
 
 awl::backends::x11::display &
 awl::backends::x11::system::original_object::display()
 {
-	return display_;
+	return
+		display_;
 }
 
 awl::backends::x11::screen const
 awl::backends::x11::system::original_object::screen() const
 {
-	return screen_;
+	return
+		screen_;
 }

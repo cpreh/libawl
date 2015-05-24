@@ -33,7 +33,9 @@ awl::backends::x11::visual::get_info(
 	);
 
 	if(
-		!ret
+		ret.get_pointer()
+		==
+		nullptr
 	)
 		throw awl::exception(
 			FCPPT_TEXT("Couldn't get XVisualInfo structure for Visual")

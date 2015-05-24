@@ -36,7 +36,7 @@ XVisualInfo *
 awl::backends::x11::visual::wrapped::info() const
 {
 	return
-		info_.get();
+		info_.get_pointer();
 }
 
 int

@@ -1,5 +1,6 @@
 #include <awl/window/object_fwd.hpp>
 #include <awl/window/event/create_processor.hpp>
+#include <awl/window/event/processor.hpp>
 #include <awl/window/event/processor_unique_ptr.hpp>
 #include <awl/config.hpp>
 #if defined(AWL_X11_BACKEND)
@@ -16,7 +17,8 @@
 #else
 #error "Implement me!"
 #endif
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 awl::window::event::processor_unique_ptr
@@ -25,9 +27,11 @@ awl::window::event::create_processor(
 )
 {
 	return
-		awl::window::event::processor_unique_ptr(
+		fcppt::unique_ptr_to_base<
+			awl::window::event::processor
+		>(
 #if defined(AWL_X11_BACKEND)
-			fcppt::make_unique_ptr<
+			fcppt::make_unique_ptr_fcppt<
 				backends::x11::window::event::original_processor
 			>(
 				fcppt::cast::static_downcast<
@@ -37,7 +41,7 @@ awl::window::event::create_processor(
 				)
 			)
 #elif defined(AWL_WINDOWS_BACKEND)
-			fcppt::make_unique_ptr<
+			fcppt::make_unique_ptr_fcppt<
 				backends::windows::window::event::original_processor
 			>(
 				fcppt::cast::static_downcast<

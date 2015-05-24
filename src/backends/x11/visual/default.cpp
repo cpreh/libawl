@@ -3,9 +3,11 @@
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/create_info.hpp>
 #include <awl/backends/x11/visual/default.hpp>
+#include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/visual/object_unique_ptr.hpp>
 #include <awl/backends/x11/visual/wrapped.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/post.hpp>
 
 
@@ -28,8 +30,10 @@ awl::backends::x11::visual::default_(
 	);
 
 	return
-		awl::backends::x11::visual::object_unique_ptr(
-			fcppt::make_unique_ptr<
+		fcppt::unique_ptr_to_base<
+			awl::backends::x11::visual::object
+		>(
+			fcppt::make_unique_ptr_fcppt<
 				awl::backends::x11::visual::wrapped
 			>(
 				awl::backends::x11::visual::create_info(

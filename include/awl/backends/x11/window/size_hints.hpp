@@ -5,9 +5,9 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/window/optional_dim.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xutil.h>
-#include <memory>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -41,10 +41,11 @@ public:
 	get() const;
 private:
 	typedef
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		XSizeHints,
 		awl::backends::x11::deleter
-	> scoped_hints;
+	>
+	scoped_hints;
 
 	scoped_hints const hints_;
 };

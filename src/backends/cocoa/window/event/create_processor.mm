@@ -1,7 +1,7 @@
 #include <awl/backends/cocoa/window/event/create_processor.hpp>
 #include <awl/backends/cocoa/window/event/processor.hpp>
 #include <awl/backends/cocoa/window/instance.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/ref.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 
@@ -12,7 +12,7 @@ awl::backends::cocoa::window::event::create_processor(
 {
 	return
 		awl::window::event::processor_unique_ptr(
-			fcppt::make_unique_ptr<
+			fcppt::make_unique_ptr_fcppt<
 				backends::cocoa::window::event::processor
 			>(
 				fcppt::cast::static_downcast<

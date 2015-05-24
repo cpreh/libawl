@@ -5,9 +5,9 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xutil.h>
-#include <memory>
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
@@ -55,7 +55,7 @@ public:
 private:
 	class impl;
 
-	std::unique_ptr<
+	fcppt::unique_ptr<
 		impl
 	> const impl_;
 

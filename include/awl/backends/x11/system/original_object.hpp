@@ -8,6 +8,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
+#include <awl/window/optional_object_unique_ptr_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -50,7 +51,7 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::object_unique_ptr
+	awl::window::optional_object_unique_ptr
 	focus_window()
 	override;
 

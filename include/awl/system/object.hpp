@@ -6,6 +6,7 @@
 #include <awl/system/object_fwd.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
+#include <awl/window/optional_object_unique_ptr_fwd.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -35,7 +36,7 @@ public:
 	default_visual() = 0;
 
 	virtual
-	awl::window::object_unique_ptr
+	awl::window::optional_object_unique_ptr
 	focus_window() = 0;
 
 	AWL_DETAIL_SYMBOL

@@ -1,4 +1,5 @@
 #include <awl/event/create_processor.hpp>
+#include <awl/event/processor.hpp>
 #include <awl/event/processor_unique_ptr.hpp>
 #include <awl/system/object_fwd.hpp>
 #include <awl/system/event/optional_processor_ref.hpp>
@@ -18,7 +19,8 @@
 #include <awl/event/processor.hpp>
 #endif
 #include <fcppt/dynamic_optional_cast.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 
 
 awl::event::processor_unique_ptr
@@ -28,9 +30,11 @@ awl::event::create_processor(
 )
 {
 	return
+		fcppt::unique_ptr_to_base<
+			awl::event::processor
+		>(
 #if defined(AWL_X11_BACKEND)
-		awl::event::processor_unique_ptr(
-			fcppt::make_unique_ptr<
+			fcppt::make_unique_ptr_fcppt<
 				awl::backends::x11::event::processor
 			>(
 				fcppt::cast::static_downcast<
@@ -44,10 +48,8 @@ awl::event::create_processor(
 					_system_processor
 				)
 			)
-		)
 #elif defined(AWL_WINDOWS_BACKEND)
-		awl::event::processor_unique_ptr(
-			fcppt::make_unique_ptr<
+			fcppt::make_unique_ptr_fcppt<
 				awl::backends::windows::event::processor
 			>(
 				fcppt::cast::static_downcast<
@@ -61,12 +63,11 @@ awl::event::create_processor(
 					_system_processor
 				)
 			)
-		)
 #elif defined(AWL_COCOA_BACKEND)
 			awl::backends::cocoa::event::create_processor(
 				_system,
 				_system_processor
 			)
 #endif
-			;
+		);
 }

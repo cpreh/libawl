@@ -3,7 +3,7 @@
 #include <awl/backends/x11/cursor/holder_unique_ptr.hpp>
 #include <awl/backends/x11/cursor/load_font.hpp>
 #include <awl/backends/x11/cursor/shape.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
@@ -16,7 +16,7 @@ awl::backends::x11::cursor::load_font(
 )
 {
 	return
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			awl::backends::x11::cursor::holder
 		>(
 			_display,

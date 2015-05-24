@@ -8,7 +8,7 @@
 #include <awl/backends/windows/cursor/shared.hpp>
 #include <awl/backends/windows/cursor/size.hpp>
 #include <awl/cursor/hotspot.hpp>
-#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
@@ -57,7 +57,7 @@ awl::backends::windows::cursor::create_invisible()
 	);
 
 	return
-		fcppt::make_unique_ptr<
+		fcppt::make_unique_ptr_fcppt<
 			awl::backends::windows::cursor::created
 		>(
 			awl::cursor::hotspot::null(),

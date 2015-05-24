@@ -21,7 +21,9 @@ awl::backends::x11::window::size_hints::size_hints(
 	)
 {
 	if(
-		!hints_
+		hints_.get_pointer()
+		==
+		nullptr
 	)
 		throw awl::exception(
 			FCPPT_TEXT("XAllocSizeHints() failed!")
@@ -100,7 +102,7 @@ XSizeHints *
 awl::backends::x11::window::size_hints::get() const
 {
 	return
-		hints_.get();
+		hints_.get_pointer();
 }
 
 awl::backends::x11::window::size_hints::~size_hints()
