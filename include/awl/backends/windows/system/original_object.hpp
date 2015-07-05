@@ -6,6 +6,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
+#include <awl/window/optional_object_unique_ptr_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -24,7 +25,7 @@ namespace system
 
 class original_object
 :
-	public windows::system::object
+	public awl::backends::windows::system::object
 {
 	FCPPT_NONCOPYABLE(
 		original_object
@@ -45,7 +46,7 @@ public:
 	awl::visual::object_unique_ptr
 	default_visual();
 
-	awl::window::object_unique_ptr
+	awl::window::optional_object_unique_ptr
 	focus_window();
 private:
 	void
@@ -53,10 +54,12 @@ private:
 		fcppt::string const &
 	);
 
-	typedef std::unordered_map<
+	typedef
+	std::unordered_map<
 		fcppt::string,
 		awl::backends::windows::counted_wndclass
-	> wndclass_map;
+	>
+	wndclass_map;
 
 	wndclass_map wndclasses_;
 };

@@ -688,6 +688,8 @@ set(
 	include/awl/backends/windows/window/object.hpp
 	include/awl/backends/windows/window/object_fwd.hpp
 	include/awl/backends/windows/window/object_unique_ptr.hpp
+	include/awl/backends/windows/window/optional_object_unique_ptr.hpp
+	include/awl/backends/windows/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/backends/windows/window/original_object.hpp
 	include/awl/backends/windows/window/screen_to_client.hpp
 	include/awl/backends/windows/window/signed_dim.hpp

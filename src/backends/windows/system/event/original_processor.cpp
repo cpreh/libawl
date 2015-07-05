@@ -6,6 +6,8 @@
 #include <awl/backends/windows/event/peek.hpp>
 #include <awl/backends/windows/event/type.hpp>
 #include <awl/backends/windows/event/wparam.hpp>
+#include <awl/backends/windows/system/event/handle.hpp>
+#include <awl/backends/windows/system/event/handle_unique_ptr.hpp>
 #include <awl/backends/windows/system/event/object.hpp>
 #include <awl/backends/windows/system/event/original_handle.hpp>
 #include <awl/backends/windows/system/event/original_processor.hpp>
@@ -18,6 +20,7 @@
 #include <fcppt/maybe.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/size.hpp>
@@ -30,7 +33,6 @@
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -189,13 +191,17 @@ awl::backends::windows::system::event::handle_unique_ptr
 awl::backends::windows::system::event::original_processor::create_event_handle()
 {
 	awl::backends::windows::system::event::handle_unique_ptr ret(
-		fcppt::make_unique_ptr_fcppt<
-			awl::backends::windows::system::event::original_handle
+		fcppt::unique_ptr_to_base<
+			awl::backends::windows::system::event::handle
 		>(
-			std::bind(
-				&awl::backends::windows::system::event::original_processor::unregister_event_handle,
-				this,
-				std::placeholders::_1
+			fcppt::make_unique_ptr_fcppt<
+				awl::backends::windows::system::event::original_handle
+			>(
+				std::bind(
+					&awl::backends::windows::system::event::original_processor::unregister_event_handle,
+					this,
+					std::placeholders::_1
+				)
 			)
 		)
 	);
@@ -205,11 +211,7 @@ awl::backends::windows::system::event::original_processor::create_event_handle()
 	);
 
 	return
-		awl::backends::windows::system::event::handle_unique_ptr(
-			move(
-				ret
-			)
-		);
+		ret;
 }
 
 void

@@ -3,12 +3,12 @@
 #include <awl/backends/windows/cursor/create_invisible.hpp>
 #include <awl/backends/windows/cursor/created.hpp>
 #include <awl/backends/windows/cursor/dim.hpp>
-#include <awl/backends/windows/cursor/load.hpp>
+#include <awl/backends/windows/cursor/object.hpp>
 #include <awl/backends/windows/cursor/object_unique_ptr.hpp>
-#include <awl/backends/windows/cursor/shared.hpp>
 #include <awl/backends/windows/cursor/size.hpp>
 #include <awl/cursor/hotspot.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
@@ -57,16 +57,20 @@ awl::backends::windows::cursor::create_invisible()
 	);
 
 	return
-		fcppt::make_unique_ptr_fcppt<
-			awl::backends::windows::cursor::created
+		fcppt::unique_ptr_to_base<
+			awl::backends::windows::cursor::object
 		>(
-			awl::cursor::hotspot::null(),
-			dim,
-			awl::backends::windows::cursor::and_plane(
-				and_vector.data()
-			),
-			awl::backends::windows::cursor::xor_plane(
-				xor_vector.data()
+			fcppt::make_unique_ptr_fcppt<
+				awl::backends::windows::cursor::created
+			>(
+				awl::cursor::hotspot::null(),
+				dim,
+				awl::backends::windows::cursor::and_plane(
+					and_vector.data()
+				),
+				awl::backends::windows::cursor::xor_plane(
+					xor_vector.data()
+				)
 			)
 		);
 }

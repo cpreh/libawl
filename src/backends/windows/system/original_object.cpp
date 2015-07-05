@@ -3,12 +3,21 @@
 #include <awl/backends/windows/get_focus.hpp>
 #include <awl/backends/windows/system/original_object.hpp>
 #include <awl/backends/windows/visual/null_object.hpp>
+#include <awl/backends/windows/window/object_unique_ptr.hpp>
 #include <awl/backends/windows/window/original_object.hpp>
+#include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
+#include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/optional_bind_construct.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
+#include <fcppt/container/get_or_insert_result.hpp>
+#include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <utility>
@@ -30,35 +39,39 @@ awl::backends::windows::system::original_object::create_window(
 	awl::window::parameters const &_param
 )
 {
-	awl::backends::windows::system::original_object::wndclass_map::iterator wndclass_it(
-		wndclasses_.find(
-			_param.class_name()
+	fcppt::container::get_or_insert_result<
+		wndclass_map::mapped_type &
+	> const result(
+		fcppt::container::get_or_insert_with_result(
+			wndclasses_,
+			_param.class_name(),
+			[](
+				fcppt::string const &_class_name
+			)
+			{
+				return
+					awl::backends::windows::counted_wndclass(
+						_class_name,
+						awl::backends::windows::default_wnd_proc
+					);
+			}
 		)
 	);
 
 	if(
-		wndclass_it == wndclasses_.end()
+		!result.inserted()
 	)
-		wndclass_it =
-			wndclasses_.insert(
-				std::make_pair(
-					_param.class_name(),
-					awl::backends::windows::counted_wndclass(
-						_param.class_name(),
-						awl::backends::windows::default_wnd_proc
-					)
-				)
-			).first;
-	else
-		wndclass_it->second.add_ref();
+		result.element().add_ref();
 
 	return
-		awl::window::object_unique_ptr(
+		fcppt::unique_ptr_to_base<
+			awl::window::object
+		>(
 			fcppt::make_unique_ptr_fcppt<
 				awl::backends::windows::window::original_object
 			>(
 				_param,
-				wndclass_it->second.wndclass(),
+				result.element().wndclass(),
 				std::bind(
 					&awl::backends::windows::system::original_object::unregister_wndclass,
 					this,
@@ -72,19 +85,34 @@ awl::visual::object_unique_ptr
 awl::backends::windows::system::original_object::default_visual()
 {
 	return
-		awl::visual::object_unique_ptr(
+		fcppt::unique_ptr_to_base<
+			awl::visual::object
+		>(
 			fcppt::make_unique_ptr_fcppt<
 				awl::backends::windows::visual::null_object
 			>()
 		);
 }
 
-awl::window::object_unique_ptr
+awl::window::optional_object_unique_ptr
 awl::backends::windows::system::original_object::focus_window()
 {
 	return
-		awl::window::object_unique_ptr(
-			awl::backends::windows::get_focus()
+		fcppt::optional_bind_construct(
+			awl::backends::windows::get_focus(),
+			[](
+				awl::backends::windows::window::object_unique_ptr &&_focus
+			)
+			{
+				return
+					fcppt::unique_ptr_to_base<
+						awl::window::object
+					>(
+						std::move(
+							_focus
+						)
+					);
+			}
 		);
 }
 
@@ -93,16 +121,21 @@ awl::backends::windows::system::original_object::unregister_wndclass(
 	fcppt::string const &_class_name
 )
 {
-	awl::backends::windows::system::original_object::wndclass_map::iterator const wndclass_it(
-		wndclasses_.find(
-			_class_name
+	wndclass_map::iterator const it(
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::find_opt_iterator(
+				wndclasses_,
+				_class_name
+			)
 		)
 	);
 
 	if(
-		wndclass_it->second.release() == 0u
+		it->second.release()
+		==
+		0u
 	)
 		wndclasses_.erase(
-			wndclass_it
+			it
 		);
 }
