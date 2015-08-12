@@ -12,6 +12,7 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <awl/window/event/create_processor.hpp>
+#include <awl/window/event/destroy_callback.hpp>
 #include <awl/window/event/processor.hpp>
 #include <awl/window/event/processor_unique_ptr.hpp>
 #include <awl/window/event/resize.hpp>
@@ -107,14 +108,16 @@ try
 
 	fcppt::signal::scoped_connection const destroy_connection(
 		window_processor->destroy_callback(
-			[
-				&running
-			](
-				awl::window::event::destroy const &
-			){
-				running =
-					false;
-			}
+			awl::window::event::destroy_callback(
+				[
+					&running
+				](
+					awl::window::event::destroy const &
+				){
+					running =
+						false;
+				}
+			)
 		)
 	);
 

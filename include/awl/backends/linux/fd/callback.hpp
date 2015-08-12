@@ -2,9 +2,7 @@
 #define AWL_BACKENDS_LINUX_FD_CALLBACK_HPP_INCLUDED
 
 #include <awl/backends/linux/fd/function.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace awl
@@ -16,9 +14,11 @@ namespace linux
 namespace fd
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	awl::backends::linux::fd::function
-> callback;
+>
+callback;
 
 }
 }

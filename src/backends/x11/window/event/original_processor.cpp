@@ -36,6 +36,7 @@
 #include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/signal/unregister/base_impl.hpp>
+#include <fcppt/signal/unregister/function.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -75,16 +76,21 @@ awl::backends::x11::window::event::original_processor::original_processor(
 		}
 	),
 	close_signal_(
-		[](
-			bool const _arg1,
-			bool const _arg2
-		)
-		{
-			return
-				_arg1 && _arg2;
+		awl::window::event::close_signal::combiner_function{
+			[](
+				bool const _arg1,
+				bool const _arg2
+			)
+			{
+				return
+					_arg1
+					&&
+					_arg2;
+			}
+		},
+		awl::window::event::close_signal::initial_value{
+			true
 		}
-		,
-		true
 	),
 	destroy_signal_(),
 	focus_in_signal_(),
@@ -100,80 +106,93 @@ awl::backends::x11::window::event::original_processor::original_processor(
 				awl::backends::x11::window::event::type(
 					ClientMessage
 				),
-				std::bind(
-					&awl::backends::x11::window::event::original_processor::on_client_message,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::x11::window::event::callback{
+					std::bind(
+						&awl::backends::x11::window::event::original_processor::on_client_message,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					ConfigureNotify
 				),
-				std::bind(
-					&awl::backends::x11::window::event::original_processor::on_configure,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::x11::window::event::callback{
+					std::bind(
+						&awl::backends::x11::window::event::original_processor::on_configure,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					DestroyNotify
 				),
-				std::bind(
-					&awl::backends::x11::window::event::original_processor::on_destroy,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::x11::window::event::callback{
+					std::bind(
+						&awl::backends::x11::window::event::original_processor::on_destroy,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					FocusIn
 				),
-				std::bind(
-					&awl::backends::x11::window::event::original_processor::on_focus_in,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::x11::window::event::callback{
+					std::bind(
+						&awl::backends::x11::window::event::original_processor::on_focus_in,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					FocusOut
 				),
-				std::bind(
-					&awl::backends::x11::window::event::original_processor::on_focus_out,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::x11::window::event::callback{
+					std::bind(
+						&awl::backends::x11::window::event::original_processor::on_focus_out,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					MapNotify
 				),
-				std::bind(
-					&awl::backends::x11::window::event::original_processor::on_map,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::x11::window::event::callback{
+					std::bind(
+						&awl::backends::x11::window::event::original_processor::on_map,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					UnmapNotify
 				),
-				std::bind(
-					&awl::backends::x11::window::event::original_processor::on_unmap,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::x11::window::event::callback{
+					std::bind(
+						&awl::backends::x11::window::event::original_processor::on_unmap,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)
-		.move_container()
 	)
 {
 }
@@ -384,11 +403,13 @@ awl::backends::x11::window::event::original_processor::register_callback(
 			_event_type
 		].connect(
 			_callback,
-			std::bind(
-				&awl::backends::x11::window::event::original_processor::unregister,
-				this,
-				_event_type
-			)
+			fcppt::signal::unregister::function{
+				std::bind(
+					&awl::backends::x11::window::event::original_processor::unregister,
+					this,
+					_event_type
+				)
+			}
 		);
 }
 

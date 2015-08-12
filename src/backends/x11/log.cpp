@@ -3,7 +3,6 @@
 #include <awl/backends/x11/log.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/log/object.hpp>
-#include <fcppt/log/parameters/object.hpp>
 
 
 namespace
@@ -22,5 +21,6 @@ fcppt::log::object logger(
 fcppt::log::object &
 awl::backends::x11::log()
 {
-	return logger;
+	return
+		logger;
 }

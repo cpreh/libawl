@@ -2,9 +2,7 @@
 #define AWL_WINDOW_EVENT_RESIZE_CALLBACK_HPP_INCLUDED
 
 #include <awl/window/event/resize_function.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace awl
@@ -14,9 +12,11 @@ namespace window
 namespace event
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	awl::window::event::resize_function
-> resize_callback;
+>
+resize_callback;
 
 }
 }

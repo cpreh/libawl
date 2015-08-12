@@ -2,9 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_EVENT_CALLBACK_HPP_INCLUDED
 
 #include <awl/backends/x11/window/event/function.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace awl
@@ -18,9 +16,11 @@ namespace window
 namespace event
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	awl::backends::x11::window::event::function
-> callback;
+>
+callback;
 
 }
 }

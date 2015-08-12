@@ -2,9 +2,7 @@
 #define AWL_WINDOW_EVENT_SHOW_CALLBACK_HPP_INCLUDED
 
 #include <awl/window/event/show_function.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace awl
@@ -14,9 +12,11 @@ namespace window
 namespace event
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	awl::window::event::show_function
-> show_callback;
+>
+show_callback;
 
 }
 }

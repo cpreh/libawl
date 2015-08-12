@@ -3,6 +3,7 @@
 
 #include <awl/backends/x11/system/event/object_fwd.hpp>
 
+
 namespace awl
 {
 namespace backends
@@ -17,7 +18,7 @@ namespace event
 typedef
 void
 function(
-	x11::system::event::object const &
+	awl::backends::x11::system::event::object const &
 );
 
 }

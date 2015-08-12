@@ -24,6 +24,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt.hpp>
+#include <fcppt/signal/unregister/function.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/signal/unregister/base_impl.hpp>
@@ -176,6 +177,7 @@ awl::backends::x11::system::event::original_processor::register_fd_callback(
 	awl::backends::linux::fd::callback const &_callback
 )
 {
+	// TODO: insert_with_result
 	fd_signal_map::iterator it(
 		fd_signals_.find(
 			_fd
@@ -202,11 +204,13 @@ awl::backends::x11::system::event::original_processor::register_fd_callback(
 	return
 		it->second.connect(
 			_callback,
-			std::bind(
-				&awl::backends::x11::system::event::original_processor::unregister_fd_signal,
-				this,
-				_fd
-			)
+			fcppt::signal::unregister::function{
+				std::bind(
+					&awl::backends::x11::system::event::original_processor::unregister_fd_signal,
+					this,
+					_fd
+				)
+			}
 		);
 }
 
