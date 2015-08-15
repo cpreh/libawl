@@ -15,6 +15,7 @@
 #include <awl/window/dim.hpp>
 #include <awl/window/event/close.hpp>
 #include <awl/window/event/close_callback.hpp>
+#include <awl/window/event/close_signal.hpp>
 #include <awl/window/event/destroy.hpp>
 #include <awl/window/event/destroy_callback.hpp>
 #include <awl/window/event/focus_in.hpp>
@@ -59,16 +60,21 @@ awl::backends::windows::window::event::original_processor::original_processor(
 	),
 	signals_(),
 	close_signal_(
-		[](
-			bool const _arg1,
-			bool const _arg2
-		)
-		{
-			return
-				_arg1 && _arg2;
+		awl::window::event::close_signal::combiner_function{
+			[](
+				bool const _arg1,
+				bool const _arg2
+			)
+			{
+				return
+					_arg1
+					&&
+					_arg2;
+			}
+		},
+		awl::window::event::close_signal::initial_value{
+			true
 		}
-		,
-		true
 	),
 	destroy_signal_(),
 	focus_in_signal_(),
@@ -87,11 +93,13 @@ awl::backends::windows::window::event::original_processor::original_processor(
 				>(
 					WM_CLOSE
 				),
-				std::bind(
-					&awl::backends::windows::window::event::original_processor::on_close,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::windows::window::event::callback{
+					std::bind(
+						&awl::backends::windows::window::event::original_processor::on_close,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
@@ -101,11 +109,13 @@ awl::backends::windows::window::event::original_processor::original_processor(
 				>(
 					WM_DESTROY
 				),
-				std::bind(
-					&awl::backends::windows::window::event::original_processor::on_destroy,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::windows::window::event::callback{
+					std::bind(
+						&awl::backends::windows::window::event::original_processor::on_destroy,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
@@ -115,11 +125,13 @@ awl::backends::windows::window::event::original_processor::original_processor(
 				>(
 					WM_SETFOCUS
 				),
-				std::bind(
-					&awl::backends::windows::window::event::original_processor::on_focus_in,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::windows::window::event::callback{
+					std::bind(
+						&awl::backends::windows::window::event::original_processor::on_focus_in,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
@@ -129,11 +141,13 @@ awl::backends::windows::window::event::original_processor::original_processor(
 				>(
 					WM_KILLFOCUS
 				),
-				std::bind(
-					&awl::backends::windows::window::event::original_processor::on_focus_out,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::windows::window::event::callback{
+					std::bind(
+						&awl::backends::windows::window::event::original_processor::on_focus_out,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
@@ -143,11 +157,13 @@ awl::backends::windows::window::event::original_processor::original_processor(
 				>(
 					WM_SIZE
 				),
-				std::bind(
-					&awl::backends::windows::window::event::original_processor::on_resize,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::windows::window::event::callback{
+					std::bind(
+						&awl::backends::windows::window::event::original_processor::on_resize,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
@@ -157,11 +173,13 @@ awl::backends::windows::window::event::original_processor::original_processor(
 				>(
 					WM_SHOWWINDOW
 				),
-				std::bind(
-					&awl::backends::windows::window::event::original_processor::on_show,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::windows::window::event::callback{
+					std::bind(
+						&awl::backends::windows::window::event::original_processor::on_show,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)(
 			this->register_callback(
@@ -171,11 +189,13 @@ awl::backends::windows::window::event::original_processor::original_processor(
 				>(
 					WM_SETCURSOR
 				),
-				std::bind(
-					&awl::backends::windows::window::event::original_processor::on_setcursor,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::windows::window::event::callback{
+					std::bind(
+						&awl::backends::windows::window::event::original_processor::on_setcursor,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)
 		.move_container()
@@ -375,8 +395,12 @@ awl::backends::windows::window::event::original_processor::register_callback(
 						std::make_pair(
 							_type,
 							signal_type(
-								awl::backends::windows::window::event::combine_result,
-								awl::backends::windows::window::event::return_type()
+								signal_type::combiner_function{
+									awl::backends::windows::window::event::combine_result
+								},
+								signal_type::initial_value{
+									awl::backends::windows::window::event::return_type()
+								}
 							)
 						)
 					).first->second;

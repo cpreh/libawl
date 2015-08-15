@@ -7,6 +7,7 @@
 #include <awl/backends/windows/event/type.hpp>
 #include <awl/backends/windows/event/wparam.hpp>
 #include <awl/backends/windows/system/event/handle.hpp>
+#include <awl/backends/windows/system/event/handle_destroy_callback.hpp>
 #include <awl/backends/windows/system/event/handle_unique_ptr.hpp>
 #include <awl/backends/windows/system/event/object.hpp>
 #include <awl/backends/windows/system/event/original_handle.hpp>
@@ -55,11 +56,13 @@ awl::backends::windows::system::event::original_processor::original_processor(
 			>(
 				WM_QUIT
 			),
-			std::bind(
-				&awl::backends::windows::system::event::original_processor::on_quit,
-				this,
-				std::placeholders::_1
-			)
+			awl::backends::windows::system::event::callback{
+				std::bind(
+					&awl::backends::windows::system::event::original_processor::on_quit,
+					this,
+					std::placeholders::_1
+				)
+			}
 		)
 	)
 {
@@ -197,11 +200,13 @@ awl::backends::windows::system::event::original_processor::create_event_handle()
 			fcppt::make_unique_ptr_fcppt<
 				awl::backends::windows::system::event::original_handle
 			>(
-				std::bind(
-					&awl::backends::windows::system::event::original_processor::unregister_event_handle,
-					this,
-					std::placeholders::_1
-				)
+				awl::backends::windows::system::event::handle_destroy_callback{
+					std::bind(
+						&awl::backends::windows::system::event::original_processor::unregister_event_handle,
+						this,
+						std::placeholders::_1
+					)
+				}
 			)
 		)
 	);

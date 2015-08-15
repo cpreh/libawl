@@ -2,9 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_CALLBACK_HPP_INCLUDED
 
 #include <awl/backends/windows/system/event/function.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <functional>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/function_impl.hpp>
 
 
 namespace awl
@@ -18,9 +16,11 @@ namespace system
 namespace event
 {
 
-typedef std::function<
+typedef
+fcppt::function<
 	awl::backends::windows::system::event::function
-> callback;
+>
+callback;
 
 }
 }

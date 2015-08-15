@@ -21,15 +21,16 @@ namespace event
 
 class original_handle
 :
-	public system::event::handle
+	public awl::backends::windows::system::event::handle
 {
 	FCPPT_NONCOPYABLE(
 		original_handle
 	);
 public:
 	AWL_DETAIL_SYMBOL
-	explicit original_handle(
-		system::event::handle_destroy_callback const &
+	explicit
+	original_handle(
+		awl::backends::windows::system::event::handle_destroy_callback const &
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -43,7 +44,7 @@ public:
 	bool
 	ready() const;
 private:
-	system::event::handle_destroy_callback const on_destroy_;
+	awl::backends::windows::system::event::handle_destroy_callback const on_destroy_;
 
 	HANDLE handle_;
 };

@@ -1,6 +1,7 @@
 #include <awl/backends/windows/counted_wndclass.hpp>
 #include <awl/backends/windows/default_wnd_proc.hpp>
 #include <awl/backends/windows/get_focus.hpp>
+#include <awl/backends/windows/wndclass_remove_callback.hpp>
 #include <awl/backends/windows/system/original_object.hpp>
 #include <awl/backends/windows/visual/null_object.hpp>
 #include <awl/backends/windows/window/object_unique_ptr.hpp>
@@ -72,11 +73,13 @@ awl::backends::windows::system::original_object::create_window(
 			>(
 				_param,
 				result.element().wndclass(),
-				std::bind(
-					&awl::backends::windows::system::original_object::unregister_wndclass,
-					this,
-					_param.class_name()
-				)
+				awl::backends::windows::wndclass_remove_callback{
+					std::bind(
+						&awl::backends::windows::system::original_object::unregister_wndclass,
+						this,
+						_param.class_name()
+					)
+				}
 			)
 		);
 }

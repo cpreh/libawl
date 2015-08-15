@@ -1,14 +1,17 @@
 #include <awl/exception.hpp>
 #include <awl/backends/windows/windows.hpp>
+#include <awl/backends/windows/system/event/handle_destroy_callback.hpp>
 #include <awl/backends/windows/system/event/original_handle.hpp>
 #include <fcppt/text.hpp>
 
 
 awl::backends::windows::system::event::original_handle::original_handle(
-	system::event::handle_destroy_callback const &_on_destroy
+	awl::backends::windows::system::event::handle_destroy_callback const &_on_destroy
 )
 :
-	on_destroy_(_on_destroy),
+	on_destroy_(
+		_on_destroy
+	),
 	handle_(
 		::CreateEvent(
 			NULL,
@@ -19,11 +22,14 @@ awl::backends::windows::system::event::original_handle::original_handle(
 	)
 {
 	if(
-		handle_ == NULL
+		handle_
+		==
+		NULL
 	)
-		throw awl::exception(
-			FCPPT_TEXT("CreateEvent() failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("CreateEvent() failed!")
+			};
 }
 
 awl::backends::windows::system::event::original_handle::~original_handle()
@@ -40,7 +46,8 @@ awl::backends::windows::system::event::original_handle::~original_handle()
 HANDLE
 awl::backends::windows::system::event::original_handle::get() const
 {
-	return handle_;
+	return
+		handle_;
 }
 
 bool
@@ -54,12 +61,17 @@ awl::backends::windows::system::event::original_handle::ready() const
 	);
 
 	if(
-		ret == WAIT_FAILED
+		ret
+		==
+		WAIT_FAILED
 	)
-		throw awl::exception(
-			FCPPT_TEXT("WaitForSingleObject() failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("WaitForSingleObject() failed!")
+			};
 
 	return
-		ret == WAIT_OBJECT_0;
+		ret
+		==
+		WAIT_OBJECT_0;
 }
