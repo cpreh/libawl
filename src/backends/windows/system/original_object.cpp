@@ -13,8 +13,8 @@
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/optional_bind_construct.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
