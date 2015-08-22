@@ -37,7 +37,7 @@
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
@@ -380,7 +380,7 @@ awl::backends::windows::window::event::original_processor::register_callback(
 {
 	return
 		fcppt::from_optional(
-			fcppt::container::find_opt(
+			fcppt::container::find_opt_mapped(
 				signals_,
 				_type
 			),
@@ -450,7 +450,7 @@ awl::backends::windows::window::event::original_processor::execute_callback(
 {
 	return
 		fcppt::optional_bind(
-			fcppt::container::find_opt(
+			fcppt::container::find_opt_mapped(
 				signals_,
 				_type
 			),

@@ -18,7 +18,7 @@
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <utility>
@@ -173,7 +173,7 @@ awl::backends::windows::event::processor::do_process(
 	}
 
 	fcppt::maybe_void(
-		fcppt::container::find_opt(
+		fcppt::container::find_opt_mapped(
 			window_processors_,
 			_msg.get().hwnd
 		),
