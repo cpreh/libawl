@@ -38,8 +38,8 @@ try
 			)
 			.size(
 				awl::window::dim(
-					1024,
-					768
+					1024u,
+					768u
 				)
 			)
 		)
@@ -52,6 +52,9 @@ try
 			1
 		)
 	);
+
+	return
+		EXIT_SUCCESS;
 }
 catch(
 	fcppt::exception const &_exception
@@ -61,5 +64,6 @@ catch(
 		<< _exception.string()
 		<< FCPPT_TEXT('\n');
 
-	return EXIT_FAILURE;
+	return
+		EXIT_FAILURE;
 }

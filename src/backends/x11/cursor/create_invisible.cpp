@@ -81,8 +81,8 @@ awl::backends::x11::cursor::create_invisible(
 					black
 				),
 				awl::cursor::hotspot(
-					0,
-					0
+					0u,
+					0u
 				)
 			)
 		);
