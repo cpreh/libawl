@@ -18,7 +18,7 @@
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/static_downcast_ptr.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
 #include <utility>
@@ -171,7 +171,7 @@ awl::backends::x11::event::processor::next()
 	}
 
 	fcppt::maybe_void(
-		fcppt::container::find_opt(
+		fcppt::container::find_opt_mapped(
 			window_processors_,
 			event.get().xany.window
 		),

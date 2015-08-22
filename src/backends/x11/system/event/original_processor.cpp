@@ -21,9 +21,10 @@
 #include <awl/system/event/quit.hpp>
 #include <awl/system/event/quit_callback.hpp>
 #include <fcppt/maybe_void.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/assert/optional_error.hpp>
-#include <fcppt/container/find_opt.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/container/get_or_insert_result.hpp>
+#include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/signal/unregister/base_impl.hpp>
@@ -177,32 +178,31 @@ awl::backends::x11::system::event::original_processor::register_fd_callback(
 	awl::backends::linux::fd::callback const &_callback
 )
 {
-	// TODO: insert_with_result
-	fd_signal_map::iterator it(
-		fd_signals_.find(
-			_fd
+	fcppt::container::get_or_insert_result<
+		fd_signal_map::mapped_type &
+	> const result(
+		fcppt::container::get_or_insert_with_result(
+			fd_signals_,
+			_fd,
+			[](
+				awl::backends::linux::fd::object const &
+			)
+			{
+				return
+					fd_signal();
+			}
 		)
 	);
 
 	if(
-		it == fd_signals_.end()
+		result.inserted()
 	)
-	{
-		it =
-			fd_signals_.insert(
-				std::make_pair(
-					_fd,
-					fd_signal()
-				)
-			).first;
-
 		fd_set_.add(
 			_fd
 		);
-	}
 
 	return
-		it->second.connect(
+		result.element().connect(
 			_callback,
 			fcppt::signal::unregister::function{
 				std::bind(
@@ -231,7 +231,7 @@ awl::backends::x11::system::event::original_processor::epoll(
 		ready_fds
 	)
 		fcppt::maybe_void(
-			fcppt::container::find_opt(
+			fcppt::container::find_opt_mapped(
 				fd_signals_,
 				fd
 			),
@@ -279,15 +279,13 @@ awl::backends::x11::system::event::original_processor::unregister_fd_signal(
 	awl::backends::linux::fd::object const &_fd
 )
 {
-	// TODO: Improve this!
 	fd_signal_map::iterator const it(
-		fd_signals_.find(
-			_fd
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::container::find_opt_iterator(
+				fd_signals_,
+				_fd
+			)
 		)
-	);
-
-	FCPPT_ASSERT_ERROR(
-		it != fd_signals_.end()
 	);
 
 	fd_set_.remove(
