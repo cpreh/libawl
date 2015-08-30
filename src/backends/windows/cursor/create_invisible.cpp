@@ -10,6 +10,8 @@
 #include <fcppt/make_unique_ptr_fcppt.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
+#include <fcppt/math/dim/contents.hpp>
+#include <fcppt/math/vector/null.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
 #include <vector>
@@ -39,7 +41,9 @@ awl::backends::windows::cursor::create_invisible()
 	byte_vector;
 
 	awl::backends::windows::cursor::size const size(
-		dim.content()
+		fcppt::math::dim::contents(
+			dim
+		)
 		/
 		8
 	);
@@ -63,7 +67,9 @@ awl::backends::windows::cursor::create_invisible()
 			fcppt::make_unique_ptr_fcppt<
 				awl::backends::windows::cursor::created
 			>(
-				awl::cursor::hotspot::null(),
+				fcppt::math::vector::null<
+					awl::cursor::hotspot
+				>(),
 				dim,
 				awl::backends::windows::cursor::and_plane(
 					and_vector.data()
