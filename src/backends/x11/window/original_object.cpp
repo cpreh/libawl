@@ -10,7 +10,7 @@
 #include <awl/backends/x11/window/transient_for_hint.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/window/parameters.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/static_optional_cast.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/static_downcast.hpp>

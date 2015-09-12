@@ -15,7 +15,7 @@
 #include <awl/backends/cocoa/system/event/create_processor.hpp>
 #include <awl/system/event/processor.hpp>
 #endif
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -29,7 +29,7 @@ awl::system::event::create_processor(
 			awl::system::event::processor
 		>(
 #if defined(AWL_X11_BACKEND)
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				backends::x11::system::event::original_processor
 			>(
 				fcppt::cast::static_downcast<
@@ -39,7 +39,7 @@ awl::system::event::create_processor(
 				)
 			)
 #elif defined(AWL_WINDOWS_BACKEND)
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				backends::windows::system::event::original_processor
 			>(
 				fcppt::cast::static_downcast<

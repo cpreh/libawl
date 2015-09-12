@@ -5,7 +5,7 @@
 #include <awl/backends/windows/cursor/object_unique_ptr.hpp>
 #include <awl/backends/windows/cursor/shared.hpp>
 #include <awl/cursor/predefined.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -18,7 +18,7 @@ awl::backends::windows::cursor::create_predefined(
 		fcppt::unique_ptr_to_base<
 			awl::backends::windows::cursor::object
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::windows::cursor::shared
 			>(
 				awl::backends::windows::cursor::load(

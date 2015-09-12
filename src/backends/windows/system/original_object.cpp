@@ -11,7 +11,7 @@
 #include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/optional_bind_construct.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -68,7 +68,7 @@ awl::backends::windows::system::original_object::create_window(
 		fcppt::unique_ptr_to_base<
 			awl::window::object
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::windows::window::original_object
 			>(
 				_param,
@@ -91,7 +91,7 @@ awl::backends::windows::system::original_object::default_visual()
 		fcppt::unique_ptr_to_base<
 			awl::visual::object
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::windows::visual::null_object
 			>()
 		);

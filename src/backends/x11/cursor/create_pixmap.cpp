@@ -9,7 +9,7 @@
 #include <awl/backends/x11/cursor/source_pixmap.hpp>
 #include <awl/backends/x11/pixmap/holder.hpp>
 #include <awl/cursor/hotspot.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
@@ -58,7 +58,7 @@ awl::backends::x11::cursor::create_pixmap(
 			};
 
 	return
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			awl::backends::x11::cursor::holder
 		>(
 			_display,

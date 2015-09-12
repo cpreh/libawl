@@ -30,7 +30,7 @@
 #include <awl/window/event/show_callback.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/from_optional.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/maybe.hpp>
 #include <fcppt/optional_bind.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>

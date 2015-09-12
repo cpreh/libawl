@@ -4,7 +4,7 @@
 #include <awl/backends/windows/window/common_object.hpp>
 #include <awl/backends/windows/window/wrapped_object.hpp>
 #include <awl/visual/object.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -17,7 +17,7 @@ awl::backends::windows::window::wrapped_object::wrapped_object(
 		fcppt::unique_ptr_to_base<
 			awl::visual::object
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::windows::visual::null_object
 			>()
 		)

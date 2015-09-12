@@ -7,7 +7,7 @@
 #include <awl/backends/windows/cursor/object_unique_ptr.hpp>
 #include <awl/backends/windows/cursor/size.hpp>
 #include <awl/cursor/hotspot.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/math/dim/contents.hpp>
@@ -64,7 +64,7 @@ awl::backends::windows::cursor::create_invisible()
 		fcppt::unique_ptr_to_base<
 			awl::backends::windows::cursor::object
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::windows::cursor::created
 			>(
 				fcppt::math::vector::null<

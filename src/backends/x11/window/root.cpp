@@ -2,7 +2,7 @@
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/root.hpp>
 #include <awl/backends/x11/window/wrapped_object.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
@@ -19,7 +19,7 @@ awl::backends::x11::window::root(
 		fcppt::unique_ptr_to_base<
 			awl::backends::x11::window::object
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::x11::window::wrapped_object
 			>(
 				_display,

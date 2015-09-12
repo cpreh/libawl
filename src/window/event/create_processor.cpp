@@ -17,7 +17,7 @@
 #else
 #error "Implement me!"
 #endif
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -31,7 +31,7 @@ awl::window::event::create_processor(
 			awl::window::event::processor
 		>(
 #if defined(AWL_X11_BACKEND)
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				backends::x11::window::event::original_processor
 			>(
 				fcppt::cast::static_downcast<
@@ -41,7 +41,7 @@ awl::window::event::create_processor(
 				)
 			)
 #elif defined(AWL_WINDOWS_BACKEND)
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				backends::windows::window::event::original_processor
 			>(
 				fcppt::cast::static_downcast<

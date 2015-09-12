@@ -11,7 +11,7 @@
 #else
 #error "Don't know how to create a system object"
 #endif
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -23,11 +23,11 @@ awl::system::create()
 			awl::system::object
 		>(
 #if defined(AWL_X11_BACKEND)
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::x11::system::original_object
 			>()
 #elif defined(AWL_WINDOWS_BACKEND)
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::windows::system::original_object
 			>()
 #elif defined(AWL_COCOA_BACKEND)

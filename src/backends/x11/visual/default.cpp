@@ -6,7 +6,7 @@
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/visual/object_unique_ptr.hpp>
 #include <awl/backends/x11/visual/wrapped.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/post.hpp>
 
@@ -33,7 +33,7 @@ awl::backends::x11::visual::default_(
 		fcppt::unique_ptr_to_base<
 			awl::backends::x11::visual::object
 		>(
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::x11::visual::wrapped
 			>(
 				awl::backends::x11::visual::create_info(

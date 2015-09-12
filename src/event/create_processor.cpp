@@ -19,7 +19,7 @@
 #include <awl/event/processor.hpp>
 #endif
 #include <fcppt/dynamic_optional_cast.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
@@ -34,7 +34,7 @@ awl::event::create_processor(
 			awl::event::processor
 		>(
 #if defined(AWL_X11_BACKEND)
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::x11::event::processor
 			>(
 				fcppt::cast::static_downcast<
@@ -49,7 +49,7 @@ awl::event::create_processor(
 				)
 			)
 #elif defined(AWL_WINDOWS_BACKEND)
-			fcppt::make_unique_ptr_fcppt<
+			fcppt::make_unique_ptr<
 				awl::backends::windows::event::processor
 			>(
 				fcppt::cast::static_downcast<

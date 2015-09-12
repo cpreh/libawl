@@ -17,7 +17,7 @@
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/root.hpp>
 #include <awl/cursor/hotspot.hpp>
-#include <fcppt/make_unique_ptr_fcppt.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
 #include <fcppt/config/external_end.hpp>
@@ -63,7 +63,7 @@ awl::backends::x11::cursor::create_invisible(
 	};
 
 	return
-		fcppt::make_unique_ptr_fcppt<
+		fcppt::make_unique_ptr<
 			awl::backends::x11::cursor::object
 		>(
 			awl::backends::x11::cursor::create_pixmap(
