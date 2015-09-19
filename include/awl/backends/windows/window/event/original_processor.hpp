@@ -33,6 +33,7 @@
 #include <fcppt/signal/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -188,16 +189,28 @@ private:
 
 	windows::window::object &window_;
 
-	typedef fcppt::signal::object<
+	typedef
+	fcppt::signal::object<
 		windows::window::event::function
-	> signal_type;
+	>
+	signal_type;
 
-	typedef std::unordered_map<
+	typedef
+	std::unordered_map<
 		awl::backends::windows::event::type,
 		signal_type
-	> signal_map;
+	>
+	signal_map;
+
+	typedef
+	std::vector<
+		awl::backends::windows::event::type
+	>
+	user_message_vector;
 
 	signal_map signals_;
+
+	user_message_vector user_messages_;
 
 	awl::window::event::close_signal close_signal_;
 
