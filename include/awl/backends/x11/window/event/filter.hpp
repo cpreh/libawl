@@ -4,6 +4,7 @@
 #include <awl/backends/x11/window/object_fwd.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
+#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace awl
@@ -20,9 +21,10 @@ namespace event
 AWL_DETAIL_SYMBOL
 bool
 filter(
-	event::object,
-	x11::window::object const &
-);
+	awl::backends::x11::window::event::object,
+	awl::backends::x11::window::object const &
+)
+FCPPT_PP_WARN_UNUSED_RESULT;
 
 }
 }

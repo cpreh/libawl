@@ -8,8 +8,8 @@
 
 bool
 awl::backends::x11::window::event::filter(
-	event::object _event,
-	x11::window::object const &_window
+	awl::backends::x11::window::event::object _event,
+	awl::backends::x11::window::object const &_window
 )
 {
 	return
