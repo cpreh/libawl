@@ -23,7 +23,7 @@
 #include <fcppt/io/cout.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
@@ -86,7 +86,7 @@ try
 		*window_processor
 	);
 
-	fcppt::signal::scoped_connection const resize_connection(
+	fcppt::signal::auto_connection const resize_connection(
 		window_processor->resize_callback(
 			awl::window::event::resize_callback(
 				[](
@@ -106,7 +106,7 @@ try
 		true
 	);
 
-	fcppt::signal::scoped_connection const destroy_connection(
+	fcppt::signal::auto_connection const destroy_connection(
 		window_processor->destroy_callback(
 			awl::window::event::destroy_callback(
 				[

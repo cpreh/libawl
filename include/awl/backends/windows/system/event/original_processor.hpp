@@ -23,7 +23,7 @@
 #include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
@@ -164,7 +164,7 @@ private:
 
 	awl::system::event::quit_signal quit_signal_;
 
-	fcppt::signal::scoped_connection const quit_connection_;
+	fcppt::signal::auto_connection const quit_connection_;
 };
 
 }

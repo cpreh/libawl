@@ -24,7 +24,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/signal/scoped_connection.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
@@ -87,7 +87,7 @@ try
 
 	window->show();
 
-	fcppt::signal::scoped_connection const show_connection(
+	fcppt::signal::auto_connection const show_connection(
 		window_processor->show_callback(
 			awl::window::event::show_callback(
 				[
