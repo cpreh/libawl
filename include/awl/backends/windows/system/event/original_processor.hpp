@@ -21,9 +21,9 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/strong_typedef_std_hash.hpp>
 #include <fcppt/container/raw_vector_decl.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
