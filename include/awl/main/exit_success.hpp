@@ -11,7 +11,7 @@ namespace main
 {
 
 AWL_DETAIL_SYMBOL
-awl::main::exit_code const
+awl::main::exit_code
 exit_success();
 
 }

@@ -63,7 +63,7 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::x11::screen const
+	awl::backends::x11::screen
 	screen() const
 	override;
 

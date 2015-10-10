@@ -3,7 +3,7 @@
 #include <fcppt/log/location.hpp>
 
 
-fcppt::log::location const
+fcppt::log::location
 awl::log_location()
 {
 	return

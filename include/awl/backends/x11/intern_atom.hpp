@@ -17,7 +17,7 @@ namespace x11
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::x11::atom const
+awl::backends::x11::atom
 intern_atom(
 	awl::backends::x11::display &,
 	std::string const &

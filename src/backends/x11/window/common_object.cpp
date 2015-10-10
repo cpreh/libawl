@@ -43,7 +43,7 @@ awl::backends::x11::window::common_object::show()
 	);
 }
 
-awl::window::rect const
+awl::window::rect
 awl::backends::x11::window::common_object::rect() const
 {
 	Window root_return;
@@ -92,7 +92,7 @@ awl::backends::x11::window::common_object::rect() const
 		);
 }
 
-awl::window::dim const
+awl::window::dim
 awl::backends::x11::window::common_object::size() const
 {
 	return

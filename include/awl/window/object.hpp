@@ -28,11 +28,11 @@ public:
 	show() = 0;
 
 	virtual
-	awl::window::dim const
+	awl::window::dim
 	size() const = 0;
 
 	virtual
-	awl::window::rect const
+	awl::window::rect
 	rect() const = 0;
 
 	virtual

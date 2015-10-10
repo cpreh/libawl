@@ -9,9 +9,9 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::x11::window::event::optional_mask const
+awl::backends::x11::window::event::optional_mask
 awl::backends::x11::window::event::to_mask(
-	x11::window::event::type const _event_type
+	awl::backends::x11::window::event::type const _event_type
 )
 {
 #define AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(\

@@ -12,7 +12,7 @@ awl::system::event::quit::quit(
 {
 }
 
-awl::main::exit_code const
+awl::main::exit_code
 awl::system::event::quit::exit_code() const
 {
 	return

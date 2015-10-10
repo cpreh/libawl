@@ -68,7 +68,9 @@ awl::backends::x11::system::event::original_processor::~original_processor()
 bool
 awl::backends::x11::system::event::original_processor::poll()
 {
-	bool events_processed = false;
+	bool events_processed{
+		false
+	};
 
 	XEvent xev;
 
@@ -130,7 +132,7 @@ awl::backends::x11::system::event::original_processor::running() const
 		!exit_code_.has_value();
 }
 
-awl::main::exit_code const
+awl::main::exit_code
 awl::backends::x11::system::event::original_processor::exit_code() const
 {
 	awl::main::exit_code const code(

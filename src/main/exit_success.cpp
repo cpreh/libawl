@@ -6,7 +6,7 @@
 #endif
 
 
-awl::main::exit_code const
+awl::main::exit_code
 awl::main::exit_success()
 {
 	return

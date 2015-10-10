@@ -41,7 +41,7 @@ public:
 	running() const = 0;
 
 	virtual
-	awl::main::exit_code const
+	awl::main::exit_code
 	exit_code() const = 0;
 
 	virtual
@@ -51,7 +51,8 @@ public:
 	) = 0;
 
 	AWL_DETAIL_SYMBOL
-	virtual ~processor();
+	virtual
+	~processor() = 0;
 };
 
 }

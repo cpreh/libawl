@@ -83,23 +83,23 @@ public:
 	visual() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::optional_pos const
+	awl::window::optional_pos
 	position() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::optional_dim const
+	awl::window::optional_dim
 	size() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::optional_dim const
+	awl::window::optional_dim
 	exact_size_hint() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::optional_dim const
+	awl::window::optional_dim
 	minimum_size_hint() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::optional_dim const
+	awl::window::optional_dim
 	maximum_size_hint() const;
 
 	AWL_DETAIL_SYMBOL

@@ -22,11 +22,13 @@ awl::backends::x11::window::atoms::atoms(
 Atom const *
 awl::backends::x11::window::atoms::get() const
 {
-	return atoms_;
+	return
+		atoms_;
 }
 
-awl::backends::x11::window::atom_count const
+awl::backends::x11::window::atom_count
 awl::backends::x11::window::atoms::count() const
 {
-	return count_;
+	return
+		count_;
 }

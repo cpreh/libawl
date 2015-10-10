@@ -18,9 +18,9 @@ namespace event
 {
 
 AWL_DETAIL_SYMBOL
-event::optional_mask const
+awl::backends::x11::window::event::optional_mask
 to_mask(
-	x11::window::event::type
+	awl::backends::x11::window::event::type
 );
 
 }

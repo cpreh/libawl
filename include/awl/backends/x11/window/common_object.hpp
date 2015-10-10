@@ -41,12 +41,12 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::dim const
+	awl::window::dim
 	size() const
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::rect const
+	awl::window::rect
 	rect() const
 	override;
 

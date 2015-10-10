@@ -132,29 +132,34 @@ awl::backends::x11::window::original_object::destroyed() const
 awl::backends::x11::display &
 awl::backends::x11::window::original_object::display() const
 {
-	return display_;
+	return
+		display_;
 }
 
-awl::backends::x11::screen const
+awl::backends::x11::screen
 awl::backends::x11::window::original_object::screen() const
 {
-	return screen_;
+	return
+		screen_;
 }
 
 awl::backends::x11::visual::object const &
 awl::backends::x11::window::original_object::visual() const
 {
-	return visual_;
+	return
+		visual_;
 }
 
 Window
 awl::backends::x11::window::original_object::get() const
 {
-	return window_.get();
+	return
+		window_.get();
 }
 
 awl::backends::x11::window::class_hint const *
 awl::backends::x11::window::original_object::class_hint() const
 {
-	return &class_hint_;
+	return
+		&class_hint_;
 }

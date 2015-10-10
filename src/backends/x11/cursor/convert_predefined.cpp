@@ -9,7 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::x11::cursor::shape const
+awl::backends::x11::cursor::shape
 awl::backends::x11::cursor::convert_predefined(
 	awl::cursor::predefined const _type
 )

@@ -65,7 +65,7 @@ awl::backends::x11::window::wrapped_object::display() const
 		display_;
 }
 
-awl::backends::x11::screen const
+awl::backends::x11::screen
 awl::backends::x11::window::wrapped_object::screen() const
 {
 	return

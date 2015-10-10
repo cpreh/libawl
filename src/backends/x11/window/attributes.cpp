@@ -8,7 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-XWindowAttributes const
+XWindowAttributes
 awl::backends::x11::window::attributes(
 	x11::window::object &_window
 )
@@ -23,9 +23,11 @@ awl::backends::x11::window::attributes(
 		)
 		!= 1
 	)
-		throw awl::exception(
+		throw
+			awl::exception{
 			FCPPT_TEXT("XGetWindowAttributes() failed!")
-		);
+			};
 
-	return ret;
+	return
+		ret;
 }

@@ -6,7 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::x11::screen const
+awl::backends::x11::screen
 awl::backends::x11::default_screen(
 	awl::backends::x11::display const &_display
 )

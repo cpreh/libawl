@@ -9,10 +9,10 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::x11::window::event::optional const
+awl::backends::x11::window::event::optional
 awl::backends::x11::window::event::poll_type(
-	x11::window::object &_window,
-	x11::window::event::type const _event_mask
+	awl::backends::x11::window::object &_window,
+	awl::backends::x11::window::event::type const _event_mask
 )
 {
 	XEvent ret;
@@ -26,11 +26,12 @@ awl::backends::x11::window::event::poll_type(
 		)
 		== True
 		?
-			x11::window::event::optional(
-				x11::window::event::object(
+			awl::backends::x11::window::event::optional(
+				awl::backends::x11::window::event::object(
 					ret
 				)
 			)
 		:
-			x11::window::event::optional();
+			awl::backends::x11::window::event::optional()
+		;
 }

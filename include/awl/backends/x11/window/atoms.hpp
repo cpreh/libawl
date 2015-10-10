@@ -32,7 +32,7 @@ public:
 	get() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::atom_count const
+	awl::backends::x11::window::atom_count
 	count() const;
 private:
 	Atom const *atoms_;

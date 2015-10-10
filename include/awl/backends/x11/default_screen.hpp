@@ -14,7 +14,7 @@ namespace x11
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::x11::screen const
+awl::backends::x11::screen
 default_screen(
 	awl::backends::x11::display const &
 );

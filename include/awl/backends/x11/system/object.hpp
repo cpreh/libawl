@@ -39,7 +39,7 @@ public:
 	display() = 0;
 
 	virtual
-	awl::backends::x11::screen const
+	awl::backends::x11::screen
 	screen() const = 0;
 };
 

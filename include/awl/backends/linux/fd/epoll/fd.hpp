@@ -30,7 +30,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	~fd();
 
-	awl::backends::linux::fd::object const
+	awl::backends::linux::fd::object
 	get() const;
 private:
 	awl::backends::linux::fd::object const fd_;

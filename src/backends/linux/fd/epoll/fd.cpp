@@ -16,11 +16,14 @@ awl::backends::linux::fd::epoll::fd::fd()
 	)
 {
 	if(
-		fd_.get() == -1
+		fd_.get()
+		==
+		-1
 	)
-		throw awl::exception(
-			FCPPT_TEXT("epoll_create failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("epoll_create failed!")
+			};
 }
 
 awl::backends::linux::fd::epoll::fd::~fd()
@@ -30,8 +33,9 @@ awl::backends::linux::fd::epoll::fd::~fd()
 	);
 }
 
-awl::backends::linux::fd::object const
+awl::backends::linux::fd::object
 awl::backends::linux::fd::epoll::fd::get() const
 {
-	return fd_;
+	return
+		fd_;
 }

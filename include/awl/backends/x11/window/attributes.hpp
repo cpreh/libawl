@@ -18,7 +18,7 @@ namespace window
 {
 
 AWL_DETAIL_SYMBOL
-XWindowAttributes const
+XWindowAttributes
 attributes(
 	x11::window::object &
 );

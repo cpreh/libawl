@@ -139,35 +139,35 @@ awl::window::parameters::visual() const
 		visual_;
 }
 
-awl::window::optional_pos const
+awl::window::optional_pos
 awl::window::parameters::position() const
 {
 	return
 		position_;
 }
 
-awl::window::optional_dim const
+awl::window::optional_dim
 awl::window::parameters::size() const
 {
 	return
 		size_;
 }
 
-awl::window::optional_dim const
+awl::window::optional_dim
 awl::window::parameters::exact_size_hint() const
 {
 	return
 		exact_size_hint_;
 }
 
-awl::window::optional_dim const
+awl::window::optional_dim
 awl::window::parameters::minimum_size_hint() const
 {
 	return
 		minimum_size_hint_;
 }
 
-awl::window::optional_dim const
+awl::window::optional_dim
 awl::window::parameters::maximum_size_hint() const
 {
 	return

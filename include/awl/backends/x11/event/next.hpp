@@ -16,9 +16,9 @@ namespace event
 {
 
 AWL_DETAIL_SYMBOL
-x11::event::object const
+awl::backends::x11::event::object
 next(
-	x11::display &
+	awl::backends::x11::display &
 );
 
 }

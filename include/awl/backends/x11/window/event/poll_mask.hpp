@@ -19,10 +19,10 @@ namespace event
 {
 
 AWL_DETAIL_SYMBOL
-x11::window::event::optional const
+awl::backends::x11::window::event::optional
 poll_mask(
-	x11::window::object &,
-	x11::window::event::mask
+	awl::backends::x11::window::object &,
+	awl::backends::x11::window::event::mask
 );
 
 }

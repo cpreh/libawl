@@ -101,7 +101,7 @@ awl::backends::x11::system::original_object::display()
 		display_;
 }
 
-awl::backends::x11::screen const
+awl::backends::x11::screen
 awl::backends::x11::system::original_object::screen() const
 {
 	return
