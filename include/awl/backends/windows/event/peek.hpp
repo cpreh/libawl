@@ -16,7 +16,7 @@ namespace event
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::windows::event::optional_message const
+awl::backends::windows::event::optional_message
 peek(
 	HWND
 );

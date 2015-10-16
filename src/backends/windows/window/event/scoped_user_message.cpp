@@ -23,8 +23,9 @@ awl::backends::windows::window::event::scoped_user_message::~scoped_user_message
 	);
 }
 
-awl::backends::windows::event::type const
+awl::backends::windows::event::type
 awl::backends::windows::window::event::scoped_user_message::type() const
 {
-	return type_;
+	return
+		type_;
 }

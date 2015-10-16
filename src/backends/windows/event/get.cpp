@@ -4,7 +4,8 @@
 #include <awl/backends/windows/event/message.hpp>
 #include <fcppt/text.hpp>
 
-awl::backends::windows::event::message const
+
+awl::backends::windows::event::message
 awl::backends::windows::event::get()
 {
 	MSG msg;

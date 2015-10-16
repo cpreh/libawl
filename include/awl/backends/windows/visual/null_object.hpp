@@ -28,12 +28,14 @@ public:
 	null_object();
 
 	AWL_DETAIL_SYMBOL
-	~null_object();
+	~null_object()
+	override;
 private:
 	void
 	apply(
 		HWND
-	) const;
+	) const
+	override;
 };
 
 }

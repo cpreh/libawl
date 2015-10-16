@@ -4,7 +4,7 @@
 #include <awl/backends/windows/window/screen_to_client.hpp>
 
 
-awl::backends::windows::optional_point const
+awl::backends::windows::optional_point
 awl::backends::windows::window::screen_to_client(
 	awl::backends::windows::window::object const &_window,
 	POINT const &_point

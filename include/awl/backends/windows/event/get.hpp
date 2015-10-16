@@ -15,7 +15,7 @@ namespace event
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::windows::event::message const
+awl::backends::windows::event::message
 get();
 
 }

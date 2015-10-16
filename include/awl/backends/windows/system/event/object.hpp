@@ -28,11 +28,11 @@ public:
 	);
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::windows::event::wparam const
+	awl::backends::windows::event::wparam
 	wparam() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::windows::event::lparam const
+	awl::backends::windows::event::lparam
 	lparam() const;
 private:
 	awl::backends::windows::event::wparam wparam_;

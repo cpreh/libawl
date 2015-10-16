@@ -31,25 +31,30 @@ public:
 	common_object();
 
 	AWL_DETAIL_SYMBOL
-	~common_object();
+	~common_object()
+	override;
 
 	AWL_DETAIL_SYMBOL
 	void
-	show();
+	show()
+	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::dim const
-	size() const;
+	awl::window::dim
+	size() const
+	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::rect const
-	rect() const;
+	awl::window::rect
+	rect() const
+	override;
 
 	AWL_DETAIL_SYMBOL
 	bool
 	equal_to(
 		awl::window::object const &
-	) const;
+	) const
+	override;
 };
 
 }

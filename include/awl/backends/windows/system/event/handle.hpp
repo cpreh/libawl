@@ -27,15 +27,17 @@ protected:
 	AWL_DETAIL_SYMBOL
 	handle();
 public:
-	virtual HANDLE
+	virtual
+	HANDLE
 	get() const = 0;
 
-	virtual bool
+	virtual
+	bool
 	ready() const = 0;
 
 	AWL_DETAIL_SYMBOL
 	virtual
-	~handle();
+	~handle() = 0;
 };
 
 }

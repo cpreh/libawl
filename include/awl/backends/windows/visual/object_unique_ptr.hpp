@@ -14,9 +14,11 @@ namespace windows
 namespace visual
 {
 
-typedef fcppt::unique_ptr<
+typedef
+fcppt::unique_ptr<
 	awl::backends::windows::visual::object
-> object_unique_ptr;
+>
+object_unique_ptr;
 
 }
 }

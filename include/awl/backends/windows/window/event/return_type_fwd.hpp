@@ -16,9 +16,11 @@ namespace window
 namespace event
 {
 
-typedef fcppt::optional<
+typedef
+fcppt::optional<
 	LRESULT
-> return_type;
+>
+return_type;
 
 }
 }

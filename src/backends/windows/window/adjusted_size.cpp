@@ -9,7 +9,7 @@
 #include <fcppt/cast/to_signed.hpp>
 
 
-awl::backends::windows::window::signed_dim const
+awl::backends::windows::window::signed_dim
 awl::backends::windows::window::adjusted_size(
 	awl::window::optional_dim const &_opt_dim,
 	DWORD const _flags

@@ -4,7 +4,7 @@
 #include <awl/backends/windows/window/object.hpp>
 
 
-awl::backends::windows::optional_rect const
+awl::backends::windows::optional_rect
 awl::backends::windows::window::get_rect(
 	awl::backends::windows::window::object const &_object
 )

@@ -29,8 +29,8 @@ protected:
 	object();
 public:
 	AWL_DETAIL_SYMBOL
-	virtual
-	~object();
+	~object()
+	override;
 
 	virtual
 	void

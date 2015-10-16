@@ -35,7 +35,7 @@ public:
 	~scoped_user_message();
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::windows::event::type const
+	awl::backends::windows::event::type
 	type() const;
 private:
 	awl::backends::windows::window::event::processor &processor_;

@@ -620,6 +620,7 @@ set(
 	include/awl/backends/windows/event/object.hpp
 	include/awl/backends/windows/event/object_fwd.hpp
 	include/awl/backends/windows/event/optional_message.hpp
+	include/awl/backends/windows/event/optional_message_fwd.hpp
 	include/awl/backends/windows/event/peek.hpp
 	include/awl/backends/windows/event/post_message.hpp
 	include/awl/backends/windows/event/processor.hpp

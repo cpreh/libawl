@@ -58,7 +58,7 @@ awl::backends::windows::window::original_object::hwnd() const
 		holder_.get();
 }
 
-awl::backends::windows::cursor::const_optional_object_ref const
+awl::backends::windows::cursor::const_optional_object_ref
 awl::backends::windows::window::original_object::cursor() const
 {
 	return

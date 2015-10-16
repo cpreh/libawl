@@ -57,7 +57,7 @@ public:
 	) = 0;
 
 	virtual
-	awl::backends::windows::event::type const
+	awl::backends::windows::event::type
 	allocate_user_message() = 0;
 
 	virtual

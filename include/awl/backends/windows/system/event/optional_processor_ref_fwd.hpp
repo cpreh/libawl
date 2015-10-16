@@ -16,9 +16,11 @@ namespace system
 namespace event
 {
 
-typedef fcppt::optional<
+typedef
+fcppt::optional<
 	awl::backends::windows::system::event::processor &
-> optional_processor_ref;
+>
+optional_processor_ref;
 
 }
 }

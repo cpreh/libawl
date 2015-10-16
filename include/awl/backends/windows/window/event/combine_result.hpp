@@ -15,7 +15,7 @@ namespace window
 namespace event
 {
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 combine_result(
 	awl::backends::windows::window::event::return_type const &,
 	awl::backends::windows::window::event::return_type const &

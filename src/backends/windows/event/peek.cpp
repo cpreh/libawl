@@ -2,10 +2,9 @@
 #include <awl/backends/windows/event/message.hpp>
 #include <awl/backends/windows/event/optional_message.hpp>
 #include <awl/backends/windows/event/peek.hpp>
-#include <fcppt/optional_impl.hpp>
 
 
-awl::backends::windows::event::optional_message const
+awl::backends::windows::event::optional_message
 awl::backends::windows::event::peek(
 	HWND const _hwnd
 )

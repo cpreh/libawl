@@ -39,7 +39,7 @@ awl::backends::windows::window::wrapped_object::hwnd() const
 		hwnd_;
 }
 
-awl::backends::windows::cursor::const_optional_object_ref const
+awl::backends::windows::cursor::const_optional_object_ref
 awl::backends::windows::window::wrapped_object::cursor() const
 {
 	return

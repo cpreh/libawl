@@ -33,7 +33,7 @@ awl::backends::windows::window::common_object::~common_object()
 {
 }
 
-awl::window::dim const
+awl::window::dim
 awl::backends::windows::window::common_object::size() const
 {
 	return
@@ -42,7 +42,7 @@ awl::backends::windows::window::common_object::size() const
 		);
 }
 
-awl::window::rect const
+awl::window::rect
 awl::backends::windows::window::common_object::rect() const
 {
 	RECT const ret(

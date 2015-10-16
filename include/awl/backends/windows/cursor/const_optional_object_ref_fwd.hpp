@@ -14,9 +14,11 @@ namespace windows
 namespace cursor
 {
 
-typedef fcppt::optional<
+typedef
+fcppt::optional<
 	awl::backends::windows::cursor::object const &
-> const_optional_object_ref;
+>
+const_optional_object_ref;
 
 }
 }

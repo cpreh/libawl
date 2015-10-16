@@ -453,7 +453,7 @@ awl::backends::windows::window::event::original_processor::process(
 	);
 }
 
-awl::backends::windows::event::type const
+awl::backends::windows::event::type
 awl::backends::windows::window::event::original_processor::allocate_user_message()
 {
 	awl::backends::windows::event::type const result(
@@ -487,7 +487,7 @@ awl::backends::windows::window::event::original_processor::free_user_message(
 	);
 }
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::execute_callback(
 	awl::backends::windows::event::type const _type,
 	awl::backends::windows::event::wparam const _wparam,
@@ -532,7 +532,7 @@ awl::backends::windows::window::event::original_processor::do_process(
 	);
 }
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::on_close(
 	awl::backends::windows::window::event::object const &
 )
@@ -550,7 +550,7 @@ awl::backends::windows::window::event::original_processor::on_close(
 		;
 }
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::on_destroy(
 	awl::backends::windows::window::event::object const &
 )
@@ -563,7 +563,7 @@ awl::backends::windows::window::event::original_processor::on_destroy(
 		awl::backends::windows::window::event::return_type();
 }
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::on_focus_in(
 	awl::backends::windows::window::event::object const &
 )
@@ -576,7 +576,7 @@ awl::backends::windows::window::event::original_processor::on_focus_in(
 		awl::backends::windows::window::event::return_type();
 }
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::on_focus_out(
 	awl::backends::windows::window::event::object const &
 )
@@ -589,7 +589,7 @@ awl::backends::windows::window::event::original_processor::on_focus_out(
 		awl::backends::windows::window::event::return_type();
 }
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::on_resize(
 	awl::backends::windows::window::event::object const &_event
 )
@@ -619,7 +619,7 @@ awl::backends::windows::window::event::original_processor::on_resize(
 		awl::backends::windows::window::event::return_type();
 }
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::on_show(
 	awl::backends::windows::window::event::object const &_event
 )
@@ -644,7 +644,7 @@ awl::backends::windows::window::event::original_processor::on_show(
 		awl::backends::windows::window::event::return_type();
 }
 
-awl::backends::windows::window::event::return_type const
+awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::on_setcursor(
 	awl::backends::windows::window::event::object const &_event
 )

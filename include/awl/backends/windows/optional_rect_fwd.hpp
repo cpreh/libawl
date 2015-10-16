@@ -12,9 +12,11 @@ namespace backends
 namespace windows
 {
 
-typedef fcppt::optional<
+typedef
+fcppt::optional<
 	RECT
-> optional_rect;
+>
+optional_rect;
 
 }
 }

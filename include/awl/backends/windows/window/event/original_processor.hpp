@@ -63,84 +63,99 @@ public:
 	);
 
 	AWL_DETAIL_SYMBOL
-	~original_processor();
+	~original_processor()
+	override;
 
 	AWL_DETAIL_SYMBOL
 	bool
-	poll();
+	poll()
+	override;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	close_callback(
 		awl::window::event::close_callback const &
-	);
+	)
+	override;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	destroy_callback(
 		awl::window::event::destroy_callback const &
-	);
+	)
+	override;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	focus_in_callback(
 		awl::window::event::focus_in_callback const &
-	);
+	)
+	override;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	focus_out_callback(
 		awl::window::event::focus_out_callback const &
-	);
+	)
+	override;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	hide_callback(
 		awl::window::event::hide_callback const &
-	);
+	)
+	override;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	resize_callback(
 		awl::window::event::resize_callback const &
-	);
+	)
+	override;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	show_callback(
 		awl::window::event::show_callback const &
-	);
+	)
+	override;
 
 	AWL_DETAIL_SYMBOL
 	awl::window::object &
-	window() const;
+	window() const
+	override;
 
 	AWL_DETAIL_SYMBOL
 	awl::backends::windows::window::object &
-	windows_window() const;
+	windows_window() const
+	override;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_callback(
 		awl::backends::windows::event::type,
 		windows::window::event::callback const &
-	);
+	)
+	override;
 
 	void
 	process(
 		awl::backends::windows::event::message const &
-	);
+	)
+	override;
 
-	awl::backends::windows::event::type const
-	allocate_user_message();
+	awl::backends::windows::event::type
+	allocate_user_message()
+	override;
 
 	void
 	free_user_message(
 		awl::backends::windows::event::type
-	);
+	)
+	override;
 
 	AWL_DETAIL_SYMBOL
-	windows::window::event::return_type const
+	awl::backends::windows::window::event::return_type
 	execute_callback(
 		awl::backends::windows::event::type,
 		awl::backends::windows::event::wparam,
@@ -152,37 +167,37 @@ private:
 		awl::backends::windows::event::message const &
 	);
 
-	awl::backends::windows::window::event::return_type const
+	awl::backends::windows::window::event::return_type
 	on_close(
 		awl::backends::windows::window::event::object const &
 	);
 
-	awl::backends::windows::window::event::return_type const
+	awl::backends::windows::window::event::return_type
 	on_destroy(
 		awl::backends::windows::window::event::object const &
 	);
 
-	awl::backends::windows::window::event::return_type const
+	awl::backends::windows::window::event::return_type
 	on_focus_in(
 		awl::backends::windows::window::event::object const &
 	);
 
-	awl::backends::windows::window::event::return_type const
+	awl::backends::windows::window::event::return_type
 	on_focus_out(
 		awl::backends::windows::window::event::object const &
 	);
 
-	awl::backends::windows::window::event::return_type const
+	awl::backends::windows::window::event::return_type
 	on_resize(
 		awl::backends::windows::window::event::object const &
 	);
 
-	awl::backends::windows::window::event::return_type const
+	awl::backends::windows::window::event::return_type
 	on_show(
 		awl::backends::windows::window::event::object const &
 	);
 
-	awl::backends::windows::window::event::return_type const
+	awl::backends::windows::window::event::return_type
 	on_setcursor(
 		awl::backends::windows::window::event::object const &
 	);

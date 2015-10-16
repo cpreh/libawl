@@ -48,7 +48,7 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::windows::cursor::const_optional_object_ref const
+	awl::backends::windows::cursor::const_optional_object_ref
 	cursor() const
 	override;
 

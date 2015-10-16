@@ -22,20 +22,23 @@ awl::backends::windows::event::object::object(
 {
 }
 
-awl::backends::windows::event::type const
+awl::backends::windows::event::type
 awl::backends::windows::event::object::type() const
 {
-	return type_;
+	return
+		type_;
 }
 
-awl::backends::windows::event::wparam const
+awl::backends::windows::event::wparam
 awl::backends::windows::event::object::wparam() const
 {
-	return wparam_;
+	return
+		wparam_;
 }
 
-awl::backends::windows::event::lparam const
+awl::backends::windows::event::lparam
 awl::backends::windows::event::object::lparam() const
 {
-	return lparam_;
+	return
+		lparam_;
 }

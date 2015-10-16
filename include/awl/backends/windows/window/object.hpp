@@ -31,14 +31,15 @@ protected:
 	object();
 public:
 	AWL_DETAIL_SYMBOL
-	~object();
+	~object()
+	override;
 
 	virtual
 	HWND
 	hwnd() const = 0;
 
 	virtual
-	awl::backends::windows::cursor::const_optional_object_ref const
+	awl::backends::windows::cursor::const_optional_object_ref
 	cursor() const = 0;
 };
 

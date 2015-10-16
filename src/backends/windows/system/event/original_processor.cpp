@@ -145,7 +145,7 @@ awl::backends::windows::system::event::original_processor::running() const
 		!exit_code_.has_value();
 }
 
-awl::main::exit_code const
+awl::main::exit_code
 awl::backends::windows::system::event::original_processor::exit_code() const
 {
 	return

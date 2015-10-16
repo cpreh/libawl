@@ -35,14 +35,16 @@ public:
 	);
 
 	AWL_DETAIL_SYMBOL
-	~wrapped_object();
+	~wrapped_object()
+	override;
 
 	AWL_DETAIL_SYMBOL
 	HWND
-	hwnd() const;
+	hwnd() const
+	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::windows::cursor::const_optional_object_ref const
+	awl::backends::windows::cursor::const_optional_object_ref
 	cursor() const
 	override;
 

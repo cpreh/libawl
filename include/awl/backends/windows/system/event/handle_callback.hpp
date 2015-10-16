@@ -19,7 +19,8 @@ namespace event
 typedef
 fcppt::function<
 	awl::backends::windows::system::event::handle_function
->handle_callback;
+>
+handle_callback;
 
 }
 }

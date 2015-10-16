@@ -17,7 +17,7 @@ namespace window
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::windows::optional_point const
+awl::backends::windows::optional_point
 client_to_screen(
 	awl::backends::windows::window::object const &,
 	POINT const &

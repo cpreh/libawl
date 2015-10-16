@@ -17,7 +17,7 @@ namespace window
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::windows::window::signed_dim const
+awl::backends::windows::window::signed_dim
 adjusted_size(
 	awl::window::optional_dim const &,
 	DWORD flags
