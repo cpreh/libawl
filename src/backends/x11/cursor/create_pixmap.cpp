@@ -30,8 +30,8 @@ awl::backends::x11::cursor::create_pixmap(
 	Cursor const result{
 		::XCreatePixmapCursor(
 			_display.get(),
-			_source_pixmap.get().get(),
-			_dest_pixmap.get().get(),
+			_source_pixmap.get().get().get(),
+			_dest_pixmap.get().get().get(),
 			const_cast<
 				XColor *
 			>(

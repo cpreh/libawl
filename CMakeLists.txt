@@ -424,6 +424,7 @@ set(
 	include/awl/backends/x11/intern_atom.hpp
 	include/awl/backends/x11/log.hpp
 	include/awl/backends/x11/original_display.hpp
+	include/awl/backends/x11/pixmap/const_holder_ref.hpp
 	include/awl/backends/x11/pixmap/create_from_data.hpp
 	include/awl/backends/x11/pixmap/dim.hpp
 	include/awl/backends/x11/pixmap/dim_fwd.hpp

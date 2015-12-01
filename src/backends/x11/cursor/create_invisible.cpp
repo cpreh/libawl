@@ -17,6 +17,7 @@
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/root.hpp>
 #include <awl/cursor/hotspot.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <array>
@@ -69,10 +70,14 @@ awl::backends::x11::cursor::create_invisible(
 			awl::backends::x11::cursor::create_pixmap(
 				_display,
 				awl::backends::x11::cursor::source_pixmap(
-					*pixmap
+					fcppt::make_cref(
+						*pixmap
+					)
 				),
 				awl::backends::x11::cursor::dest_pixmap(
-					*pixmap
+					fcppt::make_cref(
+						*pixmap
+					)
 				),
 				awl::backends::x11::cursor::foreground_color(
 					black
