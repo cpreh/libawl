@@ -11,9 +11,9 @@
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/static_optional_cast.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/optional/static_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
@@ -62,7 +62,7 @@ awl::backends::x11::window::original_object::original_object(
 			screen_,
 			colormap_,
 			visual_,
-			fcppt::static_optional_cast<
+			fcppt::optional::static_cast_<
 				awl::backends::x11::cursor::object const
 			>(
 				_params.cursor()

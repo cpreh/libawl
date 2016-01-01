@@ -3,7 +3,7 @@
 
 #include <awl/window/optional_pos_fwd.hpp>
 #include <awl/window/pos.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 #endif

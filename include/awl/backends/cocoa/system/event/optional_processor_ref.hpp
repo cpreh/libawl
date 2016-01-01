@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_COCOA_SYSTEM_EVENT_OPTIONAL_PROCESSOR_REF_HPP_INCLUDED
 
 #include <awl/backends/cocoa/system/event/processor_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 namespace awl
 {

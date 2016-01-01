@@ -20,7 +20,7 @@
 #include <awl/system/optional_exit_code.hpp>
 #include <awl/system/event/quit.hpp>
 #include <awl/system/event/quit_callback.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
@@ -232,7 +232,7 @@ awl::backends::x11::system::event::original_processor::epoll(
 		:
 		ready_fds
 	)
-		fcppt::maybe_void(
+		fcppt::optional::maybe_void(
 			fcppt::container::find_opt_mapped(
 				fd_signals_,
 				fd

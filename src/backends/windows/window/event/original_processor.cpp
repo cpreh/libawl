@@ -34,9 +34,9 @@
 #include <fcppt/identity.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_bind.hpp>
-#include <fcppt/optional_to_exception.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -285,7 +285,7 @@ awl::backends::windows::window::event::original_processor::poll()
 	};
 
 	while(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			awl::backends::windows::event::peek(
 				window_.hwnd()
 			),
@@ -457,7 +457,7 @@ awl::backends::windows::event::type
 awl::backends::windows::window::event::original_processor::allocate_user_message()
 {
 	awl::backends::windows::event::type const result(
-		fcppt::optional_to_exception(
+		fcppt::optional::to_exception(
 			fcppt::container::maybe_back(
 				user_messages_
 			),
@@ -495,7 +495,7 @@ awl::backends::windows::window::event::original_processor::execute_callback(
 )
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional::bind(
 			fcppt::container::find_opt_mapped(
 				signals_,
 				_type
@@ -650,7 +650,7 @@ awl::backends::windows::window::event::original_processor::on_setcursor(
 )
 {
 	return
-		fcppt::optional_bind(
+		fcppt::optional::bind(
 			window_.cursor(),
 			[
 				&_event

@@ -12,8 +12,8 @@
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/static_downcast_ptr.hpp>
@@ -57,7 +57,7 @@ awl::backends::x11::event::processor::poll()
 		more_messages
 	)
 	{
-		fcppt::maybe_void(
+		fcppt::optional::maybe_void(
 			system_processor_,
 			[
 				&more_messages
@@ -97,7 +97,7 @@ awl::backends::x11::event::processor::next()
 {
 	// TODO: This is a complicated check for pending events, move this into a function!
 	if(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			system_processor_,
 			fcppt::const_(
 				false
@@ -111,7 +111,7 @@ awl::backends::x11::event::processor::next()
 				return
 					!_system_processor.running()
 					||
-					fcppt::maybe(
+					fcppt::optional::maybe(
 						fcppt::cast::try_dynamic<
 							awl::backends::linux::fd::processor &
 						>(
@@ -153,7 +153,7 @@ awl::backends::x11::event::processor::next()
 		GenericEvent
 	)
 	{
-		fcppt::maybe_void(
+		fcppt::optional::maybe_void(
 			system_processor_,
 			[
 				&event
@@ -170,7 +170,7 @@ awl::backends::x11::event::processor::next()
 		return;
 	}
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		fcppt::container::find_opt_mapped(
 			window_processors_,
 			event.get().xany.window

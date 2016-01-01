@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_EVENT_OPTIONAL_HPP_INCLUDED
 
 #include <awl/backends/x11/window/event/object_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 namespace awl
 {
@@ -15,7 +15,7 @@ namespace window
 namespace event
 {
 
-typedef fcppt::optional<
+typedef fcppt::optional::object<
 	x11::window::event::object
 > optional;
 

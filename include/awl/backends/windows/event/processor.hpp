@@ -11,7 +11,7 @@
 #include <awl/event/processor.hpp>
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_decl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 #include <fcppt/reference_wrapper_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>

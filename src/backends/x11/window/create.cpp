@@ -13,8 +13,8 @@
 #include <awl/window/unit.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
@@ -47,7 +47,7 @@ awl::backends::x11::window::create(
 
 	swa.event_mask = StructureNotifyMask | FocusChangeMask;
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_cursor,
 		[
 			&swa,
@@ -90,7 +90,7 @@ awl::backends::x11::window::create(
 				_display.get(),
 				_screen.get()
 			),
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				_position,
 				position_default,
 				[](
@@ -101,7 +101,7 @@ awl::backends::x11::window::create(
 						_pos.x();
 				}
 			),
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				_position,
 				position_default,
 				[](
@@ -112,7 +112,7 @@ awl::backends::x11::window::create(
 						_pos.y();
 				}
 			),
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				_dim,
 				dim_default,
 				[](
@@ -123,7 +123,7 @@ awl::backends::x11::window::create(
 						_d.w();
 				}
 			),
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				_dim,
 				dim_default,
 				[](

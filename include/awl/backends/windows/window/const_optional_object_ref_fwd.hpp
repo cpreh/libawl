@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_CONST_OPTIONAL_OBJECT_REF_FWD_HPP_INCLUDED
 
 #include <awl/backends/windows/window/object_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace awl
@@ -15,7 +15,7 @@ namespace window
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	awl::backends::windows::window::object const &
 >
 const_optional_object_ref;

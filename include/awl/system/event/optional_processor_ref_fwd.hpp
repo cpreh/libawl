@@ -2,7 +2,7 @@
 #define AWL_SYSTEM_EVENT_OPTIONAL_PROCESSOR_REF_FWD_HPP_INCLUDED
 
 #include <awl/system/event/processor_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace awl
@@ -12,7 +12,7 @@ namespace system
 namespace event
 {
 
-typedef fcppt::optional<
+typedef fcppt::optional::object<
 	awl::system::event::processor &
 > optional_processor_ref;
 

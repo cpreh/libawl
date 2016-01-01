@@ -11,7 +11,7 @@
 #include <awl/window/parameters_fwd.hpp>
 #include <awl/window/stencil_buffer.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 @class NSWindow;
@@ -49,15 +49,15 @@ public:
 	has_opengl() const;
 
 	AWL_DETAIL_SYMBOL
-	fcppt::optional<awl::window::bit_depth::type> const
+	fcppt::optional::object<awl::window::bit_depth::type> const
 	bit_depth() const;
 
 	AWL_DETAIL_SYMBOL
-	fcppt::optional<awl::window::stencil_buffer::type> const
+	fcppt::optional::object<awl::window::stencil_buffer::type> const
 	stencil_buffer() const;
 
 	AWL_DETAIL_SYMBOL
-	fcppt::optional<awl::window::depth_buffer::type> const
+	fcppt::optional::object<awl::window::depth_buffer::type> const
 	depth_buffer() const;
 
 	AWL_DETAIL_SYMBOL
@@ -72,9 +72,9 @@ private:
 
 	__strong NSWindow *window_;
 	bool has_opengl_;
-	fcppt::optional<awl::window::bit_depth::type> bit_depth_;
-	fcppt::optional<awl::window::stencil_buffer::type> stencil_buffer_;
-	fcppt::optional<awl::window::depth_buffer::type> depth_buffer_;
+	fcppt::optional::object<awl::window::bit_depth::type> bit_depth_;
+	fcppt::optional::object<awl::window::stencil_buffer::type> stencil_buffer_;
+	fcppt::optional::object<awl::window::depth_buffer::type> depth_buffer_;
 };
 }
 }

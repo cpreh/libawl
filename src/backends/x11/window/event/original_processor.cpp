@@ -28,7 +28,7 @@
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
@@ -209,7 +209,7 @@ awl::backends::x11::window::event::original_processor::poll()
 	};
 
 	while(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			awl::backends::x11::window::event::poll_mask(
 				window_,
 				event_mask_
@@ -240,7 +240,7 @@ awl::backends::x11::window::event::original_processor::poll()
 		type_counts_
 	)
 		while(
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				awl::backends::x11::window::event::poll_type(
 					window_,
 					item.first
@@ -364,7 +364,7 @@ awl::backends::x11::window::event::original_processor::register_callback(
 	awl::backends::x11::window::event::callback const &_callback
 )
 {
-	fcppt::maybe(
+	fcppt::optional::maybe(
 		awl::backends::x11::window::event::to_mask(
 			_event_type
 		),
@@ -452,7 +452,7 @@ awl::backends::x11::window::event::original_processor::unregister(
 	awl::backends::x11::window::event::type const _event_type
 )
 {
-	fcppt::maybe(
+	fcppt::optional::maybe(
 		awl::backends::x11::window::event::to_mask(
 			_event_type
 		),

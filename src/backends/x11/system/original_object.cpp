@@ -14,7 +14,7 @@
 #include <awl/window/optional_object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_map.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
@@ -73,7 +73,7 @@ awl::window::optional_object_unique_ptr
 awl::backends::x11::system::original_object::focus_window()
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			awl::backends::x11::get_input_focus(
 				display_,
 				screen_

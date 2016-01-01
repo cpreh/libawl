@@ -4,7 +4,7 @@
 #include <awl/backends/windows/window/const_optional_object_ref.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 
@@ -19,7 +19,7 @@ awl::backends::windows::message_box(
 {
 	if(
 		::MessageBox(
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				_opt_window,
 				fcppt::const_<
 					HWND

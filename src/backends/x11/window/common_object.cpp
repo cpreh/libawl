@@ -7,7 +7,7 @@
 #include <awl/window/dim.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
@@ -107,7 +107,7 @@ awl::backends::x11::window::common_object::equal_to(
 ) const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::cast::try_dynamic<
 				awl::backends::x11::window::object const &
 			>(

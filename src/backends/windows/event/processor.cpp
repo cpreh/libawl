@@ -13,8 +13,8 @@
 #include <awl/backends/windows/window/event/processor.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
@@ -48,7 +48,7 @@ awl::backends::windows::event::processor::poll()
 		this->poll_messages()
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		system_processor_,
 		[
 			&events_processed
@@ -70,7 +70,7 @@ awl::backends::windows::event::processor::poll()
 void
 awl::backends::windows::event::processor::next()
 {
-	fcppt::maybe(
+	fcppt::optional::maybe(
 		system_processor_,
 		[
 			this
@@ -145,7 +145,7 @@ awl::backends::windows::event::processor::do_process(
 		NULL
 	)
 	{
-		fcppt::maybe_void(
+		fcppt::optional::maybe_void(
 			system_processor_,
 			[
 				&_msg
@@ -172,7 +172,7 @@ awl::backends::windows::event::processor::do_process(
 		return;
 	}
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		fcppt::container::find_opt_mapped(
 			window_processors_,
 			_msg.get().hwnd
@@ -198,7 +198,7 @@ awl::backends::windows::event::processor::poll_messages()
 	};
 
 	while(
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			awl::backends::windows::event::peek(
 				NULL
 			),

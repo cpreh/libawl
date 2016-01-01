@@ -12,7 +12,7 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional_map.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
@@ -101,7 +101,7 @@ awl::window::optional_object_unique_ptr
 awl::backends::windows::system::original_object::focus_window()
 {
 	return
-		fcppt::optional_map(
+		fcppt::optional::map(
 			awl::backends::windows::get_focus(),
 			[](
 				awl::backends::windows::window::object_unique_ptr &&_focus

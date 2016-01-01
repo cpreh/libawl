@@ -2,7 +2,7 @@
 #include <awl/backends/x11/window/size_hints.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/optional_dim.hpp>
-#include <fcppt/maybe_void.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -31,7 +31,7 @@ awl::backends::x11::window::size_hints::size_hints(
 
 	hints_->flags = 0;
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_exact_hint,
 		[
 			this
@@ -53,7 +53,7 @@ awl::backends::x11::window::size_hints::size_hints(
 		}
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_minimum_hint,
 		[
 			this
@@ -75,7 +75,7 @@ awl::backends::x11::window::size_hints::size_hints(
 		}
 	);
 
-	fcppt::maybe_void(
+	fcppt::optional::maybe_void(
 		_maximum_hint,
 		[
 			this

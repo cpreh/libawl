@@ -4,7 +4,7 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/optional_object_unique_ptr.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 bool
@@ -18,7 +18,7 @@ awl::window::has_focus(
 	);
 
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			focus_window,
 			fcppt::const_(
 				false

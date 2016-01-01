@@ -7,7 +7,7 @@
 #include <awl/backends/linux/fd/epoll/set.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/maybe.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -77,7 +77,7 @@ awl::backends::linux::fd::epoll::set::epoll(
 					events_.size()
 				)
 			),
-			fcppt::maybe(
+			fcppt::optional::maybe(
 				_opt_duration,
 				fcppt::const_(
 					-1

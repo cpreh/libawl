@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_RETURN_TYPE_FWD_HPP_INCLUDED
 
 #include <awl/backends/windows/windows.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace awl
@@ -17,7 +17,7 @@ namespace event
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	LRESULT
 >
 return_type;

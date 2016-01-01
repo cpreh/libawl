@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_EVENT_OPTIONAL_MASK_HPP_INCLUDED
 
 #include <awl/backends/x11/window/event/mask.hpp>
-#include <fcppt/optional_impl.hpp>
+#include <fcppt/optional/object_impl.hpp>
 
 
 namespace awl
@@ -16,7 +16,7 @@ namespace window
 namespace event
 {
 
-typedef fcppt::optional<
+typedef fcppt::optional::object<
 	event::mask
 > optional_mask;
 

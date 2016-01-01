@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_EVENT_OPTIONAL_MESSAGE_FWD_HPP_INCLUDED
 
 #include <awl/backends/windows/event/message_fwd.hpp>
-#include <fcppt/optional_fwd.hpp>
+#include <fcppt/optional/object_fwd.hpp>
 
 
 namespace awl
@@ -15,7 +15,7 @@ namespace event
 {
 
 typedef
-fcppt::optional<
+fcppt::optional::object<
 	awl::backends::windows::event::message
 >
 optional_message;

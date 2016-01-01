@@ -11,8 +11,8 @@
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
 #include <awl/window/unit.hpp>
-#include <fcppt/maybe.hpp>
-#include <fcppt/optional_to_exception.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
@@ -46,7 +46,7 @@ awl::window::rect
 awl::backends::windows::window::common_object::rect() const
 {
 	RECT const ret(
-		fcppt::optional_to_exception(
+		fcppt::optional::to_exception(
 			awl::backends::windows::window::get_client_rect(
 				*this
 			),
@@ -146,7 +146,7 @@ awl::backends::windows::window::common_object::equal_to(
 ) const
 {
 	return
-		fcppt::maybe(
+		fcppt::optional::maybe(
 			fcppt::cast::try_dynamic<
 				awl::backends::windows::window::object const &
 			>(
