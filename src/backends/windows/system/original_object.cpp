@@ -12,13 +12,13 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional/map.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <utility>

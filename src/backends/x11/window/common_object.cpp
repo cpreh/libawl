@@ -7,11 +7,11 @@
 #include <awl/window/dim.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>

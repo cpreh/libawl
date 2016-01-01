@@ -28,10 +28,10 @@
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/signal/object_impl.hpp>

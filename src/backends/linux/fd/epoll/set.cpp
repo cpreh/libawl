@@ -7,12 +7,12 @@
 #include <awl/backends/linux/fd/epoll/set.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/cast/truncation_check.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sys/epoll.h>
 #include <chrono>

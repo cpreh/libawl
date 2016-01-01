@@ -18,7 +18,6 @@
 #include <awl/system/event/quit_callback.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -28,6 +27,7 @@
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>

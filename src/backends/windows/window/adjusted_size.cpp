@@ -3,10 +3,10 @@
 #include <awl/backends/windows/window/adjusted_size.hpp>
 #include <awl/backends/windows/window/signed_dim.hpp>
 #include <awl/window/optional_dim.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 awl::backends::windows::window::signed_dim

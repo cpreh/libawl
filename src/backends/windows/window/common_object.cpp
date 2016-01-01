@@ -11,8 +11,6 @@
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
 #include <awl/window/unit.hpp>
-#include <fcppt/optional/maybe.hpp>
-#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
@@ -21,6 +19,8 @@
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 awl::backends::windows::window::common_object::common_object()

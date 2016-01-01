@@ -2,9 +2,9 @@
 #include <awl/backends/x11/window/size_hints.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/optional_dim.hpp>
-#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>

@@ -12,13 +12,13 @@
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/optional/maybe.hpp>
-#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/static_downcast_ptr.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
 #include <utility>

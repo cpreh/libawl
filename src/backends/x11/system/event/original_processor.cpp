@@ -20,11 +20,11 @@
 #include <awl/system/optional_exit_code.hpp>
 #include <awl/system/event/quit.hpp>
 #include <awl/system/event/quit_callback.hpp>
-#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/signal/unregister/base_impl.hpp>

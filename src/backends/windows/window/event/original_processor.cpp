@@ -33,10 +33,6 @@
 #include <fcppt/identity.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional/from.hpp>
-#include <fcppt/optional/maybe.hpp>
-#include <fcppt/optional/bind.hpp>
-#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -46,6 +42,10 @@
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/maybe_back.hpp>
+#include <fcppt/optional/bind.hpp>
+#include <fcppt/optional/from.hpp>
+#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>

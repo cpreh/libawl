@@ -14,8 +14,8 @@
 #include <awl/window/optional_object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/optional/map.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
