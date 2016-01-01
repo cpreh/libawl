@@ -9,8 +9,8 @@
 #include <awl/backends/windows/window/original_object.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/parameters.hpp>
-#include <fcppt/static_optional_cast.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/optional/static_cast.hpp>
 
 
 awl::backends::windows::window::original_object::original_object(
@@ -31,7 +31,7 @@ awl::backends::windows::window::original_object::original_object(
 		_remove_wndclass
 	),
 	cursor_(
-		fcppt::static_optional_cast<
+		fcppt::optional::static_cast_<
 			awl::backends::windows::cursor::object const
 		>(
 			_param.cursor()

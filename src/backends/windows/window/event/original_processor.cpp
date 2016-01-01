@@ -30,10 +30,10 @@
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/from_optional.hpp>
 #include <fcppt/identity.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -412,7 +412,7 @@ awl::backends::windows::window::event::original_processor::register_callback(
 )
 {
 	return
-		fcppt::from_optional(
+		fcppt::optional::from(
 			fcppt::container::find_opt_mapped(
 				signals_,
 				_type
