@@ -7,6 +7,7 @@
 #include <awl/window/dim.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
@@ -109,7 +110,7 @@ awl::backends::x11::window::common_object::equal_to(
 	return
 		fcppt::optional::maybe(
 			fcppt::cast::try_dynamic<
-				awl::backends::x11::window::object const &
+				awl::backends::x11::window::object const
 			>(
 				_other
 			),
@@ -121,11 +122,13 @@ awl::backends::x11::window::common_object::equal_to(
 			[
 				this
 			](
-				awl::backends::x11::window::object const &_casted_other
+				fcppt::reference_wrapper<
+					awl::backends::x11::window::object const
+				> const _casted_other
 			)
 			{
 				return
-					_casted_other.get()
+					_casted_other.get().get()
 					==
 					this->get();
 			}

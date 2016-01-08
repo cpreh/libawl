@@ -21,6 +21,7 @@
 #include <awl/window/event/show_callback.hpp>
 #include <awl/window/event/show_fwd.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -69,7 +70,9 @@ try
 		awl::event::create_processor(
 			*system,
 			awl::system::event::optional_processor_ref(
-				*system_processor
+				fcppt::make_ref(
+					*system_processor
+				)
 			)
 		)
 	);

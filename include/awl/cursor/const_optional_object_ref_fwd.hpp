@@ -2,7 +2,7 @@
 #define AWL_CURSOR_CONST_OPTIONAL_OBJECT_REF_FWD_HPP_INCLUDED
 
 #include <awl/cursor/object_fwd.hpp>
-#include <fcppt/optional/object_fwd.hpp>
+#include <fcppt/optional/reference_fwd.hpp>
 
 
 namespace awl
@@ -10,9 +10,11 @@ namespace awl
 namespace cursor
 {
 
-typedef fcppt::optional::object<
-	awl::cursor::object const &
-> const_optional_object_ref;
+typedef
+fcppt::optional::reference<
+	awl::cursor::object const
+>
+const_optional_object_ref;
 
 }
 }

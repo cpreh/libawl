@@ -12,6 +12,7 @@
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/static_downcast_ptr.hpp>
@@ -62,11 +63,13 @@ awl::backends::x11::event::processor::poll()
 			[
 				&more_messages
 			](
-				awl::backends::x11::system::event::processor &_system_processor
+				fcppt::reference_wrapper<
+					awl::backends::x11::system::event::processor
+				> const _system_processor
 			)
 			{
 				more_messages =
-					_system_processor.poll();
+					_system_processor.get().poll();
 			}
 		);
 
@@ -105,17 +108,19 @@ awl::backends::x11::event::processor::next()
 			[
 				this
 			](
-				awl::backends::x11::system::event::processor &_system_processor
+				fcppt::reference_wrapper<
+					awl::backends::x11::system::event::processor
+				> const _system_processor
 			)
 			{
 				return
-					!_system_processor.running()
+					!_system_processor.get().running()
 					||
 					fcppt::optional::maybe(
 						fcppt::cast::try_dynamic<
-							awl::backends::linux::fd::processor &
+							awl::backends::linux::fd::processor
 						>(
-							_system_processor
+							_system_processor.get()
 						),
 						fcppt::const_(
 							false
@@ -123,10 +128,12 @@ awl::backends::x11::event::processor::next()
 						[
 							this
 						](
-							awl::backends::linux::fd::processor &_linux_processor
+							fcppt::reference_wrapper<
+								awl::backends::linux::fd::processor
+							> const _linux_processor
 						)
 						{
-							_linux_processor.epoll(
+							_linux_processor.get().epoll(
 								awl::backends::linux::fd::optional_duration()
 							);
 
@@ -158,10 +165,12 @@ awl::backends::x11::event::processor::next()
 			[
 				&event
 			](
-				awl::backends::x11::system::event::processor &_system_processor
+				fcppt::reference_wrapper<
+					awl::backends::x11::system::event::processor
+				> const _system_processor
 			)
 			{
-				_system_processor.process(
+				_system_processor.get().process(
 					event
 				);
 			}
@@ -178,10 +187,12 @@ awl::backends::x11::event::processor::next()
 		[
 			&event
 		](
-			window_event_processor_ref const _processor
+			fcppt::reference_wrapper<
+				window_event_processor_ref
+			> const _processor
 		)
 		{
-			_processor.get().process(
+			_processor.get().get().process(
 				event
 			);
 		}
