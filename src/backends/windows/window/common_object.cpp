@@ -11,6 +11,8 @@
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
 #include <awl/window/unit.hpp>
+#include <fcppt/const.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
@@ -148,23 +150,23 @@ awl::backends::windows::window::common_object::equal_to(
 	return
 		fcppt::optional::maybe(
 			fcppt::cast::try_dynamic<
-				awl::backends::windows::window::object const &
+				awl::backends::windows::window::object const
 			>(
 				_other
 			),
-			[]
-			{
-				return
-					false;
-			},
+			fcppt::const_(
+				false
+			),
 			[
 				this
 			](
-				awl::backends::windows::window::object const &_casted_other
+				fcppt::reference_wrapper<
+					awl::backends::windows::window::object const
+				> const _casted_other
 			)
 			{
 				return
-					_casted_other.hwnd()
+					_casted_other.get().hwnd()
 					==
 					this->hwnd();
 			}

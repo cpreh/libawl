@@ -32,7 +32,9 @@
 #include <fcppt/const.hpp>
 #include <fcppt/identity.hpp>
 #include <fcppt/make_int_range.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -421,24 +423,25 @@ awl::backends::windows::window::event::original_processor::register_callback(
 				this,
 				_type
 			]()
-			-> signal_type &
 			{
 				return
-					signals_.insert(
-						std::make_pair(
-							_type,
-							signal_type(
-								signal_type::combiner_function{
-									awl::backends::windows::window::event::combine_result
-								},
-								signal_type::initial_value{
-									awl::backends::windows::window::event::return_type()
-								}
+					fcppt::make_ref(
+						signals_.insert(
+							std::make_pair(
+								_type,
+								signal_type(
+									signal_type::combiner_function{
+										awl::backends::windows::window::event::combine_result
+									},
+									signal_type::initial_value{
+										awl::backends::windows::window::event::return_type()
+									}
+								)
 							)
-						)
-					).first->second;
+						).first->second
+					);
 			}
-		).connect(
+		).get().connect(
 			_func
 		);
 }
@@ -467,7 +470,7 @@ awl::backends::windows::window::event::original_processor::allocate_user_message
 						FCPPT_TEXT("User messages exhausted.")
 					};
 			}
-		)
+		).get()
 	);
 
 	// TODO: This is ugly
@@ -504,11 +507,13 @@ awl::backends::windows::window::event::original_processor::execute_callback(
 				_wparam,
 				_lparam
 			](
-				signal_type &_signal
+				fcppt::reference_wrapper<
+					signal_type
+				> const _signal
 			)
 			{
 				return
-					_signal(
+					_signal.get()(
 						awl::backends::windows::window::event::object(
 							_wparam,
 							_lparam
@@ -655,7 +660,9 @@ awl::backends::windows::window::event::original_processor::on_setcursor(
 			[
 				&_event
 			](
-				awl::backends::windows::cursor::object const &_cursor
+				fcppt::reference_wrapper<
+					awl::backends::windows::cursor::object const
+				> const _cursor
 			)
 			{
 				if(
@@ -667,7 +674,7 @@ awl::backends::windows::window::event::original_processor::on_setcursor(
 				)
 				{
 					::SetCursor(
-						_cursor.get()
+						_cursor.get().get()
 					);
 
 					return

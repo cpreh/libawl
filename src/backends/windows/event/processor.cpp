@@ -17,6 +17,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -53,11 +54,13 @@ awl::backends::windows::event::processor::poll()
 		[
 			&events_processed
 		](
-			awl::backends::windows::system::event::processor &_processor
+			fcppt::reference_wrapper<
+				awl::backends::windows::system::event::processor
+			> const _processor
 		)
 		{
 			events_processed =
-				_processor.poll_handles()
+				_processor.get().poll_handles()
 				||
 				events_processed;
 		}
@@ -82,10 +85,12 @@ awl::backends::windows::event::processor::next()
 		[
 			this
 		](
-			awl::backends::windows::system::event::processor &_processor
+			fcppt::reference_wrapper<
+				awl::backends::windows::system::event::processor
+			> const _processor
 		)
 		{
-			_processor.next();
+			_processor.get().next();
 
 			this->poll_messages();
 		}
@@ -150,10 +155,12 @@ awl::backends::windows::event::processor::do_process(
 			[
 				&_msg
 			](
-				awl::backends::windows::system::event::processor &_processor
+				fcppt::reference_wrapper<
+					awl::backends::windows::system::event::processor
+				> const _processor
 			)
 			{
-				_processor.process(
+				_processor.get().process(
 					awl::backends::windows::event::object(
 						awl::backends::windows::event::type(
 							_msg.get().message
@@ -173,9 +180,11 @@ awl::backends::windows::event::processor::do_process(
 	}
 
 	fcppt::optional::maybe_void(
-		fcppt::container::find_opt_mapped(
-			window_processors_,
-			_msg.get().hwnd
+		fcppt::optional::copy_value(
+			fcppt::container::find_opt_mapped(
+				window_processors_,
+				_msg.get().hwnd
+			)
 		),
 		[
 			&_msg

@@ -5,6 +5,7 @@
 #include <awl/backends/windows/window/object.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/reference_wrapper_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -30,11 +31,13 @@ awl::backends::windows::message_box_narrow(
 					nullptr
 				),
 				[](
-					awl::backends::windows::window::object const &_window
+					fcppt::reference_wrapper<
+						awl::backends::windows::window::object const
+					> const _window
 				)
 				{
 					return
-						_window.hwnd();
+						_window.get().hwnd();
 				}
 			),
 			_text.c_str(),
