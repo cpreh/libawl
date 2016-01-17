@@ -7,7 +7,7 @@
 #include <awl/window/dim.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/try_dynamic.hpp>
@@ -122,7 +122,7 @@ awl::backends::x11::window::common_object::equal_to(
 			[
 				this
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					awl::backends::x11::window::object const
 				> const _casted_other
 			)

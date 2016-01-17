@@ -12,7 +12,7 @@
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/static_downcast_ptr.hpp>
@@ -63,7 +63,7 @@ awl::backends::x11::event::processor::poll()
 			[
 				&more_messages
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					awl::backends::x11::system::event::processor
 				> const _system_processor
 			)
@@ -108,7 +108,7 @@ awl::backends::x11::event::processor::next()
 			[
 				this
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					awl::backends::x11::system::event::processor
 				> const _system_processor
 			)
@@ -128,7 +128,7 @@ awl::backends::x11::event::processor::next()
 						[
 							this
 						](
-							fcppt::reference_wrapper<
+							fcppt::reference<
 								awl::backends::linux::fd::processor
 							> const _linux_processor
 						)
@@ -165,7 +165,7 @@ awl::backends::x11::event::processor::next()
 			[
 				&event
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					awl::backends::x11::system::event::processor
 				> const _system_processor
 			)
@@ -187,7 +187,7 @@ awl::backends::x11::event::processor::next()
 		[
 			&event
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				window_event_processor_ref
 			> const _processor
 		)

@@ -20,7 +20,7 @@
 #include <awl/system/optional_exit_code.hpp>
 #include <awl/system/event/quit.hpp>
 #include <awl/system/event/quit_callback.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
@@ -239,7 +239,7 @@ awl::backends::x11::system::event::original_processor::epoll(
 				fd
 			),
 			[](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					fd_signal
 				> const _signal
 			)

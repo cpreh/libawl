@@ -4,7 +4,7 @@
 #include <awl/backends/windows/window/const_optional_object_ref.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -28,7 +28,7 @@ awl::backends::windows::message_box(
 					nullptr
 				),
 				[](
-					fcppt::reference_wrapper<
+					fcppt::reference<
 						awl::backends::windows::window::object const
 					> const _window
 				)

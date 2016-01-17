@@ -12,7 +12,7 @@
 #include <awl/window/rect.hpp>
 #include <awl/window/unit.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
@@ -160,7 +160,7 @@ awl::backends::windows::window::common_object::equal_to(
 			[
 				this
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					awl::backends::windows::window::object const
 				> const _casted_other
 			)

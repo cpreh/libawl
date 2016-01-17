@@ -9,8 +9,8 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/event/processor.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
-#include <fcppt/reference_wrapper_std_hash.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <unordered_map>
@@ -69,7 +69,7 @@ public:
 	override;
 private:
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		awl::backends::x11::window::event::processor
 	>
 	window_event_processor_ref;

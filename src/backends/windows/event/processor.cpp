@@ -13,7 +13,7 @@
 #include <awl/backends/windows/window/event/processor.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
@@ -54,7 +54,7 @@ awl::backends::windows::event::processor::poll()
 		[
 			&events_processed
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				awl::backends::windows::system::event::processor
 			> const _processor
 		)
@@ -85,7 +85,7 @@ awl::backends::windows::event::processor::next()
 		[
 			this
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				awl::backends::windows::system::event::processor
 			> const _processor
 		)
@@ -155,7 +155,7 @@ awl::backends::windows::event::processor::do_process(
 			[
 				&_msg
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					awl::backends::windows::system::event::processor
 				> const _processor
 			)

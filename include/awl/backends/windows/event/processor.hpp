@@ -11,7 +11,7 @@
 #include <awl/event/processor.hpp>
 #include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_wrapper_decl.hpp>
+#include <fcppt/reference_decl.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -75,7 +75,7 @@ private:
 	awl::backends::windows::system::event::optional_processor_ref const system_processor_;
 
 	typedef
-	fcppt::reference_wrapper<
+	fcppt::reference<
 		awl::backends::windows::window::event::processor
 	>
 	window_processor_ref;

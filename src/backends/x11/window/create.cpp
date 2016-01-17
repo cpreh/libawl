@@ -13,7 +13,7 @@
 #include <awl/window/unit.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/literal.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -54,7 +54,7 @@ awl::backends::x11::window::create(
 			&swa,
 			&value_mask
 		](
-			fcppt::reference_wrapper<
+			fcppt::reference<
 				awl::backends::x11::cursor::object const
 			> const _opt_cursor
 		)

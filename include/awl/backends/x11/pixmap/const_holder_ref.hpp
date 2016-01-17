@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_PIXMAP_CONST_HOLDER_REF_HPP_INCLUDED
 
 #include <awl/backends/x11/pixmap/holder_fwd.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 
 
 namespace awl
@@ -15,7 +15,7 @@ namespace pixmap
 {
 
 typedef
-fcppt::reference_wrapper<
+fcppt::reference<
 	awl::backends::x11::pixmap::holder const
 >
 const_holder_ref;

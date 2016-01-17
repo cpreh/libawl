@@ -34,7 +34,7 @@
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_wrapper_impl.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -507,7 +507,7 @@ awl::backends::windows::window::event::original_processor::execute_callback(
 				_wparam,
 				_lparam
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					signal_type
 				> const _signal
 			)
@@ -660,7 +660,7 @@ awl::backends::windows::window::event::original_processor::on_setcursor(
 			[
 				&_event
 			](
-				fcppt::reference_wrapper<
+				fcppt::reference<
 					awl::backends::windows::cursor::object const
 				> const _cursor
 			)
