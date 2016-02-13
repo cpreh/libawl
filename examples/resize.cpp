@@ -29,11 +29,6 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace
-{
-
-}
-
 int
 main()
 try
