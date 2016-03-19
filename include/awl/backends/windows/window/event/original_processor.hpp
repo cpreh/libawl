@@ -16,10 +16,6 @@
 #include <awl/window/event/close_signal.hpp>
 #include <awl/window/event/destroy_callback.hpp>
 #include <awl/window/event/destroy_signal.hpp>
-#include <awl/window/event/focus_in_callback.hpp>
-#include <awl/window/event/focus_in_signal.hpp>
-#include <awl/window/event/focus_out_callback.hpp>
-#include <awl/window/event/focus_out_signal.hpp>
 #include <awl/window/event/hide_callback.hpp>
 #include <awl/window/event/hide_signal.hpp>
 #include <awl/window/event/resize_callback.hpp>
@@ -82,20 +78,6 @@ public:
 	fcppt::signal::auto_connection
 	destroy_callback(
 		awl::window::event::destroy_callback const &
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	fcppt::signal::auto_connection
-	focus_in_callback(
-		awl::window::event::focus_in_callback const &
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	fcppt::signal::auto_connection
-	focus_out_callback(
-		awl::window::event::focus_out_callback const &
 	)
 	override;
 
@@ -178,16 +160,6 @@ private:
 	);
 
 	awl::backends::windows::window::event::return_type
-	on_focus_in(
-		awl::backends::windows::window::event::object const &
-	);
-
-	awl::backends::windows::window::event::return_type
-	on_focus_out(
-		awl::backends::windows::window::event::object const &
-	);
-
-	awl::backends::windows::window::event::return_type
 	on_resize(
 		awl::backends::windows::window::event::object const &
 	);
@@ -230,10 +202,6 @@ private:
 	awl::window::event::close_signal close_signal_;
 
 	awl::window::event::destroy_signal destroy_signal_;
-
-	awl::window::event::focus_in_signal focus_in_signal_;
-
-	awl::window::event::focus_out_signal focus_out_signal_;
 
 	awl::window::event::hide_signal hide_signal_;
 
