@@ -5,7 +5,7 @@
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
-#include <awl/backends/x11/window/class_hint_fwd.hpp>
+#include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
 #include <awl/backends/x11/window/event/optional.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/object.hpp>
@@ -64,10 +64,8 @@ public:
 	Window
 	get() const = 0;
 
-	// TODO: change this to an optional reference
-	// might return 0
 	virtual
-	awl::backends::x11::window::class_hint const *
+	awl::backends::x11::window::const_optional_class_hint_ref
 	class_hint() const = 0;
 };
 

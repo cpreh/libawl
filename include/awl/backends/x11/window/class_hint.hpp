@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/window/class_hint_fwd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <string>
 #include <fcppt/config/external_end.hpp>
@@ -20,24 +20,34 @@ namespace window
 
 class class_hint
 {
-	FCPPT_NONCOPYABLE(
-		class_hint
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	class_hint();
 public:
+	FCPPT_MAKE_STRONG_TYPEDEF(
+		std::string,
+		res_name_type
+	);
+
+	FCPPT_MAKE_STRONG_TYPEDEF(
+		std::string,
+		res_class_type
+	);
+
 	AWL_DETAIL_SYMBOL
-	virtual
-	~class_hint() = 0;
+	class_hint(
+		res_name_type &&,
+		res_class_type &&
+	);
 
-	virtual
-	std::string
-	res_name() const = 0;
+	AWL_DETAIL_SYMBOL
+	std::string const &
+	res_name() const;
 
-	virtual
-	std::string
-	res_class() const = 0;
+	AWL_DETAIL_SYMBOL
+	std::string const &
+	res_class() const;
+private:
+	res_name_type res_name_;
+
+	res_class_type res_class_;
 };
 
 }

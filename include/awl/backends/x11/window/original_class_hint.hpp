@@ -4,11 +4,9 @@
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/string.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xutil.h>
-#include <string>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -22,36 +20,27 @@ namespace window
 {
 
 class original_class_hint
-:
-	public awl::backends::x11::window::class_hint
 {
 	FCPPT_NONCOPYABLE(
 		original_class_hint
 	);
 public:
 	AWL_DETAIL_SYMBOL
+	explicit
 	original_class_hint(
-		fcppt::string const &app_name,
-		fcppt::string const &class_name
+		awl::backends::x11::window::class_hint &&
 	);
 
 	AWL_DETAIL_SYMBOL
-	~original_class_hint()
-	override;
+	~original_class_hint();
 
 	AWL_DETAIL_SYMBOL
 	XClassHint *
 	get() const;
 
 	AWL_DETAIL_SYMBOL
-	std::string
-	res_name() const
-	override;
-
-	AWL_DETAIL_SYMBOL
-	std::string
-	res_class() const
-	override;
+	awl::backends::x11::window::class_hint const &
+	hint() const;
 private:
 	class impl;
 
@@ -59,9 +48,7 @@ private:
 		impl
 	> const impl_;
 
-	std::string const
-		res_name_,
-		res_class_;
+	awl::backends::x11::window::class_hint const hint_;
 };
 
 }

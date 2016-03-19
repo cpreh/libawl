@@ -6,8 +6,8 @@
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object_fwd.hpp>
-#include <awl/backends/x11/window/class_hint_fwd.hpp>
 #include <awl/backends/x11/window/common_object.hpp>
+#include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
 #include <awl/backends/x11/window/hints.hpp>
 #include <awl/backends/x11/window/holder.hpp>
 #include <awl/backends/x11/window/original_class_hint.hpp>
@@ -77,7 +77,7 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::class_hint const *
+	awl::backends::x11::window::const_optional_class_hint_ref
 	class_hint() const
 	override;
 private:

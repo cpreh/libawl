@@ -3,6 +3,7 @@
 
 #include <awl/backends/x11/free.hpp>
 
+
 namespace awl
 {
 namespace backends
@@ -20,7 +21,7 @@ struct deleter
 		T *const _param
 	) const
 	{
-		x11::free(
+		awl::backends::x11::free(
 			_param
 		);
 	}

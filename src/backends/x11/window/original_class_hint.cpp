@@ -1,9 +1,12 @@
 #include <awl/exception.hpp>
+#include <awl/backends/x11/window/class_hint.hpp>
 #include <awl/backends/x11/window/original_class_hint.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/to_std_string.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <X11/Xutil.h>
+#include <fcppt/config/external_end.hpp>
 
 
 class awl::backends::x11::window::original_class_hint::impl
@@ -25,43 +28,36 @@ private:
 
 
 awl::backends::x11::window::original_class_hint::original_class_hint(
-	fcppt::string const &_res_name,
-	fcppt::string const &_res_class
+	awl::backends::x11::window::class_hint &&_hint
 )
 :
-	awl::backends::x11::window::class_hint(),
 	impl_(
 		fcppt::make_unique_ptr<
 			impl
 		>()
 	),
-	res_name_(
-		fcppt::to_std_string(
-			_res_name
-		)
-	),
-	res_class_(
-		fcppt::to_std_string(
-			_res_class
+	hint_(
+		std::move(
+			_hint
 		)
 	)
 {
 	XClassHint *const hint(
-		get()
+		this->get()
 	);
 
 	hint->res_name =
 		const_cast<
 			char *
 		>(
-			res_name_.c_str()
+			hint_.res_name().c_str()
 		);
 
 	hint->res_class =
 		const_cast<
 			char *
 		>(
-			res_class_.c_str()
+			hint_.res_class().c_str()
 		);
 }
 
@@ -72,19 +68,15 @@ awl::backends::x11::window::original_class_hint::~original_class_hint()
 XClassHint *
 awl::backends::x11::window::original_class_hint::get() const
 {
-	return impl_->get();
+	return
+		impl_->get();
 }
 
-std::string
-awl::backends::x11::window::original_class_hint::res_name() const
+awl::backends::x11::window::class_hint const &
+awl::backends::x11::window::original_class_hint::hint() const
 {
-	return res_name_;
-}
-
-std::string
-awl::backends::x11::window::original_class_hint::res_class() const
-{
-	return res_class_;
+	return
+		hint_;
 }
 
 awl::backends::x11::window::original_class_hint::impl::impl()
@@ -94,11 +86,14 @@ awl::backends::x11::window::original_class_hint::impl::impl()
 	)
 {
 	if(
-		!hint_
+		hint_
+		==
+		nullptr
 	)
-		throw awl::exception(
-			FCPPT_TEXT("XAllocClassHint() failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("XAllocClassHint() failed!")
+			};
 }
 
 awl::backends::x11::window::original_class_hint::impl::~impl()
@@ -111,5 +106,6 @@ awl::backends::x11::window::original_class_hint::impl::~impl()
 XClassHint *
 awl::backends::x11::window::original_class_hint::impl::get() const
 {
-	return hint_;
+	return
+		hint_;
 }

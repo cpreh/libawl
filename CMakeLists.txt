@@ -172,16 +172,6 @@ set(
 	include/awl/window/event/destroy_function.hpp
 	include/awl/window/event/destroy_fwd.hpp
 	include/awl/window/event/destroy_signal.hpp
-	include/awl/window/event/focus_in.hpp
-	include/awl/window/event/focus_in_callback.hpp
-	include/awl/window/event/focus_in_function.hpp
-	include/awl/window/event/focus_in_fwd.hpp
-	include/awl/window/event/focus_in_signal.hpp
-	include/awl/window/event/focus_out.hpp
-	include/awl/window/event/focus_out_callback.hpp
-	include/awl/window/event/focus_out_function.hpp
-	include/awl/window/event/focus_out_fwd.hpp
-	include/awl/window/event/focus_out_signal.hpp
 	include/awl/window/event/hide.hpp
 	include/awl/window/event/hide_callback.hpp
 	include/awl/window/event/hide_function.hpp
@@ -370,6 +360,7 @@ set(
 	src/backends/x11/window/event/send.cpp
 	src/backends/x11/window/event/to_mask.cpp
 	src/backends/x11/window/event/wm_protocols.cpp
+	src/backends/x11/window/get_class_hint.cpp
 	src/backends/x11/window/hints.cpp
 	src/backends/x11/window/holder.cpp
 	src/backends/x11/window/object.cpp
@@ -380,7 +371,6 @@ set(
 	src/backends/x11/window/size_hints.cpp
 	src/backends/x11/window/transient_for_hint.cpp
 	src/backends/x11/window/visual.cpp
-	src/backends/x11/window/wrapped_class_hint.cpp
 	src/backends/x11/window/wrapped_object.cpp
 )
 
@@ -466,6 +456,8 @@ set(
 	include/awl/backends/x11/window/class_hint.hpp
 	include/awl/backends/x11/window/class_hint_fwd.hpp
 	include/awl/backends/x11/window/common_object.hpp
+	include/awl/backends/x11/window/const_optional_class_hint_ref.hpp
+	include/awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp
 	include/awl/backends/x11/window/create.hpp
 	include/awl/backends/x11/window/event/atom_vector.hpp
 	include/awl/backends/x11/window/event/atom_vector_fwd.hpp
@@ -487,11 +479,14 @@ set(
 	include/awl/backends/x11/window/event/to_mask.hpp
 	include/awl/backends/x11/window/event/type.hpp
 	include/awl/backends/x11/window/event/wm_protocols.hpp
+	include/awl/backends/x11/window/get_class_hint.hpp
 	include/awl/backends/x11/window/hints.hpp
 	include/awl/backends/x11/window/holder.hpp
 	include/awl/backends/x11/window/object.hpp
 	include/awl/backends/x11/window/object_fwd.hpp
 	include/awl/backends/x11/window/object_unique_ptr.hpp
+	include/awl/backends/x11/window/optional_class_hint.hpp
+	include/awl/backends/x11/window/optional_class_hint_fwd.hpp
 	include/awl/backends/x11/window/optional_object_unique_ptr.hpp
 	include/awl/backends/x11/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/backends/x11/window/original_class_hint.hpp
@@ -501,7 +496,6 @@ set(
 	include/awl/backends/x11/window/size_hints.hpp
 	include/awl/backends/x11/window/transient_for_hint.hpp
 	include/awl/backends/x11/window/visual.hpp
-	include/awl/backends/x11/window/wrapped_class_hint.hpp
 	include/awl/backends/x11/window/wrapped_object.hpp
 )
 

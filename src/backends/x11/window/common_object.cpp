@@ -3,7 +3,6 @@
 #include <awl/backends/x11/display.hpp>
 #include <awl/backends/x11/window/common_object.hpp>
 #include <awl/backends/x11/window/object.hpp>
-#include <awl/backends/x11/window/wrapped_class_hint.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>

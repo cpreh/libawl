@@ -4,12 +4,15 @@
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/cursor/object.hpp>
 #include <awl/backends/x11/visual/object.hpp>
+#include <awl/backends/x11/window/class_hint.hpp>
+#include <awl/backends/x11/window/const_optional_class_hint_ref.hpp>
 #include <awl/backends/x11/window/create.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
 #include <awl/backends/x11/window/root.hpp>
 #include <awl/backends/x11/window/transient_for_hint.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/window/parameters.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/static_downcast.hpp>
@@ -50,8 +53,18 @@ awl::backends::x11::window::original_object::original_object(
 		_params.maximum_size_hint()
 	),
 	class_hint_(
-		_params.title(),
-		_params.class_name()
+		awl::backends::x11::window::class_hint{
+			awl::backends::x11::window::class_hint::res_name_type{
+				fcppt::to_std_string(
+					_params.title()
+				)
+			},
+			awl::backends::x11::window::class_hint::res_class_type{
+				fcppt::to_std_string(
+					_params.class_name()
+				)
+			}
+		}
 	),
 	window_(
 		display_,
@@ -157,9 +170,13 @@ awl::backends::x11::window::original_object::get() const
 		window_.get();
 }
 
-awl::backends::x11::window::class_hint const *
+awl::backends::x11::window::const_optional_class_hint_ref
 awl::backends::x11::window::original_object::class_hint() const
 {
 	return
-		&class_hint_;
+		awl::backends::x11::window::const_optional_class_hint_ref{
+			fcppt::make_cref(
+				class_hint_.hint()
+			)
+		};
 }

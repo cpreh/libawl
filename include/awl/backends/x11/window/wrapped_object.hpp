@@ -6,9 +6,9 @@
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object_fwd.hpp>
 #include <awl/backends/x11/visual/object_unique_ptr.hpp>
-#include <awl/backends/x11/window/class_hint_fwd.hpp>
 #include <awl/backends/x11/window/common_object.hpp>
-#include <awl/backends/x11/window/wrapped_class_hint.hpp>
+#include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
+#include <awl/backends/x11/window/optional_class_hint.hpp>
 #include <awl/backends/x11/window/event/optional.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/object.hpp>
@@ -78,7 +78,7 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::class_hint const *
+	awl::backends::x11::window::const_optional_class_hint_ref
 	class_hint() const
 	override;
 private:
@@ -90,7 +90,7 @@ private:
 
 	awl::backends::x11::visual::object_unique_ptr const visual_;
 
-	awl::backends::x11::window::wrapped_class_hint const class_hint_;
+	awl::backends::x11::window::optional_class_hint const class_hint_;
 };
 
 }

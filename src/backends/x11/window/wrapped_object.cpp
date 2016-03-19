@@ -1,13 +1,17 @@
 #include <awl/exception.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
-#include <awl/backends/x11/window/class_hint_fwd.hpp>
+#include <awl/backends/x11/window/class_hint.hpp>
+#include <awl/backends/x11/window/const_optional_class_hint_ref.hpp>
+#include <awl/backends/x11/window/get_class_hint.hpp>
 #include <awl/backends/x11/window/visual.hpp>
 #include <awl/backends/x11/window/wrapped_object.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
+#include <X11/X.h>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -32,8 +36,10 @@ awl::backends::x11::window::wrapped_object::wrapped_object(
 		)
 	),
 	class_hint_(
-		this->display().get(),
-		this->get()
+		awl::backends::x11::window::get_class_hint(
+			_display,
+			_window
+		)
 	)
 {
 }
@@ -86,14 +92,20 @@ awl::backends::x11::window::wrapped_object::get() const
 		window_;
 }
 
-awl::backends::x11::window::class_hint const *
+awl::backends::x11::window::const_optional_class_hint_ref
 awl::backends::x11::window::wrapped_object::class_hint() const
 {
 	return
-		class_hint_.has_data()
-		?
-			&class_hint_
-		:
-			nullptr
-		;
+		fcppt::optional::map(
+			class_hint_,
+			[](
+				awl::backends::x11::window::class_hint const &_hint
+			)
+			{
+				return
+					fcppt::make_cref(
+						_hint
+					);
+			}
+		);
 }
