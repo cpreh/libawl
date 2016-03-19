@@ -6,8 +6,6 @@
 #include <awl/window/object_fwd.hpp>
 #include <awl/window/event/close_callback.hpp>
 #include <awl/window/event/destroy_callback.hpp>
-#include <awl/window/event/focus_in_callback.hpp>
-#include <awl/window/event/focus_out_callback.hpp>
 #include <awl/window/event/hide_callback.hpp>
 #include <awl/window/event/processor_fwd.hpp>
 #include <awl/window/event/resize_callback.hpp>
@@ -46,18 +44,6 @@ public:
 	fcppt::signal::auto_connection
 	destroy_callback(
 		awl::window::event::destroy_callback const &
-	) = 0;
-
-	virtual
-	fcppt::signal::auto_connection
-	focus_in_callback(
-		awl::window::event::focus_in_callback const &
-	) = 0;
-
-	virtual
-	fcppt::signal::auto_connection
-	focus_out_callback(
-		awl::window::event::focus_out_callback const &
 	) = 0;
 
 	virtual
