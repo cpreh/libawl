@@ -129,8 +129,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 						std::placeholders::_1
 					)
 				}
-			)
-		)(
+			),
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
 					awl::backends::windows::event::type,
@@ -145,8 +144,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 						std::placeholders::_1
 					)
 				}
-			)
-		)(
+			),
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
 					awl::backends::windows::event::type,
@@ -161,8 +159,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 						std::placeholders::_1
 					)
 				}
-			)
-		)(
+			),
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
 					awl::backends::windows::event::type,
@@ -177,8 +174,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 						std::placeholders::_1
 					)
 				}
-			)
-		)(
+			),
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
 					awl::backends::windows::event::type,
@@ -195,7 +191,6 @@ awl::backends::windows::window::event::original_processor::original_processor(
 				}
 			)
 		)
-		.move_container()
 	)
 {
 	::SetWindowLongPtr(
