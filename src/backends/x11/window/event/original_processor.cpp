@@ -107,8 +107,7 @@ awl::backends::x11::window::event::original_processor::original_processor(
 						std::placeholders::_1
 					)
 				}
-			)
-		)(
+			),
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					ConfigureNotify
@@ -120,8 +119,7 @@ awl::backends::x11::window::event::original_processor::original_processor(
 						std::placeholders::_1
 					)
 				}
-			)
-		)(
+			),
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					DestroyNotify
@@ -133,8 +131,7 @@ awl::backends::x11::window::event::original_processor::original_processor(
 						std::placeholders::_1
 					)
 				}
-			)
-		)(
+			),
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					MapNotify
@@ -146,8 +143,7 @@ awl::backends::x11::window::event::original_processor::original_processor(
 						std::placeholders::_1
 					)
 				}
-			)
-		)(
+			),
 			this->register_callback(
 				awl::backends::x11::window::event::type(
 					UnmapNotify
