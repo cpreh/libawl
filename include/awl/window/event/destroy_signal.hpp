@@ -4,6 +4,7 @@
 #include <awl/window/event/destroy_function.hpp>
 #include <fcppt/signal/object_fwd.hpp>
 
+
 namespace awl
 {
 namespace window
@@ -11,9 +12,11 @@ namespace window
 namespace event
 {
 
-typedef fcppt::signal::object<
-	event::destroy_function
-> destroy_signal;
+typedef
+fcppt::signal::object<
+	awl::window::event::destroy_function
+>
+destroy_signal;
 
 }
 }

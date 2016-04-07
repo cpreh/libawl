@@ -3,6 +3,7 @@
 
 #include <awl/window/event/destroy_fwd.hpp>
 
+
 namespace awl
 {
 namespace window
@@ -10,9 +11,10 @@ namespace window
 namespace event
 {
 
-typedef void
+typedef
+void
 destroy_function(
-	event::destroy const &
+	awl::window::event::destroy const &
 );
 
 }

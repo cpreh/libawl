@@ -12,7 +12,8 @@ namespace system
 namespace event
 {
 
-typedef void
+typedef
+void
 quit_function(
 	awl::system::event::quit const &
 );

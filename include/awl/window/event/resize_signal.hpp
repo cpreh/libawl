@@ -12,9 +12,11 @@ namespace window
 namespace event
 {
 
-typedef fcppt::signal::object<
+typedef
+fcppt::signal::object<
 	awl::window::event::resize_function
-> resize_signal;
+>
+resize_signal;
 
 }
 }

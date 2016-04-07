@@ -12,9 +12,11 @@ namespace window
 namespace event
 {
 
-typedef fcppt::signal::object<
+typedef
+fcppt::signal::object<
 	awl::window::event::hide_function
-> hide_signal;
+>
+hide_signal;
 
 }
 }

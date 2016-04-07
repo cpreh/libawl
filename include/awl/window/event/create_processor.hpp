@@ -14,7 +14,7 @@ namespace event
 {
 
 AWL_DETAIL_SYMBOL
-event::processor_unique_ptr
+awl::window::event::processor_unique_ptr
 create_processor(
 	awl::window::object &
 );

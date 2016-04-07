@@ -12,9 +12,11 @@ namespace system
 namespace event
 {
 
-typedef fcppt::signal::object<
+typedef
+fcppt::signal::object<
 	awl::system::event::quit_function
-> quit_signal;
+>
+quit_signal;
 
 }
 }

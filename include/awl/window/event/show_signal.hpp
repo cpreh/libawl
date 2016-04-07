@@ -12,9 +12,11 @@ namespace window
 namespace event
 {
 
-typedef fcppt::signal::object<
+typedef
+fcppt::signal::object<
 	awl::window::event::show_function
-> show_signal;
+>
+show_signal;
 
 }
 }
