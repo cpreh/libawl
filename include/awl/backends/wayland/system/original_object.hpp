@@ -1,10 +1,10 @@
 #ifndef AWL_BACKENDS_WAYLAND_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_WAYLAND_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 
+#include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/original_display.hpp>
 #include <awl/backends/wayland/system/object.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/system/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -22,7 +22,7 @@ class original_object
 	public awl::backends::wayland::system::object
 {
 	FCPPT_NONCOPYABLE(
-		object
+		original_object
 	);
 public:
 	AWL_DETAIL_SYMBOL
@@ -31,10 +31,15 @@ public:
 	AWL_DETAIL_SYMBOL
 	~original_object()
 	override;
+
+	awl::backends::wayland::display &
+	display()
+	override;
 private:
 	awl::backends::wayland::original_display display_;
 };
 
+}
 }
 }
 }

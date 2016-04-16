@@ -50,9 +50,13 @@ awl::backends::x11::event::processor::poll()
 {
 	// events might come in any order
 	// so make sure to process as much as possible in one go
-	bool events_processed = false;
+	bool events_processed{
+		false
+	};
 
-	bool more_messages = true;
+	bool more_messages{
+		true
+	};
 
 	while(
 		more_messages

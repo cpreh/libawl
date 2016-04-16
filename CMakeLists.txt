@@ -532,6 +532,8 @@ set(
 	include/awl/backends/wayland/display.hpp
 	include/awl/backends/wayland/display_fwd.hpp
 	include/awl/backends/wayland/original_display.hpp
+	include/awl/backends/wayland/registry.hpp
+	include/awl/backends/wayland/registry_fwd.hpp
 	include/awl/backends/wayland/system/object.hpp
 	include/awl/backends/wayland/system/object_fwd.hpp
 	include/awl/backends/wayland/system/original_object.hpp
@@ -541,6 +543,9 @@ set(
 	AWL_WAYLAND_SRC_FILES
 	src/backends/wayland/display.cpp
 	src/backends/wayland/original_display.cpp
+	src/backends/wayland/registry.cpp
+	src/backends/wayland/system/object.cpp
+	src/backends/wayland/system/original_object.cpp
 )
 
 set(

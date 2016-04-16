@@ -50,7 +50,7 @@ public:
 	virtual
 	void
 	process(
-		x11::event::object const &
+		awl::backends::x11::event::object const &
 	) = 0;
 };
 

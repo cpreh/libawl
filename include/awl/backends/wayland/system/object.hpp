@@ -2,6 +2,7 @@
 #define AWL_BACKENDS_WAYLAND_SYSTEM_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
+#include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/system/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/object.hpp>
@@ -31,8 +32,13 @@ public:
 	AWL_DETAIL_SYMBOL
 	~object()
 	override;
+
+	virtual
+	awl::backends::wayland::display &
+	display() = 0;
 };
 
+}
 }
 }
 }

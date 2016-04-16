@@ -93,9 +93,9 @@ public:
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_callback(
-		x11::system::event::opcode const &,
-		x11::system::event::type const &,
-		x11::system::event::callback const &
+		awl::backends::x11::system::event::opcode const &,
+		awl::backends::x11::system::event::type const &,
+		awl::backends::x11::system::event::callback const &
 	)
 	override;
 
@@ -117,7 +117,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	void
 	process(
-		x11::event::object const &
+		awl::backends::x11::event::object const &
 	)
 	override;
 private:
