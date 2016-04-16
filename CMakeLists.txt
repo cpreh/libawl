@@ -230,13 +230,41 @@ elseif(
 )
 	find_package(
 		X11
-		REQUIRED
 	)
 
-	set(
-		AWL_X11_BACKEND
-		TRUE
+	option(
+		ENABLE_X11
+		"Build the X11 backend"
+		${X11_FOUND}
 	)
+
+	if(
+		ENABLE_X11
+	)
+		set(
+			AWL_X11_BACKEND
+			TRUE
+		)
+	endif()
+
+	find_package(
+		Wayland
+	)
+
+	option(
+		ENABLE_WAYLAND
+		"Build the wayland backend"
+		${WAYLAND_FOUND}
+	)
+
+	if(
+		ENABLE_WAYLAND
+	)
+		set(
+			AWL_WAYLAND_BACKEND
+			TRUE
+		)
+	endif()
 else()
 	message(
 		FATAL_ERROR

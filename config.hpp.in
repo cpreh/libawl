@@ -3,6 +3,7 @@
 
 #cmakedefine AWL_WINDOWS_BACKEND
 #cmakedefine AWL_X11_BACKEND
+#cmakedefine AWL_WAYLAND_BACKEND
 #cmakedefine AWL_COCOA_BACKEND
 
 #endif
