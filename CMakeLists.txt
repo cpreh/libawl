@@ -540,6 +540,7 @@ set(
 set(
 	AWL_WAYLAND_SRC_FILES
 	src/backends/wayland/display.cpp
+	src/backends/wayland/original_display.cpp
 )
 
 set(
@@ -907,6 +908,22 @@ function(
 			${TARGETNAME}
 			PRIVATE
 			${X11_X11_LIB}
+		)
+	endif()
+
+	if(
+		AWL_WAYLAND_BACKEND
+	)
+		target_include_directories(
+			${TARGETNAME}
+			PRIVATE
+			${WAYLAND_INCLUDE_DIRS}
+		)
+
+		target_link_libraries(
+			${TARGETNAME}
+			PRIVATE
+			${WAYLAND_LIBRARIES}
 		)
 	endif()
 
