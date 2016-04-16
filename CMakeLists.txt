@@ -528,6 +528,21 @@ set(
 )
 
 set(
+	AWL_WAYLAND_INCLUDE_FILES
+	include/awl/backends/wayland/display.hpp
+	include/awl/backends/wayland/display_fwd.hpp
+	include/awl/backends/wayland/original_display.hpp
+	include/awl/backends/wayland/system/object.hpp
+	include/awl/backends/wayland/system/object_fwd.hpp
+	include/awl/backends/wayland/system/original_object.hpp
+)
+
+set(
+	AWL_WAYLAND_SRC_FILES
+	src/backends/wayland/display.cpp
+)
+
+set(
 	AWL_LINUX_INCLUDE_FILES
 	include/awl/backends/linux/fd/callback.hpp
 	include/awl/backends/linux/fd/duration.hpp
@@ -738,14 +753,16 @@ set(
 if(
 	AWL_COCOA_BACKEND
 )
-	set(
+	list(
+		APPEND
 		AWL_INCLUDE_FILES
-		"${AWL_INCLUDE_FILES};${AWL_COCOA_INCLUDE_FILES}"
+		${AWL_COCOA_INCLUDE_FILES}
 	)
 
-	set(
+	list(
+		APPEND
 		AWL_SRC_FILES
-		"${AWL_SRC_FILES};${AWL_COCOA_SRC_FILES}"
+		${AWL_COCOA_SRC_FILES}
 	)
 
 	add_definitions(-fobjc-arc)
@@ -754,48 +771,72 @@ endif()
 if(
 	AWL_X11_BACKEND
 )
-	set(
+	list(
+		APPEND
 		AWL_INCLUDE_FILES
-		"${AWL_INCLUDE_FILES};${AWL_X11_INCLUDE_FILES}"
+		${AWL_X11_INCLUDE_FILES}
 	)
 
-	set(
+	list(
+		APPEND
 		AWL_SRC_FILES
-		"${AWL_SRC_FILES};${AWL_X11_SRC_FILES}"
+		${AWL_X11_SRC_FILES}
+	)
+endif()
+
+if(
+	AWL_WAYLAND_BACKEND
+)
+	list(
+		APPEND
+		AWL_INCLUDE_FILES
+		${AWL_WAYLAND_INCLUDE_FILES}
+	)
+
+	list(
+		APPEND
+		AWL_SRC_FILES
+		${AWL_WAYLAND_SRC_FILES}
 	)
 endif()
 
 if(
 	AWL_LINUX_BACKEND
 )
-	set(
+	list(
+		APPEND
 		AWL_INCLUDE_FILES
-		"${AWL_INCLUDE_FILES};${AWL_LINUX_INCLUDE_FILES}"
+		${AWL_LINUX_INCLUDE_FILES}
 	)
 
-	set(
+	list(
+		APPEND
 		AWL_SRC_FILES
-		"${AWL_SRC_FILES};${AWL_LINUX_SRC_FILES}"
+		${AWL_LINUX_SRC_FILES}
 	)
 endif()
 
 if(
 	AWL_WINDOWS_BACKEND
 )
-	set(
+	list(
+		APPEND
 		AWL_INCLUDE_FILES
-		"${AWL_INCLUDE_FILES};${AWL_WINDOWS_INCLUDE_FILES}"
+		${AWL_WINDOWS_INCLUDE_FILES}
 	)
 
-	set(
+	list(
+		APPEND
 		AWL_SRC_FILES
-		"${AWL_SRC_FILES};${AWL_WINDOWS_SRC_FILES}"
+		${AWL_WINDOWS_SRC_FILES}
 	)
 endif()
 
-set(
+list(
+	APPEND
 	AWL_FILES
-	"${AWL_SRC_FILES};${AWL_INCLUDE_FILES}"
+	${AWL_SRC_FILES}
+	${AWL_INCLUDE_FILES}
 )
 
 fcppt_utils_add_source_groups(

@@ -55,6 +55,16 @@ update_main \
 	src/backends/x11
 # X11 end
 
+# Wayland begin
+update_main \
+	AWL_WAYLAND_INCLUDE_FILES \
+	include/awl/backends/wayland
+
+update_main \
+	AWL_WAYLAND_SRC_FILES \
+	src/backends/wayland
+# Wayland end
+
 # Linux begin
 update_main \
 	AWL_LINUX_INCLUDE_FILES \
