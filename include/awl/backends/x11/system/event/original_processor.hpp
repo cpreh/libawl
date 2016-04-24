@@ -2,33 +2,37 @@
 #define AWL_BACKENDS_X11_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/backends/linux/fd/callback.hpp>
-#include <awl/backends/linux/fd/function.hpp>
-#include <awl/backends/linux/fd/object.hpp>
-#include <awl/backends/linux/fd/optional_duration_fwd.hpp>
-#include <awl/backends/linux/fd/processor.hpp>
-#include <awl/backends/linux/fd/epoll/scoped.hpp>
-#include <awl/backends/linux/fd/epoll/set.hpp>
-#include <awl/backends/x11/event/object_fwd.hpp>
-#include <awl/backends/x11/system/object_fwd.hpp>
+#include <awl/backends/linux/fd/event_fwd.hpp>
+#include <awl/backends/linux/fd/original_processor.hpp>
+#include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/system/event/callback.hpp>
+#include <awl/backends/x11/system/event/function.hpp>
 #include <awl/backends/x11/system/event/map_key.hpp>
+#include <awl/backends/x11/system/event/object_fwd.hpp>
 #include <awl/backends/x11/system/event/opcode.hpp>
 #include <awl/backends/x11/system/event/processor.hpp>
 #include <awl/backends/x11/system/event/type.hpp>
+#include <awl/backends/x11/window/event/processor_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
-#include <awl/system/optional_exit_code.hpp>
+#include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/system/event/quit_callback.hpp>
 #include <awl/system/event/quit_signal.hpp>
+#include <awl/window/object_fwd.hpp>
+#include <awl/window/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/auto_connection_fwd.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_std_hash.hpp>
+#include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_decl.hpp>
-#include <fcppt/signal/unregister/base_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <X11/Xlib.h>
 #include <map>
+#include <unordered_map>
 #include <fcppt/config/external_end.hpp>
+
+
 
 
 namespace awl
@@ -45,7 +49,7 @@ namespace event
 class AWL_CLASS_SYMBOL original_processor
 :
 	public awl::backends::x11::system::event::processor,
-	public awl::backends::linux::fd::processor
+	public awl::backends::linux::fd::original_processor
 {
 	FCPPT_NONCOPYABLE(
 		original_processor
@@ -54,7 +58,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	explicit
 	original_processor(
-		x11::system::object &
+		awl::backends::x11::display &
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -62,8 +66,20 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	bool
+	awl::main::optional_exit_code
 	poll()
+	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::main::optional_exit_code
+	next()
+	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::window::event::processor_unique_ptr
+	create_window_processor(
+		awl::window::object &
+	)
 	override;
 
 	AWL_DETAIL_SYMBOL
@@ -71,16 +87,6 @@ public:
 	quit(
 		awl::main::exit_code
 	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	bool
-	running() const
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::main::exit_code
-	exit_code() const
 	override;
 
 	AWL_DETAIL_SYMBOL
@@ -98,35 +104,18 @@ public:
 		awl::backends::x11::system::event::callback const &
 	)
 	override;
-
-	AWL_DETAIL_SYMBOL
-	fcppt::signal::auto_connection
-	register_fd_callback(
-		awl::backends::linux::fd::object const &,
-		awl::backends::linux::fd::callback const &
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	bool
-	epoll(
-		awl::backends::linux::fd::optional_duration const &
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	void
-	process(
-		awl::backends::x11::event::object const &
-	)
-	override;
 private:
 	void
-	unregister_fd_signal(
-		awl::backends::linux::fd::object const &
+	process_pending(
+		awl::backends::linux::fd::event const &
 	);
 
-	awl::backends::x11::system::object &system_;
+	void
+	process_event(
+		awl::backends::x11::system::event::object const &
+	);
+
+	awl::backends::x11::display &display_;
 
 	typedef
 	fcppt::signal::object<
@@ -143,29 +132,26 @@ private:
 
 	event_signal_map signals_;
 
-	awl::backends::linux::fd::epoll::set fd_set_;
+	fcppt::signal::auto_connection const fd_connection_;
 
-	typedef
-	fcppt::signal::object<
-		awl::backends::linux::fd::function,
-		fcppt::signal::unregister::base
-	>
-	fd_signal;
-
-	typedef
-	std::map<
-		awl::backends::linux::fd::object,
-		fd_signal
-	>
-	fd_signal_map;
-
-	fd_signal_map fd_signals_;
-
-	awl::backends::linux::fd::epoll::scoped const scoped_fd_;
-
-	awl::system::optional_exit_code exit_code_;
+	awl::main::optional_exit_code exit_code_;
 
 	awl::system::event::quit_signal quit_signal_;
+
+	typedef
+	fcppt::reference<
+		awl::backends::x11::window::event::processor
+	>
+	window_event_processor_ref;
+
+	typedef
+	std::unordered_map<
+		Window,
+		window_event_processor_ref
+	>
+	window_processor_map;
+
+	window_processor_map window_processors_;
 };
 
 }

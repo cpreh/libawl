@@ -1,21 +1,29 @@
 #include <awl/backends/x11/system/event/object.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <X11/Xlib.h>
+#include <fcppt/config/external_end.hpp>
+
 
 awl::backends::x11::system::event::object::object(
-	XGenericEventCookie const &_event
+	XEvent const &_event
 )
 :
-	event_(_event)
+	event_{
+		_event
+	}
 {
 }
 
-XGenericEventCookie const &
+XEvent const &
 awl::backends::x11::system::event::object::get() const
 {
-	return event_;
+	return
+		event_;
 }
 
-XGenericEventCookie &
+XEvent &
 awl::backends::x11::system::event::object::get()
 {
-	return event_;
+	return
+		event_;
 }

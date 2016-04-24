@@ -31,10 +31,6 @@ protected:
 	processor();
 public:
 	virtual
-	bool
-	poll() = 0;
-
-	virtual
 	fcppt::signal::auto_connection
 	close_callback(
 		awl::window::event::close_callback const &

@@ -1,13 +1,9 @@
-#include <awl/event/create_processor.hpp>
-#include <awl/event/processor.hpp>
-#include <awl/event/processor_unique_ptr.hpp>
-#include <awl/event/scoped_window_processor.hpp>
 #include <awl/main/exit_success.hpp>
+#include <awl/main/loop_callback.hpp>
+#include <awl/main/loop_next.hpp>
 #include <awl/system/create.hpp>
 #include <awl/system/object.hpp>
 #include <awl/system/object_unique_ptr.hpp>
-#include <awl/system/event/create_processor.hpp>
-#include <awl/system/event/optional_processor_ref.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object.hpp>
@@ -15,7 +11,6 @@
 #include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
-#include <awl/window/event/create_processor.hpp>
 #include <awl/window/event/processor.hpp>
 #include <awl/window/event/processor_unique_ptr.hpp>
 #include <awl/window/event/show_callback.hpp>
@@ -61,31 +56,13 @@ try
 	);
 
 	awl::system::event::processor_unique_ptr const system_processor(
-		awl::system::event::create_processor(
-			*system
-		)
-	);
-
-	awl::event::processor_unique_ptr const processor(
-		awl::event::create_processor(
-			*system,
-			awl::system::event::optional_processor_ref(
-				fcppt::make_ref(
-					*system_processor
-				)
-			)
-		)
+		system->create_processor()
 	);
 
 	awl::window::event::processor_unique_ptr const window_processor(
-		awl::window::event::create_processor(
+		system_processor->create_window_processor(
 			*window
 		)
-	);
-
-	awl::event::scoped_window_processor const scoped_window_processor(
-		*processor,
-		*window_processor
 	);
 
 	window->show();
@@ -107,13 +84,13 @@ try
 		)
 	);
 
-	while(
-		system_processor->running()
-	)
-		processor->next();
-
 	return
-		EXIT_SUCCESS;
+		awl::main::loop_next(
+			*system_processor,
+			awl::main::loop_callback{
+				[]{}
+			}
+		).get();
 }
 catch(
 	fcppt::exception const &_exception

@@ -9,6 +9,7 @@
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/optional_object_unique_ptr_fwd.hpp>
+#include <awl/system/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -29,8 +30,6 @@ class original_object
 		original_object
 	);
 public:
-	// NOTE: We could add a string specifying which display to connect
-	// to here
 	AWL_DETAIL_SYMBOL
 	original_object();
 
@@ -43,6 +42,11 @@ public:
 	create_window(
 		awl::window::parameters const &
 	)
+	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::system::event::processor_unique_ptr
+	create_processor()
 	override;
 
 	AWL_DETAIL_SYMBOL

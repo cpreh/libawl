@@ -3,7 +3,6 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/backends/x11/atom.hpp>
-#include <awl/backends/x11/event/object_fwd.hpp>
 #include <awl/backends/x11/window/object_fwd.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
 #include <awl/backends/x11/window/event/function.hpp>
@@ -11,6 +10,7 @@
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/backends/x11/window/event/processor.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
+#include <awl/backends/x11/window/event/unregister_callback.hpp>
 #include <awl/backends/x11/window/event/wm_protocols.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/event/close_callback.hpp>
@@ -54,18 +54,13 @@ class AWL_CLASS_SYMBOL original_processor
 	);
 public:
 	AWL_DETAIL_SYMBOL
-	explicit
 	original_processor(
-		awl::backends::x11::window::object &
+		awl::backends::x11::window::object &,
+		awl::backends::x11::window::event::unregister_callback const &
 	);
 
 	AWL_DETAIL_SYMBOL
 	~original_processor()
-	override;
-
-	AWL_DETAIL_SYMBOL
-	bool
-	poll()
 	override;
 
 	AWL_DETAIL_SYMBOL
@@ -123,15 +118,10 @@ public:
 
 	void
 	process(
-		awl::backends::x11::event::object const &
+		awl::backends::x11::window::event::object const &
 	)
 	override;
 private:
-	void
-	do_process(
-		awl::backends::x11::window::event::object const &
-	);
-
 	void
 	unregister(
 		awl::backends::x11::window::event::type
@@ -164,27 +154,39 @@ private:
 
 	awl::backends::x11::window::object &window_;
 
-	typedef fcppt::signal::object<
+	awl::backends::x11::window::event::unregister_callback const unregister_;
+
+	typedef
+	fcppt::signal::object<
 		awl::backends::x11::window::event::function,
 		fcppt::signal::unregister::base
-	> signal;
+	>
+	signal;
 
-	typedef std::map<
+	typedef
+	std::map<
 		awl::backends::x11::window::event::type,
 		signal
-	> event_signal_map;
+	>
+	event_signal_map;
 
-	typedef unsigned mask_count;
+	typedef
+	unsigned
+	mask_count;
 
-	typedef std::map<
+	typedef
+	std::map<
 		awl::backends::x11::window::event::mask,
 		mask_count
-	> mask_count_map;
+	>
+	mask_count_map;
 
-	typedef std::map<
+	typedef
+	std::map<
 		awl::backends::x11::window::event::type,
 		mask_count
-	> type_count_map;
+	>
+	type_count_map;
 
 	event_signal_map signals_;
 

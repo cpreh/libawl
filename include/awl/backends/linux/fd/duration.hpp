@@ -15,7 +15,9 @@ namespace linux
 namespace fd
 {
 
-typedef std::chrono::milliseconds duration;
+typedef
+std::chrono::milliseconds
+duration;
 
 }
 }

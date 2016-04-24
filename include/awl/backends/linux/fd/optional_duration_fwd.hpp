@@ -14,9 +14,11 @@ namespace linux
 namespace fd
 {
 
-typedef fcppt::optional::object<
+typedef
+fcppt::optional::object<
 	awl::backends::linux::fd::duration
-> optional_duration;
+>
+optional_duration;
 
 }
 }

@@ -9,7 +9,8 @@ awl::exception::exception(
 	fcppt::exception(
 		_string
 	)
-{}
+{
+}
 
 awl::exception::exception(
 	fcppt::assert_::information const &_info

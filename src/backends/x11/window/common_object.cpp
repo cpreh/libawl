@@ -1,6 +1,7 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/discard.hpp>
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/sync.hpp>
 #include <awl/backends/x11/window/common_object.hpp>
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/window/dim.hpp>
@@ -36,7 +37,8 @@ awl::backends::x11::window::common_object::show()
 		this->get()
 	);
 
-	this->display().sync(
+	awl::backends::x11::sync(
+		this->display(),
 		awl::backends::x11::discard(
 			false
 		)

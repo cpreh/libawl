@@ -4,6 +4,7 @@
 #include <awl/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/object_fwd.hpp>
+#include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/optional_object_unique_ptr_fwd.hpp>
@@ -30,6 +31,10 @@ public:
 	create_window(
 		awl::window::parameters const &
 	) = 0;
+
+	virtual
+	awl::system::event::processor_unique_ptr
+	create_processor() = 0;
 
 	virtual
 	awl::visual::object_unique_ptr

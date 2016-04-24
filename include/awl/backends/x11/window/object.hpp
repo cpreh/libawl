@@ -6,7 +6,6 @@
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
-#include <awl/backends/x11/window/event/optional.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/object.hpp>
 #include <fcppt/noncopyable.hpp>

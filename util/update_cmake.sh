@@ -15,7 +15,6 @@ update_main \
 	include/awl \
 	-r \
 	include/awl/cursor \
-	include/awl/event \
 	include/awl/main \
 	include/awl/system \
 	include/awl/visual \
@@ -27,7 +26,6 @@ update_main \
 	src \
 	-r \
 	src/cursor \
-	src/event \
 	src/main \
 	src/system \
 	src/visual \

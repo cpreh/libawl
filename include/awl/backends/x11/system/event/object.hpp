@@ -23,19 +23,20 @@ class object
 {
 public:
 	AWL_DETAIL_SYMBOL
-	explicit object(
-		XGenericEventCookie const &
+	explicit
+	object(
+		XEvent const &
 	);
 
 	AWL_DETAIL_SYMBOL
-	XGenericEventCookie const &
+	XEvent const &
 	get() const;
 
 	AWL_DETAIL_SYMBOL
-	XGenericEventCookie &
+	XEvent &
 	get();
 private:
-	XGenericEventCookie event_;
+	XEvent event_;
 };
 
 }

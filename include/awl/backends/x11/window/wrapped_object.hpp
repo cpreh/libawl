@@ -9,7 +9,6 @@
 #include <awl/backends/x11/window/common_object.hpp>
 #include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
 #include <awl/backends/x11/window/optional_class_hint.hpp>
-#include <awl/backends/x11/window/event/optional.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/parameters_fwd.hpp>

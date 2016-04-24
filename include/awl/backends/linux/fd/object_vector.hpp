@@ -16,9 +16,11 @@ namespace linux
 namespace fd
 {
 
-typedef std::vector<
+typedef
+std::vector<
 	awl::backends::linux::fd::object
-> object_vector;
+>
+object_vector;
 
 }
 }

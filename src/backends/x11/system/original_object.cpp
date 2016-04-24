@@ -2,11 +2,15 @@
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/get_input_focus.hpp>
 #include <awl/backends/x11/screen.hpp>
+#include <awl/backends/x11/system/object.hpp>
 #include <awl/backends/x11/system/original_object.hpp>
+#include <awl/backends/x11/system/event/original_processor.hpp>
 #include <awl/backends/x11/visual/default.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/object_unique_ptr.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
+#include <awl/system/event/processor.hpp>
+#include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object.hpp>
@@ -23,6 +27,7 @@
 
 awl::backends::x11::system::original_object::original_object()
 :
+	awl::backends::x11::system::object(),
 	display_(),
 	screen_(
 		awl::backends::x11::default_screen(
@@ -51,6 +56,21 @@ awl::backends::x11::system::original_object::create_window(
 				display_,
 				screen_,
 				_param
+			)
+		);
+}
+
+awl::system::event::processor_unique_ptr
+awl::backends::x11::system::original_object::create_processor()
+{
+	return
+		fcppt::unique_ptr_to_base<
+			awl::system::event::processor
+		>(
+			fcppt::make_unique_ptr<
+				awl::backends::x11::system::event::original_processor
+			>(
+				display_
 			)
 		);
 }

@@ -15,5 +15,6 @@ awl::window::event::resize::resize(
 awl::window::dim const &
 awl::window::event::resize::dim() const
 {
-	return dim_;
+	return
+		dim_;
 }

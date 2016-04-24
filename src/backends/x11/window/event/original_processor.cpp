@@ -1,5 +1,4 @@
 #include <awl/backends/x11/intern_atom.hpp>
-#include <awl/backends/x11/event/object.hpp>
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/event/atom_vector.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
@@ -8,10 +7,9 @@
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/original_processor.hpp>
-#include <awl/backends/x11/window/event/poll_mask.hpp>
-#include <awl/backends/x11/window/event/poll_type.hpp>
 #include <awl/backends/x11/window/event/to_mask.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
+#include <awl/backends/x11/window/event/unregister_callback.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/event/close.hpp>
 #include <awl/window/event/close_callback.hpp>
@@ -23,10 +21,10 @@
 #include <awl/window/event/resize_callback.hpp>
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
-#include <fcppt/const.hpp>
-#include <fcppt/assert/error.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
@@ -41,18 +39,22 @@
 
 
 awl::backends::x11::window::event::original_processor::original_processor(
-	awl::backends::x11::window::object &_window
+	awl::backends::x11::window::object &_window,
+	awl::backends::x11::window::event::unregister_callback const &_unregister
 )
 :
 	window_(
 		_window
 	),
+	unregister_{
+		_unregister
+	},
 	signals_(),
 	mask_counts_(),
 	type_counts_(),
-	event_mask_(
+	event_mask_{
 		0l
-	),
+	},
 	wm_protocols_atom_(
 		awl::backends::x11::intern_atom(
 			_window.display(),
@@ -163,74 +165,9 @@ awl::backends::x11::window::event::original_processor::original_processor(
 
 awl::backends::x11::window::event::original_processor::~original_processor()
 {
-}
-
-bool
-awl::backends::x11::window::event::original_processor::poll()
-{
-	bool events_processed{
-		false
-	};
-
-	while(
-		fcppt::optional::maybe(
-			awl::backends::x11::window::event::poll_mask(
-				window_,
-				event_mask_
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				awl::backends::x11::window::event::object const &_event
-			)
-			{
-				this->do_process(
-					_event
-				);
-
-				return
-					true;
-			}
-		)
-	)
-		events_processed = true;
-
-	for(
-		auto const &item
-		:
-		type_counts_
-	)
-		while(
-			fcppt::optional::maybe(
-				awl::backends::x11::window::event::poll_type(
-					window_,
-					item.first
-				),
-				fcppt::const_(
-					false
-				),
-				[
-					this
-				](
-					awl::backends::x11::window::event::object const &_event
-				)
-				{
-					this->do_process(
-						_event
-					);
-
-					return
-						true;
-				}
-			)
-		)
-			events_processed = true;
-
-	return
-		events_processed;
+	unregister_(
+		*this
+	);
 }
 
 fcppt::signal::auto_connection
@@ -291,13 +228,15 @@ awl::backends::x11::window::event::original_processor::show_callback(
 awl::window::object &
 awl::backends::x11::window::event::original_processor::window() const
 {
-	return window_;
+	return
+		window_;
 }
 
 awl::backends::x11::window::object &
 awl::backends::x11::window::event::original_processor::x11_window() const
 {
-	return window_;
+	return
+		window_;
 }
 
 fcppt::signal::auto_connection
@@ -357,18 +296,6 @@ awl::backends::x11::window::event::original_processor::register_callback(
 
 void
 awl::backends::x11::window::event::original_processor::process(
-	awl::backends::x11::event::object const &_event
-)
-{
-	this->do_process(
-		awl::backends::x11::window::event::object(
-			_event.get()
-		)
-	);
-}
-
-void
-awl::backends::x11::window::event::original_processor::do_process(
 	awl::backends::x11::window::event::object const &_event
 )
 {
@@ -402,15 +329,13 @@ awl::backends::x11::window::event::original_processor::unregister(
 			this,
 			_event_type
 		]{
-			// TODO: Improve this!
 			type_count_map::iterator const it(
-				type_counts_.find(
-					_event_type
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					fcppt::container::find_opt_iterator(
+						type_counts_,
+						_event_type
+					)
 				)
-			);
-
-			FCPPT_ASSERT_ERROR(
-				it != type_counts_.end()
 			);
 
 			if(

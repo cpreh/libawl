@@ -62,9 +62,6 @@ set(
 	src/cursor/create_invisible.cpp
 	src/cursor/create_predefined.cpp
 	src/cursor/object.cpp
-	src/event/create_processor.cpp
-	src/event/processor.cpp
-	src/event/scoped_window_processor.cpp
 	src/exception.cpp
 	src/log.cpp
 	src/log_context.cpp
@@ -74,6 +71,9 @@ set(
 	src/main/exit_failure.cpp
 	src/main/exit_success.cpp
 	src/main/function_context.cpp
+	src/main/loop.cpp
+	src/main/loop_next.cpp
+	src/main/loop_poll.cpp
 	src/main/output.cpp
 	src/main/scoped_output.cpp
 	src/show_error.cpp
@@ -81,12 +81,10 @@ set(
 	src/show_message.cpp
 	src/show_message_narrow.cpp
 	src/system/create.cpp
-	src/system/event/create_processor.cpp
 	src/system/event/processor.cpp
 	src/system/event/quit.cpp
 	src/system/object.cpp
 	src/visual/object.cpp
-	src/window/event/create_processor.cpp
 	src/window/event/processor.cpp
 	src/window/event/resize.cpp
 	src/window/has_focus.cpp
@@ -110,12 +108,6 @@ set(
 	include/awl/cursor/predefined.hpp
 	include/awl/cursor/predefined_fwd.hpp
 	include/awl/cursor/size.hpp
-	include/awl/event/create_processor.hpp
-	include/awl/event/processor.hpp
-	include/awl/event/processor_fwd.hpp
-	include/awl/event/processor_unique_ptr.hpp
-	include/awl/event/scoped_window_processor.hpp
-	include/awl/event/scoped_window_processor_fwd.hpp
 	include/awl/exception.hpp
 	include/awl/log.hpp
 	include/awl/log_context.hpp
@@ -123,10 +115,18 @@ set(
 	include/awl/main/create_output.hpp
 	include/awl/main/dummy_output.hpp
 	include/awl/main/exit_code.hpp
+	include/awl/main/exit_code_fwd.hpp
 	include/awl/main/exit_failure.hpp
 	include/awl/main/exit_success.hpp
 	include/awl/main/function_context.hpp
 	include/awl/main/function_context_fwd.hpp
+	include/awl/main/loop.hpp
+	include/awl/main/loop_callback.hpp
+	include/awl/main/loop_next.hpp
+	include/awl/main/loop_poll.hpp
+	include/awl/main/loop_process_callback.hpp
+	include/awl/main/optional_exit_code.hpp
+	include/awl/main/optional_exit_code_fwd.hpp
 	include/awl/main/optional_scoped_output_unique_ptr.hpp
 	include/awl/main/optional_scoped_output_unique_ptr_fwd.hpp
 	include/awl/main/output.hpp
@@ -140,9 +140,6 @@ set(
 	include/awl/show_message.hpp
 	include/awl/show_message_narrow.hpp
 	include/awl/system/create.hpp
-	include/awl/system/event/create_processor.hpp
-	include/awl/system/event/optional_processor_ref.hpp
-	include/awl/system/event/optional_processor_ref_fwd.hpp
 	include/awl/system/event/processor.hpp
 	include/awl/system/event/processor_fwd.hpp
 	include/awl/system/event/processor_unique_ptr.hpp
@@ -154,8 +151,6 @@ set(
 	include/awl/system/object.hpp
 	include/awl/system/object_fwd.hpp
 	include/awl/system/object_unique_ptr.hpp
-	include/awl/system/optional_exit_code.hpp
-	include/awl/system/optional_exit_code_fwd.hpp
 	include/awl/visual/object.hpp
 	include/awl/visual/object_fwd.hpp
 	include/awl/visual/object_unique_ptr.hpp
@@ -166,7 +161,6 @@ set(
 	include/awl/window/event/close_function.hpp
 	include/awl/window/event/close_fwd.hpp
 	include/awl/window/event/close_signal.hpp
-	include/awl/window/event/create_processor.hpp
 	include/awl/window/event/destroy.hpp
 	include/awl/window/event/destroy_callback.hpp
 	include/awl/window/event/destroy_function.hpp
@@ -349,20 +343,23 @@ set(
 	src/backends/x11/default_screen.cpp
 	src/backends/x11/display.cpp
 	src/backends/x11/display_fd.cpp
-	src/backends/x11/event/next.cpp
-	src/backends/x11/event/object.cpp
-	src/backends/x11/event/pending.cpp
-	src/backends/x11/event/processor.cpp
+	src/backends/x11/flush.cpp
 	src/backends/x11/free.cpp
 	src/backends/x11/get_input_focus.cpp
 	src/backends/x11/intern_atom.cpp
 	src/backends/x11/log.cpp
 	src/backends/x11/original_display.cpp
+	src/backends/x11/pending.cpp
 	src/backends/x11/pixmap/create_from_data.cpp
 	src/backends/x11/pixmap/holder.cpp
+	src/backends/x11/sync.cpp
+	src/backends/x11/system/event/create_window_processor.cpp
+	src/backends/x11/system/event/generic.cpp
 	src/backends/x11/system/event/map_key.cpp
+	src/backends/x11/system/event/next.cpp
 	src/backends/x11/system/event/object.cpp
 	src/backends/x11/system/event/original_processor.cpp
+	src/backends/x11/system/event/pending.cpp
 	src/backends/x11/system/event/processor.cpp
 	src/backends/x11/system/object.cpp
 	src/backends/x11/system/original_object.cpp
@@ -382,8 +379,6 @@ set(
 	src/backends/x11/window/event/filter.cpp
 	src/backends/x11/window/event/object.cpp
 	src/backends/x11/window/event/original_processor.cpp
-	src/backends/x11/window/event/poll_mask.cpp
-	src/backends/x11/window/event/poll_type.cpp
 	src/backends/x11/window/event/processor.cpp
 	src/backends/x11/window/event/send.cpp
 	src/backends/x11/window/event/to_mask.cpp
@@ -431,17 +426,13 @@ set(
 	include/awl/backends/x11/display.hpp
 	include/awl/backends/x11/display_fd.hpp
 	include/awl/backends/x11/display_fwd.hpp
-	include/awl/backends/x11/event/next.hpp
-	include/awl/backends/x11/event/object.hpp
-	include/awl/backends/x11/event/object_fwd.hpp
-	include/awl/backends/x11/event/pending.hpp
-	include/awl/backends/x11/event/processor.hpp
-	include/awl/backends/x11/event/processor_fwd.hpp
+	include/awl/backends/x11/flush.hpp
 	include/awl/backends/x11/free.hpp
 	include/awl/backends/x11/get_input_focus.hpp
 	include/awl/backends/x11/intern_atom.hpp
 	include/awl/backends/x11/log.hpp
 	include/awl/backends/x11/original_display.hpp
+	include/awl/backends/x11/pending.hpp
 	include/awl/backends/x11/pixmap/const_holder_ref.hpp
 	include/awl/backends/x11/pixmap/create_from_data.hpp
 	include/awl/backends/x11/pixmap/dim.hpp
@@ -451,15 +442,19 @@ set(
 	include/awl/backends/x11/pixmap/holder_unique_ptr.hpp
 	include/awl/backends/x11/pixmap/size.hpp
 	include/awl/backends/x11/screen.hpp
+	include/awl/backends/x11/sync.hpp
 	include/awl/backends/x11/system/event/callback.hpp
+	include/awl/backends/x11/system/event/create_window_processor.hpp
 	include/awl/backends/x11/system/event/function.hpp
+	include/awl/backends/x11/system/event/generic.hpp
+	include/awl/backends/x11/system/event/generic_fwd.hpp
 	include/awl/backends/x11/system/event/map_key.hpp
+	include/awl/backends/x11/system/event/next.hpp
 	include/awl/backends/x11/system/event/object.hpp
 	include/awl/backends/x11/system/event/object_fwd.hpp
 	include/awl/backends/x11/system/event/opcode.hpp
-	include/awl/backends/x11/system/event/optional_processor_ref.hpp
-	include/awl/backends/x11/system/event/optional_processor_ref_fwd.hpp
 	include/awl/backends/x11/system/event/original_processor.hpp
+	include/awl/backends/x11/system/event/pending.hpp
 	include/awl/backends/x11/system/event/processor.hpp
 	include/awl/backends/x11/system/event/processor_fwd.hpp
 	include/awl/backends/x11/system/event/type.hpp
@@ -496,16 +491,15 @@ set(
 	include/awl/backends/x11/window/event/mask.hpp
 	include/awl/backends/x11/window/event/object.hpp
 	include/awl/backends/x11/window/event/object_fwd.hpp
-	include/awl/backends/x11/window/event/optional.hpp
 	include/awl/backends/x11/window/event/optional_mask.hpp
 	include/awl/backends/x11/window/event/original_processor.hpp
-	include/awl/backends/x11/window/event/poll_mask.hpp
-	include/awl/backends/x11/window/event/poll_type.hpp
 	include/awl/backends/x11/window/event/processor.hpp
 	include/awl/backends/x11/window/event/processor_fwd.hpp
+	include/awl/backends/x11/window/event/processor_unique_ptr.hpp
 	include/awl/backends/x11/window/event/send.hpp
 	include/awl/backends/x11/window/event/to_mask.hpp
 	include/awl/backends/x11/window/event/type.hpp
+	include/awl/backends/x11/window/event/unregister_callback.hpp
 	include/awl/backends/x11/window/event/wm_protocols.hpp
 	include/awl/backends/x11/window/get_class_hint.hpp
 	include/awl/backends/x11/window/hints.hpp
@@ -534,6 +528,8 @@ set(
 	include/awl/backends/wayland/original_display.hpp
 	include/awl/backends/wayland/registry.hpp
 	include/awl/backends/wayland/registry_fwd.hpp
+	include/awl/backends/wayland/system/event/processor.hpp
+	include/awl/backends/wayland/system/event/processor_fwd.hpp
 	include/awl/backends/wayland/system/object.hpp
 	include/awl/backends/wayland/system/object_fwd.hpp
 	include/awl/backends/wayland/system/original_object.hpp
@@ -555,8 +551,6 @@ set(
 	include/awl/backends/linux/fd/epoll/ctl.hpp
 	include/awl/backends/linux/fd/epoll/fd.hpp
 	include/awl/backends/linux/fd/epoll/fd_fwd.hpp
-	include/awl/backends/linux/fd/epoll/scoped.hpp
-	include/awl/backends/linux/fd/epoll/scoped_fwd.hpp
 	include/awl/backends/linux/fd/epoll/set.hpp
 	include/awl/backends/linux/fd/epoll/set_fwd.hpp
 	include/awl/backends/linux/fd/event.hpp
@@ -566,6 +560,7 @@ set(
 	include/awl/backends/linux/fd/object_vector.hpp
 	include/awl/backends/linux/fd/optional_duration.hpp
 	include/awl/backends/linux/fd/optional_duration_fwd.hpp
+	include/awl/backends/linux/fd/original_processor.hpp
 	include/awl/backends/linux/fd/processor.hpp
 	include/awl/backends/linux/fd/processor_fwd.hpp
 )
@@ -574,8 +569,8 @@ set(
 	AWL_LINUX_SRC_FILES
 	src/backends/linux/fd/epoll/ctl.cpp
 	src/backends/linux/fd/epoll/fd.cpp
-	src/backends/linux/fd/epoll/scoped.cpp
 	src/backends/linux/fd/epoll/set.cpp
+	src/backends/linux/fd/original_processor.cpp
 	src/backends/linux/fd/processor.cpp
 )
 

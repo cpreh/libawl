@@ -23,7 +23,8 @@ class object
 {
 public:
 	AWL_DETAIL_SYMBOL
-	explicit object(
+	explicit
+	object(
 		XEvent const &
 	);
 

@@ -4,8 +4,11 @@
 #include <awl/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
+#include <awl/main/optional_exit_code_fwd.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/system/event/quit_callback.hpp>
+#include <awl/window/object_fwd.hpp>
+#include <awl/window/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 
@@ -27,22 +30,24 @@ protected:
 	processor();
 public:
 	virtual
-	bool
+	awl::main::optional_exit_code
 	poll() = 0;
+
+	virtual
+	awl::main::optional_exit_code
+	next() = 0;
+
+	virtual
+	awl::window::event::processor_unique_ptr
+	create_window_processor(
+		awl::window::object &
+	) = 0;
 
 	virtual
 	void
 	quit(
 		awl::main::exit_code
 	) = 0;
-
-	virtual
-	bool
-	running() const = 0;
-
-	virtual
-	awl::main::exit_code
-	exit_code() const = 0;
 
 	virtual
 	fcppt::signal::auto_connection
