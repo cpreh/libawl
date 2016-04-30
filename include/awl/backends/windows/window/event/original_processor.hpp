@@ -10,8 +10,8 @@
 #include <awl/backends/windows/window/event/callback.hpp>
 #include <awl/backends/windows/window/event/object_fwd.hpp>
 #include <awl/backends/windows/window/event/processor.hpp>
-#include <awl/backends/windows/window/event/unregister_callback.hpp>
 #include <awl/backends/windows/window/event/return_type.hpp>
+#include <awl/backends/windows/window/event/unregister_callback.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/event/close_callback.hpp>
 #include <awl/window/event/close_signal.hpp>

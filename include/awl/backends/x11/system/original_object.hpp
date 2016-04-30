@@ -6,10 +6,10 @@
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/system/object.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/optional_object_unique_ptr_fwd.hpp>
-#include <awl/system/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
