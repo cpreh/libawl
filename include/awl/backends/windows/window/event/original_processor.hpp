@@ -2,14 +2,15 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/backends/windows/event/lparam.hpp>
-#include <awl/backends/windows/event/message_fwd.hpp>
-#include <awl/backends/windows/event/type.hpp>
-#include <awl/backends/windows/event/wparam.hpp>
+#include <awl/backends/windows/lparam.hpp>
+#include <awl/backends/windows/message_fwd.hpp>
+#include <awl/backends/windows/message_type.hpp>
+#include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/window/object_fwd.hpp>
 #include <awl/backends/windows/window/event/callback.hpp>
 #include <awl/backends/windows/window/event/object_fwd.hpp>
 #include <awl/backends/windows/window/event/processor.hpp>
+#include <awl/backends/windows/window/event/unregister_callback.hpp>
 #include <awl/backends/windows/window/event/return_type.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/event/close_callback.hpp>
@@ -53,18 +54,13 @@ class AWL_CLASS_SYMBOL original_processor
 	);
 public:
 	AWL_DETAIL_SYMBOL
-	explicit
 	original_processor(
-		awl::backends::windows::window::object &
+		awl::backends::windows::window::object &,
+		awl::backends::windows::window::event::unregister_callback const &
 	);
 
 	AWL_DETAIL_SYMBOL
 	~original_processor()
-	override;
-
-	AWL_DETAIL_SYMBOL
-	bool
-	poll()
 	override;
 
 	AWL_DETAIL_SYMBOL
@@ -115,40 +111,36 @@ public:
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_callback(
-		awl::backends::windows::event::type,
+		awl::backends::windows::message_type,
 		windows::window::event::callback const &
 	)
 	override;
 
 	void
 	process(
-		awl::backends::windows::event::message const &
+		awl::backends::windows::message const &
 	)
 	override;
 
-	awl::backends::windows::event::type
+	// TODO: Why is this here?
+	awl::backends::windows::message_type
 	allocate_user_message()
 	override;
 
 	void
 	free_user_message(
-		awl::backends::windows::event::type
+		awl::backends::windows::message_type
 	)
 	override;
 
 	AWL_DETAIL_SYMBOL
 	awl::backends::windows::window::event::return_type
 	execute_callback(
-		awl::backends::windows::event::type,
-		awl::backends::windows::event::wparam,
-		awl::backends::windows::event::lparam
+		awl::backends::windows::message_type,
+		awl::backends::windows::wparam,
+		awl::backends::windows::lparam
 	);
 private:
-	void
-	do_process(
-		awl::backends::windows::event::message const &
-	);
-
 	awl::backends::windows::window::event::return_type
 	on_close(
 		awl::backends::windows::window::event::object const &
@@ -174,24 +166,26 @@ private:
 		awl::backends::windows::window::event::object const &
 	);
 
-	windows::window::object &window_;
+	awl::backends::windows::window::object &window_;
+
+	awl::backends::windows::window::event::unregister_callback const unregister_;
 
 	typedef
 	fcppt::signal::object<
-		windows::window::event::function
+		awl::backends::windows::window::event::function
 	>
 	signal_type;
 
 	typedef
 	std::unordered_map<
-		awl::backends::windows::event::type,
+		awl::backends::windows::message_type,
 		signal_type
 	>
 	signal_map;
 
 	typedef
 	std::vector<
-		awl::backends::windows::event::type
+		awl::backends::windows::message_type
 	>
 	user_message_vector;
 

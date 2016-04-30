@@ -34,15 +34,18 @@ public:
 	);
 
 	AWL_DETAIL_SYMBOL
-	~original_handle();
+	~original_handle()
+	override;
 
 	AWL_DETAIL_SYMBOL
 	HANDLE
-	get() const;
+	get() const
+	override;
 
 	AWL_DETAIL_SYMBOL
 	bool
-	ready() const;
+	ready() const
+	override;
 private:
 	awl::backends::windows::system::event::handle_destroy_callback const on_destroy_;
 

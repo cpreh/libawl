@@ -1,5 +1,5 @@
-#ifndef AWL_BACKENDS_WINDOWS_EVENT_WPARAM_HPP_INCLUDED
-#define AWL_BACKENDS_WINDOWS_EVENT_WPARAM_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WINDOWS_MESSAGE_TYPE_HPP_INCLUDED
+#define AWL_BACKENDS_WINDOWS_MESSAGE_TYPE_HPP_INCLUDED
 
 #include <awl/backends/windows/windows.hpp>
 #include <fcppt/strong_typedef.hpp>
@@ -11,15 +11,12 @@ namespace backends
 {
 namespace windows
 {
-namespace event
-{
 
 FCPPT_MAKE_STRONG_TYPEDEF(
-	WPARAM,
-	wparam
+	UINT,
+	message_type
 );
 
-}
 }
 }
 }

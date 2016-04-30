@@ -1,8 +1,8 @@
-#ifndef AWL_BACKENDS_WINDOWS_EVENT_MESSAGE_HPP_INCLUDED
-#define AWL_BACKENDS_WINDOWS_EVENT_MESSAGE_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WINDOWS_MESSAGE_HPP_INCLUDED
+#define AWL_BACKENDS_WINDOWS_MESSAGE_HPP_INCLUDED
 
+#include <awl/backends/windows/message_fwd.hpp>
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/event/message_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
 
@@ -11,8 +11,6 @@ namespace awl
 namespace backends
 {
 namespace windows
-{
-namespace event
 {
 
 class message
@@ -31,7 +29,6 @@ private:
 	MSG msg_;
 };
 
-}
 }
 }
 }

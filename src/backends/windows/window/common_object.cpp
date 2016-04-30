@@ -1,9 +1,9 @@
 #include <awl/exception.hpp>
+#include <awl/backends/windows/lparam.hpp>
+#include <awl/backends/windows/message_type.hpp>
+#include <awl/backends/windows/post_message.hpp>
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/event/lparam.hpp>
-#include <awl/backends/windows/event/post_message.hpp>
-#include <awl/backends/windows/event/type.hpp>
-#include <awl/backends/windows/event/wparam.hpp>
+#include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/window/common_object.hpp>
 #include <awl/backends/windows/window/get_client_rect.hpp>
 #include <awl/backends/windows/window/object.hpp>
@@ -109,23 +109,23 @@ awl::backends::windows::window::common_object::show()
 		this->size()
 	);
 
-	awl::backends::windows::event::post_message(
+	awl::backends::windows::post_message(
 		this->hwnd(),
 		fcppt::strong_typedef_construct_cast<
-			awl::backends::windows::event::type,
+			awl::backends::windows::message_type,
 			fcppt::cast::to_unsigned_fun
 		>(
 			WM_SIZE
 		),
 		fcppt::strong_typedef_construct_cast<
-			awl::backends::windows::event::wparam,
+			awl::backends::windows::wparam,
 			fcppt::cast::size_fun
 		>(
 			fcppt::cast::to_unsigned(
 				SIZE_RESTORED
 			)
 		),
-		awl::backends::windows::event::lparam(
+		awl::backends::windows::lparam{
 			MAKELPARAM(
 				fcppt::cast::size<
 					WORD
@@ -138,7 +138,7 @@ awl::backends::windows::window::common_object::show()
 					cur_size.h()
 				)
 			)
-		)
+		}
 	);
 }
 

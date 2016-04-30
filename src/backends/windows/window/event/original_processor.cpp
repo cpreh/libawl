@@ -1,16 +1,16 @@
 #include <awl/exception.hpp>
 #include <awl/backends/windows/default_wnd_proc.hpp>
+#include <awl/backends/windows/lparam.hpp>
+#include <awl/backends/windows/message.hpp>
+#include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/windows.hpp>
+#include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/cursor/object.hpp>
-#include <awl/backends/windows/event/lparam.hpp>
-#include <awl/backends/windows/event/message.hpp>
-#include <awl/backends/windows/event/peek.hpp>
-#include <awl/backends/windows/event/type.hpp>
-#include <awl/backends/windows/event/wparam.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/backends/windows/window/event/combine_result.hpp>
 #include <awl/backends/windows/window/event/object.hpp>
 #include <awl/backends/windows/window/event/original_processor.hpp>
+#include <awl/backends/windows/window/event/processor.hpp>
 #include <awl/backends/windows/window/event/return_type.hpp>
 #include <awl/backends/windows/window/event/wnd_proc.hpp>
 #include <awl/window/dim.hpp>
@@ -25,24 +25,20 @@
 #include <awl/window/event/resize_callback.hpp>
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
-#include <fcppt/const.hpp>
 #include <fcppt/identity.hpp>
 #include <fcppt/make_int_range.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
-#include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/maybe_back.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/from.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -59,12 +55,17 @@
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 awl::backends::windows::window::event::original_processor::original_processor(
-	awl::backends::windows::window::object &_window
+	awl::backends::windows::window::object &_window,
+	awl::backends::windows::window::event::unregister_callback const &_unregister
 )
 :
+	awl::backends::windows::window::event::processor(),
 	window_(
 		_window
 	),
+	unregister_{
+		_unregister
+	},
 	signals_(),
 	user_messages_(
 		// TODO: We need something better for this, like a sparse map
@@ -73,13 +74,13 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		>(
 			fcppt::make_int_range(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type,
+					awl::backends::windows::message_type,
 					fcppt::cast::to_unsigned_fun
 				>(
 					WM_USER
 				),
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type,
+					awl::backends::windows::message_type,
 					fcppt::cast::to_unsigned_fun
 				>(
 					WM_USER
@@ -117,7 +118,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		>(
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type,
+					awl::backends::windows::message_type,
 					fcppt::cast::to_unsigned_fun
 				>(
 					WM_CLOSE
@@ -132,7 +133,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 			),
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type,
+					awl::backends::windows::message_type,
 					fcppt::cast::to_unsigned_fun
 				>(
 					WM_DESTROY
@@ -147,7 +148,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 			),
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type,
+					awl::backends::windows::message_type,
 					fcppt::cast::to_unsigned_fun
 				>(
 					WM_SIZE
@@ -162,7 +163,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 			),
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type,
+					awl::backends::windows::message_type,
 					fcppt::cast::to_unsigned_fun
 				>(
 					WM_SHOWWINDOW
@@ -177,7 +178,7 @@ awl::backends::windows::window::event::original_processor::original_processor(
 			),
 			this->register_callback(
 				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::event::type,
+					awl::backends::windows::message_type,
 					fcppt::cast::to_unsigned_fun
 				>(
 					WM_SETCURSOR
@@ -234,43 +235,10 @@ awl::backends::windows::window::event::original_processor::~original_processor()
 		::SetCursor(
 			nullptr
 		);
-}
 
-bool
-awl::backends::windows::window::event::original_processor::poll()
-{
-	bool events_processed{
-		false
-	};
-
-	while(
-		fcppt::optional::maybe(
-			awl::backends::windows::event::peek(
-				window_.hwnd()
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				awl::backends::windows::event::message const &_message
-			)
-			{
-				this->do_process(
-					_message
-				);
-
-				return
-					true;
-			}
-		)
-	)
-		events_processed =
-			true;
-
-	return
-		events_processed;
+	unregister_(
+		*this
+	);
 }
 
 fcppt::signal::auto_connection
@@ -344,7 +312,7 @@ awl::backends::windows::window::event::original_processor::windows_window() cons
 
 fcppt::signal::auto_connection
 awl::backends::windows::window::event::original_processor::register_callback(
-	awl::backends::windows::event::type const _type,
+	awl::backends::windows::message_type const _type,
 	awl::backends::windows::window::event::callback const &_func
 )
 {
@@ -383,18 +351,22 @@ awl::backends::windows::window::event::original_processor::register_callback(
 
 void
 awl::backends::windows::window::event::original_processor::process(
-	awl::backends::windows::event::message const &_message
+	awl::backends::windows::message const &_message
 )
 {
-	this->do_process(
-		_message
+	::TranslateMessage(
+		&_message.get()
+	);
+
+	::DispatchMessage(
+		&_message.get()
 	);
 }
 
-awl::backends::windows::event::type
+awl::backends::windows::message_type
 awl::backends::windows::window::event::original_processor::allocate_user_message()
 {
-	awl::backends::windows::event::type const result(
+	awl::backends::windows::message_type const result(
 		fcppt::optional::to_exception(
 			fcppt::container::maybe_back(
 				user_messages_
@@ -417,7 +389,7 @@ awl::backends::windows::window::event::original_processor::allocate_user_message
 
 void
 awl::backends::windows::window::event::original_processor::free_user_message(
-	awl::backends::windows::event::type const _message
+	awl::backends::windows::message_type const _message
 )
 {
 	user_messages_.push_back(
@@ -427,9 +399,9 @@ awl::backends::windows::window::event::original_processor::free_user_message(
 
 awl::backends::windows::window::event::return_type
 awl::backends::windows::window::event::original_processor::execute_callback(
-	awl::backends::windows::event::type const _type,
-	awl::backends::windows::event::wparam const _wparam,
-	awl::backends::windows::event::lparam const _lparam
+	awl::backends::windows::message_type const _type,
+	awl::backends::windows::wparam const _wparam,
+	awl::backends::windows::lparam const _lparam
 )
 {
 	return
@@ -456,20 +428,6 @@ awl::backends::windows::window::event::original_processor::execute_callback(
 					);
 			}
 		);
-}
-
-void
-awl::backends::windows::window::event::original_processor::do_process(
-	awl::backends::windows::event::message const &_message
-)
-{
-	::TranslateMessage(
-		&_message.get()
-	);
-
-	::DispatchMessage(
-		&_message.get()
-	);
 }
 
 awl::backends::windows::window::event::return_type

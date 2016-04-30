@@ -585,19 +585,16 @@ set(
 	src/backends/windows/cursor/object.cpp
 	src/backends/windows/cursor/shared.cpp
 	src/backends/windows/default_wnd_proc.cpp
-	src/backends/windows/event/get.cpp
-	src/backends/windows/event/message.cpp
-	src/backends/windows/event/object.cpp
-	src/backends/windows/event/peek.cpp
-	src/backends/windows/event/post_message.cpp
-	src/backends/windows/event/processor.cpp
 	src/backends/windows/format_message.cpp
 	src/backends/windows/get_focus.cpp
 	src/backends/windows/local_free.cpp
 	src/backends/windows/main/output.cpp
+	src/backends/windows/message.cpp
 	src/backends/windows/message_box.cpp
 	src/backends/windows/message_box_narrow.cpp
 	src/backends/windows/module_handle.cpp
+	src/backends/windows/peek_message.cpp
+	src/backends/windows/post_message.cpp
 	src/backends/windows/scoped_local_memory.cpp
 	src/backends/windows/system/event/handle.cpp
 	src/backends/windows/system/event/object.cpp
@@ -614,6 +611,7 @@ set(
 	src/backends/windows/window/common_object.cpp
 	src/backends/windows/window/create.cpp
 	src/backends/windows/window/event/combine_result.cpp
+	src/backends/windows/window/event/create_processor.cpp
 	src/backends/windows/window/event/object.cpp
 	src/backends/windows/window/event/original_processor.cpp
 	src/backends/windows/window/event/processor.cpp
@@ -652,31 +650,25 @@ set(
 	include/awl/backends/windows/cursor/size.hpp
 	include/awl/backends/windows/cursor/xor_plane.hpp
 	include/awl/backends/windows/default_wnd_proc.hpp
-	include/awl/backends/windows/event/get.hpp
-	include/awl/backends/windows/event/lparam.hpp
-	include/awl/backends/windows/event/message.hpp
-	include/awl/backends/windows/event/message_fwd.hpp
-	include/awl/backends/windows/event/object.hpp
-	include/awl/backends/windows/event/object_fwd.hpp
-	include/awl/backends/windows/event/optional_message.hpp
-	include/awl/backends/windows/event/optional_message_fwd.hpp
-	include/awl/backends/windows/event/peek.hpp
-	include/awl/backends/windows/event/post_message.hpp
-	include/awl/backends/windows/event/processor.hpp
-	include/awl/backends/windows/event/processor_fwd.hpp
-	include/awl/backends/windows/event/type.hpp
-	include/awl/backends/windows/event/wparam.hpp
 	include/awl/backends/windows/format_message.hpp
 	include/awl/backends/windows/get_focus.hpp
 	include/awl/backends/windows/local_free.hpp
+	include/awl/backends/windows/lparam.hpp
 	include/awl/backends/windows/main/output.hpp
+	include/awl/backends/windows/message.hpp
 	include/awl/backends/windows/message_box.hpp
 	include/awl/backends/windows/message_box_narrow.hpp
+	include/awl/backends/windows/message_fwd.hpp
+	include/awl/backends/windows/message_type.hpp
 	include/awl/backends/windows/module_handle.hpp
+	include/awl/backends/windows/optional_message.hpp
+	include/awl/backends/windows/optional_message_fwd.hpp
 	include/awl/backends/windows/optional_point.hpp
 	include/awl/backends/windows/optional_point_fwd.hpp
 	include/awl/backends/windows/optional_rect.hpp
 	include/awl/backends/windows/optional_rect_fwd.hpp
+	include/awl/backends/windows/peek_message.hpp
+	include/awl/backends/windows/post_message.hpp
 	include/awl/backends/windows/scoped_local_memory.hpp
 	include/awl/backends/windows/system/event/callback.hpp
 	include/awl/backends/windows/system/event/function.hpp
@@ -711,16 +703,19 @@ set(
 	include/awl/backends/windows/window/create.hpp
 	include/awl/backends/windows/window/event/callback.hpp
 	include/awl/backends/windows/window/event/combine_result.hpp
+	include/awl/backends/windows/window/event/create_processor.hpp
 	include/awl/backends/windows/window/event/function.hpp
 	include/awl/backends/windows/window/event/object.hpp
 	include/awl/backends/windows/window/event/object_fwd.hpp
 	include/awl/backends/windows/window/event/original_processor.hpp
 	include/awl/backends/windows/window/event/processor.hpp
 	include/awl/backends/windows/window/event/processor_fwd.hpp
+	include/awl/backends/windows/window/event/processor_unique_ptr.hpp
 	include/awl/backends/windows/window/event/return_type.hpp
 	include/awl/backends/windows/window/event/return_type_fwd.hpp
 	include/awl/backends/windows/window/event/scoped_user_message.hpp
 	include/awl/backends/windows/window/event/scoped_user_message_fwd.hpp
+	include/awl/backends/windows/window/event/unregister_callback.hpp
 	include/awl/backends/windows/window/event/wnd_proc.hpp
 	include/awl/backends/windows/window/get_client_rect.hpp
 	include/awl/backends/windows/window/get_rect.hpp
@@ -739,6 +734,7 @@ set(
 	include/awl/backends/windows/wndclass.hpp
 	include/awl/backends/windows/wndclass_fwd.hpp
 	include/awl/backends/windows/wndclass_remove_callback.hpp
+	include/awl/backends/windows/wparam.hpp
 )
 
 set(

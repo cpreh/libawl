@@ -4,6 +4,7 @@
 #include <awl/backends/windows/counted_wndclass.hpp>
 #include <awl/backends/windows/system/object.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/optional_object_unique_ptr_fwd.hpp>
@@ -35,19 +36,30 @@ public:
 	original_object();
 
 	AWL_DETAIL_SYMBOL
-	~original_object();
+	~original_object()
+	override;
 
 	AWL_DETAIL_SYMBOL
 	awl::window::object_unique_ptr
 	create_window(
 		awl::window::parameters const &
-	);
+	)
+	override;
 
+	AWL_DETAIL_SYMBOL
+	awl::system::event::processor_unique_ptr
+	create_processor()
+	override;
+
+	AWL_DETAIL_SYMBOL
 	awl::visual::object_unique_ptr
-	default_visual();
+	default_visual()
+	override;
 
+	AWL_DETAIL_SYMBOL
 	awl::window::optional_object_unique_ptr
-	focus_window();
+	focus_window()
+	override;
 private:
 	void
 	unregister_wndclass(

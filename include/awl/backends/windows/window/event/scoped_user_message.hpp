@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_WINDOW_EVENT_SCOPED_USER_MESSAGE_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_SCOPED_USER_MESSAGE_HPP_INCLUDED
 
-#include <awl/backends/windows/event/type.hpp>
+#include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/window/event/processor_fwd.hpp>
 #include <awl/backends/windows/window/event/scoped_user_message_fwd.hpp>
 #include <awl/detail/symbol.hpp>
@@ -35,12 +35,12 @@ public:
 	~scoped_user_message();
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::windows::event::type
+	awl::backends::windows::message_type
 	type() const;
 private:
 	awl::backends::windows::window::event::processor &processor_;
 
-	awl::backends::windows::event::type const type_;
+	awl::backends::windows::message_type const type_;
 };
 
 }

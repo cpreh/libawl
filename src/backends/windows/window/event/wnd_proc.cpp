@@ -1,7 +1,7 @@
+#include <awl/backends/windows/lparam.hpp>
+#include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/event/lparam.hpp>
-#include <awl/backends/windows/event/type.hpp>
-#include <awl/backends/windows/event/wparam.hpp>
+#include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/window/event/original_processor.hpp>
 #include <awl/backends/windows/window/event/return_type.hpp>
 #include <awl/backends/windows/window/event/wnd_proc.hpp>
@@ -30,15 +30,15 @@ awl::backends::windows::window::event::wnd_proc(
 	{
 		awl::backends::windows::window::event::return_type const ret(
 			processor.execute_callback(
-				awl::backends::windows::event::type(
+				awl::backends::windows::message_type{
 					_msg
-				),
-				awl::backends::windows::event::wparam(
+				},
+				awl::backends::windows::wparam{
 					_wparam
-				),
-				awl::backends::windows::event::lparam(
+				},
+				awl::backends::windows::lparam{
 					_lparam
-				)
+				}
 			)
 		);
 
