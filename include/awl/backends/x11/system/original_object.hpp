@@ -6,6 +6,7 @@
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/system/object.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/system/event/processor_fwd.hpp>
 #include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
@@ -45,8 +46,8 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::system::event::processor_unique_ptr
-	create_processor()
+	awl::system::event::processor &
+	processor()
 	override;
 
 	AWL_DETAIL_SYMBOL
@@ -72,6 +73,8 @@ private:
 	awl::backends::x11::original_display display_;
 
 	awl::backends::x11::screen const screen_;
+
+	awl::system::event::processor_unique_ptr const processor_;
 };
 
 }

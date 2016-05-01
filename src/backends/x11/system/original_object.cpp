@@ -10,7 +10,6 @@
 #include <awl/backends/x11/window/object_unique_ptr.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
 #include <awl/system/event/processor.hpp>
-#include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object.hpp>
@@ -32,6 +31,17 @@ awl::backends::x11::system::original_object::original_object()
 	screen_(
 		awl::backends::x11::default_screen(
 			display_
+		)
+	),
+	processor_(
+		fcppt::unique_ptr_to_base<
+			awl::system::event::processor
+		>(
+			fcppt::make_unique_ptr<
+				awl::backends::x11::system::event::original_processor
+			>(
+				display_
+			)
 		)
 	)
 {
@@ -60,19 +70,11 @@ awl::backends::x11::system::original_object::create_window(
 		);
 }
 
-awl::system::event::processor_unique_ptr
-awl::backends::x11::system::original_object::create_processor()
+awl::system::event::processor &
+awl::backends::x11::system::original_object::processor()
 {
 	return
-		fcppt::unique_ptr_to_base<
-			awl::system::event::processor
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::x11::system::event::original_processor
-			>(
-				display_
-			)
-		);
+		*processor_;
 }
 
 awl::visual::object_unique_ptr

@@ -13,7 +13,6 @@
 #include <awl/window/parameters.hpp>
 #include <awl/window/event/destroy_callback.hpp>
 #include <awl/window/event/processor.hpp>
-#include <awl/window/event/processor_unique_ptr.hpp>
 #include <awl/window/event/resize.hpp>
 #include <awl/window/event/resize_callback.hpp>
 #include <fcppt/exception.hpp>
@@ -62,12 +61,12 @@ try
 
 	window->show();
 
-	awl::system::event::processor_unique_ptr const system_processor(
-		window_system->create_processor()
+	awl::system::event::processor &system_processor(
+		window_system->processor()
 	);
 
 	awl::window::event::processor_unique_ptr const window_processor(
-		system_processor->create_window_processor(
+		system_processor.create_window_processor(
 			*window
 		)
 	);
@@ -96,7 +95,7 @@ try
 				](
 					awl::window::event::destroy const &
 				){
-					system_processor->quit(
+					system_processor.quit(
 						awl::main::exit_success()
 					);
 				}
@@ -106,7 +105,7 @@ try
 
 	return
 		awl::main::loop_next(
-			*system_processor,
+			system_processor,
 			awl::main::loop_callback{
 				[]{}
 			}
