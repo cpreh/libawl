@@ -24,8 +24,6 @@
 #include <awl/backends/x11/window/event/unregister_callback.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
-#include <awl/system/event/quit.hpp>
-#include <awl/system/event/quit_callback.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/event/processor.hpp>
 #include <awl/window/event/processor_unique_ptr.hpp>
@@ -72,7 +70,6 @@ awl::backends::x11::system::event::original_processor::original_processor(
 		)
 	},
 	exit_code_(),
-	quit_signal_(),
 	window_processors_()
 {
 }
@@ -163,24 +160,6 @@ awl::backends::x11::system::event::original_processor::quit(
 	exit_code_ =
 		awl::main::optional_exit_code(
 			_exit_code
-		);
-
-	// TODO: can we integrate this in the message loop instead?
-	quit_signal_(
-		awl::system::event::quit(
-			_exit_code
-		)
-	);
-}
-
-fcppt::signal::auto_connection
-awl::backends::x11::system::event::original_processor::quit_callback(
-	awl::system::event::quit_callback const &_callback
-)
-{
-	return
-		quit_signal_.connect(
-			_callback
 		);
 }
 

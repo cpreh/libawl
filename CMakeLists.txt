@@ -82,7 +82,6 @@ set(
 	src/show_message_narrow.cpp
 	src/system/create.cpp
 	src/system/event/processor.cpp
-	src/system/event/quit.cpp
 	src/system/object.cpp
 	src/visual/object.cpp
 	src/window/event/processor.cpp
@@ -143,11 +142,6 @@ set(
 	include/awl/system/event/processor.hpp
 	include/awl/system/event/processor_fwd.hpp
 	include/awl/system/event/processor_unique_ptr.hpp
-	include/awl/system/event/quit.hpp
-	include/awl/system/event/quit_callback.hpp
-	include/awl/system/event/quit_function.hpp
-	include/awl/system/event/quit_fwd.hpp
-	include/awl/system/event/quit_signal.hpp
 	include/awl/system/object.hpp
 	include/awl/system/object_fwd.hpp
 	include/awl/system/object_unique_ptr.hpp

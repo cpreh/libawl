@@ -3,14 +3,12 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/main/exit_code.hpp>
+#include <awl/main/exit_code_fwd.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
 #include <awl/system/event/processor_fwd.hpp>
-#include <awl/system/event/quit_callback.hpp>
 #include <awl/window/object_fwd.hpp>
 #include <awl/window/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/auto_connection_fwd.hpp>
 
 
 namespace awl
@@ -47,12 +45,6 @@ public:
 	void
 	quit(
 		awl::main::exit_code
-	) = 0;
-
-	virtual
-	fcppt::signal::auto_connection
-	quit_callback(
-		awl::system::event::quit_callback const &
 	) = 0;
 
 	AWL_DETAIL_SYMBOL

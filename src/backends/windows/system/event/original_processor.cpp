@@ -19,8 +19,6 @@
 #include <awl/backends/windows/window/event/unregister_callback.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
-#include <awl/system/event/quit.hpp>
-#include <awl/system/event/quit_callback.hpp>
 #include <awl/window/object_fwd.hpp>
 #include <awl/window/event/processor.hpp>
 #include <awl/window/event/processor_unique_ptr.hpp>
@@ -53,7 +51,6 @@ awl::backends::windows::system::event::original_processor::original_processor()
 	signals_(),
 	handle_signal_(),
 	handles_(),
-	quit_signal_(),
 	window_processors_()
 {
 }
@@ -69,7 +66,7 @@ awl::backends::windows::system::event::original_processor::poll()
 		::WaitForMultipleObjects,
 		0u
 	);
-	
+
 	return
 		this->poll_messages();
 
@@ -158,17 +155,6 @@ awl::backends::windows::system::event::original_processor::quit(
 	::PostQuitMessage(
 		_exit_code.get()
 	);
-}
-
-fcppt::signal::auto_connection
-awl::backends::windows::system::event::original_processor::quit_callback(
-	awl::system::event::quit_callback const &_callback
-)
-{
-	return
-		quit_signal_.connect(
-			_callback
-		);
 }
 
 fcppt::signal::auto_connection
@@ -332,12 +318,6 @@ awl::backends::windows::system::event::original_processor::process_message(
 				fcppt::cast::to_signed(
 					_msg.get().wParam
 				)
-			)
-		);
-
-		quit_signal_(
-			awl::system::event::quit(
-				res_exit_code
 			)
 		);
 

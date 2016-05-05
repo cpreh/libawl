@@ -15,8 +15,6 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
-#include <awl/system/event/quit_callback.hpp>
-#include <awl/system/event/quit_signal.hpp>
 #include <awl/window/object_fwd.hpp>
 #include <awl/window/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -77,13 +75,6 @@ public:
 	void
 	quit(
 		awl::main::exit_code
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	fcppt::signal::auto_connection
-	quit_callback(
-		awl::system::event::quit_callback const &
 	)
 	override;
 
@@ -154,8 +145,6 @@ private:
 	handle_vector;
 
 	handle_vector handles_;
-
-	awl::system::event::quit_signal quit_signal_;
 
 	typedef
 	fcppt::reference<
