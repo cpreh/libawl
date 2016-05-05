@@ -1,3 +1,4 @@
+#include <awl/log.hpp>
 #include <awl/main/exit_success.hpp>
 #include <awl/main/loop_callback.hpp>
 #include <awl/main/loop_next.hpp>
@@ -18,6 +19,8 @@
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
+#include <fcppt/log/activate_levels.hpp>
+#include <fcppt/log/level.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -30,6 +33,11 @@ int
 main()
 try
 {
+	fcppt::log::activate_levels(
+		awl::log(),
+		fcppt::log::level::debug
+	);
+
 	awl::system::object_unique_ptr const window_system(
 		awl::system::create()
 	);

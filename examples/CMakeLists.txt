@@ -1,12 +1,29 @@
+include(
+	CMakeParseArguments
+)
+
 function(
 	add_awl_example
 	EXAMPLE_NAME
-	ADDITIONAL_DEPS
 )
 	set(
 		TARGET_NAME
 		awl_example_${EXAMPLE_NAME}
 	)
+
+	set(
+		MULTI_ARGS
+		LINK_LIBS
+	)
+
+	cmake_parse_arguments(
+		""
+		""
+		""
+		"${MULTI_ARGS}"
+		${ARGN}
+	)
+
 
 	add_executable(
 		${TARGET_NAME}
@@ -27,10 +44,25 @@ function(
 		${TARGET_NAME}
 		PRIVATE
 		${awl_TARGET}
-		${ADDITIONAL_DEPS}
+		${_LINK_LIBS}
 	)
 endfunction()
 
-add_awl_example(main "${fcppt_core_TARGET}")
-add_awl_example(resize "${fcppt_core_TARGET}")
-add_awl_example(show "${fcppt_core_TARGET}")
+add_awl_example(
+	main
+	LINK_LIBS
+		${fcppt_core_TARGET}
+)
+
+add_awl_example(
+	resize
+	LINK_LIBS
+		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
+)
+
+add_awl_example(
+	show
+	LINK_LIBS
+		${fcppt_core_TARGET}
+)

@@ -2,6 +2,9 @@
 #define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
+#include <awl/backends/wayland/compositor_fwd.hpp>
+#include <awl/backends/wayland/shell_fwd.hpp>
+#include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/processor_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor.hpp>
@@ -33,6 +36,18 @@ public:
 	AWL_DETAIL_SYMBOL
 	~processor()
 	override;
+
+	virtual
+	awl::backends::wayland::compositor const &
+	compositor() const = 0;
+
+	virtual
+	awl::backends::wayland::shell const &
+	shell() const = 0;
+
+	virtual
+	awl::backends::wayland::shm const &
+	shm() const = 0;
 };
 
 }

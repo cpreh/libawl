@@ -1,6 +1,7 @@
 #ifndef AWL_VISUAL_OBJECT_HPP_INCLUDED
 #define AWL_VISUAL_OBJECT_HPP_INCLUDED
 
+#include <awl/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -11,7 +12,7 @@ namespace awl
 namespace visual
 {
 
-class object
+class AWL_CLASS_SYMBOL object
 {
 	FCPPT_NONCOPYABLE(
 		object

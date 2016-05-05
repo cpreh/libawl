@@ -11,11 +11,14 @@ awl::backends::x11::window::hints::hints()
 	)
 {
 	if(
-		!hints_
+		hints_
+		==
+		nullptr
 	)
-		throw awl::exception(
-			FCPPT_TEXT("XAllocWMHints() failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("XAllocWMHints() failed!")
+			};
 
 	hints_->input = True;
 
@@ -26,7 +29,7 @@ awl::backends::x11::window::hints::hints()
 
 awl::backends::x11::window::hints::~hints()
 {
-	x11::free(
+	awl::backends::x11::free(
 		hints_
 	);
 }
@@ -34,5 +37,6 @@ awl::backends::x11::window::hints::~hints()
 XWMHints *
 awl::backends::x11::window::hints::get() const
 {
-	return hints_;
+	return
+		hints_;
 }
