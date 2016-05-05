@@ -12,6 +12,7 @@
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
+#include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

@@ -458,25 +458,105 @@ set(
 
 set(
 	AWL_WAYLAND_INCLUDE_FILES
+	include/awl/backends/wayland/compositor.hpp
+	include/awl/backends/wayland/compositor_fwd.hpp
+	include/awl/backends/wayland/cursor/convert_name.hpp
+	include/awl/backends/wayland/cursor/create_invisible.hpp
+	include/awl/backends/wayland/cursor/create_name.hpp
+	include/awl/backends/wayland/cursor/name.hpp
+	include/awl/backends/wayland/cursor/name_fwd.hpp
+	include/awl/backends/wayland/cursor/object.hpp
+	include/awl/backends/wayland/cursor/object_fwd.hpp
+	include/awl/backends/wayland/cursor/object_unique_ptr.hpp
+	include/awl/backends/wayland/cursor/optional_name.hpp
+	include/awl/backends/wayland/cursor/optional_name_fwd.hpp
+	include/awl/backends/wayland/cursor/predefined.hpp
+	include/awl/backends/wayland/cursor/theme.hpp
+	include/awl/backends/wayland/cursor/theme_fwd.hpp
 	include/awl/backends/wayland/display.hpp
+	include/awl/backends/wayland/display_dispatch_pending.hpp
+	include/awl/backends/wayland/display_flush.hpp
 	include/awl/backends/wayland/display_fwd.hpp
+	include/awl/backends/wayland/display_prepare_read.hpp
+	include/awl/backends/wayland/display_read_events.hpp
+	include/awl/backends/wayland/display_roundtrip.hpp
+	include/awl/backends/wayland/make_registry_object.hpp
+	include/awl/backends/wayland/make_registry_object_impl.hpp
+	include/awl/backends/wayland/optional_compositor.hpp
+	include/awl/backends/wayland/optional_compositor_fwd.hpp
+	include/awl/backends/wayland/optional_shell.hpp
+	include/awl/backends/wayland/optional_shell_fwd.hpp
+	include/awl/backends/wayland/optional_shm.hpp
+	include/awl/backends/wayland/optional_shm_fwd.hpp
 	include/awl/backends/wayland/original_display.hpp
 	include/awl/backends/wayland/registry.hpp
 	include/awl/backends/wayland/registry_fwd.hpp
+	include/awl/backends/wayland/registry_id.hpp
+	include/awl/backends/wayland/registry_object_decl.hpp
+	include/awl/backends/wayland/registry_object_fwd.hpp
+	include/awl/backends/wayland/registry_object_impl.hpp
+	include/awl/backends/wayland/shell.hpp
+	include/awl/backends/wayland/shell_fwd.hpp
+	include/awl/backends/wayland/shm.hpp
+	include/awl/backends/wayland/shm_fwd.hpp
+	include/awl/backends/wayland/surface.hpp
+	include/awl/backends/wayland/surface_fwd.hpp
+	include/awl/backends/wayland/system/event/global_data.hpp
+	include/awl/backends/wayland/system/event/global_data_fwd.hpp
+	include/awl/backends/wayland/system/event/original_processor.hpp
 	include/awl/backends/wayland/system/event/processor.hpp
 	include/awl/backends/wayland/system/event/processor_fwd.hpp
+	include/awl/backends/wayland/system/event/processor_unique_ptr.hpp
 	include/awl/backends/wayland/system/object.hpp
 	include/awl/backends/wayland/system/object_fwd.hpp
 	include/awl/backends/wayland/system/original_object.hpp
+	include/awl/backends/wayland/visual/null_object.hpp
+	include/awl/backends/wayland/visual/object.hpp
+	include/awl/backends/wayland/window/event/data.hpp
+	include/awl/backends/wayland/window/event/data_fwd.hpp
+	include/awl/backends/wayland/window/event/original_processor.hpp
+	include/awl/backends/wayland/window/event/processor.hpp
+	include/awl/backends/wayland/window/event/processor_fwd.hpp
+	include/awl/backends/wayland/window/object.hpp
+	include/awl/backends/wayland/window/object_fwd.hpp
+	include/awl/backends/wayland/window/original_object.hpp
+	include/awl/backends/wayland/window/shell_surface.hpp
+	include/awl/backends/wayland/window/shell_surface_fwd.hpp
 )
 
 set(
 	AWL_WAYLAND_SRC_FILES
+	src/backends/wayland/compositor.cpp
+	src/backends/wayland/cursor/convert_name.cpp
+	src/backends/wayland/cursor/create_invisible.cpp
+	src/backends/wayland/cursor/create_name.cpp
+	src/backends/wayland/cursor/object.cpp
+	src/backends/wayland/cursor/predefined.cpp
+	src/backends/wayland/cursor/theme.cpp
 	src/backends/wayland/display.cpp
+	src/backends/wayland/display_dispatch_pending.cpp
+	src/backends/wayland/display_flush.cpp
+	src/backends/wayland/display_prepare_read.cpp
+	src/backends/wayland/display_read_events.cpp
+	src/backends/wayland/display_roundtrip.cpp
 	src/backends/wayland/original_display.cpp
 	src/backends/wayland/registry.cpp
+	src/backends/wayland/shell.cpp
+	src/backends/wayland/shm.cpp
+	src/backends/wayland/surface.cpp
+	src/backends/wayland/system/event/global_data.cpp
+	src/backends/wayland/system/event/original_processor.cpp
+	src/backends/wayland/system/event/processor.cpp
 	src/backends/wayland/system/object.cpp
 	src/backends/wayland/system/original_object.cpp
+	src/backends/wayland/visual/null_object.cpp
+	src/backends/wayland/visual/object.cpp
+	src/backends/wayland/window/event/data.cpp
+	src/backends/wayland/window/event/original_processor.cpp
+	src/backends/wayland/window/event/processor.cpp
+	src/backends/wayland/window/object.cpp
+	src/backends/wayland/window/original_object.cpp
+	src/backends/wayland/window/shell_surface.cpp
 )
 
 set(
@@ -828,13 +908,15 @@ function(
 		target_include_directories(
 			${TARGETNAME}
 			PRIVATE
-			${WAYLAND_INCLUDE_DIRS}
+			${WAYLAND_CLIENT_INCLUDE_DIRS}
+			${WAYLAND_CURSOR_INCLUDE_DIRS}
 		)
 
 		target_link_libraries(
 			${TARGETNAME}
 			PRIVATE
-			${WAYLAND_LIBRARIES}
+			${WAYLAND_CLIENT_LIBRARIES}
+			${WAYLAND_CURSOR_LIBRARIES}
 		)
 	endif()
 

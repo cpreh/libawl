@@ -102,11 +102,14 @@ awl::backends::linux::fd::epoll::set::epoll(
 	);
 
 	if(
-		ret == -1
+		ret
+		==
+		-1
 	)
-		throw awl::exception(
-			FCPPT_TEXT("epoll_wait failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("epoll_wait failed!")
+			};
 
 	ready_fds_.clear();
 
@@ -132,7 +135,8 @@ awl::backends::linux::fd::epoll::set::epoll(
 
 		if(
 			event.events
-			& EPOLLIN
+			&
+			EPOLLIN
 		)
 			ready_fds_.push_back(
 				awl::backends::linux::fd::object(

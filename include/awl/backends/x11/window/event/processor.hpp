@@ -35,7 +35,6 @@ protected:
 	processor();
 public:
 	AWL_DETAIL_SYMBOL
-	virtual
 	~processor()
 	override;
 

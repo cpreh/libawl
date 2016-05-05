@@ -51,6 +51,7 @@ awl::backends::x11::cursor::convert_predefined(
 				XC_icon
 			);
 	case awl::cursor::type::invisible:
+		// TODO: Better typing
 		break;
 	}
 
