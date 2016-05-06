@@ -609,6 +609,7 @@ set(
 	src/backends/windows/window/event/wnd_proc.cpp
 	src/backends/windows/window/get_client_rect.cpp
 	src/backends/windows/window/get_rect.cpp
+	src/backends/windows/window/has_focus.cpp
 	src/backends/windows/window/holder.cpp
 	src/backends/windows/window/object.cpp
 	src/backends/windows/window/original_object.cpp
@@ -709,6 +710,7 @@ set(
 	include/awl/backends/windows/window/event/wnd_proc.hpp
 	include/awl/backends/windows/window/get_client_rect.hpp
 	include/awl/backends/windows/window/get_rect.hpp
+	include/awl/backends/windows/window/has_focus.hpp
 	include/awl/backends/windows/window/holder.hpp
 	include/awl/backends/windows/window/object.hpp
 	include/awl/backends/windows/window/object_fwd.hpp
