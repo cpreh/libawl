@@ -5,14 +5,10 @@
 #include <awl/backends/x11/window/common_object.hpp>
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/window/dim.hpp>
-#include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
-#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
-#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
@@ -100,38 +96,5 @@ awl::backends::x11::window::common_object::size() const
 	return
 		fcppt::math::dim::to_unsigned(
 			this->rect().size()
-		);
-}
-
-bool
-awl::backends::x11::window::common_object::equal_to(
-	awl::window::object const &_other
-) const
-{
-	return
-		fcppt::optional::maybe(
-			fcppt::cast::try_dynamic<
-				awl::backends::x11::window::object const
-			>(
-				_other
-			),
-			[]
-			{
-				return
-					false;
-			},
-			[
-				this
-			](
-				fcppt::reference<
-					awl::backends::x11::window::object const
-				> const _casted_other
-			)
-			{
-				return
-					_casted_other.get().get()
-					==
-					this->get();
-			}
 		);
 }

@@ -10,7 +10,6 @@
 #include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
-#include <awl/window/optional_object_unique_ptr_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -53,11 +52,6 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::visual::object_unique_ptr
 	default_visual()
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::window::optional_object_unique_ptr
-	focus_window()
 	override;
 
 	AWL_DETAIL_SYMBOL

@@ -86,7 +86,6 @@ set(
 	src/visual/object.cpp
 	src/window/event/processor.cpp
 	src/window/event/resize.cpp
-	src/window/has_focus.cpp
 	src/window/object.cpp
 	src/window/parameters.cpp
 )
@@ -178,14 +177,11 @@ set(
 	include/awl/window/event/show_function.hpp
 	include/awl/window/event/show_fwd.hpp
 	include/awl/window/event/show_signal.hpp
-	include/awl/window/has_focus.hpp
 	include/awl/window/object.hpp
 	include/awl/window/object_fwd.hpp
 	include/awl/window/object_unique_ptr.hpp
 	include/awl/window/optional_dim.hpp
 	include/awl/window/optional_dim_fwd.hpp
-	include/awl/window/optional_object_unique_ptr.hpp
-	include/awl/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/window/optional_pos.hpp
 	include/awl/window/optional_pos_fwd.hpp
 	include/awl/window/parameters.hpp

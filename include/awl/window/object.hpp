@@ -36,12 +36,6 @@ public:
 	rect() const = 0;
 
 	virtual
-	bool
-	equal_to(
-		awl::window::object const &
-	) const = 0;
-
-	virtual
 	awl::visual::object const &
 	visual() const = 0;
 
