@@ -11,17 +11,13 @@
 #include <awl/window/object.hpp>
 #include <awl/window/rect.hpp>
 #include <awl/window/unit.hpp>
-#include <fcppt/const.hpp>
-#include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
-#include <fcppt/cast/try_dynamic.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
 
@@ -140,35 +136,4 @@ awl::backends::windows::window::common_object::show()
 			)
 		}
 	);
-}
-
-bool
-awl::backends::windows::window::common_object::equal_to(
-	awl::window::object const &_other
-) const
-{
-	return
-		fcppt::optional::maybe(
-			fcppt::cast::try_dynamic<
-				awl::backends::windows::window::object const
-			>(
-				_other
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				this
-			](
-				fcppt::reference<
-					awl::backends::windows::window::object const
-				> const _casted_other
-			)
-			{
-				return
-					_casted_other.get().hwnd()
-					==
-					this->hwnd();
-			}
-		);
 }

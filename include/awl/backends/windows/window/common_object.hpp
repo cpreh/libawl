@@ -5,7 +5,6 @@
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/dim_fwd.hpp>
-#include <awl/window/object_fwd.hpp>
 #include <awl/window/rect_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -47,13 +46,6 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::window::rect
 	rect() const
-	override;
-
-	AWL_DETAIL_SYMBOL
-	bool
-	equal_to(
-		awl::window::object const &
-	) const
 	override;
 };
 

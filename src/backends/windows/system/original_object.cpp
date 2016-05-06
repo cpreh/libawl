@@ -6,7 +6,6 @@
 #include <awl/backends/windows/system/original_object.hpp>
 #include <awl/backends/windows/system/event/original_processor.hpp>
 #include <awl/backends/windows/visual/null_object.hpp>
-#include <awl/backends/windows/window/object_unique_ptr.hpp>
 #include <awl/backends/windows/window/original_object.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/visual/object.hpp>
@@ -21,10 +20,8 @@
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
-#include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -114,28 +111,6 @@ awl::backends::windows::system::original_object::default_visual()
 			fcppt::make_unique_ptr<
 				awl::backends::windows::visual::null_object
 			>()
-		);
-}
-
-awl::window::optional_object_unique_ptr
-awl::backends::windows::system::original_object::focus_window()
-{
-	return
-		fcppt::optional::map(
-			awl::backends::windows::get_focus(),
-			[](
-				awl::backends::windows::window::object_unique_ptr &&_focus
-			)
-			{
-				return
-					fcppt::unique_ptr_to_base<
-						awl::window::object
-					>(
-						std::move(
-							_focus
-						)
-					);
-			}
 		);
 }
 
