@@ -190,15 +190,7 @@ set(
 	include/awl/window/unit.hpp
 )
 
-# We can use either X11 or plain windows or Apple
 if(
-	APPLE
-)
-	set(
-		AWL_COCOA_BACKEND
-		TRUE
-	)
-elseif(
 	WIN32
 )
 	set(
@@ -282,38 +274,6 @@ fcppt_generate_symbol_header(
 
 include_directories(
 	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include
-)
-
-set(
-	AWL_COCOA_SRC_FILES
-	src/backends/cocoa/event/create_processor.mm
-	src/backends/cocoa/event/processor.mm
-	src/backends/cocoa/from_fcppt_string.mm
-	src/backends/cocoa/system/create.mm
-	src/backends/cocoa/system/event/create_processor.mm
-	src/backends/cocoa/system/event/processor.mm
-	src/backends/cocoa/system/object.mm
-	src/backends/cocoa/window/event/AWLWindowDelegate.mm
-	src/backends/cocoa/window/event/create_processor.mm
-	src/backends/cocoa/window/event/processor.mm
-	src/backends/cocoa/window/instance.mm
-)
-
-set(
-	AWL_COCOA_INCLUDE_FILES
-	include/awl/backends/cocoa/system/create.hpp
-	include/awl/backends/cocoa/system/event/create_processor.hpp
-	include/awl/backends/cocoa/system/event/optional_processor_ref.hpp
-	include/awl/backends/cocoa/system/event/processor.hpp
-	include/awl/backends/cocoa/system/event/processor_fwd.hpp
-	include/awl/backends/cocoa/system/object.hpp
-	include/awl/backends/cocoa/system/object_fwd.hpp
-	include/awl/backends/cocoa/window/event/AWLWindowDelegate.hpp
-	include/awl/backends/cocoa/window/event/create_processor.hpp
-	include/awl/backends/cocoa/window/event/processor.hpp
-	include/awl/backends/cocoa/window/event/processor_fwd.hpp
-	include/awl/backends/cocoa/window/object.hpp
-	include/awl/backends/cocoa/window/object_fwd.hpp
 )
 
 set(
@@ -736,24 +696,6 @@ set(
 )
 
 if(
-	AWL_COCOA_BACKEND
-)
-	list(
-		APPEND
-		AWL_INCLUDE_FILES
-		${AWL_COCOA_INCLUDE_FILES}
-	)
-
-	list(
-		APPEND
-		AWL_SRC_FILES
-		${AWL_COCOA_SRC_FILES}
-	)
-
-	add_definitions(-fobjc-arc)
-endif()
-
-if(
 	AWL_X11_BACKEND
 )
 	list(
@@ -927,16 +869,6 @@ function(
 			${TARGETNAME}
 			PRIVATE
 			${fcppt_filesystem_TARGET}
-		)
-	endif()
-
-	if(
-		AWL_COCOA_BACKEND
-	)
-		target_link_libraries(
-			${TARGETNAME}
-			PRIVATE
-			"-framework Cocoa"
 		)
 	endif()
 

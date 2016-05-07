@@ -31,18 +31,6 @@ update_main \
 	src/visual \
 	src/window
 
-# Cocoa begin
-update_main \
-	AWL_COCOA_INCLUDE_FILES \
-	include/awl/backends/cocoa/window \
-	include/awl/backends/cocoa/system
-
-update_main \
-	AWL_COCOA_SRC_FILES \
-	-e '.*\.(mm|cpp)?' \
-	src/backends/cocoa
-# Cocoa end
-
 # X11 begin
 update_main \
 	AWL_X11_INCLUDE_FILES \

@@ -6,8 +6,6 @@
 #include <awl/backends/x11/system/original_object.hpp>
 #elif defined(AWL_WINDOWS_BACKEND)
 #include <awl/backends/windows/system/original_object.hpp>
-#elif defined(AWL_COCOA_BACKEND)
-#include <awl/backends/cocoa/system/create.hpp>
 #else
 #error "Don't know how to create a system object"
 #endif
@@ -30,8 +28,6 @@ awl::system::create()
 			fcppt::make_unique_ptr<
 				awl::backends::windows::system::original_object
 			>()
-#elif defined(AWL_COCOA_BACKEND)
-			awl::backends::cocoa::system::create()
 #else
 #error "Don't know how to create a system object"
 #endif
