@@ -17,7 +17,6 @@
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
-#include <fcppt/math/dim/to_unsigned.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
 
@@ -29,15 +28,6 @@ awl::backends::windows::window::common_object::common_object()
 
 awl::backends::windows::window::common_object::~common_object()
 {
-}
-
-awl::window::dim
-awl::backends::windows::window::common_object::size() const
-{
-	return
-		fcppt::math::dim::to_unsigned(
-			this->rect().size()
-		);
 }
 
 awl::window::rect

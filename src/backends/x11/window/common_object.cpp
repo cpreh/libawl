@@ -4,11 +4,9 @@
 #include <awl/backends/x11/sync.hpp>
 #include <awl/backends/x11/window/common_object.hpp>
 #include <awl/backends/x11/window/object.hpp>
-#include <awl/window/dim.hpp>
 #include <awl/window/rect.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
-#include <fcppt/math/dim/to_unsigned.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
@@ -87,14 +85,5 @@ awl::backends::x11::window::common_object::rect() const
 					height_return
 				)
 			)
-		);
-}
-
-awl::window::dim
-awl::backends::x11::window::common_object::size() const
-{
-	return
-		fcppt::math::dim::to_unsigned(
-			this->rect().size()
 		);
 }

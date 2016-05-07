@@ -4,7 +4,6 @@
 #include <awl/class_symbol.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/window/dim_fwd.hpp>
 #include <awl/window/rect_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -36,11 +35,6 @@ public:
 	AWL_DETAIL_SYMBOL
 	void
 	show()
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::window::dim
-	size() const
 	override;
 
 	AWL_DETAIL_SYMBOL

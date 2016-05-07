@@ -27,9 +27,9 @@ public:
 	void
 	show() = 0;
 
-	virtual
+	AWL_DETAIL_SYMBOL
 	awl::window::dim
-	size() const = 0;
+	size() const;
 
 	virtual
 	awl::window::rect

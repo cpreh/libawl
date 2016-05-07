@@ -11,8 +11,7 @@ namespace window
 {
 
 typedef
-fcppt::math::dim::static_
-<
+fcppt::math::dim::static_<
 	awl::window::size,
 	2
 >
