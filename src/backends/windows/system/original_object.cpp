@@ -2,11 +2,17 @@
 #include <awl/backends/windows/default_wnd_proc.hpp>
 #include <awl/backends/windows/get_focus.hpp>
 #include <awl/backends/windows/wndclass_remove_callback.hpp>
+#include <awl/backends/windows/cursor/create_invisible.hpp>
+#include <awl/backends/windows/cursor/create_predefined.hpp>
+#include <awl/backends/windows/cursor/object.hpp>
 #include <awl/backends/windows/system/object.hpp>
 #include <awl/backends/windows/system/original_object.hpp>
 #include <awl/backends/windows/system/event/original_processor.hpp>
 #include <awl/backends/windows/visual/null_object.hpp>
 #include <awl/backends/windows/window/original_object.hpp>
+#include <awl/cursor/object.hpp>
+#include <awl/cursor/object_unique_ptr.hpp>
+#include <awl/cursor/type.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
@@ -20,6 +26,7 @@
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
+#include <fcppt/optional/from.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -50,12 +57,22 @@ awl::backends::windows::system::original_object::create_window(
 	awl::window::parameters const &_param
 )
 {
+	fcppt::string const class_name{
+		fcppt::optional::from(
+			_param.class_name(),
+			[]{
+				return
+					fcppt::string{};
+			}
+		)
+	};
+
 	fcppt::container::get_or_insert_result<
 		wndclass_map::mapped_type &
 	> const result(
 		fcppt::container::get_or_insert_with_result(
 			wndclasses_,
-			_param.class_name(),
+			class_name,
 			[](
 				fcppt::string const &_class_name
 			)
@@ -87,7 +104,7 @@ awl::backends::windows::system::original_object::create_window(
 					std::bind(
 						&awl::backends::windows::system::original_object::unregister_wndclass,
 						this,
-						_param.class_name()
+						class_name
 					)
 				}
 			)
@@ -111,6 +128,27 @@ awl::backends::windows::system::original_object::default_visual()
 			fcppt::make_unique_ptr<
 				awl::backends::windows::visual::null_object
 			>()
+		);
+}
+
+awl::cursor::object_unique_ptr
+awl::backends::windows::system::original_object::create_cursor(
+	awl::cursor::type const _type
+)
+{
+	return
+		fcppt::unique_ptr_to_base<
+			awl::cursor::object
+		>(
+			_type
+			==
+			awl::cursor::type::invisible
+			?
+				awl::backends::windows::cursor::create_invisible()
+			:
+				awl::backends::windows::cursor::create_predefined(
+					_type
+				)
 		);
 }
 

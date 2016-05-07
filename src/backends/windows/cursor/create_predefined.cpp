@@ -4,14 +4,14 @@
 #include <awl/backends/windows/cursor/object.hpp>
 #include <awl/backends/windows/cursor/object_unique_ptr.hpp>
 #include <awl/backends/windows/cursor/shared.hpp>
-#include <awl/cursor/predefined.hpp>
+#include <awl/cursor/type.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
 
 awl::backends::windows::cursor::object_unique_ptr
 awl::backends::windows::cursor::create_predefined(
-	awl::cursor::predefined const _type
+	awl::cursor::type const _type
 )
 {
 	return

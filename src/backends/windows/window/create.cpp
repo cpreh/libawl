@@ -6,6 +6,7 @@
 #include <awl/backends/windows/window/create.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 HWND
@@ -28,7 +29,22 @@ awl::backends::windows::window::create(
 	HWND const ret(
 		CreateWindow(
 			_wndclass.name().c_str(),
-			_param.title().c_str(),
+			fcppt::optional::maybe(
+				_param.title(),
+				[]()
+				-> LPCTSTR
+				{
+					return
+						nullptr;
+				},
+				[](
+					fcppt::string const &_title
+				)
+				{
+					return
+						_title.c_str();
+				}
+			),
 			window_flags,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
