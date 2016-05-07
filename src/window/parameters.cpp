@@ -5,6 +5,8 @@
 #include <awl/window/optional_pos.hpp>
 #include <awl/window/parameters.hpp>
 #include <awl/window/pos.hpp>
+#include <fcppt/make_cref.hpp>
+#include <fcppt/optional_string.hpp>
 #include <fcppt/string.hpp>
 
 
@@ -17,9 +19,6 @@ awl::window::parameters::parameters(
 	),
 	position_(),
 	size_(),
-	exact_size_hint_(),
-	minimum_size_hint_(),
-	maximum_size_hint_(),
 	title_(),
 	class_name_(),
 	cursor_()
@@ -55,54 +54,14 @@ awl::window::parameters::size(
 }
 
 awl::window::parameters &
-awl::window::parameters::exact_size_hint(
-	awl::window::dim const &_exact_size_hint
-)
-{
-	exact_size_hint_ =
-		awl::window::optional_dim(
-			_exact_size_hint
-		);
-
-	return
-		*this;
-}
-
-awl::window::parameters &
-awl::window::parameters::minimum_size_hint(
-	awl::window::dim const &_minimum_size_hint
-)
-{
-	minimum_size_hint_ =
-		awl::window::optional_dim(
-			_minimum_size_hint
-		);
-
-	return
-		*this;
-}
-
-awl::window::parameters &
-awl::window::parameters::maximum_size_hint(
-	awl::window::dim const &_maximum_size_hint
-)
-{
-	maximum_size_hint_ =
-		awl::window::optional_dim(
-			_maximum_size_hint
-		);
-
-	return
-		*this;
-}
-
-awl::window::parameters &
 awl::window::parameters::title(
 	fcppt::string const &_title
 )
 {
 	title_ =
-		_title;
+		fcppt::optional_string{
+			_title
+		};
 
 	return
 		*this;
@@ -114,7 +73,9 @@ awl::window::parameters::class_name(
 )
 {
 	class_name_ =
-		_class_name;
+		fcppt::optional_string{
+			_class_name
+		};
 
 	return
 		*this;
@@ -122,11 +83,15 @@ awl::window::parameters::class_name(
 
 awl::window::parameters &
 awl::window::parameters::cursor(
-	awl::cursor::const_optional_object_ref const &_cursor
+	awl::cursor::object const &_cursor
 )
 {
 	cursor_ =
-		_cursor;
+		awl::cursor::const_optional_object_ref{
+			fcppt::make_cref(
+				_cursor
+			)
+		};
 
 	return
 		*this;
@@ -153,35 +118,14 @@ awl::window::parameters::size() const
 		size_;
 }
 
-awl::window::optional_dim
-awl::window::parameters::exact_size_hint() const
-{
-	return
-		exact_size_hint_;
-}
-
-awl::window::optional_dim
-awl::window::parameters::minimum_size_hint() const
-{
-	return
-		minimum_size_hint_;
-}
-
-awl::window::optional_dim
-awl::window::parameters::maximum_size_hint() const
-{
-	return
-		maximum_size_hint_;
-}
-
-fcppt::string const &
+fcppt::optional_string const &
 awl::window::parameters::title() const
 {
 	return
 		title_;
 }
 
-fcppt::string const &
+fcppt::optional_string const &
 awl::window::parameters::class_name() const
 {
 	return

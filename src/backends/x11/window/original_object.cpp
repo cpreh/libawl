@@ -7,15 +7,19 @@
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <awl/backends/x11/window/const_optional_class_hint_ref.hpp>
 #include <awl/backends/x11/window/create.hpp>
+#include <awl/backends/x11/window/original_class_hint.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
-#include <awl/backends/x11/window/root.hpp>
-#include <awl/backends/x11/window/transient_for_hint.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/string.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/optional/apply.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/static_cast.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
@@ -47,25 +51,34 @@ awl::backends::x11::window::original_object::original_object(
 		visual_
 	),
 	hints_(),
-	size_hints_(
-		_params.exact_size_hint(),
-		_params.minimum_size_hint(),
-		_params.maximum_size_hint()
-	),
-	class_hint_(
-		awl::backends::x11::window::class_hint{
-			awl::backends::x11::window::class_hint::res_name_type{
-				fcppt::to_std_string(
-					_params.title()
-				)
+	class_hint_{
+		fcppt::optional::apply(
+			[](
+				fcppt::string const &_title,
+				fcppt::string const &_class_name
+			){
+				return
+					fcppt::make_unique_ptr<
+						awl::backends::x11::window::original_class_hint
+					>(
+						awl::backends::x11::window::class_hint{
+							awl::backends::x11::window::class_hint::res_name_type{
+								fcppt::to_std_string(
+									_title
+								)
+							},
+							awl::backends::x11::window::class_hint::res_class_type{
+								fcppt::to_std_string(
+									_class_name
+								)
+							}
+						}
+					);
 			},
-			awl::backends::x11::window::class_hint::res_class_type{
-				fcppt::to_std_string(
-					_params.class_name()
-				)
-			}
-		}
-	),
+			_params.title(),
+			_params.class_name()
+		)
+	},
 	window_(
 		display_,
 		awl::backends::x11::window::create(
@@ -90,39 +103,41 @@ awl::backends::x11::window::original_object::original_object(
 		hints_.get()
 	);
 
-	// always returns 1
-	::XSetWMNormalHints(
-		display_.get(),
-		window_.get(),
-		size_hints_.get()
+	fcppt::optional::maybe_void(
+		class_hint_,
+		[
+			this
+		](
+			original_class_hint_unique_ptr const &_class_hint
+		)
+		{
+			// always returns 1
+			::XSetClassHint(
+				display_.get(),
+				window_.get(),
+				_class_hint->get()
+			);
+		}
 	);
 
-	// always returns 1
-	::XSetClassHint(
-		display_.get(),
-		window_.get(),
-		class_hint_.get()
+	fcppt::optional::maybe_void(
+		_params.title(),
+		[
+			this
+		](
+			fcppt::string const &_title
+		)
+		{
+			// always returns 1
+			::XStoreName(
+				display_.get(),
+				window_.get(),
+				fcppt::to_std_string(
+					_title
+				).c_str()
+			);
+		}
 	);
-
-	// always returns 1
-	::XStoreName(
-		display_.get(),
-		window_.get(),
-		fcppt::to_std_string(
-			_params.title()
-		).c_str()
-	);
-
-	if(
-		_params.exact_size_hint().has_value()
-	)
-		awl::backends::x11::window::transient_for_hint(
-			*this,
-			*awl::backends::x11::window::root(
-				display_,
-				screen_
-			)
-		);
 }
 
 awl::backends::x11::window::original_object::~original_object()
@@ -174,9 +189,16 @@ awl::backends::x11::window::const_optional_class_hint_ref
 awl::backends::x11::window::original_object::class_hint() const
 {
 	return
-		awl::backends::x11::window::const_optional_class_hint_ref{
-			fcppt::make_cref(
-				class_hint_.hint()
+		fcppt::optional::map(
+			class_hint_,
+			[](
+				original_class_hint_unique_ptr const &_class_hint
 			)
-		};
+			{
+				return
+					fcppt::make_cref(
+						_class_hint->hint()
+					);
+			}
+		);
 }

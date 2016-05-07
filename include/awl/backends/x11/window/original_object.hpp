@@ -11,11 +11,12 @@
 #include <awl/backends/x11/window/hints.hpp>
 #include <awl/backends/x11/window/holder.hpp>
 #include <awl/backends/x11/window/original_class_hint.hpp>
-#include <awl/backends/x11/window/size_hints.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/optional/object_decl.hpp>
 
 
 namespace awl
@@ -91,9 +92,19 @@ private:
 
 	awl::backends::x11::window::hints const hints_;
 
-	awl::backends::x11::window::size_hints const size_hints_;
+	typedef
+	fcppt::unique_ptr<
+		awl::backends::x11::window::original_class_hint
+	>
+	original_class_hint_unique_ptr;
 
-	awl::backends::x11::window::original_class_hint const class_hint_;
+	typedef
+	fcppt::optional::object<
+		original_class_hint_unique_ptr
+	>
+	optional_original_class_hint_unique_ptr;
+
+	optional_original_class_hint_unique_ptr const class_hint_;
 
 	awl::backends::x11::window::holder window_;
 };

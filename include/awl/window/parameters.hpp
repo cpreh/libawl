@@ -10,6 +10,7 @@
 #include <awl/window/parameters_fwd.hpp>
 #include <awl/window/pos_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
+#include <fcppt/optional_string.hpp>
 #include <fcppt/string.hpp>
 
 
@@ -44,24 +45,6 @@ public:
 
 	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
-	exact_size_hint(
-		awl::window::dim const &
-	);
-
-	AWL_DETAIL_SYMBOL
-	awl::window::parameters &
-	minimum_size_hint(
-		awl::window::dim const &
-	);
-
-	AWL_DETAIL_SYMBOL
-	awl::window::parameters &
-	maximum_size_hint(
-		awl::window::dim const &
-	);
-
-	AWL_DETAIL_SYMBOL
-	awl::window::parameters &
 	title(
 		fcppt::string const &
 	);
@@ -75,7 +58,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::window::parameters &
 	cursor(
-		awl::cursor::const_optional_object_ref const &
+		awl::cursor::object const &
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -91,23 +74,11 @@ public:
 	size() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::optional_dim
-	exact_size_hint() const;
-
-	AWL_DETAIL_SYMBOL
-	awl::window::optional_dim
-	minimum_size_hint() const;
-
-	AWL_DETAIL_SYMBOL
-	awl::window::optional_dim
-	maximum_size_hint() const;
-
-	AWL_DETAIL_SYMBOL
-	fcppt::string const &
+	fcppt::optional_string const &
 	title() const;
 
 	AWL_DETAIL_SYMBOL
-	fcppt::string const &
+	fcppt::optional_string const &
 	class_name() const;
 
 	AWL_DETAIL_SYMBOL
@@ -120,15 +91,9 @@ private:
 
 	awl::window::optional_dim size_;
 
-	awl::window::optional_dim exact_size_hint_;
+	fcppt::optional_string title_;
 
-	awl::window::optional_dim minimum_size_hint_;
-
-	awl::window::optional_dim maximum_size_hint_;
-
-	fcppt::string title_;
-
-	fcppt::string class_name_;
+	fcppt::optional_string class_name_;
 
 	awl::cursor::const_optional_object_ref cursor_;
 };
