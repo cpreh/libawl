@@ -1,6 +1,6 @@
 #include <awl/backends/x11/cursor/convert_predefined.hpp>
 #include <awl/backends/x11/cursor/shape.hpp>
-#include <awl/cursor/predefined.hpp>
+#include <awl/cursor/type.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
@@ -11,14 +11,14 @@
 
 awl::backends::x11::cursor::shape
 awl::backends::x11::cursor::convert_predefined(
-	awl::cursor::predefined const _type
+	awl::cursor::type const _type
 )
 {
 	switch(
 		_type
 	)
 	{
-	case awl::cursor::predefined::arrow:
+	case awl::cursor::type::arrow:
 		return
 			fcppt::strong_typedef_construct_cast<
 				awl::backends::x11::cursor::shape,
@@ -26,7 +26,7 @@ awl::backends::x11::cursor::convert_predefined(
 			>(
 				XC_left_ptr
 			);
-	case awl::cursor::predefined::cross:
+	case awl::cursor::type::cross:
 		return
 			fcppt::strong_typedef_construct_cast<
 				awl::backends::x11::cursor::shape,
@@ -34,7 +34,7 @@ awl::backends::x11::cursor::convert_predefined(
 			>(
 				XC_cross
 			);
-	case awl::cursor::predefined::hand:
+	case awl::cursor::type::hand:
 		return
 			fcppt::strong_typedef_construct_cast<
 				awl::backends::x11::cursor::shape,
@@ -42,7 +42,7 @@ awl::backends::x11::cursor::convert_predefined(
 			>(
 				XC_hand1
 			);
-	case awl::cursor::predefined::icon:
+	case awl::cursor::type::icon:
 		return
 			fcppt::strong_typedef_construct_cast<
 				awl::backends::x11::cursor::shape,
@@ -50,6 +50,8 @@ awl::backends::x11::cursor::convert_predefined(
 			>(
 				XC_icon
 			);
+	case awl::cursor::type::invisible:
+		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

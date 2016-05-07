@@ -59,8 +59,6 @@ find_package(
 set(
 	AWL_BASE_SRC_FILES
 	src/create_log.cpp
-	src/cursor/create_invisible.cpp
-	src/cursor/create_predefined.cpp
 	src/cursor/object.cpp
 	src/exception.cpp
 	src/log.cpp
@@ -96,16 +94,14 @@ set(
 	include/awl/create_log.hpp
 	include/awl/cursor/const_optional_object_ref.hpp
 	include/awl/cursor/const_optional_object_ref_fwd.hpp
-	include/awl/cursor/create_invisible.hpp
-	include/awl/cursor/create_predefined.hpp
 	include/awl/cursor/hotspot.hpp
 	include/awl/cursor/hotspot_fwd.hpp
 	include/awl/cursor/object.hpp
 	include/awl/cursor/object_fwd.hpp
 	include/awl/cursor/object_unique_ptr.hpp
-	include/awl/cursor/predefined.hpp
-	include/awl/cursor/predefined_fwd.hpp
 	include/awl/cursor/size.hpp
+	include/awl/cursor/type.hpp
+	include/awl/cursor/type_fwd.hpp
 	include/awl/exception.hpp
 	include/awl/log.hpp
 	include/awl/log_context.hpp

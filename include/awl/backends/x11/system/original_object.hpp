@@ -5,6 +5,8 @@
 #include <awl/backends/x11/original_display.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/system/object.hpp>
+#include <awl/cursor/object_unique_ptr.hpp>
+#include <awl/cursor/type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/system/event/processor_unique_ptr.hpp>
@@ -52,6 +54,13 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::visual::object_unique_ptr
 	default_visual()
+	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::cursor::object_unique_ptr
+	create_cursor(
+		awl::cursor::type
+	)
 	override;
 
 	AWL_DETAIL_SYMBOL

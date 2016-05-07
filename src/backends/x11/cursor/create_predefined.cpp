@@ -5,14 +5,14 @@
 #include <awl/backends/x11/cursor/load_font.hpp>
 #include <awl/backends/x11/cursor/object.hpp>
 #include <awl/backends/x11/cursor/object_unique_ptr.hpp>
-#include <awl/cursor/predefined.hpp>
+#include <awl/cursor/type.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 
 
 awl::backends::x11::cursor::object_unique_ptr
 awl::backends::x11::cursor::create_predefined(
 	awl::backends::x11::display const &_display,
-	awl::cursor::predefined const _type
+	awl::cursor::type const _type
 )
 {
 	return

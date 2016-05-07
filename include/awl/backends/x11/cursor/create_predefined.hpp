@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/cursor/object_unique_ptr.hpp>
-#include <awl/cursor/predefined_fwd.hpp>
+#include <awl/cursor/type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
 
@@ -20,7 +20,7 @@ AWL_DETAIL_SYMBOL
 awl::backends::x11::cursor::object_unique_ptr
 create_predefined(
 	awl::backends::x11::display const &,
-	awl::cursor::predefined
+	awl::cursor::type
 );
 
 }
