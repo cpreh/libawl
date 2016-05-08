@@ -285,7 +285,6 @@ set(
 	src/backends/x11/display_fd.cpp
 	src/backends/x11/flush.cpp
 	src/backends/x11/free.cpp
-	src/backends/x11/get_input_focus.cpp
 	src/backends/x11/intern_atom.cpp
 	src/backends/x11/log.cpp
 	src/backends/x11/original_display.cpp
@@ -366,7 +365,6 @@ set(
 	include/awl/backends/x11/display_fwd.hpp
 	include/awl/backends/x11/flush.hpp
 	include/awl/backends/x11/free.hpp
-	include/awl/backends/x11/get_input_focus.hpp
 	include/awl/backends/x11/intern_atom.hpp
 	include/awl/backends/x11/log.hpp
 	include/awl/backends/x11/original_display.hpp
