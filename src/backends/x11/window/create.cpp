@@ -7,8 +7,6 @@
 #include <awl/backends/x11/window/create.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/optional_dim.hpp>
-#include <awl/window/optional_pos.hpp>
-#include <awl/window/pos.hpp>
 #include <awl/window/size.hpp>
 #include <awl/window/unit.hpp>
 #include <fcppt/const.hpp>
@@ -23,7 +21,6 @@
 
 Window
 awl::backends::x11::window::create(
-	awl::window::optional_pos const &_position,
 	awl::window::optional_dim const &_dim,
 	awl::backends::x11::display &_display,
 	awl::backends::x11::screen const _screen,
@@ -66,12 +63,10 @@ awl::backends::x11::window::create(
 	);
 
 	auto const position_default(
-		fcppt::const_(
-			fcppt::literal<
-				awl::window::unit
-			>(
-				0
-			)
+		fcppt::literal<
+			awl::window::unit
+		>(
+			0
 		)
 	);
 
@@ -93,28 +88,8 @@ awl::backends::x11::window::create(
 				_display.get(),
 				_screen.get()
 			),
-			fcppt::optional::maybe(
-				_position,
-				position_default,
-				[](
-					awl::window::pos const _pos
-				)
-				{
-					return
-						_pos.x();
-				}
-			),
-			fcppt::optional::maybe(
-				_position,
-				position_default,
-				[](
-					awl::window::pos const _pos
-				)
-				{
-					return
-						_pos.y();
-				}
-			),
+			position_default,
+			position_default,
 			fcppt::optional::maybe(
 				_dim,
 				dim_default,

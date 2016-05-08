@@ -178,14 +178,8 @@ set(
 	include/awl/window/object_unique_ptr.hpp
 	include/awl/window/optional_dim.hpp
 	include/awl/window/optional_dim_fwd.hpp
-	include/awl/window/optional_pos.hpp
-	include/awl/window/optional_pos_fwd.hpp
 	include/awl/window/parameters.hpp
 	include/awl/window/parameters_fwd.hpp
-	include/awl/window/pos.hpp
-	include/awl/window/pos_fwd.hpp
-	include/awl/window/rect.hpp
-	include/awl/window/rect_fwd.hpp
 	include/awl/window/size.hpp
 	include/awl/window/unit.hpp
 )
@@ -457,6 +451,8 @@ set(
 	include/awl/backends/x11/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/backends/x11/window/original_class_hint.hpp
 	include/awl/backends/x11/window/original_object.hpp
+	include/awl/backends/x11/window/rect.hpp
+	include/awl/backends/x11/window/rect_fwd.hpp
 	include/awl/backends/x11/window/root.hpp
 	include/awl/backends/x11/window/set_wm_protocols.hpp
 	include/awl/backends/x11/window/visual.hpp

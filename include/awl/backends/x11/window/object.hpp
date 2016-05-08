@@ -6,6 +6,7 @@
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
+#include <awl/backends/x11/window/rect_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -58,6 +59,10 @@ public:
 	awl::backends::x11::visual::object const &
 	visual() const
 	override = 0;
+
+	virtual
+	awl::backends::x11::window::rect
+	rect() const = 0;
 
 	virtual
 	Window

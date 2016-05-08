@@ -9,7 +9,6 @@
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/object.hpp>
-#include <awl/window/rect.hpp>
 #include <awl/window/unit.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
@@ -30,8 +29,8 @@ awl::backends::windows::window::common_object::~common_object()
 {
 }
 
-awl::window::rect
-awl::backends::windows::window::common_object::rect() const
+awl::window::dim
+awl::backends::windows::window::common_object::size() const
 {
 	RECT const ret(
 		fcppt::optional::to_exception(
@@ -48,30 +47,16 @@ awl::backends::windows::window::common_object::rect() const
 	);
 
 	return
-		awl::window::rect(
-			awl::window::rect::vector(
-				fcppt::cast::size<
-					awl::window::unit
-				>(
-					ret.left
-				),
-				fcppt::cast::size<
-					awl::window::unit
-				>(
-					ret.top
-				)
+		awl::window::dim(
+			fcppt::cast::size<
+				awl::window::unit
+			>(
+				ret.right - ret.left
 			),
-			awl::window::rect::dim(
-				fcppt::cast::size<
-					awl::window::unit
-				>(
-					ret.right - ret.left
-				),
-				fcppt::cast::size<
-					awl::window::unit
-				>(
-					ret.bottom - ret.top
-				)
+			fcppt::cast::size<
+				awl::window::unit
+			>(
+				ret.bottom - ret.top
 			)
 		);
 }

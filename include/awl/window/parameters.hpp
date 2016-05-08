@@ -6,9 +6,7 @@
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/optional_dim.hpp>
-#include <awl/window/optional_pos.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <awl/window/pos_fwd.hpp>
 #include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_string.hpp>
 #include <fcppt/string.hpp>
@@ -29,12 +27,6 @@ public:
 	explicit
 	parameters(
 		awl::visual::object const &
-	);
-
-	AWL_DETAIL_SYMBOL
-	awl::window::parameters &
-	position(
-		awl::window::pos const &
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -66,10 +58,6 @@ public:
 	visual() const;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::optional_pos
-	position() const;
-
-	AWL_DETAIL_SYMBOL
 	awl::window::optional_dim
 	size() const;
 
@@ -86,8 +74,6 @@ public:
 	cursor() const;
 private:
 	awl::visual::object const &visual_;
-
-	awl::window::optional_pos position_;
 
 	awl::window::optional_dim size_;
 

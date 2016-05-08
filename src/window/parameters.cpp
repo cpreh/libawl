@@ -2,9 +2,7 @@
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/optional_dim.hpp>
-#include <awl/window/optional_pos.hpp>
 #include <awl/window/parameters.hpp>
-#include <awl/window/pos.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/optional_string.hpp>
 #include <fcppt/string.hpp>
@@ -17,26 +15,11 @@ awl::window::parameters::parameters(
 	visual_(
 		_visual
 	),
-	position_(),
 	size_(),
 	title_(),
 	class_name_(),
 	cursor_()
 {
-}
-
-awl::window::parameters &
-awl::window::parameters::position(
-	awl::window::pos const &_position
-)
-{
-	position_ =
-		awl::window::optional_pos(
-			_position
-		);
-
-	return
-		*this;
 }
 
 awl::window::parameters &
@@ -102,13 +85,6 @@ awl::window::parameters::visual() const
 {
 	return
 		visual_;
-}
-
-awl::window::optional_pos
-awl::window::parameters::position() const
-{
-	return
-		position_;
 }
 
 awl::window::optional_dim

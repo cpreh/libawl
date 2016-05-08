@@ -5,7 +5,6 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
-#include <awl/window/rect_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -27,13 +26,9 @@ public:
 	void
 	show() = 0;
 
-	AWL_DETAIL_SYMBOL
-	awl::window::dim
-	size() const;
-
 	virtual
-	awl::window::rect
-	rect() const = 0;
+	awl::window::dim
+	size() const = 0;
 
 	virtual
 	awl::visual::object const &

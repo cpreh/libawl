@@ -4,8 +4,9 @@
 #include <awl/class_symbol.hpp>
 #include <awl/backends/x11/window/class_hint_fwd.hpp>
 #include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/rect_fwd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/window/rect_fwd.hpp>
+#include <awl/window/dim_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -39,7 +40,12 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::rect
+	awl::window::dim
+	size() const
+	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::backends::x11::window::rect
 	rect() const
 	override;
 };

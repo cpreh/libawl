@@ -82,7 +82,6 @@ awl::backends::x11::window::original_object::original_object(
 	window_(
 		display_,
 		awl::backends::x11::window::create(
-			_params.position(),
 			_params.size(),
 			display_,
 			screen_,
