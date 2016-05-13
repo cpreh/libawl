@@ -136,7 +136,6 @@ set(
 	include/awl/system/create.hpp
 	include/awl/system/event/processor.hpp
 	include/awl/system/event/processor_fwd.hpp
-	include/awl/system/event/processor_unique_ptr.hpp
 	include/awl/system/object.hpp
 	include/awl/system/object_fwd.hpp
 	include/awl/system/object_unique_ptr.hpp
@@ -162,7 +161,6 @@ set(
 	include/awl/window/event/hide_signal.hpp
 	include/awl/window/event/processor.hpp
 	include/awl/window/event/processor_fwd.hpp
-	include/awl/window/event/processor_unique_ptr.hpp
 	include/awl/window/event/resize.hpp
 	include/awl/window/event/resize_callback.hpp
 	include/awl/window/event/resize_function.hpp
@@ -292,7 +290,6 @@ set(
 	src/backends/x11/pixmap/create_from_data.cpp
 	src/backends/x11/pixmap/holder.cpp
 	src/backends/x11/sync.cpp
-	src/backends/x11/system/event/create_window_processor.cpp
 	src/backends/x11/system/event/generic.cpp
 	src/backends/x11/system/event/map_key.cpp
 	src/backends/x11/system/event/next.cpp
@@ -312,17 +309,18 @@ set(
 	src/backends/x11/window/atoms.cpp
 	src/backends/x11/window/attributes.cpp
 	src/backends/x11/window/class_hint.cpp
-	src/backends/x11/window/common_object.cpp
 	src/backends/x11/window/create.cpp
 	src/backends/x11/window/event/change_mask.cpp
 	src/backends/x11/window/event/filter.cpp
 	src/backends/x11/window/event/object.cpp
 	src/backends/x11/window/event/original_processor.cpp
 	src/backends/x11/window/event/processor.cpp
+	src/backends/x11/window/event/scoped_processor.cpp
 	src/backends/x11/window/event/send.cpp
 	src/backends/x11/window/event/to_mask.cpp
 	src/backends/x11/window/event/wm_protocols.cpp
 	src/backends/x11/window/get_class_hint.cpp
+	src/backends/x11/window/get_geometry.cpp
 	src/backends/x11/window/hints.cpp
 	src/backends/x11/window/holder.cpp
 	src/backends/x11/window/object.cpp
@@ -380,7 +378,6 @@ set(
 	include/awl/backends/x11/screen.hpp
 	include/awl/backends/x11/sync.hpp
 	include/awl/backends/x11/system/event/callback.hpp
-	include/awl/backends/x11/system/event/create_window_processor.hpp
 	include/awl/backends/x11/system/event/function.hpp
 	include/awl/backends/x11/system/event/generic.hpp
 	include/awl/backends/x11/system/event/generic_fwd.hpp
@@ -390,6 +387,7 @@ set(
 	include/awl/backends/x11/system/event/object_fwd.hpp
 	include/awl/backends/x11/system/event/opcode.hpp
 	include/awl/backends/x11/system/event/original_processor.hpp
+	include/awl/backends/x11/system/event/original_processor_fwd.hpp
 	include/awl/backends/x11/system/event/pending.hpp
 	include/awl/backends/x11/system/event/processor.hpp
 	include/awl/backends/x11/system/event/processor_fwd.hpp
@@ -414,7 +412,6 @@ set(
 	include/awl/backends/x11/window/change_wm_protocols.hpp
 	include/awl/backends/x11/window/class_hint.hpp
 	include/awl/backends/x11/window/class_hint_fwd.hpp
-	include/awl/backends/x11/window/common_object.hpp
 	include/awl/backends/x11/window/const_optional_class_hint_ref.hpp
 	include/awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp
 	include/awl/backends/x11/window/create.hpp
@@ -432,12 +429,13 @@ set(
 	include/awl/backends/x11/window/event/processor.hpp
 	include/awl/backends/x11/window/event/processor_fwd.hpp
 	include/awl/backends/x11/window/event/processor_unique_ptr.hpp
+	include/awl/backends/x11/window/event/scoped_processor.hpp
 	include/awl/backends/x11/window/event/send.hpp
 	include/awl/backends/x11/window/event/to_mask.hpp
 	include/awl/backends/x11/window/event/type.hpp
-	include/awl/backends/x11/window/event/unregister_callback.hpp
 	include/awl/backends/x11/window/event/wm_protocols.hpp
 	include/awl/backends/x11/window/get_class_hint.hpp
+	include/awl/backends/x11/window/get_geometry.hpp
 	include/awl/backends/x11/window/hints.hpp
 	include/awl/backends/x11/window/holder.hpp
 	include/awl/backends/x11/window/object.hpp
@@ -449,6 +447,7 @@ set(
 	include/awl/backends/x11/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/backends/x11/window/original_class_hint.hpp
 	include/awl/backends/x11/window/original_object.hpp
+	include/awl/backends/x11/window/original_object_fwd.hpp
 	include/awl/backends/x11/window/rect.hpp
 	include/awl/backends/x11/window/rect_fwd.hpp
 	include/awl/backends/x11/window/root.hpp

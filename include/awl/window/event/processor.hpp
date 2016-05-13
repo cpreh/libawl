@@ -3,7 +3,6 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/window/object_fwd.hpp>
 #include <awl/window/event/close_callback.hpp>
 #include <awl/window/event/destroy_callback.hpp>
 #include <awl/window/event/hide_callback.hpp>
@@ -59,10 +58,6 @@ public:
 	show_callback(
 		awl::window::event::show_callback const &
 	) = 0;
-
-	virtual
-	awl::window::object &
-	window() const = 0;
 
 	AWL_DETAIL_SYMBOL
 	virtual

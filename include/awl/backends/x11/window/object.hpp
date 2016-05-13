@@ -8,7 +8,6 @@
 #include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
 #include <awl/backends/x11/window/rect_fwd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/window/object.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
@@ -25,8 +24,6 @@ namespace window
 {
 
 class AWL_CLASS_SYMBOL object
-:
-	public awl::window::object
 {
 	FCPPT_NONCOPYABLE(
 		object
@@ -36,12 +33,8 @@ protected:
 	object();
 public:
 	AWL_DETAIL_SYMBOL
-	~object()
-	override;
-
 	virtual
-	void
-	destroy() = 0;
+	~object() = 0;
 
 	virtual
 	bool
@@ -57,8 +50,7 @@ public:
 
 	virtual
 	awl::backends::x11::visual::object const &
-	visual() const
-	override = 0;
+	x11_visual() const = 0;
 
 	virtual
 	awl::backends::x11::window::rect

@@ -1,21 +1,32 @@
-#include <awl/config.hpp>
 #include <awl/backends/x11/colormap.hpp>
+#include <awl/backends/x11/discard.hpp>
 #include <awl/backends/x11/display.hpp>
 #include <awl/backends/x11/screen.hpp>
+#include <awl/backends/x11/sync.hpp>
 #include <awl/backends/x11/cursor/object.hpp>
+#include <awl/backends/x11/system/event/original_processor_fwd.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <awl/backends/x11/window/const_optional_class_hint_ref.hpp>
 #include <awl/backends/x11/window/create.hpp>
+#include <awl/backends/x11/window/get_geometry.hpp>
+#include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/original_class_hint.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
+#include <awl/backends/x11/window/rect.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
+#include <awl/backends/x11/window/event/original_processor.hpp>
+#include <awl/visual/object.hpp>
+#include <awl/window/dim.hpp>
+#include <awl/window/object.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/to_std_string.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/static_downcast.hpp>
+#include <fcppt/math/dim/to_unsigned.hpp>
 #include <fcppt/optional/apply.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -29,9 +40,12 @@
 awl::backends::x11::window::original_object::original_object(
 	awl::backends::x11::display &_display,
 	awl::backends::x11::screen const _screen,
+	awl::backends::x11::system::event::original_processor &_system_processor,
 	awl::window::parameters const &_params
 )
 :
+	awl::backends::x11::window::object(),
+	awl::window::object(),
 	display_(
 		_display
 	),
@@ -93,7 +107,23 @@ awl::backends::x11::window::original_object::original_object(
 				_params.cursor()
 			)
 		)
-	)
+	),
+	processor_{
+		fcppt::unique_ptr_to_base<
+			awl::backends::x11::window::event::processor
+		>(
+			fcppt::make_unique_ptr<
+				awl::backends::x11::window::event::original_processor
+			>(
+				*this
+			)
+		)
+	},
+	scoped_processor_{
+		_system_processor,
+		*this,
+		*processor_
+	}
 {
 	// always returns 1
 	::XSetWMHints(
@@ -144,9 +174,43 @@ awl::backends::x11::window::original_object::~original_object()
 }
 
 void
-awl::backends::x11::window::original_object::destroy()
+awl::backends::x11::window::original_object::show()
 {
-	window_.destroy();
+	// always returns 1
+	::XMapWindow(
+		this->display().get(),
+		this->get()
+	);
+
+	awl::backends::x11::sync(
+		this->display(),
+		awl::backends::x11::discard(
+			false
+		)
+	);
+}
+
+awl::window::dim
+awl::backends::x11::window::original_object::size() const
+{
+	return
+		fcppt::math::dim::to_unsigned(
+			this->rect().size()
+		);
+}
+
+awl::visual::object const &
+awl::backends::x11::window::original_object::visual() const
+{
+	return
+		this->x11_visual();
+}
+
+awl::window::event::processor &
+awl::backends::x11::window::original_object::processor()
+{
+	return
+		*processor_;
 }
 
 bool
@@ -171,10 +235,19 @@ awl::backends::x11::window::original_object::screen() const
 }
 
 awl::backends::x11::visual::object const &
-awl::backends::x11::window::original_object::visual() const
+awl::backends::x11::window::original_object::x11_visual() const
 {
 	return
 		visual_;
+}
+
+awl::backends::x11::window::rect
+awl::backends::x11::window::original_object::rect() const
+{
+	return
+		awl::backends::x11::window::get_geometry(
+			*this
+		);
 }
 
 Window
@@ -200,4 +273,10 @@ awl::backends::x11::window::original_object::class_hint() const
 					);
 			}
 		);
+}
+
+void
+awl::backends::x11::window::original_object::destroy()
+{
+	window_.destroy();
 }

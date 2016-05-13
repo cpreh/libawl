@@ -1,5 +1,5 @@
 #include <awl/backends/x11/intern_atom.hpp>
-#include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/original_object.hpp>
 #include <awl/backends/x11/window/event/atom_vector.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
 #include <awl/backends/x11/window/event/change_mask.hpp>
@@ -9,7 +9,6 @@
 #include <awl/backends/x11/window/event/original_processor.hpp>
 #include <awl/backends/x11/window/event/to_mask.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
-#include <awl/backends/x11/window/event/unregister_callback.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/event/close.hpp>
 #include <awl/window/event/close_callback.hpp>
@@ -39,16 +38,12 @@
 
 
 awl::backends::x11::window::event::original_processor::original_processor(
-	awl::backends::x11::window::object &_window,
-	awl::backends::x11::window::event::unregister_callback const &_unregister
+	awl::backends::x11::window::original_object &_window
 )
 :
 	window_(
 		_window
 	),
-	unregister_{
-		_unregister
-	},
 	signals_(),
 	mask_counts_(),
 	type_counts_(),
@@ -165,9 +160,6 @@ awl::backends::x11::window::event::original_processor::original_processor(
 
 awl::backends::x11::window::event::original_processor::~original_processor()
 {
-	unregister_(
-		*this
-	);
 }
 
 fcppt::signal::auto_connection
@@ -223,20 +215,6 @@ awl::backends::x11::window::event::original_processor::show_callback(
 		show_signal_.connect(
 			_callback
 		);
-}
-
-awl::window::object &
-awl::backends::x11::window::event::original_processor::window() const
-{
-	return
-		window_;
-}
-
-awl::backends::x11::window::object &
-awl::backends::x11::window::event::original_processor::x11_window() const
-{
-	return
-		window_;
 }
 
 fcppt::signal::auto_connection

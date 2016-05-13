@@ -1,14 +1,14 @@
-#include <awl/exception.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <awl/backends/x11/window/const_optional_class_hint_ref.hpp>
 #include <awl/backends/x11/window/get_class_hint.hpp>
+#include <awl/backends/x11/window/get_geometry.hpp>
+#include <awl/backends/x11/window/rect.hpp>
 #include <awl/backends/x11/window/visual.hpp>
 #include <awl/backends/x11/window/wrapped_object.hpp>
 #include <fcppt/make_cref.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
@@ -48,15 +48,6 @@ awl::backends::x11::window::wrapped_object::~wrapped_object()
 {
 }
 
-void
-awl::backends::x11::window::wrapped_object::destroy()
-{
-	throw
-		awl::exception{
-			FCPPT_TEXT("x11::window::wrapped_object::destroy called!")
-		};
-}
-
 bool
 awl::backends::x11::window::wrapped_object::destroyed() const
 {
@@ -79,10 +70,19 @@ awl::backends::x11::window::wrapped_object::screen() const
 }
 
 awl::backends::x11::visual::object const &
-awl::backends::x11::window::wrapped_object::visual() const
+awl::backends::x11::window::wrapped_object::x11_visual() const
 {
 	return
 		*visual_;
+}
+
+awl::backends::x11::window::rect
+awl::backends::x11::window::wrapped_object::rect() const
+{
+	return
+		awl::backends::x11::window::get_geometry(
+			*this
+		);
 }
 
 Window

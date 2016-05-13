@@ -5,6 +5,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
+#include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -33,6 +34,10 @@ public:
 	virtual
 	awl::visual::object const &
 	visual() const = 0;
+
+	virtual
+	awl::window::event::processor &
+	processor() = 0;
 
 	AWL_DETAIL_SYMBOL
 	virtual

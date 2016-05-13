@@ -5,7 +5,6 @@
 #include <awl/system/object.hpp>
 #include <awl/system/object_unique_ptr.hpp>
 #include <awl/system/event/processor.hpp>
-#include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object.hpp>
@@ -65,14 +64,8 @@ try
 		window_system->processor()
 	);
 
-	awl::window::event::processor_unique_ptr const window_processor(
-		system_processor.create_window_processor(
-			*window
-		)
-	);
-
 	fcppt::signal::auto_connection const resize_connection(
-		window_processor->resize_callback(
+		window->processor().resize_callback(
 			awl::window::event::resize_callback(
 				[](
 					awl::window::event::resize const &_size
@@ -88,7 +81,7 @@ try
 	);
 
 	fcppt::signal::auto_connection const destroy_connection(
-		window_processor->destroy_callback(
+		window->processor().destroy_callback(
 			awl::window::event::destroy_callback(
 				[
 					&system_processor

@@ -11,7 +11,6 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <awl/window/event/processor.hpp>
-#include <awl/window/event/processor_unique_ptr.hpp>
 #include <awl/window/event/show_callback.hpp>
 #include <awl/window/event/show_fwd.hpp>
 #include <fcppt/exception.hpp>
@@ -58,16 +57,10 @@ try
 		system->processor()
 	);
 
-	awl::window::event::processor_unique_ptr const window_processor(
-		system_processor.create_window_processor(
-			*window
-		)
-	);
-
 	window->show();
 
 	fcppt::signal::auto_connection const show_connection(
-		window_processor->show_callback(
+		window->processor().show_callback(
 			awl::window::event::show_callback(
 				[
 					&system_processor

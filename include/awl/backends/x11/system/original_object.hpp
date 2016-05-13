@@ -5,11 +5,11 @@
 #include <awl/backends/x11/original_display.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/system/object.hpp>
+#include <awl/backends/x11/system/event/original_processor_fwd.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
 #include <awl/cursor/type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor_fwd.hpp>
-#include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -77,7 +77,9 @@ private:
 
 	awl::backends::x11::screen const screen_;
 
-	awl::system::event::processor_unique_ptr const processor_;
+	fcppt::unique_ptr<
+		awl::backends::x11::system::event::original_processor
+	> const processor_;
 };
 
 }

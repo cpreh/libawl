@@ -2,7 +2,6 @@
 #define AWL_BACKENDS_X11_WINDOW_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/backends/x11/window/object_fwd.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/backends/x11/window/event/processor_fwd.hpp>
@@ -39,10 +38,6 @@ public:
 	virtual
 	~processor()
 	override;
-
-	virtual
-	awl::backends::x11::window::object &
-	x11_window() const = 0;
 
 	virtual
 	fcppt::signal::auto_connection

@@ -10,15 +10,15 @@
 #include <awl/backends/x11/system/event/map_key.hpp>
 #include <awl/backends/x11/system/event/object_fwd.hpp>
 #include <awl/backends/x11/system/event/opcode.hpp>
+#include <awl/backends/x11/system/event/original_processor_fwd.hpp>
 #include <awl/backends/x11/system/event/processor.hpp>
 #include <awl/backends/x11/system/event/type.hpp>
+#include <awl/backends/x11/window/object_fwd.hpp>
 #include <awl/backends/x11/window/event/processor_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/processor.hpp>
-#include <awl/window/object_fwd.hpp>
-#include <awl/window/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_std_hash.hpp>
@@ -29,8 +29,6 @@
 #include <map>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
-
-
 
 
 namespace awl
@@ -74,13 +72,6 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::event::processor_unique_ptr
-	create_window_processor(
-		awl::window::object &
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
 	void
 	quit(
 		awl::main::exit_code
@@ -95,6 +86,17 @@ public:
 		awl::backends::x11::system::event::callback const &
 	)
 	override;
+
+	void
+	add_window_processor(
+		awl::backends::x11::window::object &,
+		awl::backends::x11::window::event::processor &
+	);
+
+	void
+	remove_window_processor(
+		awl::backends::x11::window::object const &
+	);
 private:
 	void
 	process_pending(

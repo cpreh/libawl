@@ -6,8 +6,6 @@
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
 #include <awl/system/event/processor_fwd.hpp>
-#include <awl/window/object_fwd.hpp>
-#include <awl/window/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -34,12 +32,6 @@ public:
 	virtual
 	awl::main::optional_exit_code
 	next() = 0;
-
-	virtual
-	awl::window::event::processor_unique_ptr
-	create_window_processor(
-		awl::window::object &
-	) = 0;
 
 	virtual
 	void

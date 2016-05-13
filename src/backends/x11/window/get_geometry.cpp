@@ -1,57 +1,19 @@
 #include <awl/exception.hpp>
-#include <awl/backends/x11/discard.hpp>
 #include <awl/backends/x11/display.hpp>
-#include <awl/backends/x11/sync.hpp>
-#include <awl/backends/x11/window/common_object.hpp>
+#include <awl/backends/x11/window/get_geometry.hpp>
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/rect.hpp>
-#include <awl/window/dim.hpp>
-#include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
-#include <fcppt/math/dim/to_unsigned.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::x11::window::common_object::common_object()
-:
-	awl::backends::x11::window::object()
-{
-}
-
-awl::backends::x11::window::common_object::~common_object()
-{
-}
-
-void
-awl::backends::x11::window::common_object::show()
-{
-	// always returns 1
-	::XMapWindow(
-		this->display().get(),
-		this->get()
-	);
-
-	awl::backends::x11::sync(
-		this->display(),
-		awl::backends::x11::discard(
-			false
-		)
-	);
-}
-
-awl::window::dim
-awl::backends::x11::window::common_object::size() const
-{
-	return
-		fcppt::math::dim::to_unsigned(
-			this->rect().size()
-		);
-}
-
 awl::backends::x11::window::rect
-awl::backends::x11::window::common_object::rect() const
+awl::backends::x11::window::get_geometry(
+	awl::backends::x11::window::object const &_window
+)
 {
 	Window root_return;
 
@@ -67,8 +29,8 @@ awl::backends::x11::window::common_object::rect() const
 
 	if(
 		::XGetGeometry(
-			display().get(),
-			get(),
+			_window.display().get(),
+			_window.get(),
 			&root_return,
 			&x_return,
 			&y_return,

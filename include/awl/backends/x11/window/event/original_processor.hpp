@@ -3,14 +3,13 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/backends/x11/atom.hpp>
-#include <awl/backends/x11/window/object_fwd.hpp>
+#include <awl/backends/x11/window/original_object_fwd.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
 #include <awl/backends/x11/window/event/function.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/backends/x11/window/event/processor.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
-#include <awl/backends/x11/window/event/unregister_callback.hpp>
 #include <awl/backends/x11/window/event/wm_protocols.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/event/close_callback.hpp>
@@ -54,9 +53,9 @@ class AWL_CLASS_SYMBOL original_processor
 	);
 public:
 	AWL_DETAIL_SYMBOL
+	explicit
 	original_processor(
-		awl::backends::x11::window::object &,
-		awl::backends::x11::window::event::unregister_callback const &
+		awl::backends::x11::window::original_object &
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -96,16 +95,6 @@ public:
 	show_callback(
 		awl::window::event::show_callback const &
 	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::window::object &
-	window() const
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::object &
-	x11_window() const
 	override;
 
 	AWL_DETAIL_SYMBOL
@@ -152,9 +141,7 @@ private:
 		awl::backends::x11::window::event::object const &
 	);
 
-	awl::backends::x11::window::object &window_;
-
-	awl::backends::x11::window::event::unregister_callback const unregister_;
+	awl::backends::x11::window::original_object &window_;
 
 	typedef
 	fcppt::signal::object<

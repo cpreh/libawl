@@ -9,6 +9,7 @@
 #include <awl/backends/x11/system/event/original_processor.hpp>
 #include <awl/backends/x11/visual/default.hpp>
 #include <awl/backends/x11/visual/object.hpp>
+#include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
 #include <awl/cursor/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
@@ -33,14 +34,10 @@ awl::backends::x11::system::original_object::original_object()
 		)
 	),
 	processor_(
-		fcppt::unique_ptr_to_base<
-			awl::system::event::processor
+		fcppt::make_unique_ptr<
+			awl::backends::x11::system::event::original_processor
 		>(
-			fcppt::make_unique_ptr<
-				awl::backends::x11::system::event::original_processor
-			>(
-				display_
-			)
+			display_
 		)
 	)
 {
@@ -52,7 +49,7 @@ awl::backends::x11::system::original_object::~original_object()
 
 awl::window::object_unique_ptr
 awl::backends::x11::system::original_object::create_window(
-	awl::window::parameters const &_param
+	awl::window::parameters const &_parameters
 )
 {
 	return
@@ -64,7 +61,8 @@ awl::backends::x11::system::original_object::create_window(
 			>(
 				display_,
 				screen_,
-				_param
+				*processor_,
+				_parameters
 			)
 		);
 }

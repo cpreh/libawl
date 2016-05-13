@@ -7,7 +7,7 @@
 
 
 awl::backends::x11::window::holder::holder(
-	x11::display &_display,
+	awl::backends::x11::display &_display,
 	Window const _window
 )
 :
