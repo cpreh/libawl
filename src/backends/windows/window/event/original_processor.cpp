@@ -55,17 +55,13 @@
 FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 awl::backends::windows::window::event::original_processor::original_processor(
-	awl::backends::windows::window::object &_window,
-	awl::backends::windows::window::event::unregister_callback const &_unregister
+	awl::backends::windows::window::object &_window
 )
 :
 	awl::backends::windows::window::event::processor(),
 	window_(
 		_window
 	),
-	unregister_{
-		_unregister
-	},
 	signals_(),
 	user_messages_(
 		// TODO: We need something better for this, like a sparse map
@@ -235,10 +231,6 @@ awl::backends::windows::window::event::original_processor::~original_processor()
 		::SetCursor(
 			nullptr
 		);
-
-	unregister_(
-		*this
-	);
 }
 
 fcppt::signal::auto_connection
@@ -294,20 +286,6 @@ awl::backends::windows::window::event::original_processor::show_callback(
 		show_signal_.connect(
 			_callback
 		);
-}
-
-awl::window::object &
-awl::backends::windows::window::event::original_processor::window() const
-{
-	return
-		window_;
-}
-
-awl::backends::windows::window::object &
-awl::backends::windows::window::event::original_processor::windows_window() const
-{
-	return
-		window_;
 }
 
 fcppt::signal::auto_connection

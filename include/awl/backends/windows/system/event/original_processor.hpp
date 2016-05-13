@@ -11,12 +11,11 @@
 #include <awl/backends/windows/system/event/handle_unique_ptr.hpp>
 #include <awl/backends/windows/system/event/original_processor_fwd.hpp>
 #include <awl/backends/windows/system/event/processor.hpp>
+#include <awl/backends/windows/window/object_fwd.hpp>
 #include <awl/backends/windows/window/event/processor_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
-#include <awl/window/object_fwd.hpp>
-#include <awl/window/event/processor_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_decl.hpp>
 #include <fcppt/strong_typedef_std_hash.hpp>
@@ -65,13 +64,6 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::event::processor_unique_ptr
-	create_window_processor(
-		awl::window::object &
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
 	void
 	quit(
 		awl::main::exit_code
@@ -97,6 +89,17 @@ public:
 	awl::backends::windows::system::event::handle_unique_ptr
 	create_event_handle()
 	override;
+
+	void
+	add_window_processor(
+		awl::backends::windows::window::object &,
+		awl::backends::windows::window::event::processor &
+	);
+
+	void
+	remove_window_processor(
+		awl::backends::windows::window::object const &
+	);
 private:
 	awl::main::optional_exit_code
 	poll_messages();

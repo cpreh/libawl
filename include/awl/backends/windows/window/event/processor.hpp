@@ -4,7 +4,6 @@
 #include <awl/class_symbol.hpp>
 #include <awl/backends/windows/message_fwd.hpp>
 #include <awl/backends/windows/message_type.hpp>
-#include <awl/backends/windows/window/object_fwd.hpp>
 #include <awl/backends/windows/window/event/callback.hpp>
 #include <awl/backends/windows/window/event/processor_fwd.hpp>
 #include <awl/detail/symbol.hpp>
@@ -36,12 +35,8 @@ protected:
 	processor();
 public:
 	AWL_DETAIL_SYMBOL
-	virtual
-	~processor() = 0;
-
-	virtual
-	awl::backends::windows::window::object &
-	windows_window() const = 0;
+	~processor()
+	override;
 
 	virtual
 	fcppt::signal::auto_connection

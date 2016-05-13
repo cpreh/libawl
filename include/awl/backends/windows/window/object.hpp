@@ -6,7 +6,6 @@
 #include <awl/backends/windows/cursor/const_optional_object_ref_fwd.hpp>
 #include <awl/backends/windows/window/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/window/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -20,8 +19,6 @@ namespace window
 {
 
 class AWL_CLASS_SYMBOL object
-:
-	public awl::window::object
 {
 	FCPPT_NONCOPYABLE(
 		object
@@ -31,8 +28,8 @@ protected:
 	object();
 public:
 	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+	virtual
+	~object() = 0;
 
 	virtual
 	HWND

@@ -37,13 +37,9 @@ awl::backends::windows::system::original_object::original_object()
 	awl::backends::windows::system::object(),
 	wndclasses_(),
 	processor_{
-		fcppt::unique_ptr_to_base<
-			awl::system::event::processor
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::system::event::original_processor
-			>()
-		)
+		fcppt::make_unique_ptr<
+			awl::backends::windows::system::event::original_processor
+		>()
 	}
 {
 }
@@ -86,6 +82,7 @@ awl::backends::windows::system::original_object::create_window(
 		)
 	);
 
+	// FIXME: This is not exception-safe
 	if(
 		!result.inserted()
 	)
@@ -99,6 +96,7 @@ awl::backends::windows::system::original_object::create_window(
 				awl::backends::windows::window::original_object
 			>(
 				_param,
+				*processor_,
 				result.element().wndclass(),
 				awl::backends::windows::wndclass_remove_callback{
 					std::bind(

@@ -543,13 +543,12 @@ set(
 	src/backends/windows/visual/object.cpp
 	src/backends/windows/window/adjusted_size.cpp
 	src/backends/windows/window/client_to_screen.cpp
-	src/backends/windows/window/common_object.cpp
 	src/backends/windows/window/create.cpp
 	src/backends/windows/window/event/combine_result.cpp
-	src/backends/windows/window/event/create_processor.cpp
 	src/backends/windows/window/event/object.cpp
 	src/backends/windows/window/event/original_processor.cpp
 	src/backends/windows/window/event/processor.cpp
+	src/backends/windows/window/event/scoped_processor.cpp
 	src/backends/windows/window/event/scoped_user_message.cpp
 	src/backends/windows/window/event/wnd_proc.cpp
 	src/backends/windows/window/get_client_rect.cpp
@@ -559,7 +558,6 @@ set(
 	src/backends/windows/window/object.cpp
 	src/backends/windows/window/original_object.cpp
 	src/backends/windows/window/screen_to_client.cpp
-	src/backends/windows/window/wrapped_object.cpp
 	src/backends/windows/wndclass.cpp
 )
 
@@ -633,13 +631,11 @@ set(
 	include/awl/backends/windows/visual/object_unique_ptr.hpp
 	include/awl/backends/windows/window/adjusted_size.hpp
 	include/awl/backends/windows/window/client_to_screen.hpp
-	include/awl/backends/windows/window/common_object.hpp
 	include/awl/backends/windows/window/const_optional_object_ref.hpp
 	include/awl/backends/windows/window/const_optional_object_ref_fwd.hpp
 	include/awl/backends/windows/window/create.hpp
 	include/awl/backends/windows/window/event/callback.hpp
 	include/awl/backends/windows/window/event/combine_result.hpp
-	include/awl/backends/windows/window/event/create_processor.hpp
 	include/awl/backends/windows/window/event/function.hpp
 	include/awl/backends/windows/window/event/object.hpp
 	include/awl/backends/windows/window/event/object_fwd.hpp
@@ -649,6 +645,7 @@ set(
 	include/awl/backends/windows/window/event/processor_unique_ptr.hpp
 	include/awl/backends/windows/window/event/return_type.hpp
 	include/awl/backends/windows/window/event/return_type_fwd.hpp
+	include/awl/backends/windows/window/event/scoped_processor.hpp
 	include/awl/backends/windows/window/event/scoped_user_message.hpp
 	include/awl/backends/windows/window/event/scoped_user_message_fwd.hpp
 	include/awl/backends/windows/window/event/unregister_callback.hpp
@@ -666,7 +663,6 @@ set(
 	include/awl/backends/windows/window/screen_to_client.hpp
 	include/awl/backends/windows/window/signed_dim.hpp
 	include/awl/backends/windows/window/signed_dim_fwd.hpp
-	include/awl/backends/windows/window/wrapped_object.hpp
 	include/awl/backends/windows/windows.hpp
 	include/awl/backends/windows/wndclass.hpp
 	include/awl/backends/windows/wndclass_fwd.hpp

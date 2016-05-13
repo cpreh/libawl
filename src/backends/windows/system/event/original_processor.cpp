@@ -13,15 +13,10 @@
 #include <awl/backends/windows/system/event/original_processor.hpp>
 #include <awl/backends/windows/system/event/processor.hpp>
 #include <awl/backends/windows/window/object.hpp>
-#include <awl/backends/windows/window/event/create_processor.hpp>
 #include <awl/backends/windows/window/event/processor.hpp>
-#include <awl/backends/windows/window/event/processor_unique_ptr.hpp>
-#include <awl/backends/windows/window/event/unregister_callback.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/window/object_fwd.hpp>
-#include <awl/window/event/processor.hpp>
-#include <awl/window/event/processor_unique_ptr.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -99,54 +94,6 @@ awl::backends::windows::system::event::original_processor::next()
 		this->poll_messages();
 }
 
-awl::window::event::processor_unique_ptr
-awl::backends::windows::system::event::original_processor::create_window_processor(
-	awl::window::object &_window
-)
-{
-	awl::backends::windows::window::event::processor_unique_ptr result{
-		awl::backends::windows::window::event::create_processor(
-			_window,
-			awl::backends::windows::window::event::unregister_callback{
-				[
-					this
-				](
-					awl::backends::windows::window::event::processor &_processor
-				)
-				{
-					FCPPT_ASSERT_ERROR(
-						window_processors_.erase(
-							_processor.windows_window().hwnd()
-						)
-						==
-						1u
-					);
-				}
-			}
-		)
-	};
-
-	FCPPT_ASSERT_ERROR(
-		window_processors_.insert(
-			std::make_pair(
-				result->windows_window().hwnd(),
-				fcppt::make_ref(
-					*result
-				)
-			)
-		).second
-	);
-
-	return
-		fcppt::unique_ptr_to_base<
-			awl::window::event::processor
-		>(
-			std::move(
-				result
-			)
-		);
-}
-
 void
 awl::backends::windows::system::event::original_processor::quit(
 	awl::main::exit_code const _exit_code
@@ -217,6 +164,38 @@ awl::backends::windows::system::event::original_processor::create_event_handle()
 
 	return
 		ret;
+}
+
+void
+awl::backends::windows::system::event::original_processor::add_window_processor(
+	awl::backends::windows::window::object &_window,
+	awl::backends::windows::window::event::processor &_processor
+)
+{
+	FCPPT_ASSERT_ERROR(
+		window_processors_.insert(
+			std::make_pair(
+				_window.hwnd(),
+				fcppt::make_ref(
+					_processor
+				)
+			)
+		).second
+	);
+}
+
+void
+awl::backends::windows::system::event::original_processor::remove_window_processor(
+	awl::backends::windows::window::object const &_window
+)
+{
+	FCPPT_ASSERT_ERROR(
+		window_processors_.erase(
+			_window.hwnd()
+		)
+		==
+		1u
+	);
 }
 
 awl::main::optional_exit_code

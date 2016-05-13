@@ -11,7 +11,6 @@
 #include <awl/backends/windows/window/event/object_fwd.hpp>
 #include <awl/backends/windows/window/event/processor.hpp>
 #include <awl/backends/windows/window/event/return_type.hpp>
-#include <awl/backends/windows/window/event/unregister_callback.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/event/close_callback.hpp>
 #include <awl/window/event/close_signal.hpp>
@@ -54,9 +53,9 @@ class AWL_CLASS_SYMBOL original_processor
 	);
 public:
 	AWL_DETAIL_SYMBOL
+	explicit
 	original_processor(
-		awl::backends::windows::window::object &,
-		awl::backends::windows::window::event::unregister_callback const &
+		awl::backends::windows::window::object &
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -99,20 +98,10 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::window::object &
-	window() const
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::window::object &
-	windows_window() const
-	override;
-
-	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection
 	register_callback(
 		awl::backends::windows::message_type,
-		windows::window::event::callback const &
+		awl::backends::windows::window::event::callback const &
 	)
 	override;
 
@@ -167,8 +156,6 @@ private:
 	);
 
 	awl::backends::windows::window::object &window_;
-
-	awl::backends::windows::window::event::unregister_callback const unregister_;
 
 	typedef
 	fcppt::signal::object<

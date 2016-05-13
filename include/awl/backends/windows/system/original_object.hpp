@@ -3,15 +3,16 @@
 
 #include <awl/backends/windows/counted_wndclass.hpp>
 #include <awl/backends/windows/system/object.hpp>
+#include <awl/backends/windows/system/event/original_processor_fwd.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
 #include <awl/cursor/type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor_fwd.hpp>
-#include <awl/system/event/processor_unique_ptr.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
@@ -79,7 +80,9 @@ private:
 
 	wndclass_map wndclasses_;
 
-	awl::system::event::processor_unique_ptr const processor_;
+	fcppt::unique_ptr<
+		awl::backends::windows::system::event::original_processor
+	> const processor_;
 };
 
 }
