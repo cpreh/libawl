@@ -3,8 +3,8 @@
 #include <awl/backends/x11/window/get_geometry.hpp>
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/rect.hpp>
-#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/to_signed.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>

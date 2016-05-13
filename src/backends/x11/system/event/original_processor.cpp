@@ -3,8 +3,8 @@
 #include <awl/backends/linux/fd/object.hpp>
 #include <awl/backends/linux/fd/optional_duration.hpp>
 #include <awl/backends/linux/fd/original_processor.hpp>
-#include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/display_fd.hpp>
+#include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/flush.hpp>
 #include <awl/backends/x11/pending.hpp>
 #include <awl/backends/x11/system/event/callback.hpp>

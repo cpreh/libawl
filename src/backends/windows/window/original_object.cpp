@@ -3,17 +3,17 @@
 #include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/post_message.hpp>
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/wndclass_fwd.hpp>
 #include <awl/backends/windows/wndclass_remove_callback.hpp>
+#include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/cursor/const_optional_object_ref.hpp>
 #include <awl/backends/windows/cursor/object.hpp>
 #include <awl/backends/windows/system/event/original_processor_fwd.hpp>
 #include <awl/backends/windows/visual/object.hpp>
 #include <awl/backends/windows/window/create.hpp>
 #include <awl/backends/windows/window/get_client_rect.hpp>
-#include <awl/backends/windows/window/original_object.hpp>
 #include <awl/backends/windows/window/object.hpp>
+#include <awl/backends/windows/window/original_object.hpp>
 #include <awl/backends/windows/window/event/original_processor.hpp>
 #include <awl/backends/windows/window/event/processor.hpp>
 #include <awl/visual/object_fwd.hpp>
@@ -26,16 +26,15 @@
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/size_fun.hpp>
+#include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/math/dim/static.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
-#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/optional/static_cast.hpp>
-
+#include <fcppt/optional/to_exception.hpp>
 
 
 awl::backends::windows::window::original_object::original_object(
