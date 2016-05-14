@@ -3,6 +3,7 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
+#include <awl/backends/wayland/seat_set_fwd.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/processor_fwd.hpp>
@@ -48,6 +49,10 @@ public:
 	virtual
 	awl::backends::wayland::shm const &
 	shm() const = 0;
+
+	virtual
+	awl::backends::wayland::seat_set const &
+	seats() const = 0;
 };
 
 }

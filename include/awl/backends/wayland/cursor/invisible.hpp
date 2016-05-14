@@ -1,5 +1,5 @@
-#ifndef AWL_BACKENDS_WAYLAND_CURSOR_PREDEFINED_HPP_INCLUDED
-#define AWL_BACKENDS_WAYLAND_CURSOR_PREDEFINED_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WAYLAND_CURSOR_INVISIBLE_HPP_INCLUDED
+#define AWL_BACKENDS_WAYLAND_CURSOR_INVISIBLE_HPP_INCLUDED
 
 #include <awl/backends/wayland/cursor/object.hpp>
 #include <awl/backends/wayland/cursor/optional_fwd.hpp>

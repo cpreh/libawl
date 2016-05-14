@@ -123,6 +123,17 @@ registry_add(
 					name
 				}
 			};
+	else if(
+		interface
+		==
+		"wl_seat"
+	)
+		data.seats_.add(
+			awl::backends::wayland::seat{
+				_registry,
+				name
+			}
+		);
 }
 
 void
@@ -144,14 +155,15 @@ registry_remove(
 		_name
 	};
 
-	auto const compare(
+	auto const process_global(
 		[
-			name
+			name,
+			&data
 		](
-			auto const &_object
+			auto &_object
 		)
 		{
-			return
+			if(
 				fcppt::optional::maybe(
 					_object,
 					fcppt::const_(
@@ -168,56 +180,40 @@ registry_remove(
 							==
 							name;
 					}
-				);
+				)
+			)
+			{
+				data.exit_code_ =
+					awl::main::optional_exit_code{
+						awl::main::exit_failure()
+					};
+
+				_object =
+					typename
+					std::decay<
+						decltype(
+							_object
+						)
+					>::type{};
+			}
 		}
 	);
 
-	auto const unset(
-		[
-			&data
-		](
-			auto &_object
-		)
-		{
-			data.exit_code_ =
-				awl::main::optional_exit_code{
-					awl::main::exit_failure()
-				};
-
-			_object =
-				typename
-				std::decay<
-					decltype(
-						_object
-					)
-				>::type{};
-		}
+	process_global(
+		data.compositor_
 	);
 
-	if(
-		compare(
-			data.compositor_
-		)
-	)
-		unset(
-			data.compositor_
-		);
-	else if(
-		compare(
-			data.shell_
-		)
-	)
-		unset(
-			data.shell_
-		);
-	else if(
-		compare(
-			data.shm_
-		)
-	)
-		unset(
-			data.shm_
-		);
+	process_global(
+		data.shell_
+	);
+
+	process_global(
+		data.shm_
+	);
+
+	data.seats_.remove(
+		name
+	);
 }
 
 wl_registry_listener const registry_listener{
@@ -352,6 +348,13 @@ awl::backends::wayland::system::event::original_processor::shm() const
 					};
 			}
 		);
+}
+
+awl::backends::wayland::seat_set const &
+awl::backends::wayland::system::event::original_processor::seats() const
+{
+	return
+		global_data_.seats_;
 }
 
 awl::main::optional_exit_code

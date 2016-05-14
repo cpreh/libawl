@@ -498,6 +498,14 @@ set(
 	include/awl/backends/wayland/registry_object_decl.hpp
 	include/awl/backends/wayland/registry_object_fwd.hpp
 	include/awl/backends/wayland/registry_object_impl.hpp
+	include/awl/backends/wayland/registry_object_less.hpp
+	include/awl/backends/wayland/registry_set_decl.hpp
+	include/awl/backends/wayland/registry_set_fwd.hpp
+	include/awl/backends/wayland/registry_set_impl.hpp
+	include/awl/backends/wayland/seat.hpp
+	include/awl/backends/wayland/seat_fwd.hpp
+	include/awl/backends/wayland/seat_set.hpp
+	include/awl/backends/wayland/seat_set_fwd.hpp
 	include/awl/backends/wayland/shell.hpp
 	include/awl/backends/wayland/shell_fwd.hpp
 	include/awl/backends/wayland/shm.hpp
@@ -545,6 +553,8 @@ set(
 	src/backends/wayland/display_roundtrip.cpp
 	src/backends/wayland/original_display.cpp
 	src/backends/wayland/registry.cpp
+	src/backends/wayland/seat.cpp
+	src/backends/wayland/seat_set.cpp
 	src/backends/wayland/shell.cpp
 	src/backends/wayland/shm.cpp
 	src/backends/wayland/surface.cpp
