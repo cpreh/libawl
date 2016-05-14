@@ -14,6 +14,7 @@
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/global_data.hpp>
 #include <awl/backends/wayland/system/event/processor.hpp>
+#include <awl/backends/wayland/system/event/seat_callback.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
@@ -82,6 +83,12 @@ public:
 
 	awl::backends::wayland::seat_set const &
 	seats() const
+	override;
+
+	fcppt::signal::auto_connection
+	seat_callback(
+		awl::backends::wayland::system::event::seat_callback const &
+	)
 	override;
 private:
 	awl::main::optional_exit_code

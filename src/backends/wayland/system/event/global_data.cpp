@@ -1,4 +1,5 @@
 #include <awl/backends/wayland/system/event/global_data.hpp>
+#include <fcppt/signal/object_impl.hpp>
 
 
 awl::backends::wayland::system::event::global_data::global_data()

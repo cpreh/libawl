@@ -22,6 +22,7 @@
 #include <awl/backends/wayland/system/event/global_data.hpp>
 #include <awl/backends/wayland/system/event/original_processor.hpp>
 #include <awl/backends/wayland/system/event/processor.hpp>
+#include <awl/backends/wayland/system/event/seat_callback.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/optional_exit_code.hpp>
@@ -34,6 +35,7 @@
 #include <fcppt/log/debug.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <stdint.h>
@@ -354,7 +356,18 @@ awl::backends::wayland::seat_set const &
 awl::backends::wayland::system::event::original_processor::seats() const
 {
 	return
-		global_data_.seats_;
+		global_data_.seats_.get();
+}
+
+fcppt::signal::auto_connection
+awl::backends::wayland::system::event::original_processor::seat_callback(
+	awl::backends::wayland::system::event::seat_callback const &_callback
+)
+{
+	return
+		global_data_.seats_.signal().connect(
+			_callback
+		);
 }
 
 awl::main::optional_exit_code

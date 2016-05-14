@@ -499,25 +499,35 @@ set(
 	include/awl/backends/wayland/registry_object_fwd.hpp
 	include/awl/backends/wayland/registry_object_impl.hpp
 	include/awl/backends/wayland/registry_object_less.hpp
-	include/awl/backends/wayland/registry_set_decl.hpp
-	include/awl/backends/wayland/registry_set_fwd.hpp
-	include/awl/backends/wayland/registry_set_impl.hpp
+	include/awl/backends/wayland/registry_set.hpp
 	include/awl/backends/wayland/seat.hpp
 	include/awl/backends/wayland/seat_fwd.hpp
 	include/awl/backends/wayland/seat_set.hpp
-	include/awl/backends/wayland/seat_set_fwd.hpp
 	include/awl/backends/wayland/shell.hpp
 	include/awl/backends/wayland/shell_fwd.hpp
 	include/awl/backends/wayland/shm.hpp
 	include/awl/backends/wayland/shm_fwd.hpp
 	include/awl/backends/wayland/surface.hpp
 	include/awl/backends/wayland/surface_fwd.hpp
+	include/awl/backends/wayland/system/event/add_remove_decl.hpp
+	include/awl/backends/wayland/system/event/add_remove_fwd.hpp
+	include/awl/backends/wayland/system/event/add_remove_impl.hpp
+	include/awl/backends/wayland/system/event/added.hpp
 	include/awl/backends/wayland/system/event/global_data.hpp
 	include/awl/backends/wayland/system/event/global_data_fwd.hpp
 	include/awl/backends/wayland/system/event/original_processor.hpp
 	include/awl/backends/wayland/system/event/processor.hpp
 	include/awl/backends/wayland/system/event/processor_fwd.hpp
 	include/awl/backends/wayland/system/event/processor_unique_ptr.hpp
+	include/awl/backends/wayland/system/event/registry_set_decl.hpp
+	include/awl/backends/wayland/system/event/registry_set_fwd.hpp
+	include/awl/backends/wayland/system/event/registry_set_impl.hpp
+	include/awl/backends/wayland/system/event/seat.hpp
+	include/awl/backends/wayland/system/event/seat_callback.hpp
+	include/awl/backends/wayland/system/event/seat_function.hpp
+	include/awl/backends/wayland/system/event/seat_fwd.hpp
+	include/awl/backends/wayland/system/event/seat_set.hpp
+	include/awl/backends/wayland/system/event/seat_set_fwd.hpp
 	include/awl/backends/wayland/system/object.hpp
 	include/awl/backends/wayland/system/object_fwd.hpp
 	include/awl/backends/wayland/system/original_object.hpp
@@ -554,13 +564,14 @@ set(
 	src/backends/wayland/original_display.cpp
 	src/backends/wayland/registry.cpp
 	src/backends/wayland/seat.cpp
-	src/backends/wayland/seat_set.cpp
 	src/backends/wayland/shell.cpp
 	src/backends/wayland/shm.cpp
 	src/backends/wayland/surface.cpp
 	src/backends/wayland/system/event/global_data.cpp
 	src/backends/wayland/system/event/original_processor.cpp
 	src/backends/wayland/system/event/processor.cpp
+	src/backends/wayland/system/event/seat.cpp
+	src/backends/wayland/system/event/seat_set.cpp
 	src/backends/wayland/system/object.cpp
 	src/backends/wayland/system/original_object.cpp
 	src/backends/wayland/visual/null_object.cpp

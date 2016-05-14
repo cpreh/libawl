@@ -13,8 +13,8 @@
 #include <awl/window/event/resize_callback.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/to_std_string.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/math/dim/null.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe_void.hpp>

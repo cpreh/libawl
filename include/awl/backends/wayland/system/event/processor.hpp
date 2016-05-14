@@ -3,13 +3,15 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
-#include <awl/backends/wayland/seat_set_fwd.hpp>
+#include <awl/backends/wayland/seat_set.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/processor_fwd.hpp>
+#include <awl/backends/wayland/system/event/seat_callback.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/signal/auto_connection_fwd.hpp>
 
 
 namespace awl
@@ -53,6 +55,12 @@ public:
 	virtual
 	awl::backends::wayland::seat_set const &
 	seats() const = 0;
+
+	virtual
+	fcppt::signal::auto_connection
+	seat_callback(
+		awl::backends::wayland::system::event::seat_callback const &
+	) = 0;
 };
 
 }
