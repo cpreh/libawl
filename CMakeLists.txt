@@ -1048,6 +1048,7 @@ install(
 install(
 	FILES
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/CMakeModules/AwlMainGenerator.cmake
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/CMakeModules/FindWayland.cmake
 	DESTINATION
 	${INSTALL_CMAKEMODULES_DIR}
 )
