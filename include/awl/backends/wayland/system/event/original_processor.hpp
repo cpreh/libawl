@@ -9,12 +9,12 @@
 #include <awl/backends/wayland/compositor_fwd.hpp>
 #include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/registry.hpp>
-#include <awl/backends/wayland/seat_set.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/global_data.hpp>
 #include <awl/backends/wayland/system/event/processor.hpp>
 #include <awl/backends/wayland/system/event/seat_callback.hpp>
+#include <awl/backends/wayland/system/seat/set.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
@@ -81,7 +81,7 @@ public:
 	shm() const
 	override;
 
-	awl::backends::wayland::seat_set const &
+	awl::backends::wayland::system::seat::set const &
 	seats() const
 	override;
 

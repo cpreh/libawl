@@ -1,7 +1,7 @@
-#ifndef AWL_BACKENDS_WAYLAND_REGISTRY_SET_HPP_INCLUDED
-#define AWL_BACKENDS_WAYLAND_REGISTRY_SET_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WAYLAND_ID_SET_HPP_INCLUDED
+#define AWL_BACKENDS_WAYLAND_ID_SET_HPP_INCLUDED
 
-#include <awl/backends/wayland/registry_object_less.hpp>
+#include <awl/backends/wayland/id_less.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <set>
 #include <fcppt/config/external_end.hpp>
@@ -18,11 +18,11 @@ template<
 	typename Type
 >
 using
-registry_set
+id_set
 =
 std::set<
 	Type,
-	awl::backends::wayland::registry_object_less<
+	awl::backends::wayland::id_less<
 		Type
 	>
 >;

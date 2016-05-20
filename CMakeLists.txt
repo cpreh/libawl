@@ -483,6 +483,8 @@ set(
 	include/awl/backends/wayland/display_prepare_read.hpp
 	include/awl/backends/wayland/display_read_events.hpp
 	include/awl/backends/wayland/display_roundtrip.hpp
+	include/awl/backends/wayland/id_less.hpp
+	include/awl/backends/wayland/id_set.hpp
 	include/awl/backends/wayland/make_registry_object.hpp
 	include/awl/backends/wayland/make_registry_object_impl.hpp
 	include/awl/backends/wayland/optional_compositor.hpp
@@ -498,11 +500,8 @@ set(
 	include/awl/backends/wayland/registry_object_decl.hpp
 	include/awl/backends/wayland/registry_object_fwd.hpp
 	include/awl/backends/wayland/registry_object_impl.hpp
-	include/awl/backends/wayland/registry_object_less.hpp
-	include/awl/backends/wayland/registry_set.hpp
 	include/awl/backends/wayland/seat.hpp
 	include/awl/backends/wayland/seat_fwd.hpp
-	include/awl/backends/wayland/seat_set.hpp
 	include/awl/backends/wayland/shell.hpp
 	include/awl/backends/wayland/shell_fwd.hpp
 	include/awl/backends/wayland/shm.hpp
@@ -519,18 +518,29 @@ set(
 	include/awl/backends/wayland/system/event/processor.hpp
 	include/awl/backends/wayland/system/event/processor_fwd.hpp
 	include/awl/backends/wayland/system/event/processor_unique_ptr.hpp
-	include/awl/backends/wayland/system/event/registry_set_decl.hpp
-	include/awl/backends/wayland/system/event/registry_set_fwd.hpp
-	include/awl/backends/wayland/system/event/registry_set_impl.hpp
 	include/awl/backends/wayland/system/event/seat.hpp
 	include/awl/backends/wayland/system/event/seat_callback.hpp
 	include/awl/backends/wayland/system/event/seat_function.hpp
 	include/awl/backends/wayland/system/event/seat_fwd.hpp
 	include/awl/backends/wayland/system/event/seat_set.hpp
 	include/awl/backends/wayland/system/event/seat_set_fwd.hpp
+	include/awl/backends/wayland/system/event/set_decl.hpp
+	include/awl/backends/wayland/system/event/set_fwd.hpp
+	include/awl/backends/wayland/system/event/set_impl.hpp
 	include/awl/backends/wayland/system/object.hpp
 	include/awl/backends/wayland/system/object_fwd.hpp
 	include/awl/backends/wayland/system/original_object.hpp
+	include/awl/backends/wayland/system/seat/caps.hpp
+	include/awl/backends/wayland/system/seat/caps_callback.hpp
+	include/awl/backends/wayland/system/seat/caps_field.hpp
+	include/awl/backends/wayland/system/seat/caps_field_fwd.hpp
+	include/awl/backends/wayland/system/seat/caps_function.hpp
+	include/awl/backends/wayland/system/seat/caps_fwd.hpp
+	include/awl/backends/wayland/system/seat/data.hpp
+	include/awl/backends/wayland/system/seat/data_fwd.hpp
+	include/awl/backends/wayland/system/seat/object.hpp
+	include/awl/backends/wayland/system/seat/object_fwd.hpp
+	include/awl/backends/wayland/system/seat/set.hpp
 	include/awl/backends/wayland/visual/null_object.hpp
 	include/awl/backends/wayland/visual/object.hpp
 	include/awl/backends/wayland/window/event/data.hpp
@@ -574,6 +584,8 @@ set(
 	src/backends/wayland/system/event/seat_set.cpp
 	src/backends/wayland/system/object.cpp
 	src/backends/wayland/system/original_object.cpp
+	src/backends/wayland/system/seat/data.cpp
+	src/backends/wayland/system/seat/object.cpp
 	src/backends/wayland/visual/null_object.cpp
 	src/backends/wayland/visual/object.cpp
 	src/backends/wayland/window/event/data.cpp

@@ -3,11 +3,11 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
-#include <awl/backends/wayland/seat_set.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/processor_fwd.hpp>
 #include <awl/backends/wayland/system/event/seat_callback.hpp>
+#include <awl/backends/wayland/system/seat/set.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -53,7 +53,7 @@ public:
 	shm() const = 0;
 
 	virtual
-	awl::backends::wayland::seat_set const &
+	awl::backends::wayland::system::seat::set const &
 	seats() const = 0;
 
 	virtual

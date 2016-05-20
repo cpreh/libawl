@@ -1,10 +1,10 @@
-#ifndef AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_REGISTRY_SET_DECL_HPP_INCLUDED
-#define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_REGISTRY_SET_DECL_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_SET_DECL_HPP_INCLUDED
+#define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_SET_DECL_HPP_INCLUDED
 
+#include <awl/backends/wayland/id_set.hpp>
 #include <awl/backends/wayland/registry_id.hpp>
-#include <awl/backends/wayland/registry_set.hpp>
 #include <awl/backends/wayland/system/event/add_remove_fwd.hpp>
-#include <awl/backends/wayland/system/event/registry_set_fwd.hpp>
+#include <awl/backends/wayland/system/event/set_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/object_decl.hpp>
 
@@ -23,27 +23,27 @@ namespace event
 template<
 	typename Type
 >
-class registry_set
+class set
 {
 	FCPPT_NONCOPYABLE(
-		registry_set
+		set
 	);
 public:
-	registry_set();
+	set();
 
-	registry_set(
-		registry_set &&
+	set(
+		set &&
 	);
 
-	registry_set &
+	set &
 	operator=(
-		registry_set &&
+		set &&
 	);
 
-	~registry_set();
+	~set();
 
 	typedef
-	awl::backends::wayland::registry_set<
+	awl::backends::wayland::id_set<
 		Type
 	>
 	set_type;

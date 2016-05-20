@@ -23,6 +23,8 @@
 #include <awl/backends/wayland/system/event/original_processor.hpp>
 #include <awl/backends/wayland/system/event/processor.hpp>
 #include <awl/backends/wayland/system/event/seat_callback.hpp>
+#include <awl/backends/wayland/system/seat/object.hpp>
+#include <awl/backends/wayland/system/seat/set.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/optional_exit_code.hpp>
@@ -131,9 +133,11 @@ registry_add(
 		"wl_seat"
 	)
 		data.seats_.add(
-			awl::backends::wayland::seat{
-				_registry,
-				name
+			awl::backends::wayland::system::seat::object{
+				awl::backends::wayland::seat{
+					_registry,
+					name
+				}
 			}
 		);
 }
@@ -352,7 +356,7 @@ awl::backends::wayland::system::event::original_processor::shm() const
 		);
 }
 
-awl::backends::wayland::seat_set const &
+awl::backends::wayland::system::seat::set const &
 awl::backends::wayland::system::event::original_processor::seats() const
 {
 	return

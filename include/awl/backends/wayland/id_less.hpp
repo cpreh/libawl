@@ -1,5 +1,5 @@
-#ifndef AWL_BACKENDS_WAYLAND_REGISTRY_OBJECT_LESS_HPP_INCLUDED
-#define AWL_BACKENDS_WAYLAND_REGISTRY_OBJECT_LESS_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WAYLAND_ID_LESS_HPP_INCLUDED
+#define AWL_BACKENDS_WAYLAND_ID_LESS_HPP_INCLUDED
 
 #include <awl/backends/wayland/registry_id.hpp>
 
@@ -14,7 +14,7 @@ namespace wayland
 template<
 	typename Type
 >
-struct registry_object_less
+struct id_less
 {
 	typedef
 	void

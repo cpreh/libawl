@@ -1,10 +1,10 @@
-#ifndef AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_REGISTRY_SET_IMPL_HPP_INCLUDED
-#define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_REGISTRY_SET_IMPL_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_SET_IMPL_HPP_INCLUDED
+#define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_SET_IMPL_HPP_INCLUDED
 
 #include <awl/backends/wayland/registry_id.hpp>
 #include <awl/backends/wayland/system/event/add_remove_decl.hpp>
 #include <awl/backends/wayland/system/event/added.hpp>
-#include <awl/backends/wayland/system/event/registry_set_decl.hpp>
+#include <awl/backends/wayland/system/event/set_decl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -17,9 +17,9 @@
 template<
 	typename Type
 >
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
->::registry_set()
+>::set()
 :
 	impl_{},
 	signal_{}
@@ -29,32 +29,32 @@ awl::backends::wayland::system::event::registry_set<
 template<
 	typename Type
 >
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
->::registry_set(
-	registry_set &&
+>::set(
+	set &&
 )
 = default;
 
 template<
 	typename Type
 >
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
 > &
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
 >::operator=(
-	registry_set &&
+	set &&
 )
 = default;
 
 template<
 	typename Type
 >
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
->::~registry_set()
+>::~set()
 {
 }
 
@@ -62,7 +62,7 @@ template<
 	typename Type
 >
 void
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
 >::add(
 	Type &&_other
@@ -98,7 +98,7 @@ template<
 	typename Type
 >
 void
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
 >::remove(
 	awl::backends::wayland::registry_id const _id
@@ -136,10 +136,10 @@ template<
 	typename Type
 >
 typename
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
 >::set_type const &
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
 >::get() const
 {
@@ -151,10 +151,10 @@ template<
 	typename Type
 >
 typename
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
 >::signal_type &
-awl::backends::wayland::system::event::registry_set<
+awl::backends::wayland::system::event::set<
 	Type
 >::signal()
 {
