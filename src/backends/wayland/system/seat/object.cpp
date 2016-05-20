@@ -52,7 +52,7 @@ convert_caps(
 		)
 	)
 		result |=
-			awl::backends::wayland::system::seat::caps::focus;
+			awl::backends::wayland::system::seat::caps::keyboard;
 
 	return
 		result;
@@ -137,6 +137,13 @@ awl::backends::wayland::system::seat::object::name() const
 {
 	return
 		impl_.name();
+}
+
+awl::backends::wayland::seat const &
+awl::backends::wayland::system::seat::object::get() const
+{
+	return
+		impl_;
 }
 
 fcppt::signal::auto_connection

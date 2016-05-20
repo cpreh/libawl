@@ -45,8 +45,13 @@ public:
 
 	~object();
 
+	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::registry_id
 	name() const;
+
+	AWL_DETAIL_SYMBOL
+	awl::backends::wayland::seat const &
+	get() const;
 
 	AWL_DETAIL_SYMBOL
 	fcppt::signal::auto_connection

@@ -18,8 +18,8 @@ namespace seat
 enum class caps
 {
 	pointer,
-	focus,
-	fcppt_maximum = focus
+	keyboard,
+	fcppt_maximum = keyboard
 };
 
 }
