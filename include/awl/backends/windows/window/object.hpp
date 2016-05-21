@@ -18,6 +18,7 @@ namespace windows
 namespace window
 {
 
+// TODO: Derive from awl::window::object again
 class AWL_CLASS_SYMBOL object
 {
 	FCPPT_NONCOPYABLE(

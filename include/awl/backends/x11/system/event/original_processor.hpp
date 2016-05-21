@@ -2,8 +2,10 @@
 #define AWL_BACKENDS_X11_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/backends/linux/fd/event_fwd.hpp>
-#include <awl/backends/linux/fd/original_processor.hpp>
+#include <awl/backends/posix/event_fwd.hpp>
+#include <awl/backends/posix/optional_duration_fwd.hpp>
+#include <awl/backends/posix/processor_fwd.hpp>
+#include <awl/backends/posix/processor_unique_ptr.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/system/event/callback.hpp>
 #include <awl/backends/x11/system/event/function.hpp>
@@ -44,8 +46,7 @@ namespace event
 
 class AWL_CLASS_SYMBOL original_processor
 :
-	public awl::backends::x11::system::event::processor,
-	public awl::backends::linux::fd::original_processor
+	public awl::backends::x11::system::event::processor
 {
 	FCPPT_NONCOPYABLE(
 		original_processor
@@ -87,6 +88,10 @@ public:
 	)
 	override;
 
+	awl::backends::posix::processor &
+	fd_processor()
+	override;
+
 	void
 	add_window_processor(
 		awl::backends::x11::window::object &,
@@ -98,9 +103,14 @@ public:
 		awl::backends::x11::window::object const &
 	);
 private:
+	awl::main::optional_exit_code
+	process(
+		awl::backends::posix::optional_duration const &
+	);
+
 	void
 	process_pending(
-		awl::backends::linux::fd::event const &
+		awl::backends::posix::event const &
 	);
 
 	void
@@ -109,6 +119,8 @@ private:
 	);
 
 	awl::backends::x11::display &display_;
+
+	awl::backends::posix::processor_unique_ptr const fd_processor_;
 
 	typedef
 	fcppt::signal::object<

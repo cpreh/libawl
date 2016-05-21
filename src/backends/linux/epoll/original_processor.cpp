@@ -1,13 +1,12 @@
-#include <awl/backends/linux/fd/callback.hpp>
-#include <awl/backends/linux/fd/duration.hpp>
-#include <awl/backends/linux/fd/event.hpp>
-#include <awl/backends/linux/fd/function.hpp>
-#include <awl/backends/linux/fd/object.hpp>
-#include <awl/backends/linux/fd/object_vector.hpp>
-#include <awl/backends/linux/fd/optional_duration.hpp>
-#include <awl/backends/linux/fd/original_processor.hpp>
-#include <awl/backends/linux/fd/processor.hpp>
-#include <awl/backends/linux/fd/epoll/set.hpp>
+#include <awl/backends/linux/epoll/fd_vector.hpp>
+#include <awl/backends/linux/epoll/original_processor.hpp>
+#include <awl/backends/linux/epoll/set.hpp>
+#include <awl/backends/posix/callback.hpp>
+#include <awl/backends/posix/duration.hpp>
+#include <awl/backends/posix/event.hpp>
+#include <awl/backends/posix/fd.hpp>
+#include <awl/backends/posix/optional_duration.hpp>
+#include <awl/backends/posix/processor.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
@@ -23,22 +22,22 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::linux::fd::original_processor::original_processor()
+awl::backends::linux::epoll::original_processor::original_processor()
 :
-	awl::backends::linux::fd::original_processor::processor(),
+	awl::backends::posix::processor(),
 	fd_set_(),
 	fd_signals_()
 {
 }
 
-awl::backends::linux::fd::original_processor::~original_processor()
+awl::backends::linux::epoll::original_processor::~original_processor()
 {
 }
 
 fcppt::signal::auto_connection
-awl::backends::linux::fd::original_processor::register_fd_callback(
-	awl::backends::linux::fd::object const &_fd,
-	awl::backends::linux::fd::callback const &_callback
+awl::backends::linux::epoll::original_processor::register_fd_callback(
+	awl::backends::posix::fd const &_fd,
+	awl::backends::posix::callback const &_callback
 )
 {
 	fcppt::container::get_or_insert_result<
@@ -48,7 +47,7 @@ awl::backends::linux::fd::original_processor::register_fd_callback(
 			fd_signals_,
 			_fd,
 			[](
-				awl::backends::linux::fd::object const &
+				awl::backends::posix::fd const &
 			)
 			{
 				return
@@ -69,7 +68,7 @@ awl::backends::linux::fd::original_processor::register_fd_callback(
 			_callback,
 			fcppt::signal::unregister::function{
 				std::bind(
-					&awl::backends::linux::fd::original_processor::unregister_fd_signal,
+					&awl::backends::linux::epoll::original_processor::unregister_fd_signal,
 					this,
 					_fd
 				)
@@ -78,18 +77,18 @@ awl::backends::linux::fd::original_processor::register_fd_callback(
 }
 
 bool
-awl::backends::linux::fd::original_processor::epoll(
-	awl::backends::linux::fd::optional_duration const &_duration
+awl::backends::linux::epoll::original_processor::poll(
+	awl::backends::posix::optional_duration const &_duration
 )
 {
-	awl::backends::linux::fd::object_vector const &ready_fds(
+	awl::backends::linux::epoll::fd_vector const &ready_fds(
 		fd_set_.epoll(
 			_duration
 		)
 	);
 
 	for(
-		awl::backends::linux::fd::object const &fd
+		awl::backends::posix::fd const &fd
 		:
 		ready_fds
 	)
@@ -105,7 +104,7 @@ awl::backends::linux::fd::original_processor::epoll(
 			)
 			{
 				_signal.get()(
-					awl::backends::linux::fd::event()
+					awl::backends::posix::event()
 				);
 			}
 		);
@@ -115,8 +114,8 @@ awl::backends::linux::fd::original_processor::epoll(
 }
 
 void
-awl::backends::linux::fd::original_processor::unregister_fd_signal(
-	awl::backends::linux::fd::object const &_fd
+awl::backends::linux::epoll::original_processor::unregister_fd_signal(
+	awl::backends::posix::fd const &_fd
 )
 {
 	fd_signal_map::iterator const it(

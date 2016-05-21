@@ -1,11 +1,12 @@
 #include <awl/exception.hpp>
 #include <awl/log.hpp>
-#include <awl/backends/linux/fd/callback.hpp>
-#include <awl/backends/linux/fd/duration.hpp>
-#include <awl/backends/linux/fd/event_fwd.hpp>
-#include <awl/backends/linux/fd/object.hpp>
-#include <awl/backends/linux/fd/optional_duration.hpp>
-#include <awl/backends/linux/fd/original_processor.hpp>
+#include <awl/backends/posix/callback.hpp>
+#include <awl/backends/posix/create_processor.hpp>
+#include <awl/backends/posix/duration.hpp>
+#include <awl/backends/posix/event_fwd.hpp>
+#include <awl/backends/posix/fd.hpp>
+#include <awl/backends/posix/optional_duration.hpp>
+#include <awl/backends/posix/processor.hpp>
 #include <awl/backends/wayland/compositor.hpp>
 #include <awl/backends/wayland/display.hpp>
 #include <awl/backends/wayland/display_dispatch_pending.hpp>
@@ -234,22 +235,24 @@ awl::backends::wayland::system::event::original_processor::original_processor(
 )
 :
 	awl::backends::wayland::system::event::processor(),
-	awl::backends::linux::fd::original_processor(),
 	display_{
 		_display
+	},
+	fd_processor_{
+		awl::backends::posix::create_processor()
 	},
 	registry_{
 		_display
 	},
 	global_data_(),
 	fd_connection_{
-		this->register_fd_callback(
-			awl::backends::linux::fd::object{
+		fd_processor_->register_fd_callback(
+			awl::backends::posix::fd{
 				::wl_display_get_fd(
 					_display.get()
 				)
 			},
-			awl::backends::linux::fd::callback{
+			awl::backends::posix::callback{
 				std::bind(
 					&awl::backends::wayland::system::event::original_processor::process_pending,
 					this,
@@ -283,8 +286,8 @@ awl::backends::wayland::system::event::original_processor::poll()
 {
 	return
 		this->process(
-			awl::backends::linux::fd::optional_duration{
-				awl::backends::linux::fd::duration{
+			awl::backends::posix::optional_duration{
+				awl::backends::posix::duration{
 					0
 				}
 			}
@@ -296,7 +299,7 @@ awl::backends::wayland::system::event::original_processor::next()
 {
 	return
 		this->process(
-			awl::backends::linux::fd::optional_duration()
+			awl::backends::posix::optional_duration()
 		);
 }
 
@@ -374,16 +377,23 @@ awl::backends::wayland::system::event::original_processor::seat_callback(
 		);
 }
 
+awl::backends::posix::processor &
+awl::backends::wayland::system::event::original_processor::fd_processor()
+{
+	return
+		*fd_processor_;
+}
+
 awl::main::optional_exit_code
 awl::backends::wayland::system::event::original_processor::process(
-	awl::backends::linux::fd::optional_duration const &_duration
+	awl::backends::posix::optional_duration const &_duration
 )
 {
 	awl::backends::wayland::display_flush(
 		display_
 	);
 
-	this->epoll(
+	fd_processor_->poll(
 		_duration
 	);
 
@@ -393,7 +403,7 @@ awl::backends::wayland::system::event::original_processor::process(
 
 void
 awl::backends::wayland::system::event::original_processor::process_pending(
-	awl::backends::linux::fd::event const &
+	awl::backends::posix::event const &
 )
 {
 	while(

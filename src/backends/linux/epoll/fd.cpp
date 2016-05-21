@@ -1,5 +1,6 @@
 #include <awl/exception.hpp>
-#include <awl/backends/linux/fd/epoll/fd.hpp>
+#include <awl/backends/posix/fd.hpp>
+#include <awl/backends/linux/epoll/fd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sys/epoll.h>
@@ -7,13 +8,13 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::linux::fd::epoll::fd::fd()
+awl::backends::linux::epoll::fd::fd()
 :
-	fd_(
+	fd_{
 		::epoll_create(
 			1 // some hint for the number of fds
 		)
-	)
+	}
 {
 	if(
 		fd_.get()
@@ -26,15 +27,15 @@ awl::backends::linux::fd::epoll::fd::fd()
 			};
 }
 
-awl::backends::linux::fd::epoll::fd::~fd()
+awl::backends::linux::epoll::fd::~fd()
 {
 	::close(
 		fd_.get()
 	);
 }
 
-awl::backends::linux::fd::object
-awl::backends::linux::fd::epoll::fd::get() const
+awl::backends::posix::fd
+awl::backends::linux::epoll::fd::get() const
 {
 	return
 		fd_;

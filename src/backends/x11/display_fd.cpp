@@ -1,3 +1,4 @@
+#include <awl/backends/posix/fd.hpp>
 #include <awl/backends/x11/display.hpp>
 #include <awl/backends/x11/display_fd.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -6,11 +7,13 @@
 #include <fcppt/config/external_end.hpp>
 
 
-int
+awl::backends::posix::fd
 awl::backends::x11::display_fd(
 	awl::backends::x11::display &_display
 )
 {
 	return
-		_display.get()->fd;
+		awl::backends::posix::fd{
+			_display.get()->fd
+		};
 }

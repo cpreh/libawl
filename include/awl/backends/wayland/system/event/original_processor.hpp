@@ -3,9 +3,10 @@
 #define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/backends/linux/fd/event_fwd.hpp>
-#include <awl/backends/linux/fd/optional_duration_fwd.hpp>
-#include <awl/backends/linux/fd/original_processor.hpp>
+#include <awl/backends/posix/event_fwd.hpp>
+#include <awl/backends/posix/optional_duration_fwd.hpp>
+#include <awl/backends/posix/processor_fwd.hpp>
+#include <awl/backends/posix/processor_unique_ptr.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
 #include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/registry.hpp>
@@ -35,8 +36,7 @@ namespace event
 
 class AWL_CLASS_SYMBOL original_processor
 :
-	public awl::backends::wayland::system::event::processor,
-	public awl::backends::linux::fd::original_processor
+	public awl::backends::wayland::system::event::processor
 {
 	FCPPT_NONCOPYABLE(
 		original_processor
@@ -90,18 +90,24 @@ public:
 		awl::backends::wayland::system::event::seat_callback const &
 	)
 	override;
+
+	awl::backends::posix::processor &
+	fd_processor()
+	override;
 private:
 	awl::main::optional_exit_code
 	process(
-		awl::backends::linux::fd::optional_duration const &
+		awl::backends::posix::optional_duration const &
 	);
 
 	void
 	process_pending(
-		awl::backends::linux::fd::event const &
+		awl::backends::posix::event const &
 	);
 
 	awl::backends::wayland::display &display_;
+
+	awl::backends::posix::processor_unique_ptr const fd_processor_;
 
 	awl::backends::wayland::registry registry_;
 

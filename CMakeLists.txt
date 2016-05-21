@@ -245,6 +245,12 @@ if(
 	)
 endif()
 
+# FIXME: Add a proper check here
+set(
+	AWL_POSIX_BACKEND
+	TRUE
+)
+
 configure_file(
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/config.hpp.in
 	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include/awl/config.hpp
@@ -597,33 +603,44 @@ set(
 )
 
 set(
+	AWL_POSIX_INCLUDE_FILES
+	include/awl/backends/posix/callback.hpp
+	include/awl/backends/posix/create_processor.hpp
+	include/awl/backends/posix/duration.hpp
+	include/awl/backends/posix/event.hpp
+	include/awl/backends/posix/event_fwd.hpp
+	include/awl/backends/posix/fd.hpp
+	include/awl/backends/posix/function.hpp
+	include/awl/backends/posix/optional_duration.hpp
+	include/awl/backends/posix/optional_duration_fwd.hpp
+	include/awl/backends/posix/processor.hpp
+	include/awl/backends/posix/processor_fwd.hpp
+	include/awl/backends/posix/processor_unique_ptr.hpp
+)
+
+set(
+	AWL_POSIX_SRC_FILES
+	src/backends/posix/create_processor.cpp
+	src/backends/posix/processor.cpp
+)
+
+set(
 	AWL_LINUX_INCLUDE_FILES
-	include/awl/backends/linux/fd/callback.hpp
-	include/awl/backends/linux/fd/duration.hpp
-	include/awl/backends/linux/fd/epoll/ctl.hpp
-	include/awl/backends/linux/fd/epoll/fd.hpp
-	include/awl/backends/linux/fd/epoll/fd_fwd.hpp
-	include/awl/backends/linux/fd/epoll/set.hpp
-	include/awl/backends/linux/fd/epoll/set_fwd.hpp
-	include/awl/backends/linux/fd/event.hpp
-	include/awl/backends/linux/fd/event_fwd.hpp
-	include/awl/backends/linux/fd/function.hpp
-	include/awl/backends/linux/fd/object.hpp
-	include/awl/backends/linux/fd/object_vector.hpp
-	include/awl/backends/linux/fd/optional_duration.hpp
-	include/awl/backends/linux/fd/optional_duration_fwd.hpp
-	include/awl/backends/linux/fd/original_processor.hpp
-	include/awl/backends/linux/fd/processor.hpp
-	include/awl/backends/linux/fd/processor_fwd.hpp
+	include/awl/backends/linux/epoll/ctl.hpp
+	include/awl/backends/linux/epoll/fd.hpp
+	include/awl/backends/linux/epoll/fd_fwd.hpp
+	include/awl/backends/linux/epoll/fd_vector.hpp
+	include/awl/backends/linux/epoll/original_processor.hpp
+	include/awl/backends/linux/epoll/set.hpp
+	include/awl/backends/linux/epoll/set_fwd.hpp
 )
 
 set(
 	AWL_LINUX_SRC_FILES
-	src/backends/linux/fd/epoll/ctl.cpp
-	src/backends/linux/fd/epoll/fd.cpp
-	src/backends/linux/fd/epoll/set.cpp
-	src/backends/linux/fd/original_processor.cpp
-	src/backends/linux/fd/processor.cpp
+	src/backends/linux/epoll/ctl.cpp
+	src/backends/linux/epoll/fd.cpp
+	src/backends/linux/epoll/original_processor.cpp
+	src/backends/linux/epoll/set.cpp
 )
 
 set(
@@ -826,6 +843,22 @@ if(
 		APPEND
 		AWL_SRC_FILES
 		${AWL_WAYLAND_SRC_FILES}
+	)
+endif()
+
+if(
+	AWL_POSIX_BACKEND
+)
+	list(
+		APPEND
+		AWL_INCLUDE_FILES
+		${AWL_POSIX_INCLUDE_FILES}
+	)
+
+	list(
+		APPEND
+		AWL_SRC_FILES
+		${AWL_POSIX_SRC_FILES}
 	)
 endif()
 

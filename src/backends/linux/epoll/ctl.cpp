@@ -1,7 +1,7 @@
 #include <awl/exception.hpp>
-#include <awl/backends/linux/fd/object.hpp>
-#include <awl/backends/linux/fd/epoll/ctl.hpp>
-#include <awl/backends/linux/fd/epoll/fd.hpp>
+#include <awl/backends/linux/epoll/ctl.hpp>
+#include <awl/backends/linux/epoll/fd.hpp>
+#include <awl/backends/posix/fd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sys/epoll.h>
@@ -9,9 +9,9 @@
 
 
 void
-awl::backends::linux::fd::epoll::ctl(
-	awl::backends::linux::fd::epoll::fd const &_epoll_fd,
-	awl::backends::linux::fd::object const &_fd,
+awl::backends::linux::epoll::ctl(
+	awl::backends::linux::epoll::fd const &_epoll_fd,
+	awl::backends::posix::fd const &_fd,
 	epoll_event *const _data
 )
 {
@@ -39,7 +39,8 @@ awl::backends::linux::fd::epoll::ctl(
 		)
 		!= 0
 	)
-		throw awl::exception(
-			FCPPT_TEXT("epoll_ctl failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("epoll_ctl failed!")
+			};
 }

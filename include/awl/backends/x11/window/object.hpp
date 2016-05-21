@@ -23,6 +23,7 @@ namespace x11
 namespace window
 {
 
+// TODO: Derive from window::object again!
 class AWL_CLASS_SYMBOL object
 {
 	FCPPT_NONCOPYABLE(

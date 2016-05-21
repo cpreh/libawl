@@ -1,5 +1,5 @@
-#ifndef AWL_BACKENDS_LINUX_FD_DURATION_HPP_INCLUDED
-#define AWL_BACKENDS_LINUX_FD_DURATION_HPP_INCLUDED
+#ifndef AWL_BACKENDS_POSIX_DURATION_HPP_INCLUDED
+#define AWL_BACKENDS_POSIX_DURATION_HPP_INCLUDED
 
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -10,16 +10,13 @@ namespace awl
 {
 namespace backends
 {
-namespace linux
-{
-namespace fd
+namespace posix
 {
 
 typedef
 std::chrono::milliseconds
 duration;
 
-}
 }
 }
 }

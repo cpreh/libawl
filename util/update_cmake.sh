@@ -51,6 +51,16 @@ update_main \
 	src/backends/wayland
 # Wayland end
 
+# Posix begin
+update_main \
+	AWL_POSIX_INCLUDE_FILES \
+	include/awl/backends/posix
+
+update_main \
+	AWL_POSIX_SRC_FILES \
+	src/backends/posix
+# Posix end
+
 # Linux begin
 update_main \
 	AWL_LINUX_INCLUDE_FILES \
