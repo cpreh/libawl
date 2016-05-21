@@ -613,6 +613,9 @@ set(
 	include/awl/backends/posix/function.hpp
 	include/awl/backends/posix/optional_duration.hpp
 	include/awl/backends/posix/optional_duration_fwd.hpp
+	include/awl/backends/posix/posted.hpp
+	include/awl/backends/posix/posted_fwd.hpp
+	include/awl/backends/posix/posted_unique_ptr.hpp
 	include/awl/backends/posix/processor.hpp
 	include/awl/backends/posix/processor_base.hpp
 	include/awl/backends/posix/processor_base_fwd.hpp
@@ -623,6 +626,7 @@ set(
 set(
 	AWL_POSIX_SRC_FILES
 	src/backends/posix/create_processor.cpp
+	src/backends/posix/posted.cpp
 	src/backends/posix/processor.cpp
 	src/backends/posix/processor_base.cpp
 )
@@ -636,6 +640,9 @@ set(
 	include/awl/backends/linux/epoll/original_processor.hpp
 	include/awl/backends/linux/epoll/set.hpp
 	include/awl/backends/linux/epoll/set_fwd.hpp
+	include/awl/backends/linux/eventfd/object.hpp
+	include/awl/backends/linux/eventfd/object_fwd.hpp
+	include/awl/backends/linux/eventfd/posted.hpp
 )
 
 set(
@@ -644,6 +651,8 @@ set(
 	src/backends/linux/epoll/fd.cpp
 	src/backends/linux/epoll/original_processor.cpp
 	src/backends/linux/epoll/set.cpp
+	src/backends/linux/eventfd/object.cpp
+	src/backends/linux/eventfd/posted.cpp
 )
 
 set(

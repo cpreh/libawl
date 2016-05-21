@@ -6,6 +6,7 @@
 #include <awl/backends/posix/function.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration_fwd.hpp>
+#include <awl/backends/posix/posted_unique_ptr.hpp>
 #include <awl/backends/posix/processor.hpp>
 #include <awl/backends/linux/epoll/set.hpp>
 #include <awl/detail/symbol.hpp>
@@ -51,7 +52,14 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	bool
+	awl::backends::posix::posted_unique_ptr
+	post(
+		awl::backends::posix::callback const &
+	)
+	override;
+
+	AWL_DETAIL_SYMBOL
+	void
 	poll(
 		awl::backends::posix::optional_duration const &
 	)

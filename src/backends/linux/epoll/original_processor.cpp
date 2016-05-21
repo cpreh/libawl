@@ -1,13 +1,17 @@
-#include <awl/backends/linux/epoll/fd_vector.hpp>
 #include <awl/backends/linux/epoll/original_processor.hpp>
 #include <awl/backends/linux/epoll/set.hpp>
+#include <awl/backends/linux/eventfd/posted.hpp>
 #include <awl/backends/posix/callback.hpp>
 #include <awl/backends/posix/duration.hpp>
 #include <awl/backends/posix/event.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration.hpp>
+#include <awl/backends/posix/posted.hpp>
+#include <awl/backends/posix/posted_unique_ptr.hpp>
 #include <awl/backends/posix/processor.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
@@ -76,21 +80,35 @@ awl::backends::linux::epoll::original_processor::register_fd_callback(
 		);
 }
 
-bool
+awl::backends::posix::posted_unique_ptr
+awl::backends::linux::epoll::original_processor::post(
+	awl::backends::posix::callback const &_callback
+)
+{
+	return
+		fcppt::unique_ptr_to_base<
+			awl::backends::posix::posted
+		>(
+			fcppt::make_unique_ptr<
+				awl::backends::linux::eventfd::posted
+			>(
+				*this,
+				_callback
+			)
+		);
+}
+
+void
 awl::backends::linux::epoll::original_processor::poll(
 	awl::backends::posix::optional_duration const &_duration
 )
 {
-	awl::backends::linux::epoll::fd_vector const &ready_fds(
-		fd_set_.epoll(
-			_duration
-		)
-	);
-
 	for(
 		awl::backends::posix::fd const &fd
 		:
-		ready_fds
+		fd_set_.epoll(
+			_duration
+		)
 	)
 		fcppt::optional::maybe_void(
 			fcppt::container::find_opt_mapped(
@@ -108,9 +126,6 @@ awl::backends::linux::epoll::original_processor::poll(
 				);
 			}
 		);
-
-	return
-		!ready_fds.empty();
 }
 
 void

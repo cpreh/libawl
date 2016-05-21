@@ -5,6 +5,7 @@
 #include <awl/backends/posix/callback.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration_fwd.hpp>
+#include <awl/backends/posix/posted_unique_ptr.hpp>
 #include <awl/backends/posix/processor_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -35,7 +36,13 @@ public:
 	) = 0;
 
 	virtual
-	bool
+	awl::backends::posix::posted_unique_ptr
+	post(
+		awl::backends::posix::callback const &
+	) = 0;
+
+	virtual
+	void
 	poll(
 		awl::backends::posix::optional_duration const &
 	) = 0;
