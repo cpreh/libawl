@@ -243,13 +243,12 @@ if(
 		AWL_LINUX_BACKEND
 		TRUE
 	)
-endif()
 
-# FIXME: Add a proper check here
-set(
-	AWL_POSIX_BACKEND
-	TRUE
-)
+	set(
+		AWL_POSIX_BACKEND
+		TRUE
+	)
+endif()
 
 configure_file(
 	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/config.hpp.in
