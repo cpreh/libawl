@@ -18,22 +18,30 @@
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/window/object_fwd.hpp>
 #include <fcppt/const.hpp>
+#include <fcppt/identity.hpp>
+#include <fcppt/make_int_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/container/maybe_back.hpp>
 #include <fcppt/container/raw_vector_impl.hpp>
 #include <fcppt/optional/alternative.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/object_impl.hpp>
+#include <fcppt/type_iso/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <utility>
@@ -46,7 +54,31 @@ awl::backends::windows::system::event::original_processor::original_processor()
 	signals_(),
 	handle_signal_(),
 	handles_(),
-	window_processors_()
+	window_processors_(),
+	user_messages_(
+		// TODO: We need something better for this, like a sparse map
+		fcppt::algorithm::map<
+			user_message_vector
+		>(
+			fcppt::make_int_range(
+				fcppt::strong_typedef_construct_cast<
+					awl::backends::windows::message_type,
+					fcppt::cast::to_unsigned_fun
+				>(
+					WM_USER
+				),
+				fcppt::strong_typedef_construct_cast<
+					awl::backends::windows::message_type,
+					fcppt::cast::to_unsigned_fun
+				>(
+					WM_USER
+					+
+					128
+				)
+			),
+			fcppt::identity{}
+		)
+	)
 {
 }
 
@@ -164,6 +196,40 @@ awl::backends::windows::system::event::original_processor::create_event_handle()
 
 	return
 		ret;
+}
+
+awl::backends::windows::message_type
+awl::backends::windows::system::event::original_processor::allocate_user_message()
+{
+	awl::backends::windows::message_type const result(
+		fcppt::optional::to_exception(
+			fcppt::container::maybe_back(
+				user_messages_
+			),
+			[]{
+				return
+					awl::exception{
+						FCPPT_TEXT("User messages exhausted.")
+					};
+			}
+		).get()
+	);
+
+	// TODO: This is ugly
+	user_messages_.pop_back();
+
+	return
+		result;
+}
+
+void
+awl::backends::windows::system::event::original_processor::free_user_message(
+	awl::backends::windows::message_type const _message
+)
+{
+	user_messages_.push_back(
+		_message
+	);
 }
 
 void

@@ -1,4 +1,3 @@
-#include <awl/exception.hpp>
 #include <awl/backends/windows/default_wnd_proc.hpp>
 #include <awl/backends/windows/lparam.hpp>
 #include <awl/backends/windows/message.hpp>
@@ -25,28 +24,21 @@
 #include <awl/window/event/resize_callback.hpp>
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
-#include <fcppt/identity.hpp>
-#include <fcppt/make_int_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/algorithm/map.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
-#include <fcppt/container/maybe_back.hpp>
 #include <fcppt/optional/bind.hpp>
 #include <fcppt/optional/from.hpp>
-#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
 #include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/signal/object_impl.hpp>
-#include <fcppt/type_iso/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -63,30 +55,6 @@ awl::backends::windows::window::event::original_processor::original_processor(
 		_window
 	),
 	signals_(),
-	user_messages_(
-		// TODO: We need something better for this, like a sparse map
-		fcppt::algorithm::map<
-			user_message_vector
-		>(
-			fcppt::make_int_range(
-				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::message_type,
-					fcppt::cast::to_unsigned_fun
-				>(
-					WM_USER
-				),
-				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::message_type,
-					fcppt::cast::to_unsigned_fun
-				>(
-					WM_USER
-					+
-					128
-				)
-			),
-			fcppt::identity{}
-		)
-	),
 	close_signal_(
 		awl::window::event::close_signal::combiner_function{
 			[](
@@ -338,40 +306,6 @@ awl::backends::windows::window::event::original_processor::process(
 
 	::DispatchMessage(
 		&_message.get()
-	);
-}
-
-awl::backends::windows::message_type
-awl::backends::windows::window::event::original_processor::allocate_user_message()
-{
-	awl::backends::windows::message_type const result(
-		fcppt::optional::to_exception(
-			fcppt::container::maybe_back(
-				user_messages_
-			),
-			[]{
-				return
-					awl::exception{
-						FCPPT_TEXT("User messages exhausted.")
-					};
-			}
-		).get()
-	);
-
-	// TODO: This is ugly
-	user_messages_.pop_back();
-
-	return
-		result;
-}
-
-void
-awl::backends::windows::window::event::original_processor::free_user_message(
-	awl::backends::windows::message_type const _message
-)
-{
-	user_messages_.push_back(
-		_message
 	);
 }
 

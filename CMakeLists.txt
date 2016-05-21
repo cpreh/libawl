@@ -681,6 +681,7 @@ set(
 	src/backends/windows/system/event/original_handle.cpp
 	src/backends/windows/system/event/original_processor.cpp
 	src/backends/windows/system/event/processor.cpp
+	src/backends/windows/system/event/scoped_user_message.cpp
 	src/backends/windows/system/object.cpp
 	src/backends/windows/system/original_object.cpp
 	src/backends/windows/system_metrics.cpp
@@ -694,7 +695,6 @@ set(
 	src/backends/windows/window/event/original_processor.cpp
 	src/backends/windows/window/event/processor.cpp
 	src/backends/windows/window/event/scoped_processor.cpp
-	src/backends/windows/window/event/scoped_user_message.cpp
 	src/backends/windows/window/event/wnd_proc.cpp
 	src/backends/windows/window/get_client_rect.cpp
 	src/backends/windows/window/get_rect.cpp
@@ -766,6 +766,8 @@ set(
 	include/awl/backends/windows/system/event/original_processor_fwd.hpp
 	include/awl/backends/windows/system/event/processor.hpp
 	include/awl/backends/windows/system/event/processor_fwd.hpp
+	include/awl/backends/windows/system/event/scoped_user_message.hpp
+	include/awl/backends/windows/system/event/scoped_user_message_fwd.hpp
 	include/awl/backends/windows/system/object.hpp
 	include/awl/backends/windows/system/object_fwd.hpp
 	include/awl/backends/windows/system/original_object.hpp
@@ -791,8 +793,6 @@ set(
 	include/awl/backends/windows/window/event/return_type.hpp
 	include/awl/backends/windows/window/event/return_type_fwd.hpp
 	include/awl/backends/windows/window/event/scoped_processor.hpp
-	include/awl/backends/windows/window/event/scoped_user_message.hpp
-	include/awl/backends/windows/window/event/scoped_user_message_fwd.hpp
 	include/awl/backends/windows/window/event/unregister_callback.hpp
 	include/awl/backends/windows/window/event/wnd_proc.hpp
 	include/awl/backends/windows/window/get_client_rect.hpp

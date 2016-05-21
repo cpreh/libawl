@@ -29,7 +29,6 @@
 #include <fcppt/signal/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
-#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -111,17 +110,6 @@ public:
 	)
 	override;
 
-	// TODO: Why is this here?
-	awl::backends::windows::message_type
-	allocate_user_message()
-	override;
-
-	void
-	free_user_message(
-		awl::backends::windows::message_type
-	)
-	override;
-
 	AWL_DETAIL_SYMBOL
 	awl::backends::windows::window::event::return_type
 	execute_callback(
@@ -170,15 +158,7 @@ private:
 	>
 	signal_map;
 
-	typedef
-	std::vector<
-		awl::backends::windows::message_type
-	>
-	user_message_vector;
-
 	signal_map signals_;
-
-	user_message_vector user_messages_;
 
 	awl::window::event::close_signal close_signal_;
 

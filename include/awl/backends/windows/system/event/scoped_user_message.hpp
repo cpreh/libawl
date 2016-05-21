@@ -1,9 +1,9 @@
-#ifndef AWL_BACKENDS_WINDOWS_WINDOW_EVENT_SCOPED_USER_MESSAGE_HPP_INCLUDED
-#define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_SCOPED_USER_MESSAGE_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_SCOPED_USER_MESSAGE_HPP_INCLUDED
+#define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_SCOPED_USER_MESSAGE_HPP_INCLUDED
 
 #include <awl/backends/windows/message_type.hpp>
-#include <awl/backends/windows/window/event/processor_fwd.hpp>
-#include <awl/backends/windows/window/event/scoped_user_message_fwd.hpp>
+#include <awl/backends/windows/system/event/processor_fwd.hpp>
+#include <awl/backends/windows/system/event/scoped_user_message_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -14,7 +14,7 @@ namespace backends
 {
 namespace windows
 {
-namespace window
+namespace system
 {
 namespace event
 {
@@ -28,7 +28,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	explicit
 	scoped_user_message(
-		awl::backends::windows::window::event::processor &
+		awl::backends::windows::system::event::processor &
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -38,7 +38,7 @@ public:
 	awl::backends::windows::message_type
 	type() const;
 private:
-	awl::backends::windows::window::event::processor &processor_;
+	awl::backends::windows::system::event::processor &processor_;
 
 	awl::backends::windows::message_type const type_;
 };

@@ -50,17 +50,6 @@ public:
 	process(
 		awl::backends::windows::message const &
 	) = 0;
-
-	// TODO: Move this!
-	virtual
-	awl::backends::windows::message_type
-	allocate_user_message() = 0;
-
-	virtual
-	void
-	free_user_message(
-		awl::backends::windows::message_type
-	) = 0;
 };
 
 }

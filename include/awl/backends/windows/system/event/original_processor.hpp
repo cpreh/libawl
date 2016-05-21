@@ -24,6 +24,7 @@
 #include <fcppt/signal/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
+#include <vector>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -88,6 +89,16 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::backends::windows::system::event::handle_unique_ptr
 	create_event_handle()
+	override;
+
+	awl::backends::windows::message_type
+	allocate_user_message()
+	override;
+
+	void
+	free_user_message(
+		awl::backends::windows::message_type
+	)
 	override;
 
 	void
@@ -163,6 +174,14 @@ private:
 	window_processor_map;
 
 	window_processor_map window_processors_;
+
+	typedef
+	std::vector<
+		awl::backends::windows::message_type
+	>
+	user_message_vector;
+
+	user_message_vector user_messages_;
 };
 
 }

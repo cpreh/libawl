@@ -55,6 +55,16 @@ public:
 	virtual
 	awl::backends::windows::system::event::handle_unique_ptr
 	create_event_handle() = 0;
+
+	virtual
+	awl::backends::windows::message_type
+	allocate_user_message() = 0;
+
+	virtual
+	void
+	free_user_message(
+		awl::backends::windows::message_type
+	) = 0;
 };
 
 }
