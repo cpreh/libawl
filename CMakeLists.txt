@@ -614,6 +614,8 @@ set(
 	include/awl/backends/posix/optional_duration.hpp
 	include/awl/backends/posix/optional_duration_fwd.hpp
 	include/awl/backends/posix/processor.hpp
+	include/awl/backends/posix/processor_base.hpp
+	include/awl/backends/posix/processor_base_fwd.hpp
 	include/awl/backends/posix/processor_fwd.hpp
 	include/awl/backends/posix/processor_unique_ptr.hpp
 )
@@ -622,6 +624,7 @@ set(
 	AWL_POSIX_SRC_FILES
 	src/backends/posix/create_processor.cpp
 	src/backends/posix/processor.cpp
+	src/backends/posix/processor_base.cpp
 )
 
 set(

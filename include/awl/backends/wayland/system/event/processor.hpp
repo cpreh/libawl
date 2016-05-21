@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/backends/posix/processor_fwd.hpp>
+#include <awl/backends/posix/processor_base.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/shm_fwd.hpp>
@@ -28,7 +28,8 @@ namespace event
 
 class AWL_CLASS_SYMBOL processor
 :
-	public awl::system::event::processor
+	public awl::system::event::processor,
+	public awl::backends::posix::processor_base
 {
 	FCPPT_NONCOPYABLE(
 		processor
@@ -62,10 +63,6 @@ public:
 	seat_callback(
 		awl::backends::wayland::system::event::seat_callback const &
 	) = 0;
-
-	virtual
-	awl::backends::posix::processor &
-	fd_processor() = 0;
 };
 
 }

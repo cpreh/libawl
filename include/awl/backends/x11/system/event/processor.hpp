@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/backends/posix/processor_fwd.hpp>
+#include <awl/backends/posix/processor_base.hpp>
 #include <awl/backends/x11/system/event/callback.hpp>
 #include <awl/backends/x11/system/event/opcode.hpp>
 #include <awl/backends/x11/system/event/processor_fwd.hpp>
@@ -26,7 +26,8 @@ namespace event
 
 class AWL_CLASS_SYMBOL processor
 :
-	public awl::system::event::processor
+	public awl::system::event::processor,
+	public awl::backends::posix::processor_base
 {
 	FCPPT_NONCOPYABLE(
 		processor
@@ -46,10 +47,6 @@ public:
 		awl::backends::x11::system::event::type const &,
 		awl::backends::x11::system::event::callback const &
 	) = 0;
-
-	virtual
-	awl::backends::posix::processor &
-	fd_processor() = 0;
 };
 
 }
