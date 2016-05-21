@@ -2,13 +2,13 @@
 #define AWL_BACKENDS_LINUX_EPOLL_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
+#include <awl/backends/linux/epoll/set.hpp>
 #include <awl/backends/posix/callback.hpp>
-#include <awl/backends/posix/function.hpp>
 #include <awl/backends/posix/fd.hpp>
+#include <awl/backends/posix/function.hpp>
 #include <awl/backends/posix/optional_duration_fwd.hpp>
 #include <awl/backends/posix/posted_unique_ptr.hpp>
 #include <awl/backends/posix/processor.hpp>
-#include <awl/backends/linux/epoll/set.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>

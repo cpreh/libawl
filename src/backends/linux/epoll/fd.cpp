@@ -1,6 +1,6 @@
 #include <awl/exception.hpp>
-#include <awl/backends/posix/fd.hpp>
 #include <awl/backends/linux/epoll/fd.hpp>
+#include <awl/backends/posix/fd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sys/epoll.h>

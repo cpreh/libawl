@@ -1,8 +1,8 @@
 #ifndef AWL_BACKENDS_LINUX_EVENTFD_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_LINUX_EVENTFD_OBJECT_HPP_INCLUDED
 
-#include <awl/backends/posix/fd.hpp>
 #include <awl/backends/linux/eventfd/object_fwd.hpp>
+#include <awl/backends/posix/fd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
