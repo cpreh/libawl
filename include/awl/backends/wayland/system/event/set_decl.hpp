@@ -3,7 +3,8 @@
 
 #include <awl/backends/wayland/id_set.hpp>
 #include <awl/backends/wayland/registry_id.hpp>
-#include <awl/backends/wayland/system/event/add_remove_fwd.hpp>
+#include <awl/backends/wayland/system/event/add_fwd.hpp>
+#include <awl/backends/wayland/system/event/remove_fwd.hpp>
 #include <awl/backends/wayland/system/event/set_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/object_decl.hpp>
@@ -59,32 +60,55 @@ public:
 	);
 
 	typedef
-	awl::backends::wayland::system::event::add_remove<
+	awl::backends::wayland::system::event::add<
 		Type
 	>
-	event_type;
+	add_event;
 
 	typedef
 	void
-	function_type(
-		event_type const &
+	add_function(
+		add_event const &
 	);
 
 	typedef
 	fcppt::signal::object<
-		function_type
+		add_function
 	>
-	signal_type;
+	add_signal_type;
+
+	typedef
+	awl::backends::wayland::system::event::remove<
+		Type
+	>
+	remove_event;
+
+	typedef
+	void
+	remove_function(
+		remove_event const &
+	);
+
+	typedef
+	fcppt::signal::object<
+		remove_function
+	>
+	remove_signal_type;
 
 	set_type const &
 	get() const;
 
-	signal_type &
-	signal();
+	add_signal_type &
+	add_signal();
+
+	remove_signal_type &
+	remove_signal();
 private:
 	set_type impl_;
 
-	signal_type signal_;
+	add_signal_type add_signal_;
+
+	remove_signal_type remove_signal_;
 };
 
 }

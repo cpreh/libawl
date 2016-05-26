@@ -23,7 +23,8 @@
 #include <awl/backends/wayland/system/event/global_data.hpp>
 #include <awl/backends/wayland/system/event/original_processor.hpp>
 #include <awl/backends/wayland/system/event/processor.hpp>
-#include <awl/backends/wayland/system/event/seat_callback.hpp>
+#include <awl/backends/wayland/system/event/seat_added_callback.hpp>
+#include <awl/backends/wayland/system/event/seat_removed_callback.hpp>
 #include <awl/backends/wayland/system/seat/object.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
 #include <awl/main/exit_code.hpp>
@@ -367,12 +368,23 @@ awl::backends::wayland::system::event::original_processor::seats() const
 }
 
 fcppt::signal::auto_connection
-awl::backends::wayland::system::event::original_processor::seat_callback(
-	awl::backends::wayland::system::event::seat_callback const &_callback
+awl::backends::wayland::system::event::original_processor::seat_added_callback(
+	awl::backends::wayland::system::event::seat_added_callback const &_callback
 )
 {
 	return
-		global_data_.seats_.signal().connect(
+		global_data_.seats_.add_signal().connect(
+			_callback
+		);
+}
+
+fcppt::signal::auto_connection
+awl::backends::wayland::system::event::original_processor::seat_removed_callback(
+	awl::backends::wayland::system::event::seat_removed_callback const &_callback
+)
+{
+	return
+		global_data_.seats_.remove_signal().connect(
 			_callback
 		);
 }

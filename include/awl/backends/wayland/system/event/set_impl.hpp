@@ -2,8 +2,8 @@
 #define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_SET_IMPL_HPP_INCLUDED
 
 #include <awl/backends/wayland/registry_id.hpp>
-#include <awl/backends/wayland/system/event/add_remove_decl.hpp>
-#include <awl/backends/wayland/system/event/added.hpp>
+#include <awl/backends/wayland/system/event/add_decl.hpp>
+#include <awl/backends/wayland/system/event/remove_decl.hpp>
 #include <awl/backends/wayland/system/event/set_decl.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
@@ -22,7 +22,8 @@ awl::backends::wayland::system::event::set<
 >::set()
 :
 	impl_{},
-	signal_{}
+	add_signal_{},
+	remove_signal_{}
 {
 }
 
@@ -84,12 +85,9 @@ awl::backends::wayland::system::event::set<
 		result.second
 	);
 
-	signal_(
-		event_type{
-			*result.first,
-			awl::backends::wayland::system::event::added{
-				true
-			}
+	add_signal_(
+		add_event{
+			*result.first
 		}
 	);
 }
@@ -116,12 +114,9 @@ awl::backends::wayland::system::event::set<
 			set_type::iterator const _iterator
 		)
 		{
-			signal_(
-				event_type{
-					*_iterator,
-					awl::backends::wayland::system::event::added{
-						false
-					}
+			remove_signal_(
+				remove_event{
+					*_iterator
 				}
 			);
 
@@ -153,13 +148,28 @@ template<
 typename
 awl::backends::wayland::system::event::set<
 	Type
->::signal_type &
+>::add_signal_type &
 awl::backends::wayland::system::event::set<
 	Type
->::signal()
+>::add_signal()
 {
 	return
-		signal_;
+		add_signal_;
+}
+
+template<
+	typename Type
+>
+typename
+awl::backends::wayland::system::event::set<
+	Type
+>::remove_signal_type &
+awl::backends::wayland::system::event::set<
+	Type
+>::remove_signal()
+{
+	return
+		remove_signal_;
 }
 
 #endif

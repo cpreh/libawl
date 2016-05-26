@@ -7,7 +7,8 @@
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/processor_fwd.hpp>
-#include <awl/backends/wayland/system/event/seat_callback.hpp>
+#include <awl/backends/wayland/system/event/seat_added_callback.hpp>
+#include <awl/backends/wayland/system/event/seat_removed_callback.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor.hpp>
@@ -60,8 +61,14 @@ public:
 
 	virtual
 	fcppt::signal::auto_connection
-	seat_callback(
-		awl::backends::wayland::system::event::seat_callback const &
+	seat_added_callback(
+		awl::backends::wayland::system::event::seat_added_callback const &
+	) = 0;
+
+	virtual
+	fcppt::signal::auto_connection
+	seat_removed_callback(
+		awl::backends::wayland::system::event::seat_removed_callback const &
 	) = 0;
 };
 
