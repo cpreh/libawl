@@ -1,6 +1,6 @@
 cmake_minimum_required(
 	VERSION
-	2.8.12
+	3.0.0
 )
 
 project(
@@ -44,17 +44,12 @@ include_directories(
 link_directories(
 	${Boost_LIBRARY_DIRS}
 )
-
 # Boost end
 
-# Fcppt begin
 find_package(
 	fcppt
 	REQUIRED
 )
-# Fcppt end
-
-# Source groups end
 
 set(
 	AWL_BASE_SRC_FILES
@@ -192,6 +187,11 @@ if(
 elseif(
 	UNIX
 )
+	set(
+		AWL_POSIX_BACKEND
+		TRUE
+	)
+
 	find_package(
 		X11
 	)
@@ -241,11 +241,6 @@ if(
 )
 	set(
 		AWL_LINUX_BACKEND
-		TRUE
-	)
-
-	set(
-		AWL_POSIX_BACKEND
 		TRUE
 	)
 endif()
