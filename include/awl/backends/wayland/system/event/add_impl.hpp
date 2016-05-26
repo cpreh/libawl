@@ -10,7 +10,7 @@ template<
 awl::backends::wayland::system::event::add<
 	Type
 >::add(
-	Type const &_ref
+	Type &_ref
 )
 :
 	impl_{
@@ -22,7 +22,7 @@ awl::backends::wayland::system::event::add<
 template<
 	typename Type
 >
-Type const &
+Type &
 awl::backends::wayland::system::event::add<
 	Type
 >::get() const

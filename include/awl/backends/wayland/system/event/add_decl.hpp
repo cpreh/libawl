@@ -25,16 +25,16 @@ class add
 public:
 	explicit
 	add(
-		Type const &
+		Type &
 	);
 
 	AWL_DETAIL_SYMBOL
-	Type const &
+	Type &
 	get() const;
 private:
 	typedef
 	fcppt::reference<
-		Type const
+		Type
 	>
 	ref;
 

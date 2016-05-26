@@ -87,7 +87,11 @@ awl::backends::wayland::system::event::set<
 
 	add_signal_(
 		add_event{
-			*result.first
+			const_cast<
+				Type &
+			>(
+				*result.first
+			)
 		}
 	);
 }
