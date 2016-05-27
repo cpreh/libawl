@@ -9,6 +9,7 @@
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-protocol.h>
 #include <wayland-util.h>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -95,11 +96,10 @@ awl::backends::wayland::registry_object<
 	registry_object &&_other
 )
 {
-	value_ =
-		_other.value_;
-
-	_other.value_ =
-		nullptr;
+	std::swap(
+		value_,
+		_other.value_
+	);
 
 	name_ =
 		_other.name_;
