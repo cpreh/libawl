@@ -7,9 +7,9 @@
 #include <fcppt/text.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <utility>
 #include <wayland-client-protocol.h>
 #include <wayland-util.h>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 
