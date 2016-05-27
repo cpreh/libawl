@@ -34,12 +34,6 @@ function(
 		${TARGET_NAME}
 	)
 
-	target_include_directories(
-		${TARGET_NAME}
-		PRIVATE
-		${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include
-	)
-
 	target_link_libraries(
 		${TARGET_NAME}
 		PRIVATE

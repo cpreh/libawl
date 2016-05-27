@@ -26,19 +26,10 @@ fcppt_utils_handle_so_version(
 	"0.1"
 )
 
-include_directories(
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include
-)
-
 # Boost begin
 find_package(
 	Boost 1.47.0 REQUIRED
 	system
-)
-
-include_directories(
-	${FCPPT_UTILS_INCLUDE_SYSTEM}
-	${Boost_INCLUDE_DIRS}
 )
 
 link_directories(
@@ -262,11 +253,6 @@ fcppt_generate_symbol_header(
 		awl
 	SYMBOL_NAME
 		AWL_DETAIL
-)
-
-include_directories(
-	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/src/impl/include
 )
 
 set(
@@ -952,9 +938,15 @@ function(
 
 	target_include_directories(
 		${TARGETNAME}
+		PUBLIC
+		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_BINARY_DIR}/include>"
+		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include>"
+		${Boost_INCLUDE_DIRS}
 		INTERFACE
 		${Boost_INCLUDE_DIRS}
 		${fcppt_INCLUDE_DIRS}
+		PRIVATE
+		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/src/impl/include>"
 	)
 
 	fcppt_utils_add_target_include_dir(
