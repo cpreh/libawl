@@ -70,6 +70,11 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
+	wl_surface *
+	surface() const
+	override;
+
+	AWL_DETAIL_SYMBOL
 	wl_shell_surface *
 	get() const
 	override;

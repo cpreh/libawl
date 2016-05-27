@@ -36,6 +36,10 @@ public:
 	override;
 
 	virtual
+	wl_surface *
+	surface() const = 0;
+
+	virtual
 	wl_shell_surface *
 	get() const = 0;
 };

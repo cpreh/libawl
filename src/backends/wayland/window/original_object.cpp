@@ -147,6 +147,13 @@ awl::backends::wayland::window::original_object::processor()
 		*processor_;
 }
 
+wl_surface *
+awl::backends::wayland::window::original_object::surface() const
+{
+	return
+		surface_.get();
+}
+
 wl_shell_surface *
 awl::backends::wayland::window::original_object::get() const
 {
