@@ -266,6 +266,7 @@ fcppt_generate_symbol_header(
 
 include_directories(
 	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/src/impl/include
 )
 
 set(
@@ -486,7 +487,6 @@ set(
 	include/awl/backends/wayland/id_less.hpp
 	include/awl/backends/wayland/id_set.hpp
 	include/awl/backends/wayland/make_registry_object.hpp
-	include/awl/backends/wayland/make_registry_object_impl.hpp
 	include/awl/backends/wayland/optional_compositor.hpp
 	include/awl/backends/wayland/optional_compositor_fwd.hpp
 	include/awl/backends/wayland/optional_shell.hpp

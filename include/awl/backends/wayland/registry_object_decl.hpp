@@ -3,6 +3,7 @@
 
 #include <awl/backends/wayland/registry_id.hpp>
 #include <awl/backends/wayland/registry_object_fwd.hpp>
+#include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-protocol.h>
@@ -33,20 +34,25 @@ public:
 		awl::backends::wayland::registry_id
 	);
 
+	AWL_DETAIL_SYMBOL
 	registry_object(
 		registry_object &&
 	);
 
+	AWL_DETAIL_SYMBOL
 	registry_object &
 	operator=(
 		registry_object &&
 	);
 
+	AWL_DETAIL_SYMBOL
 	~registry_object();
 
+	AWL_DETAIL_SYMBOL
 	Type *
 	get() const;
 
+	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::registry_id
 	name() const;
 private:
