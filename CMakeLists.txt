@@ -608,6 +608,11 @@ set(
 	include/awl/backends/posix/processor_base_fwd.hpp
 	include/awl/backends/posix/processor_fwd.hpp
 	include/awl/backends/posix/processor_unique_ptr.hpp
+	include/awl/backends/posix/timer.hpp
+	include/awl/backends/posix/timer_delay.hpp
+	include/awl/backends/posix/timer_fwd.hpp
+	include/awl/backends/posix/timer_period.hpp
+	include/awl/backends/posix/timer_unique_ptr.hpp
 )
 
 set(
@@ -616,6 +621,7 @@ set(
 	src/backends/posix/posted.cpp
 	src/backends/posix/processor.cpp
 	src/backends/posix/processor_base.cpp
+	src/backends/posix/timer.cpp
 )
 
 set(
@@ -630,6 +636,9 @@ set(
 	include/awl/backends/linux/eventfd/object.hpp
 	include/awl/backends/linux/eventfd/object_fwd.hpp
 	include/awl/backends/linux/eventfd/posted.hpp
+	include/awl/backends/linux/timerfd/object.hpp
+	include/awl/backends/linux/timerfd/object_fwd.hpp
+	include/awl/backends/linux/timerfd/timer.hpp
 )
 
 set(
@@ -640,6 +649,8 @@ set(
 	src/backends/linux/epoll/set.cpp
 	src/backends/linux/eventfd/object.cpp
 	src/backends/linux/eventfd/posted.cpp
+	src/backends/linux/timerfd/object.cpp
+	src/backends/linux/timerfd/timer.cpp
 )
 
 set(

@@ -1,6 +1,7 @@
 #include <awl/backends/linux/epoll/original_processor.hpp>
 #include <awl/backends/linux/epoll/set.hpp>
 #include <awl/backends/linux/eventfd/posted.hpp>
+#include <awl/backends/linux/timerfd/timer.hpp>
 #include <awl/backends/posix/callback.hpp>
 #include <awl/backends/posix/duration.hpp>
 #include <awl/backends/posix/event.hpp>
@@ -9,6 +10,10 @@
 #include <awl/backends/posix/posted.hpp>
 #include <awl/backends/posix/posted_unique_ptr.hpp>
 #include <awl/backends/posix/processor.hpp>
+#include <awl/backends/posix/timer.hpp>
+#include <awl/backends/posix/timer_delay.hpp>
+#include <awl/backends/posix/timer_period.hpp>
+#include <awl/backends/posix/timer_unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -94,6 +99,28 @@ awl::backends::linux::epoll::original_processor::post(
 			>(
 				*this,
 				_callback
+			)
+		);
+}
+
+awl::backends::posix::timer_unique_ptr
+awl::backends::linux::epoll::original_processor::create_timer(
+	awl::backends::posix::callback const &_callback,
+	awl::backends::posix::timer_delay const _delay,
+	awl::backends::posix::timer_period const _period
+)
+{
+	return
+		fcppt::unique_ptr_to_base<
+			awl::backends::posix::timer
+		>(
+			fcppt::make_unique_ptr<
+				awl::backends::linux::timerfd::timer
+			>(
+				*this,
+				_callback,
+				_delay,
+				_period
 			)
 		);
 }

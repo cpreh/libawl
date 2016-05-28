@@ -1,7 +1,6 @@
 #ifndef AWL_BACKENDS_LINUX_EVENTFD_POSTED_HPP_INCLUDED
 #define AWL_BACKENDS_LINUX_EVENTFD_POSTED_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
 #include <awl/backends/linux/eventfd/object.hpp>
 #include <awl/backends/posix/callback.hpp>
 #include <awl/backends/posix/posted.hpp>

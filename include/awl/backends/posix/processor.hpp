@@ -7,6 +7,9 @@
 #include <awl/backends/posix/optional_duration_fwd.hpp>
 #include <awl/backends/posix/posted_unique_ptr.hpp>
 #include <awl/backends/posix/processor_fwd.hpp>
+#include <awl/backends/posix/timer_delay.hpp>
+#include <awl/backends/posix/timer_period.hpp>
+#include <awl/backends/posix/timer_unique_ptr.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
@@ -39,6 +42,14 @@ public:
 	awl::backends::posix::posted_unique_ptr
 	post(
 		awl::backends::posix::callback const &
+	) = 0;
+
+	virtual
+	awl::backends::posix::timer_unique_ptr
+	create_timer(
+		awl::backends::posix::callback const &,
+		awl::backends::posix::timer_delay,
+		awl::backends::posix::timer_period
 	) = 0;
 
 	virtual
