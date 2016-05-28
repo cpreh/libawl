@@ -3,8 +3,8 @@
 
 #include <awl/backends/linux/timerfd/object.hpp>
 #include <awl/backends/posix/callback.hpp>
-#include <awl/backends/posix/timer.hpp>
 #include <awl/backends/posix/processor_fwd.hpp>
+#include <awl/backends/posix/timer.hpp>
 #include <awl/backends/posix/timer_delay.hpp>
 #include <awl/backends/posix/timer_period.hpp>
 #include <awl/detail/symbol.hpp>
