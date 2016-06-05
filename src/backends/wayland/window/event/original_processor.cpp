@@ -1,4 +1,5 @@
-#include <awl/backends/wayland/window/object.hpp>
+#include <awl/log.hpp>
+#include <awl/backends/wayland/window/shell_surface.hpp>
 #include <awl/backends/wayland/window/event/data.hpp>
 #include <awl/backends/wayland/window/event/original_processor.hpp>
 #include <awl/backends/wayland/window/event/processor.hpp>
@@ -13,6 +14,9 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/debug.hpp>
+#include <fcppt/math/dim/output.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -66,16 +70,27 @@ shell_surface_configure(
 		0
 	);
 
+	awl::window::dim const size{
+		fcppt::cast::to_unsigned(
+			_width
+		),
+		fcppt::cast::to_unsigned(
+			_height
+		)
+	};
+
+	FCPPT_LOG_DEBUG(
+		awl::log(),
+		fcppt::log::_
+			<<
+			FCPPT_TEXT("Got resize event ")
+			<<
+			size
+	);
+
 	data.resize_signal_(
 		awl::window::event::resize{
-			awl::window::dim{
-				fcppt::cast::to_unsigned(
-					_width
-				),
-				fcppt::cast::to_unsigned(
-					_height
-				)
-			}
+			size
 		}
 	);
 }
@@ -97,7 +112,7 @@ wl_shell_surface_listener const shell_surface_listener{
 }
 
 awl::backends::wayland::window::event::original_processor::original_processor(
-	awl::backends::wayland::window::object &_window
+	awl::backends::wayland::window::shell_surface &_shell_surface
 )
 :
 	awl::backends::wayland::window::event::processor(),
@@ -124,7 +139,7 @@ awl::backends::wayland::window::event::original_processor::original_processor(
 	data_{}
 {
 	::wl_shell_surface_add_listener(
-		_window.get(),
+		_shell_surface.get(),
 		&shell_surface_listener,
 		&data_
 	);

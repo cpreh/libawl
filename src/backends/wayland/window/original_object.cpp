@@ -1,4 +1,6 @@
 #include <awl/backends/wayland/compositor_fwd.hpp>
+#include <awl/backends/wayland/display_fwd.hpp>
+#include <awl/backends/wayland/display_roundtrip.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/window/object.hpp>
 #include <awl/backends/wayland/window/original_object.hpp>
@@ -24,12 +26,16 @@
 
 
 awl::backends::wayland::window::original_object::original_object(
+	awl::backends::wayland::display const &_display,
 	awl::backends::wayland::compositor const &_compositor,
 	awl::backends::wayland::shell const &_shell,
 	awl::window::parameters const &_parameters
 )
 :
 	awl::backends::wayland::window::object(),
+	display_{
+		_display
+	},
 	visual_{
 		_parameters.visual()
 	},
@@ -47,7 +53,7 @@ awl::backends::wayland::window::original_object::original_object(
 			fcppt::make_unique_ptr<
 				awl::backends::wayland::window::event::original_processor
 			>(
-				*this
+				shell_surface_
 			)
 		)
 	},
@@ -115,6 +121,10 @@ awl::backends::wayland::window::original_object::show()
 {
 	::wl_shell_surface_set_toplevel(
 		shell_surface_.get()
+	);
+
+	awl::backends::wayland::display_roundtrip(
+		display_
 	);
 }
 

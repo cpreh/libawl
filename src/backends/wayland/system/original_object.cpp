@@ -1,4 +1,5 @@
 #include <awl/backends/wayland/display_fwd.hpp>
+#include <awl/backends/wayland/display_roundtrip.hpp>
 #include <awl/backends/wayland/cursor/convert_name.hpp>
 #include <awl/backends/wayland/cursor/create_invisible.hpp>
 #include <awl/backends/wayland/cursor/create_name.hpp>
@@ -54,18 +55,28 @@ awl::backends::wayland::system::original_object::create_window(
 	awl::window::parameters const &_parameters
 )
 {
-	return
+	awl::window::object_unique_ptr result{
 		fcppt::unique_ptr_to_base<
 			awl::window::object
 		>(
 			fcppt::make_unique_ptr<
 				awl::backends::wayland::window::original_object
 			>(
+				display_,
 				processor_->compositor(),
 				processor_->shell(),
 				_parameters
 			)
-		);
+		)
+	};
+
+	// TODO: Do we need this?
+	awl::backends::wayland::display_roundtrip(
+		display_
+	);
+
+	return
+		result;
 }
 
 awl::system::event::processor &

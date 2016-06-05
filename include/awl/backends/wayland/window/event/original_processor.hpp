@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WAYLAND_WINDOW_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
-#include <awl/backends/wayland/window/object_fwd.hpp>
+#include <awl/backends/wayland/window/shell_surface_fwd.hpp>
 #include <awl/backends/wayland/window/event/data.hpp>
 #include <awl/backends/wayland/window/event/processor.hpp>
 #include <awl/detail/symbol.hpp>
@@ -42,7 +42,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	explicit
 	original_processor(
-		awl::backends::wayland::window::object &
+		awl::backends::wayland::window::shell_surface &
 	);
 
 	AWL_DETAIL_SYMBOL

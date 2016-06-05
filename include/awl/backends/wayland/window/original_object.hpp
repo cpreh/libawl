@@ -3,6 +3,7 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
+#include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/surface.hpp>
 #include <awl/backends/wayland/window/object.hpp>
@@ -40,6 +41,7 @@ class AWL_CLASS_SYMBOL original_object
 public:
 	AWL_DETAIL_SYMBOL
 	original_object(
+		awl::backends::wayland::display const &,
 		awl::backends::wayland::compositor const &,
 		awl::backends::wayland::shell const &,
 		awl::window::parameters const &
@@ -79,6 +81,8 @@ public:
 	get() const
 	override;
 private:
+	awl::backends::wayland::display const &display_;
+
 	awl::visual::object const &visual_;
 
 	awl::backends::wayland::surface surface_;

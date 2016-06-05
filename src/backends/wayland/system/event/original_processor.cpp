@@ -272,10 +272,6 @@ awl::backends::wayland::system::event::original_processor::original_processor(
 	awl::backends::wayland::display_roundtrip(
 		display_
 	);
-
-	awl::backends::wayland::display_roundtrip(
-		display_
-	);
 }
 
 awl::backends::wayland::system::event::original_processor::~original_processor()
