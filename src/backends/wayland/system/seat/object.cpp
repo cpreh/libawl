@@ -118,15 +118,49 @@ awl::backends::wayland::system::seat::object::object(
 }
 
 awl::backends::wayland::system::seat::object::object(
-	object &&
+	object &&_other
 )
-= default;
+:
+	impl_{
+		std::move(
+			_other.impl_
+		)
+	},
+	data_{
+		std::move(
+			_other.data_
+		)
+	}
+{
+	::wl_seat_set_user_data(
+		impl_.get(),
+		&data_
+	);
+}
 
 awl::backends::wayland::system::seat::object &
 awl::backends::wayland::system::seat::object::operator=(
-	object &&
+	object &&_other
 )
-= default;
+{
+	impl_ =
+		std::move(
+			_other.impl_
+		);
+
+	data_ =
+		std::move(
+			_other.data_
+		);
+
+	::wl_seat_set_user_data(
+		impl_.get(),
+		&data_
+	);
+
+	return
+		*this;
+}
 
 awl::backends::wayland::system::seat::object::~object()
 {
