@@ -44,10 +44,10 @@ find_package(
 
 set(
 	AWL_BASE_SRC_FILES
-	src/create_log.cpp
 	src/cursor/object.cpp
 	src/exception.cpp
-	src/log.cpp
+	src/impl/src/create_log.cpp
+	src/impl/src/log.cpp
 	src/log_context.cpp
 	src/log_location.cpp
 	src/main/create_output.cpp
@@ -77,7 +77,6 @@ set(
 set(
 	AWL_BASE_INCLUDE_FILES
 	include/awl/class_symbol.hpp
-	include/awl/create_log.hpp
 	include/awl/cursor/const_optional_object_ref.hpp
 	include/awl/cursor/const_optional_object_ref_fwd.hpp
 	include/awl/cursor/hotspot.hpp
@@ -89,7 +88,6 @@ set(
 	include/awl/cursor/type.hpp
 	include/awl/cursor/type_fwd.hpp
 	include/awl/exception.hpp
-	include/awl/log.hpp
 	include/awl/log_context.hpp
 	include/awl/log_location.hpp
 	include/awl/main/create_output.hpp
@@ -166,6 +164,10 @@ set(
 	include/awl/window/parameters_fwd.hpp
 	include/awl/window/size.hpp
 	include/awl/window/unit.hpp
+	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
+	src/impl/include/awl/impl/create_log.hpp
+	src/impl/include/awl/impl/export_class_instantiation.hpp
+	src/impl/include/awl/impl/log.hpp
 )
 
 if(

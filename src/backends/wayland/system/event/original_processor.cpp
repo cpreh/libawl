@@ -1,5 +1,4 @@
 #include <awl/exception.hpp>
-#include <awl/log.hpp>
 #include <awl/backends/posix/callback.hpp>
 #include <awl/backends/posix/create_processor.hpp>
 #include <awl/backends/posix/duration.hpp>
@@ -27,6 +26,7 @@
 #include <awl/backends/wayland/system/event/seat_removed_callback.hpp>
 #include <awl/backends/wayland/system/seat/object.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
+#include <awl/impl/log.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/optional_exit_code.hpp>
@@ -79,7 +79,7 @@ registry_add(
 	};
 
 	FCPPT_LOG_DEBUG(
-		awl::log(),
+		awl::impl::log(),
 		fcppt::log::_
 			<<
 			FCPPT_TEXT("Got registry object \"")

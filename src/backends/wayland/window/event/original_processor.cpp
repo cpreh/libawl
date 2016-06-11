@@ -1,8 +1,8 @@
-#include <awl/log.hpp>
 #include <awl/backends/wayland/window/shell_surface.hpp>
 #include <awl/backends/wayland/window/event/data.hpp>
 #include <awl/backends/wayland/window/event/original_processor.hpp>
 #include <awl/backends/wayland/window/event/processor.hpp>
+#include <awl/impl/log.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/event/close_callback.hpp>
 #include <awl/window/event/close_signal.hpp>
@@ -80,7 +80,7 @@ shell_surface_configure(
 	};
 
 	FCPPT_LOG_DEBUG(
-		awl::log(),
+		awl::impl::log(),
 		fcppt::log::_
 			<<
 			FCPPT_TEXT("Got resize event ")

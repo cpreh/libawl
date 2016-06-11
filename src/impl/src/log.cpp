@@ -1,6 +1,6 @@
-#include <awl/create_log.hpp>
-#include <awl/log.hpp>
 #include <awl/log_location.hpp>
+#include <awl/impl/create_log.hpp>
+#include <awl/impl/log.hpp>
 #include <fcppt/log/object.hpp>
 
 
@@ -8,7 +8,7 @@ namespace
 {
 
 fcppt::log::object logger(
-	awl::create_log(
+	awl::impl::create_log(
 		awl::log_location()
 	)
 );
@@ -16,7 +16,7 @@ fcppt::log::object logger(
 }
 
 fcppt::log::object &
-awl::log()
+awl::impl::log()
 {
 	return
 		logger;

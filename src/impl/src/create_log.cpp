@@ -1,5 +1,5 @@
-#include <awl/create_log.hpp>
 #include <awl/log_context.hpp>
+#include <awl/impl/create_log.hpp>
 #include <fcppt/io/clog.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/location.hpp>
@@ -7,7 +7,7 @@
 
 
 fcppt::log::parameters
-awl::create_log(
+awl::impl::create_log(
 	fcppt::log::location const &_location
 )
 {
