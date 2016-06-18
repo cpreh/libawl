@@ -957,7 +957,6 @@ function(
 		${Boost_INCLUDE_DIRS}
 		INTERFACE
 		${Boost_INCLUDE_DIRS}
-		${fcppt_INCLUDE_DIRS}
 		PRIVATE
 		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/src/impl/include>"
 	)
@@ -972,6 +971,8 @@ function(
 		PRIVATE
 		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
+		INTERFACE
+		fcppt_core_interface
 	)
 
 	if(
