@@ -7,11 +7,6 @@ fcppt_export_init(
 )
 
 fcppt_export_generate_targets(
-	"awl"
 	"${awl_USE_STATIC_LIBS}"
-)
-
-set(
-	awl_INCLUDE_DIRS
-	"@Boost_INCLUDE_DIRS@;@fcppt_INCLUDE_DIRS@;@awl_INCLUDE_DIR@"
+	"awl"
 )

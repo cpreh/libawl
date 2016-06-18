@@ -924,24 +924,42 @@ fcppt_utils_link_target(
 )
 
 function(
-	MAKE_AWL_LIBRARY
+	make_awl_library
 	TARGETNAME
 	VARIANT
 )
-	add_library(
-		${TARGETNAME}
+	if(
 		${VARIANT}
-		${AWL_FILES}
+		STREQUAL
+		INTERFACE
 	)
+		add_library(
+			${TARGETNAME}
+			${VARIANT}
+		)
+	else()
+		add_library(
+			${TARGETNAME}
+			${VARIANT}
+			${AWL_FILES}
+		)
+	endif()
 
-	fcppt_utils_set_so_version(
-		${TARGETNAME}
-		${AWL_USED_SO_VERSION}
+	if(
+		NOT
+		${VARIANT}
+		STREQUAL
+		INTERFACE
 	)
+		fcppt_utils_set_so_version(
+			${TARGETNAME}
+			${AWL_USED_SO_VERSION}
+		)
 
-	fcppt_utils_set_target_compiler_flags(
-		${TARGETNAME}
-	)
+		fcppt_utils_set_target_compiler_flags(
+			${TARGETNAME}
+		)
+	endif()
 
 	fcppt_utils_interface_static_link(
 		${TARGETNAME}
@@ -949,82 +967,112 @@ function(
 		${AWL_STATIC_LINK_FLAG}
 	)
 
-	target_include_directories(
-		${TARGETNAME}
-		PUBLIC
+	set(
+		PUBLIC_INCLUDES
 		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_BINARY_DIR}/include>"
 		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include>"
 		${Boost_INCLUDE_DIRS}
-		INTERFACE
-		${Boost_INCLUDE_DIRS}
-		PRIVATE
-		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/src/impl/include>"
 	)
 
-	fcppt_utils_add_target_include_dir(
+	target_include_directories(
 		${TARGETNAME}
-		TRUE
+		INTERFACE
+		${PUBLIC_INCLUDES}
 	)
 
 	target_link_libraries(
 		${TARGETNAME}
-		PRIVATE
-		${fcppt_core_TARGET}
-		${fcppt_log_TARGET}
 		INTERFACE
 		fcppt_core_interface
 	)
 
+	set(
+		WINDOWS_COMPILE_DEFINITIONS
+		_UNICODE
+		UNICODE
+	)
+
 	if(
-		AWL_X11_BACKEND
+		NOT
+		${VARIANT}
+		STREQUAL
+		INTERFACE
 	)
 		target_include_directories(
 			${TARGETNAME}
 			PRIVATE
-			${X11_INCLUDE_PATH}
+			${PUBLIC_INCLUDES}
+			"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/src/impl/include>"
 		)
 
 		target_link_libraries(
 			${TARGETNAME}
 			PRIVATE
-			${X11_X11_LIB}
+			${fcppt_core_TARGET}
+			${fcppt_log_TARGET}
 		)
+
+# FIXME: This is broken. Clients that use the backends must also
+#include this
+		if(
+			AWL_X11_BACKEND
+		)
+			target_include_directories(
+				${TARGETNAME}
+				PRIVATE
+				${X11_INCLUDE_PATH}
+			)
+
+			target_link_libraries(
+				${TARGETNAME}
+				PRIVATE
+				${X11_X11_LIB}
+			)
+		endif()
+
+		if(
+			AWL_WAYLAND_BACKEND
+		)
+			target_include_directories(
+				${TARGETNAME}
+				PRIVATE
+				${WAYLAND_CLIENT_INCLUDE_DIRS}
+				${WAYLAND_CURSOR_INCLUDE_DIRS}
+			)
+
+			target_link_libraries(
+				${TARGETNAME}
+				PRIVATE
+				${WAYLAND_CLIENT_LIBRARIES}
+				${WAYLAND_CURSOR_LIBRARIES}
+			)
+		endif()
+
+		# TODO: Link to certain windows libs
+		if(
+			AWL_WINDOWS_BACKEND
+		)
+			target_compile_definitions(
+				${TARGETNAME}
+				PRIVATE
+				${WINDOWS_COMPILE_DEFINITIONS}
+			)
+
+			target_link_libraries(
+				${TARGETNAME}
+				PRIVATE
+				${fcppt_filesystem_TARGET}
+			)
+		endif()
 	endif()
-
-	if(
-		AWL_WAYLAND_BACKEND
-	)
-		target_include_directories(
-			${TARGETNAME}
-			PRIVATE
-			${WAYLAND_CLIENT_INCLUDE_DIRS}
-			${WAYLAND_CURSOR_INCLUDE_DIRS}
-		)
-
-		target_link_libraries(
-			${TARGETNAME}
-			PRIVATE
-			${WAYLAND_CLIENT_LIBRARIES}
-			${WAYLAND_CURSOR_LIBRARIES}
-		)
-	endif()
-
-	# TODO: Link to certain windows libs
 
 	if(
 		AWL_WINDOWS_BACKEND
 	)
 		target_compile_definitions(
 			${TARGETNAME}
-			PUBLIC
-			UNICODE
-			_UNICODE
-		)
-
-		target_link_libraries(
-			${TARGETNAME}
-			PRIVATE
-			${fcppt_filesystem_TARGET}
+			INTERFACE
+			${WINDOWS_COMPILE_DEFINITIONS}
 		)
 	endif()
 
@@ -1032,6 +1080,16 @@ function(
 		${TARGETNAME}
 	)
 endfunction()
+
+fcppt_utils_interface_link_name(
+	awl
+	INTERFACE_NAME
+)
+
+make_awl_library(
+	${INTERFACE_NAME}
+	INTERFACE
+)
 
 if(
 	ENABLE_STATIC
@@ -1098,9 +1156,7 @@ foreach(
 	)
 endforeach()
 
-fcppt_utils_generate_config(
-	HAS_BUILDDIR
-)
+fcppt_utils_generate_config()
 
 install(
 	DIRECTORY
