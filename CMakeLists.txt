@@ -47,8 +47,6 @@ set(
 	src/cursor/object.cpp
 	src/exception.cpp
 	src/impl/src/create_log.cpp
-	src/impl/src/log.cpp
-	src/log_context.cpp
 	src/log_location.cpp
 	src/main/create_output.cpp
 	src/main/dummy_output.cpp
@@ -88,7 +86,6 @@ set(
 	include/awl/cursor/type.hpp
 	include/awl/cursor/type_fwd.hpp
 	include/awl/exception.hpp
-	include/awl/log_context.hpp
 	include/awl/log_location.hpp
 	include/awl/main/create_output.hpp
 	include/awl/main/dummy_output.hpp
@@ -167,7 +164,6 @@ set(
 	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
 	src/impl/include/awl/impl/create_log.hpp
 	src/impl/include/awl/impl/export_class_instantiation.hpp
-	src/impl/include/awl/impl/log.hpp
 )
 
 if(
@@ -273,7 +269,7 @@ set(
 	src/backends/x11/flush.cpp
 	src/backends/x11/free.cpp
 	src/backends/x11/intern_atom.cpp
-	src/backends/x11/log.cpp
+	src/backends/x11/log_location.cpp
 	src/backends/x11/original_display.cpp
 	src/backends/x11/pending.cpp
 	src/backends/x11/pixmap/create_from_data.cpp
@@ -353,7 +349,7 @@ set(
 	include/awl/backends/x11/flush.hpp
 	include/awl/backends/x11/free.hpp
 	include/awl/backends/x11/intern_atom.hpp
-	include/awl/backends/x11/log.hpp
+	include/awl/backends/x11/log_location.hpp
 	include/awl/backends/x11/original_display.hpp
 	include/awl/backends/x11/pending.hpp
 	include/awl/backends/x11/pixmap/const_holder_ref.hpp

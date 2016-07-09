@@ -1,7 +1,6 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/colormap.hpp>
 #include <awl/backends/x11/display.hpp>
-#include <awl/backends/x11/log.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <fcppt/text.hpp>
@@ -32,11 +31,14 @@ awl::backends::x11::colormap::colormap(
 	)
 {
 	if(
-		colormap_ == 0
+		colormap_
+		==
+		0
 	)
-		throw awl::exception(
-			FCPPT_TEXT("XCreateColormap() failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("XCreateColormap() failed!")
+			};
 }
 
 awl::backends::x11::colormap::~colormap()
@@ -50,11 +52,13 @@ awl::backends::x11::colormap::~colormap()
 Colormap &
 awl::backends::x11::colormap::get()
 {
-	return colormap_;
+	return
+		colormap_;
 }
 
 Colormap const &
 awl::backends::x11::colormap::get() const
 {
-	return colormap_;
+	return
+		colormap_;
 }

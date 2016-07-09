@@ -26,7 +26,6 @@
 #include <awl/backends/wayland/system/event/seat_removed_callback.hpp>
 #include <awl/backends/wayland/system/seat/object.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
-#include <awl/impl/log.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/optional_exit_code.hpp>
@@ -79,7 +78,7 @@ registry_add(
 	};
 
 	FCPPT_LOG_DEBUG(
-		awl::impl::log(),
+		data.log_,
 		fcppt::log::_
 			<<
 			FCPPT_TEXT("Got registry object \"")

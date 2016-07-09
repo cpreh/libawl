@@ -8,6 +8,7 @@
 #include <awl/backends/wayland/system/event/seat_set.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
 
 
@@ -28,9 +29,14 @@ struct global_data
 		global_data
 	);
 public:
-	global_data();
+	explicit
+	global_data(
+		fcppt::log::object &
+	);
 
 	~global_data();
+
+	fcppt::log::object &log_;
 
 	awl::backends::wayland::optional_compositor compositor_;
 
