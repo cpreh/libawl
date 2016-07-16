@@ -1,3 +1,4 @@
+#include <awl/log_location.hpp>
 #include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/display_roundtrip.hpp>
 #include <awl/backends/wayland/cursor/convert_name.hpp>
@@ -14,6 +15,8 @@
 #include <awl/cursor/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
 #include <awl/cursor/type.hpp>
+#include <awl/impl/create_log.hpp>
+#include <awl/impl/backends/wayland/log_name.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
@@ -22,13 +25,23 @@
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
-awl::backends::wayland::system::original_object::original_object()
+awl::backends::wayland::system::original_object::original_object(
+	fcppt::log::context &_log_context
+)
 :
 	awl::backends::wayland::system::object(),
-	display_(),
+	log_{
+		_log_context,
+		awl::log_location(),
+		awl::impl::create_log(
+			awl::impl::backends::wayland::log_name()
+		)
+	},
+	display_{},
 	processor_{
 		fcppt::unique_ptr_to_base<
 			awl::backends::wayland::system::event::processor
@@ -36,6 +49,7 @@ awl::backends::wayland::system::original_object::original_object()
 			fcppt::make_unique_ptr<
 				awl::backends::wayland::system::event::original_processor
 			>(
+				log_,
 				display_
 			)
 		)
@@ -62,6 +76,7 @@ awl::backends::wayland::system::original_object::create_window(
 			fcppt::make_unique_ptr<
 				awl::backends::wayland::window::original_object
 			>(
+				log_,
 				display_,
 				processor_->compositor(),
 				processor_->shell(),

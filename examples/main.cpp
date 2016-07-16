@@ -9,6 +9,10 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
+#include <fcppt/log/context.hpp>
+#include <fcppt/log/enabled_levels.hpp>
+#include <fcppt/log/level.hpp>
+#include <fcppt/log/setting.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
 #include <cstdlib>
@@ -20,8 +24,18 @@ int
 main()
 try
 {
+	fcppt::log::context log_context{
+		fcppt::log::setting{
+			fcppt::log::enabled_levels(
+				fcppt::log::level::debug
+			)
+		}
+	};
+
 	awl::system::object_unique_ptr const window_system(
-		awl::system::create()
+		awl::system::create(
+			log_context
+		)
 	);
 
 	awl::visual::object_unique_ptr const visual(

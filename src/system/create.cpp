@@ -24,6 +24,7 @@
 #include <fcppt/either/object.hpp>
 #include <fcppt/either/to_exception.hpp>
 #include <fcppt/either/try_call.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -49,23 +50,31 @@ template<
 	typename Result
 >
 function_type
-try_create()
+try_create(
+	fcppt::log::context &_log_context
+)
 {
 	return
 		function_type{
-			[]{
+			[
+				&_log_context
+			]{
 				return
 					fcppt::either::try_call<
 						awl::exception
 					>(
-						[]{
+						[
+							&_log_context
+						]{
 							return
 								fcppt::unique_ptr_to_base<
 									awl::system::object
 								>(
 									fcppt::make_unique_ptr<
 										Result
-									>()
+									>(
+										_log_context
+									)
 								);
 						},
 						[](
@@ -83,7 +92,9 @@ try_create()
 }
 
 awl::system::object_unique_ptr
-awl::system::create()
+awl::system::create(
+	fcppt::log::context &_log_context
+)
 {
 	return
 		fcppt::either::to_exception(
@@ -92,19 +103,25 @@ awl::system::create()
 #if defined(AWL_WAYLAND_BACKEND)
 					try_create<
 						awl::backends::wayland::system::original_object
-					>()
+					>(
+						_log_context
+					)
 					,
 #endif
 #if defined(AWL_X11_BACKEND)
 					try_create<
 						awl::backends::x11::system::original_object
-					>()
+					>(
+						_log_context
+					)
 					,
 #endif
 #if defined(AWL_WINDOWS_BACKEND)
 					try_create<
 						awl::backends::windows::system::original_object
-					>()
+					>(
+						_log_context
+					)
 					,
 #endif
 					function_type{

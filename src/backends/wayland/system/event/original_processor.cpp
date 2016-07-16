@@ -36,6 +36,7 @@
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/object_impl.hpp>
@@ -231,6 +232,7 @@ wl_registry_listener const registry_listener{
 }
 
 awl::backends::wayland::system::event::original_processor::original_processor(
+	fcppt::log::object &_log,
 	awl::backends::wayland::display &_display
 )
 :
@@ -244,7 +246,9 @@ awl::backends::wayland::system::event::original_processor::original_processor(
 	registry_{
 		_display
 	},
-	global_data_(),
+	global_data_{
+		_log
+	},
 	fd_connection_{
 		fd_processor_->register_fd_callback(
 			awl::backends::posix::fd{

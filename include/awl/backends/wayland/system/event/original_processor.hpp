@@ -21,6 +21,7 @@
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 
 
@@ -44,8 +45,8 @@ class AWL_CLASS_SYMBOL original_processor
 	);
 public:
 	AWL_DETAIL_SYMBOL
-	explicit
 	original_processor(
+		fcppt::log::object &,
 		awl::backends::wayland::display &
 	);
 

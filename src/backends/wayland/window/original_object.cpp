@@ -17,6 +17,7 @@
 #include <fcppt/string.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/math/dim/null.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -26,6 +27,7 @@
 
 
 awl::backends::wayland::window::original_object::original_object(
+	fcppt::log::object &_log,
 	awl::backends::wayland::display const &_display,
 	awl::backends::wayland::compositor const &_compositor,
 	awl::backends::wayland::shell const &_shell,
@@ -53,6 +55,7 @@ awl::backends::wayland::window::original_object::original_object(
 			fcppt::make_unique_ptr<
 				awl::backends::wayland::window::event::original_processor
 			>(
+				_log,
 				shell_surface_
 			)
 		)

@@ -46,6 +46,7 @@ add_awl_example(
 	main
 	LINK_LIBS
 		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
 )
 
 add_awl_example(
@@ -59,4 +60,5 @@ add_awl_example(
 	show
 	LINK_LIBS
 		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
 )

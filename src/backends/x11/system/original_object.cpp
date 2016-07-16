@@ -22,9 +22,12 @@
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/log/context_fwd.hpp>
 
 
-awl::backends::x11::system::original_object::original_object()
+awl::backends::x11::system::original_object::original_object(
+	fcppt::log::context &
+)
 :
 	awl::backends::x11::system::object(),
 	display_(),

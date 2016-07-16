@@ -1,5 +1,3 @@
-#include <awl/log_context.hpp>
-#include <awl/log_location.hpp>
 #include <awl/main/exit_success.hpp>
 #include <awl/main/loop_callback.hpp>
 #include <awl/main/loop_next.hpp>
@@ -20,8 +18,10 @@
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
-#include <fcppt/log/activate_levels_recursive.hpp>
+#include <fcppt/log/context.hpp>
+#include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
+#include <fcppt/log/setting.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -34,14 +34,18 @@ int
 main()
 try
 {
-	fcppt::log::activate_levels_recursive(
-		awl::log_context(),
-		awl::log_location(),
-		fcppt::log::level::debug
-	);
+	fcppt::log::context log_context{
+		fcppt::log::setting{
+			fcppt::log::enabled_levels(
+				fcppt::log::level::debug
+			)
+		}
+	};
 
 	awl::system::object_unique_ptr const window_system(
-		awl::system::create()
+		awl::system::create(
+			log_context
+		)
 	);
 
 	awl::visual::object_unique_ptr const visual(

@@ -4,6 +4,7 @@
 #include <awl/backends/wayland/window/event/data_fwd.hpp>
 #include <awl/window/event/resize_signal.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
 
 
@@ -24,9 +25,14 @@ class data
 		data
 	);
 public:
-	data();
+	explicit
+	data(
+		fcppt::log::object &
+	);
 
 	~data();
+
+	fcppt::log::object &log_;
 
 	awl::window::event::resize_signal resize_signal_;
 };

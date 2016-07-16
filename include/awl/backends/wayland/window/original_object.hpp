@@ -16,6 +16,7 @@
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-protocol.h>
@@ -41,6 +42,7 @@ class AWL_CLASS_SYMBOL original_object
 public:
 	AWL_DETAIL_SYMBOL
 	original_object(
+		fcppt::log::object &,
 		awl::backends::wayland::display const &,
 		awl::backends::wayland::compositor const &,
 		awl::backends::wayland::shell const &,
