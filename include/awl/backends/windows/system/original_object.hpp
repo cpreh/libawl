@@ -13,6 +13,7 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
@@ -36,7 +37,10 @@ class original_object
 	);
 public:
 	AWL_DETAIL_SYMBOL
-	original_object();
+	explicit
+	original_object(
+		fcppt::log::context &
+	);
 
 	AWL_DETAIL_SYMBOL
 	~original_object()

@@ -26,13 +26,16 @@
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::windows::system::original_object::original_object()
+awl::backends::windows::system::original_object::original_object(
+	fcppt::log::context &
+)
 :
 	awl::backends::windows::system::object(),
 	wndclasses_(),
