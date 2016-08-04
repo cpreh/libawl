@@ -18,6 +18,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/context.hpp>
+#include <fcppt/log/default_level_streams.hpp>
 #include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/setting.hpp>
@@ -37,7 +38,8 @@ try
 			fcppt::log::enabled_levels(
 				fcppt::log::level::debug
 			)
-		}
+		},
+		fcppt::log::default_level_streams()
 	};
 
 	awl::system::object_unique_ptr const system(

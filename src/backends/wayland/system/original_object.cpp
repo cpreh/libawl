@@ -15,7 +15,6 @@
 #include <awl/cursor/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
 #include <awl/cursor/type.hpp>
-#include <awl/impl/create_log.hpp>
 #include <awl/impl/backends/wayland/log_name.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/visual/object.hpp>
@@ -26,6 +25,8 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/parameters.hpp>
+#include <fcppt/log/format/optional_function.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
@@ -37,9 +38,10 @@ awl::backends::wayland::system::original_object::original_object(
 	log_{
 		_log_context,
 		awl::log_location(),
-		awl::impl::create_log(
-			awl::impl::backends::wayland::log_name()
-		)
+		fcppt::log::parameters{
+			awl::impl::backends::wayland::log_name(),
+			fcppt::log::format::optional_function()
+		}
 	},
 	display_{},
 	processor_{
