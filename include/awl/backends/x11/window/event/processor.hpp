@@ -3,6 +3,7 @@
 
 #include <awl/class_symbol.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
+#include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/backends/x11/window/event/processor_fwd.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
@@ -49,6 +50,18 @@ public:
 	void
 	process(
 		awl::backends::x11::window::event::object const &
+	) = 0;
+
+	virtual
+	void
+	add_event_mask(
+		awl::backends::x11::window::event::mask
+	) = 0;
+
+	virtual
+	void
+	remove_event_mask(
+		awl::backends::x11::window::event::mask
 	) = 0;
 };
 

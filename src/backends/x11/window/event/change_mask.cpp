@@ -9,8 +9,8 @@
 
 void
 awl::backends::x11::window::event::change_mask(
-	x11::window::object &_window,
-	x11::window::event::mask const _mask
+	awl::backends::x11::window::object &_window,
+	awl::backends::x11::window::event::mask const _mask
 )
 {
 	if(

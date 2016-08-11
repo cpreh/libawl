@@ -7,6 +7,7 @@
 #include <awl/backends/x11/window/event/callback.hpp>
 #include <awl/backends/x11/window/event/function.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>
+#include <awl/backends/x11/window/event/mask_bit.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/backends/x11/window/event/processor.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
@@ -110,7 +111,29 @@ public:
 		awl::backends::x11::window::event::object const &
 	)
 	override;
+
+	void
+	add_event_mask(
+		awl::backends::x11::window::event::mask
+	)
+	override;
+
+	void
+	remove_event_mask(
+		awl::backends::x11::window::event::mask
+	)
+	override;
 private:
+	void
+	add_mask_bit(
+		awl::backends::x11::window::event::mask_bit
+	);
+
+	void
+	remove_mask_bit(
+		awl::backends::x11::window::event::mask_bit
+	);
+
 	void
 	unregister(
 		awl::backends::x11::window::event::type
@@ -163,7 +186,7 @@ private:
 
 	typedef
 	std::map<
-		awl::backends::x11::window::event::mask,
+		awl::backends::x11::window::event::mask_bit,
 		mask_count
 	>
 	mask_count_map;

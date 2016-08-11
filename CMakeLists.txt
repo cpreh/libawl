@@ -301,9 +301,11 @@ set(
 	src/backends/x11/window/create.cpp
 	src/backends/x11/window/event/change_mask.cpp
 	src/backends/x11/window/event/filter.cpp
+	src/backends/x11/window/event/mask_for_each.cpp
 	src/backends/x11/window/event/object.cpp
 	src/backends/x11/window/event/original_processor.cpp
 	src/backends/x11/window/event/processor.cpp
+	src/backends/x11/window/event/scoped_mask.cpp
 	src/backends/x11/window/event/scoped_processor.cpp
 	src/backends/x11/window/event/send.cpp
 	src/backends/x11/window/event/to_mask.cpp
@@ -411,13 +413,18 @@ set(
 	include/awl/backends/x11/window/event/filter.hpp
 	include/awl/backends/x11/window/event/function.hpp
 	include/awl/backends/x11/window/event/mask.hpp
+	include/awl/backends/x11/window/event/mask_bit.hpp
+	include/awl/backends/x11/window/event/mask_callback.hpp
+	include/awl/backends/x11/window/event/mask_for_each.hpp
 	include/awl/backends/x11/window/event/object.hpp
 	include/awl/backends/x11/window/event/object_fwd.hpp
-	include/awl/backends/x11/window/event/optional_mask.hpp
+	include/awl/backends/x11/window/event/optional_mask_bit.hpp
+	include/awl/backends/x11/window/event/optional_mask_bit_fwd.hpp
 	include/awl/backends/x11/window/event/original_processor.hpp
 	include/awl/backends/x11/window/event/processor.hpp
 	include/awl/backends/x11/window/event/processor_fwd.hpp
 	include/awl/backends/x11/window/event/processor_unique_ptr.hpp
+	include/awl/backends/x11/window/event/scoped_mask.hpp
 	include/awl/backends/x11/window/event/scoped_processor.hpp
 	include/awl/backends/x11/window/event/send.hpp
 	include/awl/backends/x11/window/event/to_mask.hpp

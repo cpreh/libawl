@@ -5,6 +5,9 @@
 #include <awl/backends/x11/window/event/change_mask.hpp>
 #include <awl/backends/x11/window/event/filter.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>
+#include <awl/backends/x11/window/event/mask_bit.hpp>
+#include <awl/backends/x11/window/event/mask_callback.hpp>
+#include <awl/backends/x11/window/event/mask_for_each.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/original_processor.hpp>
 #include <awl/backends/x11/window/event/to_mask.hpp>
@@ -227,22 +230,12 @@ awl::backends::x11::window::event::original_processor::register_callback(
 		[
 			this
 		](
-			awl::backends::x11::window::event::mask const _mask
+			awl::backends::x11::window::event::mask_bit const _mask
 		)
 		{
-			mask_count const count(
-				++mask_counts_[
-					_mask
-				]
+			this->add_mask_bit(
+				_mask
 			);
-
-			if(
-				count == 1u
-			)
-				awl::backends::x11::window::event::change_mask(
-					window_,
-					event_mask_ |= _mask
-				);
 		}
 	);
 
@@ -284,6 +277,110 @@ awl::backends::x11::window::event::original_processor::process(
 }
 
 void
+awl::backends::x11::window::event::original_processor::add_event_mask(
+	awl::backends::x11::window::event::mask const _mask
+)
+{
+	awl::backends::x11::window::event::mask_for_each(
+		_mask,
+		awl::backends::x11::window::event::mask_callback{
+			[
+				this
+			](
+				awl::backends::x11::window::event::mask_bit const _mask_bit
+			)
+			{
+				this->add_mask_bit(
+					_mask_bit
+				);
+			}
+		}
+	);
+}
+
+void
+awl::backends::x11::window::event::original_processor::remove_event_mask(
+	awl::backends::x11::window::event::mask const _mask
+)
+{
+	awl::backends::x11::window::event::mask_for_each(
+		_mask,
+		awl::backends::x11::window::event::mask_callback{
+			[
+				this
+			](
+				awl::backends::x11::window::event::mask_bit const _mask_bit
+			)
+			{
+				this->remove_mask_bit(
+					_mask_bit
+				);
+			}
+		}
+	);
+}
+
+void
+awl::backends::x11::window::event::original_processor::add_mask_bit(
+	awl::backends::x11::window::event::mask_bit const _mask_bit
+)
+{
+	mask_count const count(
+		++mask_counts_[
+			_mask_bit
+		]
+	);
+
+	if(
+		count
+		==
+		1u
+	)
+	{
+		event_mask_ |=
+			awl::backends::x11::window::event::mask{
+				_mask_bit.get()
+			};
+
+		awl::backends::x11::window::event::change_mask(
+			window_,
+			event_mask_
+		);
+	};
+}
+
+void
+awl::backends::x11::window::event::original_processor::remove_mask_bit(
+	awl::backends::x11::window::event::mask_bit const _mask_bit
+)
+{
+	mask_count const count(
+		--mask_counts_[
+			_mask_bit
+		]
+	);
+
+	if(
+		count
+		==
+		0u
+	)
+	{
+		event_mask_ &=
+			~(
+				awl::backends::x11::window::event::mask{
+					_mask_bit.get()
+				}
+			);
+
+		awl::backends::x11::window::event::change_mask(
+			window_,
+			event_mask_
+		);
+	}
+}
+
+void
 awl::backends::x11::window::event::original_processor::unregister(
 	awl::backends::x11::window::event::type const _event_type
 )
@@ -295,22 +392,12 @@ awl::backends::x11::window::event::original_processor::unregister(
 		[
 			this
 		](
-			awl::backends::x11::window::event::mask const _old_mask
+			awl::backends::x11::window::event::mask_bit const _old_mask
 		)
 		{
-			mask_count const count(
-				--mask_counts_[
-					_old_mask
-				]
+			this->remove_mask_bit(
+				_old_mask
 			);
-
-			if(
-				count == 0u
-			)
-				awl::backends::x11::window::event::change_mask(
-					window_,
-					event_mask_ &= ~(_old_mask)
-				);
 		}
 	);
 }
