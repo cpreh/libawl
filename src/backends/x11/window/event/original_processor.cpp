@@ -20,11 +20,9 @@
 #include <awl/window/event/resize_callback.hpp>
 #include <awl/window/event/show.hpp>
 #include <awl/window/event/show_callback.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/container/find_opt_iterator.hpp>
-#include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection_container.hpp>
 #include <fcppt/signal/object_impl.hpp>
@@ -46,7 +44,6 @@ awl::backends::x11::window::event::original_processor::original_processor(
 	),
 	signals_(),
 	mask_counts_(),
-	type_counts_(),
 	event_mask_{
 		0l
 	},
@@ -223,18 +220,10 @@ awl::backends::x11::window::event::original_processor::register_callback(
 	awl::backends::x11::window::event::callback const &_callback
 )
 {
-	fcppt::optional::maybe(
+	fcppt::optional::maybe_void(
 		awl::backends::x11::window::event::to_mask(
 			_event_type
 		),
-		[
-			this,
-			_event_type
-		]{
-			++type_counts_[
-				_event_type
-			];
-		},
 		[
 			this
 		](
@@ -299,30 +288,10 @@ awl::backends::x11::window::event::original_processor::unregister(
 	awl::backends::x11::window::event::type const _event_type
 )
 {
-	fcppt::optional::maybe(
+	fcppt::optional::maybe_void(
 		awl::backends::x11::window::event::to_mask(
 			_event_type
 		),
-		[
-			this,
-			_event_type
-		]{
-			type_count_map::iterator const it(
-				FCPPT_ASSERT_OPTIONAL_ERROR(
-					fcppt::container::find_opt_iterator(
-						type_counts_,
-						_event_type
-					)
-				)
-			);
-
-			if(
-				--it->second == 0u
-			)
-				type_counts_.erase(
-					it
-				);
-		},
 		[
 			this
 		](

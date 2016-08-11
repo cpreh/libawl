@@ -168,18 +168,9 @@ private:
 	>
 	mask_count_map;
 
-	typedef
-	std::map<
-		awl::backends::x11::window::event::type,
-		mask_count
-	>
-	type_count_map;
-
 	event_signal_map signals_;
 
 	mask_count_map mask_counts_;
-
-	type_count_map type_counts_;
 
 	awl::backends::x11::window::event::mask event_mask_;
 
