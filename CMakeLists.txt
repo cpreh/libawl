@@ -405,6 +405,8 @@ set(
 	include/awl/backends/x11/window/class_hint_fwd.hpp
 	include/awl/backends/x11/window/const_optional_class_hint_ref.hpp
 	include/awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp
+	include/awl/backends/x11/window/const_optional_object_ref.hpp
+	include/awl/backends/x11/window/const_optional_object_ref_fwd.hpp
 	include/awl/backends/x11/window/create.hpp
 	include/awl/backends/x11/window/event/atom_vector.hpp
 	include/awl/backends/x11/window/event/atom_vector_fwd.hpp

@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_EVENT_FILTER_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_EVENT_FILTER_HPP_INCLUDED
 
-#include <awl/backends/x11/window/object_fwd.hpp>
+#include <awl/backends/x11/window/const_optional_object_ref_fwd.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/preprocessor/warn_unused_result.hpp>
@@ -22,7 +22,7 @@ AWL_DETAIL_SYMBOL
 bool
 filter(
 	awl::backends::x11::window::event::object,
-	awl::backends::x11::window::object const &
+	awl::backends::x11::window::const_optional_object_ref
 )
 FCPPT_PP_WARN_UNUSED_RESULT;
 

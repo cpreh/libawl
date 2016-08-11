@@ -1,4 +1,5 @@
 #include <awl/backends/x11/intern_atom.hpp>
+#include <awl/backends/x11/window/const_optional_object_ref.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
 #include <awl/backends/x11/window/event/atom_vector.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
@@ -262,7 +263,7 @@ awl::backends::x11::window::event::original_processor::process(
 	if(
 		awl::backends::x11::window::event::filter(
 			_event,
-			window_
+			awl::backends::x11::window::const_optional_object_ref()
 		)
 	)
 		return;
