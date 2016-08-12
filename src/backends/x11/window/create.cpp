@@ -33,8 +33,6 @@ awl::backends::x11::window::create(
 		CWColormap
 		|
 		CWBorderPixel
-		|
-		CWEventMask
 	);
 
 	XSetWindowAttributes swa;
@@ -42,8 +40,6 @@ awl::backends::x11::window::create(
 	swa.colormap = _colormap.get();
 
 	swa.border_pixel = 0;
-
-	swa.event_mask = StructureNotifyMask | FocusChangeMask;
 
 	fcppt::optional::maybe_void(
 		_cursor,
