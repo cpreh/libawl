@@ -17,7 +17,9 @@
 #include <awl/backends/x11/system/event/original_processor.hpp>
 #include <awl/backends/x11/system/event/processor.hpp>
 #include <awl/backends/x11/system/event/type.hpp>
+#include <awl/backends/x11/window/const_optional_object_ref.hpp>
 #include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/event/filter.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/processor.hpp>
 #include <awl/main/exit_code.hpp>
@@ -204,6 +206,16 @@ awl::backends::x11::system::event::original_processor::process_event(
 	awl::backends::x11::system::event::object const &_event
 )
 {
+	if(
+		awl::backends::x11::window::event::filter(
+			awl::backends::x11::window::event::object{
+				_event.get()
+			},
+			awl::backends::x11::window::const_optional_object_ref()
+		)
+	)
+		return;
+
 	if(
 		_event.get().type
 		==

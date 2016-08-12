@@ -1,10 +1,8 @@
 #include <awl/backends/x11/intern_atom.hpp>
-#include <awl/backends/x11/window/const_optional_object_ref.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
 #include <awl/backends/x11/window/event/atom_vector.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
 #include <awl/backends/x11/window/event/change_mask.hpp>
-#include <awl/backends/x11/window/event/filter.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/mask_bit.hpp>
 #include <awl/backends/x11/window/event/mask_callback.hpp>
@@ -260,14 +258,6 @@ awl::backends::x11::window::event::original_processor::process(
 	awl::backends::x11::window::event::object const &_event
 )
 {
-	if(
-		awl::backends::x11::window::event::filter(
-			_event,
-			awl::backends::x11::window::const_optional_object_ref()
-		)
-	)
-		return;
-
 	signals_[
 		awl::backends::x11::window::event::type(
 			_event.get().type
