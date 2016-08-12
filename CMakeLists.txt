@@ -436,6 +436,7 @@ set(
 	include/awl/backends/x11/window/get_geometry.hpp
 	include/awl/backends/x11/window/hints.hpp
 	include/awl/backends/x11/window/holder.hpp
+	include/awl/backends/x11/window/holder_fwd.hpp
 	include/awl/backends/x11/window/object.hpp
 	include/awl/backends/x11/window/object_fwd.hpp
 	include/awl/backends/x11/window/object_unique_ptr.hpp
