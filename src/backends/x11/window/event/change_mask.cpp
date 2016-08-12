@@ -18,15 +18,10 @@ awl::backends::x11::window::event::change_mask(
 	)
 		return;
 
-	XSetWindowAttributes swa;
-
-	swa.event_mask = _mask.get();
-
-	// always returns 1
-	::XChangeWindowAttributes(
+	// Always returns 1
+	::XSelectInput(
 		_window.display().get(),
 		_window.get(),
-		CWEventMask,
-		&swa
+		_mask.get()
 	);
 }
