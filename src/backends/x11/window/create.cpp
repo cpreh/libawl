@@ -31,15 +31,12 @@ awl::backends::x11::window::create(
 {
 	unsigned long value_mask(
 		CWColormap
-		|
-		CWBorderPixel
 	);
 
 	XSetWindowAttributes swa;
 
-	swa.colormap = _colormap.get();
-
-	swa.border_pixel = 0;
+	swa.colormap =
+		_colormap.get();
 
 	fcppt::optional::maybe_void(
 		_cursor,
