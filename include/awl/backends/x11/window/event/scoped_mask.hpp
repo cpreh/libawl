@@ -3,6 +3,7 @@
 
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/processor_fwd.hpp>
+#include <awl/backends/x11/window/event/scoped_mask_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 

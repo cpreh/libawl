@@ -427,6 +427,7 @@ set(
 	include/awl/backends/x11/window/event/processor_fwd.hpp
 	include/awl/backends/x11/window/event/processor_unique_ptr.hpp
 	include/awl/backends/x11/window/event/scoped_mask.hpp
+	include/awl/backends/x11/window/event/scoped_mask_fwd.hpp
 	include/awl/backends/x11/window/event/scoped_processor.hpp
 	include/awl/backends/x11/window/event/send.hpp
 	include/awl/backends/x11/window/event/to_mask.hpp
