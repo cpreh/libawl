@@ -5,7 +5,7 @@
 #include <awl/main/output.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/io/ofstream.hpp>
-#include <fcppt/io/ostream.hpp>
+#include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/io/scoped_rdbuf.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
