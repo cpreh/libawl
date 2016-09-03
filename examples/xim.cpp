@@ -2,8 +2,10 @@
 #include <awl/backends/x11/system/object.hpp>
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/event/callback.hpp>
+#include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/processor.hpp>
+#include <awl/backends/x11/window/event/scoped_mask.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
 #include <awl/main/exit_success.hpp>
 #include <awl/main/loop_callback.hpp>
@@ -262,24 +264,36 @@ try
 		xic.get()
 	};
 
-	{
-		long im_event_mask{
-			0l
-		};
+	awl::backends::x11::window::event::processor &x11_window_processor{
+		fcppt::cast::dynamic_exn<
+			awl::backends::x11::window::event::processor &
+		>(
+			awl_window->processor()
+		)
+	};
 
-		XGetICValues(
-			ic,
-			XNFilterEvents,
-			&im_event_mask,
-			nullptr
-		);
+	awl::backends::x11::window::event::scoped_mask const scoped_mask{
+		x11_window_processor,
+		[
+			ic
+		]{
+			long im_event_mask{
+				0l
+			};
 
-		XSelectInput(
-			dpy,
-			win,
-			ExposureMask | KeyPressMask | StructureNotifyMask | im_event_mask
-		);
-	}
+			XGetICValues(
+				ic,
+				XNFilterEvents,
+				&im_event_mask,
+				nullptr
+			);
+
+			return
+				awl::backends::x11::window::event::mask{
+					im_event_mask
+				};
+		}()
+	};
 
 	XSetICFocus(
 		ic
@@ -288,11 +302,7 @@ try
 	awl_window->show();
 
 	fcppt::signal::auto_connection const key_connection{
-		fcppt::cast::dynamic_exn<
-			awl::backends::x11::window::event::processor &
-		>(
-			awl_window->processor()
-		).register_callback(
+		x11_window_processor.register_callback(
 			awl::backends::x11::window::event::type{
 				KeyPress
 			},
