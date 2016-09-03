@@ -41,7 +41,7 @@ awl::backends::x11::window::create(
 		_colormap.get();
 
 	swa.background_pixel =
-		BlackPixel(
+		XBlackPixel(
 			_display.get(),
 			_screen.get()
 		);
