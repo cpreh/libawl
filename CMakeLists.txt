@@ -998,6 +998,16 @@ function(
 		fcppt_log_interface
 	)
 
+	if(
+		AWL_WINDOWS_BACKEND
+	)
+		target_link_libraries(
+			${TARGETNAME}
+			INTERFACE
+			fcppt_filesystem_interface
+		)
+	endif()
+
 	set(
 		WINDOWS_COMPILE_DEFINITIONS
 		_UNICODE

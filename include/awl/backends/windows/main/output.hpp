@@ -4,7 +4,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/main/output.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/io/ofstream.hpp>
+#include <fcppt/filesystem/ofstream.hpp>
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/io/scoped_rdbuf.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -39,7 +39,7 @@ public:
 	~output()
 	override;
 private:
-	fcppt::io::ofstream stream_;
+	fcppt::filesystem::ofstream stream_;
 
 	fcppt::io::scoped_rdbuf const scoped_rdbuf_;
 };
