@@ -995,6 +995,7 @@ function(
 		${TARGETNAME}
 		INTERFACE
 		fcppt_core_interface
+		fcppt_log_interface
 	)
 
 	set(

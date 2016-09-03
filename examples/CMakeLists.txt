@@ -13,6 +13,7 @@ function(
 
 	set(
 		MULTI_ARGS
+		INCLUDE_DIRS
 		LINK_LIBS
 	)
 
@@ -32,6 +33,12 @@ function(
 
 	fcppt_utils_set_target_compiler_flags(
 		${TARGET_NAME}
+	)
+
+	target_include_directories(
+		${TARGET_NAME}
+		PRIVATE
+		${_INCLUDE_DIRS}
 	)
 
 	target_link_libraries(
@@ -62,3 +69,17 @@ add_awl_example(
 		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
 )
+
+if(
+	AWL_X11_BACKEND
+)
+	add_awl_example(
+		xim
+		LINK_LIBS
+			${X11_X11_LIB}
+			${fcppt_core_TARGET}
+			${fcppt_log_TARGET}
+		INCLUDE_DIRS
+			${X11_INCLUDE_PATH}
+	)
+endif()
