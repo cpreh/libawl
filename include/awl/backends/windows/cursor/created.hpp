@@ -39,11 +39,13 @@ public:
 	);
 
 	AWL_DETAIL_SYMBOL
-	~created();
+	~created()
+	override;
 
 	AWL_DETAIL_SYMBOL
 	HCURSOR
-	get() const;
+	get() const
+	override;
 private:
 	HCURSOR const cursor_;
 };
