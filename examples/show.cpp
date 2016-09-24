@@ -19,9 +19,8 @@
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/default_level_streams.hpp>
-#include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/setting.hpp>
+#include <fcppt/log/optional_level.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -34,10 +33,8 @@ main()
 try
 {
 	fcppt::log::context log_context{
-		fcppt::log::setting{
-			fcppt::log::enabled_levels(
-				fcppt::log::level::debug
-			)
+		fcppt::log::optional_level{
+			fcppt::log::level::debug
 		},
 		fcppt::log::default_level_streams()
 	};

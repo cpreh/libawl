@@ -35,9 +35,8 @@
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/default_level_streams.hpp>
-#include <fcppt/log/enabled_levels.hpp>
 #include <fcppt/log/level.hpp>
-#include <fcppt/log/setting.hpp>
+#include <fcppt/log/optional_level.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
@@ -58,6 +57,19 @@ main(
 )
 try
 {
+	fcppt::log::context log_context{
+		fcppt::log::optional_level{
+			fcppt::log::level::debug
+		},
+		fcppt::log::default_level_streams()
+	};
+
+	awl::system::object_unique_ptr const awl_system{
+		awl::system::create(
+			log_context
+		)
+	};
+
 	if(
 		std::setlocale(LC_ALL, "")
 		==
@@ -70,21 +82,6 @@ try
 		return
 			EXIT_FAILURE;
 	}
-
-	fcppt::log::context log_context{
-		fcppt::log::setting{
-			fcppt::log::enabled_levels(
-				fcppt::log::level::debug
-			)
-		},
-		fcppt::log::default_level_streams()
-	};
-
-	awl::system::object_unique_ptr const awl_system{
-		awl::system::create(
-			log_context
-		)
-	};
 
 	awl::backends::x11::system::object &x11_system{
 		fcppt::cast::dynamic_exn<
