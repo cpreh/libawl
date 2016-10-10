@@ -7,11 +7,6 @@ function(
 	EXAMPLE_NAME
 )
 	set(
-		TARGET_NAME
-		awl_example_${EXAMPLE_NAME}
-	)
-
-	set(
 		MULTI_ARGS
 		INCLUDE_DIRS
 		LINK_LIBS
@@ -25,27 +20,13 @@ function(
 		${ARGN}
 	)
 
-
-	add_executable(
-		${TARGET_NAME}
-		${EXAMPLE_NAME}.cpp
-	)
-
-	fcppt_utils_set_target_compiler_flags(
-		${TARGET_NAME}
-	)
-
-	target_include_directories(
-		${TARGET_NAME}
-		PRIVATE
-		${_INCLUDE_DIRS}
-	)
-
-	target_link_libraries(
-		${TARGET_NAME}
-		PRIVATE
-		${awl_TARGET}
-		${_LINK_LIBS}
+	fcppt_utils_add_example(
+		${FCPPT_UTILS_PROJECT_SOURCE_DIR}/examples
+		${EXAMPLE_NAME}
+		INCLUDE_DIRS
+			${_INCLUDE_DIRS}
+		LINK_LIBS
+			${_LINK_LIBS}
 	)
 endfunction()
 

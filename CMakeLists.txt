@@ -7,6 +7,13 @@ project(
 	awl
 )
 
+set_property(
+	GLOBAL
+	PROPERTY
+	USE_FOLDERS
+	ON
+)
+
 set(
 	CMAKE_MODULE_PATH
 	"${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}"
@@ -1020,6 +1027,14 @@ function(
 		STREQUAL
 		INTERFACE
 	)
+
+		set_target_properties(
+			${TARGETNAME}
+			PROPERTIES
+			FOLDER
+			awl
+		)
+
 		target_include_directories(
 			${TARGETNAME}
 			PRIVATE
