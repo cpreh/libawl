@@ -26,6 +26,7 @@ function(
 		INCLUDE_DIRS
 			${_INCLUDE_DIRS}
 		LINK_LIBS
+			${awl_TARGET}
 			${_LINK_LIBS}
 	)
 endfunction()
