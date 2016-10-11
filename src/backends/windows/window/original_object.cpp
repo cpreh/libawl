@@ -35,7 +35,13 @@
 #include <fcppt/math/dim/to_unsigned.hpp>
 #include <fcppt/optional/static_cast.hpp>
 #include <fcppt/optional/to_exception.hpp>
+#include <fcppt/preprocessor/disable_vc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 
+
+FCPPT_PP_PUSH_WARNING
+FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 awl::backends::windows::window::original_object::original_object(
 	awl::window::parameters const &_param,
@@ -88,6 +94,8 @@ awl::backends::windows::window::original_object::original_object(
 		this->hwnd()
 	);
 }
+
+FCPPT_PP_POP_WARNING
 
 awl::backends::windows::window::original_object::~original_object()
 {
