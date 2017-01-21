@@ -290,9 +290,14 @@ awl::backends::windows::system::event::original_processor::poll_messages()
 						this->process_message(
 							_message
 						),
-						std::move(
-							result
-						)
+						[
+							&result
+						]{
+							return
+								std::move(
+									result
+								);
+						}
 					);
 
 				return
