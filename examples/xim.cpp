@@ -138,7 +138,7 @@ try
 		)
 	};
 
-    	Window const win{
+	Window const win{
 		fcppt::cast::dynamic_cross_exn<
 			awl::backends::x11::window::object &
 		>(
@@ -158,7 +158,7 @@ try
 		)
 		:
 			impl_{
-    				XOpenIM(
+				XOpenIM(
 					_display,
 					nullptr,
 					nullptr,
