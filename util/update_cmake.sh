@@ -19,7 +19,6 @@ update_main \
 	include/awl/system \
 	include/awl/visual \
 	include/awl/window \
-	src/impl/include \
 
 update_main \
 	AWL_BASE_SRC_FILES \
@@ -27,7 +26,7 @@ update_main \
 	src \
 	-r \
 	src/cursor \
-	src/impl/src \
+	src/impl \
 	src/main \
 	src/system \
 	src/visual \

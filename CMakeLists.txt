@@ -67,6 +67,11 @@ set(
 	AWL_BASE_SRC_FILES
 	src/cursor/object.cpp
 	src/exception.cpp
+	src/impl/include/awl/impl/backends/wayland/log_name.hpp
+	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
+	src/impl/include/awl/impl/backends/x11/log_name.hpp
+	src/impl/include/awl/impl/export_class_instantiation.hpp
+	src/impl/include/awl/impl/log_name.hpp
 	src/impl/src/backends/wayland/log_name.cpp
 	src/impl/src/backends/x11/log_name.cpp
 	src/impl/src/log_name.cpp
@@ -184,11 +189,6 @@ set(
 	include/awl/window/parameters_fwd.hpp
 	include/awl/window/size.hpp
 	include/awl/window/unit.hpp
-	src/impl/include/awl/impl/backends/wayland/log_name.hpp
-	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
-	src/impl/include/awl/impl/backends/x11/log_name.hpp
-	src/impl/include/awl/impl/export_class_instantiation.hpp
-	src/impl/include/awl/impl/log_name.hpp
 )
 
 if(
