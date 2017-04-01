@@ -7,6 +7,10 @@ project(
 	awl
 )
 
+include(
+	GNUInstallDirs
+)
+
 set_property(
 	GLOBAL
 	PROPERTY
@@ -14,13 +18,39 @@ set_property(
 	ON
 )
 
-set(
-	CMAKE_MODULE_PATH
-	"${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}"
+find_package(
+	Boost 1.47.0 REQUIRED
+	system
+)
+
+link_directories(
+	${Boost_LIBRARY_DIRS}
+)
+
+find_package(
+	fcppt
+	REQUIRED
 )
 
 include(
 	FcpptCMakeUtils
+)
+
+set(
+	CMAKE_MODULES_SOURCE_DIR
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake/modules
+)
+
+set(
+	CMAKE_MODULES_PUBLIC
+	${CMAKE_MODULES_SOURCE_DIR}/public
+)
+
+list(
+	APPEND
+	CMAKE_MODULE_PATH
+	"${CMAKE_MODULES_PUBLIC}"
+	"${CMAKE_MODULES_SOURCE_DIR}/private"
 )
 
 include(
@@ -33,26 +63,15 @@ fcppt_utils_handle_so_version(
 	"0.1"
 )
 
-# Boost begin
-find_package(
-	Boost 1.47.0 REQUIRED
-	system
-)
-
-link_directories(
-	${Boost_LIBRARY_DIRS}
-)
-# Boost end
-
-find_package(
-	fcppt
-	REQUIRED
-)
-
 set(
 	AWL_BASE_SRC_FILES
 	src/cursor/object.cpp
 	src/exception.cpp
+	src/impl/include/awl/impl/backends/wayland/log_name.hpp
+	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
+	src/impl/include/awl/impl/backends/x11/log_name.hpp
+	src/impl/include/awl/impl/export_class_instantiation.hpp
+	src/impl/include/awl/impl/log_name.hpp
 	src/impl/src/backends/wayland/log_name.cpp
 	src/impl/src/backends/x11/log_name.cpp
 	src/impl/src/log_name.cpp
@@ -170,11 +189,6 @@ set(
 	include/awl/window/parameters_fwd.hpp
 	include/awl/window/size.hpp
 	include/awl/window/unit.hpp
-	src/impl/include/awl/impl/backends/wayland/log_name.hpp
-	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
-	src/impl/include/awl/impl/backends/x11/log_name.hpp
-	src/impl/include/awl/impl/export_class_instantiation.hpp
-	src/impl/include/awl/impl/log_name.hpp
 )
 
 if(
@@ -246,7 +260,7 @@ if(
 endif()
 
 configure_file(
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/config.hpp.in
+	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake/config.hpp.in
 	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include/awl/config.hpp
 )
 
@@ -969,8 +983,10 @@ function(
 		STREQUAL
 		INTERFACE
 	)
-		fcppt_utils_set_so_version(
+		set_target_properties(
 			${TARGETNAME}
+			PROPERTIES
+			VERSION
 			${AWL_USED_SO_VERSION}
 		)
 
@@ -1027,7 +1043,6 @@ function(
 		STREQUAL
 		INTERFACE
 	)
-
 		set_target_properties(
 			${TARGETNAME}
 			PROPERTIES
@@ -1189,23 +1204,28 @@ foreach(
 		FILES
 		${FCPPT_UTILS_PROJECT_SOURCE_DIR}/${CUR_FILE}
 		DESTINATION
-		${INSTALL_INCLUDE_DIR}/${TRIMMED_PATH}
+		${CMAKE_INSTALL_INCLUDEDIR}/${TRIMMED_PATH}
 	)
 endforeach()
 
-fcppt_utils_generate_config()
+fcppt_utils_generate_config(
+	CONFIG_PATH
+		${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake
+	MODULES_PATH
+		${CMAKE_MODULES_PUBLIC}
+)
 
 install(
 	DIRECTORY
 	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include/
 	DESTINATION
-	${INSTALL_INCLUDE_DIR}
+	${CMAKE_INSTALL_INCLUDEDIR}
 )
 
 install(
 	FILES
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/CMakeModules/AwlMainGenerator.cmake
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/CMakeModules/FindWayland.cmake
+	${CMAKE_MODULES_PUBLIC}/AwlMainGenerator.cmake
+	${CMAKE_MODULES_PUBLIC}/FindWayland.cmake
 	DESTINATION
-	${INSTALL_CMAKEMODULES_DIR}
+	${FCPPT_UTILS_INSTALL_CMAKEMODULES_DIR}
 )

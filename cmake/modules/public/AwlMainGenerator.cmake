@@ -1,4 +1,18 @@
-set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS ON)
+if(
+	NOT
+	${PROJECT_NAME}
+	STREQUAL
+	"awl"
+	AND
+	NOT
+	awl_FOUND
+)
+	message(
+		FATAL_ERROR
+		"AwlMainGenerator included without prior find_package(awl)"
+	)
+endif()
+
 
 set(awl_utils_prototype_main_file
 "
