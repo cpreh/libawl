@@ -16,7 +16,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	function_context(
 		int argc,
-		fcppt::args_char const *const *
+		fcppt::args_char **
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -24,12 +24,12 @@ public:
 	argc() const;
 
 	AWL_DETAIL_SYMBOL
-	fcppt::args_char const * const *
+	fcppt::args_char **
 	argv() const;
 private:
 	int argc_;
 
-	fcppt::args_char const * const *argv_;
+	fcppt::args_char **argv_;
 };
 
 }

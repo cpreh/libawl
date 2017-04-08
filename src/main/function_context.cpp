@@ -4,7 +4,7 @@
 
 awl::main::function_context::function_context(
 	int const _argc,
-	fcppt::args_char const *const *const _argv
+	fcppt::args_char **const _argv
 )
 :
 	argc_(
@@ -23,7 +23,7 @@ awl::main::function_context::argc() const
 		argc_;
 }
 
-fcppt::args_char const *const *
+fcppt::args_char **
 awl::main::function_context::argv() const
 {
 	return

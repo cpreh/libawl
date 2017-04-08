@@ -49,7 +49,7 @@ public:
 	noexcept;
 
 	AWL_DETAIL_SYMBOL
-	wchar_t const *const *
+	wchar_t **
 	argv() const
 	noexcept;
 private:

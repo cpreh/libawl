@@ -50,7 +50,7 @@ noexcept
 		argc_;
 }
 
-wchar_t const *const *
+wchar_t **
 awl::backends::windows::command_line_argv::argv() const
 noexcept
 {
