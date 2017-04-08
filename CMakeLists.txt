@@ -689,6 +689,8 @@ set(
 
 set(
 	AWL_WINDOWS_SRC_FILES
+	src/backends/windows/command_line_argv.cpp
+	src/backends/windows/command_line_to_argv.cpp
 	src/backends/windows/counted_wndclass.cpp
 	src/backends/windows/cursor/convert_predefined.cpp
 	src/backends/windows/cursor/create_invisible.cpp
@@ -699,6 +701,7 @@ set(
 	src/backends/windows/cursor/shared.cpp
 	src/backends/windows/default_wnd_proc.cpp
 	src/backends/windows/format_message.cpp
+	src/backends/windows/get_command_line.cpp
 	src/backends/windows/get_focus.cpp
 	src/backends/windows/local_free.cpp
 	src/backends/windows/main/output.cpp
@@ -741,6 +744,10 @@ set(
 
 set(
 	AWL_WINDOWS_INCLUDE_FILES
+	include/awl/backends/windows/command_line_argv.hpp
+	include/awl/backends/windows/command_line_argv_fwd.hpp
+	include/awl/backends/windows/command_line_ptr.hpp
+	include/awl/backends/windows/command_line_to_argv.hpp
 	include/awl/backends/windows/counted_wndclass.hpp
 	include/awl/backends/windows/counted_wndclass_fwd.hpp
 	include/awl/backends/windows/cursor/and_plane.hpp
@@ -763,8 +770,11 @@ set(
 	include/awl/backends/windows/cursor/xor_plane.hpp
 	include/awl/backends/windows/default_wnd_proc.hpp
 	include/awl/backends/windows/format_message.hpp
+	include/awl/backends/windows/get_command_line.hpp
 	include/awl/backends/windows/get_focus.hpp
 	include/awl/backends/windows/local_free.hpp
+	include/awl/backends/windows/local_free_deleter.hpp
+	include/awl/backends/windows/local_free_deleter_fwd.hpp
 	include/awl/backends/windows/lparam.hpp
 	include/awl/backends/windows/main/output.hpp
 	include/awl/backends/windows/message.hpp
@@ -1031,11 +1041,16 @@ function(
 		)
 	endif()
 
-	set(
-		WINDOWS_COMPILE_DEFINITIONS
-		_UNICODE
-		UNICODE
+	if(
+		NOT
+		FCPPT_NARROW_STRING
 	)
+		set(
+			WINDOWS_COMPILE_DEFINITIONS
+			_UNICODE
+			UNICODE
+		)
+	endif()
 
 	if(
 		NOT
@@ -1226,6 +1241,7 @@ install(
 	FILES
 	${CMAKE_MODULES_PUBLIC}/AwlMainGenerator.cmake
 	${CMAKE_MODULES_PUBLIC}/FindWayland.cmake
+	${CMAKE_MODULES_PUBLIC}/main_prototype.cpp.in
 	DESTINATION
 	${FCPPT_UTILS_INSTALL_CMAKEMODULES_DIR}
 )

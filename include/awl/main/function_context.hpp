@@ -2,32 +2,36 @@
 #define AWL_MAIN_FUNCTION_CONTEXT_HPP_INCLUDED
 
 #include <awl/detail/symbol.hpp>
+#include <fcppt/args_char.hpp>
 
 
 namespace awl
 {
 namespace main
 {
+
 class function_context
 {
 public:
 	AWL_DETAIL_SYMBOL
-	explicit
 	function_context(
 		int argc,
-		char *argv[]);
+		fcppt::args_char const *const *
+	);
 
 	AWL_DETAIL_SYMBOL
 	int
 	argc() const;
 
 	AWL_DETAIL_SYMBOL
-	char**
+	fcppt::args_char const * const *
 	argv() const;
 private:
 	int argc_;
-	char **argv_;
+
+	fcppt::args_char const * const *argv_;
 };
+
 }
 }
 

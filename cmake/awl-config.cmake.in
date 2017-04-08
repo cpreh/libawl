@@ -4,6 +4,11 @@ list(
 	@ADDITIONAL_MODULE_PATH@
 )
 
+set(
+	awl_utils_prototype_file_name
+	@ADDITIONAL_MODULE_PATH@/main_prototype.cpp.in
+)
+
 include(
 	FcpptExport
 )

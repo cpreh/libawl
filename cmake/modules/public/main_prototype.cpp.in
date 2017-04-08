@@ -1,0 +1,71 @@
+#include <awl/main/exit_code.hpp>
+#include <awl/main/function_context.hpp>
+#include <fcppt/config/platform.hpp>
+#if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
+#if !defined(FCPPT_NARROW_STRING)
+#include <awl/backends/windows/command_line_argv.hpp>
+#include <awl/backends/windows/command_line_to_argv.hpp>
+#include <awl/backends/windows/get_command_line.hpp>
+#endif
+#include <awl/backends/windows/windows.hpp>
+#else
+#include <fcppt/args_char.hpp>
+#include <fcppt/main.hpp>
+#endif
+
+
+@AWL_UTILS_MAIN_FUNCTION_NAMESPACES_BEGIN@
+
+awl::main::exit_code const
+@AWL_UTILS_MAIN_FUNCTION_NAME@(
+	awl::main::function_context const &
+);
+
+@AWL_UTILS_MAIN_FUNCTION_NAMESPACES_END@
+
+#if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
+int
+CALLBACK
+WinMain(
+	HINSTANCE,
+	HINSTANCE,
+	LPSTR,
+	int
+)
+{
+#if defined (FCPPT_NARROW_STRING)
+	awl::main::function_context const main_context{
+		__argc,
+		__argv
+	};
+#else
+// TODO: This can throw exceptions
+	awl::backends::windows::command_line_argv const command_line{
+		awl::backends::windows::command_line_to_argv(
+			awl::backends::windows::get_command_line()
+		)
+	};
+
+	awl::main::function_context const main_context{
+		command_line.argc(),
+		command_line.argv()
+	};
+#endif
+
+#else
+int
+FCPPT_MAIN(
+	int argc,
+	fcppt::args_char **argv
+)
+{
+	awl::main::function_context const main_context{
+		argc,
+		argv
+	};
+#endif
+	return
+		@AWL_UTILS_FULLY_QUALIFIED_MAIN_FUNCTION_NAME@(
+			main_context
+		).get();
+}
