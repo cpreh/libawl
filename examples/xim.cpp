@@ -31,7 +31,8 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/container/raw_vector.hpp>
+#include <fcppt/container/buffer/object.hpp>
+#include <fcppt/container/buffer/read_from.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/default_level_streams.hpp>
@@ -314,12 +315,11 @@ try
 						_event.get().xkey
 					};
 
-					fcppt::container::raw_vector<
+					typedef
+					fcppt::container::buffer::object<
 						char
 					>
-					buffer{
-						10
-					};
+					buffer_type;
 
 					Status status{
 						0
@@ -329,41 +329,44 @@ try
 						[
 							ic,
 							&event,
-							&buffer,
 							&status
-						]{
+						](
+							buffer_type::pointer const _data,
+							buffer_type::size_type const _size
+						){
 							KeySym keysym;
 
 							return
-								XmbLookupString(
-									ic,
-									&event,
-									buffer.data(),
-									fcppt::cast::size<
-										int
-									>(
-										fcppt::cast::to_signed(
-											buffer.size()
-										)
-									),
-									&keysym,
-									&status
+								fcppt::cast::to_unsigned(
+									XmbLookupString(
+										ic,
+										&event,
+										_data,
+										fcppt::cast::size<
+											int
+										>(
+											fcppt::cast::to_signed(
+												_size
+											)
+										),
+										&keysym,
+										&status
+									)
 								);
 						}
 					);
 
-					buffer.resize_uninitialized(
-						fcppt::cast::to_unsigned(
-							lookup()
+					buffer_type const buffer{
+						fcppt::container::buffer::read_from<
+							char
+						>(
+							lookup(
+								nullptr,
+								0u
+							),
+							lookup
 						)
-					);
-
-					if(
-						status
-						==
-						XBufferOverflow
-					)
-						lookup();
+					};
 
 					switch(
 						status
@@ -377,8 +380,8 @@ try
 						std::cout
 							<<
 							std::string(
-								buffer.data(),
-								buffer.data_end()
+								buffer.begin(),
+								buffer.end()
 							)
 							<<
 							'\n';

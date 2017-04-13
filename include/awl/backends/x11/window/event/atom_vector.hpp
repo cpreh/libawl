@@ -1,8 +1,33 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_EVENT_ATOM_VECTOR_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_EVENT_ATOM_VECTOR_HPP_INCLUDED
 
-#include <awl/backends/x11/window/event/atom_vector_fwd.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <X11/Xlib.h>
+#include <vector>
+#include <fcppt/config/external_end.hpp>
 
+
+namespace awl
+{
+namespace backends
+{
+namespace x11
+{
+namespace window
+{
+namespace event
+{
+
+typedef
+std::vector<
+	Atom
+>
+atom_vector;
+
+}
+}
+}
+}
+}
 
 #endif

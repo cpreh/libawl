@@ -430,7 +430,6 @@ set(
 	include/awl/backends/x11/window/const_optional_object_ref_fwd.hpp
 	include/awl/backends/x11/window/create.hpp
 	include/awl/backends/x11/window/event/atom_vector.hpp
-	include/awl/backends/x11/window/event/atom_vector_fwd.hpp
 	include/awl/backends/x11/window/event/callback.hpp
 	include/awl/backends/x11/window/event/change_mask.hpp
 	include/awl/backends/x11/window/event/filter.hpp
