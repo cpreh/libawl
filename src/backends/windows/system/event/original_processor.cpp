@@ -33,8 +33,7 @@
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
-#include <fcppt/container/maybe_back.hpp>
-#include <fcppt/container/raw_vector_impl.hpp>
+#include <fcppt/container/pop_back.hpp>
 #include <fcppt/optional/alternative.hpp>
 #include <fcppt/optional/copy_value.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -201,9 +200,9 @@ awl::backends::windows::system::event::original_processor::create_event_handle()
 awl::backends::windows::message_type
 awl::backends::windows::system::event::original_processor::allocate_user_message()
 {
-	awl::backends::windows::message_type const result(
+	return
 		fcppt::optional::to_exception(
-			fcppt::container::maybe_back(
+			fcppt::container::pop_back(
 				user_messages_
 			),
 			[]{
@@ -212,14 +211,7 @@ awl::backends::windows::system::event::original_processor::allocate_user_message
 						FCPPT_TEXT("User messages exhausted.")
 					};
 			}
-		).get()
-	);
-
-	// TODO: This is ugly
-	user_messages_.pop_back();
-
-	return
-		result;
+		);
 }
 
 void

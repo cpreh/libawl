@@ -19,7 +19,6 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_decl.hpp>
 #include <fcppt/strong_typedef_std_hash.hpp>
-#include <fcppt/container/raw_vector_decl.hpp>
 #include <fcppt/signal/auto_connection_fwd.hpp>
 #include <fcppt/signal/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -153,7 +152,7 @@ private:
 	handle_signal handle_signal_;
 
 	typedef
-	fcppt::container::raw_vector<
+	std::vector<
 		HANDLE
 	>
 	handle_vector;
