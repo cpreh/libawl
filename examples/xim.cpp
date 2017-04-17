@@ -358,7 +358,7 @@ try
 
 					buffer_type const buffer{
 						fcppt::container::buffer::read_from<
-							char
+							buffer_type
 						>(
 							lookup(
 								nullptr,
