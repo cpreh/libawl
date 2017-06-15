@@ -1,11 +1,12 @@
 #include <awl/exception.hpp>
 #include <awl/backends/windows/main/output.hpp>
 #include <awl/main/output.hpp>
-#include <fcppt/text.hpp>
-#include <fcppt/filesystem/path_to_string.hpp>
+#include <fcppt/filesystem/ofstream.hpp>
+#include <fcppt/filesystem/open_exn.hpp>
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <boost/filesystem/path.hpp>
+#include <ios>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -16,24 +17,19 @@ awl::backends::windows::main::output::output(
 :
 	awl::main::output(),
 	stream_(
-		_path
+		fcppt::filesystem::open_exn<
+			fcppt::filesystem::ofstream,
+			awl::exception
+		>(
+			_path,
+			std::ios_base::openmode{}
+		)
 	),
 	scoped_rdbuf_(
 		stream_,
 		_stream
 	)
 {
-	if(
-		!stream_.is_open()
-	)
-		throw
-			awl::exception(
-				FCPPT_TEXT("Failed to open ")
-				+
-				fcppt::filesystem::path_to_string(
-					_path
-				)
-			);
 }
 
 awl::backends::windows::main::output::~output()
