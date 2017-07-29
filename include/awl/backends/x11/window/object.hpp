@@ -2,6 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
+#include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
@@ -9,9 +10,6 @@
 #include <awl/backends/x11/window/rect_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace awl

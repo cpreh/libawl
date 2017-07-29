@@ -91,6 +91,7 @@ set(
 	src/show_message.cpp
 	src/show_message_narrow.cpp
 	src/system/create.cpp
+	src/system/event/base.cpp
 	src/system/event/processor.cpp
 	src/system/object.cpp
 	src/visual/object.cpp
@@ -143,8 +144,14 @@ set(
 	include/awl/show_message.hpp
 	include/awl/show_message_narrow.hpp
 	include/awl/system/create.hpp
+	include/awl/system/event/base.hpp
+	include/awl/system/event/base_fwd.hpp
+	include/awl/system/event/base_unique_ptr.hpp
+	include/awl/system/event/container.hpp
 	include/awl/system/event/processor.hpp
 	include/awl/system/event/processor_fwd.hpp
+	include/awl/system/event/result.hpp
+	include/awl/system/event/result_fwd.hpp
 	include/awl/system/object.hpp
 	include/awl/system/object_fwd.hpp
 	include/awl/system/object_unique_ptr.hpp
@@ -359,6 +366,9 @@ set(
 
 set(
 	AWL_X11_INCLUDE_FILES
+	include/awl/backends/x11/X.hpp
+	include/awl/backends/x11/Xlib.hpp
+	include/awl/backends/x11/Xutil.hpp
 	include/awl/backends/x11/atom.hpp
 	include/awl/backends/x11/colormap.hpp
 	include/awl/backends/x11/colormap_fwd.hpp

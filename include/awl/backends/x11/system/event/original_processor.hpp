@@ -6,6 +6,7 @@
 #include <awl/backends/posix/optional_duration_fwd.hpp>
 #include <awl/backends/posix/processor_fwd.hpp>
 #include <awl/backends/posix/processor_unique_ptr.hpp>
+#include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/system/event/callback.hpp>
 #include <awl/backends/x11/system/event/function.hpp>
@@ -21,13 +22,13 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/processor.hpp>
+#include <awl/system/event/result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_std_hash.hpp>
 #include <fcppt/signal/auto_connection.hpp>
 #include <fcppt/signal/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
 #include <map>
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
@@ -70,6 +71,11 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::main::optional_exit_code
 	next()
+	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::system::event::result
+	poll_result()
 	override;
 
 	AWL_DETAIL_SYMBOL

@@ -1,6 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_CREATE_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_CREATE_HPP_INCLUDED
 
+#include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/colormap_fwd.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
@@ -8,9 +9,6 @@
 #include <awl/backends/x11/visual/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/optional_dim_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace awl

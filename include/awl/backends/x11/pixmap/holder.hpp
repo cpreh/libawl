@@ -1,13 +1,11 @@
 #ifndef AWL_BACKENDS_X11_PIXMAP_HOLDER_HPP_INCLUDED
 #define AWL_BACKENDS_X11_PIXMAP_HOLDER_HPP_INCLUDED
 
+#include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/pixmap/holder_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <X11/X.h>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace awl

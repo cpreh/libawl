@@ -6,6 +6,7 @@
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
 #include <awl/system/event/processor_fwd.hpp>
+#include <awl/system/event/result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -32,6 +33,10 @@ public:
 	virtual
 	awl::main::optional_exit_code
 	next() = 0;
+
+	virtual
+	awl::system::event::result
+	poll_result() = 0;
 
 	virtual
 	void

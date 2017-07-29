@@ -20,6 +20,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/main/optional_exit_code_fwd.hpp>
+#include <awl/system/event/result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/signal/auto_connection.hpp>
@@ -62,6 +63,11 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::main::optional_exit_code
 	next()
+	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::system::event::result
+	poll_result()
 	override;
 
 	AWL_DETAIL_SYMBOL

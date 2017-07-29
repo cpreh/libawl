@@ -24,6 +24,8 @@
 #include <awl/backends/x11/window/event/processor.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
+#include <awl/system/event/base.hpp>
+#include <awl/system/event/result.hpp>
 #include <awl/window/object.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_ref.hpp>
@@ -95,6 +97,18 @@ awl::backends::x11::system::event::original_processor::next()
 		this->process(
 			awl::backends::posix::optional_duration{}
 		);
+}
+
+#include <awl/main/exit_failure.hpp>
+
+awl::system::event::result
+awl::backends::x11::system::event::original_processor::poll_result()
+{
+	// FIXME
+	return
+		awl::system::event::result{
+			awl::main::exit_failure()
+		};
 }
 
 void

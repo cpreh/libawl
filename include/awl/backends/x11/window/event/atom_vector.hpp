@@ -1,8 +1,8 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_EVENT_ATOM_VECTOR_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_EVENT_ATOM_VECTOR_HPP_INCLUDED
 
+#include <awl/backends/x11/X.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 

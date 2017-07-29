@@ -2,6 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_WRAPPED_OBJECT_HPP_INCLUDED
 
 #include <awl/class_symbol.hpp>
+#include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object_unique_ptr.hpp>
@@ -13,9 +14,6 @@
 #include <awl/window/object.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace awl
