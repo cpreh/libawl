@@ -18,9 +18,32 @@ set_property(
 	ON
 )
 
-find_package(
-	Boost 1.47.0 REQUIRED
+option(
+	ENABLE_TEST
+	"Build the tests"
+	ON
+)
+
+set(
+	NEEDED_BOOST_LIBS
 	system
+)
+
+if(
+	ENABLE_TEST
+)
+	list(
+		APPEND
+		NEEDED_BOOST_LIBS
+		"unit_test_framework"
+	)
+endif()
+
+find_package(
+	Boost 1.47.0
+	REQUIRED
+	COMPONENTS
+	"${NEEDED_BOOST_LIBS}"
 )
 
 link_directories(
@@ -1244,6 +1267,16 @@ foreach(
 		${CMAKE_INSTALL_INCLUDEDIR}/${TRIMMED_PATH}
 	)
 endforeach()
+
+if(
+	ENABLE_TEST
+)
+	enable_testing()
+
+	add_subdirectory(
+		test
+	)
+endif()
 
 fcppt_utils_generate_config(
 	CONFIG_PATH
