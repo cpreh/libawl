@@ -243,6 +243,19 @@ elseif(
 			TRUE
 		)
 	endif()
+
+        if(
+		NOT
+		ENABLE_X11
+		AND
+		NOT
+		ENABLE_WAYLAND
+	)
+		message(
+			FATAL_ERROR
+			"Neither X11 nor Wayland is enabled."
+		)
+	endif()
 else()
 	message(
 		FATAL_ERROR
