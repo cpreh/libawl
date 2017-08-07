@@ -22,4 +22,3 @@ class generic;
 }
 
 #endif
-

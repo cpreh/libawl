@@ -89,6 +89,10 @@ fcppt_utils_handle_so_version(
 set(
 	AWL_BASE_SRC_FILES
 	src/cursor/object.cpp
+	src/event/base.cpp
+	src/event/concrete_connection.cpp
+	src/event/connection.cpp
+	src/event/make_connection.cpp
 	src/exception.cpp
 	src/impl/include/awl/impl/backends/wayland/log_name.hpp
 	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
@@ -104,9 +108,7 @@ set(
 	src/main/exit_failure.cpp
 	src/main/exit_success.cpp
 	src/main/function_context.cpp
-	src/main/loop.cpp
 	src/main/loop_next.cpp
-	src/main/loop_poll.cpp
 	src/main/output.cpp
 	src/main/scoped_output.cpp
 	src/show_error.cpp
@@ -114,19 +116,21 @@ set(
 	src/show_message.cpp
 	src/show_message_narrow.cpp
 	src/system/create.cpp
-	src/system/event/base.cpp
 	src/system/event/processor.cpp
 	src/system/object.cpp
 	src/visual/object.cpp
-	src/window/event/processor.cpp
+	src/window/event/base.cpp
+	src/window/event/close.cpp
+	src/window/event/destroy.cpp
+	src/window/event/hide.cpp
 	src/window/event/resize.cpp
+	src/window/event/show.cpp
 	src/window/object.cpp
 	src/window/parameters.cpp
 )
 
 set(
 	AWL_BASE_INCLUDE_FILES
-	include/awl/class_symbol.hpp
 	include/awl/cursor/const_optional_object_ref.hpp
 	include/awl/cursor/const_optional_object_ref_fwd.hpp
 	include/awl/cursor/hotspot.hpp
@@ -137,6 +141,22 @@ set(
 	include/awl/cursor/size.hpp
 	include/awl/cursor/type.hpp
 	include/awl/cursor/type_fwd.hpp
+	include/awl/event/base.hpp
+	include/awl/event/base_fwd.hpp
+	include/awl/event/base_unique_ptr.hpp
+	include/awl/event/concrete_connection.hpp
+	include/awl/event/concrete_connection_fwd.hpp
+	include/awl/event/connection.hpp
+	include/awl/event/connection_function.hpp
+	include/awl/event/connection_fwd.hpp
+	include/awl/event/connection_unique_ptr.hpp
+	include/awl/event/container.hpp
+	include/awl/event/make_connection.hpp
+	include/awl/event/map_concat.hpp
+	include/awl/event/optional_base_unique_ptr.hpp
+	include/awl/event/optional_base_unique_ptr_fwd.hpp
+	include/awl/event/variant.hpp
+	include/awl/event/variant_fwd.hpp
 	include/awl/exception.hpp
 	include/awl/log_location.hpp
 	include/awl/main/create_output.hpp
@@ -147,11 +167,8 @@ set(
 	include/awl/main/exit_success.hpp
 	include/awl/main/function_context.hpp
 	include/awl/main/function_context_fwd.hpp
-	include/awl/main/loop.hpp
-	include/awl/main/loop_callback.hpp
+	include/awl/main/loop_function.hpp
 	include/awl/main/loop_next.hpp
-	include/awl/main/loop_poll.hpp
-	include/awl/main/loop_process_callback.hpp
 	include/awl/main/optional_exit_code.hpp
 	include/awl/main/optional_exit_code_fwd.hpp
 	include/awl/main/optional_scoped_output_unique_ptr.hpp
@@ -167,10 +184,6 @@ set(
 	include/awl/show_message.hpp
 	include/awl/show_message_narrow.hpp
 	include/awl/system/create.hpp
-	include/awl/system/event/base.hpp
-	include/awl/system/event/base_fwd.hpp
-	include/awl/system/event/base_unique_ptr.hpp
-	include/awl/system/event/container.hpp
 	include/awl/system/event/processor.hpp
 	include/awl/system/event/processor_fwd.hpp
 	include/awl/system/event/result.hpp
@@ -183,33 +196,18 @@ set(
 	include/awl/visual/object_unique_ptr.hpp
 	include/awl/window/dim.hpp
 	include/awl/window/dim_fwd.hpp
+	include/awl/window/event/base.hpp
+	include/awl/window/event/base_fwd.hpp
 	include/awl/window/event/close.hpp
-	include/awl/window/event/close_callback.hpp
-	include/awl/window/event/close_function.hpp
 	include/awl/window/event/close_fwd.hpp
-	include/awl/window/event/close_signal.hpp
 	include/awl/window/event/destroy.hpp
-	include/awl/window/event/destroy_callback.hpp
-	include/awl/window/event/destroy_function.hpp
 	include/awl/window/event/destroy_fwd.hpp
-	include/awl/window/event/destroy_signal.hpp
 	include/awl/window/event/hide.hpp
-	include/awl/window/event/hide_callback.hpp
-	include/awl/window/event/hide_function.hpp
 	include/awl/window/event/hide_fwd.hpp
-	include/awl/window/event/hide_signal.hpp
-	include/awl/window/event/processor.hpp
-	include/awl/window/event/processor_fwd.hpp
 	include/awl/window/event/resize.hpp
-	include/awl/window/event/resize_callback.hpp
-	include/awl/window/event/resize_function.hpp
 	include/awl/window/event/resize_fwd.hpp
-	include/awl/window/event/resize_signal.hpp
 	include/awl/window/event/show.hpp
-	include/awl/window/event/show_callback.hpp
-	include/awl/window/event/show_function.hpp
 	include/awl/window/event/show_fwd.hpp
-	include/awl/window/event/show_signal.hpp
 	include/awl/window/object.hpp
 	include/awl/window/object_fwd.hpp
 	include/awl/window/object_unique_ptr.hpp
@@ -217,6 +215,7 @@ set(
 	include/awl/window/optional_dim_fwd.hpp
 	include/awl/window/parameters.hpp
 	include/awl/window/parameters_fwd.hpp
+	include/awl/window/reference.hpp
 	include/awl/window/size.hpp
 	include/awl/window/unit.hpp
 )
@@ -344,7 +343,6 @@ set(
 	src/backends/x11/pixmap/holder.cpp
 	src/backends/x11/sync.cpp
 	src/backends/x11/system/event/generic.cpp
-	src/backends/x11/system/event/map_key.cpp
 	src/backends/x11/system/event/next.cpp
 	src/backends/x11/system/event/object.cpp
 	src/backends/x11/system/event/original_processor.cpp
@@ -361,16 +359,15 @@ set(
 	src/backends/x11/visual/wrapped.cpp
 	src/backends/x11/window/atoms.cpp
 	src/backends/x11/window/attributes.cpp
+	src/backends/x11/window/base.cpp
 	src/backends/x11/window/class_hint.cpp
 	src/backends/x11/window/create.cpp
 	src/backends/x11/window/event/change_mask.cpp
 	src/backends/x11/window/event/filter.cpp
+	src/backends/x11/window/event/generic.cpp
+	src/backends/x11/window/event/make.cpp
 	src/backends/x11/window/event/mask_for_each.cpp
 	src/backends/x11/window/event/object.cpp
-	src/backends/x11/window/event/original_processor.cpp
-	src/backends/x11/window/event/processor.cpp
-	src/backends/x11/window/event/scoped_mask.cpp
-	src/backends/x11/window/event/scoped_processor.cpp
 	src/backends/x11/window/event/send.cpp
 	src/backends/x11/window/event/to_mask.cpp
 	src/backends/x11/window/event/wm_protocols.cpp
@@ -384,7 +381,7 @@ set(
 	src/backends/x11/window/root.cpp
 	src/backends/x11/window/set_wm_protocols.cpp
 	src/backends/x11/window/visual.cpp
-	src/backends/x11/window/wrapped_object.cpp
+	src/backends/x11/window/wrapped.cpp
 )
 
 set(
@@ -419,6 +416,7 @@ set(
 	include/awl/backends/x11/display.hpp
 	include/awl/backends/x11/display_fd.hpp
 	include/awl/backends/x11/display_fwd.hpp
+	include/awl/backends/x11/display_ref.hpp
 	include/awl/backends/x11/flush.hpp
 	include/awl/backends/x11/free.hpp
 	include/awl/backends/x11/intern_atom.hpp
@@ -435,21 +433,16 @@ set(
 	include/awl/backends/x11/pixmap/size.hpp
 	include/awl/backends/x11/screen.hpp
 	include/awl/backends/x11/sync.hpp
-	include/awl/backends/x11/system/event/callback.hpp
-	include/awl/backends/x11/system/event/function.hpp
 	include/awl/backends/x11/system/event/generic.hpp
 	include/awl/backends/x11/system/event/generic_fwd.hpp
-	include/awl/backends/x11/system/event/map_key.hpp
 	include/awl/backends/x11/system/event/next.hpp
 	include/awl/backends/x11/system/event/object.hpp
 	include/awl/backends/x11/system/event/object_fwd.hpp
-	include/awl/backends/x11/system/event/opcode.hpp
 	include/awl/backends/x11/system/event/original_processor.hpp
 	include/awl/backends/x11/system/event/original_processor_fwd.hpp
 	include/awl/backends/x11/system/event/pending.hpp
 	include/awl/backends/x11/system/event/processor.hpp
 	include/awl/backends/x11/system/event/processor_fwd.hpp
-	include/awl/backends/x11/system/event/type.hpp
 	include/awl/backends/x11/system/object.hpp
 	include/awl/backends/x11/system/object_fwd.hpp
 	include/awl/backends/x11/system/original_object.hpp
@@ -467,6 +460,9 @@ set(
 	include/awl/backends/x11/window/atoms.hpp
 	include/awl/backends/x11/window/atoms_fwd.hpp
 	include/awl/backends/x11/window/attributes.hpp
+	include/awl/backends/x11/window/base.hpp
+	include/awl/backends/x11/window/base_fwd.hpp
+	include/awl/backends/x11/window/base_unique_ptr.hpp
 	include/awl/backends/x11/window/change_wm_protocols.hpp
 	include/awl/backends/x11/window/class_hint.hpp
 	include/awl/backends/x11/window/class_hint_fwd.hpp
@@ -476,25 +472,20 @@ set(
 	include/awl/backends/x11/window/const_optional_object_ref_fwd.hpp
 	include/awl/backends/x11/window/create.hpp
 	include/awl/backends/x11/window/event/atom_vector.hpp
-	include/awl/backends/x11/window/event/callback.hpp
 	include/awl/backends/x11/window/event/change_mask.hpp
+	include/awl/backends/x11/window/event/close.hpp
 	include/awl/backends/x11/window/event/filter.hpp
-	include/awl/backends/x11/window/event/function.hpp
+	include/awl/backends/x11/window/event/generic.hpp
+	include/awl/backends/x11/window/event/generic_fwd.hpp
+	include/awl/backends/x11/window/event/make.hpp
 	include/awl/backends/x11/window/event/mask.hpp
 	include/awl/backends/x11/window/event/mask_bit.hpp
-	include/awl/backends/x11/window/event/mask_callback.hpp
 	include/awl/backends/x11/window/event/mask_for_each.hpp
+	include/awl/backends/x11/window/event/mask_function.hpp
 	include/awl/backends/x11/window/event/object.hpp
 	include/awl/backends/x11/window/event/object_fwd.hpp
 	include/awl/backends/x11/window/event/optional_mask_bit.hpp
 	include/awl/backends/x11/window/event/optional_mask_bit_fwd.hpp
-	include/awl/backends/x11/window/event/original_processor.hpp
-	include/awl/backends/x11/window/event/processor.hpp
-	include/awl/backends/x11/window/event/processor_fwd.hpp
-	include/awl/backends/x11/window/event/processor_unique_ptr.hpp
-	include/awl/backends/x11/window/event/scoped_mask.hpp
-	include/awl/backends/x11/window/event/scoped_mask_fwd.hpp
-	include/awl/backends/x11/window/event/scoped_processor.hpp
 	include/awl/backends/x11/window/event/send.hpp
 	include/awl/backends/x11/window/event/to_mask.hpp
 	include/awl/backends/x11/window/event/type.hpp
@@ -506,6 +497,7 @@ set(
 	include/awl/backends/x11/window/holder_fwd.hpp
 	include/awl/backends/x11/window/object.hpp
 	include/awl/backends/x11/window/object_fwd.hpp
+	include/awl/backends/x11/window/object_ref.hpp
 	include/awl/backends/x11/window/object_unique_ptr.hpp
 	include/awl/backends/x11/window/optional_class_hint.hpp
 	include/awl/backends/x11/window/optional_class_hint_fwd.hpp
@@ -519,7 +511,7 @@ set(
 	include/awl/backends/x11/window/root.hpp
 	include/awl/backends/x11/window/set_wm_protocols.hpp
 	include/awl/backends/x11/window/visual.hpp
-	include/awl/backends/x11/window/wrapped_object.hpp
+	include/awl/backends/x11/window/wrapped.hpp
 )
 
 set(
@@ -670,37 +662,28 @@ set(
 
 set(
 	AWL_POSIX_INCLUDE_FILES
-	include/awl/backends/posix/callback.hpp
 	include/awl/backends/posix/create_processor.hpp
 	include/awl/backends/posix/duration.hpp
 	include/awl/backends/posix/event.hpp
+	include/awl/backends/posix/event_container.hpp
 	include/awl/backends/posix/event_fwd.hpp
+	include/awl/backends/posix/event_unique_ptr.hpp
 	include/awl/backends/posix/fd.hpp
-	include/awl/backends/posix/function.hpp
 	include/awl/backends/posix/optional_duration.hpp
 	include/awl/backends/posix/optional_duration_fwd.hpp
-	include/awl/backends/posix/posted.hpp
-	include/awl/backends/posix/posted_fwd.hpp
-	include/awl/backends/posix/posted_unique_ptr.hpp
 	include/awl/backends/posix/processor.hpp
 	include/awl/backends/posix/processor_base.hpp
 	include/awl/backends/posix/processor_base_fwd.hpp
 	include/awl/backends/posix/processor_fwd.hpp
 	include/awl/backends/posix/processor_unique_ptr.hpp
-	include/awl/backends/posix/timer.hpp
-	include/awl/backends/posix/timer_delay.hpp
-	include/awl/backends/posix/timer_fwd.hpp
-	include/awl/backends/posix/timer_period.hpp
-	include/awl/backends/posix/timer_unique_ptr.hpp
 )
 
 set(
 	AWL_POSIX_SRC_FILES
 	src/backends/posix/create_processor.cpp
-	src/backends/posix/posted.cpp
+	src/backends/posix/event.cpp
 	src/backends/posix/processor.cpp
 	src/backends/posix/processor_base.cpp
-	src/backends/posix/timer.cpp
 )
 
 set(
@@ -712,12 +695,6 @@ set(
 	include/awl/backends/linux/epoll/original_processor.hpp
 	include/awl/backends/linux/epoll/set.hpp
 	include/awl/backends/linux/epoll/set_fwd.hpp
-	include/awl/backends/linux/eventfd/object.hpp
-	include/awl/backends/linux/eventfd/object_fwd.hpp
-	include/awl/backends/linux/eventfd/posted.hpp
-	include/awl/backends/linux/timerfd/object.hpp
-	include/awl/backends/linux/timerfd/object_fwd.hpp
-	include/awl/backends/linux/timerfd/timer.hpp
 )
 
 set(
@@ -726,10 +703,6 @@ set(
 	src/backends/linux/epoll/fd.cpp
 	src/backends/linux/epoll/original_processor.cpp
 	src/backends/linux/epoll/set.cpp
-	src/backends/linux/eventfd/object.cpp
-	src/backends/linux/eventfd/posted.cpp
-	src/backends/linux/timerfd/object.cpp
-	src/backends/linux/timerfd/timer.cpp
 )
 
 set(

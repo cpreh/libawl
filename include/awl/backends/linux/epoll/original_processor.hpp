@@ -1,25 +1,15 @@
 #ifndef AWL_BACKENDS_LINUX_EPOLL_ORIGINAL_PROCESSOR_HPP_INCLUDED
 #define AWL_BACKENDS_LINUX_EPOLL_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
 #include <awl/backends/linux/epoll/set.hpp>
-#include <awl/backends/posix/callback.hpp>
+#include <awl/backends/posix/event_container.hpp>
 #include <awl/backends/posix/fd.hpp>
-#include <awl/backends/posix/function.hpp>
 #include <awl/backends/posix/optional_duration_fwd.hpp>
-#include <awl/backends/posix/posted_unique_ptr.hpp>
 #include <awl/backends/posix/processor.hpp>
-#include <awl/backends/posix/timer_delay.hpp>
-#include <awl/backends/posix/timer_period.hpp>
-#include <awl/backends/posix/timer_unique_ptr.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/connection_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/auto_connection_fwd.hpp>
-#include <fcppt/signal/object_decl.hpp>
-#include <fcppt/signal/unregister/base_decl.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <unordered_map>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace awl
@@ -31,7 +21,7 @@ namespace linux
 namespace epoll
 {
 
-class AWL_CLASS_SYMBOL original_processor
+class AWL_DETAIL_CLASS_SYMBOL original_processor
 :
 	public awl::backends::posix::processor
 {
@@ -47,57 +37,20 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	fcppt::signal::auto_connection
-	register_fd_callback(
-		awl::backends::posix::fd const &,
-		awl::backends::posix::callback const &
+	awl::event::connection_unique_ptr
+	register_fd(
+		awl::backends::posix::fd const &
 	)
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::posix::posted_unique_ptr
-	post(
-		awl::backends::posix::callback const &
-	)
-	override;
-
-	awl::backends::posix::timer_unique_ptr
-	create_timer(
-		awl::backends::posix::callback const &,
-		awl::backends::posix::timer_delay,
-		awl::backends::posix::timer_period
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	void
+	awl::backends::posix::event_container
 	poll(
 		awl::backends::posix::optional_duration const &
 	)
 	override;
 private:
-	void
-	unregister_fd_signal(
-		awl::backends::posix::fd const &
-	);
-
 	awl::backends::linux::epoll::set fd_set_;
-
-	typedef
-	fcppt::signal::object<
-		awl::backends::posix::function,
-		fcppt::signal::unregister::base
-	>
-	fd_signal;
-
-	typedef
-	std::unordered_map<
-		awl::backends::posix::fd,
-		fd_signal
-	>
-	fd_signal_map;
-
-	fd_signal_map fd_signals_;
 };
 
 }

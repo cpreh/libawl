@@ -1,5 +1,6 @@
+#include <awl/event/base.hpp>
 #include <awl/main/exit_success.hpp>
-#include <awl/main/loop_callback.hpp>
+#include <awl/main/loop_function.hpp>
 #include <awl/main/loop_next.hpp>
 #include <awl/system/create.hpp>
 #include <awl/system/object.hpp>
@@ -10,19 +11,18 @@
 #include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
-#include <awl/window/event/processor.hpp>
-#include <awl/window/event/show_callback.hpp>
-#include <awl/window/event/show_fwd.hpp>
+#include <awl/window/event/show.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/dynamic.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/default_level_streams.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/optional_level.hpp>
-#include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
@@ -72,28 +72,36 @@ try
 
 	window->show();
 
-	fcppt::signal::auto_connection const show_connection(
-		window->processor().show_callback(
-			awl::window::event::show_callback(
-				[
-					&system_processor
-				](
-					awl::window::event::show const &
-				)
-				{
-					system_processor.quit(
-						awl::main::exit_success()
-					);
-				}
-			)
-		)
-	);
-
 	return
 		awl::main::loop_next(
 			system_processor,
-			awl::main::loop_callback{
-				[]{}
+			awl::main::loop_function{
+				[
+					&system_processor
+				](
+					awl::event::base const &_event
+				)
+				{
+					fcppt::optional::maybe_void(
+						fcppt::cast::dynamic<
+							awl::window::event::show const
+						>(
+							_event
+						),
+						[
+							&system_processor
+						](
+							fcppt::reference<
+								awl::window::event::show const
+							>
+						)
+						{
+							system_processor.quit(
+								awl::main::exit_success()
+							);
+						}
+					);
+				}
 			}
 		).get();
 }

@@ -1,10 +1,10 @@
 #ifndef AWL_BACKENDS_X11_VISUAL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_X11_VISUAL_OBJECT_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
 #include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/Xutil.hpp>
 #include <awl/backends/x11/visual/object_fwd.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -19,7 +19,7 @@ namespace x11
 namespace visual
 {
 
-class AWL_CLASS_SYMBOL object
+class AWL_DETAIL_CLASS_SYMBOL object
 :
 	public awl::visual::object
 {

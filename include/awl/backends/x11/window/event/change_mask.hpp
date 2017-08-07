@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_EVENT_CHANGE_MASK_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_EVENT_CHANGE_MASK_HPP_INCLUDED
 
-#include <awl/backends/x11/window/object_fwd.hpp>
+#include <awl/backends/x11/window/base_fwd.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/detail/symbol.hpp>
 
@@ -20,8 +20,8 @@ namespace event
 AWL_DETAIL_SYMBOL
 void
 change_mask(
-	x11::window::object &,
-	x11::window::event::mask
+	awl::backends::x11::window::base &,
+	awl::backends::x11::window::event::mask
 );
 
 }

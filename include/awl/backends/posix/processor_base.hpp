@@ -1,9 +1,9 @@
 #ifndef AWL_BACKENDS_POSIX_PROCESSOR_BASE_HPP_INCLUDED
 #define AWL_BACKENDS_POSIX_PROCESSOR_BASE_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
 #include <awl/backends/posix/processor_base_fwd.hpp>
 #include <awl/backends/posix/processor_fwd.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -15,7 +15,7 @@ namespace backends
 namespace posix
 {
 
-class AWL_CLASS_SYMBOL processor_base
+class AWL_DETAIL_CLASS_SYMBOL processor_base
 {
 	FCPPT_NONCOPYABLE(
 		processor_base

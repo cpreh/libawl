@@ -1,7 +1,7 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/display.hpp>
 #include <awl/backends/x11/window/attributes.hpp>
-#include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/base.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
@@ -10,7 +10,7 @@
 
 XWindowAttributes
 awl::backends::x11::window::attributes(
-	x11::window::object &_window
+	awl::backends::x11::window::base &_window
 )
 {
 	XWindowAttributes ret;
@@ -25,7 +25,7 @@ awl::backends::x11::window::attributes(
 	)
 		throw
 			awl::exception{
-			FCPPT_TEXT("XGetWindowAttributes() failed!")
+				FCPPT_TEXT("XGetWindowAttributes() failed!")
 			};
 
 	return

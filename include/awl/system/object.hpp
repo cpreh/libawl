@@ -1,9 +1,9 @@
 #ifndef AWL_SYSTEM_OBJECT_HPP_INCLUDED
 #define AWL_SYSTEM_OBJECT_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
 #include <awl/cursor/type_fwd.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/object_fwd.hpp>
 #include <awl/system/event/processor_fwd.hpp>
@@ -18,7 +18,7 @@ namespace awl
 namespace system
 {
 
-class AWL_CLASS_SYMBOL object
+class AWL_DETAIL_CLASS_SYMBOL object
 {
 	FCPPT_NONCOPYABLE(
 		object

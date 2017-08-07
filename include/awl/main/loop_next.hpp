@@ -3,7 +3,7 @@
 
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
-#include <awl/main/loop_callback.hpp>
+#include <awl/main/loop_function.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 
 
@@ -16,7 +16,7 @@ AWL_DETAIL_SYMBOL
 awl::main::exit_code
 loop_next(
 	awl::system::event::processor &,
-	awl::main::loop_callback const &
+	awl::main::loop_function const &
 );
 
 }

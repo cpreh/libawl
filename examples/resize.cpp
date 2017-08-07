@@ -1,5 +1,6 @@
+#include <awl/event/base.hpp>
 #include <awl/main/exit_success.hpp>
-#include <awl/main/loop_callback.hpp>
+#include <awl/main/loop_function.hpp>
 #include <awl/main/loop_next.hpp>
 #include <awl/system/create.hpp>
 #include <awl/system/object.hpp>
@@ -10,12 +11,13 @@
 #include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
-#include <awl/window/event/destroy_callback.hpp>
-#include <awl/window/event/processor.hpp>
+#include <awl/window/event/close.hpp>
+#include <awl/window/event/destroy.hpp>
 #include <awl/window/event/resize.hpp>
-#include <awl/window/event/resize_callback.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/cast/dynamic_fun.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
 #include <fcppt/log/context.hpp>
@@ -23,9 +25,11 @@
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/optional_level.hpp>
 #include <fcppt/math/dim/output.hpp>
-#include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/signal/auto_connection.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/variant/dynamic_cast.hpp>
+#include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <boost/mpl/vector/vector10.hpp>
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
@@ -77,43 +81,82 @@ try
 		window_system->processor()
 	);
 
-	fcppt::signal::auto_connection const resize_connection(
-		window->processor().resize_callback(
-			awl::window::event::resize_callback(
-				[](
-					awl::window::event::resize const &_size
-				)
-				{
-					fcppt::io::cout()
-						<< FCPPT_TEXT("Resize: ")
-						<< _size.dim()
-						<< FCPPT_TEXT('\n');
-				}
-			)
-		)
-	);
-
-	fcppt::signal::auto_connection const destroy_connection(
-		window->processor().destroy_callback(
-			awl::window::event::destroy_callback(
-				[
-					&system_processor
-				](
-					awl::window::event::destroy const &
-				){
-					system_processor.quit(
-						awl::main::exit_success()
-					);
-				}
-			)
-		)
-	);
-
 	return
 		awl::main::loop_next(
 			system_processor,
-			awl::main::loop_callback{
-				[]{}
+			awl::main::loop_function{
+				[
+					&system_processor
+				](
+					awl::event::base const &_event
+				){
+					fcppt::optional::maybe_void(
+						fcppt::variant::dynamic_cast_<
+							boost::mpl::vector3<
+								fcppt::reference<
+									awl::window::event::resize const
+								>,
+								fcppt::reference<
+									awl::window::event::close const
+								>,
+								fcppt::reference<
+									awl::window::event::destroy const
+								>
+							>,
+							fcppt::cast::dynamic_fun
+						>(
+							_event
+						),
+						[
+							&system_processor
+						](
+							auto const &_variant
+						)
+						{
+							fcppt::variant::match(
+								_variant,
+								[](
+									fcppt::reference<
+										awl::window::event::resize const
+									> const _resize
+								)
+								{
+									fcppt::io::cout()
+										<<
+										FCPPT_TEXT("Resize: ")
+										<<
+										_resize.get().dim()
+										<<
+										FCPPT_TEXT('\n');
+								},
+								[
+									&system_processor
+								](
+									fcppt::reference<
+										awl::window::event::close const
+									>
+								)
+								{
+									system_processor.quit(
+										awl::main::exit_success()
+									);
+								},
+								[
+									&system_processor
+								](
+									fcppt::reference<
+										awl::window::event::destroy const
+									>
+								)
+								{
+									system_processor.quit(
+										awl::main::exit_success()
+									);
+								}
+							);
+						}
+					);
+				}
 			}
 		).get();
 }
@@ -122,8 +165,10 @@ catch(
 )
 {
 	fcppt::io::cerr()
-		<< _exception.string()
-		<< FCPPT_TEXT('\n');
+		<<
+		_exception.string()
+		<<
+		FCPPT_TEXT('\n');
 
 	return
 		EXIT_FAILURE;

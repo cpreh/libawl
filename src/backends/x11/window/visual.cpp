@@ -3,7 +3,7 @@
 #include <awl/backends/x11/visual/object_unique_ptr.hpp>
 #include <awl/backends/x11/visual/wrapped.hpp>
 #include <awl/backends/x11/window/attributes.hpp>
-#include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/window/visual.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -11,7 +11,7 @@
 
 awl::backends::x11::visual::object_unique_ptr
 awl::backends::x11::window::visual(
-	awl::backends::x11::window::object &_window
+	awl::backends::x11::window::base &_window
 )
 {
 	return

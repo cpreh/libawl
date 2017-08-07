@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
-#include <awl/backends/x11/window/object_unique_ptr.hpp>
+#include <awl/backends/x11/window/base_unique_ptr.hpp>
 #include <awl/detail/symbol.hpp>
 
 
@@ -17,7 +17,7 @@ namespace window
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::x11::window::object_unique_ptr
+awl::backends::x11::window::base_unique_ptr
 root(
 	awl::backends::x11::display &,
 	awl::backends::x11::screen

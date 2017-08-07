@@ -2,8 +2,8 @@
 #define AWL_SYSTEM_EVENT_RESULT_FWD_HPP_INCLUDED
 
 #include <awl/main/exit_code_fwd.hpp>
-#include <awl/system/event/container.hpp>
-#include <fcppt/either/object_fwd.hpp>
+#include <awl/event/container.hpp>
+#include <fcppt/variant/variadic_fwd.hpp>
 
 
 namespace awl
@@ -14,9 +14,9 @@ namespace event
 {
 
 typedef
-fcppt::either::object<
+fcppt::variant::variadic<
 	awl::main::exit_code,
-	awl::system::event::container
+	awl::event::container
 >
 result;
 

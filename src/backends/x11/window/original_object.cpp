@@ -1,10 +1,8 @@
-#include <awl/backends/x11/colormap.hpp>
-#include <awl/backends/x11/discard.hpp>
+#include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/display.hpp>
 #include <awl/backends/x11/screen.hpp>
-#include <awl/backends/x11/sync.hpp>
 #include <awl/backends/x11/cursor/object.hpp>
-#include <awl/backends/x11/system/event/original_processor_fwd.hpp>
+#include <awl/backends/x11/system/event/original_processor.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <awl/backends/x11/window/const_optional_class_hint_ref.hpp>
@@ -14,27 +12,31 @@
 #include <awl/backends/x11/window/original_class_hint.hpp>
 #include <awl/backends/x11/window/original_object.hpp>
 #include <awl/backends/x11/window/rect.hpp>
+#include <awl/backends/x11/window/event/atom_vector.hpp>
+#include <awl/backends/x11/window/event/change_mask.hpp>
+#include <awl/backends/x11/window/event/mask.hpp>
+#include <awl/backends/x11/window/event/mask_bit.hpp>
+#include <awl/backends/x11/window/event/mask_function.hpp>
+#include <awl/backends/x11/window/event/mask_for_each.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
-#include <awl/backends/x11/window/event/original_processor.hpp>
+#include <awl/backends/x11/window/event/to_mask.hpp>
+#include <awl/backends/x11/window/event/type.hpp>
+#include <awl/event/connection_function.hpp>
+#include <awl/event/connection_unique_ptr.hpp>
+#include <awl/event/make_connection.hpp>
 #include <awl/visual/object.hpp>
-#include <awl/window/dim.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/to_std_string.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/static_downcast.hpp>
-#include <fcppt/math/dim/to_unsigned.hpp>
 #include <fcppt/optional/apply.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/static_cast.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
-#include <fcppt/config/external_end.hpp>
 
 
 awl::backends::x11::window::original_object::original_object(
@@ -45,7 +47,6 @@ awl::backends::x11::window::original_object::original_object(
 )
 :
 	awl::backends::x11::window::object(),
-	awl::window::object(),
 	display_(
 		_display
 	),
@@ -108,21 +109,55 @@ awl::backends::x11::window::original_object::original_object(
 			)
 		)
 	),
-	processor_{
-		fcppt::unique_ptr_to_base<
-			awl::backends::x11::window::event::processor
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::x11::window::event::original_processor
-			>(
-				*this
+	processor_connection_{
+		_system_processor.add_window(
+			*this
+		)
+	},
+	mask_counts_(),
+	event_mask_{
+		0l
+	},
+	wm_protocols_(
+		*this,
+		awl::backends::x11::window::event::atom_vector{
+			_system_processor.delete_window_atom().get()
+		}
+	),
+	client_message_connection_{
+		this->register_event(
+			awl::backends::x11::window::event::type(
+				ClientMessage
 			)
 		)
 	},
-	scoped_processor_{
-		_system_processor,
-		*this,
-		*processor_
+	configure_connection_{
+		this->register_event(
+			awl::backends::x11::window::event::type(
+				ConfigureNotify
+			)
+		)
+	},
+	destroy_connection_{
+		this->register_event(
+			awl::backends::x11::window::event::type(
+				DestroyNotify
+			)
+		)
+	},
+	map_connection_{
+		this->register_event(
+			awl::backends::x11::window::event::type(
+				MapNotify
+			)
+		)
+	},
+	unmap_connection_{
+		this->register_event(
+			awl::backends::x11::window::event::type(
+				UnmapNotify
+			)
+		)
 	}
 {
 	// always returns 1
@@ -171,46 +206,6 @@ awl::backends::x11::window::original_object::original_object(
 
 awl::backends::x11::window::original_object::~original_object()
 {
-}
-
-void
-awl::backends::x11::window::original_object::show()
-{
-	// always returns 1
-	::XMapWindow(
-		this->display().get(),
-		this->get()
-	);
-
-	awl::backends::x11::sync(
-		this->display(),
-		awl::backends::x11::discard(
-			false
-		)
-	);
-}
-
-awl::window::dim
-awl::backends::x11::window::original_object::size() const
-{
-	return
-		fcppt::math::dim::to_unsigned(
-			this->rect().size()
-		);
-}
-
-awl::visual::object const &
-awl::backends::x11::window::original_object::visual() const
-{
-	return
-		this->x11_visual();
-}
-
-awl::window::event::processor &
-awl::backends::x11::window::original_object::processor()
-{
-	return
-		*processor_;
 }
 
 bool
@@ -279,4 +274,181 @@ void
 awl::backends::x11::window::original_object::destroy()
 {
 	window_.destroy();
+}
+
+awl::event::connection_unique_ptr
+awl::backends::x11::window::original_object::register_event(
+	awl::backends::x11::window::event::type const _event_type
+)
+{
+	fcppt::optional::maybe_void(
+		awl::backends::x11::window::event::to_mask(
+			_event_type
+		),
+		[
+			this
+		](
+			awl::backends::x11::window::event::mask_bit const _mask
+		)
+		{
+			this->add_mask_bit(
+				_mask
+			);
+		}
+	);
+
+	return
+		awl::event::make_connection(
+			awl::event::connection_function{
+				[
+					this,
+					_event_type
+				]{
+					this->unregister_event(
+						_event_type
+					);
+				}
+			}
+		);
+}
+
+awl::event::connection_unique_ptr
+awl::backends::x11::window::original_object::add_event_mask(
+	awl::backends::x11::window::event::mask const _mask
+)
+{
+	awl::backends::x11::window::event::mask_for_each(
+		_mask,
+		awl::backends::x11::window::event::mask_function{
+			[
+				this
+			](
+				awl::backends::x11::window::event::mask_bit const _mask_bit
+			)
+			{
+				this->add_mask_bit(
+					_mask_bit
+				);
+			}
+		}
+	);
+
+	return
+		awl::event::make_connection(
+			awl::event::connection_function{
+				[
+					this,
+					_mask
+				]{
+					return
+						this->remove_event_mask(
+							_mask
+						);
+				}
+			}
+		);
+}
+
+void
+awl::backends::x11::window::original_object::unregister_event(
+	awl::backends::x11::window::event::type const _event_type
+)
+{
+	fcppt::optional::maybe_void(
+		awl::backends::x11::window::event::to_mask(
+			_event_type
+		),
+		[
+			this
+		](
+			awl::backends::x11::window::event::mask_bit const _old_mask
+		)
+		{
+			this->remove_mask_bit(
+				_old_mask
+			);
+		}
+	);
+}
+
+void
+awl::backends::x11::window::original_object::remove_event_mask(
+	awl::backends::x11::window::event::mask const _mask
+)
+{
+	awl::backends::x11::window::event::mask_for_each(
+		_mask,
+		awl::backends::x11::window::event::mask_function{
+			[
+				this
+			](
+				awl::backends::x11::window::event::mask_bit const _mask_bit
+			)
+			{
+				this->remove_mask_bit(
+					_mask_bit
+				);
+			}
+		}
+	);
+}
+
+void
+awl::backends::x11::window::original_object::add_mask_bit(
+	awl::backends::x11::window::event::mask_bit const _mask_bit
+)
+{
+	mask_count const count(
+		++mask_counts_[
+			_mask_bit
+		]
+	);
+
+	if(
+		count
+		==
+		1u
+	)
+	{
+		event_mask_ |=
+			awl::backends::x11::window::event::mask{
+				_mask_bit.get()
+			};
+
+		awl::backends::x11::window::event::change_mask(
+			*this,
+			event_mask_
+		);
+	};
+}
+
+void
+awl::backends::x11::window::original_object::remove_mask_bit(
+	awl::backends::x11::window::event::mask_bit const _mask_bit
+)
+{
+	mask_count const count(
+		--mask_counts_[
+			_mask_bit
+		]
+	);
+
+	if(
+		count
+		==
+		0u
+	)
+	{
+		event_mask_ &=
+			~(
+				awl::backends::x11::window::event::mask{
+					_mask_bit.get()
+				}
+			);
+
+		awl::backends::x11::window::event::change_mask(
+			*this,
+			event_mask_
+		);
+	}
 }

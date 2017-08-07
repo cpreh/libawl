@@ -1,7 +1,7 @@
 #ifndef AWL_CURSOR_OBJECT_HPP_INCLUDED
 #define AWL_CURSOR_OBJECT_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
@@ -11,7 +11,7 @@ namespace awl
 namespace cursor
 {
 
-class AWL_CLASS_SYMBOL object
+class AWL_DETAIL_CLASS_SYMBOL object
 {
 	FCPPT_NONCOPYABLE(
 		object

@@ -1,7 +1,7 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/window/get_geometry.hpp>
-#include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/rect.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -12,7 +12,7 @@
 
 awl::backends::x11::window::rect
 awl::backends::x11::window::get_geometry(
-	awl::backends::x11::window::object const &_window
+	awl::backends::x11::window::base const &_window
 )
 {
 	Window root_return;

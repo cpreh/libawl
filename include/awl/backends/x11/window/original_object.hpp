@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_ORIGINAL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_ORIGINAL_OBJECT_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
+#include <awl/backends/x11/atom.hpp>
 #include <awl/backends/x11/colormap.hpp>
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/backends/x11/screen.hpp>
@@ -14,17 +14,20 @@
 #include <awl/backends/x11/window/original_class_hint.hpp>
 #include <awl/backends/x11/window/original_object_fwd.hpp>
 #include <awl/backends/x11/window/rect_fwd.hpp>
-#include <awl/backends/x11/window/event/processor_fwd.hpp>
-#include <awl/backends/x11/window/event/scoped_processor.hpp>
+#include <awl/backends/x11/window/event/mask.hpp>
+#include <awl/backends/x11/window/event/mask_bit.hpp>
+#include <awl/backends/x11/window/event/type.hpp>
+#include <awl/backends/x11/window/event/wm_protocols.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/visual/object_fwd.hpp>
-#include <awl/window/dim_fwd.hpp>
-#include <awl/window/object.hpp>
+#include <awl/event/connection_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/optional/object_decl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <map>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace awl
@@ -36,10 +39,9 @@ namespace x11
 namespace window
 {
 
-class AWL_CLASS_SYMBOL original_object
+class AWL_DETAIL_CLASS_SYMBOL original_object
 :
-	public awl::backends::x11::window::object,
-	public awl::window::object
+	public awl::backends::x11::window::object
 {
 	FCPPT_NONCOPYABLE(
 		original_object
@@ -55,26 +57,6 @@ public:
 
 	AWL_DETAIL_SYMBOL
 	~original_object()
-	override;
-
-	AWL_DETAIL_SYMBOL
-	void
-	show()
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::window::dim
-	size() const
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::visual::object const &
-	visual() const
-	override;
-
-	AWL_DETAIL_SYMBOL
-	awl::window::event::processor &
-	processor()
 	override;
 
 	AWL_DETAIL_SYMBOL
@@ -116,10 +98,38 @@ public:
 	void
 	destroy();
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::event::processor &
-	x11_processor();
+	awl::event::connection_unique_ptr
+	register_event(
+		awl::backends::x11::window::event::type
+	)
+	override;
+
+	awl::event::connection_unique_ptr
+	add_event_mask(
+		awl::backends::x11::window::event::mask
+	)
+	override;
 private:
+	void
+	unregister_event(
+		awl::backends::x11::window::event::type
+	);
+
+	void
+	remove_event_mask(
+		awl::backends::x11::window::event::mask
+	);
+
+	void
+	add_mask_bit(
+		awl::backends::x11::window::event::mask_bit
+	);
+
+	void
+	remove_mask_bit(
+		awl::backends::x11::window::event::mask_bit
+	);
+
 	awl::backends::x11::display &display_;
 
 	awl::backends::x11::screen const screen_;
@@ -146,11 +156,34 @@ private:
 
 	awl::backends::x11::window::holder window_;
 
-	fcppt::unique_ptr<
-		awl::backends::x11::window::event::processor
-	> const processor_;
+	awl::event::connection_unique_ptr const processor_connection_;
 
-	awl::backends::x11::window::event::scoped_processor const scoped_processor_;
+	typedef
+	unsigned
+	mask_count;
+
+	typedef
+	std::map<
+		awl::backends::x11::window::event::mask_bit,
+		mask_count
+	>
+	mask_count_map;
+
+	mask_count_map mask_counts_;
+
+	awl::backends::x11::window::event::mask event_mask_;
+
+	awl::backends::x11::window::event::wm_protocols const wm_protocols_;
+
+	awl::event::connection_unique_ptr const client_message_connection_;
+
+	awl::event::connection_unique_ptr const configure_connection_;
+
+	awl::event::connection_unique_ptr const destroy_connection_;
+
+	awl::event::connection_unique_ptr const map_connection_;
+
+	awl::event::connection_unique_ptr const unmap_connection_;
 };
 
 }

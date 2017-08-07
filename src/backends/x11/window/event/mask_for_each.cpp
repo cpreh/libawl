@@ -1,6 +1,6 @@
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/mask_bit.hpp>
-#include <awl/backends/x11/window/event/mask_callback.hpp>
+#include <awl/backends/x11/window/event/mask_function.hpp>
 #include <awl/backends/x11/window/event/mask_for_each.hpp>
 #include <fcppt/use.hpp>
 #include <fcppt/tag_type.hpp>
@@ -18,7 +18,7 @@
 void
 awl::backends::x11::window::event::mask_for_each(
 	awl::backends::x11::window::event::mask const _mask,
-	awl::backends::x11::window::event::mask_callback const &_mask_callback
+	awl::backends::x11::window::event::mask_function const &_mask_function
 )
 {
 	fcppt::algorithm::loop(
@@ -31,7 +31,7 @@ awl::backends::x11::window::event::mask_for_each(
 		>{},
 		[
 			_mask,
-			&_mask_callback
+			&_mask_function
 		](
 			auto const _index
 		)
@@ -63,7 +63,7 @@ awl::backends::x11::window::event::mask_for_each(
 					mask_bit
 				)
 			)
-				_mask_callback(
+				_mask_function(
 					awl::backends::x11::window::event::mask_bit{
 						mask_bit.get()
 					}
