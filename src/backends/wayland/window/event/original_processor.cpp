@@ -129,9 +129,6 @@ awl::backends::wayland::window::event::original_processor::original_processor(
 					&&
 					_arg2;
 			}
-		},
-		awl::window::event::close_signal::initial_value{
-			true
 		}
 	},
 	destroy_signal_{},

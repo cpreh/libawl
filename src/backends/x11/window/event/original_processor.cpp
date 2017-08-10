@@ -79,9 +79,6 @@ awl::backends::x11::window::event::original_processor::original_processor(
 					&&
 					_arg2;
 			}
-		},
-		awl::window::event::close_signal::initial_value{
-			true
 		}
 	),
 	destroy_signal_(),
@@ -421,6 +418,9 @@ awl::backends::x11::window::event::original_processor::on_client_message(
 
 	if(
 		close_signal_(
+			awl::window::event::close_signal::initial_value{
+				true
+			},
 			awl::window::event::close()
 		)
 	)

@@ -67,9 +67,6 @@ awl::backends::windows::window::event::original_processor::original_processor(
 					&&
 					_arg2;
 			}
-		},
-		awl::window::event::close_signal::initial_value{
-			true
 		}
 	),
 	destroy_signal_(),
@@ -349,6 +346,9 @@ awl::backends::windows::window::event::original_processor::on_close(
 {
 	return
 		close_signal_(
+			awl::window::event::close_signal::initial_value{
+				true
+			},
 			awl::window::event::close()
 		)
 		?
