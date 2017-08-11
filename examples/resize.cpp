@@ -93,15 +93,9 @@ try
 					fcppt::optional::maybe_void(
 						fcppt::variant::dynamic_cast_<
 							boost::mpl::vector3<
-								fcppt::reference<
-									awl::window::event::resize const
-								>,
-								fcppt::reference<
-									awl::window::event::close const
-								>,
-								fcppt::reference<
-									awl::window::event::destroy const
-								>
+								awl::window::event::resize const,
+								awl::window::event::close const,
+								awl::window::event::destroy const
 							>,
 							fcppt::cast::dynamic_fun
 						>(
