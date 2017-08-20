@@ -278,9 +278,6 @@ awl::backends::windows::window::event::original_processor::register_callback(
 								signal_type(
 									signal_type::combiner_function{
 										awl::backends::windows::window::event::combine_result
-									},
-									signal_type::initial_value{
-										awl::backends::windows::window::event::return_type()
 									}
 								)
 							)
@@ -330,6 +327,9 @@ awl::backends::windows::window::event::original_processor::execute_callback(
 			{
 				return
 					_signal.get()(
+						signal_type::initial_value{
+							awl::backends::windows::window::event::return_type()
+						},
 						awl::backends::windows::window::event::object(
 							_wparam,
 							_lparam
