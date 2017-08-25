@@ -19,7 +19,9 @@ set_property(
 )
 
 find_package(
-	Boost 1.47.0 REQUIRED
+	Boost 1.47.0
+	REQUIRED
+	filesystem
 	system
 )
 
@@ -1087,6 +1089,8 @@ function(
 		target_link_libraries(
 			${TARGETNAME}
 			PRIVATE
+			${Boost_FILESYSTEM_LIBRARIES}
+			${Boost_SYSTEM_LIBRARIES}
 			${fcppt_core_TARGET}
 			${fcppt_log_TARGET}
 		)
