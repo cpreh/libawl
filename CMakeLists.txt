@@ -26,6 +26,7 @@ option(
 
 set(
 	NEEDED_BOOST_LIBS
+	filesystem
 	system
 )
 
@@ -1093,6 +1094,8 @@ function(
 		target_link_libraries(
 			${TARGETNAME}
 			PRIVATE
+			${Boost_FILESYSTEM_LIBRARIES}
+			${Boost_SYSTEM_LIBRARIES}
 			${fcppt_core_TARGET}
 			${fcppt_log_TARGET}
 		)
