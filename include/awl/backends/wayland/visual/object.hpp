@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WAYLAND_VISUAL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_WAYLAND_VISUAL_OBJECT_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -16,7 +16,7 @@ namespace wayland
 namespace visual
 {
 
-class AWL_CLASS_SYMBOL object
+class AWL_DETAIL_CLASS_SYMBOL object
 :
 	public
 		awl::visual::object

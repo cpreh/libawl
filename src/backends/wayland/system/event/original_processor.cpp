@@ -283,7 +283,7 @@ awl::backends::wayland::system::event::original_processor::~original_processor()
 {
 }
 
-awl::main::optional_exit_code
+awl::system::event::result
 awl::backends::wayland::system::event::original_processor::poll()
 {
 	return
@@ -296,25 +296,13 @@ awl::backends::wayland::system::event::original_processor::poll()
 		);
 }
 
-awl::main::optional_exit_code
+awl::system::event::result
 awl::backends::wayland::system::event::original_processor::next()
 {
 	return
 		this->process(
 			awl::backends::posix::optional_duration()
 		);
-}
-
-#include <awl/main/exit_failure.hpp>
-
-awl::system::event::result
-awl::backends::wayland::system::event::original_processor::poll_result()
-{
-	// FIXME:
-	return
-		awl::system::event::result{
-			awl::main::exit_failure()
-		};
 }
 
 void
@@ -409,7 +397,7 @@ awl::backends::wayland::system::event::original_processor::fd_processor()
 		*fd_processor_;
 }
 
-awl::main::optional_exit_code
+awl::system::event::result
 awl::backends::wayland::system::event::original_processor::process(
 	awl::backends::posix::optional_duration const &_duration
 )

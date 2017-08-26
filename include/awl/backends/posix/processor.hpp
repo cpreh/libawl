@@ -39,6 +39,13 @@ public:
 		awl::backends::posix::optional_duration const &
 	) = 0;
 
+	virtual
+	fcppt::signal::auto_connection
+	event_function(
+		awl::backends::posix::event_function,
+		awl::backends::posix::fd
+	) = 0;
+
 	AWL_DETAIL_SYMBOL
 	virtual
 	~processor() = 0;
