@@ -1,16 +1,25 @@
 #include <awl/backends/wayland/window/event/data.hpp>
+#include <awl/event/container_reference.hpp>
+#include <awl/window/reference.hpp>
 #include <fcppt/log/object_fwd.hpp>
-#include <fcppt/signal/object_impl.hpp>
 
 
 awl::backends::wayland::window::event::data::data(
-	fcppt::log::object &_log
+	fcppt::log::object &_log,
+	awl::window::reference const _reference,
+	awl::event::container_reference const _events
 )
 :
 	log_{
 		_log
 	},
-	resize_signal_()
+	reference_{
+		_reference
+	},
+	events_{
+		_events
+	},
+	size_{}
 {
 }
 

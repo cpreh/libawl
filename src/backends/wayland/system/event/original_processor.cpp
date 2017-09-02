@@ -1,8 +1,8 @@
 #include <awl/exception.hpp>
-#include <awl/backends/posix/callback.hpp>
 #include <awl/backends/posix/create_processor.hpp>
 #include <awl/backends/posix/duration.hpp>
-#include <awl/backends/posix/event_fwd.hpp>
+#include <awl/backends/posix/event.hpp>
+#include <awl/backends/posix/event_unique_ptr.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration.hpp>
 #include <awl/backends/posix/processor.hpp>
@@ -17,36 +17,49 @@
 #include <awl/backends/wayland/optional_shell.hpp>
 #include <awl/backends/wayland/optional_shm.hpp>
 #include <awl/backends/wayland/registry_id.hpp>
+#include <awl/backends/wayland/seat.hpp>
 #include <awl/backends/wayland/shell.hpp>
 #include <awl/backends/wayland/shm.hpp>
 #include <awl/backends/wayland/system/event/global_data.hpp>
 #include <awl/backends/wayland/system/event/original_processor.hpp>
 #include <awl/backends/wayland/system/event/processor.hpp>
-#include <awl/backends/wayland/system/event/seat_added_callback.hpp>
-#include <awl/backends/wayland/system/event/seat_removed_callback.hpp>
+#include <awl/backends/wayland/system/event/seat_added.hpp>
+#include <awl/backends/wayland/system/event/seat_removed.hpp>
 #include <awl/backends/wayland/system/seat/object.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
+#include <awl/event/base.hpp>
+#include <awl/event/base_unique_ptr.hpp>
+#include <awl/event/container.hpp>
+#include <awl/event/container_reference.hpp>
+#include <awl/event/map_concat.hpp>
+#include <awl/event/variant.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/optional_exit_code.hpp>
-#include <awl/system/event/base.hpp>
 #include <awl/system/event/result.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/make_shared_ptr.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
+#include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/log/_.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <functional>
 #include <stdint.h>
 #include <string>
 #include <type_traits>
+#include <utility>
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
@@ -136,14 +149,46 @@ registry_add(
 		==
 		"wl_seat"
 	)
-		data.seats_.add(
-			awl::backends::wayland::system::seat::object{
-				awl::backends::wayland::seat{
-					_registry,
-					name
-				}
-			}
+	{
+		std::pair<
+			awl::backends::wayland::system::seat::set::iterator,
+			bool
+		> const result{
+			data.seats_.insert(
+				fcppt::make_shared_ptr<
+					awl::backends::wayland::system::seat::object
+				>(
+					awl::backends::wayland::seat{
+						_registry,
+						name
+					},
+					data.display_,
+					fcppt::make_ref(
+						data.last_events_
+					)
+				)
+			)
+		};
+
+		FCPPT_ASSERT_ERROR(
+			result.second
 		);
+
+		(*result.first)->init_ptr();
+
+		data.last_events_.push_back(
+			fcppt::unique_ptr_to_base<
+				awl::event::base
+			>(
+				fcppt::make_unique_ptr<
+					awl::backends::wayland::system::event::seat_added
+				>(
+					data.display_,
+					*result.first
+				)
+			)
+		);
+	}
 }
 
 void
@@ -221,8 +266,34 @@ registry_remove(
 		data.shm_
 	);
 
-	data.seats_.remove(
-		name
+	fcppt::optional::maybe_void(
+		fcppt::container::find_opt_iterator(
+			data.seats_,
+			name
+		),
+		[
+			&data
+		](
+			awl::backends::wayland::system::seat::set::iterator const _it
+		)
+		{
+			data.last_events_.push_back(
+				fcppt::unique_ptr_to_base<
+					awl::event::base
+				>(
+					fcppt::make_unique_ptr<
+						awl::backends::wayland::system::event::seat_removed
+					>(
+						data.display_,
+						*_it
+					)
+				)
+			);
+
+			data.seats_.erase(
+				_it
+			);
+		}
 	);
 }
 
@@ -249,22 +320,14 @@ awl::backends::wayland::system::event::original_processor::original_processor(
 		_display
 	},
 	global_data_{
-		_log
+		_log,
+		fcppt::make_ref(
+			_display
+		)
 	},
-	fd_connection_{
-		fd_processor_->register_fd_callback(
-			awl::backends::posix::fd{
-				::wl_display_get_fd(
-					_display.get()
-				)
-			},
-			awl::backends::posix::callback{
-				std::bind(
-					&awl::backends::wayland::system::event::original_processor::process_pending,
-					this,
-					std::placeholders::_1
-				)
-			}
+	fd_{
+		::wl_display_get_fd(
+			_display.get()
 		)
 	}
 {
@@ -313,6 +376,15 @@ awl::backends::wayland::system::event::original_processor::quit(
 	global_data_.exit_code_ =
 		awl::main::optional_exit_code(
 			_exit_code
+		);
+}
+
+awl::event::container_reference
+awl::backends::wayland::system::event::original_processor::events()
+{
+	return
+		fcppt::make_ref(
+			global_data_.last_events_
 		);
 }
 
@@ -365,29 +437,7 @@ awl::backends::wayland::system::seat::set const &
 awl::backends::wayland::system::event::original_processor::seats() const
 {
 	return
-		global_data_.seats_.get();
-}
-
-fcppt::signal::auto_connection
-awl::backends::wayland::system::event::original_processor::seat_added_callback(
-	awl::backends::wayland::system::event::seat_added_callback const &_callback
-)
-{
-	return
-		global_data_.seats_.add_signal().connect(
-			_callback
-		);
-}
-
-fcppt::signal::auto_connection
-awl::backends::wayland::system::event::original_processor::seat_removed_callback(
-	awl::backends::wayland::system::event::seat_removed_callback const &_callback
-)
-{
-	return
-		global_data_.seats_.remove_signal().connect(
-			_callback
-		);
+		global_data_.seats_;
 }
 
 awl::backends::posix::processor &
@@ -402,22 +452,85 @@ awl::backends::wayland::system::event::original_processor::process(
 	awl::backends::posix::optional_duration const &_duration
 )
 {
+	// TODO: This code is the same in X11
+	return
+		fcppt::optional::maybe(
+			global_data_.exit_code_,
+			[
+				this,
+				&_duration
+			]{
+				return
+					awl::system::event::result{
+						this->process_fds(
+							_duration
+						)
+					};
+			},
+			[](
+				awl::main::exit_code const _code
+			)
+			{
+				return
+					awl::system::event::result{
+						_code
+					};
+			}
+		);
+}
+
+awl::event::container
+awl::backends::wayland::system::event::original_processor::process_fds(
+	awl::backends::posix::optional_duration const &_duration
+)
+{
 	awl::backends::wayland::display_flush(
 		display_
 	);
 
-	fd_processor_->poll(
-		_duration
-	);
-
+	// TODO: This code is the same in X11
 	return
-		global_data_.exit_code_;
+		awl::event::map_concat<
+			awl::event::base_unique_ptr
+		>(
+			fd_processor_->poll(
+				_duration
+			),
+			[
+				this
+			](
+				awl::backends::posix::event_unique_ptr &&_event
+			)
+			{
+				return
+					_event->fd()
+					==
+					fd_
+					?
+						awl::event::variant<
+							awl::event::base_unique_ptr
+						>(
+							this->process_pending()
+						)
+					:
+						awl::event::variant<
+							awl::event::base_unique_ptr
+						>(
+							fcppt::unique_ptr_to_base<
+								awl::event::base
+							>(
+								std::move(
+									_event
+								)
+							)
+						)
+					;
+			}
+		);
 }
 
-void
-awl::backends::wayland::system::event::original_processor::process_pending(
-	awl::backends::posix::event const &
-)
+awl::event::container
+awl::backends::wayland::system::event::original_processor::process_pending()
 {
 	while(
 		!awl::backends::wayland::display_prepare_read(
@@ -435,4 +548,16 @@ awl::backends::wayland::system::event::original_processor::process_pending(
 	awl::backends::wayland::display_dispatch_pending(
 		display_
 	);
+
+	awl::event::container result(
+		std::move(
+			global_data_.last_events_
+		)
+	);
+
+	global_data_.last_events_ =
+		awl::event::container();
+
+	return
+		result;
 }

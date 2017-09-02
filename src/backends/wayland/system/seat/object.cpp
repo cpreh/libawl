@@ -1,15 +1,21 @@
+#include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/registry_id.hpp>
 #include <awl/backends/wayland/seat.hpp>
-#include <awl/backends/wayland/system/seat/caps_callback.hpp>
+#include <awl/backends/wayland/system/event/seat_caps.hpp>
 #include <awl/backends/wayland/system/seat/caps_field.hpp>
 #include <awl/backends/wayland/system/seat/data.hpp>
 #include <awl/backends/wayland/system/seat/object.hpp>
+#include <awl/event/base.hpp>
+#include <awl/event/container_reference.hpp>
+#include <fcppt/enable_shared_from_this_impl.hpp>
+#include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/bit/mask_c.hpp>
 #include <fcppt/bit/test.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/container/bitfield/operators.hpp>
-#include <fcppt/signal/auto_connection.hpp>
-#include <fcppt/signal/object_impl.hpp>
+#include <fcppt/optional/make.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <stdint.h>
@@ -78,8 +84,20 @@ wl_seat_capabilities(
 			_capabilities
 		);
 
-	data.caps_signal_(
-		data.caps_
+	data.events_.get().push_back(
+		fcppt::unique_ptr_to_base<
+			awl::event::base
+		>(
+			fcppt::make_unique_ptr<
+				awl::backends::wayland::system::event::seat_caps
+			>(
+				data.display_,
+				FCPPT_ASSERT_OPTIONAL_ERROR(
+					data.pointer_
+				),
+				data.caps_
+			)
+		)
 	);
 }
 
@@ -100,15 +118,23 @@ wl_seat_listener const seat_listener{
 }
 
 awl::backends::wayland::system::seat::object::object(
-	awl::backends::wayland::seat &&_impl
+	awl::backends::wayland::seat &&_impl,
+	awl::backends::wayland::display_reference const _display,
+	awl::event::container_reference const _events
 )
 :
+	fcppt::enable_shared_from_this<
+		awl::backends::wayland::system::seat::object
+	>{},
 	impl_{
 		std::move(
 			_impl
 		)
 	},
-	data_{}
+	data_{
+		_display,
+		_events
+	}
 {
 	::wl_seat_add_listener(
 		impl_.get(),
@@ -117,53 +143,18 @@ awl::backends::wayland::system::seat::object::object(
 	);
 }
 
-awl::backends::wayland::system::seat::object::object(
-	object &&_other
-)
-:
-	impl_{
-		std::move(
-			_other.impl_
-		)
-	},
-	data_{
-		std::move(
-			_other.data_
-		)
-	}
-{
-	::wl_seat_set_user_data(
-		impl_.get(),
-		&data_
-	);
-}
-
-awl::backends::wayland::system::seat::object &
-awl::backends::wayland::system::seat::object::operator=(
-	object &&_other
-)
-{
-	impl_ =
-		std::move(
-			_other.impl_
-		);
-
-	data_ =
-		std::move(
-			_other.data_
-		);
-
-	::wl_seat_set_user_data(
-		impl_.get(),
-		&data_
-	);
-
-	return
-		*this;
-}
-
 awl::backends::wayland::system::seat::object::~object()
 {
+}
+
+void
+awl::backends::wayland::system::seat::object::init_ptr()
+{
+	// TODO: Make this less ugly
+	data_.pointer_ =
+		fcppt::optional::make(
+			this->fcppt_shared_from_this()
+		);
 }
 
 awl::backends::wayland::registry_id
@@ -178,17 +169,6 @@ awl::backends::wayland::system::seat::object::get() const
 {
 	return
 		impl_;
-}
-
-fcppt::signal::auto_connection
-awl::backends::wayland::system::seat::object::caps_callback(
-	awl::backends::wayland::system::seat::caps_callback const &_callback
-)
-{
-	return
-		data_.caps_signal_.connect(
-			_callback
-		);
 }
 
 awl::backends::wayland::system::seat::caps_field

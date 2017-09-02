@@ -2,10 +2,11 @@
 #define AWL_BACKENDS_WAYLAND_WINDOW_EVENT_DATA_HPP_INCLUDED
 
 #include <awl/backends/wayland/window/event/data_fwd.hpp>
-#include <awl/window/event/resize_signal.hpp>
+#include <awl/event/container_reference.hpp>
+#include <awl/window/optional_dim.hpp>
+#include <awl/window/reference.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/log/object_fwd.hpp>
-#include <fcppt/signal/object_decl.hpp>
 
 
 namespace awl
@@ -25,16 +26,22 @@ class data
 		data
 	);
 public:
-	explicit
 	data(
-		fcppt::log::object &
+		fcppt::log::object &,
+		awl::window::reference,
+		awl::event::container_reference
 	);
 
 	~data();
 
 	fcppt::log::object &log_;
 
-	awl::window::event::resize_signal resize_signal_;
+	awl::window::reference const reference_;
+
+	awl::event::container_reference const events_;
+
+	awl::window::optional_dim size_;
+
 };
 
 }

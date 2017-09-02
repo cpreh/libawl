@@ -79,6 +79,7 @@ awl::backends::wayland::system::original_object::create_window(
 				awl::backends::wayland::window::original_object
 			>(
 				log_,
+				processor_->events(),
 				display_,
 				processor_->compositor(),
 				processor_->shell(),

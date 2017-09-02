@@ -2,6 +2,7 @@
 #define AWL_BACKENDS_WAYLAND_ID_LESS_HPP_INCLUDED
 
 #include <awl/backends/wayland/registry_id.hpp>
+#include <fcppt/shared_ptr_impl.hpp>
 
 
 namespace awl
@@ -20,14 +21,20 @@ struct id_less
 	void
 	is_transparent;
 
+	typedef
+	fcppt::shared_ptr<
+		Type
+	>
+	impl;
+
 	bool
 	operator()(
-		Type const &_left,
+		impl const &_left,
 		awl::backends::wayland::registry_id const _right
 	) const
 	{
 		return
-			_left.name()
+			_left->name()
 			<
 			_right;
 	}
@@ -35,25 +42,25 @@ struct id_less
 	bool
 	operator()(
 		awl::backends::wayland::registry_id const _left,
-		Type const &_right
+		impl const &_right
 	) const
 	{
 		return
 			_left
 			<
-			_right.name();
+			_right->name();
 	}
 
 	bool
 	operator()(
-		Type const &_left,
-		Type const &_right
+		impl const &_left,
+		impl const &_right
 	) const
 	{
 		return
-			_left.name()
+			_left->name()
 			<
-			_right.name();
+			_right->name();
 	}
 };
 

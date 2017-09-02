@@ -2,8 +2,7 @@
 #ifndef AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 #define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
-#include <awl/backends/posix/event_fwd.hpp>
+#include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration_fwd.hpp>
 #include <awl/backends/posix/processor_fwd.hpp>
 #include <awl/backends/posix/processor_unique_ptr.hpp>
@@ -14,16 +13,15 @@
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/global_data.hpp>
 #include <awl/backends/wayland/system/event/processor.hpp>
-#include <awl/backends/wayland/system/event/seat_added_callback.hpp>
-#include <awl/backends/wayland/system/event/seat_removed_callback.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/container.hpp>
+#include <awl/event/container_reference.hpp>
 #include <awl/main/exit_code_fwd.hpp>
-#include <awl/main/optional_exit_code_fwd.hpp>
 #include <awl/system/event/result_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/log/object_fwd.hpp>
-#include <fcppt/signal/auto_connection.hpp>
 
 
 namespace awl
@@ -37,7 +35,7 @@ namespace system
 namespace event
 {
 
-class AWL_CLASS_SYMBOL original_processor
+class AWL_DETAIL_CLASS_SYMBOL original_processor
 :
 	public awl::backends::wayland::system::event::processor
 {
@@ -56,18 +54,13 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::main::optional_exit_code
+	awl::system::event::result
 	poll()
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::main::optional_exit_code
-	next()
-	override;
-
-	AWL_DETAIL_SYMBOL
 	awl::system::event::result
-	poll_result()
+	next()
 	override;
 
 	AWL_DETAIL_SYMBOL
@@ -77,47 +70,48 @@ public:
 	)
 	override;
 
+	AWL_DETAIL_SYMBOL
+	awl::event::container_reference
+	events()
+	override;
+
+	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::compositor const &
 	compositor() const
 	override;
 
+	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::shell const &
 	shell() const
 	override;
 
+	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::shm const &
 	shm() const
 	override;
 
+	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::system::seat::set const &
 	seats() const
 	override;
 
-	fcppt::signal::auto_connection
-	seat_added_callback(
-		awl::backends::wayland::system::event::seat_added_callback const &
-	)
-	override;
-
-	fcppt::signal::auto_connection
-	seat_removed_callback(
-		awl::backends::wayland::system::event::seat_removed_callback const &
-	)
-	override;
-
+	AWL_DETAIL_SYMBOL
 	awl::backends::posix::processor &
 	fd_processor()
 	override;
 private:
-	awl::main::optional_exit_code
+	awl::system::event::result
 	process(
 		awl::backends::posix::optional_duration const &
 	);
 
-	void
-	process_pending(
-		awl::backends::posix::event const &
+	awl::event::container
+	process_fds(
+		awl::backends::posix::optional_duration const &
 	);
+
+	awl::event::container
+	process_pending();
 
 	awl::backends::wayland::display &display_;
 
@@ -127,7 +121,7 @@ private:
 
 	awl::backends::wayland::system::event::global_data global_data_;
 
-	fcppt::signal::auto_connection const fd_connection_;
+	awl::backends::posix::fd const fd_;
 };
 
 }

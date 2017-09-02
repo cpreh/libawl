@@ -1,27 +1,26 @@
+#include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/system/seat/caps_field.hpp>
 #include <awl/backends/wayland/system/seat/data.hpp>
-#include <fcppt/signal/object_impl.hpp>
+#include <awl/event/container_reference.hpp>
 
 
-awl::backends::wayland::system::seat::data::data()
+awl::backends::wayland::system::seat::data::data(
+	awl::backends::wayland::display_reference const _display,
+	awl::event::container_reference const _events
+)
 :
+	display_{
+		_display
+	},
 	caps_{
 		awl::backends::wayland::system::seat::caps_field::null()
 	},
-	caps_signal_{}
+	events_{
+		_events
+	},
+	pointer_{}
 {
 }
-
-awl::backends::wayland::system::seat::data::data(
-	data &&
-)
-= default;
-
-awl::backends::wayland::system::seat::data &
-awl::backends::wayland::system::seat::data::operator=(
-	data &&
-)
-= default;
 
 awl::backends::wayland::system::seat::data::~data()
 {

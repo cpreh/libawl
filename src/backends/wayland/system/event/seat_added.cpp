@@ -1,12 +1,26 @@
-#include <awl/backends/wayland/system/event/add_impl.hpp>
+#include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/system/event/seat_added.hpp>
-#include <awl/backends/wayland/system/seat/object.hpp>
-#include <awl/impl/export_class_instantiation.hpp>
+#include <awl/backends/wayland/system/event/seat_base.hpp>
+#include <awl/backends/wayland/system/seat/shared_ptr.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
-template
-class
-AWL_IMPL_EXPORT_CLASS_INSTANTIATION
-awl::backends::wayland::system::event::add<
-	awl::backends::wayland::system::seat::object
->;
+awl::backends::wayland::system::event::seat_added::seat_added(
+	awl::backends::wayland::display_reference const _display,
+	awl::backends::wayland::system::seat::shared_ptr _seat
+)
+:
+	awl::backends::wayland::system::event::seat_base{
+		_display,
+		std::move(
+			_seat
+		)
+	}
+{
+}
+
+awl::backends::wayland::system::event::seat_added::~seat_added()
+{
+}

@@ -4,30 +4,141 @@
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/window/object.hpp>
 #include <awl/backends/wayland/window/original_object.hpp>
-#include <awl/backends/wayland/window/event/original_processor.hpp>
-#include <awl/backends/wayland/window/event/processor.hpp>
+#include <awl/backends/wayland/window/event/data.hpp>
+#include <awl/event/base.hpp>
+#include <awl/event/container_reference.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/optional_dim.hpp>
 #include <awl/window/parameters.hpp>
-#include <awl/window/event/processor.hpp>
+#include <awl/window/object.hpp>
 #include <awl/window/event/resize.hpp>
-#include <awl/window/event/resize_callback.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/assert/pre.hpp>
+#include <fcppt/cast/from_void_ptr.hpp>
+#include <fcppt/cast/to_unsigned.hpp>
+#include <fcppt/log/_.hpp>
+#include <fcppt/log/debug.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/math/dim/null.hpp>
+#include <fcppt/math/dim/output.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <stdint.h>
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
 
+namespace
+{
+
+void
+shell_surface_ping(
+	void *,
+	wl_shell_surface *const _shell_surface,
+	uint32_t _serial
+)
+{
+	::wl_shell_surface_pong(
+		_shell_surface,
+		_serial
+	);
+}
+
+void
+shell_surface_configure(
+	void *const _data,
+	wl_shell_surface *,
+	uint32_t,
+	int32_t const _width,
+	int32_t const _height
+)
+{
+	awl::backends::wayland::window::event::data &data{
+		*fcppt::cast::from_void_ptr<
+			awl::backends::wayland::window::event::data *
+		>(
+			_data
+		)
+	};
+
+	FCPPT_ASSERT_PRE(
+		_width
+		>=
+		0
+	);
+
+	FCPPT_ASSERT_PRE(
+		_height
+		>=
+		0
+	);
+
+	awl::window::dim const size{
+		fcppt::cast::to_unsigned(
+			_width
+		),
+		fcppt::cast::to_unsigned(
+			_height
+		)
+	};
+
+	FCPPT_LOG_DEBUG(
+		data.log_,
+		fcppt::log::_
+			<<
+			FCPPT_TEXT("Got resize event ")
+			<<
+			size
+	);
+
+	data.size_ =
+		awl::window::optional_dim{
+			size
+		};
+
+	data.events_.get().push_back(
+		fcppt::unique_ptr_to_base<
+			awl::event::base
+		>(
+			fcppt::make_unique_ptr<
+				awl::window::event::resize
+			>(
+				data.reference_,
+				size
+			)
+		)
+	);
+
+	// TODO: Add hide and show events
+}
+
+void
+shell_surface_popup_done(
+	void *,
+	wl_shell_surface *
+)
+{
+}
+
+wl_shell_surface_listener const shell_surface_listener{
+	shell_surface_ping,
+	shell_surface_configure,
+	shell_surface_popup_done
+};
+
+}
+
 awl::backends::wayland::window::original_object::original_object(
 	fcppt::log::object &_log,
+	awl::event::container_reference const _events,
 	awl::backends::wayland::display const &_display,
 	awl::backends::wayland::compositor const &_compositor,
 	awl::backends::wayland::shell const &_shell,
@@ -48,35 +159,16 @@ awl::backends::wayland::window::original_object::original_object(
 		_shell,
 		surface_
 	},
-	processor_{
-		fcppt::unique_ptr_to_base<
-			awl::backends::wayland::window::event::processor
+	data_{
+		_log,
+		fcppt::reference_to_base<
+			awl::window::object
 		>(
-			fcppt::make_unique_ptr<
-				awl::backends::wayland::window::event::original_processor
-			>(
-				_log,
-				shell_surface_
+			fcppt::make_ref(
+				*this
 			)
-		)
-	},
-	size_{},
-	resize_connection_{
-		processor_->resize_callback(
-			awl::window::event::resize_callback{
-				[
-					this
-				](
-					awl::window::event::resize const &_event
-				)
-				{
-					size_ =
-						awl::window::optional_dim{
-							_event.dim()
-						};
-				}
-			}
-		)
+		),
+		_events
 	}
 {
 	// TODO: We have to keep track of pointers that enter and set their cursors
@@ -113,6 +205,12 @@ awl::backends::wayland::window::original_object::original_object(
 			);
 		}
 	);
+
+	::wl_shell_surface_add_listener(
+		shell_surface_.get(),
+		&shell_surface_listener,
+		&data_
+	);
 }
 
 awl::backends::wayland::window::original_object::~original_object()
@@ -136,7 +234,7 @@ awl::backends::wayland::window::original_object::size() const
 {
 	return
 		fcppt::optional::from(
-			size_,
+			data_.size_,
 			[]{
 				return
 					fcppt::math::dim::null<
@@ -151,13 +249,6 @@ awl::backends::wayland::window::original_object::visual() const
 {
 	return
 		visual_;
-}
-
-awl::window::event::processor &
-awl::backends::wayland::window::original_object::processor()
-{
-	return
-		*processor_;
 }
 
 wl_surface *

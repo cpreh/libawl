@@ -1,19 +1,17 @@
 #ifndef AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 #define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
 #include <awl/backends/posix/processor_base.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/processor_fwd.hpp>
-#include <awl/backends/wayland/system/event/seat_added_callback.hpp>
-#include <awl/backends/wayland/system/event/seat_removed_callback.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
+#include <awl/event/container_reference.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/signal/auto_connection_fwd.hpp>
 
 
 namespace awl
@@ -27,7 +25,7 @@ namespace system
 namespace event
 {
 
-class AWL_CLASS_SYMBOL processor
+class AWL_DETAIL_CLASS_SYMBOL processor
 :
 	public awl::system::event::processor,
 	public awl::backends::posix::processor_base
@@ -42,6 +40,11 @@ public:
 	AWL_DETAIL_SYMBOL
 	~processor()
 	override;
+
+	// TODO: Should this be here?
+	virtual
+	awl::event::container_reference
+	events() = 0;
 
 	virtual
 	awl::backends::wayland::compositor const &
@@ -58,18 +61,6 @@ public:
 	virtual
 	awl::backends::wayland::system::seat::set const &
 	seats() const = 0;
-
-	virtual
-	fcppt::signal::auto_connection
-	seat_added_callback(
-		awl::backends::wayland::system::event::seat_added_callback const &
-	) = 0;
-
-	virtual
-	fcppt::signal::auto_connection
-	seat_removed_callback(
-		awl::backends::wayland::system::event::seat_removed_callback const &
-	) = 0;
 };
 
 }
