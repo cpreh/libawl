@@ -475,7 +475,6 @@ set(
 	include/awl/backends/x11/window/create.hpp
 	include/awl/backends/x11/window/event/atom_vector.hpp
 	include/awl/backends/x11/window/event/change_mask.hpp
-	include/awl/backends/x11/window/event/close.hpp
 	include/awl/backends/x11/window/event/filter.hpp
 	include/awl/backends/x11/window/event/generic.hpp
 	include/awl/backends/x11/window/event/generic_fwd.hpp

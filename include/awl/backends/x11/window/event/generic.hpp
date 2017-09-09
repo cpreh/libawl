@@ -8,7 +8,7 @@
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/event/base.hpp>
+#include <awl/window/event/base.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -25,7 +25,7 @@ namespace event
 
 class AWL_DETAIL_CLASS_SYMBOL generic
 :
-	public awl::event::base
+	public awl::window::event::base
 {
 	FCPPT_NONCOPYABLE(
 		generic
