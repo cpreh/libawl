@@ -45,8 +45,8 @@ public:
 	get() const;
 
 	AWL_DETAIL_SYMBOL
-	XGenericEventCookie &
-	get();
+	void const *
+	data() const;
 
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::display &
