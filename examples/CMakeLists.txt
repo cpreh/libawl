@@ -52,6 +52,13 @@ add_awl_example(
 		${fcppt_log_TARGET}
 )
 
+add_awl_example(
+	timer
+	LINK_LIBS
+		${fcppt_core_TARGET}
+		${fcppt_log_TARGET}
+)
+
 if(
 	AWL_X11_BACKEND
 )

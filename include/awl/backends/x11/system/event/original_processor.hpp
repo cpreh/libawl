@@ -23,6 +23,8 @@
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/system/event/result_fwd.hpp>
+#include <awl/timer/setting_fwd.hpp>
+#include <awl/timer/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -73,6 +75,13 @@ public:
 	void
 	quit(
 		awl::main::exit_code
+	)
+	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::timer::unique_ptr
+	create_timer(
+		awl::timer::setting const &
 	)
 	override;
 

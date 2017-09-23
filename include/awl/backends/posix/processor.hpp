@@ -3,11 +3,13 @@
 
 #include <awl/detail/class_symbol.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
-#include <awl/backends/posix/event_container.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration_fwd.hpp>
 #include <awl/backends/posix/processor_fwd.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/container.hpp>
+#include <awl/timer/setting_fwd.hpp>
+#include <awl/timer/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -34,9 +36,15 @@ public:
 	) = 0;
 
 	virtual
-	awl::backends::posix::event_container
+	awl::event::container
 	poll(
 		awl::backends::posix::optional_duration const &
+	) = 0;
+
+	virtual
+	awl::timer::unique_ptr
+	create_timer(
+		awl::timer::setting const &
 	) = 0;
 
 	AWL_DETAIL_SYMBOL

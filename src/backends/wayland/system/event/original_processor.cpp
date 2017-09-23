@@ -2,7 +2,7 @@
 #include <awl/backends/posix/create_processor.hpp>
 #include <awl/backends/posix/duration.hpp>
 #include <awl/backends/posix/event.hpp>
-#include <awl/backends/posix/event_unique_ptr.hpp>
+#include <awl/backends/posix/extract_event.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration.hpp>
 #include <awl/backends/posix/processor.hpp>
@@ -28,17 +28,19 @@
 #include <awl/backends/wayland/system/seat/object.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
 #include <awl/event/base.hpp>
-#include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
 #include <awl/event/container_reference.hpp>
 #include <awl/event/map_concat.hpp>
-#include <awl/event/variant.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/result.hpp>
+#include <awl/timer/object.hpp>
+#include <awl/timer/setting_fwd.hpp>
+#include <awl/timer/unique_ptr.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/function_impl.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -379,6 +381,17 @@ awl::backends::wayland::system::event::original_processor::quit(
 		);
 }
 
+awl::timer::unique_ptr
+awl::backends::wayland::system::event::original_processor::create_timer(
+	awl::timer::setting const &_setting
+)
+{
+	return
+		fd_processor_->create_timer(
+			_setting
+		);
+}
+
 awl::event::container_reference
 awl::backends::wayland::system::event::original_processor::events()
 {
@@ -488,43 +501,21 @@ awl::backends::wayland::system::event::original_processor::process_fds(
 		display_
 	);
 
-	// TODO: This code is the same in X11
 	return
-		awl::event::map_concat<
-			awl::event::base_unique_ptr
-		>(
+		awl::backends::posix::extract_event(
 			fd_processor_->poll(
 				_duration
 			),
-			[
-				this
-			](
-				awl::backends::posix::event_unique_ptr &&_event
-			)
-			{
-				return
-					_event->fd()
-					==
-					fd_
-					?
-						awl::event::variant<
-							awl::event::base_unique_ptr
-						>(
-							this->process_pending()
-						)
-					:
-						awl::event::variant<
-							awl::event::base_unique_ptr
-						>(
-							fcppt::unique_ptr_to_base<
-								awl::event::base
-							>(
-								std::move(
-									_event
-								)
-							)
-						)
-					;
+			fd_,
+			fcppt::function<
+				awl::event::container ()
+			>{
+				[
+					this
+				]{
+					return
+						this->process_pending();
+				}
 			}
 		);
 }

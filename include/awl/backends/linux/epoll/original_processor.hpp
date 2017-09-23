@@ -2,14 +2,21 @@
 #define AWL_BACKENDS_LINUX_EPOLL_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/backends/linux/epoll/set.hpp>
-#include <awl/backends/posix/event_container.hpp>
+#include <awl/backends/linux/timer/reference.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration_fwd.hpp>
 #include <awl/backends/posix/processor.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
+#include <awl/event/container.hpp>
+#include <awl/timer/setting_fwd.hpp>
+#include <awl/timer/unique_ptr.hpp>
+#include <fcppt/strong_typedef_std_hash.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <unordered_map>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace awl
@@ -44,13 +51,29 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::posix::event_container
+	awl::event::container
 	poll(
 		awl::backends::posix::optional_duration const &
 	)
 	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::timer::unique_ptr
+	create_timer(
+		awl::timer::setting const &
+	)
+	override;
 private:
 	awl::backends::linux::epoll::set fd_set_;
+
+	typedef
+	std::unordered_map<
+		awl::backends::posix::fd,
+		awl::backends::linux::timer::reference
+	>
+	timer_map;
+
+	timer_map timers_;
 };
 
 }

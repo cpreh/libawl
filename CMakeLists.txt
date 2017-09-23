@@ -119,6 +119,10 @@ set(
 	src/system/create.cpp
 	src/system/event/processor.cpp
 	src/system/object.cpp
+	src/timer/event.cpp
+	src/timer/match.cpp
+	src/timer/object.cpp
+	src/timer/setting.cpp
 	src/visual/object.cpp
 	src/window/event/base.cpp
 	src/window/event/close.cpp
@@ -193,6 +197,18 @@ set(
 	include/awl/system/object.hpp
 	include/awl/system/object_fwd.hpp
 	include/awl/system/object_unique_ptr.hpp
+	include/awl/timer/delay.hpp
+	include/awl/timer/duration.hpp
+	include/awl/timer/event.hpp
+	include/awl/timer/event_fwd.hpp
+	include/awl/timer/match.hpp
+	include/awl/timer/object.hpp
+	include/awl/timer/object_fwd.hpp
+	include/awl/timer/period.hpp
+	include/awl/timer/reference.hpp
+	include/awl/timer/setting.hpp
+	include/awl/timer/setting_fwd.hpp
+	include/awl/timer/unique_ptr.hpp
 	include/awl/visual/object.hpp
 	include/awl/visual/object_fwd.hpp
 	include/awl/visual/object_unique_ptr.hpp
@@ -654,9 +670,8 @@ set(
 	include/awl/backends/posix/create_processor.hpp
 	include/awl/backends/posix/duration.hpp
 	include/awl/backends/posix/event.hpp
-	include/awl/backends/posix/event_container.hpp
 	include/awl/backends/posix/event_fwd.hpp
-	include/awl/backends/posix/event_unique_ptr.hpp
+	include/awl/backends/posix/extract_event.hpp
 	include/awl/backends/posix/fd.hpp
 	include/awl/backends/posix/optional_duration.hpp
 	include/awl/backends/posix/optional_duration_fwd.hpp
@@ -665,14 +680,18 @@ set(
 	include/awl/backends/posix/processor_base_fwd.hpp
 	include/awl/backends/posix/processor_fwd.hpp
 	include/awl/backends/posix/processor_unique_ptr.hpp
+	include/awl/backends/posix/timer.hpp
+	include/awl/backends/posix/timer_fwd.hpp
 )
 
 set(
 	AWL_POSIX_SRC_FILES
 	src/backends/posix/create_processor.cpp
 	src/backends/posix/event.cpp
+	src/backends/posix/extract_event.cpp
 	src/backends/posix/processor.cpp
 	src/backends/posix/processor_base.cpp
+	src/backends/posix/timer.cpp
 )
 
 set(
@@ -684,6 +703,13 @@ set(
 	include/awl/backends/linux/epoll/original_processor.hpp
 	include/awl/backends/linux/epoll/set.hpp
 	include/awl/backends/linux/epoll/set_fwd.hpp
+	include/awl/backends/linux/timer/object.hpp
+	include/awl/backends/linux/timer/object_fwd.hpp
+	include/awl/backends/linux/timer/reference.hpp
+	include/awl/backends/linux/timer/unique_ptr.hpp
+	include/awl/backends/linux/timerfd/object.hpp
+	include/awl/backends/linux/timerfd/object_fwd.hpp
+	include/awl/backends/linux/timerfd/unique_ptr.hpp
 )
 
 set(
@@ -692,6 +718,8 @@ set(
 	src/backends/linux/epoll/fd.cpp
 	src/backends/linux/epoll/original_processor.cpp
 	src/backends/linux/epoll/set.cpp
+	src/backends/linux/timer/object.cpp
+	src/backends/linux/timerfd/object.cpp
 )
 
 set(
