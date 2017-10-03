@@ -677,6 +677,7 @@ set(
 	include/awl/backends/posix/event_fwd.hpp
 	include/awl/backends/posix/extract_event.hpp
 	include/awl/backends/posix/fd.hpp
+	include/awl/backends/posix/match.hpp
 	include/awl/backends/posix/optional_duration.hpp
 	include/awl/backends/posix/optional_duration_fwd.hpp
 	include/awl/backends/posix/processor.hpp
@@ -693,6 +694,7 @@ set(
 	src/backends/posix/create_processor.cpp
 	src/backends/posix/event.cpp
 	src/backends/posix/extract_event.cpp
+	src/backends/posix/match.cpp
 	src/backends/posix/processor.cpp
 	src/backends/posix/processor_base.cpp
 	src/backends/posix/timer.cpp

@@ -1,7 +1,7 @@
-#include <awl/event/base.hpp>
-#include <awl/timer/event.hpp>
-#include <awl/timer/match.hpp>
-#include <awl/timer/object_fwd.hpp>
+#include <awl/backends/posix/event.hpp>
+#include <awl/backends/posix/fd.hpp>
+#include <awl/backends/posix/match.hpp>
+#include <awl/event/base_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/cast/dynamic.hpp>
@@ -9,15 +9,15 @@
 
 
 bool
-awl::timer::match(
+awl::backends::posix::match(
 	awl::event::base const &_event,
-	awl::timer::object const &_timer
+	awl::backends::posix::fd const _fd
 )
 {
 	return
 		fcppt::optional::maybe(
 			fcppt::cast::dynamic<
-				awl::timer::event const
+				awl::backends::posix::event const
 			>(
 				_event
 			),
@@ -25,17 +25,17 @@ awl::timer::match(
 				false
 			),
 			[
-				&_timer
+				_fd
 			](
 				fcppt::reference<
-					awl::timer::event const
-				> const _timer_event
+					awl::backends::posix::event const
+				> const _posix_event
 			)
 			{
 				return
-					&_timer_event.get().get()
+					_posix_event.get().fd()
 					==
-					&_timer;
+					_fd;
 			}
 		);
 }
