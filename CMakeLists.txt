@@ -123,6 +123,8 @@ set(
 	src/timer/match.cpp
 	src/timer/object.cpp
 	src/timer/setting.cpp
+	src/timer/setting_no_delay.cpp
+	src/timer/setting_no_period.cpp
 	src/visual/object.cpp
 	src/window/event/base.cpp
 	src/window/event/close.cpp
@@ -208,6 +210,8 @@ set(
 	include/awl/timer/reference.hpp
 	include/awl/timer/setting.hpp
 	include/awl/timer/setting_fwd.hpp
+	include/awl/timer/setting_no_delay.hpp
+	include/awl/timer/setting_no_period.hpp
 	include/awl/timer/unique_ptr.hpp
 	include/awl/visual/object.hpp
 	include/awl/visual/object_fwd.hpp
