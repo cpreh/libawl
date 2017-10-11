@@ -3,7 +3,7 @@
 
 #include <awl/main/exit_code.hpp>
 #include <awl/system/event/result_fwd.hpp>
-#include <fcppt/variant/variadic.hpp>
+#include <fcppt/either/object_impl.hpp>
 
 
 #endif

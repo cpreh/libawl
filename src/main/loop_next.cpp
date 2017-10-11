@@ -8,7 +8,7 @@
 #include <awl/system/event/processor.hpp>
 #include <awl/system/event/result.hpp>
 #include <fcppt/algorithm/loop.hpp>
-#include <fcppt/variant/match.hpp>
+#include <fcppt/either/match.hpp>
 
 
 awl::main::exit_code
@@ -24,7 +24,7 @@ awl::main::loop_next(
 		!code.has_value()
 	)
 	{
-		fcppt::variant::match(
+		fcppt::either::match(
 			_processor.next(),
 			[
 				&code

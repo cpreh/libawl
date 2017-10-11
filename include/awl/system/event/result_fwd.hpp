@@ -3,7 +3,7 @@
 
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/event/container.hpp>
-#include <fcppt/variant/variadic_fwd.hpp>
+#include <fcppt/either/object_fwd.hpp>
 
 
 namespace awl
@@ -14,7 +14,7 @@ namespace event
 {
 
 typedef
-fcppt::variant::variadic<
+fcppt::either::object<
 	awl::main::exit_code,
 	awl::event::container
 >
