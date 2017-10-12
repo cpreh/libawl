@@ -87,8 +87,20 @@ awl::backends::linux::timerfd::object::set_time(
 		convert_time(
 			_setting.period().get()
 		),
+		// A delay of 0 makes the timer inactive,
+		// so use the smallest delay possible instead.
 		convert_time(
 			_setting.delay().get()
+			==
+			awl::timer::duration{
+				0
+			}
+			?
+				awl::timer::duration{
+					1
+				}
+			:
+				_setting.delay().get()
 		)
 	};
 

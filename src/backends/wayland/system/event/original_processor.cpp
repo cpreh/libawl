@@ -44,6 +44,7 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/move_clear.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/text.hpp>
@@ -540,15 +541,8 @@ awl::backends::wayland::system::event::original_processor::process_pending()
 		display_
 	);
 
-	awl::event::container result(
-		std::move(
-			global_data_.last_events_
-		)
-	);
-
-	global_data_.last_events_ =
-		awl::event::container();
-
 	return
-		result;
+		fcppt::move_clear(
+			global_data_.last_events_
+		);
 }

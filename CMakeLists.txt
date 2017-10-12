@@ -556,7 +556,9 @@ set(
 	include/awl/backends/wayland/cursor/theme.hpp
 	include/awl/backends/wayland/cursor/theme_fwd.hpp
 	include/awl/backends/wayland/display.hpp
+	include/awl/backends/wayland/display_comparison.hpp
 	include/awl/backends/wayland/display_dispatch_pending.hpp
+	include/awl/backends/wayland/display_fd.hpp
 	include/awl/backends/wayland/display_flush.hpp
 	include/awl/backends/wayland/display_fwd.hpp
 	include/awl/backends/wayland/display_prepare_read.hpp
@@ -638,7 +640,9 @@ set(
 	src/backends/wayland/cursor/predefined.cpp
 	src/backends/wayland/cursor/theme.cpp
 	src/backends/wayland/display.cpp
+	src/backends/wayland/display_comparison.cpp
 	src/backends/wayland/display_dispatch_pending.cpp
+	src/backends/wayland/display_fd.cpp
 	src/backends/wayland/display_flush.cpp
 	src/backends/wayland/display_prepare_read.cpp
 	src/backends/wayland/display_read_events.cpp
