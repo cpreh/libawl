@@ -31,10 +31,6 @@ public:
 	HANDLE
 	get() const = 0;
 
-	virtual
-	bool
-	ready() const = 0;
-
 	AWL_DETAIL_SYMBOL
 	virtual
 	~handle() = 0;

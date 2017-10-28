@@ -15,12 +15,14 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/result_fwd.hpp>
+#include <awl/timer/reference.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/function_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <unordered_map>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -136,6 +138,11 @@ private:
 		DWORD
 	);
 
+	void
+	remove_handle(
+		HANDLE
+	);
+
 	typedef
 	std::vector<
 		HANDLE
@@ -151,6 +158,15 @@ private:
 	user_message_vector;
 
 	user_message_vector user_messages_;
+
+	typedef
+	std::unordered_map<
+		HANDLE,
+		awl::timer::reference
+	>
+	timer_map;
+
+	timer_map timers_;
 
 	awl::main::optional_exit_code exit_code_;
 };

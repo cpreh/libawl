@@ -7,22 +7,31 @@
 #include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/system/event/generic.hpp>
 #include <awl/backends/windows/system/event/handle.hpp>
-#include <awl/backends/windows/system/event/handle_destroy_callback.hpp>
+#include <awl/backends/windows/system/event/handle_holder.hpp>
+#include <awl/backends/windows/system/event/handle_holder_unique_ptr.hpp>
 #include <awl/backends/windows/system/event/handle_ready.hpp>
 #include <awl/backends/windows/system/event/handle_unique_ptr.hpp>
 #include <awl/backends/windows/system/event/object.hpp>
 #include <awl/backends/windows/system/event/original_handle.hpp>
 #include <awl/backends/windows/system/event/original_processor.hpp>
 #include <awl/backends/windows/system/event/processor.hpp>
+#include <awl/backends/windows/timer/object.hpp>
+#include <awl/backends/windows/timer/waitable.hpp>
+#include <awl/backends/windows/timer/waitable_unique_ptr.hpp>
 #include <awl/backends/windows/window/get_user_data.hpp>
 #include <awl/backends/windows/window/event/make.hpp>
 #include <awl/event/base.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
+#include <awl/event/connection.hpp>
+#include <awl/event/connection_function.hpp>
+#include <awl/event/connection_unique_ptr.hpp>
+#include <awl/event/make_connection.hpp>
 #include <awl/event/optional_base_unique_ptr.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/result.hpp>
+#include <awl/timer/event.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
@@ -30,11 +39,13 @@
 #include <fcppt/function_impl.hpp>
 #include <fcppt/identity.hpp>
 #include <fcppt/make_int_range.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/remove.hpp>
@@ -43,6 +54,8 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/to_unsigned_fun.hpp>
+#include <fcppt/container/find_opt_mapped.hpp>
+#include <fcppt/container/insert.hpp>
 #include <fcppt/container/pop_back.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
@@ -81,6 +94,7 @@ awl::backends::windows::system::event::original_processor::original_processor()
 			fcppt::identity{}
 		)
 	),
+	timers_{},
 	exit_code_{}
 {
 }
@@ -161,44 +175,121 @@ awl::backends::windows::system::event::original_processor::create_timer(
 	awl::timer::setting const &_setting
 )
 {
-	// FIXME
+	awl::backends::windows::timer::waitable_unique_ptr timer{
+		fcppt::make_unique_ptr<
+			awl::backends::windows::timer::waitable
+		>()
+	};
+
+	HANDLE const handle{
+		timer->handle()
+	};
+
+	awl::event::connection_unique_ptr connection{
+		awl::event::make_connection(
+			awl::event::connection_function{
+				[
+					handle,
+					this
+				]{
+					this->remove_handle(
+						handle
+					);
+
+					this->timers_.erase(
+						handle
+					);
+				}
+			}
+		)
+	};
+
+	awl::timer::unique_ptr result{
+		fcppt::unique_ptr_to_base<
+			awl::timer::object
+		>(
+			fcppt::make_unique_ptr<
+				awl::backends::windows::timer::object
+			>(
+				_setting,
+				std::move(
+					timer
+				),
+				std::move(
+					connection
+				)
+			)
+		)
+	};
+
+	handles_.push_back(
+		handle
+	);
+
+	FCPPT_ASSERT_ERROR(
+		fcppt::container::insert(
+			timers_,
+			timer_map::value_type{
+				handle,
+				fcppt::make_ref(
+					*result
+				)
+			}
+		)
+	);
+
+	return
+		result;
+
 }
 
 awl::backends::windows::system::event::handle_unique_ptr
 awl::backends::windows::system::event::original_processor::create_event_handle()
 {
-	awl::backends::windows::system::event::handle_unique_ptr ret(
+	awl::backends::windows::system::event::handle_holder_unique_ptr holder{
+		fcppt::make_unique_ptr<
+			awl::backends::windows::system::event::handle_holder
+		>()
+	};
+
+	HANDLE const handle{
+		holder->get()
+	};
+
+	awl::event::connection_unique_ptr connection{
+		awl::event::make_connection(
+			awl::event::connection_function{
+				[
+					handle,
+					this
+				]{
+					this->remove_handle(
+						handle
+					);
+				}
+			}
+		)
+	};
+
+	handles_.push_back(
+		handle
+	);
+
+	return
 		fcppt::unique_ptr_to_base<
 			awl::backends::windows::system::event::handle
 		>(
 			fcppt::make_unique_ptr<
 				awl::backends::windows::system::event::original_handle
 			>(
-				awl::backends::windows::system::event::handle_destroy_callback{
-					[
-						this
-					](
-						HANDLE const _handle
-					)
-					{
-						FCPPT_ASSERT_ERROR(
-							fcppt::algorithm::remove(
-								handles_,
-								_handle
-							)
-						);
-					}
-				}
+				std::move(
+					holder
+				),
+				std::move(
+					connection
+				)
 			)
-		)
-	);
-
-	handles_.push_back(
-		ret->get()
-	);
-
-	return
-		ret;
+		);
 }
 
 awl::backends::windows::message_type
@@ -473,16 +564,59 @@ awl::backends::windows::system::event::original_processor::handle_event(
 	DWORD const _index
 )
 {
+	HANDLE const handle{
+		handles_[
+			_index
+		]
+	};
+
 	return
-		fcppt::unique_ptr_to_base<
-			awl::event::base
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::system::event::handle_ready
-			>(
-				this->handles_[
-					_index
-				]
+		fcppt::optional::maybe(
+			fcppt::container::find_opt_mapped(
+				timers_,
+				handle
+			),
+			[
+				handle
+			]{
+				return
+					fcppt::unique_ptr_to_base<
+						awl::event::base
+					>(
+						fcppt::make_unique_ptr<
+							awl::backends::windows::system::event::handle_ready
+						>(
+							handle
+						)
+					);
+			},
+			[](
+				fcppt::reference<
+					awl::timer::reference
+				> const _ref
 			)
+			{
+				return
+					fcppt::unique_ptr_to_base<
+						awl::event::base
+					>(
+						fcppt::make_unique_ptr<
+							awl::timer::event
+						>(
+							_ref.get()
+						)
+					);
+			}
 		);
+}
+
+void
+awl::backends::windows::system::event::original_processor::remove_handle(
+	HANDLE const _handle
+)
+{
+	fcppt::algorithm::remove(
+		handles_,
+		_handle
+	);
 }

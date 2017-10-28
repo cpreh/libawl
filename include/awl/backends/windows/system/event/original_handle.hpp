@@ -1,10 +1,11 @@
 #ifndef AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_ORIGINAL_HANDLE_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_ORIGINAL_HANDLE_HPP_INCLUDED
 
-#include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/system/event/handle.hpp>
-#include <awl/backends/windows/system/event/handle_destroy_callback.hpp>
+#include <awl/backends/windows/system/event/handle_holder_unique_ptr.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/connection_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -19,7 +20,7 @@ namespace system
 namespace event
 {
 
-class original_handle
+class AWL_DETAIL_CLASS_SYMBOL original_handle
 :
 	public awl::backends::windows::system::event::handle
 {
@@ -28,9 +29,9 @@ class original_handle
 	);
 public:
 	AWL_DETAIL_SYMBOL
-	explicit
 	original_handle(
-		awl::backends::windows::system::event::handle_destroy_callback const &
+		awl::backends::windows::system::event::handle_holder_unique_ptr &&,
+		awl::event::connection_unique_ptr &&
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -41,15 +42,10 @@ public:
 	HANDLE
 	get() const
 	override;
-
-	AWL_DETAIL_SYMBOL
-	bool
-	ready() const
-	override;
 private:
-	awl::backends::windows::system::event::handle_destroy_callback const on_destroy_;
+	awl::backends::windows::system::event::handle_holder_unique_ptr const handle_;
 
-	HANDLE handle_;
+	awl::event::connection_unique_ptr const connection_;
 };
 
 }
