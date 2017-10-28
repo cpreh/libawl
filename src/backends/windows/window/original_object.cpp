@@ -8,24 +8,23 @@
 #include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/cursor/const_optional_object_ref.hpp>
 #include <awl/backends/windows/cursor/object.hpp>
-#include <awl/backends/windows/system/event/original_processor_fwd.hpp>
 #include <awl/backends/windows/visual/object.hpp>
 #include <awl/backends/windows/window/create.hpp>
 #include <awl/backends/windows/window/get_client_rect.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/backends/windows/window/original_object.hpp>
-#include <awl/backends/windows/window/event/original_processor.hpp>
-#include <awl/backends/windows/window/event/processor.hpp>
+#include <awl/backends/windows/window/set_long_ptr.hpp>
+#include <awl/backends/windows/window/set_user_data.hpp>
+#include <awl/backends/windows/window/event/wnd_proc.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
-#include <awl/window/object.hpp>
 #include <awl/window/parameters.hpp>
 #include <awl/window/unit.hpp>
-#include <awl/window/event/processor_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/size_fun.hpp>
 #include <fcppt/cast/static_downcast.hpp>
@@ -45,13 +44,11 @@ FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 awl::backends::windows::window::original_object::original_object(
 	awl::window::parameters const &_param,
-	awl::backends::windows::system::event::original_processor &_system_processor,
 	awl::backends::windows::wndclass &_wndclass,
 	awl::backends::windows::wndclass_remove_callback const &_remove_wndclass
 )
 :
 	awl::backends::windows::window::object(),
-	awl::window::object(),
 	visual_(
 		_param.visual()
 	),
@@ -68,23 +65,7 @@ awl::backends::windows::window::original_object::original_object(
 		>(
 			_param.cursor()
 		)
-	),
-	processor_{
-		fcppt::unique_ptr_to_base<
-			awl::backends::windows::window::event::processor
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::window::event::original_processor
-			>(
-				*this
-			)
-		)
-	},
-	scoped_processor_{
-		_system_processor,
-		*this,
-		*processor_
-	}
+	)
 {
 	fcppt::cast::static_downcast<
 		awl::backends::windows::visual::object const &
@@ -93,12 +74,40 @@ awl::backends::windows::window::original_object::original_object(
 	).apply(
 		this->hwnd()
 	);
+
+	awl::backends::windows::window::set_user_data(
+		this->hwnd(),
+		fcppt::reference_to_base<
+			awl::backends::windows::window::object
+		>(
+			fcppt::make_ref(
+				*this
+			)
+		)
+	);
+
+	awl::backends::windows::window::set_long_ptr(
+		this->hwnd(),
+		GWLP_WNDPROC,
+		reinterpret_cast<
+			LONG_PTR
+		>(
+			awl::backends::windows::window::event::wnd_proc
+		)
+	);
 }
 
 FCPPT_PP_POP_WARNING
 
 awl::backends::windows::window::original_object::~original_object()
 {
+	// FIXME: Where do we have to do this before we can destroy the cursor?
+	if(
+		cursor_.has_value()
+	)
+		::SetCursor(
+			nullptr
+		);
 }
 
 awl::window::dim
@@ -195,13 +204,6 @@ awl::backends::windows::window::original_object::visual() const
 {
 	return
 		visual_;
-}
-
-awl::window::event::processor &
-awl::backends::windows::window::original_object::processor()
-{
-	return
-		*processor_;
 }
 
 HWND

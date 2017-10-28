@@ -99,7 +99,6 @@ awl::backends::windows::system::original_object::create_window(
 				awl::backends::windows::window::original_object
 			>(
 				_param,
-				*processor_,
 				result.element().wndclass(),
 				awl::backends::windows::wndclass_remove_callback{
 					std::bind(

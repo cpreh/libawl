@@ -1,28 +1,26 @@
 #ifndef AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
-#include <awl/class_symbol.hpp>
 #include <awl/backends/windows/message_fwd.hpp>
 #include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/system/event/callback.hpp>
-#include <awl/backends/windows/system/event/handle_callback.hpp>
-#include <awl/backends/windows/system/event/handle_function.hpp>
 #include <awl/backends/windows/system/event/handle_unique_ptr.hpp>
 #include <awl/backends/windows/system/event/original_processor_fwd.hpp>
 #include <awl/backends/windows/system/event/processor.hpp>
-#include <awl/backends/windows/window/object_fwd.hpp>
-#include <awl/backends/windows/window/event/processor_fwd.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/base_unique_ptr.hpp>
+#include <awl/event/container.hpp>
+#include <awl/event/optional_base_unique_ptr_fwd.hpp>
 #include <awl/main/exit_code.hpp>
-#include <awl/main/optional_exit_code_fwd.hpp>
+#include <awl/main/optional_exit_code.hpp>
+#include <awl/system/event/result_fwd.hpp>
+#include <awl/timer/setting_fwd.hpp>
+#include <awl/timer/unique_ptr.hpp>
+#include <fcppt/function_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_decl.hpp>
-#include <fcppt/strong_typedef_std_hash.hpp>
-#include <fcppt/signal/auto_connection_fwd.hpp>
-#include <fcppt/signal/object_decl.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <unordered_map>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -38,7 +36,7 @@ namespace system
 namespace event
 {
 
-class AWL_CLASS_SYMBOL original_processor
+class AWL_DETAIL_CLASS_SYMBOL original_processor
 :
 	public awl::backends::windows::system::event::processor
 {
@@ -54,12 +52,12 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::main::optional_exit_code
+	awl::system::event::result
 	poll()
 	override;
 
 	AWL_DETAIL_SYMBOL
-	awl::main::optional_exit_code
+	awl::system::event::result
 	next()
 	override;
 
@@ -71,17 +69,9 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	fcppt::signal::auto_connection
-	register_callback(
-		awl::backends::windows::message_type,
-		awl::backends::windows::system::event::callback const &
-	)
-	override;
-
-	AWL_DETAIL_SYMBOL
-	fcppt::signal::auto_connection
-	register_handle_callback(
-		awl::backends::windows::system::event::handle_callback const &
+	awl::timer::unique_ptr
+	create_timer(
+		awl::timer::setting const &
 	)
 	override;
 
@@ -99,57 +89,52 @@ public:
 		awl::backends::windows::message_type
 	)
 	override;
-
-	void
-	add_window_processor(
-		awl::backends::windows::window::object &,
-		awl::backends::windows::window::event::processor &
-	);
-
-	void
-	remove_window_processor(
-		awl::backends::windows::window::object const &
-	);
 private:
-	awl::main::optional_exit_code
+	typedef
+	fcppt::function<
+		DWORD (
+			DWORD,
+			HANDLE const *,
+			BOOL,
+			DWORD
+		)
+	>
+	handle_function;
+
+	FCPPT_MAKE_STRONG_TYPEDEF(
+		DWORD,
+		timeout
+	);
+
+	awl::system::event::result
+	process(
+		handle_function const &,
+		timeout
+	);
+
+	awl::event::container
 	poll_messages();
 
-	awl::main::optional_exit_code
+	awl::event::optional_base_unique_ptr
 	process_message(
 		awl::backends::windows::message const &
 	);
 
-	template<
-		typename Function
-	>
-	void
-	generic_multiple_wait(
-		Function,
-		DWORD timeout
+	awl::event::base_unique_ptr
+	make_message(
+		awl::backends::windows::message const &
 	);
 
-	typedef
-	fcppt::signal::object<
-		awl::backends::windows::system::event::function
-	>
-	signal_type;
+	awl::system::event::result
+	generic_multiple_wait(
+		handle_function const &,
+		timeout
+	);
 
-	typedef
-	std::unordered_map<
-		awl::backends::windows::message_type,
-		signal_type
-	>
-	signal_map;
-
-	signal_map signals_;
-
-	typedef
-	fcppt::signal::object<
-		awl::backends::windows::system::event::handle_function
-	>
-	handle_signal;
-
-	handle_signal handle_signal_;
+	awl::event::base_unique_ptr
+	handle_event(
+		DWORD
+	);
 
 	typedef
 	std::vector<
@@ -160,27 +145,14 @@ private:
 	handle_vector handles_;
 
 	typedef
-	fcppt::reference<
-		awl::backends::windows::window::event::processor
-	>
-	window_processor_ref;
-
-	typedef
-	std::unordered_map<
-		HWND,
-		window_processor_ref
-	>
-	window_processor_map;
-
-	window_processor_map window_processors_;
-
-	typedef
 	std::vector<
 		awl::backends::windows::message_type
 	>
 	user_message_vector;
 
 	user_message_vector user_messages_;
+
+	awl::main::optional_exit_code exit_code_;
 };
 
 }

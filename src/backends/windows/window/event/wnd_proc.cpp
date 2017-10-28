@@ -2,10 +2,11 @@
 #include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/wparam.hpp>
-#include <awl/backends/windows/window/event/original_processor.hpp>
-#include <awl/backends/windows/window/event/return_type.hpp>
+#include <awl/backends/windows/window/get_user_data.hpp>
+#include <awl/backends/windows/window/event/handler.hpp>
+#include <awl/backends/windows/window/event/object.hpp>
 #include <awl/backends/windows/window/event/wnd_proc.hpp>
-#include <fcppt/optional/object_impl.hpp>
+#include <fcppt/optional/from.hpp>
 
 
 LRESULT CALLBACK
@@ -16,45 +17,37 @@ awl::backends::windows::window::event::wnd_proc(
 	LPARAM const _lparam
 )
 {
-	awl::backends::windows::window::event::original_processor &processor(
-		*reinterpret_cast<
-			awl::backends::windows::window::event::original_processor *
-		>(
-			::GetWindowLongPtr(
-				_hwnd,
-				GWLP_USERDATA
-			)
-		)
-	);
-
-	{
-		awl::backends::windows::window::event::return_type const ret(
-			processor.execute_callback(
-				awl::backends::windows::message_type{
-					_msg
-				},
-				awl::backends::windows::wparam{
-					_wparam
-				},
-				awl::backends::windows::lparam{
-					_lparam
-				}
-			)
-		);
-
-		// TODO!
-		if(
-			ret.has_value()
-		)
-			return
-				ret.get_unsafe();
-	}
-
 	return
-		::DefWindowProc(
-			_hwnd,
-			_msg,
-			_wparam,
-			_lparam
+		fcppt::optional::from(
+			awl::backends::windows::window::event::handler(
+				awl::backends::windows::window::event::object{
+					awl::backends::windows::window::get_user_data(
+						_hwnd
+					),
+					awl::backends::windows::message_type{
+						_msg
+					},
+					awl::backends::windows::wparam{
+						_wparam
+					},
+					awl::backends::windows::lparam{
+						_lparam
+					}
+				}
+			),
+			[
+				_hwnd,
+				_msg,
+				_wparam,
+				_lparam
+			]{
+				return
+					::DefWindowProc(
+						_hwnd,
+						_msg,
+						_wparam,
+						_lparam
+					);
+			}
 		);
 }

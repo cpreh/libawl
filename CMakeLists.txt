@@ -757,7 +757,10 @@ set(
 	src/backends/windows/peek_message.cpp
 	src/backends/windows/post_message.cpp
 	src/backends/windows/scoped_local_memory.cpp
+	src/backends/windows/system/event/base.cpp
+	src/backends/windows/system/event/generic.cpp
 	src/backends/windows/system/event/handle.cpp
+	src/backends/windows/system/event/handle_ready.cpp
 	src/backends/windows/system/event/object.cpp
 	src/backends/windows/system/event/original_handle.cpp
 	src/backends/windows/system/event/original_processor.cpp
@@ -771,19 +774,22 @@ set(
 	src/backends/windows/window/adjusted_size.cpp
 	src/backends/windows/window/client_to_screen.cpp
 	src/backends/windows/window/create.cpp
-	src/backends/windows/window/event/combine_result.cpp
+	src/backends/windows/window/event/generic.cpp
+	src/backends/windows/window/event/handler.cpp
+	src/backends/windows/window/event/make.cpp
 	src/backends/windows/window/event/object.cpp
-	src/backends/windows/window/event/original_processor.cpp
-	src/backends/windows/window/event/processor.cpp
-	src/backends/windows/window/event/scoped_processor.cpp
 	src/backends/windows/window/event/wnd_proc.cpp
 	src/backends/windows/window/get_client_rect.cpp
+	src/backends/windows/window/get_long_ptr.cpp
 	src/backends/windows/window/get_rect.cpp
+	src/backends/windows/window/get_user_data.cpp
 	src/backends/windows/window/has_focus.cpp
 	src/backends/windows/window/holder.cpp
 	src/backends/windows/window/object.cpp
 	src/backends/windows/window/original_object.cpp
 	src/backends/windows/window/screen_to_client.cpp
+	src/backends/windows/window/set_long_ptr.cpp
+	src/backends/windows/window/set_user_data.cpp
 	src/backends/windows/wndclass.cpp
 )
 
@@ -837,18 +843,18 @@ set(
 	include/awl/backends/windows/peek_message.hpp
 	include/awl/backends/windows/post_message.hpp
 	include/awl/backends/windows/scoped_local_memory.hpp
-	include/awl/backends/windows/system/event/callback.hpp
-	include/awl/backends/windows/system/event/function.hpp
+	include/awl/backends/windows/system/event/base.hpp
+	include/awl/backends/windows/system/event/base_fwd.hpp
+	include/awl/backends/windows/system/event/generic.hpp
+	include/awl/backends/windows/system/event/generic_fwd.hpp
 	include/awl/backends/windows/system/event/handle.hpp
-	include/awl/backends/windows/system/event/handle_callback.hpp
 	include/awl/backends/windows/system/event/handle_destroy_callback.hpp
-	include/awl/backends/windows/system/event/handle_function.hpp
 	include/awl/backends/windows/system/event/handle_fwd.hpp
+	include/awl/backends/windows/system/event/handle_ready.hpp
+	include/awl/backends/windows/system/event/handle_ready_fwd.hpp
 	include/awl/backends/windows/system/event/handle_unique_ptr.hpp
 	include/awl/backends/windows/system/event/object.hpp
 	include/awl/backends/windows/system/event/object_fwd.hpp
-	include/awl/backends/windows/system/event/optional_processor_ref.hpp
-	include/awl/backends/windows/system/event/optional_processor_ref_fwd.hpp
 	include/awl/backends/windows/system/event/original_handle.hpp
 	include/awl/backends/windows/system/event/original_processor.hpp
 	include/awl/backends/windows/system/event/original_processor_fwd.hpp
@@ -869,22 +875,19 @@ set(
 	include/awl/backends/windows/window/const_optional_object_ref.hpp
 	include/awl/backends/windows/window/const_optional_object_ref_fwd.hpp
 	include/awl/backends/windows/window/create.hpp
-	include/awl/backends/windows/window/event/callback.hpp
-	include/awl/backends/windows/window/event/combine_result.hpp
-	include/awl/backends/windows/window/event/function.hpp
+	include/awl/backends/windows/window/event/generic.hpp
+	include/awl/backends/windows/window/event/generic_fwd.hpp
+	include/awl/backends/windows/window/event/handler.hpp
+	include/awl/backends/windows/window/event/make.hpp
 	include/awl/backends/windows/window/event/object.hpp
 	include/awl/backends/windows/window/event/object_fwd.hpp
-	include/awl/backends/windows/window/event/original_processor.hpp
-	include/awl/backends/windows/window/event/processor.hpp
-	include/awl/backends/windows/window/event/processor_fwd.hpp
-	include/awl/backends/windows/window/event/processor_unique_ptr.hpp
 	include/awl/backends/windows/window/event/return_type.hpp
 	include/awl/backends/windows/window/event/return_type_fwd.hpp
-	include/awl/backends/windows/window/event/scoped_processor.hpp
-	include/awl/backends/windows/window/event/unregister_callback.hpp
 	include/awl/backends/windows/window/event/wnd_proc.hpp
 	include/awl/backends/windows/window/get_client_rect.hpp
+	include/awl/backends/windows/window/get_long_ptr.hpp
 	include/awl/backends/windows/window/get_rect.hpp
+	include/awl/backends/windows/window/get_user_data.hpp
 	include/awl/backends/windows/window/has_focus.hpp
 	include/awl/backends/windows/window/holder.hpp
 	include/awl/backends/windows/window/object.hpp
@@ -893,7 +896,10 @@ set(
 	include/awl/backends/windows/window/optional_object_unique_ptr.hpp
 	include/awl/backends/windows/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/backends/windows/window/original_object.hpp
+	include/awl/backends/windows/window/reference.hpp
 	include/awl/backends/windows/window/screen_to_client.hpp
+	include/awl/backends/windows/window/set_long_ptr.hpp
+	include/awl/backends/windows/window/set_user_data.hpp
 	include/awl/backends/windows/window/signed_dim.hpp
 	include/awl/backends/windows/window/signed_dim_fwd.hpp
 	include/awl/backends/windows/windows.hpp

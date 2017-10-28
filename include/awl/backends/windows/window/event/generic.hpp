@@ -1,12 +1,15 @@
-#ifndef AWL_BACKENDS_WINDOWS_WINDOW_EVENT_OBJECT_HPP_INCLUDED
-#define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_OBJECT_HPP_INCLUDED
+#ifndef AWL_BACKENDS_WINDOWS_WINDOW_EVENT_GENERIC_HPP_INCLUDED
+#define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_GENERIC_HPP_INCLUDED
 
 #include <awl/backends/windows/lparam.hpp>
 #include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/window/reference.hpp>
-#include <awl/backends/windows/window/event/object_fwd.hpp>
+#include <awl/backends/windows/window/event/generic_fwd.hpp>
+#include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/window/event/base.hpp>
+#include <fcppt/noncopyable.hpp>
 
 
 namespace awl
@@ -20,11 +23,16 @@ namespace window
 namespace event
 {
 
-class object
+class AWL_DETAIL_CLASS_SYMBOL generic
+:
+	public awl::window::event::base
 {
+	FCPPT_NONCOPYABLE(
+		generic
+	);
 public:
 	AWL_DETAIL_SYMBOL
-	object(
+	generic(
 		awl::backends::windows::window::reference,
 		awl::backends::windows::message_type,
 		awl::backends::windows::wparam,
@@ -32,8 +40,12 @@ public:
 	);
 
 	AWL_DETAIL_SYMBOL
+	~generic()
+	override;
+
+	AWL_DETAIL_SYMBOL
 	awl::backends::windows::window::reference
-	window() const;
+	get() const;
 
 	AWL_DETAIL_SYMBOL
 	awl::backends::windows::message_type
@@ -47,13 +59,13 @@ public:
 	awl::backends::windows::lparam
 	lparam() const;
 private:
-	awl::backends::windows::window::reference window_;
+	awl::backends::windows::window::reference const window_;
 
-	awl::backends::windows::message_type type_;
+	awl::backends::windows::message_type const type_;
 
-	awl::backends::windows::wparam wparam_;
+	awl::backends::windows::wparam const wparam_;
 
-	awl::backends::windows::lparam lparam_;
+	awl::backends::windows::lparam const lparam_;
 };
 
 }
