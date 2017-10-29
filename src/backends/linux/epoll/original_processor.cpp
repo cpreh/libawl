@@ -49,11 +49,7 @@ awl::backends::linux::epoll::original_processor::register_fd(
 	awl::backends::posix::fd const &_fd
 )
 {
-	fd_set_.add(
-		_fd
-	);
-
-	return
+	awl::event::connection_unique_ptr result{
 		awl::event::make_connection(
 			awl::event::connection_function{
 				[
@@ -69,7 +65,15 @@ awl::backends::linux::epoll::original_processor::register_fd(
 					);
 				}
 			}
-		);
+		)
+	};
+
+	fd_set_.add(
+		_fd
+	);
+
+	return
+		result;
 }
 
 awl::event::container
