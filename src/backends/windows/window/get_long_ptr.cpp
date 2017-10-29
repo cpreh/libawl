@@ -1,4 +1,6 @@
 #include <awl/exception.hpp>
+#include <awl/backends/windows/clear_last_error.hpp>
+#include <awl/backends/windows/has_last_error.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/window/get_long_ptr.hpp>
 #include <fcppt/text.hpp>
@@ -10,6 +12,8 @@ awl::backends::windows::window::get_long_ptr(
 	int const _index
 )
 {
+	awl::backends::windows::clear_last_error();
+
 	LONG_PTR const result{
 		::GetWindowLongPtr(
 			_hwnd,
@@ -21,6 +25,8 @@ awl::backends::windows::window::get_long_ptr(
 		result
 		==
 		0
+		&&
+		awl::backends::windows::has_last_error()
 	)
 		throw
 			awl::exception{

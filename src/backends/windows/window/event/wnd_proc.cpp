@@ -1,3 +1,4 @@
+#include <awl/backends/windows/default_wnd_proc.hpp>
 #include <awl/backends/windows/lparam.hpp>
 #include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/windows.hpp>
@@ -42,7 +43,7 @@ awl::backends::windows::window::event::wnd_proc(
 				_lparam
 			]{
 				return
-					::DefWindowProc(
+					awl::backends::windows::default_wnd_proc(
 						_hwnd,
 						_msg,
 						_wparam,

@@ -734,6 +734,7 @@ set(
 
 set(
 	AWL_WINDOWS_SRC_FILES
+	src/backends/windows/clear_last_error.cpp
 	src/backends/windows/command_line_argv.cpp
 	src/backends/windows/command_line_to_argv.cpp
 	src/backends/windows/counted_wndclass.cpp
@@ -748,6 +749,7 @@ set(
 	src/backends/windows/format_message.cpp
 	src/backends/windows/get_command_line.cpp
 	src/backends/windows/get_focus.cpp
+	src/backends/windows/has_last_error.cpp
 	src/backends/windows/local_free.cpp
 	src/backends/windows/main/output.cpp
 	src/backends/windows/message.cpp
@@ -803,6 +805,7 @@ set(
 
 set(
 	AWL_WINDOWS_INCLUDE_FILES
+	include/awl/backends/windows/clear_last_error.hpp
 	include/awl/backends/windows/command_line_argv.hpp
 	include/awl/backends/windows/command_line_argv_fwd.hpp
 	include/awl/backends/windows/command_line_ptr.hpp
@@ -831,6 +834,7 @@ set(
 	include/awl/backends/windows/format_message.hpp
 	include/awl/backends/windows/get_command_line.hpp
 	include/awl/backends/windows/get_focus.hpp
+	include/awl/backends/windows/has_last_error.hpp
 	include/awl/backends/windows/local_free.hpp
 	include/awl/backends/windows/local_free_deleter.hpp
 	include/awl/backends/windows/local_free_deleter_fwd.hpp
