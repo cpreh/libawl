@@ -763,12 +763,12 @@ set(
 	src/backends/windows/system/event/generic.cpp
 	src/backends/windows/system/event/handle.cpp
 	src/backends/windows/system/event/handle_holder.cpp
+	src/backends/windows/system/event/handle_matches.cpp
 	src/backends/windows/system/event/handle_ready.cpp
 	src/backends/windows/system/event/object.cpp
 	src/backends/windows/system/event/original_handle.cpp
 	src/backends/windows/system/event/original_processor.cpp
 	src/backends/windows/system/event/processor.cpp
-	src/backends/windows/system/event/scoped_user_message.cpp
 	src/backends/windows/system/object.cpp
 	src/backends/windows/system/original_object.cpp
 	src/backends/windows/system_metrics.cpp
@@ -864,6 +864,7 @@ set(
 	include/awl/backends/windows/system/event/handle_holder.hpp
 	include/awl/backends/windows/system/event/handle_holder_fwd.hpp
 	include/awl/backends/windows/system/event/handle_holder_unique_ptr.hpp
+	include/awl/backends/windows/system/event/handle_matches.hpp
 	include/awl/backends/windows/system/event/handle_ready.hpp
 	include/awl/backends/windows/system/event/handle_ready_fwd.hpp
 	include/awl/backends/windows/system/event/handle_unique_ptr.hpp
@@ -874,8 +875,6 @@ set(
 	include/awl/backends/windows/system/event/original_processor_fwd.hpp
 	include/awl/backends/windows/system/event/processor.hpp
 	include/awl/backends/windows/system/event/processor_fwd.hpp
-	include/awl/backends/windows/system/event/scoped_user_message.hpp
-	include/awl/backends/windows/system/event/scoped_user_message_fwd.hpp
 	include/awl/backends/windows/system/object.hpp
 	include/awl/backends/windows/system/object_fwd.hpp
 	include/awl/backends/windows/system/original_object.hpp

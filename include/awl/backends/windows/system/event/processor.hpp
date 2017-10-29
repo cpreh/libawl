@@ -1,7 +1,6 @@
 #ifndef AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_PROCESSOR_HPP_INCLUDED
 
-#include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/system/event/handle_unique_ptr.hpp>
 #include <awl/backends/windows/system/event/processor_fwd.hpp>
 #include <awl/detail/class_symbol.hpp>
@@ -39,16 +38,6 @@ public:
 	virtual
 	awl::backends::windows::system::event::handle_unique_ptr
 	create_event_handle() = 0;
-
-	virtual
-	awl::backends::windows::message_type
-	allocate_user_message() = 0;
-
-	virtual
-	void
-	free_user_message(
-		awl::backends::windows::message_type
-	) = 0;
 };
 
 }

@@ -37,28 +37,21 @@
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/function_impl.hpp>
-#include <fcppt/identity.hpp>
-#include <fcppt/make_int_range.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
-#include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/algorithm/map.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
-#include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/insert.hpp>
-#include <fcppt/container/pop_back.hpp>
 #include <fcppt/optional/maybe.hpp>
-#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
@@ -70,30 +63,6 @@ awl::backends::windows::system::event::original_processor::original_processor()
 :
 	awl::backends::windows::system::event::processor(),
 	handles_(),
-	user_messages_(
-		// TODO: We need something better for this, like a sparse map
-		fcppt::algorithm::map<
-			user_message_vector
-		>(
-			fcppt::make_int_range(
-				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::message_type,
-					fcppt::cast::to_unsigned_fun
-				>(
-					WM_USER
-				),
-				fcppt::strong_typedef_construct_cast<
-					awl::backends::windows::message_type,
-					fcppt::cast::to_unsigned_fun
-				>(
-					WM_USER
-					+
-					128
-				)
-			),
-			fcppt::identity{}
-		)
-	),
 	timers_{},
 	exit_code_{}
 {
@@ -290,33 +259,6 @@ awl::backends::windows::system::event::original_processor::create_event_handle()
 				)
 			)
 		);
-}
-
-awl::backends::windows::message_type
-awl::backends::windows::system::event::original_processor::allocate_user_message()
-{
-	return
-		fcppt::optional::to_exception(
-			fcppt::container::pop_back(
-				user_messages_
-			),
-			[]{
-				return
-					awl::exception{
-						FCPPT_TEXT("User messages exhausted.")
-					};
-			}
-		);
-}
-
-void
-awl::backends::windows::system::event::original_processor::free_user_message(
-	awl::backends::windows::message_type const _message
-)
-{
-	user_messages_.push_back(
-		_message
-	);
 }
 
 awl::system::event::result

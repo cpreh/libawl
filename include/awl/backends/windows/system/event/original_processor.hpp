@@ -2,7 +2,6 @@
 #define AWL_BACKENDS_WINDOWS_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/backends/windows/message_fwd.hpp>
-#include <awl/backends/windows/message_type.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/system/event/handle_unique_ptr.hpp>
 #include <awl/backends/windows/system/event/original_processor_fwd.hpp>
@@ -81,16 +80,6 @@ public:
 	awl::backends::windows::system::event::handle_unique_ptr
 	create_event_handle()
 	override;
-
-	awl::backends::windows::message_type
-	allocate_user_message()
-	override;
-
-	void
-	free_user_message(
-		awl::backends::windows::message_type
-	)
-	override;
 private:
 	typedef
 	fcppt::function<
@@ -150,14 +139,6 @@ private:
 	handle_vector;
 
 	handle_vector handles_;
-
-	typedef
-	std::vector<
-		awl::backends::windows::message_type
-	>
-	user_message_vector;
-
-	user_message_vector user_messages_;
 
 	typedef
 	std::unordered_map<
