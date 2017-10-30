@@ -21,6 +21,7 @@
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
+#include <fcppt/io/cout.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/default_level_streams.hpp>
 #include <fcppt/log/level.hpp>
@@ -97,11 +98,16 @@ try
 		)
 	};
 
+	unsigned timer_fired{
+		0u
+	};
+
 	return
 		awl::main::loop_next(
 			system_processor,
 			awl::main::loop_function{
 				[
+					&timer_fired,
 					&timer,
 					&system_processor
 				](
@@ -112,6 +118,23 @@ try
 							_event,
 							*timer
 						)
+					)
+					{
+						++timer_fired;
+
+						fcppt::io::cout()
+							<<
+							FCPPT_TEXT("Timer event ")
+							<<
+							timer_fired
+							<<
+							FCPPT_TEXT('\n');
+					}
+
+					if(
+						timer_fired
+						==
+						3u
 					)
 						system_processor.quit(
 							awl::main::exit_success()
