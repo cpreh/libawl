@@ -5,7 +5,6 @@
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/assert/pre.hpp>
-#include <fcppt/cast/size.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstring>
 #include <fcppt/config/external_end.hpp>
@@ -24,57 +23,52 @@ awl::backends::windows::wndclass::wndclass(
 		!class_name_.empty()
 	);
 
-	WNDCLASSEX wndclassex;
+	WNDCLASS object;
 
 	std::memset(
-		&wndclassex,
+		&object,
 		0,
-		sizeof(WNDCLASSEX)
+		sizeof(WNDCLASS)
 	);
 
-	wndclassex.cbClsExtra = 0;
+	object.style = 0;
 
-	wndclassex.cbWndExtra = 0;
+	object.lpfnWndProc = _proc;
 
-	wndclassex.hbrBackground =
+	object.cbClsExtra = 0;
+
+	object.cbWndExtra = 0;
+
+	object.hInstance = awl::backends::windows::module_handle();
+
+	object.hIcon = nullptr;
+
+	object.hCursor = nullptr;
+
+	object.hbrBackground =
 		reinterpret_cast<
 			HBRUSH
 		>(
-			COLOR_WINDOW + 1
+			COLOR_WINDOW
+			+
+			1
 		);
 
-	wndclassex.hCursor = nullptr;
+	object.lpszClassName = class_name_.c_str();
 
-	wndclassex.hIcon = nullptr;
-
-	wndclassex.hIconSm = nullptr;
-
-	wndclassex.hInstance = awl::backends::windows::module_handle();
-
-	wndclassex.lpfnWndProc = _proc;
-
-	wndclassex.lpszClassName = class_name_.c_str();
-
-	wndclassex.lpszMenuName = nullptr;
-
-	wndclassex.cbSize =
-		fcppt::cast::size<
-			UINT
-		>(
-			sizeof(WNDCLASSEX)
-		);
-
-	wndclassex.style = 0;
+	object.lpszMenuName = nullptr;
 
 	if(
-		::RegisterClassEx(
-			&wndclassex
+		::RegisterClass(
+			&object
 		)
-		== 0
+		==
+		0
 	)
-		throw awl::exception(
-			FCPPT_TEXT("RegisterClassEx() failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("RegisterClassEx() failed!")
+			};
 }
 
 awl::backends::windows::wndclass::~wndclass()

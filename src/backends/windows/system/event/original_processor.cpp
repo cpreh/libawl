@@ -121,7 +121,7 @@ awl::backends::windows::system::event::original_processor::next()
 							_handle,
 							_wait_all,
 							_milli_seconds,
-							QS_ALLPOSTMESSAGE
+							QS_ALLEVENTS
 						);
 				}
 			},

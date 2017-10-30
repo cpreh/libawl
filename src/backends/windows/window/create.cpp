@@ -15,18 +15,18 @@ awl::backends::windows::window::create(
 	awl::backends::windows::wndclass &_wndclass
 )
 {
-	DWORD const window_flags(
+	DWORD const window_flags{
 		WS_OVERLAPPEDWINDOW
-	);
+	};
 
-	awl::backends::windows::window::signed_dim const size(
+	awl::backends::windows::window::signed_dim const size{
 		awl::backends::windows::window::adjusted_size(
 			_param.size(),
 			window_flags
 		)
-	);
+	};
 
-	HWND const ret(
+	HWND const ret{
 		CreateWindow(
 			_wndclass.name().c_str(),
 			fcppt::optional::maybe(
@@ -55,14 +55,15 @@ awl::backends::windows::window::create(
 			awl::backends::windows::module_handle(),
 			nullptr
 		)
-	);
+	};
 
 	if(
 		!ret
 	)
-		throw awl::exception(
-			FCPPT_TEXT("CreateWindow() failed!")
-		);
+		throw
+			awl::exception{
+				FCPPT_TEXT("CreateWindow() failed!")
+			};
 
 	return
 		ret;
