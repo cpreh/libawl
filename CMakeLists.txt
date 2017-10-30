@@ -745,7 +745,6 @@ set(
 	src/backends/windows/cursor/load.cpp
 	src/backends/windows/cursor/object.cpp
 	src/backends/windows/cursor/shared.cpp
-	src/backends/windows/default_wnd_proc.cpp
 	src/backends/windows/format_message.cpp
 	src/backends/windows/get_command_line.cpp
 	src/backends/windows/get_focus.cpp
@@ -831,7 +830,6 @@ set(
 	include/awl/backends/windows/cursor/shared_fwd.hpp
 	include/awl/backends/windows/cursor/size.hpp
 	include/awl/backends/windows/cursor/xor_plane.hpp
-	include/awl/backends/windows/default_wnd_proc.hpp
 	include/awl/backends/windows/format_message.hpp
 	include/awl/backends/windows/get_command_line.hpp
 	include/awl/backends/windows/get_focus.hpp
@@ -919,6 +917,8 @@ set(
 	include/awl/backends/windows/window/object_unique_ptr.hpp
 	include/awl/backends/windows/window/optional_object_unique_ptr.hpp
 	include/awl/backends/windows/window/optional_object_unique_ptr_fwd.hpp
+	include/awl/backends/windows/window/optional_user_data_ref.hpp
+	include/awl/backends/windows/window/optional_user_data_ref_fwd.hpp
 	include/awl/backends/windows/window/original_object.hpp
 	include/awl/backends/windows/window/reference.hpp
 	include/awl/backends/windows/window/screen_to_client.hpp

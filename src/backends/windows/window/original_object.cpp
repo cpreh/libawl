@@ -13,9 +13,7 @@
 #include <awl/backends/windows/window/get_client_rect.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/backends/windows/window/original_object.hpp>
-#include <awl/backends/windows/window/set_long_ptr.hpp>
 #include <awl/backends/windows/window/set_user_data.hpp>
-#include <awl/backends/windows/window/event/wnd_proc.hpp>
 #include <awl/event/container_reference.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
@@ -90,16 +88,6 @@ awl::backends::windows::window::original_object::original_object(
 	awl::backends::windows::window::set_user_data(
 		this->hwnd(),
 		user_data_
-	);
-
-	awl::backends::windows::window::set_long_ptr(
-		this->hwnd(),
-		GWLP_WNDPROC,
-		reinterpret_cast<
-			LONG_PTR
-		>(
-			awl::backends::windows::window::event::wnd_proc
-		)
 	);
 }
 

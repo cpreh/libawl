@@ -1,5 +1,4 @@
 #include <awl/backends/windows/counted_wndclass.hpp>
-#include <awl/backends/windows/default_wnd_proc.hpp>
 #include <awl/backends/windows/get_focus.hpp>
 #include <awl/backends/windows/wndclass_remove_callback.hpp>
 #include <awl/backends/windows/cursor/create_invisible.hpp>
@@ -10,6 +9,7 @@
 #include <awl/backends/windows/system/event/original_processor.hpp>
 #include <awl/backends/windows/visual/null_object.hpp>
 #include <awl/backends/windows/window/original_object.hpp>
+#include <awl/backends/windows/window/event/wnd_proc.hpp>
 #include <awl/cursor/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
 #include <awl/cursor/type.hpp>
@@ -81,7 +81,7 @@ awl::backends::windows::system::original_object::create_window(
 						awl::backends::windows::counted_wndclass
 					>(
 						_class_name,
-						awl::backends::windows::default_wnd_proc
+						awl::backends::windows::window::event::wnd_proc
 					);
 			}
 		)
