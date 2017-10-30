@@ -22,32 +22,6 @@ awl::backends::windows::counted_wndclass::counted_wndclass(
 {
 }
 
-awl::backends::windows::counted_wndclass::counted_wndclass(
-	counted_wndclass &&_other
-)
-:
-	wndclass_(),
-	counter_(
-		0u
-	)
-{
-	_other.swap(
-		*this
-	);
-}
-
-awl::backends::windows::counted_wndclass &
-awl::backends::windows::counted_wndclass::operator=(
-	counted_wndclass &&_other
-)
-{
-	_other.swap(
-		*this
-	);
-
-	return *this;
-}
-
 awl::backends::windows::counted_wndclass::~counted_wndclass()
 {
 }
@@ -61,26 +35,13 @@ awl::backends::windows::counted_wndclass::add_ref()
 awl::backends::windows::counted_wndclass::counter_type
 awl::backends::windows::counted_wndclass::release()
 {
-	return --counter_;
+	return
+		--counter_;
 }
 
 awl::backends::windows::wndclass &
 awl::backends::windows::counted_wndclass::wndclass()
 {
-	return wndclass_;
-}
-
-void
-awl::backends::windows::counted_wndclass::swap(
-	counted_wndclass &_other
-)
-{
-	wndclass_.swap(
-		_other.wndclass_
-	);
-
-	std::swap(
-		counter_,
-		_other.counter_
-	);
+	return
+		wndclass_;
 }

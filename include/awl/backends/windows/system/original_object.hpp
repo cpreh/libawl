@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WINDOWS_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_WINDOWS_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 
-#include <awl/backends/windows/counted_wndclass.hpp>
+#include <awl/backends/windows/counted_wndclass_fwd.hpp>
 #include <awl/backends/windows/system/object.hpp>
 #include <awl/backends/windows/system/event/original_processor_fwd.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
@@ -76,9 +76,15 @@ private:
 	);
 
 	typedef
+	fcppt::unique_ptr<
+		awl::backends::windows::counted_wndclass
+	>
+	counted_wndclass_unique_ptr;
+
+	typedef
 	std::unordered_map<
 		fcppt::string,
-		awl::backends::windows::counted_wndclass
+		counted_wndclass_unique_ptr
 	>
 	wndclass_map;
 

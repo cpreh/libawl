@@ -77,7 +77,9 @@ awl::backends::windows::system::original_object::create_window(
 			)
 			{
 				return
-					awl::backends::windows::counted_wndclass(
+					fcppt::make_unique_ptr<
+						awl::backends::windows::counted_wndclass
+					>(
 						_class_name,
 						awl::backends::windows::default_wnd_proc
 					);
@@ -89,7 +91,7 @@ awl::backends::windows::system::original_object::create_window(
 	if(
 		!result.inserted()
 	)
-		result.element().add_ref();
+		result.element()->add_ref();
 
 	return
 		fcppt::unique_ptr_to_base<
@@ -99,7 +101,7 @@ awl::backends::windows::system::original_object::create_window(
 				awl::backends::windows::window::original_object
 			>(
 				_param,
-				result.element().wndclass(),
+				result.element()->wndclass(),
 				processor_->next_events(),
 				awl::backends::windows::wndclass_remove_callback{
 					std::bind(
@@ -168,7 +170,7 @@ awl::backends::windows::system::original_object::unregister_wndclass(
 	);
 
 	if(
-		it->second.release()
+		it->second->release()
 		==
 		0u
 	)

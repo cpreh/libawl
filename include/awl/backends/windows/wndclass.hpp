@@ -21,23 +21,10 @@ class wndclass
 		wndclass
 	);
 public:
-	wndclass();
-
 	AWL_DETAIL_SYMBOL
 	wndclass(
 		fcppt::string const &class_name,
 		WNDPROC
-	);
-
-	AWL_DETAIL_SYMBOL
-	wndclass(
-		wndclass &&
-	);
-
-	AWL_DETAIL_SYMBOL
-	wndclass &
-	operator=(
-		wndclass &&
 	);
 
 	AWL_DETAIL_SYMBOL
@@ -46,22 +33,9 @@ public:
 	AWL_DETAIL_SYMBOL
 	fcppt::string const &
 	name() const;
-
-	AWL_DETAIL_SYMBOL
-	void
-	swap(
-		wndclass &
-	);
 private:
 	fcppt::string class_name_;
 };
-
-AWL_DETAIL_SYMBOL
-void
-swap(
-	awl::backends::windows::wndclass &,
-	awl::backends::windows::wndclass &
-);
 
 }
 }

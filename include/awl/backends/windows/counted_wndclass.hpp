@@ -21,20 +21,13 @@ class counted_wndclass
 		counted_wndclass
 	);
 public:
-	typedef unsigned counter_type;
+	typedef
+	unsigned
+	counter_type;
 
 	counted_wndclass(
 		fcppt::string const &,
 		WNDPROC
-	);
-
-	counted_wndclass(
-		counted_wndclass &&
-	);
-
-	counted_wndclass &
-	operator=(
-		counted_wndclass &&
 	);
 
 	~counted_wndclass();
@@ -47,11 +40,6 @@ public:
 
 	awl::backends::windows::wndclass &
 	wndclass();
-
-	void
-	swap(
-		counted_wndclass &
-	);
 private:
 	awl::backends::windows::wndclass wndclass_;
 
