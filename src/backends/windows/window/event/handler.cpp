@@ -17,6 +17,11 @@ awl::backends::windows::window::event::handler(
 		_event.type().get()
 	)
 	{
+	case WM_CLOSE:
+		return
+			awl::backends::windows::window::event::return_type{
+				0
+			};
 	case WM_SETCURSOR:
 		return
 			fcppt::optional::bind(
