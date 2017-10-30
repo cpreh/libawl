@@ -100,6 +100,7 @@ awl::backends::windows::system::original_object::create_window(
 			>(
 				_param,
 				result.element().wndclass(),
+				processor_->next_events(),
 				awl::backends::windows::wndclass_remove_callback{
 					std::bind(
 						&awl::backends::windows::system::original_object::unregister_wndclass,

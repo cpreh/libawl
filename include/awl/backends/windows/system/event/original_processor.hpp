@@ -10,6 +10,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
+#include <awl/event/container_reference.hpp>
 #include <awl/event/optional_base_unique_ptr_fwd.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
@@ -80,6 +81,10 @@ public:
 	awl::backends::windows::system::event::handle_unique_ptr
 	create_event_handle()
 	override;
+
+	AWL_DETAIL_SYMBOL
+	awl::event::container_reference
+	next_events();
 private:
 	typedef
 	fcppt::function<
@@ -107,7 +112,7 @@ private:
 	poll_messages();
 
 	awl::event::optional_base_unique_ptr
-	process_message(
+	process_system_message(
 		awl::backends::windows::message const &
 	);
 
@@ -150,6 +155,8 @@ private:
 	timer_map timers_;
 
 	awl::main::optional_exit_code exit_code_;
+
+	awl::event::container next_events_;
 };
 
 }

@@ -18,8 +18,6 @@
 #include <awl/backends/windows/timer/object.hpp>
 #include <awl/backends/windows/timer/waitable.hpp>
 #include <awl/backends/windows/timer/waitable_unique_ptr.hpp>
-#include <awl/backends/windows/window/get_user_data.hpp>
-#include <awl/backends/windows/window/event/make.hpp>
 #include <awl/event/base.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
@@ -39,11 +37,13 @@
 #include <fcppt/function_impl.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/move_clear.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/error.hpp>
@@ -51,6 +51,7 @@
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/insert.hpp>
+#include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -64,7 +65,8 @@ awl::backends::windows::system::event::original_processor::original_processor()
 	awl::backends::windows::system::event::processor(),
 	handles_(),
 	timers_{},
-	exit_code_{}
+	exit_code_{},
+	next_events_{}
 {
 }
 
@@ -261,6 +263,15 @@ awl::backends::windows::system::event::original_processor::create_event_handle()
 		);
 }
 
+awl::event::container_reference
+awl::backends::windows::system::event::original_processor::next_events()
+{
+	return
+		fcppt::make_ref(
+			next_events_
+		);
+}
+
 awl::system::event::result
 awl::backends::windows::system::event::original_processor::process(
 	handle_function const &_handler,
@@ -324,9 +335,9 @@ awl::backends::windows::system::event::original_processor::poll_messages()
 					&_message.get()
 				);
 
-				return
+				bool const do_continue{
 					fcppt::optional::maybe(
-						this->process_message(
+						this->process_system_message(
 							_message
 						),
 						fcppt::const_(
@@ -346,7 +357,18 @@ awl::backends::windows::system::event::original_processor::poll_messages()
 							return
 								true;
 						}
-					);
+					)
+				};
+
+				fcppt::algorithm::append(
+					result,
+					fcppt::move_clear(
+						next_events_
+					)
+				);
+
+				return
+					do_continue;
 			}
 		)
 	)
@@ -357,7 +379,7 @@ awl::backends::windows::system::event::original_processor::poll_messages()
 }
 
 awl::event::optional_base_unique_ptr
-awl::backends::windows::system::event::original_processor::process_message(
+awl::backends::windows::system::event::original_processor::process_system_message(
 	awl::backends::windows::message const &_msg
 )
 {
@@ -385,11 +407,20 @@ awl::backends::windows::system::event::original_processor::process_message(
 	}
 
 	return
-		awl::event::optional_base_unique_ptr{
-			this->make_message(
-				_msg
-			)
-		};
+		fcppt::optional::make_if(
+			_msg.get().hwnd
+			==
+			NULL,
+			[
+				&_msg,
+				this
+			]{
+				return
+					this->make_message(
+						_msg
+					);
+			}
+		);
 }
 
 awl::event::base_unique_ptr
@@ -397,40 +428,26 @@ awl::backends::windows::system::event::original_processor::make_message(
 	awl::backends::windows::message const &_msg
 )
 {
-	awl::backends::windows::system::event::object const event{
-		awl::backends::windows::message_type{
-			_msg.get().message
-		},
-		awl::backends::windows::wparam{
-			_msg.get().wParam
-		},
-		awl::backends::windows::lparam{
-			_msg.get().lParam
-		}
-	};
-
 	return
-		_msg.get().hwnd
-		==
-		NULL
-		?
-			fcppt::unique_ptr_to_base<
-				awl::event::base
+		fcppt::unique_ptr_to_base<
+			awl::event::base
+		>(
+			fcppt::make_unique_ptr<
+				awl::backends::windows::system::event::generic
 			>(
-				fcppt::make_unique_ptr<
-					awl::backends::windows::system::event::generic
-				>(
-					event
-				)
+				awl::backends::windows::system::event::object{
+					awl::backends::windows::message_type{
+						_msg.get().message
+					},
+					awl::backends::windows::wparam{
+						_msg.get().wParam
+					},
+					awl::backends::windows::lparam{
+						_msg.get().lParam
+					}
+				}
 			)
-		:
-			awl::backends::windows::window::event::make(
-				awl::backends::windows::window::get_user_data(
-					_msg.get().hwnd
-				),
-				event
-			)
-		;
+		);
 }
 
 awl::system::event::result

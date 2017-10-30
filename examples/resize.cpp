@@ -131,6 +131,10 @@ try
 									>
 								)
 								{
+									fcppt::io::cout()
+										<<
+										FCPPT_TEXT("Close\n");
+
 									system_processor.quit(
 										awl::main::exit_success()
 									);
@@ -143,6 +147,10 @@ try
 									>
 								)
 								{
+									fcppt::io::cout()
+										<<
+										FCPPT_TEXT("Destroy\n");
+
 									system_processor.quit(
 										awl::main::exit_success()
 									);

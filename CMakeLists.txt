@@ -800,6 +800,7 @@ set(
 	src/backends/windows/window/screen_to_client.cpp
 	src/backends/windows/window/set_long_ptr.cpp
 	src/backends/windows/window/set_user_data.cpp
+	src/backends/windows/window/user_data.cpp
 	src/backends/windows/wndclass.cpp
 )
 
@@ -925,6 +926,8 @@ set(
 	include/awl/backends/windows/window/set_user_data.hpp
 	include/awl/backends/windows/window/signed_dim.hpp
 	include/awl/backends/windows/window/signed_dim_fwd.hpp
+	include/awl/backends/windows/window/user_data.hpp
+	include/awl/backends/windows/window/user_data_fwd.hpp
 	include/awl/backends/windows/windows.hpp
 	include/awl/backends/windows/wndclass.hpp
 	include/awl/backends/windows/wndclass_fwd.hpp

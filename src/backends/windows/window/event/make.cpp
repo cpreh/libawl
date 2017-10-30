@@ -1,9 +1,8 @@
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/system/event/object.hpp>
 #include <awl/backends/windows/window/object.hpp>
-#include <awl/backends/windows/window/reference.hpp>
 #include <awl/backends/windows/window/event/generic.hpp>
 #include <awl/backends/windows/window/event/make.hpp>
+#include <awl/backends/windows/window/event/object.hpp>
 #include <awl/event/base.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/window/dim.hpp>
@@ -22,15 +21,14 @@
 
 awl::event::base_unique_ptr
 awl::backends::windows::window::event::make(
-	awl::backends::windows::window::reference const _window,
-	awl::backends::windows::system::event::object const &_event
+	awl::backends::windows::window::event::object const &_event
 )
 {
 	awl::window::reference const window_base{
 		fcppt::reference_to_base<
 			awl::window::object
 		>(
-			_window
+			_event.window()
 		)
 	};
 
@@ -125,7 +123,7 @@ awl::backends::windows::window::event::make(
 			fcppt::make_unique_ptr<
 				awl::backends::windows::window::event::generic
 			>(
-				_window,
+				_event.window(),
 				_event.type(),
 				_event.wparam(),
 				_event.lparam()

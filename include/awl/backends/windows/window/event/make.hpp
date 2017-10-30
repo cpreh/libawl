@@ -2,8 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_EVENT_MAKE_HPP_INCLUDED
 
 #include <awl/event/base_unique_ptr.hpp>
-#include <awl/backends/windows/system/event/object_fwd.hpp>
-#include <awl/backends/windows/window/reference.hpp>
+#include <awl/backends/windows/window/event/object_fwd.hpp>
 
 
 namespace awl
@@ -19,8 +18,7 @@ namespace event
 
 awl::event::base_unique_ptr
 make(
-	awl::backends::windows::window::reference,
-	awl::backends::windows::system::event::object const &
+	awl::backends::windows::window::event::object const &
 );
 
 }

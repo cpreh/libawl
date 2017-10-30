@@ -16,6 +16,7 @@
 #include <awl/backends/windows/window/set_long_ptr.hpp>
 #include <awl/backends/windows/window/set_user_data.hpp>
 #include <awl/backends/windows/window/event/wnd_proc.hpp>
+#include <awl/event/container_reference.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/parameters.hpp>
@@ -43,18 +44,19 @@ FCPPT_PP_PUSH_WARNING
 FCPPT_PP_DISABLE_VC_WARNING(4355)
 
 awl::backends::windows::window::original_object::original_object(
-	awl::window::parameters const &_param,
+	awl::window::parameters const &_parameters,
 	awl::backends::windows::wndclass &_wndclass,
+	awl::event::container_reference const _events,
 	awl::backends::windows::wndclass_remove_callback const &_remove_wndclass
 )
 :
 	awl::backends::windows::window::object(),
 	visual_(
-		_param.visual()
+		_parameters.visual()
 	),
 	holder_(
 		awl::backends::windows::window::create(
-			_param,
+			_parameters,
 			_wndclass
 		),
 		_remove_wndclass
@@ -63,27 +65,31 @@ awl::backends::windows::window::original_object::original_object(
 		fcppt::optional::static_cast_<
 			awl::backends::windows::cursor::object const
 		>(
-			_param.cursor()
+			_parameters.cursor()
 		)
-	)
-{
-	fcppt::cast::static_downcast<
-		awl::backends::windows::visual::object const &
-	>(
-		_param.visual()
-	).apply(
-		this->hwnd()
-	);
-
-	awl::backends::windows::window::set_user_data(
-		this->hwnd(),
+	),
+	user_data_{
 		fcppt::reference_to_base<
 			awl::backends::windows::window::object
 		>(
 			fcppt::make_ref(
 				*this
 			)
-		)
+		),
+		_events
+	}
+{
+	fcppt::cast::static_downcast<
+		awl::backends::windows::visual::object const &
+	>(
+		_parameters.visual()
+	).apply(
+		this->hwnd()
+	);
+
+	awl::backends::windows::window::set_user_data(
+		this->hwnd(),
+		user_data_
 	);
 
 	awl::backends::windows::window::set_long_ptr(

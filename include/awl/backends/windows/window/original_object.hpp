@@ -7,8 +7,10 @@
 #include <awl/backends/windows/cursor/const_optional_object_ref.hpp>
 #include <awl/backends/windows/window/holder.hpp>
 #include <awl/backends/windows/window/object.hpp>
+#include <awl/backends/windows/window/user_data.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/container_reference.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/parameters_fwd.hpp>
@@ -36,6 +38,7 @@ public:
 	original_object(
 		awl::window::parameters const &,
 		awl::backends::windows::wndclass &,
+		awl::event::container_reference,
 		awl::backends::windows::wndclass_remove_callback const &
 	);
 
@@ -73,6 +76,8 @@ private:
 	awl::backends::windows::window::holder const holder_;
 
 	awl::backends::windows::cursor::const_optional_object_ref const cursor_;
+
+	awl::backends::windows::window::user_data const user_data_;
 };
 
 }

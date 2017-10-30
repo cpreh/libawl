@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WINDOW_GET_USER_DATA_HPP_INCLUDED
 
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/window/reference.hpp>
+#include <awl/backends/windows/window/user_data_fwd.hpp>
 
 
 namespace awl
@@ -14,7 +14,7 @@ namespace windows
 namespace window
 {
 
-awl::backends::windows::window::reference
+awl::backends::windows::window::user_data const &
 get_user_data(
 	HWND
 );

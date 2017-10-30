@@ -1,13 +1,13 @@
 #include <awl/backends/windows/windows.hpp>
-#include <awl/backends/windows/window/reference.hpp>
 #include <awl/backends/windows/window/set_long_ptr.hpp>
 #include <awl/backends/windows/window/set_user_data.hpp>
+#include <awl/backends/windows/window/user_data_fwd.hpp>
 
 
 void
 awl::backends::windows::window::set_user_data(
 	HWND const _hwnd,
-	awl::backends::windows::window::reference const _object
+	awl::backends::windows::window::user_data const &_data
 )
 {
 	awl::backends::windows::window::set_long_ptr(
@@ -16,7 +16,7 @@ awl::backends::windows::window::set_user_data(
 		reinterpret_cast<
 			LONG_PTR
 		>(
-			&_object.get()
+			&_data
 		)
 	);
 }
