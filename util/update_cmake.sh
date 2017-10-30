@@ -15,6 +15,7 @@ update_main \
 	include/awl \
 	-r \
 	include/awl/cursor \
+	include/awl/detail \
 	include/awl/event \
 	include/awl/main \
 	include/awl/system \

@@ -148,6 +148,7 @@ set(
 	include/awl/cursor/size.hpp
 	include/awl/cursor/type.hpp
 	include/awl/cursor/type_fwd.hpp
+	include/awl/detail/class_symbol.hpp
 	include/awl/event/base.hpp
 	include/awl/event/base_fwd.hpp
 	include/awl/event/base_unique_ptr.hpp
