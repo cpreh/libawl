@@ -771,12 +771,8 @@ set(
 	src/backends/windows/system/object.cpp
 	src/backends/windows/system/original_object.cpp
 	src/backends/windows/system_metrics.cpp
-	src/backends/windows/timer/add_time.cpp
 	src/backends/windows/timer/due_time.cpp
-	src/backends/windows/timer/file_time_to_large_integer.cpp
-	src/backends/windows/timer/get_system_time.cpp
 	src/backends/windows/timer/object.cpp
-	src/backends/windows/timer/system_time_to_file_time.cpp
 	src/backends/windows/timer/waitable.cpp
 	src/backends/windows/visual/null_object.cpp
 	src/backends/windows/visual/object.cpp
@@ -878,13 +874,9 @@ set(
 	include/awl/backends/windows/system/object_fwd.hpp
 	include/awl/backends/windows/system/original_object.hpp
 	include/awl/backends/windows/system_metrics.hpp
-	include/awl/backends/windows/timer/add_time.hpp
 	include/awl/backends/windows/timer/due_time.hpp
-	include/awl/backends/windows/timer/file_time_to_large_integer.hpp
-	include/awl/backends/windows/timer/get_system_time.hpp
 	include/awl/backends/windows/timer/object.hpp
 	include/awl/backends/windows/timer/object_fwd.hpp
-	include/awl/backends/windows/timer/system_time_to_file_time.hpp
 	include/awl/backends/windows/timer/waitable.hpp
 	include/awl/backends/windows/timer/waitable_fwd.hpp
 	include/awl/backends/windows/timer/waitable_unique_ptr.hpp
