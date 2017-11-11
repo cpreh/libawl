@@ -255,6 +255,10 @@ awl::backends::x11::system::event::original_processor::process_fds(
 awl::event::container
 awl::backends::x11::system::event::original_processor::process_pending() const
 {
+	awl::backends::x11::flush(
+		display_
+	);
+
 	awl::event::container result(
 		fcppt::algorithm::map_optional<
 			awl::event::container
@@ -278,10 +282,6 @@ awl::backends::x11::system::event::original_processor::process_pending() const
 					);
 			}
 		)
-	);
-
-	awl::backends::x11::flush(
-		display_
 	);
 
 	return
