@@ -1,9 +1,9 @@
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/mask_bit.hpp>
-#include <awl/backends/x11/window/event/mask_function.hpp>
 #include <awl/backends/x11/window/event/mask_for_each.hpp>
-#include <fcppt/use.hpp>
+#include <awl/backends/x11/window/event/mask_function.hpp>
 #include <fcppt/tag_type.hpp>
+#include <fcppt/use.hpp>
 #include <fcppt/algorithm/loop.hpp>
 #include <fcppt/algorithm/loop_break_mpl.hpp>
 #include <fcppt/bit/mask.hpp>

@@ -14,8 +14,8 @@
 #include <awl/event/container.hpp>
 #include <awl/event/make_connection.hpp>
 #include <awl/timer/event.hpp>
-#include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/object.hpp>
+#include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>

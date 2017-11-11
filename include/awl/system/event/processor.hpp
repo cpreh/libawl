@@ -6,8 +6,8 @@
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/system/event/result_fwd.hpp>
-#include <awl/timer/unique_ptr.hpp>
 #include <awl/timer/setting_fwd.hpp>
+#include <awl/timer/unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

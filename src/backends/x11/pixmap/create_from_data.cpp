@@ -1,10 +1,10 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/display.hpp>
-#include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/pixmap/create_from_data.hpp>
 #include <awl/backends/x11/pixmap/dim.hpp>
 #include <awl/backends/x11/pixmap/holder.hpp>
 #include <awl/backends/x11/pixmap/holder_unique_ptr.hpp>
+#include <awl/backends/x11/window/base.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>

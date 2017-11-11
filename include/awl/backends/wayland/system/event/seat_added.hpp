@@ -2,8 +2,8 @@
 #define AWL_BACKENDS_WAYLAND_SYSTEM_EVENT_SEAT_ADDED_HPP_INCLUDED
 
 #include <awl/backends/wayland/display_reference.hpp>
-#include <awl/backends/wayland/system/event/seat_base.hpp>
 #include <awl/backends/wayland/system/event/seat_added_fwd.hpp>
+#include <awl/backends/wayland/system/event/seat_base.hpp>
 #include <awl/backends/wayland/system/seat/shared_ptr.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>

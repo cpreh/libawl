@@ -1,8 +1,8 @@
 #ifndef AWL_EVENT_CONNECTION_HPP_INCLUDED
 #define AWL_EVENT_CONNECTION_HPP_INCLUDED
 
-#include <awl/event/connection_fwd.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/connection_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

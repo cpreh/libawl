@@ -3,9 +3,9 @@
 
 #include <awl/backends/windows/timer/object_fwd.hpp>
 #include <awl/backends/windows/timer/waitable_unique_ptr.hpp>
-#include <awl/event/connection_unique_ptr.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/connection_unique_ptr.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <fcppt/noncopyable.hpp>

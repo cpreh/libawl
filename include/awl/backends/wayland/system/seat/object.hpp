@@ -6,8 +6,8 @@
 #include <awl/backends/wayland/seat.hpp>
 #include <awl/backends/wayland/system/seat/data.hpp>
 #include <awl/backends/wayland/system/seat/object_fwd.hpp>
-#include <awl/event/container_reference.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/container_reference.hpp>
 #include <fcppt/enable_shared_from_this_decl.hpp>
 #include <fcppt/noncopyable.hpp>
 

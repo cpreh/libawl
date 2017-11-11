@@ -46,8 +46,8 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/move_clear.hpp>
 #include <fcppt/strong_typedef_output.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>

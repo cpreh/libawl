@@ -1,6 +1,6 @@
 #include <awl/event/base.hpp>
-#include <awl/window/reference.hpp>
 #include <awl/window/object_fwd.hpp>
+#include <awl/window/reference.hpp>
 #include <awl/window/event/base.hpp>
 
 

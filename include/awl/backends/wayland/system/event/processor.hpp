@@ -7,9 +7,9 @@
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/system/event/processor_fwd.hpp>
 #include <awl/backends/wayland/system/seat/set.hpp>
-#include <awl/event/container_reference.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/container_reference.hpp>
 #include <awl/system/event/processor.hpp>
 #include <fcppt/noncopyable.hpp>
 

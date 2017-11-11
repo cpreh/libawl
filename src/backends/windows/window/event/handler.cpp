@@ -1,5 +1,5 @@
-#include <awl/backends/windows/cursor/object.hpp>
 #include <awl/backends/windows/windows.hpp>
+#include <awl/backends/windows/cursor/object.hpp>
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/backends/windows/window/event/handler.hpp>
 #include <awl/backends/windows/window/event/object.hpp>

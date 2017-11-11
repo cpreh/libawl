@@ -8,9 +8,9 @@
 #include <awl/backends/wayland/window/object.hpp>
 #include <awl/backends/wayland/window/shell_surface.hpp>
 #include <awl/backends/wayland/window/event/data.hpp>
-#include <awl/event/container_reference.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/container_reference.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/parameters_fwd.hpp>

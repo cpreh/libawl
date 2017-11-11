@@ -4,8 +4,8 @@
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/backends/windows/window/reference.hpp>
 #include <awl/backends/windows/window/event/generic.hpp>
-#include <awl/window/event/base.hpp>
 #include <awl/window/object.hpp>
+#include <awl/window/event/base.hpp>
 #include <fcppt/reference_to_base.hpp>
 
 

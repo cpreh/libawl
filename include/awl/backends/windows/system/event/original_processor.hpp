@@ -19,8 +19,8 @@
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/function_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
 #include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
 #include <vector>

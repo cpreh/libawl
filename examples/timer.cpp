@@ -9,8 +9,8 @@
 #include <awl/timer/delay.hpp>
 #include <awl/timer/duration.hpp>
 #include <awl/timer/match.hpp>
-#include <awl/timer/period.hpp>
 #include <awl/timer/object.hpp>
+#include <awl/timer/period.hpp>
 #include <awl/timer/setting.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <awl/visual/object.hpp>

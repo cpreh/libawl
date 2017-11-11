@@ -19,8 +19,8 @@
 #include <awl/window/dim.hpp>
 #include <awl/window/parameters.hpp>
 #include <awl/window/unit.hpp>
-#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/make_ref.hpp>
+#include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>

@@ -1,6 +1,6 @@
 #include <awl/backends/wayland/display_reference.hpp>
-#include <awl/backends/wayland/system/event/seat_removed.hpp>
 #include <awl/backends/wayland/system/event/seat_base.hpp>
+#include <awl/backends/wayland/system/event/seat_removed.hpp>
 #include <awl/backends/wayland/system/seat/shared_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

@@ -4,9 +4,9 @@
 #include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/system/event/base_fwd.hpp>
-#include <awl/event/base.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/base.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

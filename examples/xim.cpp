@@ -13,9 +13,9 @@
 #include <awl/main/exit_success.hpp>
 #include <awl/main/loop_function.hpp>
 #include <awl/main/loop_next.hpp>
-#include <awl/system/object_unique_ptr.hpp>
 #include <awl/system/create.hpp>
 #include <awl/system/object.hpp>
+#include <awl/system/object_unique_ptr.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>

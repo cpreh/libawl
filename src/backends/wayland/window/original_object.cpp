@@ -9,15 +9,14 @@
 #include <awl/event/container_reference.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
+#include <awl/window/object.hpp>
 #include <awl/window/optional_dim.hpp>
 #include <awl/window/parameters.hpp>
-#include <awl/window/object.hpp>
 #include <awl/window/event/resize.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/pre.hpp>

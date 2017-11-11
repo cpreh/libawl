@@ -1,7 +1,7 @@
+#include <awl/exception.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/timer/due_time.hpp>
 #include <awl/backends/windows/timer/waitable.hpp>
-#include <awl/exception.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting.hpp>
 #include <fcppt/text.hpp>

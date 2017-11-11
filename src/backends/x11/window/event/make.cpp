@@ -11,8 +11,8 @@
 #include <awl/window/reference.hpp>
 #include <awl/window/event/destroy.hpp>
 #include <awl/window/event/hide.hpp>
-#include <awl/window/event/show.hpp>
 #include <awl/window/event/resize.hpp>
+#include <awl/window/event/show.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>

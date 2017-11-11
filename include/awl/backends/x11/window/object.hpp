@@ -4,9 +4,9 @@
 #include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
-#include <awl/event/connection_unique_ptr.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/connection_unique_ptr.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

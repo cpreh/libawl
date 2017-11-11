@@ -3,8 +3,8 @@
 
 #include <awl/backends/windows/window/reference.hpp>
 #include <awl/backends/windows/window/user_data_fwd.hpp>
-#include <awl/event/container_reference.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/container_reference.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

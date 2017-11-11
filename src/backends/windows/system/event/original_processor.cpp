@@ -20,10 +20,10 @@
 #include <awl/backends/windows/timer/waitable_unique_ptr.hpp>
 #include <awl/event/base.hpp>
 #include <awl/event/base_unique_ptr.hpp>
-#include <awl/event/container.hpp>
 #include <awl/event/connection.hpp>
 #include <awl/event/connection_function.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
+#include <awl/event/container.hpp>
 #include <awl/event/make_connection.hpp>
 #include <awl/event/optional_base_unique_ptr.hpp>
 #include <awl/main/exit_code.hpp>
@@ -45,8 +45,8 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/assert/error.hpp>
+#include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>

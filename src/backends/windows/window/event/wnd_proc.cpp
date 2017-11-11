@@ -4,8 +4,8 @@
 #include <awl/backends/windows/wparam.hpp>
 #include <awl/backends/windows/window/get_user_data.hpp>
 #include <awl/backends/windows/window/user_data.hpp>
-#include <awl/backends/windows/window/event/make.hpp>
 #include <awl/backends/windows/window/event/handler.hpp>
+#include <awl/backends/windows/window/event/make.hpp>
 #include <awl/backends/windows/window/event/object.hpp>
 #include <awl/backends/windows/window/event/wnd_proc.hpp>
 #include <awl/event/base.hpp>

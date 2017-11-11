@@ -4,8 +4,8 @@
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/event/base.hpp>
-#include <awl/window/reference.hpp>
 #include <awl/window/object_fwd.hpp>
+#include <awl/window/reference.hpp>
 #include <fcppt/noncopyable.hpp>
 
 

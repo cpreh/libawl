@@ -16,8 +16,8 @@
 #include <awl/backends/x11/window/event/change_mask.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/mask_bit.hpp>
-#include <awl/backends/x11/window/event/mask_function.hpp>
 #include <awl/backends/x11/window/event/mask_for_each.hpp>
+#include <awl/backends/x11/window/event/mask_function.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/to_mask.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
