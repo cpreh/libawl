@@ -2,6 +2,7 @@
 #define AWL_BACKENDS_X11_ATOM_HPP_INCLUDED
 
 #include <awl/backends/x11/X.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

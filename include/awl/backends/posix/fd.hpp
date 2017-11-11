@@ -1,6 +1,7 @@
 #ifndef AWL_BACKENDS_POSIX_FD_HPP_INCLUDED
 #define AWL_BACKENDS_POSIX_FD_HPP_INCLUDED
 
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

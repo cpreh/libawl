@@ -1,6 +1,7 @@
 #ifndef AWL_BACKENDS_WAYLAND_REGISTRY_ID_HPP_INCLUDED
 #define AWL_BACKENDS_WAYLAND_REGISTRY_ID_HPP_INCLUDED
 
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>

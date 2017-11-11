@@ -1,6 +1,7 @@
 #ifndef AWL_BACKENDS_X11_CURSOR_SHAPE_HPP_INCLUDED
 #define AWL_BACKENDS_X11_CURSOR_SHAPE_HPP_INCLUDED
 
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

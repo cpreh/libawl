@@ -2,6 +2,7 @@
 #define AWL_TIMER_DELAY_HPP_INCLUDED
 
 #include <awl/timer/duration.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

@@ -2,6 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_WPARAM_HPP_INCLUDED
 
 #include <awl/backends/windows/windows.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

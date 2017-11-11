@@ -2,6 +2,7 @@
 #define AWL_BACKENDS_X11_CURSOR_SOURCE_PIXMAP_HPP_INCLUDED
 
 #include <awl/backends/x11/pixmap/const_holder_ref.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 

@@ -3,6 +3,7 @@
 
 #include <awl/backends/x11/window/class_hint_fwd.hpp>
 #include <awl/detail/symbol.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <string>
