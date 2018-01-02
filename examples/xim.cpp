@@ -45,7 +45,7 @@
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/vector/vector10.hpp>
+#include <brigand/sequences/list.hpp>
 #include <clocale>
 #include <cstdlib>
 #include <exception>
@@ -411,7 +411,7 @@ try
 				){
 					fcppt::optional::maybe_void(
 						fcppt::variant::dynamic_cast_<
-							boost::mpl::vector3<
+							brigand::list<
 								awl::backends::x11::window::event::generic const,
 								awl::window::event::close const,
 								awl::window::event::destroy const

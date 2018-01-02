@@ -41,17 +41,6 @@ if(
 endif()
 
 find_package(
-	Boost 1.47.0
-	REQUIRED
-	COMPONENTS
-	"${NEEDED_BOOST_LIBS}"
-)
-
-link_directories(
-	${Boost_LIBRARY_DIRS}
-)
-
-find_package(
 	fcppt
 	REQUIRED
 )
@@ -75,6 +64,18 @@ list(
 	CMAKE_MODULE_PATH
 	"${CMAKE_MODULES_PUBLIC}"
 	"${CMAKE_MODULES_SOURCE_DIR}/private"
+)
+
+find_package(
+	Brigand
+	REQUIRED
+)
+
+find_package(
+	Boost 1.47.0
+	REQUIRED
+	COMPONENTS
+	"${NEEDED_BOOST_LIBS}"
 )
 
 include(
@@ -1160,6 +1161,7 @@ function(
 				${TARGETNAME}
 				PRIVATE
 				${X11_INCLUDE_PATH}
+				${BRIGAND_INCLUDE_DIRS}
 			)
 
 			target_link_libraries(

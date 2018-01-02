@@ -5,12 +5,12 @@
 #include <fcppt/tag_type.hpp>
 #include <fcppt/use.hpp>
 #include <fcppt/algorithm/loop.hpp>
-#include <fcppt/algorithm/loop_break_mpl.hpp>
+#include <fcppt/algorithm/loop_break_brigand.hpp>
 #include <fcppt/bit/mask.hpp>
 #include <fcppt/bit/shifted_mask_c.hpp>
 #include <fcppt/bit/test.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/mpl/range_c.hpp>
+#include <brigand/sequences/range.hpp>
 #include <limits>
 #include <fcppt/config/external_end.hpp>
 
@@ -22,7 +22,7 @@ awl::backends::x11::window::event::mask_for_each(
 )
 {
 	fcppt::algorithm::loop(
-		boost::mpl::range_c<
+		brigand::range<
 			int,
 			0,
 			std::numeric_limits<

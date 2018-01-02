@@ -43,6 +43,8 @@ add_awl_example(
 	LINK_LIBS
 		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
+	INCLUDE_DIRS
+		${BRIGAND_INCLUDE_DIRS}
 )
 
 add_awl_example(
@@ -69,6 +71,7 @@ if(
 			${fcppt_core_TARGET}
 			${fcppt_log_TARGET}
 		INCLUDE_DIRS
+			${BRIGAND_INCLUDE_DIRS}
 			${X11_INCLUDE_PATH}
 	)
 endif()
