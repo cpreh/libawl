@@ -41,11 +41,11 @@ public:
 	awl::backends::windows::lparam
 	lparam() const;
 private:
-	awl::backends::windows::message_type const type_;
+	awl::backends::windows::message_type type_;
 
-	awl::backends::windows::wparam const wparam_;
+	awl::backends::windows::wparam wparam_;
 
-	awl::backends::windows::lparam const lparam_;
+	awl::backends::windows::lparam lparam_;
 };
 
 }
