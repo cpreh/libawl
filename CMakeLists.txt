@@ -228,6 +228,10 @@ set(
 	include/awl/window/unit.hpp
 )
 
+include(
+	FindPkgConfig
+)
+
 if(
 	WIN32
 )
@@ -262,8 +266,11 @@ elseif(
 		)
 	endif()
 
-	find_package(
-		Wayland
+	pkg_check_modules(
+		WAYLAND
+		IMPORTED_TARGET
+		wayland-client
+		wayland-cursor
 	)
 
 	option(
@@ -1158,18 +1165,10 @@ function(
 		if(
 			AWL_WAYLAND_BACKEND
 		)
-			target_include_directories(
-				${TARGETNAME}
-				PRIVATE
-				${WAYLAND_CLIENT_INCLUDE_DIRS}
-				${WAYLAND_CURSOR_INCLUDE_DIRS}
-			)
-
 			target_link_libraries(
 				${TARGETNAME}
 				PRIVATE
-				${WAYLAND_CLIENT_LIBRARIES}
-				${WAYLAND_CURSOR_LIBRARIES}
+				PkgConfig::WAYLAND
 			)
 		endif()
 
@@ -1298,7 +1297,6 @@ install(
 install(
 	FILES
 	${CMAKE_MODULES_PUBLIC}/AwlMainGenerator.cmake
-	${CMAKE_MODULES_PUBLIC}/FindWayland.cmake
 	${CMAKE_MODULES_PUBLIC}/main_prototype.cpp.in
 	DESTINATION
 	${FCPPT_UTILS_INSTALL_CMAKEMODULES_DIR}
