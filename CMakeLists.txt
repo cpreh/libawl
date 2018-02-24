@@ -18,27 +18,11 @@ set_property(
 	ON
 )
 
-option(
-	ENABLE_TEST
-	"Build the tests"
-	ON
-)
-
 set(
 	NEEDED_BOOST_LIBS
 	filesystem
 	system
 )
-
-if(
-	ENABLE_TEST
-)
-	list(
-		APPEND
-		NEEDED_BOOST_LIBS
-		"unit_test_framework"
-	)
-endif()
 
 find_package(
 	fcppt
@@ -1296,16 +1280,6 @@ foreach(
 		${CMAKE_INSTALL_INCLUDEDIR}/${TRIMMED_PATH}
 	)
 endforeach()
-
-if(
-	ENABLE_TEST
-)
-	enable_testing()
-
-	add_subdirectory(
-		test
-	)
-endif()
 
 fcppt_utils_generate_config(
 	CONFIG_PATH
