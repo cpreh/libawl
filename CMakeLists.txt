@@ -247,8 +247,10 @@ elseif(
 		TRUE
 	)
 
-	find_package(
+	pkg_check_modules(
 		X11
+		IMPORTED_TARGET
+		x11
 	)
 
 	option(
@@ -1151,14 +1153,13 @@ function(
 			target_include_directories(
 				${TARGETNAME}
 				PRIVATE
-				${X11_INCLUDE_PATH}
 				${BRIGAND_INCLUDE_DIRS}
 			)
 
 			target_link_libraries(
 				${TARGETNAME}
 				PRIVATE
-				${X11_X11_LIB}
+				PkgConfig::X11
 			)
 		endif()
 
