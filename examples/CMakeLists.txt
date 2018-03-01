@@ -67,11 +67,10 @@ if(
 	add_awl_example(
 		xim
 		LINK_LIBS
-			${X11_X11_LIB}
+			PkgConfig::X11
 			${fcppt_core_TARGET}
 			${fcppt_log_TARGET}
 		INCLUDE_DIRS
 			${BRIGAND_INCLUDE_DIRS}
-			${X11_INCLUDE_PATH}
 	)
 endif()
