@@ -1156,7 +1156,7 @@ function(
 				${BRIGAND_INCLUDE_DIRS}
 			)
 
-			fcppt_utils_link_pkgconfig_targets(
+			fcppt_utils_link_imported_targets(
 				${TARGETNAME}
 				PRIVATE
 				PkgConfig::X11
@@ -1166,7 +1166,7 @@ function(
 		if(
 			AWL_WAYLAND_BACKEND
 		)
-			fcppt_utils_link_pkgconfig_targets(
+			fcppt_utils_link_imported_targets(
 				${TARGETNAME}
 				PRIVATE
 				PkgConfig::WAYLAND
