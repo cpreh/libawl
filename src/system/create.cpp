@@ -18,7 +18,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/join_strings.hpp>
-#include <fcppt/container/make_array.hpp>
+#include <fcppt/container/array/make.hpp>
 #undef Success
 #include <fcppt/either/first_success.hpp>
 #include <fcppt/either/object.hpp>
@@ -99,7 +99,7 @@ awl::system::create(
 	return
 		fcppt::either::to_exception(
 			fcppt::either::first_success(
-				fcppt::container::make_array(
+				fcppt::container::array::make(
 #if defined(AWL_WAYLAND_BACKEND)
 					try_create<
 						awl::backends::wayland::system::original_object
