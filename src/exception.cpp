@@ -1,13 +1,20 @@
 #include <awl/exception.hpp>
+#include <fcppt/string.hpp>
+#include <fcppt/assert/information_fwd.hpp>
 #include <fcppt/assert/make_message.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 awl::exception::exception(
-	fcppt::string const &_string
+	fcppt::string &&_string
 )
 :
 	fcppt::exception(
-		_string
+		std::move(
+			_string
+		)
 	)
 {
 }
@@ -24,6 +31,6 @@ awl::exception::exception(
 {
 }
 
-awl::exception::~exception() throw()
+awl::exception::~exception() noexcept
 {
 }

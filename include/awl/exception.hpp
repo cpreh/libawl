@@ -16,7 +16,7 @@ class exception
 public:
 	explicit
 	exception(
-		fcppt::string const &
+		fcppt::string &&
 	);
 
 	explicit
@@ -24,7 +24,7 @@ public:
 		fcppt::assert_::information const &
 	);
 
-	~exception() throw()
+	~exception() noexcept
 	override;
 };
 
