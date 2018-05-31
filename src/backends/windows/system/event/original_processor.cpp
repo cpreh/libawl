@@ -46,11 +46,11 @@
 #include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/error.hpp>
-#include <fcppt/assign/make_container.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/insert.hpp>
+#include <fcppt/container/make.hpp>
 #include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/type_iso/strong_typedef.hpp>
@@ -504,7 +504,7 @@ awl::backends::windows::system::event::original_processor::generic_multiple_wait
 				+
 				handles_.size()
 				?
-					fcppt::assign::make_container<
+					fcppt::container::make<
 						awl::event::container
 					>(
 						this->handle_event(
