@@ -47,3 +47,9 @@ awl::backends::linux::timer::object::set(
 		_setting
 	);
 }
+
+void
+awl::backends::linux::timer::object::read()
+{
+	timer_->read();
+}

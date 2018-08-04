@@ -49,6 +49,10 @@ public:
 		awl::timer::setting const &
 	)
 	override;
+
+	AWL_DETAIL_SYMBOL
+	void
+	read();
 private:
 	awl::backends::linux::timerfd::unique_ptr const timer_;
 

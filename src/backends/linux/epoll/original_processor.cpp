@@ -120,6 +120,9 @@ awl::backends::linux::epoll::original_processor::poll(
 							> const _timer
 						)
 						{
+							// TODO: Should we include this number in the timer event?
+							_timer.get().get().read();
+
 							return
 								fcppt::unique_ptr_to_base<
 									awl::event::base
