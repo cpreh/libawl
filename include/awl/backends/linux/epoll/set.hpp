@@ -48,7 +48,7 @@ public:
 	);
 
 	AWL_DETAIL_SYMBOL
-	awl::backends::linux::epoll::fd_vector const &
+	awl::backends::linux::epoll::fd_vector
 	epoll(
 		awl::backends::posix::optional_duration const &
 	);
@@ -62,8 +62,6 @@ private:
 	event_vector;
 
 	event_vector events_;
-
-	awl::backends::linux::epoll::fd_vector ready_fds_;
 };
 
 }

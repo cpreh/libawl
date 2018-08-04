@@ -8,10 +8,12 @@
 #include <fcppt/const.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/cast/truncation_check.hpp>
+#include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sys/epoll.h>
@@ -22,8 +24,7 @@
 awl::backends::linux::epoll::set::set()
 :
 	epoll_fd_(),
-	events_(),
-	ready_fds_()
+	events_()
 {
 }
 
@@ -61,7 +62,7 @@ awl::backends::linux::epoll::set::remove(
 	events_.pop_back();
 }
 
-awl::backends::linux::epoll::fd_vector const &
+awl::backends::linux::epoll::fd_vector
 awl::backends::linux::epoll::set::epoll(
 	awl::backends::posix::optional_duration const &_opt_duration
 )
@@ -111,40 +112,45 @@ awl::backends::linux::epoll::set::epoll(
 				FCPPT_TEXT("epoll_wait failed!")
 			};
 
-	ready_fds_.clear();
-
 	unsigned const ready(
 		fcppt::cast::to_unsigned(
 			ret
 		)
 	);
 
-	for(
-		unsigned const index
-		:
-		fcppt::make_int_range_count(
-			ready
-		)
-	)
-	{
-		epoll_event const &event(
-			events_[
-				index
-			]
-		);
-
-		if(
-			event.events
-			&
-			EPOLLIN
-		)
-			ready_fds_.push_back(
-				awl::backends::posix::fd{
-					event.data.fd
-				}
-			);
-	}
-
 	return
-		ready_fds_;
+		fcppt::algorithm::map_optional<
+			awl::backends::linux::epoll::fd_vector
+		>(
+			fcppt::make_int_range_count(
+				ready
+			),
+			[
+				this
+			](
+				unsigned const _index
+			)
+			{
+				epoll_event const &event(
+					this->events_[
+						_index
+					]
+				);
+
+				return
+					fcppt::optional::make_if(
+						event.events
+						&
+						EPOLLIN,
+						[
+							&event
+						]{
+							return
+								awl::backends::posix::fd{
+									event.data.fd
+								};
+						}
+					);
+			}
+		);
 }
