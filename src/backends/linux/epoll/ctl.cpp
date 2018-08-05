@@ -11,29 +11,16 @@
 void
 awl::backends::linux::epoll::ctl(
 	awl::backends::linux::epoll::fd const &_epoll_fd,
+	int const _op,
 	awl::backends::posix::fd const &_fd,
 	epoll_event *const _data
 )
 {
 
 	if(
-		_data != nullptr
-	)
-	{
-		_data->events = EPOLLIN;
-
-		_data->data.fd = _fd.get();
-	}
-
-	if(
 		::epoll_ctl(
 			_epoll_fd.get().get(),
-			_data
-			?
-				EPOLL_CTL_ADD
-			:
-				EPOLL_CTL_DEL
-			,
+			_op,
 			_fd.get(),
 			_data
 		)

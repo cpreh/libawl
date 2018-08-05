@@ -41,10 +41,15 @@ awl::backends::linux::epoll::set::add(
 		epoll_event()
 	);
 
+	epoll_event ev{};
+	ev.events = EPOLLIN;
+	ev.data.fd = _fd.get();
+
 	awl::backends::linux::epoll::ctl(
 		epoll_fd_,
+		EPOLL_CTL_ADD,
 		_fd,
-		&events_.back()
+		&ev
 	);
 }
 
@@ -55,6 +60,7 @@ awl::backends::linux::epoll::set::remove(
 {
 	awl::backends::linux::epoll::ctl(
 		epoll_fd_,
+		EPOLL_CTL_DEL,
 		_fd,
 		nullptr
 	);

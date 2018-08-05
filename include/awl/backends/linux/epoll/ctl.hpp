@@ -22,6 +22,7 @@ AWL_DETAIL_SYMBOL
 void
 ctl(
 	awl::backends::linux::epoll::fd const &,
+	int,
 	awl::backends::posix::fd const &,
 	epoll_event *
 );
