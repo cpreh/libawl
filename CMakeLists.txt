@@ -363,7 +363,6 @@ set(
 	src/backends/x11/system/event/next.cpp
 	src/backends/x11/system/event/object.cpp
 	src/backends/x11/system/event/original_processor.cpp
-	src/backends/x11/system/event/pending.cpp
 	src/backends/x11/system/event/processor.cpp
 	src/backends/x11/system/object.cpp
 	src/backends/x11/system/original_object.cpp
@@ -457,7 +456,6 @@ set(
 	include/awl/backends/x11/system/event/object_fwd.hpp
 	include/awl/backends/x11/system/event/original_processor.hpp
 	include/awl/backends/x11/system/event/original_processor_fwd.hpp
-	include/awl/backends/x11/system/event/pending.hpp
 	include/awl/backends/x11/system/event/processor.hpp
 	include/awl/backends/x11/system/event/processor_fwd.hpp
 	include/awl/backends/x11/system/object.hpp

@@ -10,8 +10,9 @@ awl::backends::x11::pending(
 {
 	return
 		fcppt::cast::to_unsigned(
-			::XPending(
-				_display.get()
+			::XEventsQueued(
+				_display.get(),
+				QueuedAlready
 			)
 		);
 }

@@ -45,6 +45,7 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/algorithm/join.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
@@ -233,33 +234,49 @@ awl::backends::x11::system::event::original_processor::process_fds(
 	awl::backends::posix::optional_duration const &_duration
 ) const
 {
+	awl::event::container result{
+		awl::backends::x11::pending(
+			display_
+		)
+		> 0u
+		?
+			this->process_pending()
+		:
+			awl::event::container{}
+	};
+
 	return
-		awl::backends::posix::extract_event(
-			fd_processor_->poll(
-				_duration
+		fcppt::algorithm::join(
+			std::move(
+				result
 			),
-			fd_,
-			fcppt::function<
-				awl::event::container ()
-			>{
-				[
-					this
-				]{
-					return
-						this->process_pending();
+			awl::backends::posix::extract_event(
+				fd_processor_->poll(
+					_duration
+				),
+				fd_,
+				fcppt::function<
+					awl::event::container ()
+				>{
+					[
+						this
+					]{
+						awl::backends::x11::flush(
+							display_
+						);
+
+						return
+							this->process_pending();
+					}
 				}
-			}
+			)
 		);
 }
 
 awl::event::container
 awl::backends::x11::system::event::original_processor::process_pending() const
 {
-	awl::backends::x11::flush(
-		display_
-	);
-
-	awl::event::container result(
+	return
 		fcppt::algorithm::map_optional<
 			awl::event::container
 		>(
@@ -281,11 +298,7 @@ awl::backends::x11::system::event::original_processor::process_pending() const
 						)
 					);
 			}
-		)
-	);
-
-	return
-		result;
+		);
 }
 
 awl::event::optional_base_unique_ptr
