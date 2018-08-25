@@ -45,11 +45,11 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/algorithm/join.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 
@@ -246,7 +246,7 @@ awl::backends::x11::system::event::original_processor::process_fds(
 	};
 
 	return
-		fcppt::algorithm::join(
+		fcppt::container::join(
 			std::move(
 				result
 			),
