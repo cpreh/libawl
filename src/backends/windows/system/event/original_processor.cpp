@@ -43,13 +43,13 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/algorithm/append.hpp>
 #include <fcppt/algorithm/remove.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/insert.hpp>
+#include <fcppt/container/join.hpp>
 #include <fcppt/container/make.hpp>
 #include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -360,12 +360,15 @@ awl::backends::windows::system::event::original_processor::poll_messages()
 					)
 				};
 
-				fcppt::algorithm::append(
-					result,
-					fcppt::move_clear(
-						next_events_
-					)
-				);
+				result =
+					fcppt::container::join(
+						std::move(
+							result
+						),
+						fcppt::move_clear(
+							next_events_
+						)
+					);
 
 				return
 					do_continue;
