@@ -27,7 +27,7 @@ void
 awl::backends::x11::window::base::show()
 {
 	// always returns 1
-	::XMapWindow(
+	::XMapRaised(
 		this->display().get(),
 		this->get()
 	);
