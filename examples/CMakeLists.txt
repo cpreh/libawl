@@ -2,6 +2,18 @@ include(
 	CMakeParseArguments
 )
 
+include(
+	GNUInstallDirs
+)
+
+set(
+	AWL_INSTALL_EXAMPLE_DIR
+	"${CMAKE_INSTALL_BINDIR}"
+	CACHE
+	STRING
+	"Example installation directory"
+)
+
 function(
 	add_awl_example
 	EXAMPLE_NAME
@@ -28,6 +40,8 @@ function(
 		LINK_LIBS
 			${awl_TARGET}
 			${_LINK_LIBS}
+		INSTALL_DIR
+			"${AWL_INSTALL_EXAMPLE_DIR}"
 	)
 endfunction()
 
