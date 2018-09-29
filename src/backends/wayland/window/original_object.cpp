@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
 #include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/display_roundtrip.hpp>
@@ -17,6 +18,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/assert/pre.hpp>
@@ -29,6 +31,7 @@
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <stdint.h>
 #include <wayland-client-protocol.h>
@@ -181,8 +184,20 @@ awl::backends::wayland::window::original_object::original_object(
 		{
 			::wl_shell_surface_set_title(
 				shell_surface.get(),
-				fcppt::to_std_string(
-					_title
+				fcppt::optional::to_exception(
+					fcppt::to_std_string(
+						_title
+					),
+					[
+						&_title
+					]{
+						return
+							awl::exception{
+								FCPPT_TEXT("Failed to convert window title: ")
+								+
+								_title
+							};
+					}
 				).c_str()
 			);
 		}
@@ -198,8 +213,20 @@ awl::backends::wayland::window::original_object::original_object(
 		{
 			::wl_shell_surface_set_class(
 				shell_surface.get(),
-				fcppt::to_std_string(
-					_class_name
+				fcppt::optional::to_exception(
+					fcppt::to_std_string(
+						_class_name
+					),
+					[
+						&_class_name
+					]{
+						return
+							awl::exception{
+								FCPPT_TEXT("Failed to convert class name: ")
+								+
+								_class_name
+							};
+					}
 				).c_str()
 			);
 		}

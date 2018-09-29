@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/display.hpp>
 #include <awl/backends/x11/screen.hpp>
@@ -30,6 +31,7 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/static_downcast.hpp>
 #include <fcppt/optional/apply.hpp>
@@ -37,6 +39,7 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/static_cast.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 awl::backends::x11::window::original_object::original_object(
@@ -78,13 +81,37 @@ awl::backends::x11::window::original_object::original_object(
 					>(
 						awl::backends::x11::window::class_hint{
 							awl::backends::x11::window::class_hint::res_name_type{
-								fcppt::to_std_string(
-									_title
+								fcppt::optional::to_exception(
+									fcppt::to_std_string(
+										_title
+									),
+									[
+										&_title
+									]{
+										return
+											awl::exception{
+												FCPPT_TEXT("Failed to convert window title: ")
+												+
+												_title
+											};
+									}
 								)
 							},
 							awl::backends::x11::window::class_hint::res_class_type{
-								fcppt::to_std_string(
-									_class_name
+								fcppt::optional::to_exception(
+									fcppt::to_std_string(
+										_class_name
+									),
+									[
+										&_class_name
+									]{
+										return
+											awl::exception{
+												FCPPT_TEXT("Failed to convert class name: ")
+												+
+												_class_name
+											};
+									}
 								)
 							}
 						}
@@ -196,8 +223,20 @@ awl::backends::x11::window::original_object::original_object(
 			::XStoreName(
 				display_.get(),
 				window_.get(),
-				fcppt::to_std_string(
-					_title
+				fcppt::optional::to_exception(
+					fcppt::to_std_string(
+						_title
+					),
+					[
+						&_title
+					]{
+						return
+							awl::exception{
+								FCPPT_TEXT("Failed to convert windows title: ")
+								+
+								_title
+							};
+					}
 				).c_str()
 			);
 		}
