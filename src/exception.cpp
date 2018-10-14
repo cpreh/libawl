@@ -31,6 +31,28 @@ awl::exception::exception(
 {
 }
 
+awl::exception::exception(
+	exception const &
+)
+= default;
+
+awl::exception::exception(
+	exception &&
+)
+= default;
+
+awl::exception &
+awl::exception::operator=(
+	exception const &
+)
+= default;
+
+awl::exception &
+awl::exception::operator=(
+	exception &&
+)
+= default;
+
 awl::exception::~exception() noexcept
 {
 }
