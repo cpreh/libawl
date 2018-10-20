@@ -51,7 +51,7 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -98,7 +98,7 @@ registry_add(
 
 	FCPPT_LOG_DEBUG(
 		data.log_,
-		fcppt::log::_
+		fcppt::log::out
 			<<
 			FCPPT_TEXT("Got registry object \"")
 			<<

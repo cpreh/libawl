@@ -24,7 +24,7 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/log/_.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/math/dim/null.hpp>
@@ -94,7 +94,7 @@ shell_surface_configure(
 
 	FCPPT_LOG_DEBUG(
 		data.log_,
-		fcppt::log::_
+		fcppt::log::out
 			<<
 			FCPPT_TEXT("Got resize event ")
 			<<
