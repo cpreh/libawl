@@ -23,7 +23,7 @@ protected:
 public:
 	AWL_DETAIL_SYMBOL
 	virtual
-	~output() = 0;
+	~output();
 };
 
 }

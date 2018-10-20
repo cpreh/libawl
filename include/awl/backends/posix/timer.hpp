@@ -29,7 +29,7 @@ protected:
 public:
 	AWL_DETAIL_SYMBOL
 	virtual
-	~timer() = 0;
+	~timer();
 
 	virtual
 	awl::backends::posix::fd

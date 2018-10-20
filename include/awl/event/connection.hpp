@@ -21,7 +21,7 @@ protected:
 public:
 	AWL_DETAIL_SYMBOL
 	virtual
-	~connection() = 0;
+	~connection();
 };
 
 }

@@ -32,7 +32,7 @@ public:
 
 	AWL_DETAIL_SYMBOL
 	virtual
-	~display() = 0;
+	~display();
 };
 
 }

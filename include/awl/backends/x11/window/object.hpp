@@ -32,7 +32,7 @@ protected:
 public:
 	AWL_DETAIL_SYMBOL
 	virtual
-	~object() = 0;
+	~object();
 
 	virtual
 	awl::event::connection_unique_ptr

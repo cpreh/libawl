@@ -49,7 +49,7 @@ public:
 
 	AWL_DETAIL_SYMBOL
 	virtual
-	~processor() = 0;
+	~processor();
 };
 
 }

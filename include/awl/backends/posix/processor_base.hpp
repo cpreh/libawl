@@ -26,7 +26,7 @@ protected:
 public:
 	AWL_DETAIL_SYMBOL
 	virtual
-	~processor_base() = 0;
+	~processor_base();
 
 	virtual
 	awl::backends::posix::processor &

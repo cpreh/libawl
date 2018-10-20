@@ -33,7 +33,7 @@ public:
 
 	AWL_DETAIL_SYMBOL
 	virtual
-	~handle() = 0;
+	~handle();
 };
 
 }
