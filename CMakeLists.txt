@@ -83,7 +83,6 @@ set(
 	src/impl/include/awl/impl/backends/wayland/log_name.hpp
 	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
 	src/impl/include/awl/impl/backends/x11/log_name.hpp
-	src/impl/include/awl/impl/export_class_instantiation.hpp
 	src/impl/include/awl/impl/log_name.hpp
 	src/impl/src/backends/wayland/log_name.cpp
 	src/impl/src/backends/x11/log_name.cpp
@@ -134,6 +133,7 @@ set(
 	include/awl/cursor/type.hpp
 	include/awl/cursor/type_fwd.hpp
 	include/awl/detail/class_symbol.hpp
+	include/awl/detail/export_class_instantiation.hpp
 	include/awl/event/base.hpp
 	include/awl/event/base_fwd.hpp
 	include/awl/event/base_unique_ptr.hpp
@@ -561,6 +561,7 @@ set(
 	include/awl/backends/wayland/id_less.hpp
 	include/awl/backends/wayland/id_set.hpp
 	include/awl/backends/wayland/make_registry_object.hpp
+	include/awl/backends/wayland/make_registry_object_fwd.hpp
 	include/awl/backends/wayland/optional_compositor.hpp
 	include/awl/backends/wayland/optional_compositor_fwd.hpp
 	include/awl/backends/wayland/optional_shell.hpp

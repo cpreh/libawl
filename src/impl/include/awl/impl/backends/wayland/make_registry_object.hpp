@@ -2,7 +2,6 @@
 #define AWL_IMPL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT_HPP_INCLUDED
 
 #include <awl/backends/wayland/registry_object_impl.hpp>
-#include <awl/impl/export_class_instantiation.hpp>
 
 
 #define AWL_IMPL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT(\
@@ -21,7 +20,6 @@ awl::backends::wayland:: name ## _destroy( \
 \
 template \
 class \
-AWL_IMPL_EXPORT_CLASS_INSTANTIATION \
 awl::backends::wayland::registry_object< \
 	wl_ ## name, \
 	wl_ ## name ## _interface, \
