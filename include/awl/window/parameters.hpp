@@ -7,8 +7,8 @@
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/optional_dim.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <fcppt/nonassignable.hpp>
 #include <fcppt/optional_string.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/string.hpp>
 
 
@@ -19,9 +19,6 @@ namespace window
 
 class parameters
 {
-	FCPPT_NONASSIGNABLE(
-		parameters
-	);
 public:
 	AWL_DETAIL_SYMBOL
 	explicit
@@ -73,7 +70,9 @@ public:
 	awl::cursor::const_optional_object_ref const &
 	cursor() const;
 private:
-	awl::visual::object const &visual_;
+	fcppt::reference<
+		awl::visual::object const
+	> visual_;
 
 	awl::window::optional_dim size_;
 

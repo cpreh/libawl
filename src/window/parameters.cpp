@@ -84,7 +84,7 @@ awl::visual::object const &
 awl::window::parameters::visual() const
 {
 	return
-		visual_;
+		visual_.get();
 }
 
 awl::window::optional_dim
