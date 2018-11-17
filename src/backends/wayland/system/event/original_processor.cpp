@@ -51,9 +51,9 @@
 #include <fcppt/assert/error.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
-#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>

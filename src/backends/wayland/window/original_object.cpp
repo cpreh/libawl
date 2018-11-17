@@ -24,9 +24,9 @@
 #include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
-#include <fcppt/log/out.hpp>
 #include <fcppt/log/debug.hpp>
 #include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/out.hpp>
 #include <fcppt/math/dim/null.hpp>
 #include <fcppt/math/dim/output.hpp>
 #include <fcppt/optional/from.hpp>
