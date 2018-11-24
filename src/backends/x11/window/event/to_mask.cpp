@@ -22,7 +22,7 @@ case type_value: \
 			awl::backends::x11::window::event::mask_bit(\
 				mask_value\
 			) \
-		);
+		)
 	switch(
 		_event_type.get()
 	)

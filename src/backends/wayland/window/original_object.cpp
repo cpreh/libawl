@@ -99,7 +99,7 @@ shell_surface_configure(
 			FCPPT_TEXT("Got resize event ")
 			<<
 			size
-	);
+	)
 
 	data.size_ =
 		awl::window::optional_dim{

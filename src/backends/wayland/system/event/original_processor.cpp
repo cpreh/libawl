@@ -109,7 +109,7 @@ registry_add(
 			FCPPT_TEXT("\" with id ")
 			<<
 			name
-	);
+	)
 
 	if(
 		interface

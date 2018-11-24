@@ -458,7 +458,7 @@ awl::backends::x11::window::original_object::add_mask_bit(
 			*this,
 			event_mask_
 		);
-	};
+	}
 }
 
 void
