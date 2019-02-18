@@ -4,7 +4,6 @@
 #include <awl/backends/x11/window/const_optional_object_ref_fwd.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/preprocessor/warn_unused_result.hpp>
 
 
 namespace awl
@@ -18,13 +17,13 @@ namespace window
 namespace event
 {
 
+[[nodiscard]]
 AWL_DETAIL_SYMBOL
 bool
 filter(
 	awl::backends::x11::window::event::object,
 	awl::backends::x11::window::const_optional_object_ref
-)
-FCPPT_PP_WARN_UNUSED_RESULT;
+);
 
 }
 }
