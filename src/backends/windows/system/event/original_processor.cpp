@@ -34,7 +34,6 @@
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/function_impl.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/move_clear.hpp>
@@ -79,23 +78,6 @@ awl::backends::windows::system::event::original_processor::poll()
 {
 	return
 		this->process(
-			handle_function{
-				[](
-					DWORD const _count,
-					HANDLE const *const _handle,
-					BOOL const _wait_all,
-					DWORD const _milli_seconds
-				)
-				{
-					return
-						::WaitForMultipleObjects(
-							_count,
-							_handle,
-							_wait_all,
-							_milli_seconds
-						);
-				}
-			},
 			timeout{
 				0u
 			}
@@ -107,24 +89,6 @@ awl::backends::windows::system::event::original_processor::next()
 {
 	return
 		this->process(
-			handle_function{
-				[](
-					DWORD const _count,
-					HANDLE const *const _handle,
-					BOOL const _wait_all,
-					DWORD const _milli_seconds
-				)
-				{
-					return
-						::MsgWaitForMultipleObjects(
-							_count,
-							_handle,
-							_wait_all,
-							_milli_seconds,
-							QS_ALLEVENTS
-						);
-				}
-			},
 			timeout{
 				INFINITE
 			}
@@ -274,7 +238,6 @@ awl::backends::windows::system::event::original_processor::next_events()
 
 awl::system::event::result
 awl::backends::windows::system::event::original_processor::process(
-	handle_function const &_handler,
 	timeout const _timeout
 )
 {
@@ -282,14 +245,12 @@ awl::backends::windows::system::event::original_processor::process(
 		fcppt::optional::maybe(
 			exit_code_,
 			[
-				&_handler,
 				_timeout,
 				this
 			]{
 				return
 					awl::system::event::result{
 						this->generic_multiple_wait(
-							_handler,
 							_timeout
 						)
 					};
@@ -455,7 +416,6 @@ awl::backends::windows::system::event::original_processor::make_message(
 
 awl::system::event::result
 awl::backends::windows::system::event::original_processor::generic_multiple_wait(
-	handle_function const &_function,
 	timeout const _timeout
 )
 {
@@ -468,11 +428,12 @@ awl::backends::windows::system::event::original_processor::generic_multiple_wait
 	};
 
 	DWORD const result(
-		_function(
+		::MsgWaitForMultipleObjects(
 			count,
 			handles_.data(),
 			FALSE,
-			_timeout.get()
+			_timeout.get(),
+			QS_ALLEVENTS
 		)
 	);
 

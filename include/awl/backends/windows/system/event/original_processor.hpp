@@ -18,7 +18,6 @@
 #include <awl/timer/reference.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
-#include <fcppt/function_fwd.hpp>
 #include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -86,17 +85,6 @@ public:
 	awl::event::container_reference
 	next_events();
 private:
-	typedef
-	fcppt::function<
-		DWORD (
-			DWORD,
-			HANDLE const *,
-			BOOL,
-			DWORD
-		)
-	>
-	handle_function;
-
 	FCPPT_MAKE_STRONG_TYPEDEF(
 		DWORD,
 		timeout
@@ -104,7 +92,6 @@ private:
 
 	awl::system::event::result
 	process(
-		handle_function const &,
 		timeout
 	);
 
@@ -123,7 +110,6 @@ private:
 
 	awl::system::event::result
 	generic_multiple_wait(
-		handle_function const &,
 		timeout
 	);
 
