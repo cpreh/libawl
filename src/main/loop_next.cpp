@@ -4,11 +4,10 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/loop_function.hpp>
 #include <awl/main/loop_next.hpp>
-#include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/system/event/result.hpp>
 #include <fcppt/algorithm/loop.hpp>
-#include <fcppt/either/match.hpp>
+#include <fcppt/either/loop.hpp>
 
 
 awl::main::exit_code
@@ -17,25 +16,13 @@ awl::main::loop_next(
 	awl::main::loop_function const &_function
 )
 {
-	// TODO!
-	awl::main::optional_exit_code code;
-
-	while(
-		!code.has_value()
-	)
-	{
-		fcppt::either::match(
-			_processor.next(),
+	return
+		fcppt::either::loop(
 			[
-				&code
-			](
-				awl::main::exit_code const _code
-			)
-			{
-				code =
-					awl::main::optional_exit_code{
-						_code
-					};
+				&_processor
+			]{
+				return
+					_processor.next();
 			},
 			[
 				&_function
@@ -58,8 +45,4 @@ awl::main::loop_next(
 				);
 			}
 		);
-	}
-
-	return
-		code.get_unsafe();
 }
