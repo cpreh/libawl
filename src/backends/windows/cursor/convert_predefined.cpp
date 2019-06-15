@@ -23,12 +23,6 @@ awl::backends::windows::cursor::convert_predefined(
 	case awl::cursor::type::hand:
 		return
 			IDC_HAND;
-	case awl::cursor::type::icon:
-		return
-			IDC_ICON;
-	case awl::cursor::type::invisible:
-		// TODO: Better typing
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;
