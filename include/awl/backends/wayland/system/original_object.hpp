@@ -7,7 +7,7 @@
 #include <awl/backends/wayland/system/object.hpp>
 #include <awl/backends/wayland/system/event/processor_unique_ptr.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
-#include <awl/cursor/type_fwd.hpp>
+#include <awl/cursor/optional_type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
@@ -65,7 +65,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::cursor::object_unique_ptr
 	create_cursor(
-		awl::cursor::type
+		awl::cursor::optional_type const &
 	)
 	override;
 

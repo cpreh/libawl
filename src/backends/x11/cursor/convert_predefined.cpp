@@ -42,17 +42,6 @@ awl::backends::x11::cursor::convert_predefined(
 			>(
 				XC_hand1
 			);
-	case awl::cursor::type::icon:
-		return
-			fcppt::strong_typedef_construct_cast<
-				awl::backends::x11::cursor::shape,
-				fcppt::cast::to_unsigned_fun
-			>(
-				XC_icon
-			);
-	case awl::cursor::type::invisible:
-		// TODO: Better typing
-		break;
 	}
 
 	FCPPT_ASSERT_UNREACHABLE;

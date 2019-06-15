@@ -13,6 +13,7 @@
 #include <awl/backends/x11/window/original_object.hpp>
 #include <awl/cursor/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
+#include <awl/cursor/optional_type.hpp>
 #include <awl/cursor/type.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/visual/object.hpp>
@@ -23,6 +24,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/context_fwd.hpp>
+#include <fcppt/optional/maybe.hpp>
 
 
 awl::backends::x11::system::original_object::original_object(
@@ -93,25 +95,36 @@ awl::backends::x11::system::original_object::default_visual()
 
 awl::cursor::object_unique_ptr
 awl::backends::x11::system::original_object::create_cursor(
-	awl::cursor::type const _type
+	awl::cursor::optional_type const &_optional_type
 )
 {
 	return
 		fcppt::unique_ptr_to_base<
 			awl::cursor::object
 		>(
-			_type
-			==
-			awl::cursor::type::invisible
-			?
-				awl::backends::x11::cursor::create_invisible(
-					display_
+			fcppt::optional::maybe(
+				_optional_type,
+				[
+					this
+				]{
+					return
+						awl::backends::x11::cursor::create_invisible(
+							this->display_
+						);
+				},
+				[
+					this
+				](
+					awl::cursor::type const _type
 				)
-			:
-				awl::backends::x11::cursor::create_predefined(
-					display_,
-					_type
-				)
+				{
+					return
+						awl::backends::x11::cursor::create_predefined(
+							this->display_,
+							_type
+						);
+				}
+			)
 		);
 }
 

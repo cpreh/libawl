@@ -4,7 +4,6 @@
 #include <awl/backends/wayland/cursor/convert_name.hpp>
 #include <awl/backends/wayland/cursor/create_invisible.hpp>
 #include <awl/backends/wayland/cursor/create_name.hpp>
-#include <awl/backends/wayland/cursor/name.hpp>
 #include <awl/backends/wayland/cursor/object.hpp>
 #include <awl/backends/wayland/system/object.hpp>
 #include <awl/backends/wayland/system/original_object.hpp>
@@ -14,6 +13,7 @@
 #include <awl/backends/wayland/window/original_object.hpp>
 #include <awl/cursor/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
+#include <awl/cursor/optional_type.hpp>
 #include <awl/cursor/type.hpp>
 #include <awl/impl/backends/wayland/log_name.hpp>
 #include <awl/system/event/processor.hpp>
@@ -119,7 +119,7 @@ awl::backends::wayland::system::original_object::default_visual()
 
 awl::cursor::object_unique_ptr
 awl::backends::wayland::system::original_object::create_cursor(
-	awl::cursor::type const _type
+	awl::cursor::optional_type const &_optional_type
 )
 {
 	return
@@ -127,9 +127,7 @@ awl::backends::wayland::system::original_object::create_cursor(
 			awl::cursor::object
 		>(
 			fcppt::optional::maybe(
-				awl::backends::wayland::cursor::convert_name(
-					_type
-				),
+				_optional_type,
 				[]{
 					return
 						awl::backends::wayland::cursor::create_invisible();
@@ -137,13 +135,15 @@ awl::backends::wayland::system::original_object::create_cursor(
 				[
 					this
 				](
-					awl::backends::wayland::cursor::name const &_name
+					awl::cursor::type const _type
 				)
 				{
 					return
 						awl::backends::wayland::cursor::create_name(
-							cursor_theme_,
-							_name
+							this->cursor_theme_,
+							awl::backends::wayland::cursor::convert_name(
+								_type
+							)
 						);
 				}
 			)

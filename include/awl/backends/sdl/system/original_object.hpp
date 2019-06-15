@@ -4,7 +4,7 @@
 #include <awl/backends/sdl/system/init.hpp>
 #include <awl/backends/sdl/system/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>
-#include <awl/cursor/type_fwd.hpp>
+#include <awl/cursor/optional_type_fwd.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/object.hpp>
@@ -59,7 +59,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::cursor::object_unique_ptr
 	create_cursor(
-		awl::cursor::type
+		awl::cursor::optional_type const &
 	)
 	override;
 private:

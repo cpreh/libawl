@@ -13,9 +13,7 @@ enum class type
 {
 	arrow,
 	cross,
-	hand,
-	icon,
-	invisible
+	hand
 };
 
 }

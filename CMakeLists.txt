@@ -564,8 +564,6 @@ set(
 	include/awl/backends/wayland/cursor/object_unique_ptr.hpp
 	include/awl/backends/wayland/cursor/optional.hpp
 	include/awl/backends/wayland/cursor/optional_fwd.hpp
-	include/awl/backends/wayland/cursor/optional_name.hpp
-	include/awl/backends/wayland/cursor/optional_name_fwd.hpp
 	include/awl/backends/wayland/cursor/predefined.hpp
 	include/awl/backends/wayland/cursor/theme.hpp
 	include/awl/backends/wayland/cursor/theme_fwd.hpp

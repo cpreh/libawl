@@ -2,7 +2,7 @@
 #define AWL_SYSTEM_OBJECT_HPP_INCLUDED
 
 #include <awl/cursor/object_unique_ptr.hpp>
-#include <awl/cursor/type_fwd.hpp>
+#include <awl/cursor/optional_type_fwd.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/object_fwd.hpp>
@@ -44,7 +44,7 @@ public:
 	virtual
 	awl::cursor::object_unique_ptr
 	create_cursor(
-		awl::cursor::type
+		awl::cursor::optional_type const &
 	) = 0;
 
 	AWL_DETAIL_SYMBOL

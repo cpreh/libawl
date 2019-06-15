@@ -23,9 +23,5 @@ awl::backends::sdl::cursor::convert_predefined(
 	case awl::cursor::type::hand:
 		return
 			SDL_SYSTEM_CURSOR_HAND;
-	case awl::cursor::type::icon:
-		// TODO: No idea
-		return
-			SDL_SYSTEM_CURSOR_IBEAM;
 	}
 }
