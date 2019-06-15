@@ -1,5 +1,6 @@
 #include <awl/backends/sdl/cursor/convert_predefined.hpp>
 #include <awl/cursor/type.hpp>
+#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_mouse.h>
 #include <fcppt/config/external_end.hpp>
@@ -24,4 +25,6 @@ awl::backends::sdl::cursor::convert_predefined(
 		return
 			SDL_SYSTEM_CURSOR_HAND;
 	}
+
+	FCPPT_ASSERT_UNREACHABLE;
 }
