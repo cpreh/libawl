@@ -952,10 +952,21 @@ set(
 	include/awl/backends/sdl/cursor/predefined.hpp
 	include/awl/backends/sdl/exception.hpp
 	include/awl/backends/sdl/get_error.hpp
+	include/awl/backends/sdl/system/event/original_processor.hpp
+	include/awl/backends/sdl/system/event/processor.hpp
+	include/awl/backends/sdl/system/event/processor_fwd.hpp
 	include/awl/backends/sdl/system/init.hpp
 	include/awl/backends/sdl/system/object.hpp
 	include/awl/backends/sdl/system/object_fwd.hpp
 	include/awl/backends/sdl/system/original_object.hpp
+	include/awl/backends/sdl/visual/flags.hpp
+	include/awl/backends/sdl/visual/flags_fwd.hpp
+	include/awl/backends/sdl/visual/object.hpp
+	include/awl/backends/sdl/visual/object_fwd.hpp
+	include/awl/backends/sdl/window/holder.hpp
+	include/awl/backends/sdl/window/object.hpp
+	include/awl/backends/sdl/window/object_fwd.hpp
+	include/awl/backends/sdl/window/original_object.hpp
 )
 
 set(
@@ -968,9 +979,15 @@ set(
 	src/backends/sdl/cursor/predefined.cpp
 	src/backends/sdl/exception.cpp
 	src/backends/sdl/get_error.cpp
+	src/backends/sdl/system/event/original_processor.cpp
+	src/backends/sdl/system/event/processor.cpp
 	src/backends/sdl/system/init.cpp
 	src/backends/sdl/system/object.cpp
-	src/backends/sdl/system/original_processor.cpp
+	src/backends/sdl/system/original_object.cpp
+	src/backends/sdl/visual/object.cpp
+	src/backends/sdl/window/holder.cpp
+	src/backends/sdl/window/object.cpp
+	src/backends/sdl/window/original_object.cpp
 )
 
 set(

@@ -13,6 +13,7 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 
 
 namespace awl
@@ -64,6 +65,10 @@ public:
 	override;
 private:
 	awl::backends::sdl::system::init const init_;
+
+	fcppt::unique_ptr<
+		awl::system::event::processor
+	> const event_processor_;
 };
 
 }
