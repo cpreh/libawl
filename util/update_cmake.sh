@@ -86,3 +86,13 @@ update_main \
 	AWL_WINDOWS_SRC_FILES \
 	src/backends/windows
 # Windows end
+
+# SDL begin
+update_main \
+	AWL_SDL_INCLUDE_FILES \
+	include/awl/backends/sdl
+
+update_main \
+	AWL_SDL_SRC_FILES \
+	src/backends/sdl
+# SDL end

@@ -129,6 +129,8 @@ set(
 	include/awl/cursor/object.hpp
 	include/awl/cursor/object_fwd.hpp
 	include/awl/cursor/object_unique_ptr.hpp
+	include/awl/cursor/optional_type.hpp
+	include/awl/cursor/optional_type_fwd.hpp
 	include/awl/cursor/size.hpp
 	include/awl/cursor/type.hpp
 	include/awl/cursor/type_fwd.hpp
@@ -290,7 +292,7 @@ elseif(
 		)
 	endif()
 
-        if(
+	if(
 		NOT
 		ENABLE_X11
 		AND
@@ -314,6 +316,25 @@ if(
 )
 	set(
 		AWL_LINUX_BACKEND
+		TRUE
+	)
+endif()
+
+find_package(
+	SDL2
+)
+
+option(
+	ENABLE_SDL
+	"Enable the SDL2 backend"
+	${SDL2_FOUND}
+)
+
+if(
+	ENABLE_SDL
+)
+	set(
+		AWL_SDL_BACKEND
 		TRUE
 	)
 endif()
@@ -922,6 +943,39 @@ set(
 )
 
 set(
+	AWL_SDL_INCLUDE_FILES
+	include/awl/backends/sdl/cursor/convert_predefined.hpp
+	include/awl/backends/sdl/cursor/create_invisible.hpp
+	include/awl/backends/sdl/cursor/create_predefined.hpp
+	include/awl/backends/sdl/cursor/invisible.hpp
+	include/awl/backends/sdl/cursor/object.hpp
+	include/awl/backends/sdl/cursor/object_fwd.hpp
+	include/awl/backends/sdl/cursor/object_unique_ptr.hpp
+	include/awl/backends/sdl/cursor/predefined.hpp
+	include/awl/backends/sdl/exception.hpp
+	include/awl/backends/sdl/get_error.hpp
+	include/awl/backends/sdl/system/init.hpp
+	include/awl/backends/sdl/system/object.hpp
+	include/awl/backends/sdl/system/object_fwd.hpp
+	include/awl/backends/sdl/system/original_object.hpp
+)
+
+set(
+	AWL_SDL_SRC_FILES
+	src/backends/sdl/cursor/convert_predefined.cpp
+	src/backends/sdl/cursor/create_invisible.cpp
+	src/backends/sdl/cursor/create_predefined.cpp
+	src/backends/sdl/cursor/invisible.cpp
+	src/backends/sdl/cursor/object.cpp
+	src/backends/sdl/cursor/predefined.cpp
+	src/backends/sdl/exception.cpp
+	src/backends/sdl/get_error.cpp
+	src/backends/sdl/system/init.cpp
+	src/backends/sdl/system/object.cpp
+	src/backends/sdl/system/original_processor.cpp
+)
+
+set(
 	AWL_INCLUDE_FILES
 	"${AWL_BASE_INCLUDE_FILES}"
 )
@@ -1008,6 +1062,22 @@ if(
 		APPEND
 		AWL_SRC_FILES
 		${AWL_WINDOWS_SRC_FILES}
+	)
+endif()
+
+if(
+	AWL_SDL_BACKEND
+)
+	list(
+		APPEND
+		AWL_INCLUDE_FILES
+		${AWL_SDL_INCLUDE_FILES}
+	)
+
+	list(
+		APPEND
+		AWL_SRC_FILES
+		${AWL_SDL_SRC_FILES}
 	)
 endif()
 
@@ -1186,6 +1256,22 @@ function(
 				${TARGETNAME}
 				PRIVATE
 				${fcppt_filesystem_TARGET}
+			)
+		endif()
+
+		if(
+			AWL_SDL_BACKEND
+		)
+			target_include_directories(
+				${TARGETNAME}
+				PRIVATE
+				${SDL2_INCLUDE_DIRS}
+			)
+
+			target_link_libraries(
+				${TARGETNAME}
+				PRIVATE
+				${SDL2_LIBRARIES}
 			)
 		endif()
 	endif()
