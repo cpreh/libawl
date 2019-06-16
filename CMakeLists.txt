@@ -959,6 +959,9 @@ set(
 	include/awl/backends/sdl/system/object.hpp
 	include/awl/backends/sdl/system/object_fwd.hpp
 	include/awl/backends/sdl/system/original_object.hpp
+	include/awl/backends/sdl/timer/events.hpp
+	include/awl/backends/sdl/timer/events_fwd.hpp
+	include/awl/backends/sdl/timer/object.hpp
 	include/awl/backends/sdl/visual/flags.hpp
 	include/awl/backends/sdl/visual/flags_fwd.hpp
 	include/awl/backends/sdl/visual/object.hpp
@@ -984,6 +987,8 @@ set(
 	src/backends/sdl/system/init.cpp
 	src/backends/sdl/system/object.cpp
 	src/backends/sdl/system/original_object.cpp
+	src/backends/sdl/timer/events.cpp
+	src/backends/sdl/timer/object.cpp
 	src/backends/sdl/visual/object.cpp
 	src/backends/sdl/window/holder.cpp
 	src/backends/sdl/window/object.cpp
