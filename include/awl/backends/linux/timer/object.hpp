@@ -7,7 +7,6 @@
 #include <awl/backends/posix/timer.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
-#include <awl/timer/setting_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -41,13 +40,6 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::backends::posix::fd
 	fd() const
-	override;
-
-	AWL_DETAIL_SYMBOL
-	void
-	set(
-		awl::timer::setting const &
-	)
 	override;
 
 	AWL_DETAIL_SYMBOL

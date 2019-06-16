@@ -28,21 +28,11 @@ awl::backends::windows::timer::object::object(
 		)
 	}
 {
-	this->set(
+	timer_->set(
 		_setting
 	);
 }
 
 awl::backends::windows::timer::object::~object()
 {
-}
-
-void
-awl::backends::windows::timer::object::set(
-	awl::timer::setting const &_setting
-)
-{
-	timer_->set(
-		_setting
-	);
 }

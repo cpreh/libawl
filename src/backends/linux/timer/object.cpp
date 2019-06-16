@@ -5,7 +5,6 @@
 #include <awl/backends/posix/timer.hpp>
 #include <awl/event/connection.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
-#include <awl/timer/setting_fwd.hpp>
 
 
 awl::backends::linux::timer::object::object(
@@ -36,16 +35,6 @@ awl::backends::linux::timer::object::fd() const
 {
 	return
 		timer_->get();
-}
-
-void
-awl::backends::linux::timer::object::set(
-	awl::timer::setting const &_setting
-)
-{
-	timer_->set_time(
-		_setting
-	);
 }
 
 void

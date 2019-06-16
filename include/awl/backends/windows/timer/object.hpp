@@ -38,13 +38,6 @@ public:
 	AWL_DETAIL_CLASS_SYMBOL
 	~object()
 	override;
-
-	AWL_DETAIL_CLASS_SYMBOL
-	void
-	set(
-		awl::timer::setting const &
-	)
-	override;
 private:
 	awl::backends::windows::timer::waitable_unique_ptr const timer_;
 
