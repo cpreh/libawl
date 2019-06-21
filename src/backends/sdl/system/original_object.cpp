@@ -1,11 +1,11 @@
 #include <awl/backends/sdl/cursor/create_invisible.hpp>
 #include <awl/backends/sdl/cursor/create_predefined.hpp>
 #include <awl/backends/sdl/cursor/object.hpp>
-#include <awl/backends/sdl/visual/flags.hpp>
-#include <awl/backends/sdl/visual/object.hpp>
 #include <awl/backends/sdl/system/object.hpp>
 #include <awl/backends/sdl/system/original_object.hpp>
 #include <awl/backends/sdl/system/event/original_processor.hpp>
+#include <awl/backends/sdl/visual/flags.hpp>
+#include <awl/backends/sdl/visual/object.hpp>
 #include <awl/backends/sdl/window/original_object.hpp>
 #include <awl/cursor/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>

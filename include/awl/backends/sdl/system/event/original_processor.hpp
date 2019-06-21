@@ -3,13 +3,15 @@
 
 #include <awl/backends/sdl/system/event/processor.hpp>
 #include <awl/backends/sdl/system/event/type.hpp>
-#include <awl/event/container.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/container.hpp>
 #include <awl/main/exit_code_fwd.hpp>
+#include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/result_fwd.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
+#include <fcppt/function_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
 
@@ -63,7 +65,23 @@ public:
 	)
 	override;
 private:
+	typedef
+	fcppt::function<
+		awl::event::container ()
+	>
+	process_function;
+
+	awl::system::event::result
+	process(
+		process_function const &
+	);
+
+	awl::event::container
+	process_events();
+
 	awl::backends::sdl::system::event::type const timer_event_;
+
+	awl::main::optional_exit_code exit_code_;
 };
 
 }

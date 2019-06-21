@@ -952,13 +952,18 @@ set(
 	include/awl/backends/sdl/cursor/predefined.hpp
 	include/awl/backends/sdl/exception.hpp
 	include/awl/backends/sdl/get_error.hpp
+	include/awl/backends/sdl/system/event/object.hpp
+	include/awl/backends/sdl/system/event/object_fwd.hpp
 	include/awl/backends/sdl/system/event/original_processor.hpp
+	include/awl/backends/sdl/system/event/poll.hpp
 	include/awl/backends/sdl/system/event/processor.hpp
 	include/awl/backends/sdl/system/event/processor_fwd.hpp
 	include/awl/backends/sdl/system/event/push.hpp
 	include/awl/backends/sdl/system/event/register.hpp
+	include/awl/backends/sdl/system/event/translate.hpp
 	include/awl/backends/sdl/system/event/type.hpp
 	include/awl/backends/sdl/system/event/type_fwd.hpp
+	include/awl/backends/sdl/system/event/wait.hpp
 	include/awl/backends/sdl/system/init.hpp
 	include/awl/backends/sdl/system/object.hpp
 	include/awl/backends/sdl/system/object_fwd.hpp
@@ -985,10 +990,14 @@ set(
 	src/backends/sdl/cursor/predefined.cpp
 	src/backends/sdl/exception.cpp
 	src/backends/sdl/get_error.cpp
+	src/backends/sdl/system/event/object.cpp
 	src/backends/sdl/system/event/original_processor.cpp
+	src/backends/sdl/system/event/poll.cpp
 	src/backends/sdl/system/event/processor.cpp
 	src/backends/sdl/system/event/push.cpp
 	src/backends/sdl/system/event/register.cpp
+	src/backends/sdl/system/event/translate.cpp
+	src/backends/sdl/system/event/wait.cpp
 	src/backends/sdl/system/init.cpp
 	src/backends/sdl/system/object.cpp
 	src/backends/sdl/system/original_object.cpp
