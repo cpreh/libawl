@@ -1,16 +1,12 @@
 #include <awl/backends/sdl/exception.hpp>
-#include <awl/backends/sdl/timer/events.hpp>
+#include <awl/backends/sdl/system/event/push.hpp>
+#include <awl/backends/sdl/timer/event_code.hpp>
+#include <awl/backends/sdl/timer/event_type.hpp>
 #include <awl/backends/sdl/timer/object.hpp>
-#include <awl/event/base.hpp>
 #include <awl/timer/duration.hpp>
-#include <awl/timer/event.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting.hpp>
-#include <fcppt/make_ref.hpp>
-#include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_impl.hpp>
-#include <fcppt/reference_to_base.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/cast/size.hpp>
@@ -18,7 +14,6 @@
 #include <fcppt/cast/to_void_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_timer.h>
-#include <atomic>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
@@ -48,16 +43,10 @@ convert_time(
 }
 
 awl::backends::sdl::timer::object::object(
-	fcppt::reference<
-		awl::backends::sdl::timer::events
-	> const _events,
 	awl::timer::setting const &_setting
 )
 :
 	awl::timer::object{},
-	events_{
-		_events
-	},
 	period_{
 		convert_time(
 			_setting.period().get()
@@ -108,23 +97,34 @@ awl::backends::sdl::timer::object::process(
 		)
 	};
 
-	timer.events_.get().push_back(
-		fcppt::unique_ptr_to_base<
-			awl::event::base
-		>(
-			fcppt::make_unique_ptr<
-				awl::timer::event
+	SDL_Event event;
+
+	event.user =
+		SDL_UserEvent{
+			awl::backends::sdl::timer::event_type(),
+			SDL_GetTicks(),
+			fcppt::literal<
+			Uint32
 			>(
-				fcppt::reference_to_base<
-					awl::timer::object
-				>(
-					fcppt::make_ref(
-						timer
-					)
-				)
-			)
-		)
-	);
+				0
+			),
+			awl::backends::sdl::timer::event_code(),
+			fcppt::cast::to_void_ptr(
+				&timer
+			),
+			nullptr
+		};
+
+	// TODO: Error handling?
+	try
+	{
+		awl::backends::sdl::system::event::push(
+			event
+		);
+	}
+	catch(...)
+	{
+	}
 
 	return
 		timer.period_;

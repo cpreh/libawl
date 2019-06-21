@@ -955,12 +955,13 @@ set(
 	include/awl/backends/sdl/system/event/original_processor.hpp
 	include/awl/backends/sdl/system/event/processor.hpp
 	include/awl/backends/sdl/system/event/processor_fwd.hpp
+	include/awl/backends/sdl/system/event/push.hpp
 	include/awl/backends/sdl/system/init.hpp
 	include/awl/backends/sdl/system/object.hpp
 	include/awl/backends/sdl/system/object_fwd.hpp
 	include/awl/backends/sdl/system/original_object.hpp
-	include/awl/backends/sdl/timer/events.hpp
-	include/awl/backends/sdl/timer/events_fwd.hpp
+	include/awl/backends/sdl/timer/event_code.hpp
+	include/awl/backends/sdl/timer/event_type.hpp
 	include/awl/backends/sdl/timer/object.hpp
 	include/awl/backends/sdl/visual/flags.hpp
 	include/awl/backends/sdl/visual/flags_fwd.hpp
@@ -984,10 +985,12 @@ set(
 	src/backends/sdl/get_error.cpp
 	src/backends/sdl/system/event/original_processor.cpp
 	src/backends/sdl/system/event/processor.cpp
+	src/backends/sdl/system/event/push.cpp
 	src/backends/sdl/system/init.cpp
 	src/backends/sdl/system/object.cpp
 	src/backends/sdl/system/original_object.cpp
-	src/backends/sdl/timer/events.cpp
+	src/backends/sdl/timer/event_code.cpp
+	src/backends/sdl/timer/event_type.cpp
 	src/backends/sdl/timer/object.cpp
 	src/backends/sdl/visual/object.cpp
 	src/backends/sdl/window/holder.cpp
