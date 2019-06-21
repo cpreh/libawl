@@ -1,7 +1,7 @@
 #include <awl/backends/sdl/exception.hpp>
 #include <awl/backends/sdl/system/event/push.hpp>
+#include <awl/backends/sdl/system/event/type.hpp>
 #include <awl/backends/sdl/timer/event_code.hpp>
-#include <awl/backends/sdl/timer/event_type.hpp>
 #include <awl/backends/sdl/timer/object.hpp>
 #include <awl/timer/duration.hpp>
 #include <awl/timer/object.hpp>
@@ -13,6 +13,7 @@
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/cast/to_void_ptr.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <SDL_stdinc.h>
 #include <SDL_timer.h>
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
@@ -43,7 +44,8 @@ convert_time(
 }
 
 awl::backends::sdl::timer::object::object(
-	awl::timer::setting const &_setting
+	awl::timer::setting const &_setting,
+	awl::backends::sdl::system::event::type const _event_type
 )
 :
 	awl::timer::object{},
@@ -51,6 +53,9 @@ awl::backends::sdl::timer::object::object(
 		convert_time(
 			_setting.period().get()
 		)
+	},
+	event_type_{
+		_event_type
 	},
 	id_{
 		SDL_AddTimer(
@@ -101,7 +106,7 @@ awl::backends::sdl::timer::object::process(
 
 	event.user =
 		SDL_UserEvent{
-			awl::backends::sdl::timer::event_type(),
+			timer.event_type_.get(),
 			SDL_GetTicks(),
 			fcppt::literal<
 			Uint32

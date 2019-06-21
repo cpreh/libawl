@@ -2,6 +2,7 @@
 #define AWL_BACKENDS_SDL_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/backends/sdl/system/event/processor.hpp>
+#include <awl/backends/sdl/system/event/type.hpp>
 #include <awl/event/container.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
@@ -61,6 +62,8 @@ public:
 		awl::timer::setting const &
 	)
 	override;
+private:
+	awl::backends::sdl::system::event::type const timer_event_;
 };
 
 }

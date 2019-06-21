@@ -1,6 +1,8 @@
 #include <awl/backends/sdl/timer/object.hpp>
 #include <awl/backends/sdl/system/event/original_processor.hpp>
 #include <awl/backends/sdl/system/event/processor.hpp>
+#include <awl/backends/sdl/system/event/register.hpp>
+#include <awl/exception.hpp>
 #include <awl/event/base.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/system/event/result.hpp>
@@ -9,11 +11,24 @@
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/optional/to_exception.hpp>
 
 
 awl::backends::sdl::system::event::original_processor::original_processor()
 :
-	awl::backends::sdl::system::event::processor{}
+	awl::backends::sdl::system::event::processor{},
+	timer_event_{
+		fcppt::optional::to_exception(
+			awl::backends::sdl::system::event::register_(),
+			[]{
+				return
+					awl::exception{
+						FCPPT_TEXT("Unable to register SDL timer event!")
+					};
+			}
+		)
+	}
 {
 }
 
@@ -50,7 +65,8 @@ awl::backends::sdl::system::event::original_processor::create_timer(
 			fcppt::make_unique_ptr<
 				awl::backends::sdl::timer::object
 			>(
-				_setting
+				_setting,
+				this->timer_event_
 			)
 		);
 }

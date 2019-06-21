@@ -1,10 +1,12 @@
 #ifndef AWL_BACKENDS_SDL_TIMER_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_SDL_TIMER_OBJECT_HPP_INCLUDED
 
+#include <awl/backends/sdl/system/event/type.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <SDL_stdinc.h>
 #include <SDL_timer.h>
 #include <fcppt/config/external_end.hpp>
 
@@ -26,9 +28,9 @@ class object
 		object
 	);
 public:
-	explicit
 	object(
-		awl::timer::setting const &
+		awl::timer::setting const &,
+		awl::backends::sdl::system::event::type
 	);
 
 	~object()
@@ -43,6 +45,8 @@ private:
 	);
 
 	Uint32 const period_;
+
+	awl::backends::sdl::system::event::type const event_type_;
 
 	SDL_TimerID const id_;
 };
