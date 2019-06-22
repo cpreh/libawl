@@ -32,9 +32,9 @@ awl::backends::sdl::window::holder::~holder()
 	);
 }
 
-SDL_Window *
+SDL_Window &
 awl::backends::sdl::window::holder::get() const
 {
 	return
-		this->window_;
+		*this->window_;
 }

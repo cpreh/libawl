@@ -47,7 +47,7 @@ public:
 	override;
 
 	virtual
-	SDL_Window *
+	SDL_Window &
 	get() const = 0;
 };
 

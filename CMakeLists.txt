@@ -976,10 +976,16 @@ set(
 	include/awl/backends/sdl/visual/flags_fwd.hpp
 	include/awl/backends/sdl/visual/object.hpp
 	include/awl/backends/sdl/visual/object_fwd.hpp
+	include/awl/backends/sdl/window/from_id.hpp
+	include/awl/backends/sdl/window/get_data.hpp
+	include/awl/backends/sdl/window/get_object.hpp
 	include/awl/backends/sdl/window/holder.hpp
 	include/awl/backends/sdl/window/object.hpp
+	include/awl/backends/sdl/window/object_data_name.hpp
 	include/awl/backends/sdl/window/object_fwd.hpp
 	include/awl/backends/sdl/window/original_object.hpp
+	include/awl/backends/sdl/window/set_data.hpp
+	include/awl/backends/sdl/window/set_object.hpp
 )
 
 set(
@@ -1006,9 +1012,15 @@ set(
 	src/backends/sdl/timer/event_code.cpp
 	src/backends/sdl/timer/object.cpp
 	src/backends/sdl/visual/object.cpp
+	src/backends/sdl/window/from_id.cpp
+	src/backends/sdl/window/get_data.cpp
+	src/backends/sdl/window/get_object.cpp
 	src/backends/sdl/window/holder.cpp
 	src/backends/sdl/window/object.cpp
+	src/backends/sdl/window/object_data_name.cpp
 	src/backends/sdl/window/original_object.cpp
+	src/backends/sdl/window/set_data.cpp
+	src/backends/sdl/window/set_object.cpp
 )
 
 set(

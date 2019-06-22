@@ -3,6 +3,7 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
+
 awl::backends::x11::window::event::object::object(
 	XEvent const &_event
 )
@@ -16,11 +17,13 @@ awl::backends::x11::window::event::object::object(
 XEvent const &
 awl::backends::x11::window::event::object::get() const
 {
-	return event_;
+	return
+		event_;
 }
 
 XEvent &
 awl::backends::x11::window::event::object::get()
 {
-	return event_;
+	return
+		event_;
 }

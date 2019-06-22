@@ -1,9 +1,12 @@
 #include <awl/backends/sdl/visual/object.hpp>
 #include <awl/backends/sdl/window/object.hpp>
 #include <awl/backends/sdl/window/original_object.hpp>
+#include <awl/backends/sdl/window/set_object.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/parameters.hpp>
+#include <fcppt/make_ref.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/dynamic_exn.hpp>
@@ -95,6 +98,16 @@ awl::backends::sdl::window::original_object::original_object(
 		)
 	}
 {
+	awl::backends::sdl::window::set_object(
+		this->get(),
+		fcppt::reference_to_base<
+			awl::window::object
+		>(
+			fcppt::make_ref(
+				*this
+			)
+		)
+	);
 	// TODO: Set cursor when the window becomes active?
 }
 
@@ -102,7 +115,7 @@ awl::backends::sdl::window::original_object::~original_object()
 {
 }
 
-SDL_Window *
+SDL_Window &
 awl::backends::sdl::window::original_object::get() const
 {
 	return

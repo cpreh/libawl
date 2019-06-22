@@ -42,7 +42,7 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	SDL_Window *
+	SDL_Window &
 	get() const
 	override;
 

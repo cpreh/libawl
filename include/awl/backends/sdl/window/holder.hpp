@@ -29,7 +29,7 @@ public:
 
 	~holder();
 
-	SDL_Window *
+	SDL_Window &
 	get() const;
 private:
 	SDL_Window *const window_;
