@@ -1,6 +1,6 @@
 #include <awl/backends/sdl/exception.hpp>
 #include <awl/backends/sdl/system/event/push.hpp>
-#include <awl/backends/sdl/system/event/type.hpp>
+#include <awl/backends/sdl/system/event/timer_type.hpp>
 #include <awl/backends/sdl/timer/event_code.hpp>
 #include <awl/backends/sdl/timer/object.hpp>
 #include <awl/timer/duration.hpp>
@@ -45,7 +45,7 @@ convert_time(
 
 awl::backends::sdl::timer::object::object(
 	awl::timer::setting const &_setting,
-	awl::backends::sdl::system::event::type const _event_type
+	awl::backends::sdl::system::event::timer_type const _event_type
 )
 :
 	awl::timer::object{},
@@ -106,7 +106,7 @@ awl::backends::sdl::timer::object::process(
 
 	event.user =
 		SDL_UserEvent{
-			timer.event_type_.get(),
+			timer.event_type_.get().get(),
 			SDL_GetTicks(),
 			fcppt::literal<
 			Uint32

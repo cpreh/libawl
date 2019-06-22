@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_SDL_TIMER_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_SDL_TIMER_OBJECT_HPP_INCLUDED
 
-#include <awl/backends/sdl/system/event/type.hpp>
+#include <awl/backends/sdl/system/event/timer_type.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
@@ -30,7 +30,7 @@ class object
 public:
 	object(
 		awl::timer::setting const &,
-		awl::backends::sdl::system::event::type
+		awl::backends::sdl::system::event::timer_type
 	);
 
 	~object()
@@ -46,7 +46,7 @@ private:
 
 	Uint32 const period_;
 
-	awl::backends::sdl::system::event::type const event_type_;
+	awl::backends::sdl::system::event::timer_type const event_type_;
 
 	SDL_TimerID const id_;
 };

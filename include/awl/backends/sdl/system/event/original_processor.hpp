@@ -2,9 +2,10 @@
 #define AWL_BACKENDS_SDL_SYSTEM_EVENT_ORIGINAL_PROCESSOR_HPP_INCLUDED
 
 #include <awl/backends/sdl/system/event/processor.hpp>
-#include <awl/backends/sdl/system/event/type.hpp>
+#include <awl/backends/sdl/system/event/timer_type.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
 #include <awl/main/exit_code_fwd.hpp>
 #include <awl/main/optional_exit_code.hpp>
@@ -13,6 +14,9 @@
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/function_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <SDL_events.h>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace awl
@@ -79,7 +83,12 @@ private:
 	awl::event::container
 	process_events();
 
-	awl::backends::sdl::system::event::type const timer_event_;
+	awl::event::base_unique_ptr
+	translate(
+		SDL_Event const &
+	) const;
+
+	awl::backends::sdl::system::event::timer_type const timer_event_;
 
 	awl::main::optional_exit_code exit_code_;
 };

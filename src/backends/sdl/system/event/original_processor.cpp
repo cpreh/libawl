@@ -80,7 +80,7 @@ awl::backends::sdl::system::event::original_processor::next()
 					this
 				]{
 					awl::event::base_unique_ptr event{
-						awl::backends::sdl::system::event::translate(
+						this->translate(
 							awl::backends::sdl::system::event::wait()
 						)
 					};
@@ -174,13 +174,14 @@ awl::backends::sdl::system::event::original_processor::process_events()
 				);
 		},
 		[
+			this,
 			&result
 		](
 			SDL_Event const &_event
 		)
 		{
 			result.push_back(
-				awl::backends::sdl::system::event::translate(
+				this->translate(
 					_event
 				)
 			);
@@ -189,4 +190,17 @@ awl::backends::sdl::system::event::original_processor::process_events()
 
 	return
 		result;
+}
+
+
+awl::event::base_unique_ptr
+awl::backends::sdl::system::event::original_processor::translate(
+	SDL_Event const &_event
+) const
+{
+	return
+		awl::backends::sdl::system::event::translate(
+			this->timer_event_,
+			_event
+		);
 }

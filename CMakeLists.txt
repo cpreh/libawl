@@ -960,6 +960,8 @@ set(
 	include/awl/backends/sdl/system/event/processor_fwd.hpp
 	include/awl/backends/sdl/system/event/push.hpp
 	include/awl/backends/sdl/system/event/register.hpp
+	include/awl/backends/sdl/system/event/timer_type.hpp
+	include/awl/backends/sdl/system/event/timer_type_fwd.hpp
 	include/awl/backends/sdl/system/event/translate.hpp
 	include/awl/backends/sdl/system/event/type.hpp
 	include/awl/backends/sdl/system/event/type_fwd.hpp
