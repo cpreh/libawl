@@ -12,13 +12,16 @@
 #if defined(AWL_WINDOWS_BACKEND)
 #include <awl/backends/windows/system/original_object.hpp>
 #endif
+#if defined(AWL_SDL_BACKEND)
+#include <awl/backends/sdl/system/original_object.hpp>
+#endif
 #include <fcppt/function_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/join_strings.hpp>
-#include <fcppt/container/array/make.hpp>
+#include <fcppt/algorithm/map.hpp>
 #undef Success
 #include <fcppt/either/first_success.hpp>
 #include <fcppt/either/object.hpp>
@@ -26,6 +29,7 @@
 #include <fcppt/either/try_call.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <utility>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
@@ -89,6 +93,90 @@ try_create(
 		};
 }
 
+typedef
+std::vector<
+	std::pair<
+		fcppt::string,
+		function_type
+	>
+>
+backend_list;
+
+backend_list
+get_backends(
+	fcppt::log::context &_log_context
+)
+{
+	return
+		backend_list{
+#if defined(AWL_WAYLAND_BACKEND)
+			std::make_pair(
+				fcppt::string{
+					FCPPT_TEXT("wayland")
+				},
+				try_create<
+					awl::backends::wayland::system::original_object
+				>(
+					_log_context
+				)
+			)
+			,
+#endif
+#if defined(AWL_X11_BACKEND)
+			std::make_pair(
+				fcppt::string{
+					FCPPT_TEXT("X11")
+				},
+				try_create<
+					awl::backends::x11::system::original_object
+				>(
+					_log_context
+				)
+			)
+			,
+#endif
+#if defined(AWL_WINDOWS_BACKEND)
+			std::make_pair(
+				fcppt::string{
+					FCPPT_TEXT("Windows")
+				},
+				try_create<
+					awl::backends::windows::system::original_object
+				>(
+					_log_context
+				)
+			)
+			,
+#endif
+#if defined(AWL_SDL_BACKEND)
+			std::make_pair(
+				fcppt::string{
+					FCPPT_TEXT("SDL")
+				},
+				try_create<
+					awl::backends::sdl::system::original_object
+				>(
+					_log_context
+				)
+			)
+			,
+#endif
+			std::make_pair(
+				fcppt::string{},
+				function_type{
+					[]{
+						return
+							either_type{
+								fcppt::string{
+									FCPPT_TEXT("All possibilities exhausted.")
+								}
+							};
+					}
+				}
+			)
+		};
+}
+
 }
 
 awl::system::object_unique_ptr
@@ -96,43 +184,30 @@ awl::system::create(
 	fcppt::log::context &_log_context
 )
 {
+	backend_list const backends{
+		get_backends(
+			_log_context
+		)
+	};
+
 	return
 		fcppt::either::to_exception(
 			fcppt::either::first_success(
-				fcppt::container::array::make(
-#if defined(AWL_WAYLAND_BACKEND)
-					try_create<
-						awl::backends::wayland::system::original_object
-					>(
-						_log_context
+				fcppt::algorithm::map<
+					std::vector<
+						function_type
+					>
+				>(
+					backends,
+					[](
+						std::pair<
+							fcppt::string,
+							function_type
+						> const &_backend
 					)
-					,
-#endif
-#if defined(AWL_X11_BACKEND)
-					try_create<
-						awl::backends::x11::system::original_object
-					>(
-						_log_context
-					)
-					,
-#endif
-#if defined(AWL_WINDOWS_BACKEND)
-					try_create<
-						awl::backends::windows::system::original_object
-					>(
-						_log_context
-					)
-					,
-#endif
-					function_type{
-						[]{
-							return
-								either_type{
-									fcppt::string{
-										FCPPT_TEXT("All possibilities exhausted.")
-									}
-								};
-						}
+					{
+						return
+							_backend.second;
 					}
 				)
 			),
