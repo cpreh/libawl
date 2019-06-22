@@ -16,19 +16,30 @@
 #include <awl/backends/sdl/system/original_object.hpp>
 #endif
 #include <fcppt/function_impl.hpp>
+#include <fcppt/from_std_string.hpp>
+#include <fcppt/getenv.hpp>
+#include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/strong_typedef_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/algorithm/find_by_opt.hpp>
 #include <fcppt/algorithm/join_strings.hpp>
 #include <fcppt/algorithm/map.hpp>
+#include <fcppt/container/join.hpp>
 #undef Success
+#include <fcppt/either/bind.hpp>
 #include <fcppt/either/first_success.hpp>
+#include <fcppt/either/from_optional.hpp>
 #include <fcppt/either/object.hpp>
 #include <fcppt/either/to_exception.hpp>
 #include <fcppt/either/try_call.hpp>
 #include <fcppt/log/context_fwd.hpp>
+#include <fcppt/optional/make_if.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <string>
 #include <utility>
 #include <vector>
 #include <fcppt/config/external_end.hpp>
@@ -96,7 +107,7 @@ try_create(
 typedef
 std::vector<
 	std::pair<
-		fcppt::string,
+		std::string,
 		function_type
 	>
 >
@@ -111,8 +122,8 @@ get_backends(
 		backend_list{
 #if defined(AWL_WAYLAND_BACKEND)
 			std::make_pair(
-				fcppt::string{
-					FCPPT_TEXT("wayland")
+				std::string{
+					"wayland"
 				},
 				try_create<
 					awl::backends::wayland::system::original_object
@@ -124,8 +135,8 @@ get_backends(
 #endif
 #if defined(AWL_X11_BACKEND)
 			std::make_pair(
-				fcppt::string{
-					FCPPT_TEXT("X11")
+				std::string{
+					"X11"
 				},
 				try_create<
 					awl::backends::x11::system::original_object
@@ -137,8 +148,8 @@ get_backends(
 #endif
 #if defined(AWL_WINDOWS_BACKEND)
 			std::make_pair(
-				fcppt::string{
-					FCPPT_TEXT("Windows")
+				std::string{
+					"Windows"
 				},
 				try_create<
 					awl::backends::windows::system::original_object
@@ -150,8 +161,8 @@ get_backends(
 #endif
 #if defined(AWL_SDL_BACKEND)
 			std::make_pair(
-				fcppt::string{
-					FCPPT_TEXT("SDL")
+				std::string{
+					"SDL"
 				},
 				try_create<
 					awl::backends::sdl::system::original_object
@@ -177,6 +188,113 @@ get_backends(
 		};
 }
 
+FCPPT_MAKE_STRONG_TYPEDEF(
+	std::string,
+	backend_name
+);
+
+function_type
+create_from_env(
+	backend_list const &_backend_list
+)
+{
+	return
+		function_type{
+			[
+				&_backend_list
+			]()
+			->
+			either_type
+			{
+				return
+					fcppt::either::bind(
+						fcppt::either::bind(
+							fcppt::either::from_optional(
+								fcppt::optional::map(
+									fcppt::getenv(
+										"AWL_BACKEND"
+									),
+									[](
+										std::string &&_name
+									)
+									{
+										return
+											backend_name{
+												std::move(
+													_name
+												)
+											};
+									}
+								),
+								[]{
+									return
+										fcppt::string{
+											FCPPT_TEXT("AWL_BACKEND not set.")
+										};
+								}
+							),
+							[
+								&_backend_list
+							](
+								backend_name const &_backend
+							)
+							{
+								return
+									fcppt::either::from_optional(
+										fcppt::algorithm::find_by_opt(
+											_backend_list,
+											[
+												&_backend
+											](
+												std::pair<
+													std::string,
+													function_type
+												> const &_element
+											)
+											{
+												return
+													fcppt::optional::make_if(
+														_element.first
+														==
+														_backend.get(),
+														[
+															&_element
+														]{
+															return
+																_element.second;
+														}
+													);
+											}
+										),
+										[
+											&_backend
+										]{
+											return
+												fcppt::string{
+													FCPPT_TEXT("Backend ")
+													+
+													fcppt::from_std_string(
+														_backend.get()
+													)
+													+
+													FCPPT_TEXT("not available!")
+												};
+										}
+									);
+							}
+						),
+						[](
+							function_type const &_function
+						)
+						{
+							return
+								_function();
+						}
+					);
+			}
+		};
+}
+
 }
 
 awl::system::object_unique_ptr
@@ -193,22 +311,31 @@ awl::system::create(
 	return
 		fcppt::either::to_exception(
 			fcppt::either::first_success(
-				fcppt::algorithm::map<
+				fcppt::container::join(
 					std::vector<
 						function_type
-					>
-				>(
-					backends,
-					[](
-						std::pair<
-							fcppt::string,
+					>{
+						create_from_env(
+							backends
+						)
+					},
+					fcppt::algorithm::map<
+						std::vector<
 							function_type
-						> const &_backend
+						>
+					>(
+						backends,
+						[](
+							std::pair<
+								fcppt::string,
+								function_type
+							> const &_backend
+						)
+						{
+							return
+								_backend.second;
+						}
 					)
-					{
-						return
-							_backend.second;
-					}
 				)
 			),
 			[](

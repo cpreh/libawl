@@ -20,6 +20,7 @@
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/log/context_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL.h>
@@ -27,7 +28,9 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::sdl::system::original_object::original_object()
+awl::backends::sdl::system::original_object::original_object(
+	fcppt::log::context &
+)
 :
 	awl::backends::sdl::system::object{},
 	init_{

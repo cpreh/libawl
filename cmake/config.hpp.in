@@ -5,6 +5,7 @@
 #cmakedefine AWL_X11_BACKEND
 #cmakedefine AWL_WAYLAND_BACKEND
 #cmakedefine AWL_LINUX_BACKEND
+#cmakedefine AWL_SDL_BACKEND
 
 
 #endif
