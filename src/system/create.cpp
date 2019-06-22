@@ -173,7 +173,7 @@ get_backends(
 			,
 #endif
 			std::make_pair(
-				fcppt::string{},
+				std::string{},
 				function_type{
 					[]{
 						return
@@ -327,7 +327,7 @@ awl::system::create(
 						backends,
 						[](
 							std::pair<
-								fcppt::string,
+								std::string,
 								function_type
 							> const &_backend
 						)
