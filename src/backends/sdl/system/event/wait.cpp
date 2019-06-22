@@ -15,7 +15,7 @@ awl::backends::sdl::system::event::wait()
 		SDL_WaitEvent(
 			&result
 		)
-		!=
+		==
 		0
 	)
 		throw
