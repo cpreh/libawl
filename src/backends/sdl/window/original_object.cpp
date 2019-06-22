@@ -95,6 +95,10 @@ awl::backends::sdl::window::original_object::original_object(
 			>(
 				_parameters.visual()
 			).flags().get()
+			|
+			SDL_WINDOW_HIDDEN
+			|
+			SDL_WINDOW_RESIZABLE
 		)
 	}
 {
