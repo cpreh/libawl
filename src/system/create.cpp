@@ -1,4 +1,5 @@
 #include <awl/exception.hpp>
+#include <awl/impl/log_name.hpp>
 #include <awl/system/create.hpp>
 #include <awl/system/object.hpp>
 #include <awl/system/object_unique_ptr.hpp>
@@ -20,10 +21,12 @@
 #include <fcppt/getenv.hpp>
 #include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/algorithm/contains_if.hpp>
 #include <fcppt/algorithm/find_by_opt.hpp>
 #include <fcppt/algorithm/join_strings.hpp>
 #include <fcppt/algorithm/map.hpp>
@@ -36,8 +39,15 @@
 #include <fcppt/either/to_exception.hpp>
 #include <fcppt/either/try_call.hpp>
 #include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/log/object.hpp>
+#include <fcppt/log/out.hpp>
+#include <fcppt/log/parameters.hpp>
+#include <fcppt/log/format/optional_function.hpp>
 #include <fcppt/optional/make_if.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <string>
 #include <utility>
@@ -193,6 +203,30 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	backend_name
 );
 
+fcppt::optional::object<
+	backend_name
+>
+env_backend()
+{
+	return
+		fcppt::optional::map(
+			fcppt::getenv(
+				"AWL_BACKEND"
+			),
+			[](
+				std::string &&_name
+			)
+			{
+				return
+					backend_name{
+						std::move(
+							_name
+						)
+					};
+			}
+		);
+}
+
 function_type
 create_from_env(
 	backend_list const &_backend_list
@@ -210,22 +244,7 @@ create_from_env(
 					fcppt::either::bind(
 						fcppt::either::bind(
 							fcppt::either::from_optional(
-								fcppt::optional::map(
-									fcppt::getenv(
-										"AWL_BACKEND"
-									),
-									[](
-										std::string &&_name
-									)
-									{
-										return
-											backend_name{
-												std::move(
-													_name
-												)
-											};
-									}
-								),
+								env_backend(),
 								[]{
 									return
 										fcppt::string{
@@ -307,6 +326,61 @@ awl::system::create(
 			_log_context
 		)
 	};
+
+	fcppt::optional::maybe_void(
+		env_backend(),
+		[
+			&_log_context,
+			&backends
+		](
+			backend_name const &_backend
+		)
+		{
+			if(
+				fcppt::not_(
+					fcppt::algorithm::contains_if(
+						backends,
+						[
+							&_backend
+						](
+							std::pair<
+								std::string,
+								function_type
+							> const &_cur
+						)
+						{
+							return
+								_cur.first
+								==
+								_backend.get();
+						}
+					)
+				)
+			)
+			{
+				fcppt::log::object log{
+					_log_context,
+					fcppt::log::parameters{
+						awl::impl::log_name(),
+						fcppt::log::format::optional_function{}
+					}
+				};
+
+				FCPPT_LOG_ERROR(
+					log,
+					fcppt::log::out
+						<<
+						FCPPT_TEXT("AWL_BACKEND ")
+						<<
+						fcppt::from_std_string(
+							_backend.get()
+						)
+						<<
+						FCPPT_TEXT(" not available!")
+				)
+			}
+		}
+	);
 
 	return
 		fcppt::either::to_exception(
