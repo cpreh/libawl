@@ -39,6 +39,11 @@ public:
 	AWL_DETAIL_SYMBOL
 	awl::backends::sdl::visual::flags
 	flags() const;
+
+	AWL_DETAIL_SYMBOL
+	virtual
+	void
+	apply() const;
 private:
 	awl::backends::sdl::visual::flags const flags_;
 };

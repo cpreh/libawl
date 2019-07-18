@@ -17,9 +17,10 @@
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
-#include <awl/window/parameters_fwd.hpp>
+#include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/cast/dynamic_exn.hpp>
 #include <fcppt/log/context_fwd.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -59,6 +60,14 @@ awl::backends::sdl::system::original_object::create_window(
 	awl::window::parameters const &_parameters
 )
 {
+	// TODO: Move this inside the window constructor?
+
+	fcppt::cast::dynamic_exn<
+		awl::backends::sdl::visual::object const &
+	>(
+		_parameters.visual()
+	).apply();
+
 	return
 		fcppt::unique_ptr_to_base<
 			awl::window::object

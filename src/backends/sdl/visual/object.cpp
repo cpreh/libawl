@@ -24,3 +24,8 @@ awl::backends::sdl::visual::object::flags() const
 	return
 		this->flags_;
 }
+
+void
+awl::backends::sdl::visual::object::apply() const
+{
+}
