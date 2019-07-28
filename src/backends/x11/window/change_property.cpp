@@ -12,9 +12,9 @@
 #include <fcppt/range/size.hpp>
 #include <fcppt/variant/apply.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <limits>
 #include <X11/X.h>
 #include <X11/Xlib.h>
+#include <limits>
 #include <fcppt/config/external_end.hpp>
 
 
