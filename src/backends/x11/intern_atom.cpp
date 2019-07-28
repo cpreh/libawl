@@ -19,10 +19,11 @@ awl::backends::x11::intern_atom(
 		::XInternAtom(
 			_display.get(),
 			_name.c_str(),
-			False // only if exists
+			True // Create the atom if it does not exist
 		)
 	);
 
+	// This should not happen
 	if(
 		ret
 		==
