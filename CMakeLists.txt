@@ -397,6 +397,7 @@ set(
 	src/backends/x11/window/atoms.cpp
 	src/backends/x11/window/attributes.cpp
 	src/backends/x11/window/base.cpp
+	src/backends/x11/window/change_property.cpp
 	src/backends/x11/window/class_hint.cpp
 	src/backends/x11/window/create.cpp
 	src/backends/x11/window/event/change_mask.cpp
@@ -427,6 +428,7 @@ set(
 	include/awl/backends/x11/Xlib.hpp
 	include/awl/backends/x11/Xutil.hpp
 	include/awl/backends/x11/atom.hpp
+	include/awl/backends/x11/atom_fwd.hpp
 	include/awl/backends/x11/colormap.hpp
 	include/awl/backends/x11/colormap_fwd.hpp
 	include/awl/backends/x11/cursor/background_color.hpp
@@ -499,6 +501,9 @@ set(
 	include/awl/backends/x11/window/base.hpp
 	include/awl/backends/x11/window/base_fwd.hpp
 	include/awl/backends/x11/window/base_unique_ptr.hpp
+	include/awl/backends/x11/window/basic_property_data.hpp
+	include/awl/backends/x11/window/basic_property_data_fwd.hpp
+	include/awl/backends/x11/window/change_property.hpp
 	include/awl/backends/x11/window/change_wm_protocols.hpp
 	include/awl/backends/x11/window/class_hint.hpp
 	include/awl/backends/x11/window/class_hint_fwd.hpp
@@ -541,6 +546,14 @@ set(
 	include/awl/backends/x11/window/original_class_hint.hpp
 	include/awl/backends/x11/window/original_object.hpp
 	include/awl/backends/x11/window/original_object_fwd.hpp
+	include/awl/backends/x11/window/property.hpp
+	include/awl/backends/x11/window/property_data.hpp
+	include/awl/backends/x11/window/property_data_fwd.hpp
+	include/awl/backends/x11/window/property_fwd.hpp
+	include/awl/backends/x11/window/property_mode.hpp
+	include/awl/backends/x11/window/property_mode_fwd.hpp
+	include/awl/backends/x11/window/property_type.hpp
+	include/awl/backends/x11/window/property_type_fwd.hpp
 	include/awl/backends/x11/window/rect.hpp
 	include/awl/backends/x11/window/rect_fwd.hpp
 	include/awl/backends/x11/window/root.hpp
