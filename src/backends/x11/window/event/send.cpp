@@ -1,6 +1,6 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/display.hpp>
-#include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/send.hpp>
@@ -12,9 +12,9 @@
 
 void
 awl::backends::x11::window::event::send(
-	x11::window::object const &_window,
-	x11::window::event::mask const _mask,
-	x11::window::event::object const &_event
+	awl::backends::x11::window::base const &_window,
+	awl::backends::x11::window::event::mask const _mask,
+	awl::backends::x11::window::event::object const &_event
 )
 {
 	if(
