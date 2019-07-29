@@ -400,6 +400,7 @@ set(
 	src/backends/x11/window/change_property.cpp
 	src/backends/x11/window/class_hint.cpp
 	src/backends/x11/window/create.cpp
+	src/backends/x11/window/delete_property.cpp
 	src/backends/x11/window/event/change_mask.cpp
 	src/backends/x11/window/event/filter.cpp
 	src/backends/x11/window/event/generic.cpp
@@ -512,6 +513,7 @@ set(
 	include/awl/backends/x11/window/const_optional_object_ref.hpp
 	include/awl/backends/x11/window/const_optional_object_ref_fwd.hpp
 	include/awl/backends/x11/window/create.hpp
+	include/awl/backends/x11/window/delete_property.hpp
 	include/awl/backends/x11/window/event/atom_vector.hpp
 	include/awl/backends/x11/window/event/change_mask.hpp
 	include/awl/backends/x11/window/event/filter.hpp
