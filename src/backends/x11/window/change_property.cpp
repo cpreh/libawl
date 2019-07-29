@@ -14,7 +14,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
 #include <X11/Xlib.h>
-#include <limits>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -47,6 +46,48 @@ convert_mode(
 template<
 	typename Type
 >
+struct convert_format_impl;
+
+template<>
+struct convert_format_impl<
+	char
+>
+{
+	static constexpr const int value{8};
+};
+
+template<>
+struct convert_format_impl<
+	short
+>
+{
+	static constexpr const int value{16};
+};
+
+template<>
+struct convert_format_impl<
+	long
+>
+{
+	static constexpr const int value{32};
+};
+
+template<
+	typename Type
+>
+constexpr
+int
+convert_format()
+{
+	return
+		convert_format_impl<
+			Type
+		>::value;
+}
+
+template<
+	typename Type
+>
 void
 change_property_impl(
 	awl::backends::x11::window::base const &_window,
@@ -64,9 +105,9 @@ change_property_impl(
 		_window.get(),
 		_name.get().get(),
 		_type.get().get(),
-		std::numeric_limits<
+		convert_format<
 			Type
-		>::digits,
+		>(),
 		convert_mode(
 			_mode
 		),

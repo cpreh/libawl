@@ -3,9 +3,6 @@
 
 #include <awl/backends/x11/window/basic_property_data_fwd.hpp>
 #include <fcppt/variant/variadic_fwd.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <cstdint>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace awl
@@ -20,13 +17,13 @@ namespace window
 typedef
 fcppt::variant::variadic<
 	awl::backends::x11::window::basic_property_data<
-		std::uint8_t
+		char
 	>,
 	awl::backends::x11::window::basic_property_data<
-		std::uint16_t
+		short
 	>,
 	awl::backends::x11::window::basic_property_data<
-		std::uint32_t
+		long
 	>
 >
 property_data;
