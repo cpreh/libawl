@@ -13,11 +13,6 @@
 #include <awl/timer/period.hpp>
 #include <awl/timer/setting.hpp>
 #include <awl/timer/unique_ptr.hpp>
-#include <awl/visual/object.hpp>
-#include <awl/visual/object_unique_ptr.hpp>
-#include <awl/window/object.hpp>
-#include <awl/window/object_unique_ptr.hpp>
-#include <awl/window/parameters.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
@@ -43,35 +38,15 @@ try
 		fcppt::log::default_level_streams()
 	};
 
-	awl::system::object_unique_ptr const window_system(
+	awl::system::object_unique_ptr const system{
 		awl::system::create(
 			log_context
 		)
-	);
+	};
 
-	awl::visual::object_unique_ptr const visual(
-		window_system->default_visual()
-	);
-
-	awl::window::object_unique_ptr const window(
-		window_system->create_window(
-			awl::window::parameters(
-				*visual
-			)
-			.title(
-				FCPPT_TEXT("awltest")
-			)
-			.class_name(
-				FCPPT_TEXT("awltest")
-			)
-		)
-	);
-
-	window->show();
-
-	awl::system::event::processor &system_processor(
-		window_system->processor()
-	);
+	awl::system::event::processor &system_processor{
+		system->processor()
+	};
 
 	awl::timer::unique_ptr const timer{
 		system_processor.create_timer(
