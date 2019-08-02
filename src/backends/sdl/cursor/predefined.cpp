@@ -3,7 +3,9 @@
 #include <awl/backends/sdl/cursor/object.hpp>
 #include <awl/backends/sdl/cursor/predefined.hpp>
 #include <awl/cursor/type.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/optional/make.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_mouse.h>
 #include <fcppt/config/external_end.hpp>
@@ -40,9 +42,13 @@ awl::backends::sdl::cursor::predefined::~predefined()
 	);
 }
 
-SDL_Cursor *
+awl::backends::sdl::cursor::object::cursor_ref
 awl::backends::sdl::cursor::predefined::get() const
 {
 	return
-		this->impl_;
+		fcppt::optional::make(
+			fcppt::make_ref(
+				*this->impl_
+			)
+		);
 }

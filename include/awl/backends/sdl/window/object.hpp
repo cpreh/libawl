@@ -49,6 +49,10 @@ public:
 	virtual
 	SDL_Window &
 	get() const = 0;
+
+	virtual
+	void
+	set_cursor() = 0;
 };
 
 }

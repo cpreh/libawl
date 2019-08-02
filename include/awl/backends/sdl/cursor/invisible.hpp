@@ -30,7 +30,11 @@ public:
 	AWL_DETAIL_SYMBOL
 	~invisible()
 	override;
-private:
+
+	AWL_DETAIL_SYMBOL
+	awl::backends::sdl::cursor::object::cursor_ref
+	get() const
+	override;
 };
 
 }

@@ -5,7 +5,11 @@
 #include <awl/cursor/object.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
+#include <fcppt/optional/reference_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <SDL_mouse.h>
+#include <fcppt/config/external_end.hpp>
 
 
 namespace awl
@@ -31,6 +35,16 @@ public:
 	AWL_DETAIL_SYMBOL
 	~object()
 	override;
+
+	typedef
+	fcppt::optional::reference<
+		SDL_Cursor
+	>
+	cursor_ref;
+
+	virtual
+	cursor_ref
+	get() const = 0;
 };
 
 }

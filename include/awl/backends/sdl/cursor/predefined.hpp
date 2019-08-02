@@ -39,8 +39,9 @@ public:
 	override;
 
 	AWL_DETAIL_SYMBOL
-	SDL_Cursor *
-	get() const;
+	awl::backends::sdl::cursor::object::cursor_ref
+	get() const
+	override;
 private:
 	SDL_Cursor *const impl_;
 };

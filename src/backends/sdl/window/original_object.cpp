@@ -1,19 +1,25 @@
+#include <awl/backends/sdl/cursor/object.hpp>
 #include <awl/backends/sdl/visual/object.hpp>
 #include <awl/backends/sdl/window/object.hpp>
 #include <awl/backends/sdl/window/original_object.hpp>
 #include <awl/backends/sdl/window/set_object.hpp>
+#include <awl/cursor/object.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/parameters.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/reference_to_base.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/dynamic_exn.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/optional/from.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <SDL_mouse.h>
 #include <SDL_video.h>
 #include <string>
 #include <fcppt/config/external_end.hpp>
@@ -28,7 +34,24 @@ awl::backends::sdl::window::original_object::original_object(
 		_parameters.visual()
 	},
 	cursor_{
-		_parameters.cursor()
+		fcppt::optional::map(
+			_parameters.cursor(),
+			[](
+				fcppt::reference<
+					awl::cursor::object const
+				> const _cursor
+			)
+			{
+				return
+					fcppt::make_cref(
+						fcppt::cast::dynamic_exn<
+							awl::backends::sdl::cursor::object const &
+						>(
+							_cursor.get()
+						)
+					);
+			}
+		)
 	},
 	impl_{
 		SDL_CreateWindow(
@@ -104,15 +127,8 @@ awl::backends::sdl::window::original_object::original_object(
 {
 	awl::backends::sdl::window::set_object(
 		this->get(),
-		fcppt::reference_to_base<
-			awl::window::object
-		>(
-			fcppt::make_ref(
-				*this
-			)
-		)
+		*this
 	);
-	// TODO: Set cursor when the window becomes active?
 }
 
 awl::backends::sdl::window::original_object::~original_object()
@@ -131,4 +147,41 @@ awl::backends::sdl::window::original_object::visual() const
 {
 	return
 		this->visual_;
+}
+
+void
+awl::backends::sdl::window::original_object::set_cursor()
+{
+	fcppt::optional::maybe_void(
+		this->cursor_,
+		[](
+			fcppt::reference<
+				awl::backends::sdl::cursor::object const
+			> const _cursor
+		)
+		{
+			fcppt::optional::maybe(
+				_cursor.get().get(),
+				[]{
+					SDL_ShowCursor(
+						0
+					);
+				},
+				[](
+					fcppt::reference<
+						SDL_Cursor
+					> const _sdl_cursor
+				)
+				{
+					SDL_ShowCursor(
+						1
+					);
+
+					SDL_SetCursor(
+						&_sdl_cursor.get()
+					);
+				}
+			);
+		}
+	);
 }

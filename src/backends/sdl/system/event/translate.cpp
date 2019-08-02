@@ -4,11 +4,13 @@
 #include <awl/backends/sdl/timer/object.hpp>
 #include <awl/backends/sdl/window/from_id.hpp>
 #include <awl/backends/sdl/window/get_object.hpp>
+#include <awl/backends/sdl/window/object.hpp>
 #include <awl/event/base.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/timer/event.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/window/dim.hpp>
+#include <awl/window/object.hpp>
 #include <awl/window/reference.hpp>
 #include <awl/window/event/close.hpp>
 #include <awl/window/event/hide.hpp>
@@ -89,9 +91,19 @@ translate_opt(
 			)
 		};
 
-		awl::window::reference const window{
+		awl::backends::sdl::window::object &sdl_window_ref{
 			awl::backends::sdl::window::get_object(
 				sdl_window.get()
+			)
+		};
+
+		awl::window::reference const window{
+			fcppt::reference_to_base<
+				awl::window::object
+			>(
+				fcppt::make_ref(
+					sdl_window_ref
+				)
 			)
 		};
 
@@ -159,6 +171,10 @@ translate_opt(
 						)
 					)
 				);
+		case SDL_WINDOWEVENT_ENTER:
+			sdl_window_ref.set_cursor();
+			break;
+
 		// TODO: Add destroy event
 		}
 	}
