@@ -8,7 +8,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -26,7 +26,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	scoped_output(
 		fcppt::io::ostream &,
-		boost::filesystem::path const &
+		std::filesystem::path const &
 	);
 
 	AWL_DETAIL_SYMBOL

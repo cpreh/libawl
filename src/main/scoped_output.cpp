@@ -3,13 +3,13 @@
 #include <awl/main/scoped_output.hpp>
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
 
 awl::main::scoped_output::scoped_output(
 	fcppt::io::ostream &_stream,
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 )
 :
 	impl_(

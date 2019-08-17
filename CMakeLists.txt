@@ -18,12 +18,6 @@ set_property(
 	ON
 )
 
-set(
-	NEEDED_BOOST_LIBS
-	filesystem
-	system
-)
-
 find_package(
 	fcppt
 	REQUIRED
@@ -53,13 +47,6 @@ list(
 find_package(
 	Brigand
 	REQUIRED
-)
-
-find_package(
-	Boost 1.47.0
-	REQUIRED
-	COMPONENTS
-	"${NEEDED_BOOST_LIBS}"
 )
 
 include(
@@ -1211,7 +1198,6 @@ function(
 		PUBLIC_INCLUDES
 		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_BINARY_DIR}/include>"
 		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include>"
-		${Boost_INCLUDE_DIRS}
 	)
 
 	target_include_directories(
@@ -1271,8 +1257,7 @@ function(
 		target_link_libraries(
 			${TARGETNAME}
 			PRIVATE
-			${Boost_FILESYSTEM_LIBRARIES}
-			${Boost_SYSTEM_LIBRARIES}
+			${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 			${fcppt_core_TARGET}
 			${fcppt_log_TARGET}
 		)

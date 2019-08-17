@@ -5,7 +5,7 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <fcppt/config/external_end.hpp>
 #include <fcppt/config/platform.hpp>
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
@@ -19,10 +19,10 @@ awl::main::output_unique_ptr
 awl::main::create_output(
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
 	fcppt::io::ostream &_stream,
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 #else
 	fcppt::io::ostream &,
-	boost::filesystem::path const &
+	std::filesystem::path const &
 #endif
 )
 {

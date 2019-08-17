@@ -5,14 +5,14 @@
 #include <fcppt/filesystem/open_exn.hpp>
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <ios>
 #include <fcppt/config/external_end.hpp>
 
 
 awl::backends::windows::main::output::output(
 	fcppt::io::ostream &_stream,
-	boost::filesystem::path const &_path
+	std::filesystem::path const &_path
 )
 :
 	awl::main::output(),
