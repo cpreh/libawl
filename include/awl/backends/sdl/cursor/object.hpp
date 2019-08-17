@@ -5,8 +5,8 @@
 #include <awl/cursor/object.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/optional/reference_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
+#include <fcppt/optional/reference_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_mouse.h>
 #include <fcppt/config/external_end.hpp>
