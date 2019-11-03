@@ -45,7 +45,7 @@ list(
 )
 
 find_package(
-	Brigand
+	Metal
 	REQUIRED
 )
 
@@ -1267,10 +1267,10 @@ function(
 		if(
 			AWL_X11_BACKEND
 		)
-			target_include_directories(
+			target_link_libraries(
 				${TARGETNAME}
 				PRIVATE
-				${BRIGAND_INCLUDE_DIRS}
+				Metal
 			)
 
 			fcppt_utils_link_imported_targets(
