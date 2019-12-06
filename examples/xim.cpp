@@ -45,11 +45,11 @@
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal/list/list.hpp>
 #include <clocale>
 #include <cstdlib>
 #include <exception>
 #include <iostream>
+#include <metal.hpp>
 #include <ostream>
 #include <stdexcept>
 #include <string>
