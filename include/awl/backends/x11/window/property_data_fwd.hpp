@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_PROPERTY_DATA_FWD_HPP_INCLUDED
 
 #include <awl/backends/x11/window/basic_property_data_fwd.hpp>
-#include <fcppt/variant/variadic_fwd.hpp>
+#include <fcppt/variant/object_fwd.hpp>
 
 
 namespace awl
@@ -15,7 +15,7 @@ namespace window
 {
 
 typedef
-fcppt::variant::variadic<
+fcppt::variant::object<
 	awl::backends::x11::window::basic_property_data<
 		char
 	>,

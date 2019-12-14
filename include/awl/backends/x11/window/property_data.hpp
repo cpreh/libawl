@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/window/basic_property_data.hpp>
 #include <awl/backends/x11/window/property_data_fwd.hpp>
-#include <fcppt/variant/variadic.hpp>
+#include <fcppt/variant/object_impl.hpp>
 
 
 #endif
