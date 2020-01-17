@@ -1,8 +1,10 @@
+#include <awl/config.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
-#include <awl/config.hpp>
 #if defined(AWL_X11_BACKEND) || defined(AWL_WAYLAND_BACKEND)
+#include <fcppt/config/external_begin.hpp>
 #include <cstdlib>
+#include <fcppt/config/external_end.hpp>
 #endif
 
 

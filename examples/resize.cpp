@@ -29,8 +29,8 @@
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <cstdlib>
 #include <metal.hpp>
+#include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
 

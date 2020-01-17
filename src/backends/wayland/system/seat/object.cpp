@@ -17,10 +17,10 @@
 #include <fcppt/container/bitfield/operators.hpp>
 #include <fcppt/optional/make.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <cstdint>
 #include <stdint.h>
-#include <utility>
 #include <wayland-client-protocol.h>
+#include <cstdint>
+#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 

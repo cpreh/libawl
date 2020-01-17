@@ -60,11 +60,11 @@
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <stdint.h>
+#include <wayland-client-core.h>
+#include <wayland-client-protocol.h>
 #include <string>
 #include <type_traits>
 #include <utility>
-#include <wayland-client-core.h>
-#include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
 

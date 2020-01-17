@@ -1,8 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if [[ $1 == 'run' ]]; then
-	shift
-	prettify_includes.py --reserved-prefix awl --reserved-prefix fcppt "$@" 2>>/tmp/prettify_errors
-else
-	find src include examples  \( \( -name '*.hpp' -o -name '*.cpp' \) \) | xargs $0 run
-fi
+ARGS=(--library awl --library fcppt)
+
+find examples include src \( \( -name '*.hpp' -o -name '*.cpp' \) \) -exec update_headers.sh '{}' "${ARGS[@]}" \;

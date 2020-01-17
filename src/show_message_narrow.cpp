@@ -1,15 +1,17 @@
 #include <awl/show_message_narrow.hpp>
+#include <fcppt/config/platform.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <string>
 #include <fcppt/config/external_end.hpp>
-#include <fcppt/config/platform.hpp>
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
 #include <awl/backends/windows/message_box_narrow.hpp>
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/window/const_optional_object_ref.hpp>
 #else
+#include <fcppt/config/external_begin.hpp>
 #include <iostream>
 #include <ostream>
+#include <fcppt/config/external_end.hpp>
 #endif
 
 

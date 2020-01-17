@@ -3,8 +3,8 @@
 #include <awl/backends/posix/fd.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <sys/epoll.h>
 #include <unistd.h>
+#include <sys/epoll.h>
 #include <fcppt/config/external_end.hpp>
 
 

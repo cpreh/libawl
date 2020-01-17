@@ -1,9 +1,9 @@
+#include <awl/config.hpp>
 #include <awl/exception.hpp>
 #include <awl/impl/log_name.hpp>
 #include <awl/system/create.hpp>
 #include <awl/system/object.hpp>
 #include <awl/system/object_unique_ptr.hpp>
-#include <awl/config.hpp>
 #if defined(AWL_X11_BACKEND)
 #include <awl/backends/x11/system/original_object.hpp>
 #endif
@@ -16,8 +16,8 @@
 #if defined(AWL_SDL_BACKEND)
 #include <awl/backends/sdl/system/original_object.hpp>
 #endif
-#include <fcppt/function_impl.hpp>
 #include <fcppt/from_std_string.hpp>
+#include <fcppt/function_impl.hpp>
 #include <fcppt/getenv.hpp>
 #include <fcppt/make_strong_typedef.hpp>
 #include <fcppt/make_unique_ptr.hpp>
@@ -45,8 +45,8 @@
 #include <fcppt/log/parameters.hpp>
 #include <fcppt/log/format/optional_function.hpp>
 #include <fcppt/optional/make_if.hpp>
-#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <string>
