@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-ARGS=(--library awl --library fcppt)
+LIBS=(--library awl --library fcppt)
+DIRS=(examples include src)
 
-find examples include src \( \( -name '*.hpp' -o -name '*.cpp' \) \) -exec update_headers.sh '{}' "${ARGS[@]}" \;
+prettify_includes "${LIBS[@]}" "${DIRS[@]}"
