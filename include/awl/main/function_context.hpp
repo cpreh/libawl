@@ -19,10 +19,12 @@ public:
 		fcppt::args_char **
 	);
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	int
 	argc() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	fcppt::args_char **
 	argv() const;

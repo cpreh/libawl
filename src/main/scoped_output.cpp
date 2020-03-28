@@ -22,5 +22,4 @@ awl::main::scoped_output::scoped_output(
 }
 
 awl::main::scoped_output::~scoped_output()
-{
-}
+= default;

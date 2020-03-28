@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_SDL_SYSTEM_INIT_HPP_INCLUDED
 
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
@@ -19,7 +19,7 @@ namespace system
 
 class init
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		init
 	);
 public:

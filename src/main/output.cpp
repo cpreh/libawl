@@ -2,9 +2,7 @@
 
 
 awl::main::output::output()
-{
-}
+= default;
 
 awl::main::output::~output()
-{
-}
+= default;

@@ -10,11 +10,12 @@ namespace awl
 namespace visual
 {
 
-typedef
+using
+object_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::visual::object
->
-object_unique_ptr;
+>;
 
 }
 }

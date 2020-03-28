@@ -4,7 +4,7 @@
 #include <awl/event/concrete_connection_fwd.hpp>
 #include <awl/event/connection.hpp>
 #include <awl/event/connection_function.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -16,7 +16,7 @@ class concrete_connection
 :
 	public awl::event::connection
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		concrete_connection
 	);
 public:

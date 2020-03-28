@@ -10,13 +10,14 @@ namespace awl
 namespace main
 {
 
-typedef
+using
+loop_function
+=
 fcppt::function<
 	void (
 		awl::event::base const &
 	)
->
-loop_function;
+>;
 
 }
 }

@@ -9,5 +9,4 @@ awl::main::dummy_output::dummy_output()
 }
 
 awl::main::dummy_output::~dummy_output()
-{
-}
+= default;

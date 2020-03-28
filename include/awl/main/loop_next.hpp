@@ -15,7 +15,7 @@ namespace main
 AWL_DETAIL_SYMBOL
 awl::main::exit_code
 loop_next(
-	awl::system::event::processor &,
+	awl::system::event::processor &, // NOLINT(google-runtime-references)
 	awl::main::loop_function const &
 );
 

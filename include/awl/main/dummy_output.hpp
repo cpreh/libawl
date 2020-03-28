@@ -3,7 +3,7 @@
 
 #include <awl/detail/symbol.hpp>
 #include <awl/main/output.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -15,7 +15,7 @@ class dummy_output
 :
 	public awl::main::output
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		dummy_output
 	);
 public:

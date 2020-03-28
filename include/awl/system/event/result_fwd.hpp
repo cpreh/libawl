@@ -13,12 +13,13 @@ namespace system
 namespace event
 {
 
-typedef
+using
+result
+=
 fcppt::either::object<
 	awl::main::exit_code,
 	awl::event::container
->
-result;
+>;
 
 }
 }

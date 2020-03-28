@@ -4,7 +4,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/main/output_fwd.hpp>
 #include <awl/main/scoped_output_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -19,7 +19,7 @@ namespace main
 
 class scoped_output
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		scoped_output
 	);
 public:

@@ -10,11 +10,12 @@ namespace awl
 namespace timer
 {
 
-typedef
+using
+unique_ptr
+=
 fcppt::unique_ptr<
 	awl::timer::object
->
-unique_ptr;
+>;
 
 }
 }

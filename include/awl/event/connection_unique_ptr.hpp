@@ -10,11 +10,12 @@ namespace awl
 namespace event
 {
 
-typedef
+using
+connection_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::event::connection
->
-connection_unique_ptr;
+>;
 
 }
 }

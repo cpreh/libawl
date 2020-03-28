@@ -2,9 +2,7 @@
 
 
 awl::cursor::object::object()
-{
-}
+= default;
 
 awl::cursor::object::~object()
-{
-}
+= default;

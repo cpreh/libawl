@@ -10,11 +10,12 @@ namespace awl
 namespace system
 {
 
-typedef
+using
+object_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::system::object
->
-object_unique_ptr;
+>;
 
 }
 }

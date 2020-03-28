@@ -3,7 +3,7 @@
 
 #include <awl/detail/symbol.hpp>
 #include <awl/event/connection_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -13,7 +13,7 @@ namespace event
 
 class connection
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		connection
 	);
 protected:

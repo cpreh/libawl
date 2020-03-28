@@ -58,25 +58,27 @@
 namespace
 {
 
-typedef
+using
+either_type
+=
 fcppt::either::object<
 	fcppt::string,
 	awl::system::object_unique_ptr
->
-either_type;
+>;
 
-typedef
+using
+function_type
+=
 fcppt::function<
 	either_type ()
->
-function_type;
+>;
 
 template<
 	typename Result
 >
 function_type
 try_create(
-	fcppt::log::context &_log_context
+	fcppt::log::context &_log_context // NOLINT(google-runtime-references)
 )
 {
 	return
@@ -114,18 +116,19 @@ try_create(
 		};
 }
 
-typedef
+using
+backend_list
+=
 std::vector<
 	std::pair<
 		std::string,
 		function_type
 	>
->
-backend_list;
+>;
 
 backend_list
 get_backends(
-	fcppt::log::context &_log_context
+	fcppt::log::context &_log_context // NOLINT(google-runtime-references)
 )
 {
 	return

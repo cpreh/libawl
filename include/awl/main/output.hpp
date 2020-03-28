@@ -3,7 +3,7 @@
 
 #include <awl/detail/symbol.hpp>
 #include <awl/main/output_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/symbol/class.hpp>
 
 
@@ -14,7 +14,7 @@ namespace main
 
 class FCPPT_SYMBOL_CLASS output
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		output
 	);
 protected:

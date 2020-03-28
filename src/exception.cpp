@@ -39,6 +39,7 @@ awl::exception::exception(
 awl::exception::exception(
 	exception &&
 )
+noexcept
 = default;
 
 awl::exception &
@@ -51,8 +52,9 @@ awl::exception &
 awl::exception::operator=(
 	exception &&
 )
+noexcept
 = default;
 
-awl::exception::~exception() noexcept
-{
-}
+awl::exception::~exception()
+noexcept
+= default;
