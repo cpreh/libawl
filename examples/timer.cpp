@@ -14,6 +14,7 @@
 #include <awl/timer/setting.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/io/cout.hpp>
@@ -40,7 +41,9 @@ try
 
 	awl::system::object_unique_ptr const system{
 		awl::system::create(
-			log_context
+			fcppt::make_ref(
+				log_context
+			)
 		)
 	};
 

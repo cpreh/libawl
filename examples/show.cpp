@@ -41,7 +41,9 @@ try
 
 	awl::system::object_unique_ptr const system(
 		awl::system::create(
-			log_context
+			fcppt::make_ref(
+				log_context
+			)
 		)
 	);
 

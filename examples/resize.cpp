@@ -15,6 +15,7 @@
 #include <awl/window/event/destroy.hpp>
 #include <awl/window/event/resize.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/dynamic_fun.hpp>
@@ -47,7 +48,9 @@ try
 
 	awl::system::object_unique_ptr const window_system(
 		awl::system::create(
-			log_context
+			fcppt::make_ref(
+				log_context
+			)
 		)
 	);
 

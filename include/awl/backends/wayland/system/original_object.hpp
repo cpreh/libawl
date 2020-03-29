@@ -14,7 +14,7 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
 
@@ -38,7 +38,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	explicit
 	original_object(
-		fcppt::log::context &
+		fcppt::log::context_reference
 	);
 
 	AWL_DETAIL_SYMBOL

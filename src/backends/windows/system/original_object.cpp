@@ -27,7 +27,7 @@
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -36,7 +36,7 @@
 
 
 awl::backends::windows::system::original_object::original_object(
-	fcppt::log::context &
+	fcppt::log::context_reference
 )
 :
 	awl::backends::windows::system::object(),

@@ -3,7 +3,7 @@
 
 #include <awl/detail/symbol.hpp>
 #include <awl/system/object_unique_ptr.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference_fwd.hpp>
 
 
 namespace awl
@@ -14,7 +14,7 @@ namespace system
 AWL_DETAIL_SYMBOL
 awl::system::object_unique_ptr
 create(
-	fcppt::log::context &
+	fcppt::log::context_reference
 );
 
 }

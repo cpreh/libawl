@@ -21,7 +21,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/dynamic_exn.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL.h>
@@ -30,7 +30,7 @@
 
 
 awl::backends::sdl::system::original_object::original_object(
-	fcppt::log::context &
+	fcppt::log::context_reference
 )
 :
 	awl::backends::sdl::system::object{},

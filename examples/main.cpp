@@ -7,6 +7,7 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/io/cerr.hpp>
 #include <fcppt/log/context.hpp>
@@ -33,7 +34,9 @@ try
 
 	awl::system::object_unique_ptr const window_system(
 		awl::system::create(
-			log_context
+			fcppt::make_ref(
+				log_context
+			)
 		)
 	);
 

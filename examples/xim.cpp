@@ -26,6 +26,7 @@
 #include <awl/window/event/close.hpp>
 #include <awl/window/event/destroy.hpp>
 #include <fcppt/exception.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
@@ -72,7 +73,9 @@ try
 
 	awl::system::object_unique_ptr const awl_system{
 		awl::system::create(
-			log_context
+			fcppt::make_ref(
+				log_context
+			)
 		)
 	};
 

@@ -38,7 +38,7 @@
 #include <fcppt/either/object.hpp>
 #include <fcppt/either/to_exception.hpp>
 #include <fcppt/either/try_call.hpp>
-#include <fcppt/log/context_fwd.hpp>
+#include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
@@ -78,20 +78,20 @@ template<
 >
 function_type
 try_create(
-	fcppt::log::context &_log_context // NOLINT(google-runtime-references)
+	fcppt::log::context_reference const _log_context
 )
 {
 	return
 		function_type{
 			[
-				&_log_context
+				_log_context
 			]{
 				return
 					fcppt::either::try_call<
 						awl::exception
 					>(
 						[
-							&_log_context
+							_log_context
 						]{
 							return
 								fcppt::unique_ptr_to_base<
@@ -128,7 +128,7 @@ std::vector<
 
 backend_list
 get_backends(
-	fcppt::log::context &_log_context // NOLINT(google-runtime-references)
+	fcppt::log::context_reference const _log_context
 )
 {
 	return
@@ -321,7 +321,7 @@ create_from_env(
 
 awl::system::object_unique_ptr
 awl::system::create(
-	fcppt::log::context &_log_context
+	fcppt::log::context_reference const _log_context
 )
 {
 	backend_list const backends{
@@ -333,7 +333,7 @@ awl::system::create(
 	fcppt::optional::maybe_void(
 		env_backend(),
 		[
-			&_log_context,
+			_log_context,
 			&backends
 		](
 			backend_name const &_backend
