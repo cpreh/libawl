@@ -7,7 +7,7 @@
 #include <awl/timer/event_fwd.hpp>
 #include <awl/timer/object_fwd.hpp>
 #include <awl/timer/reference.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -19,7 +19,7 @@ class AWL_DETAIL_CLASS_SYMBOL event
 :
 	public awl::event::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		event
 	);
 public:
@@ -33,6 +33,7 @@ public:
 	~event()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::timer::object &
 	get() const;

@@ -10,11 +10,12 @@ namespace awl
 namespace cursor
 {
 
-typedef
+using
+const_optional_object_ref
+=
 fcppt::optional::reference<
 	awl::cursor::object const
->
-const_optional_object_ref;
+>;
 
 }
 }

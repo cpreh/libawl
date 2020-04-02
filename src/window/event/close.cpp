@@ -14,5 +14,4 @@ awl::window::event::close::close(
 }
 
 awl::window::event::close::~close()
-{
-}
+= default;

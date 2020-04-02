@@ -3,7 +3,7 @@
 
 #include <awl/backends/wayland/shm_fwd.hpp>
 #include <awl/backends/wayland/cursor/theme_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-cursor.h>
 #include <fcppt/config/external_end.hpp>
@@ -20,7 +20,7 @@ namespace cursor
 
 class theme
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		theme
 	);
 public:
@@ -31,6 +31,7 @@ public:
 
 	~theme();
 
+	[[nodiscard]]
 	wl_cursor_theme *
 	get() const;
 private:

@@ -13,7 +13,7 @@
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
@@ -31,7 +31,7 @@ class original_object
 :
 	public awl::backends::wayland::system::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_object
 	);
 public:

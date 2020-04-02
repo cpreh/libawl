@@ -2,25 +2,29 @@
 #include <awl/window/reference.hpp>
 #include <awl/window/event/base.hpp>
 #include <awl/window/event/resize.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 
 awl::window::event::resize::resize(
 	awl::window::reference const _window,
-	awl::window::dim const &_dim
+	awl::window::dim _dim
 )
 :
 	awl::window::event::base{
 		_window
 	},
 	dim_{
-		_dim
+		std::move(
+			_dim
+		)
 	}
 {
 }
 
 awl::window::event::resize::~resize()
-{
-}
+= default;
 
 awl::window::dim const &
 awl::window::event::resize::dim() const

@@ -16,8 +16,7 @@ awl::window::event::base::base(
 }
 
 awl::window::event::base::~base()
-{
-}
+= default;
 
 awl::window::object &
 awl::window::event::base::window() const

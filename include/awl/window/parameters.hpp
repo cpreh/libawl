@@ -50,22 +50,27 @@ public:
 		awl::cursor::object const &
 	);
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::visual::object const &
 	visual() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::window::optional_dim
 	size() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	fcppt::optional_string const &
 	title() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	fcppt::optional_string const &
 	class_name() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::cursor::const_optional_object_ref const &
 	cursor() const;

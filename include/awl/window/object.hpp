@@ -5,7 +5,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -15,7 +15,7 @@ namespace window
 
 class AWL_DETAIL_CLASS_SYMBOL object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 protected:
@@ -26,10 +26,12 @@ public:
 	void
 	show() = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::window::dim
 	size() const = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::visual::object const &
 	visual() const = 0;

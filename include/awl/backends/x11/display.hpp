@@ -4,7 +4,7 @@
 #include <awl/backends/x11/Xlib.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -16,13 +16,14 @@ namespace x11
 
 class AWL_DETAIL_CLASS_SYMBOL display
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		display
 	);
 protected:
 	AWL_DETAIL_SYMBOL
 	display();
 public:
+	[[nodiscard]]
 	virtual
 	Display *
 	get() const = 0;

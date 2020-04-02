@@ -14,5 +14,4 @@ awl::window::event::show::show(
 }
 
 awl::window::event::show::~show()
-{
-}
+= default;

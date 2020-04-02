@@ -6,7 +6,7 @@
 #include <awl/event/base.hpp>
 #include <awl/window/object_fwd.hpp>
 #include <awl/window/reference.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -20,7 +20,7 @@ class AWL_DETAIL_CLASS_SYMBOL base
 :
 	public awl::event::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		base
 	);
 public:
@@ -34,6 +34,7 @@ public:
 	~base()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::window::object &
 	window() const;

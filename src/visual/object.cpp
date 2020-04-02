@@ -2,9 +2,7 @@
 
 
 awl::visual::object::object()
-{
-}
+= default;
 
 awl::visual::object::~object()
-{
-}
+= default;

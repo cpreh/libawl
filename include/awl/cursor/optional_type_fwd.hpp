@@ -10,11 +10,12 @@ namespace awl
 namespace cursor
 {
 
-typedef
+using
+optional_type
+=
 fcppt::optional::object<
 	awl::cursor::type
->
-optional_type;
+>;
 
 }
 }

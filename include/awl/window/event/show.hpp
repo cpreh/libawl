@@ -6,7 +6,7 @@
 #include <awl/window/reference.hpp>
 #include <awl/window/event/base.hpp>
 #include <awl/window/event/show_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -20,7 +20,7 @@ class AWL_DETAIL_CLASS_SYMBOL show
 :
 	public awl::window::event::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		show
 	);
 public:

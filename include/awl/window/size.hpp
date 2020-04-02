@@ -7,9 +7,10 @@ namespace awl
 namespace window
 {
 
-typedef
-unsigned
-size;
+using
+size
+=
+unsigned;
 
 }
 }

@@ -13,7 +13,7 @@
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
@@ -30,7 +30,7 @@ class original_object
 :
 	public awl::backends::x11::system::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_object
 	);
 public:
@@ -44,6 +44,7 @@ public:
 	~original_object()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::window::object_unique_ptr
 	create_window(
@@ -51,16 +52,19 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::system::event::processor &
 	processor()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::visual::object_unique_ptr
 	default_visual()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::cursor::object_unique_ptr
 	create_cursor(
@@ -68,11 +72,13 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::display &
 	display()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::screen
 	screen() const

@@ -12,7 +12,7 @@
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
@@ -30,7 +30,7 @@ class AWL_DETAIL_CLASS_SYMBOL original_object
 :
 	public awl::backends::sdl::system::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_object
 	);
 public:

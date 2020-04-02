@@ -21,10 +21,12 @@ public:
 		awl::timer::period
 	);
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::timer::delay
 	delay() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::timer::period
 	period() const;

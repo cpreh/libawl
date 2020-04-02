@@ -6,7 +6,7 @@
 #include <awl/window/reference.hpp>
 #include <awl/window/event/base.hpp>
 #include <awl/window/event/close_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -20,7 +20,7 @@ class AWL_DETAIL_CLASS_SYMBOL close
 :
 	public awl::window::event::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		close
 	);
 public:

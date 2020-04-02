@@ -2,11 +2,11 @@
 #define AWL_BACKENDS_X11_COLORMAP_HPP_INCLUDED
 
 #include <awl/backends/x11/X.hpp>
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -18,13 +18,13 @@ namespace x11
 
 class colormap
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		colormap
 	);
 public:
 	AWL_DETAIL_SYMBOL
 	colormap(
-		awl::backends::x11::display &,
+		awl::backends::x11::display_ref,
 		awl::backends::x11::screen,
 		awl::backends::x11::visual::object const &
 	);
@@ -36,11 +36,12 @@ public:
 	Colormap &
 	get();
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	Colormap const &
 	get() const;
 private:
-	awl::backends::x11::display &display_;
+	awl::backends::x11::display_ref const display_;
 
 	Colormap colormap_;
 };

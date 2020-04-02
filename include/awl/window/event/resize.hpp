@@ -7,7 +7,7 @@
 #include <awl/window/reference.hpp>
 #include <awl/window/event/base.hpp>
 #include <awl/window/event/resize_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -21,20 +21,21 @@ class AWL_DETAIL_CLASS_SYMBOL resize
 :
 	public awl::window::event::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		resize
 	);
 public:
 	AWL_DETAIL_SYMBOL
 	resize(
 		awl::window::reference,
-		awl::window::dim const &
+		awl::window::dim
 	);
 
 	AWL_DETAIL_SYMBOL
 	~resize()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::window::dim const &
 	dim() const;

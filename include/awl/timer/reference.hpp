@@ -10,11 +10,12 @@ namespace awl
 namespace timer
 {
 
-typedef
+using
+reference
+=
 fcppt::reference<
 	awl::timer::object
->
-reference;
+>;
 
 }
 }

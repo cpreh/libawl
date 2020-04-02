@@ -16,11 +16,12 @@ namespace system
 namespace event
 {
 
-typedef
+using
+processor_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::wayland::system::event::processor
->
-processor_unique_ptr;
+>;
 
 }
 }

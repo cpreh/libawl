@@ -10,7 +10,7 @@
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -20,7 +20,7 @@ namespace system
 
 class AWL_DETAIL_CLASS_SYMBOL object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 protected:

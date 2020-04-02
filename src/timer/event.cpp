@@ -16,8 +16,7 @@ awl::timer::event::event(
 }
 
 awl::timer::event::~event()
-{
-}
+= default;
 
 awl::timer::object &
 awl::timer::event::get() const

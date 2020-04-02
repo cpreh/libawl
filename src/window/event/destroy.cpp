@@ -14,5 +14,4 @@ awl::window::event::destroy::destroy(
 }
 
 awl::window::event::destroy::~destroy()
-{
-}
+= default;

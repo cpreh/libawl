@@ -14,5 +14,4 @@ awl::window::event::hide::hide(
 }
 
 awl::window::event::hide::~hide()
-{
-}
+= default;

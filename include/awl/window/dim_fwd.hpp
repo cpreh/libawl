@@ -10,12 +10,13 @@ namespace awl
 namespace window
 {
 
-typedef
+using
+dim
+=
 fcppt::math::dim::static_<
 	awl::window::size,
 	2
->
-dim;
+>;
 
 }
 }

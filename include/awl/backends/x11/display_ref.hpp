@@ -12,11 +12,12 @@ namespace backends
 namespace x11
 {
 
-typedef
+using
+display_ref
+=
 fcppt::reference<
 	awl::backends::x11::display
->
-display_ref;
+>;
 
 }
 }

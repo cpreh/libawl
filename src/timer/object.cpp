@@ -2,9 +2,7 @@
 
 
 awl::timer::object::object()
-{
-}
+= default;
 
 awl::timer::object::~object()
-{
-}
+= default;

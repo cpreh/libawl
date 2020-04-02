@@ -14,6 +14,7 @@ awl::timer::setting_no_period(
 		awl::timer::setting{
 			_delay,
 			awl::timer::period{
+				// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 				awl::timer::duration{
 					0
 				}

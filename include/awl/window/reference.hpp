@@ -10,11 +10,12 @@ namespace awl
 namespace window
 {
 
-typedef
+using
+reference
+=
 fcppt::reference<
 	awl::window::object
->
-reference;
+>;
 
 }
 }

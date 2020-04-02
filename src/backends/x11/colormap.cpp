@@ -10,19 +10,19 @@
 
 
 awl::backends::x11::colormap::colormap(
-	awl::backends::x11::display &_display,
+	awl::backends::x11::display_ref const _display,
 	awl::backends::x11::screen const _screen,
 	awl::backends::x11::visual::object const &_visual
 )
 :
-	display_(
+	display_{
 		_display
-	),
+	},
 	colormap_(
 		::XCreateColormap(
-			display_.get(),
+			display_.get().get(),
 			::XRootWindow(
-				display_.get(),
+				display_.get().get(),
 				_screen.get()
 			),
 			_visual.get(),
@@ -35,16 +35,18 @@ awl::backends::x11::colormap::colormap(
 		==
 		0
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("XCreateColormap() failed!")
 			};
+	}
 }
 
 awl::backends::x11::colormap::~colormap()
 {
 	::XFreeColormap(
-		display_.get(),
+		display_.get().get(),
 		this->get()
 	);
 }

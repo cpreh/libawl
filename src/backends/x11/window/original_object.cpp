@@ -29,6 +29,7 @@
 #include <awl/window/object.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_cref.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -64,7 +65,9 @@ awl::backends::x11::window::original_object::original_object(
 		)
 	),
 	colormap_(
-		display_,
+		fcppt::make_ref(
+			display_
+		),
 		_screen,
 		visual_
 	),

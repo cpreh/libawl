@@ -10,9 +10,12 @@ namespace awl
 namespace window
 {
 
-typedef fcppt::optional::object<
+using
+optional_dim
+=
+fcppt::optional::object<
 	awl::window::dim
-> optional_dim;
+>;
 
 }
 }
