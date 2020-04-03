@@ -12,11 +12,12 @@ namespace awl
 namespace event
 {
 
-typedef
+using
+container
+=
 std::vector<
 	awl::event::base_unique_ptr
->
-container;
+>;
 
 }
 }

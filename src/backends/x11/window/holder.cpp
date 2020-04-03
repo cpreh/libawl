@@ -1,4 +1,5 @@
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/window/holder.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
@@ -7,7 +8,7 @@
 
 
 awl::backends::x11::window::holder::holder(
-	awl::backends::x11::display &_display,
+	awl::backends::x11::display_ref const _display,
 	Window const _window
 )
 :
@@ -57,8 +58,10 @@ awl::backends::x11::window::holder::do_destroy()
 	if(
 		!this->destroyed()
 	)
+	{
 		::XDestroyWindow(
-			display_.get(),
+			display_.get().get(),
 			window_
 		);
+	}
 }

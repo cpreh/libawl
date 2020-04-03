@@ -17,15 +17,17 @@ template<
 >
 struct id_less
 {
-	typedef
-	void
-	is_transparent;
+	using
+	is_transparent
+	=
+	void;
 
-	typedef
+	using
+	impl
+	=
 	fcppt::shared_ptr<
 		Type
-	>
-	impl;
+	>;
 
 	bool
 	operator()(

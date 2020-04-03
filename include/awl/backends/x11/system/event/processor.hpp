@@ -6,7 +6,7 @@
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/event/processor.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -20,12 +20,13 @@ namespace system
 namespace event
 {
 
+// NOLINTNEXTLINE(fuchsia-multiple-inheritance)
 class AWL_DETAIL_CLASS_SYMBOL processor
 :
 	public awl::system::event::processor,
 	public awl::backends::posix::processor_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		processor
 	);
 protected:

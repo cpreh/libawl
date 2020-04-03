@@ -8,7 +8,7 @@
 #include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/atom.hpp>
 #include <awl/backends/x11/display_fd.hpp>
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/flush.hpp>
 #include <awl/backends/x11/intern_atom.hpp>
 #include <awl/backends/x11/pending.hpp>
@@ -40,7 +40,6 @@
 #include <awl/window/event/close.hpp>
 #include <fcppt/function_impl.hpp>
 #include <fcppt/make_int_range_count.hpp>
-#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
@@ -54,7 +53,7 @@
 
 
 awl::backends::x11::system::event::original_processor::original_processor(
-	awl::backends::x11::display &_display
+	awl::backends::x11::display_ref const _display
 )
 :
 	awl::backends::x11::system::event::processor(),
@@ -92,8 +91,7 @@ awl::backends::x11::system::event::original_processor::original_processor(
 }
 
 awl::backends::x11::system::event::original_processor::~original_processor()
-{
-}
+= default;
 
 awl::system::event::result
 awl::backends::x11::system::event::original_processor::poll()
@@ -101,6 +99,7 @@ awl::backends::x11::system::event::original_processor::poll()
 	return
 		this->process(
 			awl::backends::posix::optional_duration{
+				// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 				awl::backends::posix::duration{
 					0
 				}
@@ -148,11 +147,11 @@ awl::backends::x11::system::event::original_processor::fd_processor()
 
 awl::event::connection_unique_ptr
 awl::backends::x11::system::event::original_processor::add_window(
-	awl::backends::x11::window::object &_window
+	awl::backends::x11::window::object_ref const _window
 )
 {
 	Window const id{
-		_window.get()
+		_window.get().get()
 	};
 
 	FCPPT_ASSERT_ERROR(
@@ -160,14 +159,12 @@ awl::backends::x11::system::event::original_processor::add_window(
 			windows_,
 			id,
 			[
-				&_window
+				_window
 			](
 				Window
 			){
 				return
-					fcppt::make_ref(
-						_window
-					);
+					_window;
 			}
 		).inserted()
 	);
@@ -236,9 +233,9 @@ awl::backends::x11::system::event::original_processor::process_fds(
 {
 	awl::event::container result{
 		awl::backends::x11::pending(
-			display_
+			display_.get()
 		)
-		> 0u
+		> 0U
 		?
 			this->process_pending()
 		:
@@ -262,7 +259,7 @@ awl::backends::x11::system::event::original_processor::process_fds(
 						this
 					]{
 						awl::backends::x11::flush(
-							display_
+							display_.get()
 						);
 
 						return
@@ -282,7 +279,7 @@ awl::backends::x11::system::event::original_processor::process_pending() const
 		>(
 			fcppt::make_int_range_count(
 				awl::backends::x11::pending(
-					display_
+					display_.get()
 				)
 			),
 			[
@@ -294,7 +291,7 @@ awl::backends::x11::system::event::original_processor::process_pending() const
 				return
 					this->process_x11_event(
 						awl::backends::x11::system::event::next(
-							display_
+							display_.get()
 						)
 					);
 			}
@@ -340,9 +337,7 @@ awl::backends::x11::system::event::original_processor::make_x11_event(
 					fcppt::make_unique_ptr<
 						awl::backends::x11::system::event::generic
 					>(
-						fcppt::make_ref(
-							display_
-						),
+						display_,
 						_event.get().xcookie
 					)
 				)
@@ -402,7 +397,7 @@ awl::backends::x11::system::event::original_processor::process_window_event(
 					static_cast<
 						Atom
 					>(
-						request.data.l[0]
+						request.data.l[0] // NOLINT(cppcoreguidelines-pro-type-union-access)
 					)
 					==
 					wm_delete_window_atom_.get()

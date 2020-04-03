@@ -9,5 +9,4 @@ awl::backends::posix::timer::timer()
 }
 
 awl::backends::posix::timer::~timer()
-{
-}
+= default;

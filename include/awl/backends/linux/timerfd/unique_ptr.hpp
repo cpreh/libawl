@@ -14,11 +14,12 @@ namespace linux
 namespace timerfd
 {
 
-typedef
+using
+unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::linux::timerfd::object
->
-unique_ptr;
+>;
 
 }
 }

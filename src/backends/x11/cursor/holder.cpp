@@ -1,4 +1,5 @@
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/cursor/holder.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
@@ -7,7 +8,7 @@
 
 
 awl::backends::x11::cursor::holder::holder(
-	awl::backends::x11::display const &_display,
+	awl::backends::x11::display_ref const _display,
 	Cursor const _cursor
 )
 :
@@ -23,7 +24,7 @@ awl::backends::x11::cursor::holder::holder(
 awl::backends::x11::cursor::holder::~holder()
 {
 	::XFreeCursor(
-		display_.get(),
+		display_.get().get(),
 		cursor_
 	);
 }

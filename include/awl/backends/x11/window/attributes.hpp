@@ -18,7 +18,7 @@ namespace window
 AWL_DETAIL_SYMBOL
 XWindowAttributes
 attributes(
-	awl::backends::x11::window::base &
+	awl::backends::x11::window::base const &
 );
 
 }

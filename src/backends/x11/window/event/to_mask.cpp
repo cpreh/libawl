@@ -20,7 +20,7 @@ case type_value: \
 	return \
 		awl::backends::x11::window::event::optional_mask_bit(\
 			awl::backends::x11::window::event::mask_bit(\
-				mask_value\
+				mask_value /* NOLINT(hicpp-signed-bitwise) */\
 			) \
 		)
 	switch(
@@ -29,107 +29,107 @@ case type_value: \
 	{
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			KeyPress,
-			KeyPressMask
+			KeyPressMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			KeyRelease,
-			KeyReleaseMask
+			KeyReleaseMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			ButtonPress,
-			ButtonPressMask
+			ButtonPressMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			ButtonRelease,
-			ButtonReleaseMask
+			ButtonReleaseMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			MotionNotify,
-			PointerMotionMask
+			PointerMotionMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			EnterNotify,
-			EnterWindowMask
+			EnterWindowMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			LeaveNotify,
-			LeaveWindowMask
+			LeaveWindowMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			FocusIn,
-			FocusChangeMask
+			FocusChangeMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			FocusOut,
-			FocusChangeMask
+			FocusChangeMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			KeymapNotify,
-			KeymapStateMask
+			KeymapStateMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			Expose,
-			ExposureMask
+			ExposureMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			VisibilityNotify,
-			VisibilityChangeMask
+			VisibilityChangeMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			CreateNotify,
-			SubstructureNotifyMask
+			SubstructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			DestroyNotify,
-			StructureNotifyMask
+			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			UnmapNotify,
-			StructureNotifyMask
+			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			MapNotify,
-			StructureNotifyMask
+			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			MapRequest,
-			SubstructureRedirectMask
+			SubstructureRedirectMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			ReparentNotify,
-			StructureNotifyMask
+			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			ConfigureNotify,
-			StructureNotifyMask
+			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			ConfigureRequest,
-			SubstructureRedirectMask
+			SubstructureRedirectMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			GravityNotify,
-			StructureNotifyMask
+			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			ResizeRequest,
-			ResizeRedirectMask
+			ResizeRedirectMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			CirculateNotify,
-			StructureNotifyMask
+			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			CirculateRequest,
-			SubstructureRedirectMask
+			SubstructureRedirectMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			PropertyNotify,
-			PropertyChangeMask
+			PropertyChangeMask // NOLINT(hicpp-signed-bitwise)
 		);
 		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
 			ColormapNotify,
-			ColormapChangeMask
+			ColormapChangeMask // NOLINT(hicpp-signed-bitwise)
 		);
 	case GraphicsExpose:
 	case NoExpose:

@@ -14,11 +14,12 @@ namespace linux
 namespace timer
 {
 
-typedef
+using
+unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::linux::timer::object
->
-unique_ptr;
+>;
 
 }
 }

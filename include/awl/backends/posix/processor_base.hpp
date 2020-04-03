@@ -5,7 +5,7 @@
 #include <awl/backends/posix/processor_fwd.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -17,7 +17,7 @@ namespace posix
 
 class AWL_DETAIL_CLASS_SYMBOL processor_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		processor_base
 	);
 protected:
@@ -28,6 +28,7 @@ public:
 	virtual
 	~processor_base();
 
+	[[nodiscard]]
 	virtual
 	awl::backends::posix::processor &
 	fd_processor() = 0;

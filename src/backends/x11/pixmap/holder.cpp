@@ -1,4 +1,5 @@
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/pixmap/holder.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/X.h>
@@ -7,7 +8,7 @@
 
 
 awl::backends::x11::pixmap::holder::holder(
-	awl::backends::x11::display const &_display,
+	awl::backends::x11::display_ref const _display,
 	Pixmap const _pixmap
 )
 :
@@ -23,7 +24,7 @@ awl::backends::x11::pixmap::holder::holder(
 awl::backends::x11::pixmap::holder::~holder()
 {
 	::XFreePixmap(
-		display_.get(),
+		display_.get().get(),
 		pixmap_
 	);
 }

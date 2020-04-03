@@ -8,7 +8,7 @@
 #include <awl/backends/wayland/system/seat/shared_ptr.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -26,7 +26,7 @@ class AWL_DETAIL_CLASS_SYMBOL seat_caps
 :
 	public awl::backends::wayland::system::event::seat_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		seat_caps
 	);
 public:
@@ -41,6 +41,7 @@ public:
 	~seat_caps()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::system::seat::caps_field
 	caps() const;

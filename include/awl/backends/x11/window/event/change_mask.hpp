@@ -20,7 +20,7 @@ namespace event
 AWL_DETAIL_SYMBOL
 void
 change_mask(
-	awl::backends::x11::window::base &,
+	awl::backends::x11::window::base const &,
 	awl::backends::x11::window::event::mask
 );
 

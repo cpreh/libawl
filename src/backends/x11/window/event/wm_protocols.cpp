@@ -9,7 +9,7 @@
 
 
 awl::backends::x11::window::event::wm_protocols::wm_protocols(
-	awl::backends::x11::window::base &_window,
+	awl::backends::x11::window::base const &_window,
 	awl::backends::x11::window::event::atom_vector const &_atoms
 )
 {
@@ -31,5 +31,4 @@ awl::backends::x11::window::event::wm_protocols::wm_protocols(
 }
 
 awl::backends::x11::window::event::wm_protocols::~wm_protocols()
-{
-}
+= default;

@@ -14,11 +14,12 @@ namespace x11
 namespace window
 {
 
-typedef
+using
+rect
+=
 fcppt::math::box::rect<
 	awl::window::unit
->
-rect;
+>;
 
 }
 }

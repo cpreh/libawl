@@ -10,8 +10,7 @@ awl::backends::wayland::cursor::invisible::invisible()
 }
 
 awl::backends::wayland::cursor::invisible::~invisible()
-{
-}
+= default;
 
 awl::backends::wayland::cursor::optional
 awl::backends::wayland::cursor::invisible::get() const

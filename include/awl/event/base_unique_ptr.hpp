@@ -10,11 +10,12 @@ namespace awl
 namespace event
 {
 
-typedef
+using
+base_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::event::base
->
-base_unique_ptr;
+>;
 
 }
 }

@@ -24,8 +24,7 @@ awl::backends::wayland::system::event::seat_base::seat_base(
 }
 
 awl::backends::wayland::system::event::seat_base::~seat_base()
-{
-}
+= default;
 
 awl::backends::wayland::system::seat::shared_ptr const &
 awl::backends::wayland::system::event::seat_base::get() const

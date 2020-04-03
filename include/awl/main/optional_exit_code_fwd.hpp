@@ -10,11 +10,12 @@ namespace awl
 namespace main
 {
 
-typedef
+using
+optional_exit_code
+=
 fcppt::optional::object<
 	awl::main::exit_code
->
-optional_exit_code;
+>;
 
 }
 }

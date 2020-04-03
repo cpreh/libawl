@@ -17,7 +17,6 @@
 #include <fcppt/container/bitfield/operators.hpp>
 #include <fcppt/optional/make.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <stdint.h>
 #include <wayland-client-protocol.h>
 #include <cstdint>
 #include <utility>
@@ -45,8 +44,10 @@ convert_caps(
 			>()
 		)
 	)
+	{
 		result |=
 			awl::backends::wayland::system::seat::caps::pointer;
+	}
 
 	if(
 		fcppt::bit::test(
@@ -57,8 +58,10 @@ convert_caps(
 			>()
 		)
 	)
+	{
 		result |=
 			awl::backends::wayland::system::seat::caps::keyboard;
+	}
 
 	return
 		result;
@@ -68,7 +71,7 @@ void
 wl_seat_capabilities(
 	void *const _data,
 	wl_seat *,
-	uint32_t const _capabilities
+	std::uint32_t const _capabilities
 )
 {
 	awl::backends::wayland::system::seat::data &data(
@@ -144,13 +147,12 @@ awl::backends::wayland::system::seat::object::object(
 }
 
 awl::backends::wayland::system::seat::object::~object()
-{
-}
+= default;
 
 void
 awl::backends::wayland::system::seat::object::init_ptr()
 {
-	// TODO: Make this less ugly
+	// TODO(philipp): Make this less ugly
 	data_.pointer_ =
 		fcppt::optional::make(
 			this->fcppt_shared_from_this()

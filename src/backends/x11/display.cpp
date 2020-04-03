@@ -2,9 +2,7 @@
 
 
 awl::backends::x11::display::display()
-{
-}
+= default;
 
 awl::backends::x11::display::~display()
-{
-}
+= default;

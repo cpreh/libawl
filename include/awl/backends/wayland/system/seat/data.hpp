@@ -6,7 +6,7 @@
 #include <awl/backends/wayland/system/seat/data_fwd.hpp>
 #include <awl/backends/wayland/system/seat/shared_ptr.hpp>
 #include <awl/event/container_reference.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
 
@@ -23,7 +23,7 @@ namespace seat
 
 struct data
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		data
 	);
 public:
@@ -34,18 +34,23 @@ public:
 
 	~data();
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::backends::wayland::display_reference const display_;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::backends::wayland::system::seat::caps_field caps_;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::event::container_reference const events_;
 
-	typedef
+	using
+	optional_shared_ptr
+	=
 	fcppt::optional::object<
 		awl::backends::wayland::system::seat::shared_ptr
-	>
-	optional_shared_ptr;
+	>;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	optional_shared_ptr pointer_;
 };
 

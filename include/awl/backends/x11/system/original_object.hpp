@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_X11_SYSTEM_ORIGINAL_OBJECT_HPP_INCLUDED
 
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/original_display.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/system/object.hpp>
@@ -74,7 +74,7 @@ public:
 
 	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
-	awl::backends::x11::display &
+	awl::backends::x11::display_ref
 	display()
 	override;
 
@@ -84,6 +84,10 @@ public:
 	screen() const
 	override;
 private:
+	[[nodiscard]]
+	awl::backends::x11::display_ref
+	get_display();
+
 	awl::backends::x11::original_display display_;
 
 	awl::backends::x11::screen const screen_;

@@ -14,11 +14,12 @@ namespace x11
 namespace cursor
 {
 
-typedef
+using
+object_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::x11::cursor::object
->
-object_unique_ptr;
+>;
 
 }
 }

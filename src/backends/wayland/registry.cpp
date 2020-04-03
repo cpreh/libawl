@@ -22,10 +22,12 @@ awl::backends::wayland::registry::registry(
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("wl_display_get_registry failed")
 			};
+	}
 }
 
 awl::backends::wayland::registry::~registry()

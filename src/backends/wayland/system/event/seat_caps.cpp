@@ -27,8 +27,7 @@ awl::backends::wayland::system::event::seat_caps::seat_caps(
 }
 
 awl::backends::wayland::system::event::seat_caps::~seat_caps()
-{
-}
+= default;
 
 awl::backends::wayland::system::seat::caps_field
 awl::backends::wayland::system::event::seat_caps::caps() const

@@ -26,8 +26,10 @@ awl::backends::linux::epoll::ctl(
 		)
 		!= 0
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("epoll_ctl failed!")
 			};
+	}
 }

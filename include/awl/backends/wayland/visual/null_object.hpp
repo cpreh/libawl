@@ -4,7 +4,7 @@
 #include <awl/backends/wayland/visual/object.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -21,7 +21,7 @@ class AWL_DETAIL_CLASS_SYMBOL null_object
 	public
 		awl::backends::wayland::visual::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		null_object
 	);
 public:

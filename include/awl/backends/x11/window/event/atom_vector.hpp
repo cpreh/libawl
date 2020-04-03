@@ -18,11 +18,12 @@ namespace window
 namespace event
 {
 
-typedef
+using
+atom_vector
+=
 std::vector<
 	Atom
->
-atom_vector;
+>;
 
 }
 }

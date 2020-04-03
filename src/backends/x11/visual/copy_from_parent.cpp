@@ -13,8 +13,7 @@ awl::backends::x11::visual::copy_from_parent::copy_from_parent()
 }
 
 awl::backends::x11::visual::copy_from_parent::~copy_from_parent()
-{
-}
+= default;
 
 Visual *
 awl::backends::x11::visual::copy_from_parent::get() const

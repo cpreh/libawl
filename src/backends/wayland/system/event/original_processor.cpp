@@ -8,6 +8,7 @@
 #include <awl/backends/posix/processor.hpp>
 #include <awl/backends/wayland/compositor.hpp>
 #include <awl/backends/wayland/display.hpp>
+#include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/display_dispatch_pending.hpp>
 #include <awl/backends/wayland/display_flush.hpp>
 #include <awl/backends/wayland/display_prepare_read.hpp>
@@ -45,6 +46,7 @@
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/move_clear.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -59,7 +61,7 @@
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <stdint.h>
+#include <cstdint>
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
 #include <string>
@@ -75,9 +77,9 @@ void
 registry_add(
 	void *const _data,
 	wl_registry *const _registry,
-	uint32_t const _name,
+	std::uint32_t const _name,
 	char const *const _interface,
-	uint32_t // version
+	std::uint32_t // version
 )
 {
 	awl::backends::wayland::system::event::global_data &data(
@@ -97,7 +99,7 @@ registry_add(
 	};
 
 	FCPPT_LOG_DEBUG(
-		data.log_,
+		data.log_.get(),
 		fcppt::log::out
 			<<
 			FCPPT_TEXT("Got registry object \"")
@@ -116,6 +118,7 @@ registry_add(
 		==
 		"wl_compositor"
 	)
+	{
 		data.compositor_ =
 			awl::backends::wayland::optional_compositor{
 				awl::backends::wayland::compositor{
@@ -123,11 +126,13 @@ registry_add(
 					name
 				}
 			};
+	}
 	else if(
 		interface
 		==
 		"wl_shell"
 	)
+	{
 		data.shell_ =
 			awl::backends::wayland::optional_shell{
 				awl::backends::wayland::shell{
@@ -135,11 +140,13 @@ registry_add(
 					name
 				}
 			};
+	}
 	else if(
 		interface
 		==
 		"wl_shm"
 	)
+	{
 		data.shm_ =
 			awl::backends::wayland::optional_shm{
 				awl::backends::wayland::shm{
@@ -147,6 +154,7 @@ registry_add(
 					name
 				}
 			};
+	}
 	else if(
 		interface
 		==
@@ -198,7 +206,7 @@ void
 registry_remove(
 	void *const _data,
 	wl_registry *,
-	uint32_t const _name
+	std::uint32_t const _name
 )
 {
 	awl::backends::wayland::system::event::global_data &data(
@@ -308,8 +316,10 @@ wl_registry_listener const registry_listener{
 }
 
 awl::backends::wayland::system::event::original_processor::original_processor(
-	fcppt::log::object &_log,
-	awl::backends::wayland::display &_display
+	fcppt::reference<
+		fcppt::log::object
+	> const _log,
+	awl::backends::wayland::display_reference const _display
 )
 :
 	awl::backends::wayland::system::event::processor(),
@@ -320,17 +330,15 @@ awl::backends::wayland::system::event::original_processor::original_processor(
 		awl::backends::posix::create_processor()
 	},
 	registry_{
-		_display
+		_display.get()
 	},
 	global_data_{
 		_log,
-		fcppt::make_ref(
-			_display
-		)
+		_display
 	},
 	fd_{
 		::wl_display_get_fd(
-			_display.get()
+			_display.get().get()
 		)
 	}
 {
@@ -341,13 +349,12 @@ awl::backends::wayland::system::event::original_processor::original_processor(
 	);
 
 	awl::backends::wayland::display_roundtrip(
-		display_
+		display_.get()
 	);
 }
 
 awl::backends::wayland::system::event::original_processor::~original_processor()
-{
-}
+= default;
 
 awl::system::event::result
 awl::backends::wayland::system::event::original_processor::poll()
@@ -355,6 +362,7 @@ awl::backends::wayland::system::event::original_processor::poll()
 	return
 		this->process(
 			awl::backends::posix::optional_duration{
+				// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 				awl::backends::posix::duration{
 					0
 				}
@@ -466,7 +474,6 @@ awl::backends::wayland::system::event::original_processor::process(
 	awl::backends::posix::optional_duration const &_duration
 )
 {
-	// TODO: This code is the same in X11
 	return
 		fcppt::optional::maybe(
 			global_data_.exit_code_,
@@ -499,7 +506,7 @@ awl::backends::wayland::system::event::original_processor::process_fds(
 )
 {
 	awl::backends::wayland::display_flush(
-		display_
+		display_.get()
 	);
 
 	return
@@ -526,19 +533,21 @@ awl::backends::wayland::system::event::original_processor::process_pending()
 {
 	while(
 		!awl::backends::wayland::display_prepare_read(
-			display_
+			display_.get()
 		)
 	)
+	{
 		awl::backends::wayland::display_dispatch_pending(
-			display_
+			display_.get()
 		);
+	}
 
 	awl::backends::wayland::display_read_events(
-		display_
+		display_.get()
 	);
 
 	awl::backends::wayland::display_dispatch_pending(
-		display_
+		display_.get()
 	);
 
 	return

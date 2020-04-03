@@ -16,11 +16,12 @@ namespace window
 namespace event
 {
 
-typedef
+using
+optional_mask_bit
+=
 fcppt::optional::object<
 	awl::backends::x11::window::event::mask_bit
->
-optional_mask_bit;
+>;
 
 }
 }

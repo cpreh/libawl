@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_DEFAULT_SCREEN_HPP_INCLUDED
 #define AWL_BACKENDS_X11_DEFAULT_SCREEN_HPP_INCLUDED
 
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/detail/symbol.hpp>
 
@@ -16,7 +16,7 @@ namespace x11
 AWL_DETAIL_SYMBOL
 awl::backends::x11::screen
 default_screen(
-	awl::backends::x11::display const &
+	awl::backends::x11::display_ref
 );
 
 }

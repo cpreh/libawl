@@ -4,7 +4,7 @@
 #include <awl/backends/linux/epoll/fd_fwd.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -18,7 +18,7 @@ namespace epoll
 
 class fd
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		fd
 	);
 public:
@@ -28,6 +28,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	~fd();
 
+	[[nodiscard]]
 	awl::backends::posix::fd
 	get() const;
 private:

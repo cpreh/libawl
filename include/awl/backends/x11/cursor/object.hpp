@@ -7,7 +7,7 @@
 #include <awl/cursor/object.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -23,7 +23,7 @@ class AWL_DETAIL_CLASS_SYMBOL object
 :
 	public awl::cursor::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -37,6 +37,7 @@ public:
 	~object()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	Cursor
 	get() const;

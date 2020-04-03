@@ -1,5 +1,5 @@
 #include <awl/backends/x11/default_screen.hpp>
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/cursor/background_color.hpp>
 #include <awl/backends/x11/cursor/create_invisible.hpp>
 #include <awl/backends/x11/cursor/create_pixmap.hpp>
@@ -26,7 +26,7 @@
 
 awl::backends::x11::cursor::object_unique_ptr
 awl::backends::x11::cursor::create_invisible(
-	awl::backends::x11::display &_display
+	awl::backends::x11::display_ref const _display
 )
 {
 	awl::backends::x11::pixmap::size const size{
@@ -44,7 +44,6 @@ awl::backends::x11::cursor::create_invisible(
 
 	awl::backends::x11::pixmap::holder_unique_ptr const pixmap(
 		awl::backends::x11::pixmap::create_from_data(
-			// TODO: Is this ok?
 			*awl::backends::x11::window::root(
 				_display,
 				awl::backends::x11::default_screen(
@@ -86,8 +85,8 @@ awl::backends::x11::cursor::create_invisible(
 					black
 				),
 				awl::cursor::hotspot(
-					0u,
-					0u
+					0U,
+					0U
 				)
 			)
 		);

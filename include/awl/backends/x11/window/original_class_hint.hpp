@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xutil.h>
@@ -21,7 +21,7 @@ namespace window
 
 class original_class_hint
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_class_hint
 	);
 public:
@@ -34,10 +34,12 @@ public:
 	AWL_DETAIL_SYMBOL
 	~original_class_hint();
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	XClassHint *
 	get() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::window::class_hint const &
 	hint() const;

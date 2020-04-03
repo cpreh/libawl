@@ -23,5 +23,4 @@ awl::backends::wayland::system::seat::data::data(
 }
 
 awl::backends::wayland::system::seat::data::~data()
-{
-}
+= default;

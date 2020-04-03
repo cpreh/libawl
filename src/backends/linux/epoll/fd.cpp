@@ -11,8 +11,8 @@
 awl::backends::linux::epoll::fd::fd()
 :
 	fd_{
-		::epoll_create(
-			1 // some hint for the number of fds
+		::epoll_create1(
+			EPOLL_CLOEXEC
 		)
 	}
 {
@@ -21,10 +21,12 @@ awl::backends::linux::epoll::fd::fd()
 		==
 		-1
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("epoll_create failed!")
 			};
+	}
 }
 
 awl::backends::linux::epoll::fd::~fd()

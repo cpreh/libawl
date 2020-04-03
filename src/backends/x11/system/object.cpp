@@ -2,9 +2,7 @@
 
 
 awl::backends::x11::system::object::object()
-{
-}
+= default;
 
 awl::backends::x11::system::object::~object()
-{
-}
+= default;

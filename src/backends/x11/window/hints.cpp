@@ -15,16 +15,18 @@ awl::backends::x11::window::hints::hints()
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("XAllocWMHints() failed!")
 			};
+	}
 
 	hints_->input = True;
 
 	hints_->initial_state = NormalState;
 
-	hints_->flags = InputHint | StateHint;
+	hints_->flags = InputHint | StateHint; // NOLINT(hicpp-signed-bitwise)
 }
 
 awl::backends::x11::window::hints::~hints()

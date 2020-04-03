@@ -1,5 +1,6 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/create_info.hpp>
 #include <awl/backends/x11/visual/default.hpp>
@@ -13,19 +14,19 @@
 
 awl::backends::x11::visual::object_unique_ptr
 awl::backends::x11::visual::default_(
-	awl::backends::x11::display &_display,
+	awl::backends::x11::display_ref const _display,
 	awl::backends::x11::screen const _screen
 )
 {
 	Visual *const visual(
 		::XDefaultVisual(
-			_display.get(),
+			_display.get().get(),
 			_screen.get()
 		)
 	);
 
 	FCPPT_ASSERT_POST(
-		visual,
+		visual != nullptr,
 		awl::exception
 	);
 
@@ -37,7 +38,7 @@ awl::backends::x11::visual::default_(
 				awl::backends::x11::visual::wrapped
 			>(
 				awl::backends::x11::visual::create_info(
-					_display,
+					_display.get(),
 					*visual
 				)
 			)

@@ -14,19 +14,20 @@ namespace x11
 namespace window
 {
 
-typedef
+using
+property_data
+=
 fcppt::variant::object<
 	awl::backends::x11::window::basic_property_data<
 		char
 	>,
 	awl::backends::x11::window::basic_property_data<
-		short
+		short // NOLINT(google-runtime-int)
 	>,
 	awl::backends::x11::window::basic_property_data<
-		long
+		long // NOLINT(google-runtime-int)
 	>
->
-property_data;
+>;
 
 }
 }

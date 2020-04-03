@@ -35,7 +35,7 @@ awl::backends::wayland::registry_object<
 				_registry,
 				_id.get(),
 				&Interface,
-				1u
+				1U
 			)
 		)
 	},
@@ -48,10 +48,12 @@ awl::backends::wayland::registry_object<
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("wl_registry_bind failed")
 			};
+	}
 }
 
 template<
@@ -66,6 +68,7 @@ awl::backends::wayland::registry_object<
 >::registry_object(
 	registry_object &&_other
 )
+noexcept
 :
 	value_{
 		_other.value_
@@ -95,6 +98,7 @@ awl::backends::wayland::registry_object<
 >::operator=(
 	registry_object &&_other
 )
+noexcept
 {
 	std::swap(
 		value_,
@@ -124,9 +128,11 @@ awl::backends::wayland::registry_object<
 		!=
 		nullptr
 	)
+	{
 		Destroy(
 			value_
 		);
+	}
 }
 
 template<

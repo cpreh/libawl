@@ -1,4 +1,4 @@
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/base.hpp>
@@ -17,7 +17,7 @@
 
 
 awl::backends::x11::window::wrapped::wrapped(
-	awl::backends::x11::display & _display,
+	awl::backends::x11::display_ref const _display,
 	awl::backends::x11::screen const _screen,
 	Window const _window
 )
@@ -39,7 +39,7 @@ awl::backends::x11::window::wrapped::wrapped(
 	),
 	class_hint_(
 		awl::backends::x11::window::get_class_hint(
-			_display,
+			_display.get(),
 			_window
 		)
 	)
@@ -47,8 +47,7 @@ awl::backends::x11::window::wrapped::wrapped(
 }
 
 awl::backends::x11::window::wrapped::~wrapped()
-{
-}
+= default;
 
 bool
 awl::backends::x11::window::wrapped::destroyed() const
@@ -57,7 +56,7 @@ awl::backends::x11::window::wrapped::destroyed() const
 		false;
 }
 
-awl::backends::x11::display &
+awl::backends::x11::display_ref
 awl::backends::x11::window::wrapped::display() const
 {
 	return

@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/window/base_fwd.hpp>
 #include <awl/backends/x11/window/event/atom_vector.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -19,18 +19,18 @@ namespace event
 
 class wm_protocols
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		wm_protocols
 	);
 public:
 	wm_protocols(
-		awl::backends::x11::window::base &,
+		awl::backends::x11::window::base const &,
 		awl::backends::x11::window::event::atom_vector const &
 	);
 
-	~wm_protocols();
+	~wm_protocols(); // NOLINT(performance-trivially-destructible)
 private:
-	// TODO: unset what was given here again!
+	// TODO(philipp): unset what was given here again!
 };
 
 }

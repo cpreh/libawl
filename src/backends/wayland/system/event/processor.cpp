@@ -11,5 +11,4 @@ awl::backends::wayland::system::event::processor::processor()
 }
 
 awl::backends::wayland::system::event::processor::~processor()
-{
-}
+= default;

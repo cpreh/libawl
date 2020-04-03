@@ -3,7 +3,7 @@
 
 #include <awl/backends/wayland/cursor/object.hpp>
 #include <awl/backends/wayland/cursor/optional_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -19,7 +19,7 @@ class invisible
 :
 	public awl::backends::wayland::cursor::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		invisible
 	);
 public:
@@ -28,6 +28,7 @@ public:
 	~invisible()
 	override;
 
+	[[nodiscard]]
 	awl::backends::wayland::cursor::optional
 	get() const
 	override;

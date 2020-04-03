@@ -22,10 +22,12 @@ awl::backends::wayland::surface::surface(
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("Creating a surface failed")
 			};
+	}
 }
 
 awl::backends::wayland::surface::~surface()

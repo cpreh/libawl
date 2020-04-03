@@ -12,11 +12,12 @@ namespace backends
 namespace wayland
 {
 
-typedef
+using
+optional_shell
+=
 fcppt::optional::object<
 	awl::backends::wayland::shell
->
-optional_shell;
+>;
 
 }
 }

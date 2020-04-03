@@ -9,18 +9,20 @@
 
 void
 awl::backends::x11::window::event::change_mask(
-	awl::backends::x11::window::base &_window,
+	awl::backends::x11::window::base const &_window,
 	awl::backends::x11::window::event::mask const _mask
 )
 {
 	if(
 		_window.destroyed()
 	)
+	{
 		return;
+	}
 
 	// Always returns 1
 	::XSelectInput(
-		_window.display().get(),
+		_window.display().get().get(),
 		_window.get(),
 		_mask.get()
 	);

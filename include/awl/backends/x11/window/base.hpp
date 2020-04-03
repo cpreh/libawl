@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_BASE_HPP_INCLUDED
 
 #include <awl/backends/x11/Xlib.hpp>
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <awl/backends/x11/window/base_fwd.hpp>
@@ -13,7 +13,7 @@
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/object.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -29,7 +29,7 @@ class AWL_DETAIL_CLASS_SYMBOL base
 :
 	public awl::window::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		base
 	);
 protected:
@@ -40,30 +40,37 @@ public:
 	~base()
 	override;
 
+	[[nodiscard]]
 	virtual
 	bool
 	destroyed() const = 0;
 
+	[[nodiscard]]
 	virtual
-	awl::backends::x11::display &
+	awl::backends::x11::display_ref
 	display() const = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::x11::screen
 	screen() const = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::x11::visual::object const &
 	x11_visual() const = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::x11::window::rect
 	rect() const = 0;
 
+	[[nodiscard]]
 	virtual
 	Window
 	get() const = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::x11::window::const_optional_class_hint_ref
 	class_hint() const = 0;
@@ -73,11 +80,13 @@ public:
 	show()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::window::dim
 	size() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::visual::object const &
 	visual() const

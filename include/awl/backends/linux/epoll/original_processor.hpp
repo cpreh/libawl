@@ -12,7 +12,7 @@
 #include <awl/event/container.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/strong_typedef_std_hash.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -32,7 +32,7 @@ class AWL_DETAIL_CLASS_SYMBOL original_processor
 :
 	public awl::backends::posix::processor
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_processor
 	);
 public:
@@ -43,6 +43,7 @@ public:
 	~original_processor()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::event::connection_unique_ptr
 	register_fd(
@@ -50,6 +51,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::event::container
 	poll(
@@ -57,6 +59,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::timer::unique_ptr
 	create_timer(
@@ -66,12 +69,13 @@ public:
 private:
 	awl::backends::linux::epoll::set fd_set_;
 
-	typedef
+	using
+	timer_map
+	=
 	std::unordered_map<
 		awl::backends::posix::fd,
 		awl::backends::linux::timer::reference
-	>
-	timer_map;
+	>;
 
 	timer_map timers_;
 };

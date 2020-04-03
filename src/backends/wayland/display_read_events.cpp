@@ -19,8 +19,10 @@ awl::backends::wayland::display_read_events(
 		==
 		-1
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("Display read_events failed")
 			};
+	}
 }

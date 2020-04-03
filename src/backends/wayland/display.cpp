@@ -2,9 +2,7 @@
 
 
 awl::backends::wayland::display::display()
-{
-}
+= default;
 
 awl::backends::wayland::display::~display()
-{
-}
+= default;

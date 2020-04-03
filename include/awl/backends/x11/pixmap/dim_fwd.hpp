@@ -14,12 +14,13 @@ namespace x11
 namespace pixmap
 {
 
-typedef
+using
+dim
+=
 fcppt::math::dim::static_<
 	awl::backends::x11::pixmap::size,
 	2
->
-dim;
+>;
 
 }
 }

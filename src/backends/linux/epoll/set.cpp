@@ -29,8 +29,7 @@ awl::backends::linux::epoll::set::set()
 }
 
 awl::backends::linux::epoll::set::~set()
-{
-}
+= default;
 
 void
 awl::backends::linux::epoll::set::add(
@@ -113,10 +112,12 @@ awl::backends::linux::epoll::set::epoll(
 		==
 		-1
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("epoll_wait failed!")
 			};
+	}
 
 	unsigned const ready(
 		fcppt::cast::to_unsigned(
@@ -145,9 +146,12 @@ awl::backends::linux::epoll::set::epoll(
 
 				return
 					fcppt::optional::make_if(
-						event.events
-						&
-						EPOLLIN,
+						(
+							event.events
+							&
+							EPOLLIN
+						)
+						!= 0,
 						[
 							&event
 						]{

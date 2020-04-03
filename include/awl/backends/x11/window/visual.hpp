@@ -18,7 +18,7 @@ namespace window
 AWL_DETAIL_SYMBOL
 awl::backends::x11::visual::object_unique_ptr
 visual(
-	awl::backends::x11::window::base &
+	awl::backends::x11::window::base const &
 );
 
 }

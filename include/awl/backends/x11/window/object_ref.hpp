@@ -14,11 +14,12 @@ namespace x11
 namespace window
 {
 
-typedef
+using
+object_ref
+=
 fcppt::reference<
 	awl::backends::x11::window::object
->
-object_ref;
+>;
 
 }
 }

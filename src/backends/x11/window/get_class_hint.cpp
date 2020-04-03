@@ -28,15 +28,18 @@ awl::backends::x11::window::get_class_hint(
 		==
 		0
 	)
+	{
 		return
 			awl::backends::x11::window::optional_class_hint{};
+	}
 
-	typedef
+	using
+	char_holder
+	=
 	fcppt::unique_ptr<
 		char,
 		awl::backends::x11::deleter
-	>
-	char_holder;
+	>;
 
 	char_holder const res1(
 		data.res_name

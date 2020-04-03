@@ -16,8 +16,7 @@ awl::backends::wayland::system::event::base::base(
 }
 
 awl::backends::wayland::system::event::base::~base()
-{
-}
+= default;
 
 awl::backends::wayland::display &
 awl::backends::wayland::system::event::base::display() const

@@ -11,7 +11,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/event/container_reference.hpp>
 #include <awl/system/event/processor.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -25,12 +25,13 @@ namespace system
 namespace event
 {
 
+// NOLINTNEXTLINE(fuchsia-multiple-inheritance)
 class AWL_DETAIL_CLASS_SYMBOL processor
 :
 	public awl::system::event::processor,
 	public awl::backends::posix::processor_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		processor
 	);
 protected:
@@ -41,23 +42,28 @@ public:
 	~processor()
 	override;
 
-	// TODO: Should this be here?
+	// TODO(philipp): Should this be here?
+	[[nodiscard]]
 	virtual
 	awl::event::container_reference
 	events() = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::wayland::compositor const &
 	compositor() const = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::wayland::shell const &
 	shell() const = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::wayland::shm const &
 	shm() const = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::wayland::system::seat::set const &
 	seats() const = 0;

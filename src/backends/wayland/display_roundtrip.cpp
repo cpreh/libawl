@@ -19,8 +19,10 @@ awl::backends::wayland::display_roundtrip(
 		==
 		-1
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("Display roundtrip failed")
 			};
+	}
 }

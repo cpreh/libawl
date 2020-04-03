@@ -1,4 +1,5 @@
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/cursor/holder.hpp>
 #include <awl/backends/x11/cursor/holder_unique_ptr.hpp>
 #include <awl/backends/x11/cursor/load_font.hpp>
@@ -11,7 +12,7 @@
 
 awl::backends::x11::cursor::holder_unique_ptr
 awl::backends::x11::cursor::load_font(
-	awl::backends::x11::display const &_display,
+	awl::backends::x11::display_ref const _display,
 	awl::backends::x11::cursor::shape const _shape
 )
 {
@@ -21,7 +22,7 @@ awl::backends::x11::cursor::load_font(
 		>(
 			_display,
 			::XCreateFontCursor(
-				_display.get(),
+				_display.get().get(),
 				_shape.get()
 			)
 		);

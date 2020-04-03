@@ -22,5 +22,4 @@ awl::backends::wayland::system::event::seat_removed::seat_removed(
 }
 
 awl::backends::wayland::system::event::seat_removed::~seat_removed()
-{
-}
+= default;

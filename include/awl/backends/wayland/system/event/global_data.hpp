@@ -9,7 +9,8 @@
 #include <awl/backends/wayland/system/seat/set.hpp>
 #include <awl/event/container.hpp>
 #include <awl/main/optional_exit_code.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
 
@@ -26,31 +27,42 @@ namespace event
 
 struct global_data
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		global_data
 	);
 public:
 	global_data(
-		fcppt::log::object &,
+		fcppt::reference<
+			fcppt::log::object
+		>,
 		awl::backends::wayland::display_reference
 	);
 
 	~global_data();
 
-	fcppt::log::object &log_;
+	fcppt::reference<
+		fcppt::log::object
+	> const log_; // NOLINT(misc-non-private-member-variables-in-classes)
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::backends::wayland::display_reference const display_;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::backends::wayland::optional_compositor compositor_;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::backends::wayland::optional_shell shell_;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::backends::wayland::optional_shm shm_;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::backends::wayland::system::seat::set seats_;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::main::optional_exit_code exit_code_;
 
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::event::container last_events_;
 };
 

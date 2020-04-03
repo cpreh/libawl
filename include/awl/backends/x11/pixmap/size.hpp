@@ -11,9 +11,10 @@ namespace x11
 namespace pixmap
 {
 
-typedef
-unsigned
-size;
+using
+size
+=
+unsigned;
 
 }
 }

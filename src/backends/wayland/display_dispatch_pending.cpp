@@ -19,8 +19,10 @@ awl::backends::wayland::display_dispatch_pending(
 		==
 		-1
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("Display dispatch_pending failed")
 			};
+	}
 }

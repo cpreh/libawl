@@ -16,11 +16,12 @@ namespace linux
 namespace epoll
 {
 
-typedef
+using
+fd_vector
+=
 std::vector<
 	awl::backends::posix::fd
->
-fd_vector;
+>;
 
 }
 }

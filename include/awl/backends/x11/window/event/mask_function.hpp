@@ -16,13 +16,14 @@ namespace window
 namespace event
 {
 
-typedef
+using
+mask_function
+=
 fcppt::function<
 	void (
 		awl::backends::x11::window::event::mask_bit
 	)
->
-mask_function;
+>;
 
 }
 }

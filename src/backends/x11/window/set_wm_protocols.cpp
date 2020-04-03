@@ -17,8 +17,9 @@ awl::backends::x11::window::set_wm_protocols(
 {
 	if(
 		::XSetWMProtocols(
-			_window.display().get(),
+			_window.display().get().get(),
 			_window.get(),
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
 			const_cast<
 				Atom *
 			>(
@@ -29,7 +30,10 @@ awl::backends::x11::window::set_wm_protocols(
 		==
 		0
 	)
-		throw awl::exception(
-			FCPPT_TEXT("XSetWMProtocols failed!")
-		);
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("XSetWMProtocols failed!")
+			};
+	}
 }

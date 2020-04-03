@@ -10,12 +10,13 @@ namespace awl
 namespace cursor
 {
 
-typedef
+using
+hotspot
+=
 fcppt::math::vector::static_<
 	awl::cursor::size,
 	2
->
-hotspot;
+>;
 
 }
 }

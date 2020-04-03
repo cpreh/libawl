@@ -1,5 +1,6 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/cursor/background_color.hpp>
 #include <awl/backends/x11/cursor/create_pixmap.hpp>
 #include <awl/backends/x11/cursor/dest_pixmap.hpp>
@@ -19,24 +20,26 @@
 
 awl::backends::x11::cursor::holder_unique_ptr
 awl::backends::x11::cursor::create_pixmap(
-	awl::backends::x11::display const &_display,
+	awl::backends::x11::display_ref const _display,
 	awl::backends::x11::cursor::source_pixmap const &_source_pixmap,
 	awl::backends::x11::cursor::dest_pixmap const &_dest_pixmap,
 	awl::backends::x11::cursor::foreground_color const &_foreground_color,
 	awl::backends::x11::cursor::background_color const &_background_color,
-	awl::cursor::hotspot const _hotspot
+	awl::cursor::hotspot const &_hotspot
 )
 {
 	Cursor const result{
 		::XCreatePixmapCursor(
-			_display.get(),
+			_display.get().get(),
 			_source_pixmap.get().get().get(),
 			_dest_pixmap.get().get().get(),
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
 			const_cast<
 				XColor *
 			>(
 				&_foreground_color.get()
 			),
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
 			const_cast<
 				XColor *
 			>(
@@ -52,10 +55,12 @@ awl::backends::x11::cursor::create_pixmap(
 		==
 		None
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("XCreatePixmapCursor failed!")
 			};
+	}
 
 	return
 		fcppt::make_unique_ptr<

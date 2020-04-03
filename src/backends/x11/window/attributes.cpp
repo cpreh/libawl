@@ -10,23 +10,25 @@
 
 XWindowAttributes
 awl::backends::x11::window::attributes(
-	awl::backends::x11::window::base &_window
+	awl::backends::x11::window::base const &_window
 )
 {
 	XWindowAttributes ret;
 
 	if(
 		::XGetWindowAttributes(
-			_window.display().get(),
+			_window.display().get().get(),
 			_window.get(),
 			&ret
 		)
 		!= 1
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("XGetWindowAttributes() failed!")
 			};
+	}
 
 	return
 		ret;

@@ -16,11 +16,12 @@ namespace wayland
 namespace cursor
 {
 
-typedef
+using
+optional
+=
 fcppt::optional::object<
 	wl_cursor *
->
-optional;
+>;
 
 }
 }

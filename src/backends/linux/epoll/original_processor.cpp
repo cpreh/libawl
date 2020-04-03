@@ -41,8 +41,7 @@ awl::backends::linux::epoll::original_processor::original_processor()
 }
 
 awl::backends::linux::epoll::original_processor::~original_processor()
-{
-}
+= default;
 
 awl::event::connection_unique_ptr
 awl::backends::linux::epoll::original_processor::register_fd(
@@ -120,7 +119,7 @@ awl::backends::linux::epoll::original_processor::poll(
 							> const _timer
 						)
 						{
-							// TODO: Should we include this number in the timer event?
+							// TODO(philipp): Should we include this number in the timer event?
 							_timer.get().get().read();
 
 							return

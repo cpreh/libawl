@@ -37,21 +37,25 @@ public:
 	AWL_DETAIL_SYMBOL
 	registry_object(
 		registry_object &&
-	);
+	)
+	noexcept;
 
 	AWL_DETAIL_SYMBOL
 	registry_object &
 	operator=(
 		registry_object &&
-	);
+	)
+	noexcept;
 
 	AWL_DETAIL_SYMBOL
 	~registry_object();
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	Type *
 	get() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::registry_id
 	name() const;

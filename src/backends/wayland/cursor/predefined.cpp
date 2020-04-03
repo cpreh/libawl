@@ -28,6 +28,7 @@ awl::backends::wayland::cursor::predefined::predefined(
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("Getting a cursor with name ")
@@ -38,11 +39,11 @@ awl::backends::wayland::cursor::predefined::predefined(
 				+
 				FCPPT_TEXT(" failed")
 			};
+	}
 }
 
 awl::backends::wayland::cursor::predefined::~predefined()
-{
-}
+= default;
 
 awl::backends::wayland::cursor::optional
 awl::backends::wayland::cursor::predefined::get() const

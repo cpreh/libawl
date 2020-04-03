@@ -12,11 +12,12 @@ namespace backends
 namespace wayland
 {
 
-typedef
+using
+optional_compositor
+=
 fcppt::optional::object<
 	awl::backends::wayland::compositor
->
-optional_compositor;
+>;
 
 }
 }

@@ -26,10 +26,12 @@ awl::backends::linux::timerfd::object::object()
 		==
 		-1
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("timerfd_create failed")
 			};
+	}
 }
 
 
@@ -74,6 +76,7 @@ awl::backends::linux::timerfd::object::set_time(
 						std::chrono::duration_cast<
 							awl::backends::posix::duration
 						>(
+							// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 							std::chrono::seconds(
 								1
 							)
@@ -92,10 +95,12 @@ awl::backends::linux::timerfd::object::set_time(
 		convert_time(
 			_setting.delay().get()
 			==
+			// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 			awl::timer::duration{
 				0
 			}
 			?
+				// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 				awl::timer::duration{
 					1
 				}
@@ -114,16 +119,18 @@ awl::backends::linux::timerfd::object::set_time(
 		!=
 		0
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("timerfd_settime failed")
 			};
+	}
 }
 
 awl::backends::linux::timerfd::object::value_type
 awl::backends::linux::timerfd::object::read()
 {
-	value_type ret;
+	value_type ret{0};
 
 	FCPPT_ASSERT_ERROR(
 		::read(

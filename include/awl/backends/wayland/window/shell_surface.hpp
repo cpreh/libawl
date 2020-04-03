@@ -4,7 +4,7 @@
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/surface_fwd.hpp>
 #include <awl/backends/wayland/window/shell_surface_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
@@ -21,7 +21,7 @@ namespace window
 
 class shell_surface
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		shell_surface
 	);
 public:
@@ -32,6 +32,7 @@ public:
 
 	~shell_surface();
 
+	[[nodiscard]]
 	wl_shell_surface *
 	get() const;
 private:

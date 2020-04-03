@@ -7,6 +7,15 @@
 #include <fcppt/config/external_end.hpp>
 
 
+namespace
+{
+
+constexpr int const cursor_size{
+	32
+};
+
+}
+
 awl::backends::wayland::cursor::theme::theme(
 	awl::backends::wayland::shm const &_shm
 )
@@ -14,7 +23,7 @@ awl::backends::wayland::cursor::theme::theme(
 	impl_{
 		::wl_cursor_theme_load(
 			nullptr,
-			32,
+			cursor_size,
 			_shm.get()
 		)
 	}
@@ -24,10 +33,12 @@ awl::backends::wayland::cursor::theme::theme(
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("Loading a cursor theme failed")
 			};
+	}
 }
 
 awl::backends::wayland::cursor::theme::~theme()

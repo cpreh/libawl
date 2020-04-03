@@ -15,21 +15,19 @@ awl::backends::x11::window::get_geometry(
 	awl::backends::x11::window::base const &_window
 )
 {
-	Window root_return;
+	Window root_return{};
 
-	int
-		x_return,
-		y_return;
+	int x_return{0};
+	int y_return{0};
 
-	unsigned
-		width_return,
-		height_return,
-		border_width_return,
-		depth_return;
+	unsigned width_return{0};
+	unsigned height_return{0};
+	unsigned border_width_return{0};
+	unsigned depth_return{0};
 
 	if(
 		::XGetGeometry(
-			_window.display().get(),
+			_window.display().get().get(),
 			_window.get(),
 			&root_return,
 			&x_return,
@@ -41,10 +39,12 @@ awl::backends::x11::window::get_geometry(
 		)
 		== 0
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("XGetGeometry() failed!")
 			};
+	}
 
 	return
 		awl::backends::x11::window::rect{

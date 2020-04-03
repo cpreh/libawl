@@ -12,11 +12,12 @@ namespace backends
 namespace posix
 {
 
-typedef
+using
+optional_duration
+=
 fcppt::optional::object<
 	awl::backends::posix::duration
->
-optional_duration;
+>;
 
 }
 }

@@ -14,11 +14,12 @@ namespace x11
 namespace visual
 {
 
-typedef
+using
+object_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::x11::visual::object
->
-object_unique_ptr;
+>;
 
 }
 }

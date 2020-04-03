@@ -12,11 +12,12 @@ namespace backends
 namespace wayland
 {
 
-typedef
+using
+display_reference
+=
 fcppt::reference<
 	awl::backends::wayland::display
->
-display_reference;
+>;
 
 }
 }

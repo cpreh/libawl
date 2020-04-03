@@ -14,11 +14,12 @@ namespace x11
 namespace pixmap
 {
 
-typedef
+using
+const_holder_ref
+=
 fcppt::reference<
 	awl::backends::x11::pixmap::holder const
->
-const_holder_ref;
+>;
 
 }
 }

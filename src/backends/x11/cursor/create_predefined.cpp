@@ -1,4 +1,4 @@
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/cursor/convert_predefined.hpp>
 #include <awl/backends/x11/cursor/create_predefined.hpp>
 #include <awl/backends/x11/cursor/holder.hpp>
@@ -11,7 +11,7 @@
 
 awl::backends::x11::cursor::object_unique_ptr
 awl::backends::x11::cursor::create_predefined(
-	awl::backends::x11::display const &_display,
+	awl::backends::x11::display_ref const _display,
 	awl::cursor::type const _type
 )
 {

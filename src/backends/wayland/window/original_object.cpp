@@ -16,6 +16,7 @@
 #include <awl/window/event/resize.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -33,7 +34,7 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <stdint.h>
+#include <cstdint>
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
@@ -45,7 +46,7 @@ void
 shell_surface_ping(
 	void *,
 	wl_shell_surface *const _shell_surface,
-	uint32_t _serial
+	std::uint32_t _serial
 )
 {
 	::wl_shell_surface_pong(
@@ -58,9 +59,9 @@ void
 shell_surface_configure(
 	void *const _data,
 	wl_shell_surface *,
-	uint32_t,
-	int32_t const _width,
-	int32_t const _height
+	std::uint32_t,
+	std::int32_t const _width,
+	std::int32_t const _height
 )
 {
 	awl::backends::wayland::window::event::data &data{
@@ -93,7 +94,7 @@ shell_surface_configure(
 	};
 
 	FCPPT_LOG_DEBUG(
-		data.log_,
+		data.log_.get(),
 		fcppt::log::out
 			<<
 			FCPPT_TEXT("Got resize event ")
@@ -119,7 +120,7 @@ shell_surface_configure(
 		)
 	);
 
-	// TODO: Add hide and show events
+	// TODO(philipp): Add hide and show events
 }
 
 void
@@ -139,7 +140,9 @@ wl_shell_surface_listener const shell_surface_listener{
 }
 
 awl::backends::wayland::window::original_object::original_object(
-	fcppt::log::object &_log,
+	fcppt::reference<
+		fcppt::log::object
+	> const _log,
 	awl::event::container_reference const _events,
 	awl::backends::wayland::display const &_display,
 	awl::backends::wayland::compositor const &_compositor,
@@ -173,7 +176,7 @@ awl::backends::wayland::window::original_object::original_object(
 		_events
 	}
 {
-	// TODO: We have to keep track of pointers that enter and set their cursors
+	// TODO(philipp): We have to keep track of pointers that enter and set their cursors
 	fcppt::optional::maybe_void(
 		_parameters.title(),
 		[
@@ -240,8 +243,7 @@ awl::backends::wayland::window::original_object::original_object(
 }
 
 awl::backends::wayland::window::original_object::~original_object()
-{
-}
+= default;
 
 void
 awl::backends::wayland::window::original_object::show()

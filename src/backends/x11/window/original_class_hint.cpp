@@ -2,7 +2,7 @@
 #include <awl/backends/x11/window/class_hint.hpp>
 #include <awl/backends/x11/window/original_class_hint.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xutil.h>
@@ -12,14 +12,15 @@
 class awl::backends::x11::window::original_class_hint::impl
 {
 public:
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		impl
 	);
-public:
+
 	impl();
 
 	~impl();
 
+	[[nodiscard]]
 	XClassHint *
 	get() const;
 private:
@@ -47,6 +48,7 @@ awl::backends::x11::window::original_class_hint::original_class_hint(
 	);
 
 	hint->res_name =
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
 		const_cast<
 			char *
 		>(
@@ -54,6 +56,7 @@ awl::backends::x11::window::original_class_hint::original_class_hint(
 		);
 
 	hint->res_class =
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
 		const_cast<
 			char *
 		>(
@@ -62,8 +65,7 @@ awl::backends::x11::window::original_class_hint::original_class_hint(
 }
 
 awl::backends::x11::window::original_class_hint::~original_class_hint()
-{
-}
+= default;
 
 XClassHint *
 awl::backends::x11::window::original_class_hint::get() const
@@ -90,10 +92,12 @@ awl::backends::x11::window::original_class_hint::impl::impl()
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("XAllocClassHint() failed!")
 			};
+	}
 }
 
 awl::backends::x11::window::original_class_hint::impl::~impl()

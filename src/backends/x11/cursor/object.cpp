@@ -22,8 +22,7 @@ awl::backends::x11::cursor::object::object(
 }
 
 awl::backends::x11::cursor::object::~object()
-{
-}
+= default;
 
 Cursor
 awl::backends::x11::cursor::object::get() const

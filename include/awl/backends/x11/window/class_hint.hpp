@@ -38,10 +38,12 @@ public:
 		res_class_type &&
 	);
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	std::string const &
 	res_name() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	std::string const &
 	res_class() const;

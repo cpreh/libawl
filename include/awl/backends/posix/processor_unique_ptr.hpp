@@ -12,11 +12,12 @@ namespace backends
 namespace posix
 {
 
-typedef
+using
+processor_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::posix::processor
->
-processor_unique_ptr;
+>;
 
 }
 }

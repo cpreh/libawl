@@ -5,6 +5,7 @@
 #include <awl/backends/posix/timer.hpp>
 #include <awl/event/connection.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
+#include <fcppt/use.hpp>
 
 
 awl::backends::linux::timer::object::object(
@@ -27,8 +28,7 @@ awl::backends::linux::timer::object::object(
 }
 
 awl::backends::linux::timer::object::~object()
-{
-}
+= default;
 
 awl::backends::posix::fd
 awl::backends::linux::timer::object::fd() const
@@ -40,5 +40,11 @@ awl::backends::linux::timer::object::fd() const
 void
 awl::backends::linux::timer::object::read()
 {
-	timer_->read();
+	auto const result{
+		timer_->read()
+	};
+
+	FCPPT_USE(
+		result
+	);
 }

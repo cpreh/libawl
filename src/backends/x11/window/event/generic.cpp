@@ -28,8 +28,7 @@ awl::backends::x11::window::event::generic::generic(
 }
 
 awl::backends::x11::window::event::generic::~generic()
-{
-}
+= default;
 
 awl::backends::x11::window::object &
 awl::backends::x11::window::event::generic::window() const

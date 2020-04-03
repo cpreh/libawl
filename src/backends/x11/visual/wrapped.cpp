@@ -22,8 +22,7 @@ awl::backends::x11::visual::wrapped::wrapped(
 }
 
 awl::backends::x11::visual::wrapped::~wrapped()
-{
-}
+= default;
 
 Visual *
 awl::backends::x11::visual::wrapped::get() const

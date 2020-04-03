@@ -28,10 +28,12 @@ awl::backends::x11::system::event::generic::generic(
 		==
 		False
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("XGetEventData failed!")
 			};
+	}
 }
 
 awl::backends::x11::system::event::generic::~generic()

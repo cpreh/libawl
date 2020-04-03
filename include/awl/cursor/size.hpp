@@ -7,9 +7,10 @@ namespace awl
 namespace cursor
 {
 
-typedef
-unsigned
-size;
+using
+size
+=
+unsigned;
 
 }
 }

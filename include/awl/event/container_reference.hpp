@@ -10,11 +10,12 @@ namespace awl
 namespace event
 {
 
-typedef
+using
+container_reference
+=
 fcppt::reference<
 	awl::event::container
->
-container_reference;
+>;
 
 }
 }

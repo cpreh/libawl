@@ -20,20 +20,19 @@ awl::backends::x11::window::base::base()
 }
 
 awl::backends::x11::window::base::~base()
-{
-}
+= default;
 
 void
 awl::backends::x11::window::base::show()
 {
 	// always returns 1
 	::XMapRaised(
-		this->display().get(),
+		this->display().get().get(),
 		this->get()
 	);
 
 	awl::backends::x11::sync(
-		this->display(),
+		this->display().get(),
 		awl::backends::x11::discard{
 			false
 		}

@@ -7,7 +7,7 @@
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -23,7 +23,7 @@ class AWL_DETAIL_CLASS_SYMBOL object
 :
 	public awl::backends::x11::window::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 protected:
@@ -34,12 +34,14 @@ public:
 	~object()
 	override;
 
+	[[nodiscard]]
 	virtual
 	awl::event::connection_unique_ptr
 	register_event(
 		awl::backends::x11::window::event::type
 	) = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::event::connection_unique_ptr
 	add_event_mask(

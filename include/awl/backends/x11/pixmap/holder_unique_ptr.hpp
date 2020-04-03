@@ -14,11 +14,12 @@ namespace x11
 namespace pixmap
 {
 
-typedef
+using
+holder_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::x11::pixmap::holder
->
-holder_unique_ptr;
+>;
 
 }
 }

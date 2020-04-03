@@ -12,11 +12,12 @@ namespace backends
 namespace wayland
 {
 
-typedef
+using
+optional_shm
+=
 fcppt::optional::object<
 	awl::backends::wayland::shm
->
-optional_shm;
+>;
 
 }
 }

@@ -58,7 +58,7 @@ struct convert_format_impl<
 
 template<>
 struct convert_format_impl<
-	short
+	short // NOLINT(google-runtime-int)
 >
 {
 	static constexpr const int value{16};
@@ -66,7 +66,7 @@ struct convert_format_impl<
 
 template<>
 struct convert_format_impl<
-	long
+	long // NOLINT(google-runtime-int)
 >
 {
 	static constexpr const int value{32};
@@ -91,17 +91,17 @@ template<
 void
 change_property_impl(
 	awl::backends::x11::window::base const &_window,
-	awl::backends::x11::window::property const _name,
-	awl::backends::x11::window::property_type const _type,
-	awl::backends::x11::window::property_mode const _mode,
+	awl::backends::x11::window::property const _name, // NOLINT(readability-avoid-const-params-in-decls)
+	awl::backends::x11::window::property_type const _type, // NOLINT(readability-avoid-const-params-in-decls)
+	awl::backends::x11::window::property_mode const _mode, // NOLINT(readability-avoid-const-params-in-decls)
 	awl::backends::x11::window::basic_property_data<
 		Type
-	> const _data
+	> const _data // NOLINT(readability-avoid-const-params-in-decls)
 )
 {
 	// Always returns 1
 	XChangeProperty(
-		_window.display().get(),
+		_window.display().get().get(),
 		_window.get(),
 		_name.get().get(),
 		_type.get().get(),

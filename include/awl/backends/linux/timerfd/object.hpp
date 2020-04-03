@@ -4,7 +4,7 @@
 #include <awl/backends/linux/timerfd/object_fwd.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/timer/setting_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
@@ -21,7 +21,7 @@ namespace timerfd
 
 class object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -29,6 +29,7 @@ public:
 
 	~object();
 
+	[[nodiscard]]
 	awl::backends::posix::fd
 	get() const;
 
@@ -37,10 +38,12 @@ public:
 		awl::timer::setting const &
 	);
 
-	typedef
-	std::uint64_t
-	value_type;
+	using
+	value_type
+	=
+	std::uint64_t;
 
+	[[nodiscard]]
 	value_type
 	read();
 private:

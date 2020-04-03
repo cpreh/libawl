@@ -10,7 +10,7 @@
 #include <awl/event/container.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -22,25 +22,28 @@ namespace posix
 
 class AWL_DETAIL_CLASS_SYMBOL processor
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		processor
 	);
 protected:
 	AWL_DETAIL_SYMBOL
 	processor();
 public:
+	[[nodiscard]]
 	virtual
 	awl::event::connection_unique_ptr
 	register_fd(
 		awl::backends::posix::fd const &
 	) = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::event::container
 	poll(
 		awl::backends::posix::optional_duration const &
 	) = 0;
 
+	[[nodiscard]]
 	virtual
 	awl::timer::unique_ptr
 	create_timer(

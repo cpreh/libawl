@@ -2,6 +2,7 @@
 #include <awl/backends/x11/visual/create_info.hpp>
 #include <awl/backends/x11/visual/get_info.hpp>
 #include <awl/backends/x11/visual/info_unique_ptr.hpp>
+#include <awl/backends/x11/visual/mask.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -12,14 +13,19 @@
 awl::backends::x11::visual::info_unique_ptr
 awl::backends::x11::visual::create_info(
 	awl::backends::x11::display const &_display,
-	Visual &_visual
+	Visual const &_visual
 )
 {
 	XVisualInfo tpl;
 
 	tpl.visualid =
 		::XVisualIDFromVisual(
-			&_visual
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+			const_cast<
+				Visual *
+			>(
+				&_visual
+			)
 		);
 
 	tpl.red_mask =  _visual.red_mask;
@@ -31,12 +37,15 @@ awl::backends::x11::visual::create_info(
 	return
 		awl::backends::x11::visual::get_info(
 			_display,
-			VisualIDMask |
-			VisualRedMaskMask |
-			VisualGreenMaskMask |
-			VisualBlueMaskMask |
-			VisualBitsPerRGBMask |
-			VisualClassMask,
+			awl::backends::x11::visual::mask{
+				// NOLINTNEXTLINE(hicpp-signed-bitwise)
+				VisualIDMask |
+				VisualRedMaskMask |
+				VisualGreenMaskMask |
+				VisualBlueMaskMask |
+				VisualBitsPerRGBMask |
+				VisualClassMask
+			},
 			tpl
 		);
 }

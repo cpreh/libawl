@@ -25,10 +25,12 @@ public:
 		awl::backends::x11::window::atom_count
 	);
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	Atom const *
 	get() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::window::atom_count
 	count() const;

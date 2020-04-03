@@ -7,9 +7,10 @@ namespace awl
 namespace window
 {
 
-typedef
-int
-unit;
+using
+unit
+=
+int;
 
 }
 }

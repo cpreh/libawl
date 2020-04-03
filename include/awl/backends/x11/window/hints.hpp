@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_WINDOW_HINTS_HPP_INCLUDED
 
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>
@@ -18,7 +18,7 @@ namespace window
 
 class hints
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		hints
 	);
 public:
@@ -28,6 +28,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	~hints();
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	XWMHints *
 	get() const;

@@ -22,5 +22,4 @@ awl::backends::wayland::system::event::seat_added::seat_added(
 }
 
 awl::backends::wayland::system::event::seat_added::~seat_added()
-{
-}
+= default;

@@ -21,10 +21,12 @@ awl::backends::wayland::original_display::original_display()
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("wl_display_connect failed")
 			};
+	}
 }
 
 wl_display *

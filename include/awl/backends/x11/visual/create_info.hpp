@@ -20,7 +20,7 @@ AWL_DETAIL_SYMBOL
 awl::backends::x11::visual::info_unique_ptr
 create_info(
 	awl::backends::x11::display const &,
-	Visual &
+	Visual const &
 );
 
 }

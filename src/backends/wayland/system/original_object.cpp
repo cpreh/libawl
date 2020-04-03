@@ -1,5 +1,5 @@
 #include <awl/log_location.hpp>
-#include <awl/backends/wayland/display_fwd.hpp>
+#include <awl/backends/wayland/display.hpp>
 #include <awl/backends/wayland/display_roundtrip.hpp>
 #include <awl/backends/wayland/cursor/convert_name.hpp>
 #include <awl/backends/wayland/cursor/create_invisible.hpp>
@@ -22,7 +22,9 @@
 #include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/parameters.hpp>
@@ -51,8 +53,16 @@ awl::backends::wayland::system::original_object::original_object(
 			fcppt::make_unique_ptr<
 				awl::backends::wayland::system::event::original_processor
 			>(
-				log_,
-				display_
+				fcppt::make_ref(
+					log_
+				),
+				fcppt::reference_to_base<
+					awl::backends::wayland::display
+				>(
+					fcppt::make_ref(
+						display_
+					)
+				)
 			)
 		)
 	},
@@ -63,8 +73,7 @@ awl::backends::wayland::system::original_object::original_object(
 }
 
 awl::backends::wayland::system::original_object::~original_object()
-{
-}
+= default;
 
 awl::window::object_unique_ptr
 awl::backends::wayland::system::original_object::create_window(
@@ -78,7 +87,9 @@ awl::backends::wayland::system::original_object::create_window(
 			fcppt::make_unique_ptr<
 				awl::backends::wayland::window::original_object
 			>(
-				log_,
+				fcppt::make_ref(
+					log_
+				),
 				processor_->events(),
 				display_,
 				processor_->compositor(),
@@ -88,7 +99,7 @@ awl::backends::wayland::system::original_object::create_window(
 		)
 	};
 
-	// TODO: Do we need this?
+	// TODO(philipp): Do we need this?
 	awl::backends::wayland::display_roundtrip(
 		display_
 	);

@@ -40,13 +40,14 @@ awl::backends::x11::window::event::mask_for_each(
 				_index
 			);
 
-			typedef
+			using
+			index
+			=
 			fcppt::tag_type<
 				decltype(
 					_index
 				)
-			>
-			index;
+			>;
 
 			fcppt::bit::mask<
 				awl::backends::x11::window::event::mask::value_type
@@ -63,11 +64,13 @@ awl::backends::x11::window::event::mask_for_each(
 					mask_bit
 				)
 			)
+			{
 				_mask_function(
 					awl::backends::x11::window::event::mask_bit{
 						mask_bit.get()
 					}
 				);
+			}
 		}
 	);
 }

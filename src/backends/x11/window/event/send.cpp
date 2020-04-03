@@ -19,10 +19,11 @@ awl::backends::x11::window::event::send(
 {
 	if(
 		::XSendEvent(
-			_window.display().get(),
+			_window.display().get().get(),
 			_window.get(),
 			False, // propagate
 			_mask.get(),
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
 			const_cast<
 				XEvent *
 			>(
@@ -31,7 +32,10 @@ awl::backends::x11::window::event::send(
 		)
 		== 0
 	)
-		throw awl::exception(
-			FCPPT_TEXT("XSendEvent() failed!")
-		);
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("XSendEvent() failed!")
+			};
+	}
 }

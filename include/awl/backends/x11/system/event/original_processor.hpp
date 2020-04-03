@@ -7,11 +7,10 @@
 #include <awl/backends/posix/processor_unique_ptr.hpp>
 #include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/atom.hpp>
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/system/event/object_fwd.hpp>
 #include <awl/backends/x11/system/event/original_processor_fwd.hpp>
 #include <awl/backends/x11/system/event/processor.hpp>
-#include <awl/backends/x11/window/object_fwd.hpp>
 #include <awl/backends/x11/window/object_ref.hpp>
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/detail/class_symbol.hpp>
@@ -25,8 +24,7 @@
 #include <awl/system/event/result_fwd.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
-#include <fcppt/reference_impl.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <map>
 #include <fcppt/config/external_end.hpp>
@@ -47,25 +45,27 @@ class AWL_DETAIL_CLASS_SYMBOL original_processor
 :
 	public awl::backends::x11::system::event::processor
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_processor
 	);
 public:
 	AWL_DETAIL_SYMBOL
 	explicit
 	original_processor(
-		awl::backends::x11::display &
+		awl::backends::x11::display_ref
 	);
 
 	AWL_DETAIL_SYMBOL
 	~original_processor()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::system::event::result
 	poll()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::system::event::result
 	next()
@@ -78,6 +78,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::timer::unique_ptr
 	create_timer(
@@ -85,50 +86,59 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::posix::processor &
 	fd_processor()
 	override;
 
+	[[nodiscard]]
 	awl::event::connection_unique_ptr
 	add_window(
-		awl::backends::x11::window::object &
+		awl::backends::x11::window::object_ref
 	);
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::atom
 	delete_window_atom() const;
 private:
+	[[nodiscard]]
 	awl::system::event::result
 	process(
 		awl::backends::posix::optional_duration const &
 	) const;
 
+	[[nodiscard]]
 	awl::event::container
 	process_fds(
 		awl::backends::posix::optional_duration const &
 	) const;
 
+	[[nodiscard]]
 	awl::event::container
 	process_pending() const;
 
+	[[nodiscard]]
 	awl::event::optional_base_unique_ptr
 	process_x11_event(
 		awl::backends::x11::system::event::object const &
 	) const;
 
+	[[nodiscard]]
 	awl::event::optional_base_unique_ptr
 	make_x11_event(
 		awl::backends::x11::system::event::object const &
 	) const;
 
+	[[nodiscard]]
 	awl::event::base_unique_ptr
 	process_window_event(
 		awl::backends::x11::window::object_ref,
 		awl::backends::x11::window::event::object const &
 	) const;
 
-	awl::backends::x11::display &display_;
+	awl::backends::x11::display_ref const display_;
 
 	awl::backends::posix::fd const fd_;
 
@@ -145,9 +155,7 @@ private:
 	typedef
 	std::map<
 		Window,
-		fcppt::reference<
-			awl::backends::x11::window::object
-		>
+		awl::backends::x11::window::object_ref
 	>
 	window_map;
 

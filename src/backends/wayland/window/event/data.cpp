@@ -1,11 +1,14 @@
 #include <awl/backends/wayland/window/event/data.hpp>
 #include <awl/event/container_reference.hpp>
 #include <awl/window/reference.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
 
 awl::backends::wayland::window::event::data::data(
-	fcppt::log::object &_log,
+	fcppt::reference<
+		fcppt::log::object
+	> const _log,
 	awl::window::reference const _reference,
 	awl::event::container_reference const _events
 )
@@ -24,5 +27,4 @@ awl::backends::wayland::window::event::data::data(
 }
 
 awl::backends::wayland::window::event::data::~data()
-{
-}
+= default;

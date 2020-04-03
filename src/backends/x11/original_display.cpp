@@ -16,17 +16,23 @@ awl::backends::x11::original_display::original_display()
 	)
 {
 	if(
-		!ptr_
+		ptr_
+		==
+		nullptr
 	)
-		throw awl::exception(
-			FCPPT_TEXT("XOpenDisplay failed or dsp is 0!")
-		);
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("XOpenDisplay failed or dsp is 0!")
+			};
+	}
 }
 
 Display *
 awl::backends::x11::original_display::get() const
 {
-	return ptr_;
+	return
+		ptr_;
 }
 
 awl::backends::x11::original_display::~original_display()

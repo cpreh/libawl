@@ -2,9 +2,9 @@
 #define AWL_BACKENDS_X11_WINDOW_HOLDER_HPP_INCLUDED
 
 #include <awl/backends/x11/X.hpp>
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/window/holder_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -18,12 +18,12 @@ namespace window
 
 class holder
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		holder
 	);
 public:
 	holder(
-		awl::backends::x11::display &,
+		awl::backends::x11::display_ref,
 		Window
 	);
 
@@ -32,16 +32,18 @@ public:
 	void
 	destroy();
 
+	[[nodiscard]]
 	bool
 	destroyed() const;
 
+	[[nodiscard]]
 	Window
 	get() const;
 private:
 	void
 	do_destroy();
 
-	awl::backends::x11::display &display_;
+	awl::backends::x11::display_ref const display_;
 
 	Window const window_;
 

@@ -9,7 +9,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/event/container_reference.hpp>
 #include <fcppt/enable_shared_from_this_decl.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -30,7 +30,7 @@ class object
 			awl::backends::wayland::system::seat::object
 		>
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -45,14 +45,17 @@ public:
 	void
 	init_ptr();
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::registry_id
 	name() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::seat const &
 	get() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::system::seat::caps_field
 	caps() const;

@@ -478,6 +478,7 @@ set(
 	include/awl/backends/x11/visual/default.hpp
 	include/awl/backends/x11/visual/get_info.hpp
 	include/awl/backends/x11/visual/info_unique_ptr.hpp
+	include/awl/backends/x11/visual/mask.hpp
 	include/awl/backends/x11/visual/object.hpp
 	include/awl/backends/x11/visual/object_fwd.hpp
 	include/awl/backends/x11/visual/object_unique_ptr.hpp

@@ -9,11 +9,12 @@ namespace awl
 namespace event
 {
 
-typedef
+using
+connection_function
+=
 fcppt::function<
 	void ()
->
-connection_function;
+>;
 
 }
 }

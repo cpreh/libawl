@@ -8,7 +8,7 @@
 
 awl::backends::x11::system::event::object
 awl::backends::x11::system::event::next(
-	awl::backends::x11::display &_display
+	awl::backends::x11::display const &_display
 )
 {
 	XEvent event;

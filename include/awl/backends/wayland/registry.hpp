@@ -4,7 +4,7 @@
 #include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/backends/wayland/registry_fwd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
@@ -19,7 +19,7 @@ namespace wayland
 
 class registry
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		registry
 	);
 public:
@@ -32,6 +32,7 @@ public:
 	AWL_DETAIL_SYMBOL
 	~registry();
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	wl_registry *
 	get() const;

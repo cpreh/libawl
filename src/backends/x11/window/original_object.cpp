@@ -1,6 +1,7 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/cursor/object.hpp>
 #include <awl/backends/x11/system/event/original_processor.hpp>
@@ -31,6 +32,8 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
@@ -44,9 +47,11 @@
 
 
 awl::backends::x11::window::original_object::original_object(
-	awl::backends::x11::display &_display,
+	awl::backends::x11::display_ref const _display,
 	awl::backends::x11::screen const _screen,
-	awl::backends::x11::system::event::original_processor &_system_processor,
+	fcppt::reference<
+		awl::backends::x11::system::event::original_processor
+	> const _system_processor,
 	awl::window::parameters const &_params
 )
 :
@@ -65,9 +70,7 @@ awl::backends::x11::window::original_object::original_object(
 		)
 	),
 	colormap_(
-		fcppt::make_ref(
-			display_
-		),
+		display_,
 		_screen,
 		visual_
 	),
@@ -140,50 +143,56 @@ awl::backends::x11::window::original_object::original_object(
 		)
 	),
 	processor_connection_{
-		_system_processor.add_window(
-			*this
+		_system_processor.get().add_window(
+			fcppt::reference_to_base<
+				awl::backends::x11::window::object
+			>(
+				fcppt::make_ref(
+					*this
+				)
+			)
 		)
 	},
 	mask_counts_(),
 	event_mask_{
-		0l
+		0L
 	},
 	wm_protocols_(
 		*this,
 		awl::backends::x11::window::event::atom_vector{
-			_system_processor.delete_window_atom().get()
+			_system_processor.get().delete_window_atom().get()
 		}
 	),
 	client_message_connection_{
-		this->register_event(
+		this->do_register_event(
 			awl::backends::x11::window::event::type(
 				ClientMessage
 			)
 		)
 	},
 	configure_connection_{
-		this->register_event(
+		this->do_register_event(
 			awl::backends::x11::window::event::type(
 				ConfigureNotify
 			)
 		)
 	},
 	destroy_connection_{
-		this->register_event(
+		this->do_register_event(
 			awl::backends::x11::window::event::type(
 				DestroyNotify
 			)
 		)
 	},
 	map_connection_{
-		this->register_event(
+		this->do_register_event(
 			awl::backends::x11::window::event::type(
 				MapNotify
 			)
 		)
 	},
 	unmap_connection_{
-		this->register_event(
+		this->do_register_event(
 			awl::backends::x11::window::event::type(
 				UnmapNotify
 			)
@@ -192,7 +201,7 @@ awl::backends::x11::window::original_object::original_object(
 {
 	// always returns 1
 	::XSetWMHints(
-		display_.get(),
+		display_.get().get(),
 		window_.get(),
 		hints_.get()
 	);
@@ -207,7 +216,7 @@ awl::backends::x11::window::original_object::original_object(
 		{
 			// always returns 1
 			::XSetClassHint(
-				display_.get(),
+				display_.get().get(),
 				window_.get(),
 				_class_hint->get()
 			);
@@ -224,7 +233,7 @@ awl::backends::x11::window::original_object::original_object(
 		{
 			// always returns 1
 			::XStoreName(
-				display_.get(),
+				display_.get().get(),
 				window_.get(),
 				fcppt::optional::to_exception(
 					fcppt::to_std_string(
@@ -247,8 +256,7 @@ awl::backends::x11::window::original_object::original_object(
 }
 
 awl::backends::x11::window::original_object::~original_object()
-{
-}
+= default;
 
 bool
 awl::backends::x11::window::original_object::destroyed() const
@@ -257,7 +265,7 @@ awl::backends::x11::window::original_object::destroyed() const
 		window_.destroyed();
 }
 
-awl::backends::x11::display &
+awl::backends::x11::display_ref
 awl::backends::x11::window::original_object::display() const
 {
 	return
@@ -323,34 +331,9 @@ awl::backends::x11::window::original_object::register_event(
 	awl::backends::x11::window::event::type const _event_type
 )
 {
-	fcppt::optional::maybe_void(
-		awl::backends::x11::window::event::to_mask(
-			_event_type
-		),
-		[
-			this
-		](
-			awl::backends::x11::window::event::mask_bit const _mask
-		)
-		{
-			this->add_mask_bit(
-				_mask
-			);
-		}
-	);
-
 	return
-		awl::event::make_connection(
-			awl::event::connection_function{
-				[
-					this,
-					_event_type
-				]{
-					this->unregister_event(
-						_event_type
-					);
-				}
-			}
+		this->do_register_event(
+			_event_type
 		);
 }
 
@@ -386,6 +369,42 @@ awl::backends::x11::window::original_object::add_event_mask(
 						this->remove_event_mask(
 							_mask
 						);
+				}
+			}
+		);
+}
+
+awl::event::connection_unique_ptr
+awl::backends::x11::window::original_object::do_register_event(
+	awl::backends::x11::window::event::type const _event_type
+)
+{
+	fcppt::optional::maybe_void(
+		awl::backends::x11::window::event::to_mask(
+			_event_type
+		),
+		[
+			this
+		](
+			awl::backends::x11::window::event::mask_bit const _mask
+		)
+		{
+			this->add_mask_bit(
+				_mask
+			);
+		}
+	);
+
+	return
+		awl::event::make_connection(
+			awl::event::connection_function{
+				[
+					this,
+					_event_type
+				]{
+					this->unregister_event(
+						_event_type
+					);
 				}
 			}
 		);
@@ -449,7 +468,7 @@ awl::backends::x11::window::original_object::add_mask_bit(
 	if(
 		count
 		==
-		1u
+		1U
 	)
 	{
 		event_mask_ |=
@@ -478,7 +497,7 @@ awl::backends::x11::window::original_object::remove_mask_bit(
 	if(
 		count
 		==
-		0u
+		0U
 	)
 	{
 		event_mask_ &=

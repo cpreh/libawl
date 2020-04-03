@@ -25,10 +25,12 @@ awl::backends::wayland::window::shell_surface::shell_surface(
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("Failed getting a shell surface")
 			};
+	}
 }
 
 awl::backends::wayland::window::shell_surface::~shell_surface()

@@ -20,7 +20,7 @@ namespace event
 AWL_DETAIL_SYMBOL
 awl::backends::x11::system::event::object
 next(
-	awl::backends::x11::display &
+	awl::backends::x11::display const &
 );
 
 }

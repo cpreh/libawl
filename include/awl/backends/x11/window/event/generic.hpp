@@ -9,7 +9,7 @@
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/window/event/base.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -27,7 +27,7 @@ class AWL_DETAIL_CLASS_SYMBOL generic
 :
 	public awl::window::event::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		generic
 	);
 public:
@@ -41,10 +41,12 @@ public:
 	~generic()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::window::object &
 	window() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::window::event::object const &
 	event() const;

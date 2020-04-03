@@ -16,11 +16,12 @@ namespace system
 namespace seat
 {
 
-typedef
+using
+caps_field
+=
 fcppt::container::bitfield::enum_object<
 	awl::backends::wayland::system::seat::caps
->
-caps_field;
+>;
 
 }
 }

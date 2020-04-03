@@ -1,4 +1,5 @@
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/window/base_unique_ptr.hpp>
@@ -13,7 +14,7 @@
 
 awl::backends::x11::window::base_unique_ptr
 awl::backends::x11::window::root(
-	awl::backends::x11::display &_display,
+	awl::backends::x11::display_ref const _display,
 	awl::backends::x11::screen const _screen
 )
 {
@@ -27,7 +28,7 @@ awl::backends::x11::window::root(
 				_display,
 				_screen,
 				::XRootWindow(
-					_display.get(),
+					_display.get().get(),
 					_screen.get()
 				)
 			)

@@ -20,7 +20,7 @@ AWL_DETAIL_SYMBOL
 awl::backends::x11::pixmap::holder_unique_ptr
 create_from_data(
 	awl::backends::x11::window::base const &,
-	awl::backends::x11::pixmap::dim,
+	awl::backends::x11::pixmap::dim const &,
 	char const *
 );
 

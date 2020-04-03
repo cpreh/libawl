@@ -11,9 +11,10 @@ namespace awl
 namespace timer
 {
 
-typedef
-std::chrono::milliseconds
-duration;
+using
+duration
+=
+std::chrono::milliseconds;
 
 }
 }

@@ -14,11 +14,12 @@ namespace x11
 namespace window
 {
 
-typedef
+using
+const_optional_class_hint_ref
+=
 fcppt::optional::reference<
 	awl::backends::x11::window::class_hint const
->
-const_optional_class_hint_ref;
+>;
 
 }
 }

@@ -7,7 +7,7 @@
 #include <awl/backends/posix/processor_fwd.hpp>
 #include <awl/backends/posix/processor_unique_ptr.hpp>
 #include <awl/backends/wayland/compositor_fwd.hpp>
-#include <awl/backends/wayland/display_fwd.hpp>
+#include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/registry.hpp>
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <awl/backends/wayland/shm_fwd.hpp>
@@ -22,7 +22,8 @@
 #include <awl/system/event/result_fwd.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/log/object_fwd.hpp>
 
 
@@ -41,25 +42,29 @@ class AWL_DETAIL_CLASS_SYMBOL original_processor
 :
 	public awl::backends::wayland::system::event::processor
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_processor
 	);
 public:
 	AWL_DETAIL_SYMBOL
 	original_processor(
-		fcppt::log::object &,
-		awl::backends::wayland::display &
+		fcppt::reference<
+			fcppt::log::object
+		>,
+		awl::backends::wayland::display_reference
 	);
 
 	AWL_DETAIL_SYMBOL
 	~original_processor()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::system::event::result
 	poll()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::system::event::result
 	next()
@@ -72,6 +77,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::timer::unique_ptr
 	create_timer(
@@ -79,50 +85,59 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::event::container_reference
 	events()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::compositor const &
 	compositor() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::shell const &
 	shell() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::shm const &
 	shm() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::system::seat::set const &
 	seats() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::posix::processor &
 	fd_processor()
 	override;
 private:
+	[[nodiscard]]
 	awl::system::event::result
 	process(
 		awl::backends::posix::optional_duration const &
 	);
 
+	[[nodiscard]]
 	awl::event::container
 	process_fds(
 		awl::backends::posix::optional_duration const &
 	);
 
+	[[nodiscard]]
 	awl::event::container
 	process_pending();
 
-	awl::backends::wayland::display &display_;
+	awl::backends::wayland::display_reference const display_;
 
 	awl::backends::posix::processor_unique_ptr const fd_processor_;
 

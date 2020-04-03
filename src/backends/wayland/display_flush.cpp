@@ -19,8 +19,10 @@ awl::backends::wayland::display_flush(
 		==
 		-1
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("Display flush failed")
 			};
+	}
 }

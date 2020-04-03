@@ -9,5 +9,4 @@ awl::backends::wayland::cursor::object::object()
 }
 
 awl::backends::wayland::cursor::object::~object()
-{
-}
+= default;

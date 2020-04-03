@@ -7,7 +7,7 @@
 #include <awl/backends/posix/timer.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -23,7 +23,7 @@ class object
 :
 	public awl::backends::posix::timer
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -37,6 +37,7 @@ public:
 	~object()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::posix::fd
 	fd() const

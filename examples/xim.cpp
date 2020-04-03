@@ -101,7 +101,7 @@ try
 	};
 
 	Display *const dpy{
-		x11_system.display().get()
+		x11_system.display().get().get()
 	};
 
 	if(

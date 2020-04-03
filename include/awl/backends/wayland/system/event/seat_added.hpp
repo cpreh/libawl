@@ -7,7 +7,7 @@
 #include <awl/backends/wayland/system/seat/shared_ptr.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -25,7 +25,7 @@ class AWL_DETAIL_CLASS_SYMBOL seat_added
 :
 	public awl::backends::wayland::system::event::seat_base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		seat_added
 	);
 public:

@@ -26,10 +26,12 @@ public:
 		XEvent const &
 	);
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	XEvent const &
 	get() const;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	XEvent &
 	get();

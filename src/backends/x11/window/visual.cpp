@@ -11,7 +11,7 @@
 
 awl::backends::x11::visual::object_unique_ptr
 awl::backends::x11::window::visual(
-	awl::backends::x11::window::base &_window
+	awl::backends::x11::window::base const &_window
 )
 {
 	return
@@ -22,7 +22,7 @@ awl::backends::x11::window::visual(
 				awl::backends::x11::visual::wrapped
 			>(
 				awl::backends::x11::visual::create_info(
-					_window.display(),
+					_window.display().get(),
 					*awl::backends::x11::window::attributes(
 						_window
 					).visual

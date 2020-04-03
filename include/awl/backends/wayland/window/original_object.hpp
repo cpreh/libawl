@@ -14,7 +14,8 @@
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_fwd.hpp>
 #include <fcppt/log/object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-protocol.h>
@@ -34,13 +35,15 @@ class AWL_DETAIL_CLASS_SYMBOL original_object
 :
 	public awl::backends::wayland::window::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_object
 	);
 public:
 	AWL_DETAIL_SYMBOL
 	original_object(
-		fcppt::log::object &,
+		fcppt::reference<
+			fcppt::log::object
+		>,
 		awl::event::container_reference,
 		awl::backends::wayland::display const &,
 		awl::backends::wayland::compositor const &,
@@ -57,21 +60,25 @@ public:
 	show()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::window::dim
 	size() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::visual::object const &
 	visual() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	wl_surface *
 	surface() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	wl_shell_surface *
 	get() const

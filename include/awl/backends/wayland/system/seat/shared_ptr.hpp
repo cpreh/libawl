@@ -16,11 +16,12 @@ namespace system
 namespace seat
 {
 
-typedef
+using
+shared_ptr
+=
 fcppt::shared_ptr<
 	awl::backends::wayland::system::seat::object
->
-shared_ptr;
+>;
 
 }
 }

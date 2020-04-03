@@ -16,13 +16,13 @@
 awl::backends::x11::pixmap::holder_unique_ptr
 awl::backends::x11::pixmap::create_from_data(
 	awl::backends::x11::window::base const &_window,
-	awl::backends::x11::pixmap::dim const _dim,
+	awl::backends::x11::pixmap::dim const &_dim,
 	char const *const _data
 )
 {
 	Pixmap const result{
 		::XCreateBitmapFromData(
-			_window.display().get(),
+			_window.display().get().get(),
 			_window.get(),
 			_data,
 			_dim.w(),
@@ -35,10 +35,12 @@ awl::backends::x11::pixmap::create_from_data(
 		==
 		None
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("XCreateBitmapFromData failed!")
 			};
+	}
 
 	return
 		fcppt::make_unique_ptr<

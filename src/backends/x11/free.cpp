@@ -10,9 +10,13 @@ awl::backends::x11::free(
 )
 {
 	if(
-		_ptr != nullptr
+		_ptr
+		!=
+		nullptr
 	)
+	{
 		::XFree(
 			_ptr
 		);
+	}
 }

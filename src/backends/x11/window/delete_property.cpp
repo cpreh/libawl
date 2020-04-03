@@ -15,7 +15,7 @@ awl::backends::x11::window::delete_property(
 {
 	// Always returns 1
 	XDeleteProperty(
-		_window.display().get(),
+		_window.display().get().get(),
 		_window.get(),
 		_property.get().get()
 	);

@@ -14,11 +14,12 @@ namespace x11
 namespace window
 {
 
-typedef
+using
+base_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::x11::window::base
->
-base_unique_ptr;
+>;
 
 }
 }

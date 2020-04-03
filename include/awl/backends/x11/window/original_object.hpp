@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/atom.hpp>
 #include <awl/backends/x11/colormap.hpp>
-#include <awl/backends/x11/display_fwd.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/system/event/original_processor_fwd.hpp>
 #include <awl/backends/x11/visual/object_fwd.hpp>
@@ -22,7 +22,8 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
+#include <fcppt/reference_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/optional/object_decl.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -43,15 +44,17 @@ class AWL_DETAIL_CLASS_SYMBOL original_object
 :
 	public awl::backends::x11::window::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_object
 	);
 public:
 	AWL_DETAIL_SYMBOL
 	original_object(
-		awl::backends::x11::display &,
+		awl::backends::x11::display_ref,
 		awl::backends::x11::screen,
-		awl::backends::x11::system::event::original_processor &,
+		fcppt::reference<
+			awl::backends::x11::system::event::original_processor
+		>,
 		awl::window::parameters const &
 	);
 
@@ -59,36 +62,43 @@ public:
 	~original_object()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	bool
 	destroyed() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
-	awl::backends::x11::display &
+	awl::backends::x11::display_ref
 	display() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::screen
 	screen() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::visual::object const &
 	x11_visual() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::window::rect
 	rect() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	Window
 	get() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::x11::window::const_optional_class_hint_ref
 	class_hint() const
@@ -98,18 +108,26 @@ public:
 	void
 	destroy();
 
+	[[nodiscard]]
 	awl::event::connection_unique_ptr
 	register_event(
 		awl::backends::x11::window::event::type
 	)
 	override;
 
+	[[nodiscard]]
 	awl::event::connection_unique_ptr
 	add_event_mask(
 		awl::backends::x11::window::event::mask
 	)
 	override;
 private:
+	[[nodiscard]]
+	awl::event::connection_unique_ptr
+	do_register_event(
+		awl::backends::x11::window::event::type
+	);
+
 	void
 	unregister_event(
 		awl::backends::x11::window::event::type
@@ -130,7 +148,7 @@ private:
 		awl::backends::x11::window::event::mask_bit
 	);
 
-	awl::backends::x11::display &display_;
+	awl::backends::x11::display_ref const display_;
 
 	awl::backends::x11::screen const screen_;
 
@@ -140,17 +158,19 @@ private:
 
 	awl::backends::x11::window::hints const hints_;
 
-	typedef
+	using
+	original_class_hint_unique_ptr
+	=
 	fcppt::unique_ptr<
 		awl::backends::x11::window::original_class_hint
-	>
-	original_class_hint_unique_ptr;
+	>;
 
-	typedef
+	using
+	optional_original_class_hint_unique_ptr
+	=
 	fcppt::optional::object<
 		original_class_hint_unique_ptr
-	>
-	optional_original_class_hint_unique_ptr;
+	>;
 
 	optional_original_class_hint_unique_ptr const class_hint_;
 
@@ -158,16 +178,18 @@ private:
 
 	awl::event::connection_unique_ptr const processor_connection_;
 
-	typedef
-	unsigned
-	mask_count;
+	using
+	mask_count
+	=
+	unsigned;
 
-	typedef
+	using
+	mask_count_map
+	=
 	std::map<
 		awl::backends::x11::window::event::mask_bit,
 		mask_count
-	>
-	mask_count_map;
+	>;
 
 	mask_count_map mask_counts_;
 

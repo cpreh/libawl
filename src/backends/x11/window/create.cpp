@@ -1,5 +1,6 @@
 #include <awl/backends/x11/colormap.hpp>
 #include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/cursor/const_optional_object_ref.hpp>
 #include <awl/backends/x11/cursor/object.hpp>
@@ -22,16 +23,19 @@
 Window
 awl::backends::x11::window::create(
 	awl::window::optional_dim const &_dim,
-	awl::backends::x11::display &_display,
+	awl::backends::x11::display_ref const _display,
 	awl::backends::x11::screen const _screen,
 	awl::backends::x11::colormap const &_colormap,
 	awl::backends::x11::visual::object const &_visual,
 	awl::backends::x11::cursor::const_optional_object_ref const &_cursor
 )
 {
+	// NOLINTNEXTLINE(google-runtime-int)
 	unsigned long value_mask(
+		// NOLINTNEXTLINE(hicpp-signed-bitwise)
 		CWColormap
 		|
+		// NOLINTNEXTLINE(hicpp-signed-bitwise)
 		CWBackPixel
 	);
 
@@ -42,7 +46,7 @@ awl::backends::x11::window::create(
 
 	swa.background_pixel =
 		XBlackPixel(
-			_display.get(),
+			_display.get().get(),
 			_screen.get()
 		);
 
@@ -59,7 +63,7 @@ awl::backends::x11::window::create(
 		{
 			swa.cursor = _opt_cursor.get().get();
 
-			value_mask |= CWCursor;
+			value_mask |= CWCursor; // NOLINT(hicpp-signed-bitwise)
 		}
 	);
 
@@ -84,9 +88,9 @@ awl::backends::x11::window::create(
 	// always returns a handle
 	return
 		::XCreateWindow(
-			_display.get(),
+			_display.get().get(),
 			::XRootWindow(
-				_display.get(),
+				_display.get().get(),
 				_screen.get()
 			),
 			position_default,
@@ -95,7 +99,7 @@ awl::backends::x11::window::create(
 				_dim,
 				dim_default,
 				[](
-					awl::window::dim const _d
+					awl::window::dim const &_d
 				)
 				{
 					return
@@ -106,7 +110,7 @@ awl::backends::x11::window::create(
 				_dim,
 				dim_default,
 				[](
-					awl::window::dim const _d
+					awl::window::dim const &_d
 				)
 				{
 					return

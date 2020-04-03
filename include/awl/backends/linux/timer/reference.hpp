@@ -14,11 +14,12 @@ namespace linux
 namespace timer
 {
 
-typedef
+using
+reference
+=
 fcppt::reference<
 	awl::backends::linux::timer::object
->
-reference;
+>;
 
 }
 }

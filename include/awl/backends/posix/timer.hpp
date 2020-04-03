@@ -6,7 +6,7 @@
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/timer/object.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -20,7 +20,7 @@ class AWL_DETAIL_CLASS_SYMBOL timer
 :
 	public awl::timer::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		timer
 	);
 protected:
@@ -28,9 +28,10 @@ protected:
 	timer();
 public:
 	AWL_DETAIL_SYMBOL
-	virtual
-	~timer();
+	~timer()
+	override;
 
+	[[nodiscard]]
 	virtual
 	awl::backends::posix::fd
 	fd() const = 0;
