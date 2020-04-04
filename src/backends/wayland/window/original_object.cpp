@@ -34,8 +34,8 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <cstdint>
 #include <wayland-client-protocol.h>
+#include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
 

@@ -8,11 +8,11 @@
 #include <awl/backends/posix/processor.hpp>
 #include <awl/backends/wayland/compositor.hpp>
 #include <awl/backends/wayland/display.hpp>
-#include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/display_dispatch_pending.hpp>
 #include <awl/backends/wayland/display_flush.hpp>
 #include <awl/backends/wayland/display_prepare_read.hpp>
 #include <awl/backends/wayland/display_read_events.hpp>
+#include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/display_roundtrip.hpp>
 #include <awl/backends/wayland/optional_compositor.hpp>
 #include <awl/backends/wayland/optional_shell.hpp>
@@ -61,9 +61,9 @@
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <cstdint>
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
+#include <cstdint>
 #include <string>
 #include <type_traits>
 #include <utility>
