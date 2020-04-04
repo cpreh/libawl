@@ -48,6 +48,7 @@ translate_opt(
 		==
 		_timer_event.get().get()
 	)
+	{
 		return
 			fcppt::optional::make(
 				fcppt::unique_ptr_to_base<
@@ -70,6 +71,7 @@ translate_opt(
 					)
 				)
 			);
+	}
 
 	if(
 		_event.type
@@ -83,7 +85,7 @@ translate_opt(
 
 		fcppt::reference<
 			SDL_Window
-		> sdl_window{
+		> const sdl_window{
 			FCPPT_ASSERT_OPTIONAL_ERROR(
 				awl::backends::sdl::window::from_id(
 					event.windowID
@@ -93,7 +95,7 @@ translate_opt(
 
 		awl::backends::sdl::window::object &sdl_window_ref{
 			awl::backends::sdl::window::get_object(
-				sdl_window.get()
+				sdl_window
 			)
 		};
 
@@ -175,11 +177,10 @@ translate_opt(
 			sdl_window_ref.set_cursor();
 			break;
 
-		// TODO: Add destroy event
+		// TODO(philipp): Add destroy event
 		}
 	}
 
-	// TODO
 	return
 		fcppt::optional::object<
 			awl::event::base_unique_ptr

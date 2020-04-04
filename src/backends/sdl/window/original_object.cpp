@@ -1,5 +1,6 @@
 #include <awl/backends/sdl/cursor/object.hpp>
 #include <awl/backends/sdl/visual/object.hpp>
+#include <awl/backends/sdl/window/native_reference.hpp>
 #include <awl/backends/sdl/window/object.hpp>
 #include <awl/backends/sdl/window/original_object.hpp>
 #include <awl/backends/sdl/window/set_object.hpp>
@@ -10,6 +11,7 @@
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/dynamic_exn.hpp>
@@ -79,14 +81,18 @@ awl::backends::sdl::window::original_object::original_object(
 						);
 				}
 			).c_str(),
-			SDL_WINDOWPOS_UNDEFINED,
-			SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED, //NOLINT(hicpp-signed-bitwise)
+			SDL_WINDOWPOS_UNDEFINED, //NOLINT(hicpp-signed-bitwise)
 			fcppt::cast::to_signed(
 				fcppt::optional::maybe(
 					_parameters.size(),
 					[]{
+						constexpr const unsigned default_width{
+							1024U
+						};
+
 						return
-							1024u;
+							default_width;
 					},
 					[](
 						awl::window::dim const &_dim
@@ -101,8 +107,12 @@ awl::backends::sdl::window::original_object::original_object(
 				fcppt::optional::maybe(
 					_parameters.size(),
 					[]{
+						constexpr const unsigned default_height{
+							768U
+						};
+
 						return
-							768u;
+							default_height;
 					},
 					[](
 						awl::window::dim const &_dim
@@ -126,16 +136,21 @@ awl::backends::sdl::window::original_object::original_object(
 	}
 {
 	awl::backends::sdl::window::set_object(
-		this->get(),
-		*this
+		this->impl_.get(),
+		fcppt::reference_to_base<
+			awl::backends::sdl::window::object
+		>(
+			fcppt::make_ref(
+				*this
+			)
+		)
 	);
 }
 
 awl::backends::sdl::window::original_object::~original_object()
-{
-}
+= default;
 
-SDL_Window &
+awl::backends::sdl::window::native_reference
 awl::backends::sdl::window::original_object::get() const
 {
 	return

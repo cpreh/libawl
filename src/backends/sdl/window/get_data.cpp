@@ -1,4 +1,5 @@
 #include <awl/backends/sdl/window/get_data.hpp>
+#include <awl/backends/sdl/window/native_reference.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/object_impl.hpp>
@@ -12,13 +13,13 @@ fcppt::optional::object<
 	void *
 >
 awl::backends::sdl::window::get_data(
-	SDL_Window &_window,
+	awl::backends::sdl::window::native_reference const _window,
 	std::string const &_name
 )
 {
 	void *const result{
 		SDL_GetWindowData(
-			&_window,
+			&_window.get(),
 			_name.c_str()
 		)
 	};

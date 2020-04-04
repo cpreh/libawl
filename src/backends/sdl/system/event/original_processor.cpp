@@ -51,8 +51,7 @@ awl::backends::sdl::system::event::original_processor::original_processor()
 }
 
 awl::backends::sdl::system::event::original_processor::~original_processor()
-{
-}
+= default;
 
 awl::system::event::result
 awl::backends::sdl::system::event::original_processor::poll()

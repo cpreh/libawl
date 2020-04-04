@@ -14,14 +14,13 @@ awl::backends::sdl::window::object::object()
 }
 
 awl::backends::sdl::window::object::~object()
-{
-}
+= default;
 
 void
 awl::backends::sdl::window::object::show()
 {
 	SDL_ShowWindow(
-		&this->get()
+		&this->get().get()
 	);
 }
 
@@ -33,7 +32,7 @@ awl::backends::sdl::window::object::size() const
 	int h{0};
 
 	SDL_GetWindowSize(
-		&this->get(),
+		&this->get().get(),
 		&w,
 		&h
 	);

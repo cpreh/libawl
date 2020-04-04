@@ -10,8 +10,7 @@ awl::backends::sdl::cursor::invisible::invisible()
 }
 
 awl::backends::sdl::cursor::invisible::~invisible()
-{
-}
+= default;
 
 awl::backends::sdl::cursor::object::cursor_ref
 awl::backends::sdl::cursor::invisible::get() const

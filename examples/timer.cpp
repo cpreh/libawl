@@ -58,6 +58,7 @@ try
 					std::chrono::duration_cast<
 						awl::timer::duration
 					>(
+						// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 						std::chrono::seconds{
 							2
 						}
@@ -67,6 +68,7 @@ try
 					std::chrono::duration_cast<
 						awl::timer::duration
 					>(
+						// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 						std::chrono::seconds{
 							1
 						}
@@ -77,7 +79,7 @@ try
 	};
 
 	unsigned timer_fired{
-		0u
+		0U
 	};
 
 	return
@@ -112,11 +114,13 @@ try
 					if(
 						timer_fired
 						==
-						3u
+						3U
 					)
+					{
 						system_processor.quit(
 							awl::main::exit_success()
 						);
+					}
 				}
 			}
 		).get();

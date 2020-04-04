@@ -19,9 +19,7 @@ awl::backends::sdl::get_error()
 
 	return
 		fcppt::optional::make_if(
-			error
-			!=
-			"",
+			!error.empty(),
 			[
 				&error
 			]{

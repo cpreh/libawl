@@ -9,5 +9,4 @@ awl::backends::wayland::visual::object::object()
 }
 
 awl::backends::wayland::visual::object::~object()
-{
-}
+= default;

@@ -5,7 +5,7 @@
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/event/base.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_events.h>
 #include <fcppt/config/external_end.hpp>
@@ -26,7 +26,7 @@ class AWL_DETAIL_CLASS_SYMBOL object
 :
 	public awl::event::base
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -37,8 +37,10 @@ public:
 	);
 
 	AWL_DETAIL_SYMBOL
-	~object();
+	~object()
+	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	SDL_Event const &
 	get() const;

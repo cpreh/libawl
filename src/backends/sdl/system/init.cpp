@@ -23,6 +23,7 @@ awl::backends::sdl::system::init::init(
 		!=
 		0
 	)
+	{
 		throw
 			awl::backends::sdl::exception{
 				FCPPT_TEXT("SDL_InitSubSystem ")
@@ -33,6 +34,7 @@ awl::backends::sdl::system::init::init(
 				+
 				FCPPT_TEXT(" failed.")
 			};
+	}
 }
 
 awl::backends::sdl::system::init::~init()

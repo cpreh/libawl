@@ -16,8 +16,7 @@ awl::backends::posix::event::event(
 
 
 awl::backends::posix::event::~event()
-{
-}
+= default;
 
 awl::backends::posix::fd
 awl::backends::posix::event::fd() const

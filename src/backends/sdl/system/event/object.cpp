@@ -17,8 +17,7 @@ awl::backends::sdl::system::event::object::object(
 }
 
 awl::backends::sdl::system::event::object::~object()
-{
-}
+= default;
 
 SDL_Event const &
 awl::backends::sdl::system::event::object::get() const

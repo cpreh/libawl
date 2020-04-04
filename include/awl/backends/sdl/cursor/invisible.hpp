@@ -4,7 +4,7 @@
 #include <awl/backends/sdl/cursor/object.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -20,7 +20,7 @@ class AWL_DETAIL_CLASS_SYMBOL invisible
 :
 	public awl::backends::sdl::cursor::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		invisible
 	);
 public:
@@ -31,6 +31,7 @@ public:
 	~invisible()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::sdl::cursor::object::cursor_ref
 	get() const

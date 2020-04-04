@@ -9,5 +9,4 @@ awl::backends::sdl::system::event::processor::processor()
 }
 
 awl::backends::sdl::system::event::processor::~processor()
-{
-}
+= default;

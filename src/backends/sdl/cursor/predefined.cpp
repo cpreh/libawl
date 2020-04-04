@@ -29,10 +29,12 @@ awl::backends::sdl::cursor::predefined::predefined(
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::backends::sdl::exception{
 				FCPPT_TEXT("CreateSystemCursor failed")
 			};
+	}
 }
 
 awl::backends::sdl::cursor::predefined::~predefined()

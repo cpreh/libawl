@@ -1,5 +1,6 @@
 #include <awl/backends/sdl/exception.hpp>
 #include <awl/backends/sdl/window/holder.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_video.h>
@@ -19,10 +20,12 @@ awl::backends::sdl::window::holder::holder(
 		==
 		nullptr
 	)
+	{
 		throw
 			awl::backends::sdl::exception{
 				FCPPT_TEXT("SDL_CreateWindow failed")
 			};
+	}
 }
 
 awl::backends::sdl::window::holder::~holder()
@@ -32,9 +35,11 @@ awl::backends::sdl::window::holder::~holder()
 	);
 }
 
-SDL_Window &
+awl::backends::sdl::window::native_reference
 awl::backends::sdl::window::holder::get() const
 {
 	return
-		*this->window_;
+		fcppt::make_ref(
+			*this->window_
+		);
 }

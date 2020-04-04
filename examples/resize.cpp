@@ -71,8 +71,8 @@ try
 			)
 			.size(
 				awl::window::dim(
-					1024u,
-					768u
+					1024U,
+					768U
 				)
 			)
 		)

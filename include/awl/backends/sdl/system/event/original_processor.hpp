@@ -13,7 +13,7 @@
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/function_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_events.h>
 #include <fcppt/config/external_end.hpp>
@@ -34,7 +34,7 @@ class AWL_DETAIL_CLASS_SYMBOL original_processor
 :
 	public awl::backends::sdl::system::event::processor
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_processor
 	);
 public:
@@ -45,11 +45,13 @@ public:
 	~original_processor()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::system::event::result
 	poll()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::system::event::result
 	next()
@@ -62,6 +64,7 @@ public:
 	)
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::timer::unique_ptr
 	create_timer(
@@ -69,20 +72,24 @@ public:
 	)
 	override;
 private:
-	typedef
+	using
+	process_function
+	=
 	fcppt::function<
 		awl::event::container ()
-	>
-	process_function;
+	>;
 
+	[[nodiscard]]
 	awl::system::event::result
 	process(
 		process_function const &
 	);
 
+	[[nodiscard]]
 	awl::event::container
 	process_events();
 
+	[[nodiscard]]
 	awl::event::base_unique_ptr
 	translate(
 		SDL_Event const &

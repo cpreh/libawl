@@ -52,16 +52,13 @@ awl::backends::sdl::system::original_object::original_object(
 }
 
 awl::backends::sdl::system::original_object::~original_object()
-{
-}
+= default;
 
 awl::window::object_unique_ptr
 awl::backends::sdl::system::original_object::create_window(
 	awl::window::parameters const &_parameters
 )
 {
-	// TODO: Move this inside the window constructor?
-
 	fcppt::cast::dynamic_exn<
 		awl::backends::sdl::visual::object const &
 	>(

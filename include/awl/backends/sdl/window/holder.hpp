@@ -1,7 +1,8 @@
 #ifndef AWL_BACKENDS_SDL_WINDOW_HOLDER_HPP_INCLUDED
 #define AWL_BACKENDS_SDL_WINDOW_HOLDER_HPP_INCLUDED
 
-#include <fcppt/noncopyable.hpp>
+#include <awl/backends/sdl/window/native_reference.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_video.h>
 #include <fcppt/config/external_end.hpp>
@@ -18,7 +19,7 @@ namespace window
 
 class holder
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		holder
 	);
 public:
@@ -29,7 +30,8 @@ public:
 
 	~holder();
 
-	SDL_Window &
+	[[nodiscard]]
+	awl::backends::sdl::window::native_reference
 	get() const;
 private:
 	SDL_Window *const window_;

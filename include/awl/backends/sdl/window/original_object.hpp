@@ -3,16 +3,14 @@
 
 #include <awl/backends/sdl/cursor/object_fwd.hpp>
 #include <awl/backends/sdl/window/holder.hpp>
+#include <awl/backends/sdl/window/native_reference.hpp>
 #include <awl/backends/sdl/window/object.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/parameters_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/reference.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <SDL_video.h>
-#include <fcppt/config/external_end.hpp>
 
 
 namespace awl
@@ -28,7 +26,7 @@ class AWL_DETAIL_CLASS_SYMBOL original_object
 :
 	public awl::backends::sdl::window::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_object
 	);
 public:
@@ -42,11 +40,13 @@ public:
 	~original_object()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
-	SDL_Window &
+	awl::backends::sdl::window::native_reference
 	get() const
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::visual::object const &
 	visual() const

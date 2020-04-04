@@ -1,3 +1,4 @@
+#include <awl/backends/sdl/window/native_reference.hpp>
 #include <awl/backends/sdl/window/set_data.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_video.h>
@@ -7,13 +8,13 @@
 
 void
 awl::backends::sdl::window::set_data(
-	SDL_Window &_window,
+	awl::backends::sdl::window::native_reference const _window,
 	std::string const &_name,
 	void *const _data
 )
 {
 	SDL_SetWindowData(
-		&_window,
+		&_window.get(),
 		_name.c_str(),
 		_data
 	);

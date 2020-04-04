@@ -27,7 +27,7 @@
 #include <awl/window/event/destroy.hpp>
 #include <fcppt/exception.hpp>
 #include <fcppt/make_ref.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/dynamic_exn.hpp>
@@ -105,7 +105,9 @@ try
 	};
 
 	if(
-		!XSupportsLocale()
+		XSupportsLocale()
+		==
+		0
 	)
 	{
 		std::cerr
@@ -125,9 +127,11 @@ try
 		==
 		nullptr
 	)
+	{
 		std::cerr
 			<<
 			"Warning: cannot set locale modifiers.\n";
+	}
 
 	awl::visual::object_unique_ptr const visual{
 		awl_system->default_visual()
@@ -140,8 +144,8 @@ try
 			}
 			.size(
 				awl::window::dim{
-					400u,
-					100u
+					400U,
+					100U
 				}
 			)
 		)
@@ -161,7 +165,7 @@ try
 
 	class xim_wrapper
 	{
-		FCPPT_NONCOPYABLE(
+		FCPPT_NONMOVABLE(
 			xim_wrapper
 		);
 	public:
@@ -184,10 +188,12 @@ try
 				==
 				nullptr
 			)
+			{
 				throw
 					std::runtime_error{
 						"Cannot open input method"
 					};
+			}
 		}
 
 		~xim_wrapper()
@@ -197,6 +203,7 @@ try
 			);
 		}
 
+		[[nodiscard]]
 		XIM
 		get() const
 		{
@@ -211,26 +218,27 @@ try
 		dpy
 	};
 
-	XIM const im{
+	XIM im{
 		xim.get()
 	};
 
 	class xic_wrapper
 	{
-		FCPPT_NONCOPYABLE(
+		FCPPT_NONMOVABLE(
 			xic_wrapper
 		);
 	public:
 		xic_wrapper(
-			XIM const _xim,
+			XIM _xim,
 			Window const _win
 		)
 		:
 			impl_{
+				// NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg)
 				XCreateIC(
 					_xim,
 					XNInputStyle,
-					XIMStatusNothing | XIMPreeditNothing,
+					XIMStatusNothing | XIMPreeditNothing, // NOLINT(hicpp-signed-bitwise)
 					XNClientWindow,
 					_win,
 					nullptr
@@ -242,10 +250,12 @@ try
 				==
 				nullptr
 			)
+			{
 				throw
 					std::runtime_error{
 						"XCreateIC failed"
 					};
+			}
 		}
 
 		~xic_wrapper()
@@ -255,6 +265,7 @@ try
 			);
 		}
 
+		[[nodiscard]]
 		XIC
 		get() const
 		{
@@ -270,7 +281,7 @@ try
 		win
 	};
 
-	XIC const ic{
+	XIC ic{
 		xic.get()
 	};
 
@@ -279,10 +290,12 @@ try
 			[
 				ic
 			]{
+				// NOLINTNEXTLINE(google-runtime-int)
 				long im_event_mask{
-					0l
+					0L
 				};
 
+				// NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg)
 				XGetICValues(
 					ic,
 					XNFilterEvents,
@@ -340,7 +353,7 @@ try
 					buffer_type::pointer const _data,
 					buffer_type::size_type const _size
 				){
-					KeySym keysym;
+					KeySym keysym{};
 
 					return
 						fcppt::cast::to_unsigned(
@@ -391,6 +404,8 @@ try
 					)
 					<<
 					'\n';
+				break;
+			default:
 				break;
 			}
 		}
@@ -449,9 +464,11 @@ try
 										==
 										KeyPress
 									)
+									{
 										key_press_function(
 											x11_event
 										);
+									}
 								},
 								[
 									&system_processor

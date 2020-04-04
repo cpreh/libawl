@@ -9,5 +9,4 @@ awl::backends::sdl::cursor::object::object()
 }
 
 awl::backends::sdl::cursor::object::~object()
-{
-}
+= default;

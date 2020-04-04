@@ -54,8 +54,8 @@ try
 			)
 			.size(
 				awl::window::dim(
-					1024u,
-					768u
+					1024U,
+					768U
 				)
 			)
 		)
@@ -64,6 +64,7 @@ try
 	window->show();
 
 	std::this_thread::sleep_for(
+		// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
 		std::chrono::seconds(
 			1
 		)

@@ -74,10 +74,12 @@ awl::backends::sdl::timer::object::object(
 		==
 		0
 	)
+	{
 		throw
 			awl::backends::sdl::exception{
 				FCPPT_TEXT("SDL_AddTimer failed")
 			};
+	}
 }
 
 awl::backends::sdl::timer::object::~object()
@@ -120,7 +122,7 @@ awl::backends::sdl::timer::object::process(
 			nullptr
 		};
 
-	// TODO: Error handling?
+	// TODO(philipp): Error handling?
 	try
 	{
 		awl::backends::sdl::system::event::push(

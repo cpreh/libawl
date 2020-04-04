@@ -5,7 +5,7 @@
 #include <awl/cursor/object.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_mouse.h>
@@ -25,7 +25,7 @@ class AWL_DETAIL_CLASS_SYMBOL object
 :
 	public awl::cursor::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:
@@ -36,12 +36,14 @@ public:
 	~object()
 	override;
 
-	typedef
+	using
+	cursor_ref
+	=
 	fcppt::optional::reference<
 		SDL_Cursor
-	>
-	cursor_ref;
+	>;
 
+	[[nodiscard]]
 	virtual
 	cursor_ref
 	get() const = 0;

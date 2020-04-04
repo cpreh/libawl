@@ -15,8 +15,7 @@ awl::backends::sdl::visual::object::object(
 }
 
 awl::backends::sdl::visual::object::~object()
-{
-}
+= default;
 
 awl::backends::sdl::visual::flags
 awl::backends::sdl::visual::object::flags() const

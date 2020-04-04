@@ -18,10 +18,12 @@ awl::backends::sdl::system::event::wait()
 		==
 		0
 	)
+	{
 		throw
 			awl::backends::sdl::exception{
 				FCPPT_TEXT("SDL_WaitEvent failed!")
 			};
+	}
 
 	return
 		result;

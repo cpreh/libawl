@@ -32,7 +32,8 @@ public:
 	AWL_DETAIL_SYMBOL
 	exception(
 		exception &&
-	);
+	)
+	noexcept;
 
 	AWL_DETAIL_SYMBOL
 	exception &
@@ -44,7 +45,8 @@ public:
 	exception &
 	operator=(
 		exception &&
-	);
+	)
+	noexcept;
 
 	AWL_DETAIL_SYMBOL
 	~exception() noexcept

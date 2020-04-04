@@ -5,7 +5,7 @@
 #include <awl/cursor/type_fwd.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_mouse.h>
 #include <fcppt/config/external_end.hpp>
@@ -24,7 +24,7 @@ class AWL_DETAIL_CLASS_SYMBOL predefined
 :
 	public awl::backends::sdl::cursor::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		predefined
 	);
 public:
@@ -38,6 +38,7 @@ public:
 	~predefined()
 	override;
 
+	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
 	awl::backends::sdl::cursor::object::cursor_ref
 	get() const

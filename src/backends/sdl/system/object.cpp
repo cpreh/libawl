@@ -9,5 +9,4 @@ awl::backends::sdl::system::object::object()
 }
 
 awl::backends::sdl::system::object::~object()
-{
-}
+= default;

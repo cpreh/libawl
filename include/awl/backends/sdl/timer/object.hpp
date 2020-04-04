@@ -4,7 +4,7 @@
 #include <awl/backends/sdl/system/event/timer_type.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting_fwd.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_stdinc.h>
 #include <SDL_timer.h>
@@ -24,7 +24,7 @@ class object
 :
 	public awl::timer::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 public:

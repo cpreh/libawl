@@ -9,5 +9,4 @@ awl::backends::wayland::visual::null_object::null_object()
 }
 
 awl::backends::wayland::visual::null_object::~null_object()
-{
-}
+= default;

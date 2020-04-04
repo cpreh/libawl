@@ -23,6 +23,11 @@ find_package(
 	REQUIRED
 )
 
+set(
+	FCPPT_UTILS_CLANG_TIDY_HEADER_FILTER
+	"awl/.*"
+)
+
 include(
 	FcpptCMakeUtils
 )
@@ -983,10 +988,12 @@ set(
 	include/awl/backends/sdl/window/get_data.hpp
 	include/awl/backends/sdl/window/get_object.hpp
 	include/awl/backends/sdl/window/holder.hpp
+	include/awl/backends/sdl/window/native_reference.hpp
 	include/awl/backends/sdl/window/object.hpp
 	include/awl/backends/sdl/window/object_data_name.hpp
 	include/awl/backends/sdl/window/object_fwd.hpp
 	include/awl/backends/sdl/window/original_object.hpp
+	include/awl/backends/sdl/window/reference.hpp
 	include/awl/backends/sdl/window/set_data.hpp
 	include/awl/backends/sdl/window/set_object.hpp
 )

@@ -56,6 +56,7 @@ awl::backends::sdl::exception::exception(
 awl::backends::sdl::exception::exception(
 	exception &&
 )
+noexcept
 = default;
 
 awl::backends::sdl::exception &
@@ -68,8 +69,9 @@ awl::backends::sdl::exception &
 awl::backends::sdl::exception::operator=(
 	exception &&
 )
+noexcept
 = default;
 
-awl::backends::sdl::exception::~exception() noexcept
-{
-}
+awl::backends::sdl::exception::~exception()
+noexcept
+= default;
