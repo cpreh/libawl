@@ -1,3 +1,4 @@
+#include <awl/log_location.hpp>
 #include <awl/backends/sdl/cursor/create_invisible.hpp>
 #include <awl/backends/sdl/cursor/create_predefined.hpp>
 #include <awl/backends/sdl/cursor/object.hpp>
@@ -11,6 +12,7 @@
 #include <awl/cursor/object_unique_ptr.hpp>
 #include <awl/cursor/optional_type.hpp>
 #include <awl/cursor/type.hpp>
+#include <awl/impl/backends/sdl/log_name.hpp>
 #include <awl/system/object.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/visual/object.hpp>
@@ -22,6 +24,8 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/dynamic_exn.hpp>
 #include <fcppt/log/context_reference.hpp>
+#include <fcppt/log/parameters.hpp>
+#include <fcppt/log/format/optional_function.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL.h>
@@ -30,10 +34,18 @@
 
 
 awl::backends::sdl::system::original_object::original_object(
-	fcppt::log::context_reference
+	fcppt::log::context_reference const _log_context
 )
 :
 	awl::backends::sdl::system::object{},
+	log_{
+		_log_context,
+		awl::log_location(),
+		fcppt::log::parameters{
+			awl::impl::backends::sdl::log_name(),
+			fcppt::log::format::optional_function()
+		}
+	},
 	init_{
 		SDL_INIT_TIMER
 		|

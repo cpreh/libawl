@@ -72,10 +72,12 @@ set(
 	src/event/connection.cpp
 	src/event/make_connection.cpp
 	src/exception.cpp
+	src/impl/include/awl/impl/backends/sdl/log_name.hpp
 	src/impl/include/awl/impl/backends/wayland/log_name.hpp
 	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
 	src/impl/include/awl/impl/backends/x11/log_name.hpp
 	src/impl/include/awl/impl/log_name.hpp
+	src/impl/src/backends/sdl/log_name.cpp
 	src/impl/src/backends/wayland/log_name.cpp
 	src/impl/src/backends/x11/log_name.cpp
 	src/impl/src/log_name.cpp

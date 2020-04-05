@@ -15,6 +15,7 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
+#include <fcppt/log/object.hpp>
 
 
 namespace awl
@@ -68,6 +69,8 @@ public:
 	)
 	override;
 private:
+	fcppt::log::object log_;
+
 	awl::backends::sdl::system::init const init_;
 
 	fcppt::unique_ptr<
