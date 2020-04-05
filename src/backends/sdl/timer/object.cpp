@@ -6,16 +6,28 @@
 #include <awl/timer/duration.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting.hpp>
+#include <fcppt/exception.hpp>
+#include <fcppt/from_std_string.hpp>
 #include <fcppt/literal.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/cast/to_void_ptr.hpp>
+#include <fcppt/either/match.hpp>
+#include <fcppt/either/no_error.hpp>
+#include <fcppt/log/error.hpp>
+#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference.hpp>
+#include <fcppt/log/out.hpp>
+#include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_stdinc.h>
 #include <SDL_timer.h>
 #include <chrono>
+#include <exception>
+#include <string>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -44,11 +56,15 @@ convert_time(
 }
 
 awl::backends::sdl::timer::object::object(
+	fcppt::log::object_reference const _log,
 	awl::timer::setting const &_setting,
 	awl::backends::sdl::system::event::timer_type const _event_type
 )
 :
 	awl::timer::object{},
+	log_{
+		_log
+	},
 	period_{
 		convert_time(
 			_setting.period().get()
@@ -122,15 +138,93 @@ awl::backends::sdl::timer::object::process(
 			nullptr
 		};
 
-	// TODO(philipp): Error handling?
+	fcppt::log::object &log{
+		timer.log_.get()
+	};
+
 	try
 	{
-		awl::backends::sdl::system::event::push(
-			event
+		fcppt::either::match(
+			awl::backends::sdl::system::event::push(
+				event
+			),
+			[
+				&log
+			](
+				fcppt::optional::object<
+					std::string
+				> const &_error
+			)
+			{
+				FCPPT_LOG_ERROR(
+					log,
+					fcppt::log::out
+						<<
+						FCPPT_TEXT("Failed to push timer event.")
+				)
+
+				fcppt::optional::maybe_void(
+					_error,
+					[
+						&log
+					](
+						std::string const &_text
+					)
+					{
+						FCPPT_LOG_ERROR(
+							log,
+							fcppt::log::out
+								<<
+								fcppt::from_std_string(
+									_text
+								)
+						)
+					}
+				);
+			},
+			[](
+				fcppt::either::no_error
+			)
+			{
+			}
 		);
+	}
+	catch(
+		fcppt::exception const &_error
+	)
+	{
+		FCPPT_LOG_ERROR(
+			log,
+			fcppt::log::out
+			<<
+			FCPPT_TEXT("Caught exception in timer event: ")
+			<<
+			_error.string()
+		)
+	}
+	catch(
+		std::exception const &_error
+	)
+	{
+		FCPPT_LOG_ERROR(
+			log,
+			fcppt::log::out
+			<<
+			FCPPT_TEXT("Caught exception in timer event: ")
+			<<
+			fcppt::from_std_string(
+				_error.what()
+			)
+		)
 	}
 	catch(...)
 	{
+		FCPPT_LOG_ERROR(
+			log,
+			fcppt::log::out
+			<<
+			FCPPT_TEXT("Caught unknown exception in timer event.")
+		)
 	}
 
 	return

@@ -24,6 +24,7 @@
 #include <fcppt/container/make.hpp>
 #include <fcppt/either/from_optional.hpp>
 #include <fcppt/either/loop.hpp>
+#include <fcppt/log/object_reference.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -32,9 +33,14 @@
 #include <fcppt/config/external_end.hpp>
 
 
-awl::backends::sdl::system::event::original_processor::original_processor()
+awl::backends::sdl::system::event::original_processor::original_processor(
+	fcppt::log::object_reference const _log
+)
 :
 	awl::backends::sdl::system::event::processor{},
+	log_{
+		_log
+	},
 	timer_event_{
 		fcppt::optional::to_exception(
 			awl::backends::sdl::system::event::register_(),
@@ -123,6 +129,7 @@ awl::backends::sdl::system::event::original_processor::create_timer(
 			fcppt::make_unique_ptr<
 				awl::backends::sdl::timer::object
 			>(
+				this->log_,
 				_setting,
 				this->timer_event_
 			)

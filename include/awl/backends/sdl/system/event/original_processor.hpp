@@ -14,6 +14,7 @@
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/function_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
+#include <fcppt/log/object_reference.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_events.h>
 #include <fcppt/config/external_end.hpp>
@@ -39,7 +40,10 @@ class AWL_DETAIL_CLASS_SYMBOL original_processor
 	);
 public:
 	AWL_DETAIL_SYMBOL
-	original_processor();
+	explicit
+	original_processor(
+		fcppt::log::object_reference
+	);
 
 	AWL_DETAIL_SYMBOL
 	~original_processor()
@@ -94,6 +98,8 @@ private:
 	translate(
 		SDL_Event const &
 	) const;
+
+	fcppt::log::object_reference const log_;
 
 	awl::backends::sdl::system::event::timer_type const timer_event_;
 

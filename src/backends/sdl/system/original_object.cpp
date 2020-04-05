@@ -20,6 +20,7 @@
 #include <awl/window/object.hpp>
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
+#include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/dynamic_exn.hpp>
@@ -57,7 +58,11 @@ awl::backends::sdl::system::original_object::original_object(
 		>(
 			fcppt::make_unique_ptr<
 				awl::backends::sdl::system::event::original_processor
-			>()
+			>(
+				fcppt::make_ref(
+					this->log_
+				)
+			)
 		)
 	}
 {

@@ -5,6 +5,7 @@
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
+#include <fcppt/log/object_reference.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_stdinc.h>
 #include <SDL_timer.h>
@@ -29,6 +30,7 @@ class object
 	);
 public:
 	object(
+		fcppt::log::object_reference,
 		awl::timer::setting const &,
 		awl::backends::sdl::system::event::timer_type
 	);
@@ -43,6 +45,8 @@ private:
 		Uint32,
 		void *
 	);
+
+	fcppt::log::object_reference const log_;
 
 	Uint32 const period_;
 
