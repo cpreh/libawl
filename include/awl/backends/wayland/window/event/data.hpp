@@ -6,8 +6,7 @@
 #include <awl/window/optional_dim.hpp>
 #include <awl/window/reference.hpp>
 #include <fcppt/nonmovable.hpp>
-#include <fcppt/reference_impl.hpp>
-#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference.hpp>
 
 
 namespace awl
@@ -28,18 +27,15 @@ class data
 	);
 public:
 	data(
-		fcppt::reference<
-			fcppt::log::object
-		>,
+		fcppt::log::object_reference,
 		awl::window::reference,
 		awl::event::container_reference
 	);
 
 	~data();
 
-	fcppt::reference<
-		fcppt::log::object
-	> const log_; // NOLINT(misc-non-private-member-variables-in-classes)
+	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+	fcppt::log::object_reference const log_;
 
 	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	awl::window::reference const reference_;

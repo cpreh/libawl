@@ -15,8 +15,7 @@
 #include <awl/window/dim_fwd.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
-#include <fcppt/reference_fwd.hpp>
-#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
@@ -41,9 +40,7 @@ class AWL_DETAIL_CLASS_SYMBOL original_object
 public:
 	AWL_DETAIL_SYMBOL
 	original_object(
-		fcppt::reference<
-			fcppt::log::object
-		>,
+		fcppt::log::object_reference,
 		awl::event::container_reference,
 		awl::backends::wayland::display const &,
 		awl::backends::wayland::compositor const &,

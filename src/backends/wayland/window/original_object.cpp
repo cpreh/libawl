@@ -16,7 +16,6 @@
 #include <awl/window/event/resize.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
@@ -26,7 +25,7 @@
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/math/dim/null.hpp>
 #include <fcppt/math/dim/output.hpp>
@@ -140,9 +139,7 @@ wl_shell_surface_listener const shell_surface_listener{
 }
 
 awl::backends::wayland::window::original_object::original_object(
-	fcppt::reference<
-		fcppt::log::object
-	> const _log,
+	fcppt::log::object_reference const _log,
 	awl::event::container_reference const _events,
 	awl::backends::wayland::display const &_display,
 	awl::backends::wayland::compositor const &_compositor,

@@ -23,8 +23,7 @@
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/nonmovable.hpp>
-#include <fcppt/reference_impl.hpp>
-#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference.hpp>
 
 
 namespace awl
@@ -48,9 +47,7 @@ class AWL_DETAIL_CLASS_SYMBOL original_processor
 public:
 	AWL_DETAIL_SYMBOL
 	original_processor(
-		fcppt::reference<
-			fcppt::log::object
-		>,
+		fcppt::log::object_reference,
 		awl::backends::wayland::display_reference
 	);
 

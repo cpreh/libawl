@@ -1,14 +1,11 @@
 #include <awl/backends/wayland/window/event/data.hpp>
 #include <awl/event/container_reference.hpp>
 #include <awl/window/reference.hpp>
-#include <fcppt/reference_impl.hpp>
-#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference.hpp>
 
 
 awl::backends::wayland::window::event::data::data(
-	fcppt::reference<
-		fcppt::log::object
-	> const _log,
+	fcppt::log::object_reference const _log,
 	awl::window::reference const _reference,
 	awl::event::container_reference const _events
 )

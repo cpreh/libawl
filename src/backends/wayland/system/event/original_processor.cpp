@@ -46,7 +46,6 @@
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/move_clear.hpp>
-#include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
@@ -54,7 +53,7 @@
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/log/debug.hpp>
-#include <fcppt/log/object_fwd.hpp>
+#include <fcppt/log/object_reference.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -316,9 +315,7 @@ wl_registry_listener const registry_listener{
 }
 
 awl::backends::wayland::system::event::original_processor::original_processor(
-	fcppt::reference<
-		fcppt::log::object
-	> const _log,
+	fcppt::log::object_reference const _log,
 	awl::backends::wayland::display_reference const _display
 )
 :
