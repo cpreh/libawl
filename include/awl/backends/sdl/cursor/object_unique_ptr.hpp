@@ -14,11 +14,12 @@ namespace sdl
 namespace cursor
 {
 
-typedef
+using
+object_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::backends::sdl::cursor::object
->
-object_unique_ptr;
+>;
 
 }
 }

@@ -7,7 +7,7 @@
 std::int32_t
 awl::backends::sdl::timer::event_code()
 {
-	// TODO
+	// TODO(philipp)
 	return
 		0;
 }
