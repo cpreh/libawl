@@ -5,7 +5,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/assert/error.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <time.h>
+#include <time.h> // NOLINT(hicpp-deprecated-headers,modernize-deprecated-headers)
 #include <unistd.h>
 #include <sys/timerfd.h>
 #include <chrono>
