@@ -375,57 +375,50 @@ awl::backends::x11::system::event::original_processor::process_window_event(
 	awl::backends::x11::window::event::object const &_event
 ) const
 {
-	return
+	if(
 		_event.get().type
 		==
 		ClientMessage
-		?
-			[
-				&_event,
-				_window_ref,
-				this
-			]{
-				XClientMessageEvent const request(
-					_event.get().xclient
-				);
+	)
+	{
+		XClientMessageEvent const request(
+			_event.get().xclient
+		);
 
-				return
-					request.message_type
-					==
-					wm_protocols_atom_.get()
-					&&
-					static_cast<
-						Atom
-					>(
-						request.data.l[0] // NOLINT(cppcoreguidelines-pro-type-union-access)
-					)
-					==
-					wm_delete_window_atom_.get()
-					?
-						fcppt::unique_ptr_to_base<
-							awl::event::base
-						>(
-							fcppt::make_unique_ptr<
-								awl::window::event::close
-							>(
-								fcppt::reference_to_base<
-									awl::window::object
-								>(
-									_window_ref
-								)
-							)
-						)
-					:
-						awl::backends::x11::window::event::make(
-							_window_ref,
-							_event
-						)
-					;
-			}()
-		:
-			awl::backends::x11::window::event::make(
-				_window_ref,
-				_event
+		if(
+			request.message_type
+			==
+			wm_protocols_atom_.get()
+			&&
+			static_cast<
+				Atom
+			>(
+				request.data.l[0] // NOLINT(cppcoreguidelines-pro-type-union-access)
 			)
-		;
+			==
+			wm_delete_window_atom_.get()
+		)
+		{
+			return
+				fcppt::unique_ptr_to_base<
+					awl::event::base
+				>(
+					fcppt::make_unique_ptr<
+						awl::window::event::close
+					>(
+						fcppt::reference_to_base<
+							awl::window::object
+						>(
+							_window_ref
+						)
+					)
+				);
+		}
+	}
+
+	return
+		awl::backends::x11::window::event::make(
+			_window_ref,
+			_event
+		);
 }
