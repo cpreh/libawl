@@ -55,7 +55,7 @@ case type_value: \
 			LeaveNotify,
 			LeaveWindowMask // NOLINT(hicpp-signed-bitwise)
 		);
-		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
+		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE( // NOLINT(bugprone-branch-clone)
 			FocusIn,
 			FocusChangeMask // NOLINT(hicpp-signed-bitwise)
 		);
@@ -79,7 +79,7 @@ case type_value: \
 			CreateNotify,
 			SubstructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
-		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
+		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE( // NOLINT(bugprone-branch-clone)
 			DestroyNotify,
 			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
@@ -95,7 +95,7 @@ case type_value: \
 			MapRequest,
 			SubstructureRedirectMask // NOLINT(hicpp-signed-bitwise)
 		);
-		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE(
+		AWL_BACKENDS_X11_WINDOW_EVENT_TO_MASK_CASE( // NOLINT(bugprone-branch-clone)
 			ReparentNotify,
 			StructureNotifyMask // NOLINT(hicpp-signed-bitwise)
 		);
