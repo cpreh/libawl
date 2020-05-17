@@ -181,6 +181,7 @@ set(
 	include/awl/system/object.hpp
 	include/awl/system/object_fwd.hpp
 	include/awl/system/object_unique_ptr.hpp
+	include/awl/system/reference.hpp
 	include/awl/timer/delay.hpp
 	include/awl/timer/duration.hpp
 	include/awl/timer/event.hpp
