@@ -712,6 +712,7 @@ set(
 	include/awl/backends/posix/processor_base.hpp
 	include/awl/backends/posix/processor_base_fwd.hpp
 	include/awl/backends/posix/processor_fwd.hpp
+	include/awl/backends/posix/processor_ref.hpp
 	include/awl/backends/posix/processor_unique_ptr.hpp
 	include/awl/backends/posix/timer.hpp
 	include/awl/backends/posix/timer_fwd.hpp
