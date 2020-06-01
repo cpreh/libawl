@@ -13,9 +13,10 @@ namespace backends
 namespace posix
 {
 
-typedef
-std::chrono::milliseconds
-duration;
+using
+duration
+=
+std::chrono::milliseconds;
 
 }
 }
