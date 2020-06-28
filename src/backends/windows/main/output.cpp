@@ -22,7 +22,7 @@ awl::backends::windows::main::output::output(
 	awl::main::output(),
 	filebuf_(
 		fcppt::filesystem::open_exn<
-			filebuf_type
+			filebuf_type,
 			awl::exception
 		>(
 			_path,
@@ -39,7 +39,7 @@ awl::backends::windows::main::output::output(
 				_stream
 			)
 		),
-		fcptp::reference_to_base<
+		fcppt::reference_to_base<
 			std::basic_streambuf<
 				fcppt::char_type
 			>
