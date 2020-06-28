@@ -3,12 +3,13 @@
 
 #include <awl/detail/symbol.hpp>
 #include <awl/main/output.hpp>
+#include <fcppt/char_type.hpp>
 #include <fcppt/noncopyable.hpp>
-#include <fcppt/filesystem/ofstream.hpp>
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/io/scoped_rdbuf.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>
+#include <fstream>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -39,7 +40,14 @@ public:
 	~output()
 	override;
 private:
-	fcppt::filesystem::ofstream stream_;
+	using
+	filebuf_type
+	=
+	std::basic_filebuf<
+		fcppt::char_type
+	>;
+
+	filebuf_type filebuf_;
 
 	fcppt::io::scoped_rdbuf const scoped_rdbuf_;
 };
