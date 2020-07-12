@@ -16,7 +16,7 @@
 
 @AWL_UTILS_MAIN_FUNCTION_NAMESPACES_BEGIN@
 
-awl::main::exit_code const
+awl::main::exit_code
 @AWL_UTILS_MAIN_FUNCTION_NAME@(
 	awl::main::function_context const &
 );
