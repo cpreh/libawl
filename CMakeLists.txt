@@ -180,8 +180,10 @@ set(
 	include/awl/system/event/result_fwd.hpp
 	include/awl/system/object.hpp
 	include/awl/system/object_fwd.hpp
+	include/awl/system/object_ref.hpp
 	include/awl/system/object_unique_ptr.hpp
 	include/awl/system/reference.hpp
+	include/awl/timer/const_reference.hpp
 	include/awl/timer/delay.hpp
 	include/awl/timer/duration.hpp
 	include/awl/timer/event.hpp
@@ -479,6 +481,7 @@ set(
 	include/awl/backends/x11/system/event/processor_fwd.hpp
 	include/awl/backends/x11/system/object.hpp
 	include/awl/backends/x11/system/object_fwd.hpp
+	include/awl/backends/x11/system/object_ref.hpp
 	include/awl/backends/x11/system/original_object.hpp
 	include/awl/backends/x11/to_x11_bool.hpp
 	include/awl/backends/x11/visual/copy_from_parent.hpp
@@ -981,6 +984,7 @@ set(
 	include/awl/backends/sdl/system/init.hpp
 	include/awl/backends/sdl/system/object.hpp
 	include/awl/backends/sdl/system/object_fwd.hpp
+	include/awl/backends/sdl/system/object_ref.hpp
 	include/awl/backends/sdl/system/original_object.hpp
 	include/awl/backends/sdl/timer/event_code.hpp
 	include/awl/backends/sdl/timer/object.hpp
