@@ -217,6 +217,7 @@ set(
 	include/awl/window/event/show_fwd.hpp
 	include/awl/window/object.hpp
 	include/awl/window/object_fwd.hpp
+	include/awl/window/object_ref.hpp
 	include/awl/window/object_unique_ptr.hpp
 	include/awl/window/optional_dim.hpp
 	include/awl/window/optional_dim_fwd.hpp
