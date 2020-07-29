@@ -17,12 +17,13 @@ namespace x11
 namespace visual
 {
 
-typedef
+using
+info_unique_ptr
+=
 fcppt::unique_ptr<
 	XVisualInfo,
 	awl::backends::x11::deleter
->
-info_unique_ptr;
+>;
 
 }
 }

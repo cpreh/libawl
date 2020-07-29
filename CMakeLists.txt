@@ -430,6 +430,7 @@ set(
 	include/awl/backends/x11/atom_fwd.hpp
 	include/awl/backends/x11/colormap.hpp
 	include/awl/backends/x11/colormap_fwd.hpp
+	include/awl/backends/x11/const_display_ref.hpp
 	include/awl/backends/x11/cursor/background_color.hpp
 	include/awl/backends/x11/cursor/const_optional_object_ref.hpp
 	include/awl/backends/x11/cursor/const_optional_object_ref_fwd.hpp
@@ -501,6 +502,7 @@ set(
 	include/awl/backends/x11/window/attributes.hpp
 	include/awl/backends/x11/window/base.hpp
 	include/awl/backends/x11/window/base_fwd.hpp
+	include/awl/backends/x11/window/base_ref.hpp
 	include/awl/backends/x11/window/base_unique_ptr.hpp
 	include/awl/backends/x11/window/basic_property_data.hpp
 	include/awl/backends/x11/window/basic_property_data_fwd.hpp
@@ -508,6 +510,7 @@ set(
 	include/awl/backends/x11/window/change_wm_protocols.hpp
 	include/awl/backends/x11/window/class_hint.hpp
 	include/awl/backends/x11/window/class_hint_fwd.hpp
+	include/awl/backends/x11/window/const_base_ref.hpp
 	include/awl/backends/x11/window/const_optional_class_hint_ref.hpp
 	include/awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp
 	include/awl/backends/x11/window/const_optional_object_ref.hpp
@@ -635,6 +638,7 @@ set(
 	include/awl/backends/wayland/system/event/seat_removed_fwd.hpp
 	include/awl/backends/wayland/system/object.hpp
 	include/awl/backends/wayland/system/object_fwd.hpp
+	include/awl/backends/wayland/system/object_ref.hpp
 	include/awl/backends/wayland/system/original_object.hpp
 	include/awl/backends/wayland/system/seat/caps.hpp
 	include/awl/backends/wayland/system/seat/caps_field.hpp
@@ -1001,6 +1005,7 @@ set(
 	include/awl/backends/sdl/window/object.hpp
 	include/awl/backends/sdl/window/object_data_name.hpp
 	include/awl/backends/sdl/window/object_fwd.hpp
+	include/awl/backends/sdl/window/object_ref.hpp
 	include/awl/backends/sdl/window/original_object.hpp
 	include/awl/backends/sdl/window/reference.hpp
 	include/awl/backends/sdl/window/set_data.hpp
