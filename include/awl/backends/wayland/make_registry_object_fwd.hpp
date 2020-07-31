@@ -12,12 +12,13 @@ name ## _destroy( \
 	wl_ ## name * \
 ); \
 \
-typedef \
+using \
+name \
+= \
 awl::backends::wayland::registry_object< \
 	wl_ ## name, \
 	wl_ ## name ## _interface, \
 	awl::backends::wayland::name ## _destroy \
-> \
-name
+>
 
 #endif

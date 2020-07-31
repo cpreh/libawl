@@ -52,6 +52,11 @@ public:
 
 	[[nodiscard]]
 	AWL_DETAIL_SYMBOL
+	awl::backends::wayland::seat &
+	get();
+
+	[[nodiscard]]
+	AWL_DETAIL_SYMBOL
 	awl::backends::wayland::seat const &
 	get() const;
 

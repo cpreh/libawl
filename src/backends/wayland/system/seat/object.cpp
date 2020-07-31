@@ -166,6 +166,13 @@ awl::backends::wayland::system::seat::object::name() const
 		impl_.name();
 }
 
+awl::backends::wayland::seat &
+awl::backends::wayland::system::seat::object::get()
+{
+	return
+		impl_;
+}
+
 awl::backends::wayland::seat const &
 awl::backends::wayland::system::seat::object::get() const
 {

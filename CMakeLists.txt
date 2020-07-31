@@ -176,6 +176,7 @@ set(
 	include/awl/system/create.hpp
 	include/awl/system/event/processor.hpp
 	include/awl/system/event/processor_fwd.hpp
+	include/awl/system/event/processor_ref.hpp
 	include/awl/system/event/result.hpp
 	include/awl/system/event/result_fwd.hpp
 	include/awl/system/object.hpp
@@ -446,6 +447,7 @@ set(
 	include/awl/backends/x11/cursor/load_font.hpp
 	include/awl/backends/x11/cursor/object.hpp
 	include/awl/backends/x11/cursor/object_fwd.hpp
+	include/awl/backends/x11/cursor/object_ref.hpp
 	include/awl/backends/x11/cursor/object_unique_ptr.hpp
 	include/awl/backends/x11/cursor/shape.hpp
 	include/awl/backends/x11/cursor/source_pixmap.hpp
@@ -593,6 +595,7 @@ set(
 	include/awl/backends/wayland/display_fwd.hpp
 	include/awl/backends/wayland/display_prepare_read.hpp
 	include/awl/backends/wayland/display_read_events.hpp
+	include/awl/backends/wayland/display_ref.hpp
 	include/awl/backends/wayland/display_reference.hpp
 	include/awl/backends/wayland/display_roundtrip.hpp
 	include/awl/backends/wayland/id_less.hpp
@@ -614,6 +617,7 @@ set(
 	include/awl/backends/wayland/registry_object_impl.hpp
 	include/awl/backends/wayland/seat.hpp
 	include/awl/backends/wayland/seat_fwd.hpp
+	include/awl/backends/wayland/seat_ref.hpp
 	include/awl/backends/wayland/shell.hpp
 	include/awl/backends/wayland/shell_fwd.hpp
 	include/awl/backends/wayland/shm.hpp
@@ -648,6 +652,7 @@ set(
 	include/awl/backends/wayland/system/seat/data_fwd.hpp
 	include/awl/backends/wayland/system/seat/object.hpp
 	include/awl/backends/wayland/system/seat/object_fwd.hpp
+	include/awl/backends/wayland/system/seat/object_ref.hpp
 	include/awl/backends/wayland/system/seat/set.hpp
 	include/awl/backends/wayland/system/seat/shared_ptr.hpp
 	include/awl/backends/wayland/visual/null_object.hpp
@@ -656,6 +661,7 @@ set(
 	include/awl/backends/wayland/window/event/data_fwd.hpp
 	include/awl/backends/wayland/window/object.hpp
 	include/awl/backends/wayland/window/object_fwd.hpp
+	include/awl/backends/wayland/window/object_ref.hpp
 	include/awl/backends/wayland/window/original_object.hpp
 	include/awl/backends/wayland/window/shell_surface.hpp
 	include/awl/backends/wayland/window/shell_surface_fwd.hpp
