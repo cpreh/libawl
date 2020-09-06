@@ -20,6 +20,7 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/unit.hpp>
+#include <fcppt/use.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/container/make.hpp>
 #include <fcppt/either/from_optional.hpp>
@@ -169,29 +170,35 @@ awl::backends::sdl::system::event::original_processor::process_events()
 {
 	awl::event::container result{};
 
-	fcppt::either::loop(
-		[]{
-			return
-				fcppt::either::from_optional(
-					awl::backends::sdl::system::event::poll(),
-					fcppt::const_(
-						fcppt::unit{}
+	fcppt::unit const error{
+		fcppt::either::loop(
+			[]{
+				return
+					fcppt::either::from_optional(
+						awl::backends::sdl::system::event::poll(),
+						fcppt::const_(
+							fcppt::unit{}
+						)
+					);
+			},
+			[
+				this,
+				&result
+			](
+				SDL_Event const &_event
+			)
+			{
+				result.push_back(
+					this->translate(
+						_event
 					)
 				);
-		},
-		[
-			this,
-			&result
-		](
-			SDL_Event const &_event
+			}
 		)
-		{
-			result.push_back(
-				this->translate(
-					_event
-				)
-			);
-		}
+	};
+
+	FCPPT_USE(
+		error
 	);
 
 	return
