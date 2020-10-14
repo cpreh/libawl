@@ -121,7 +121,11 @@ awl::backends::wayland::registry_object<
 	Type,
 	Interface,
 	Destroy
->::~registry_object()
+>::~registry_object<
+	Type,
+	Interface,
+	Destroy
+>()
 {
 	if(
 		value_
