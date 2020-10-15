@@ -16,11 +16,12 @@ namespace system
 namespace seat
 {
 
-typedef
+using
+set
+=
 awl::backends::wayland::id_set<
 	awl::backends::wayland::system::seat::object
->
-set;
+>;
 
 }
 }

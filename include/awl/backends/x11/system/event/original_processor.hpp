@@ -152,12 +152,13 @@ private:
 
 	awl::main::optional_exit_code exit_code_;
 
-	typedef
+	using
+	window_map
+	=
 	std::map<
 		Window,
 		awl::backends::x11::window::object_ref
-	>
-	window_map;
+	>;
 
 	window_map windows_;
 };

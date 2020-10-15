@@ -304,7 +304,7 @@ awl::backends::x11::system::event::original_processor::process_x11_event(
 ) const
 {
 	return
-		awl::backends::x11::window::event::filter(
+		awl::backends::x11::window::event::filter( // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
 			awl::backends::x11::window::event::object{
 				_event.get()
 			},

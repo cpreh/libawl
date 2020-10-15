@@ -10,11 +10,12 @@ namespace awl
 namespace main
 {
 
-typedef
+using
+output_unique_ptr
+=
 fcppt::unique_ptr<
 	awl::main::output
->
-output_unique_ptr;
+>;
 
 }
 }

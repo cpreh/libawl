@@ -334,11 +334,12 @@ try
 				_event.get().xkey
 			};
 
-			typedef
+			using
+			buffer_type
+			=
 			fcppt::container::buffer::object<
 				char
-			>
-			buffer_type;
+			>;
 
 			Status status{
 				0
