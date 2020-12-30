@@ -19,9 +19,8 @@
 #include <awl/cursor/hotspot.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/config/external_begin.hpp>
-#include <array>
-#include <fcppt/config/external_end.hpp>
+#include <fcppt/array/init.hpp>
+#include <fcppt/array/object_impl.hpp>
 
 
 awl::backends::x11::cursor::object_unique_ptr
@@ -33,14 +32,22 @@ awl::backends::x11::cursor::create_invisible(
 		8
 	};
 
-	std::array<
-		char,
-		size * size
-		/
-		8
-	> const bm_no_data{{
-		0,0,0,0, 0,0,0,0
-	}};
+	auto const bm_no_data{
+		fcppt::array::init<
+			fcppt::array::object<
+				char,
+				size * size
+				/
+				8
+			>
+		>(
+			[](auto)
+			{
+				return
+					'\0';
+			}
+		)
+	};
 
 	awl::backends::x11::pixmap::holder_unique_ptr const pixmap(
 		awl::backends::x11::pixmap::create_from_data(
