@@ -32,7 +32,7 @@ public:
 		awl::event::container_reference
 	);
 
-	~data();
+	~data(); // NOLINT(performance-trivially-destructible)
 
 	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
 	fcppt::log::object_reference const log_;
