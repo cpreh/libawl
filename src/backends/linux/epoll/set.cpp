@@ -7,6 +7,7 @@
 #include <awl/backends/posix/optional_duration.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/make_int_range_count.hpp>
+#include <fcppt/output_to_fcppt_string.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
 #include <fcppt/cast/size.hpp>
@@ -15,6 +16,7 @@
 #include <fcppt/cast/truncation_check.hpp>
 #include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <sys/epoll.h>
 #include <chrono>
@@ -93,14 +95,30 @@ awl::backends::linux::epoll::set::epoll(
 				)
 				{
 					return
-						fcppt::cast::truncation_check<
-							int
-						>(
-							std::chrono::duration_cast<
-								std::chrono::milliseconds
+						fcppt::optional::to_exception(
+							fcppt::cast::truncation_check<
+								int
 							>(
+								std::chrono::duration_cast<
+									std::chrono::milliseconds
+								>(
+									_duration
+								).count()
+							),
+							[
 								_duration
-							).count()
+							]{
+								return
+									awl::exception{
+										FCPPT_TEXT("Duration value ")
+										+
+										fcppt::output_to_fcppt_string(
+											_duration.count()
+										)
+										+
+										FCPPT_TEXT(" is too large for epoll_wait")
+									};
+							}
 						);
 				}
 			)

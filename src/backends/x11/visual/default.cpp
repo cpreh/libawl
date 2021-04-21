@@ -8,8 +8,8 @@
 #include <awl/backends/x11/visual/object_unique_ptr.hpp>
 #include <awl/backends/x11/visual/wrapped.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/post.hpp>
 
 
 awl::backends::x11::visual::object_unique_ptr
@@ -25,10 +25,15 @@ awl::backends::x11::visual::default_(
 		)
 	);
 
-	FCPPT_ASSERT_POST(
-		visual != nullptr,
-		awl::exception
-	);
+	if(
+		visual == nullptr
+	)
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("XDefaultVisual failed")
+			};
+	}
 
 	return
 		fcppt::unique_ptr_to_base<
