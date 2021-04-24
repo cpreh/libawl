@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/sdl/cursor/object.hpp>
 #include <awl/backends/sdl/visual/object.hpp>
 #include <awl/backends/sdl/window/native_reference.hpp>
@@ -8,18 +9,19 @@
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/parameters.hpp>
-#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
-#include <fcppt/cast/dynamic_exn.hpp>
+#include <fcppt/cast/dynamic.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_mouse.h>
 #include <SDL_video.h>
@@ -45,12 +47,18 @@ awl::backends::sdl::window::original_object::original_object(
 			)
 			{
 				return
-					fcppt::make_cref(
-						fcppt::cast::dynamic_exn<
-							awl::backends::sdl::cursor::object const &
+					fcppt::optional::to_exception(
+						fcppt::cast::dynamic<
+							awl::backends::sdl::cursor::object const
 						>(
 							_cursor.get()
-						)
+						),
+						[]{
+							return
+								awl::exception{
+									FCPPT_TEXT("The cursor passed to the SDL window is not an SDL cursor.")
+								};
+						}
 					);
 			}
 		)
@@ -123,11 +131,19 @@ awl::backends::sdl::window::original_object::original_object(
 					}
 				)
 			),
-			fcppt::cast::dynamic_exn<
-				awl::backends::sdl::visual::object const &
-			>(
-				_parameters.visual()
-			).flags().get()
+			fcppt::optional::to_exception(
+				fcppt::cast::dynamic<
+					awl::backends::sdl::visual::object const
+				>(
+					_parameters.visual()
+				),
+				[]{
+					return
+						awl::exception{
+							FCPPT_TEXT("The visual passed to the SDL system is not an SDL visual.")
+						};
+				}
+			)->flags().get()
 			|
 			SDL_WINDOW_HIDDEN
 			|

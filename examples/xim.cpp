@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/display.hpp>
@@ -30,7 +31,8 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/cast/dynamic_exn.hpp>
+#include <fcppt/assert/optional_error.hpp>
+#include <fcppt/cast/dynamic.hpp>
 #include <fcppt/cast/dynamic_fun.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
@@ -43,6 +45,7 @@
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/optional_level.hpp>
 #include <fcppt/optional/maybe_void.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -93,11 +96,19 @@ try
 	}
 
 	awl::backends::x11::system::object &x11_system{
-		fcppt::cast::dynamic_exn<
-			awl::backends::x11::system::object &
-		>(
-			*awl_system
-		)
+		fcppt::optional::to_exception(
+			fcppt::cast::dynamic<
+				awl::backends::x11::system::object
+			>(
+				*awl_system
+			),
+			[]{
+				return
+					awl::exception{
+						FCPPT_TEXT("The X11 example can only be used with the X11 backend.")
+					};
+			}
+		).get()
 	};
 
 	Display *const dpy{
@@ -152,11 +163,13 @@ try
 	};
 
 	awl::backends::x11::window::object &x11_window{
-		fcppt::cast::dynamic_exn<
-			awl::backends::x11::window::object &
-		>(
-			*awl_window
-		)
+		FCPPT_ASSERT_OPTIONAL_ERROR(
+			fcppt::cast::dynamic<
+				awl::backends::x11::window::object
+			>(
+				*awl_window
+			)
+		).get()
 	};
 
 	Window const win{

@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/log_location.hpp>
 #include <awl/backends/sdl/cursor/create_invisible.hpp>
 #include <awl/backends/sdl/cursor/create_predefined.hpp>
@@ -23,11 +24,13 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/cast/dynamic_exn.hpp>
+#include <fcppt/text.hpp>
+#include <fcppt/cast/dynamic.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/parameters.hpp>
 #include <fcppt/log/format/optional_function.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL.h>
 #include <cstdint>
@@ -76,11 +79,19 @@ awl::backends::sdl::system::original_object::create_window(
 	awl::window::parameters const &_parameters
 )
 {
-	fcppt::cast::dynamic_exn<
-		awl::backends::sdl::visual::object const &
-	>(
-		_parameters.visual()
-	).apply();
+	fcppt::optional::to_exception(
+		fcppt::cast::dynamic<
+			awl::backends::sdl::visual::object const
+		>(
+			_parameters.visual()
+		),
+		[]{
+			return
+				awl::exception{
+					FCPPT_TEXT("The visual passed to the SDL system is not an SDL visual.")
+				};
+		}
+	)->apply();
 
 	return
 		fcppt::unique_ptr_to_base<
