@@ -23,8 +23,8 @@
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/text.hpp>
+#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/log/parameters.hpp>
