@@ -112,20 +112,18 @@ noexcept
 		*this;
 }
 
+namespace awl::backends::wayland
+{
 template<
 	typename Type,
 	wl_interface const &Interface,
 	void (&Destroy)(Type *)
 >
-awl::backends::wayland::registry_object<
+registry_object<
 	Type,
 	Interface,
 	Destroy
->::~registry_object<
-	Type,
-	Interface,
-	Destroy
->()
+>::~registry_object()
 {
 	if(
 		value_
@@ -137,6 +135,7 @@ awl::backends::wayland::registry_object<
 			value_
 		);
 	}
+}
 }
 
 template<
