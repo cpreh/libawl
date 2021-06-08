@@ -14,13 +14,16 @@
 #include <awl/backends/windows/window/object.hpp>
 #include <awl/backends/windows/window/original_object.hpp>
 #include <awl/backends/windows/window/set_user_data.hpp>
+#include <awl/cursor/object.hpp>
 #include <awl/event/container_reference.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/parameters.hpp>
 #include <awl/window/unit.hpp>
+#include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/strong_typedef_construct_cast.hpp>
 #include <fcppt/text.hpp>
@@ -31,7 +34,7 @@
 #include <fcppt/cast/to_unsigned_fun.hpp>
 #include <fcppt/math/dim/static.hpp>
 #include <fcppt/math/dim/to_unsigned.hpp>
-#include <fcppt/optional/static_cast.hpp>
+#include <fcppt/optional/map.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/preprocessor/disable_vc_warning.hpp>
 #include <fcppt/preprocessor/pop_warning.hpp>
@@ -60,10 +63,23 @@ awl::backends::windows::window::original_object::original_object(
 		_remove_wndclass
 	),
 	cursor_(
-		fcppt::optional::static_cast_<
-			awl::backends::windows::cursor::object const
-		>(
-			_parameters.cursor()
+		fcppt::optional::map(
+			_parameters.cursor(),
+			[](
+				fcppt::reference<
+					awl::cursor::object const
+				> const _cursor
+			)
+			{
+				return
+					fcppt::make_cref(
+						fcppt::cast::static_downcast<
+							awl::backends::windows::cursor::object const &
+						>(
+							_cursor.get()
+						)
+					);
+			}
 		)
 	),
 	user_data_{

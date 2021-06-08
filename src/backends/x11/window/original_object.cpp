@@ -23,6 +23,7 @@
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/to_mask.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
+#include <awl/cursor/object.hpp>
 #include <awl/event/connection_function.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
 #include <awl/event/make_connection.hpp>
@@ -42,7 +43,6 @@
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
-#include <fcppt/optional/static_cast.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
 
@@ -135,10 +135,23 @@ awl::backends::x11::window::original_object::original_object(
 			screen_,
 			colormap_,
 			visual_,
-			fcppt::optional::static_cast_<
-				awl::backends::x11::cursor::object const
-			>(
-				_params.cursor()
+			fcppt::optional::map(
+				_params.cursor(),
+				[](
+					fcppt::reference<
+						awl::cursor::object const
+					> const _cursor
+				)
+				{
+					return
+						fcppt::make_cref(
+							fcppt::cast::static_downcast<
+								awl::backends::x11::cursor::object const &
+							>(
+								_cursor.get()
+							)
+						);
+				}
 			)
 		)
 	),
