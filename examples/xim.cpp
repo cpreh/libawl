@@ -40,6 +40,7 @@
 #include <fcppt/container/buffer/object.hpp>
 #include <fcppt/container/buffer/read_from.hpp>
 #include <fcppt/io/cerr.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/default_level_streams.hpp>
 #include <fcppt/log/level.hpp>
@@ -49,7 +50,6 @@
 #include <fcppt/variant/dynamic_cast.hpp>
 #include <fcppt/variant/match.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <metal.hpp>
 #include <clocale>
 #include <cstdlib>
 #include <exception>
@@ -443,7 +443,7 @@ try
 				){
 					fcppt::optional::maybe_void(
 						fcppt::variant::dynamic_cast_<
-							metal::list<
+							fcppt::mpl::list::object<
 								awl::backends::x11::window::event::generic const,
 								awl::window::event::close const,
 								awl::window::event::destroy const

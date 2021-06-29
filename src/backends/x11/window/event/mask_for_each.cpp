@@ -5,13 +5,14 @@
 #include <fcppt/tag_type.hpp>
 #include <fcppt/use.hpp>
 #include <fcppt/algorithm/loop.hpp>
-#include <fcppt/algorithm/loop_break_metal.hpp>
+#include <fcppt/algorithm/loop_break_mpl.hpp>
 #include <fcppt/bit/mask.hpp>
 #include <fcppt/bit/shifted_mask_c.hpp>
 #include <fcppt/bit/test.hpp>
-#include <fcppt/metal/interval.hpp>
+#include <fcppt/mpl/list/interval.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <limits>
+#include <type_traits>
 #include <fcppt/config/external_end.hpp>
 
 
@@ -22,12 +23,17 @@ awl::backends::x11::window::event::mask_for_each(
 )
 {
 	fcppt::algorithm::loop(
-		fcppt::metal::interval<
-			int,
-			0,
-			std::numeric_limits<
-				awl::backends::x11::window::event::mask::value_type
-			>::digits
+		fcppt::mpl::list::interval<
+			std::integral_constant<
+				int,
+				0
+			>,
+			std::integral_constant<
+				int,
+				std::numeric_limits<
+					awl::backends::x11::window::event::mask::value_type
+				>::digits
+			>
 		>{},
 		[
 			_mask,
