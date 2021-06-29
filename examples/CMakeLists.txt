@@ -57,7 +57,6 @@ add_awl_example(
 	LINK_LIBS
 		${fcppt_core_TARGET}
 		${fcppt_log_TARGET}
-		Metal
 )
 
 add_awl_example(
@@ -83,6 +82,5 @@ if(
 			PkgConfig::X11
 			${fcppt_core_TARGET}
 			${fcppt_log_TARGET}
-			Metal
 	)
 endif()

@@ -49,11 +49,6 @@ list(
 	"${CMAKE_MODULES_SOURCE_DIR}/private"
 )
 
-find_package(
-	Metal
-	REQUIRED
-)
-
 include(
 	FcpptSymbol
 )
@@ -1295,12 +1290,6 @@ function(
 		if(
 			AWL_X11_BACKEND
 		)
-			target_link_libraries(
-				${TARGETNAME}
-				PRIVATE
-				Metal
-			)
-
 			fcppt_utils_link_imported_targets(
 				${TARGETNAME}
 				PRIVATE
