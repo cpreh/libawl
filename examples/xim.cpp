@@ -40,11 +40,11 @@
 #include <fcppt/container/buffer/object.hpp>
 #include <fcppt/container/buffer/read_from.hpp>
 #include <fcppt/io/cerr.hpp>
-#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/log/context.hpp>
 #include <fcppt/log/default_level_streams.hpp>
 #include <fcppt/log/level.hpp>
 #include <fcppt/log/optional_level.hpp>
+#include <fcppt/mpl/list/object.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/variant/dynamic_cast.hpp>
