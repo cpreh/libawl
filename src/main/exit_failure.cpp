@@ -16,7 +16,7 @@ awl::main::exit_failure()
 #if defined(AWL_X11_BACKEND) || defined(AWL_WAYLAND_BACKEND)
 			EXIT_FAILURE
 #elif defined(AWL_WINDOWS_BACKEND)
-			0 // TODO: what do we return here?
+			0 // TODO(philipp): what do we return here?
 #else
 #error "Don't know what exit_failure should be"
 #endif

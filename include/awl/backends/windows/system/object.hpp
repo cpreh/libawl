@@ -4,7 +4,7 @@
 #include <awl/backends/windows/system/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 #include <awl/system/object.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 
 
 namespace awl
@@ -20,7 +20,7 @@ class object
 :
 	public awl::system::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		object
 	);
 protected:
@@ -28,8 +28,8 @@ protected:
 	object();
 public:
 	AWL_DETAIL_SYMBOL
-	virtual
-	~object();
+	~object()
+	override;
 };
 
 }

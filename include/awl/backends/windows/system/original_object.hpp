@@ -10,7 +10,7 @@
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>
-#include <fcppt/noncopyable.hpp>
+#include <fcppt/nonmovable.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
@@ -32,7 +32,7 @@ class original_object
 :
 	public awl::backends::windows::system::object
 {
-	FCPPT_NONCOPYABLE(
+	FCPPT_NONMOVABLE(
 		original_object
 	);
 public:
@@ -75,18 +75,20 @@ private:
 		fcppt::string const &
 	);
 
-	typedef
+	using
+	counted_wndclass_unique_ptr
+	=
 	fcppt::unique_ptr<
 		awl::backends::windows::counted_wndclass
-	>
-	counted_wndclass_unique_ptr;
+	>;
 
-	typedef
+	using
+	wndclass_map
+	=
 	std::unordered_map<
 		fcppt::string,
 		counted_wndclass_unique_ptr
-	>
-	wndclass_map;
+	>;
 
 	wndclass_map wndclasses_;
 
