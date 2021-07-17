@@ -314,9 +314,13 @@ if(
 	)
 endif()
 
-find_package(
-	SDL2
+if(
+	NOT DEFINED ENABLE_SDL
 )
+	find_package(
+		SDL2
+	)
+endif()
 
 option(
 	ENABLE_SDL
@@ -327,6 +331,11 @@ option(
 if(
 	ENABLE_SDL
 )
+	find_package(
+		SDL2
+		REQUIRED
+	)
+
 	set(
 		AWL_SDL_BACKEND
 		TRUE
@@ -1280,7 +1289,6 @@ function(
 		target_link_libraries(
 			${TARGETNAME}
 			PRIVATE
-			${FCPPT_UTILS_FILESYSTEM_LIBRARIES}
 			${fcppt_core_TARGET}
 			${fcppt_log_TARGET}
 		)
