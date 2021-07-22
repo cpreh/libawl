@@ -21,7 +21,6 @@
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/log/debug.hpp>
@@ -70,18 +69,6 @@ shell_surface_configure(
 			_data
 		)
 	};
-
-	FCPPT_ASSERT_PRE(
-		_width
-		>=
-		0
-	);
-
-	FCPPT_ASSERT_PRE(
-		_height
-		>=
-		0
-	);
 
 	awl::window::dim const size{
 		fcppt::cast::to_unsigned(

@@ -19,9 +19,15 @@ awl::backends::windows::wndclass::wndclass(
 		_class_name
 	)
 {
-	FCPPT_ASSERT_PRE(
-		!class_name_.empty()
-	);
+	if(
+		class_name_.empty()
+	)
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("wndclass name cannot be empty!")
+			};
+	}
 
 	WNDCLASS object;
 
@@ -65,10 +71,12 @@ awl::backends::windows::wndclass::wndclass(
 		==
 		0
 	)
+	{
 		throw
 			awl::exception{
 				FCPPT_TEXT("RegisterClassEx() failed!")
 			};
+	}
 }
 
 awl::backends::windows::wndclass::~wndclass()
