@@ -4,7 +4,6 @@
 #include <awl/backends/windows/wndclass.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/pre.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <cstring>
 #include <fcppt/config/external_end.hpp>
