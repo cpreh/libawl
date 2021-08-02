@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/posix/create_processor.hpp>
 #include <awl/backends/posix/duration.hpp>
 #include <awl/backends/posix/extract_event.hpp>
@@ -43,9 +44,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map_optional.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/container/join.hpp>
@@ -154,20 +155,28 @@ awl::backends::x11::system::event::original_processor::add_window(
 		_window.get().get()
 	};
 
-	FCPPT_ASSERT_ERROR(
-		fcppt::container::get_or_insert_with_result(
-			windows_,
-			id,
-			[
-				_window
-			](
-				Window
-			){
-				return
-					_window;
-			}
-		).inserted()
-	);
+	if(
+		fcppt::not_(
+			fcppt::container::get_or_insert_with_result(
+				windows_,
+				id,
+				[
+					_window
+				](
+					Window
+				){
+					return
+						_window;
+				}
+			).inserted()
+		)
+	)
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("x11::system: Double insert of a window.")
+			};
+	}
 
 	return
 		awl::event::make_connection(
@@ -176,13 +185,19 @@ awl::backends::x11::system::event::original_processor::add_window(
 					this,
 					id
 				]{
-					FCPPT_ASSERT_ERROR(
-						windows_.erase(
+					if(
+						this->windows_.erase(
 							id
 						)
-						==
+						!=
 						1u
-					);
+					)
+					{
+						throw
+							awl::exception{
+								FCPPT_TEXT("Cannot erase x11::system window.")
+							};
+					}
 				}
 			}
 		);

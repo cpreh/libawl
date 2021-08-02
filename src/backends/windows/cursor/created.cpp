@@ -8,7 +8,6 @@
 #include <awl/backends/windows/cursor/xor_plane.hpp>
 #include <awl/cursor/hotspot.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/to_signed.hpp>
 
 
@@ -53,11 +52,8 @@ awl::backends::windows::cursor::created::created(
 
 awl::backends::windows::cursor::created::~created()
 {
-	FCPPT_ASSERT_ERROR(
-		::DestroyCursor(
-			cursor_
-		)
-		!= 0
+	::DestroyCursor(
+		cursor_
 	);
 }
 

@@ -5,7 +5,6 @@
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <chrono>
@@ -36,12 +35,8 @@ awl::backends::windows::timer::waitable::waitable()
 
 awl::backends::windows::timer::waitable::~waitable()
 {
-	FCPPT_ASSERT_ERROR(
-		::CloseHandle(
-			handle_
-		)
-		!=
-		0
+	::CloseHandle(
+		handle_
 	);
 }
 

@@ -29,12 +29,8 @@ awl::backends::windows::system::event::handle_holder::handle_holder()
 
 awl::backends::windows::system::event::handle_holder::~handle_holder()
 {
-	FCPPT_ASSERT_ERROR(
-		::CloseHandle(
-			handle_
-		)
-		!=
-		0
+	::CloseHandle(
+		handle_
 	);
 }
 

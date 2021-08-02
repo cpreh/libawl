@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/linux/epoll/original_processor.hpp>
 #include <awl/backends/linux/timer/object.hpp>
 #include <awl/backends/linux/timer/reference.hpp>
@@ -19,11 +20,12 @@
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/insert.hpp>
 #include <fcppt/optional/maybe.hpp>
@@ -176,17 +178,25 @@ awl::backends::linux::epoll::original_processor::create_timer(
 		)
 	};
 
-	FCPPT_ASSERT_ERROR(
-		fcppt::container::insert(
-			timers_,
-			std::make_pair(
-				result->fd(),
-				fcppt::make_ref(
-					*result
+	if(
+		fcppt::not_(
+			fcppt::container::insert(
+				timers_,
+				std::make_pair(
+					result->fd(),
+					fcppt::make_ref(
+						*result
+					)
 				)
 			)
 		)
-	);
+	)
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("Double insert in epoll timer map.")
+			};
+	}
 
 	return
 		fcppt::unique_ptr_to_base<

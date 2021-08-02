@@ -49,7 +49,6 @@
 #include <fcppt/strong_typedef_output.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/log/debug.hpp>
@@ -180,9 +179,15 @@ registry_add(
 			)
 		};
 
-		FCPPT_ASSERT_ERROR(
-			result.second
-		);
+		if(
+			!result.second
+		)
+		{
+			throw
+				awl::exception{
+					FCPPT_TEXT("Double insert of wayland seat")
+				};
+		}
 
 		(*result.first)->init_ptr();
 

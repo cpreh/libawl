@@ -3,7 +3,6 @@
 #include <awl/backends/posix/duration.hpp>
 #include <awl/timer/setting.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <time.h> // NOLINT(hicpp-deprecated-headers,modernize-deprecated-headers)
 #include <unistd.h>
@@ -132,7 +131,7 @@ awl::backends::linux::timerfd::object::read()
 {
 	value_type ret{0};
 
-	FCPPT_ASSERT_ERROR(
+	if(
 		::read(
 			fd_.get(),
 			&ret,
@@ -140,7 +139,7 @@ awl::backends::linux::timerfd::object::read()
 				value_type
 			)
 		)
-		==
+		!=
 		static_cast<
 			ssize_t
 		>(
@@ -148,7 +147,13 @@ awl::backends::linux::timerfd::object::read()
 				value_type
 			)
 		)
-	);
+	)
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("Invalid read in linux::timerfd")
+			};
+	}
 
 	return
 		ret;

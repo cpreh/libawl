@@ -37,13 +37,13 @@
 #include <fcppt/make_ref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/move_clear.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/remove.hpp>
-#include <fcppt/assert/error.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/container/find_opt_mapped.hpp>
@@ -161,17 +161,25 @@ awl::backends::windows::system::event::original_processor::create_timer(
 		handle
 	);
 
-	FCPPT_ASSERT_ERROR(
-		fcppt::container::insert(
-			timers_,
-			timer_map::value_type{
-				handle,
-				fcppt::make_ref(
-					*result
-				)
-			}
+	if(
+		fcppt::not_(
+			fcppt::container::insert(
+				timers_,
+				timer_map::value_type{
+					handle,
+					fcppt::make_ref(
+						*result
+					)
+				}
+			)
 		)
-	);
+	)
+	{
+		throw
+			awl::exception{
+				FCPPT_TEXT("Dboule insert of Windows timer.")
+			};
+	}
 
 	return
 		result;
