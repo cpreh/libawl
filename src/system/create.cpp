@@ -263,7 +263,9 @@ create_from_env(
 							{
 								return
 									fcppt::either::from_optional(
-										fcppt::algorithm::find_by_opt(
+										fcppt::algorithm::find_by_opt<
+											function_type
+										>(
 											_backend_list,
 											[
 												&_backend
