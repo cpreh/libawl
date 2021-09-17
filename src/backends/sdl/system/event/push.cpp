@@ -1,9 +1,9 @@
 #include <awl/backends/sdl/get_error.hpp>
 #include <awl/backends/sdl/system/event/push.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/unit.hpp>
 #include <fcppt/either/construct.hpp>
 #include <fcppt/either/error.hpp>
+#include <fcppt/either/no_error.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_events.h>
@@ -32,7 +32,7 @@ awl::backends::sdl::system::event::push(
 			!=
 			-1,
 			fcppt::const_(
-				fcppt::unit{}
+				fcppt::either::no_error{}
 			),
 			[]{
 				return
