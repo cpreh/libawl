@@ -5,15 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace event
+namespace awl::backends::wayland::system::event
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::unique_ptr<
 	awl::backends::wayland::system::event::processor
 >;
 
-}
-}
-}
-}
 }
 
 #endif

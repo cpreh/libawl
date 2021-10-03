@@ -5,15 +5,7 @@
 #include <fcppt/shared_ptr_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace seat
+namespace awl::backends::wayland::system::seat
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::shared_ptr<
 	awl::backends::wayland::system::seat::object
 >;
 
-}
-}
-}
-}
 }
 
 #endif

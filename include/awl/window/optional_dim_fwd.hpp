@@ -5,9 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace window
+namespace awl::window
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::optional::object<
 	awl::window::dim
 >;
 
-}
 }
 
 #endif

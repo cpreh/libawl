@@ -7,9 +7,7 @@
 #include <awl/system/event/processor_fwd.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 AWL_DETAIL_SYMBOL
@@ -19,7 +17,6 @@ loop_next(
 	awl::main::loop_function const &
 );
 
-}
 }
 
 #endif

@@ -6,13 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace cursor
+namespace awl::backends::x11::cursor
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -20,9 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	source_pixmap
 );
 
-}
-}
-}
 }
 
 #endif

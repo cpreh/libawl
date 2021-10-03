@@ -13,15 +13,7 @@
 #include <fcppt/log/object_reference.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace event
+namespace awl::backends::wayland::system::event
 {
 
 struct global_data
@@ -62,10 +54,6 @@ public:
 	awl::event::container last_events_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -6,11 +6,7 @@
 #include <fcppt/either/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace system
-{
-namespace event
+namespace awl::system::event
 {
 
 using
@@ -21,8 +17,6 @@ fcppt::either::object<
 	awl::event::container
 >;
 
-}
-}
 }
 
 #endif

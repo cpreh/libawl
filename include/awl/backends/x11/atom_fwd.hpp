@@ -5,11 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -17,8 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	atom
 );
 
-}
-}
 }
 
 #endif

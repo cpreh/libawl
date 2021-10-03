@@ -143,5 +143,5 @@ case type_value: \
 	}
 
 	return
-		awl::backends::x11::window::event::optional_mask_bit();
+		{};
 }

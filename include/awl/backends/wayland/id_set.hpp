@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 template<
@@ -30,8 +26,6 @@ std::set<
 	>
 >;
 
-}
-}
 }
 
 #endif

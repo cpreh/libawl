@@ -7,9 +7,7 @@
 #include <fcppt/symbol/class.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 class FCPPT_SYMBOL_CLASS output
@@ -26,7 +24,6 @@ public:
 	~output();
 };
 
-}
 }
 
 #endif

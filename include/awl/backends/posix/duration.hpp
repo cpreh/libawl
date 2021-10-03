@@ -6,11 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace posix
+namespace awl::backends::posix
 {
 
 using
@@ -18,8 +14,6 @@ duration
 =
 std::chrono::milliseconds;
 
-}
-}
 }
 
 #endif

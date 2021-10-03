@@ -8,13 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace visual
+namespace awl::backends::x11::visual
 {
 
 using
@@ -25,9 +19,6 @@ fcppt::unique_ptr<
 	awl::backends::x11::deleter
 >;
 
-}
-}
-}
 }
 
 #endif

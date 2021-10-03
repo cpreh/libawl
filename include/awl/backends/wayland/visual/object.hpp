@@ -7,13 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace visual
+namespace awl::backends::wayland::visual
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -33,9 +27,6 @@ public:
 	override;
 };
 
-}
-}
-}
 }
 
 #endif

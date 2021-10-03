@@ -7,9 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace visual
+namespace awl::visual
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -26,7 +24,6 @@ public:
 	~object();
 };
 
-}
 }
 
 #endif

@@ -9,13 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace window
+namespace awl::backends::sdl::window
 {
 
 AWL_DETAIL_SYMBOL
@@ -27,9 +21,6 @@ get_data(
 	std::string const &
 );
 
-}
-}
-}
 }
 
 #endif

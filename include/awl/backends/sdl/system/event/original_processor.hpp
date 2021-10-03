@@ -20,15 +20,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
-{
-namespace event
+namespace awl::backends::sdl::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL original_processor
@@ -106,10 +98,6 @@ private:
 	awl::main::optional_exit_code exit_code_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

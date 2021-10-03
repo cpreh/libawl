@@ -11,11 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 template<
@@ -65,8 +61,6 @@ private:
 	awl::backends::wayland::registry_id name_;
 };
 
-}
-}
 }
 
 #endif

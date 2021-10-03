@@ -7,22 +7,13 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace timer
+namespace awl::backends::sdl::timer
 {
 
 AWL_DETAIL_SYMBOL
 std::int32_t
 event_code();
 
-}
-}
-}
 }
 
 #endif

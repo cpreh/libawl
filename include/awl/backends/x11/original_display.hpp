@@ -7,11 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 class original_display
@@ -38,8 +34,6 @@ private:
 	Display *const ptr_;
 };
 
-}
-}
 }
 
 #endif

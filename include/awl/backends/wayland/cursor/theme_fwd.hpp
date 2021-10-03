@@ -2,20 +2,11 @@
 #define AWL_BACKENDS_WAYLAND_CURSOR_THEME_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 class theme;
 
-}
-}
-}
 }
 
 #endif

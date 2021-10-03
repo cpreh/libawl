@@ -4,15 +4,7 @@
 #include <awl/backends/wayland/system/seat/caps_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace seat
+namespace awl::backends::wayland::system::seat
 {
 
 enum class caps
@@ -22,10 +14,6 @@ enum class caps
 	fcppt_maximum = keyboard
 };
 
-}
-}
-}
-}
 }
 
 #endif

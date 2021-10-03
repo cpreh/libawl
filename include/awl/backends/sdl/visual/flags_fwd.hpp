@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace visual
+namespace awl::backends::sdl::visual
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -21,9 +15,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	flags
 );
 
-}
-}
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 [[nodiscard]]
@@ -20,8 +16,6 @@ display_prepare_read(
 )
 noexcept(true);
 
-}
-}
 }
 
 #endif

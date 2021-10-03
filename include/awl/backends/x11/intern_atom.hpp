@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 AWL_DETAIL_SYMBOL
@@ -23,8 +19,6 @@ intern_atom(
 	std::string const &
 );
 
-}
-}
 }
 
 #endif

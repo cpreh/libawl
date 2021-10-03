@@ -5,15 +5,7 @@
 #include <fcppt/container/bitfield/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace seat
+namespace awl::backends::wayland::system::seat
 {
 
 using
@@ -23,10 +15,6 @@ fcppt::container::bitfield::object<
 	awl::backends::wayland::system::seat::caps
 >;
 
-}
-}
-}
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <fcppt/args_char.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 class function_context
@@ -34,7 +32,6 @@ private:
 	fcppt::args_char **argv_;
 };
 
-}
 }
 
 #endif

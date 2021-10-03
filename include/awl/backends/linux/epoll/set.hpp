@@ -14,13 +14,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace epoll
+namespace awl::backends::linux::epoll
 {
 
 class set
@@ -66,9 +60,6 @@ private:
 	event_vector events_;
 };
 
-}
-}
-}
 }
 
 #endif

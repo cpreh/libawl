@@ -5,13 +5,7 @@
 #include <fcppt/optional/reference_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace cursor
+namespace awl::backends::x11::cursor
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::optional::reference<
 	awl::backends::x11::cursor::object const
 >;
 
-}
-}
-}
 }
 
 #endif

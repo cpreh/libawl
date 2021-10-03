@@ -12,15 +12,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
-{
-namespace event
+namespace awl::backends::x11::window::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL generic
@@ -56,10 +48,6 @@ private:
 	awl::backends::x11::window::event::object const event_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

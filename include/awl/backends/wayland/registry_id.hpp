@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -20,8 +16,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	registry_id
 );
 
-}
-}
 }
 
 #endif

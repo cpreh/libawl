@@ -10,11 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 class AWL_DETAIL_CLASS_SYMBOL display
@@ -36,8 +32,6 @@ public:
 	~display();
 };
 
-}
-}
 }
 
 #endif

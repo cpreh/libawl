@@ -4,9 +4,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 using
@@ -16,7 +14,6 @@ fcppt::function<
 	void ()
 >;
 
-}
 }
 
 #endif

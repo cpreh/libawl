@@ -10,13 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace visual
+namespace awl::backends::x11::visual
 {
 
 AWL_DETAIL_SYMBOL
@@ -27,9 +21,6 @@ get_info(
 	XVisualInfo const &
 );
 
-}
-}
-}
 }
 
 #endif

@@ -8,13 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace cursor
+namespace awl::backends::sdl::cursor
 {
 
 AWL_DETAIL_SYMBOL
@@ -23,9 +17,6 @@ convert_predefined(
 	awl::cursor::type
 );
 
-}
-}
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::optional::object<
 	awl::main::exit_code
 >;
 
-}
 }
 
 #endif

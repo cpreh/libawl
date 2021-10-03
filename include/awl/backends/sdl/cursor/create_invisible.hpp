@@ -5,22 +5,13 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace cursor
+namespace awl::backends::sdl::cursor
 {
 
 AWL_DETAIL_SYMBOL
 awl::backends::sdl::cursor::object_unique_ptr
 create_invisible();
 
-}
-}
-}
 }
 
 #endif

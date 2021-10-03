@@ -5,9 +5,7 @@
 #include <fcppt/function_impl.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 using
@@ -19,7 +17,6 @@ fcppt::function<
 	)
 >;
 
-}
 }
 
 #endif

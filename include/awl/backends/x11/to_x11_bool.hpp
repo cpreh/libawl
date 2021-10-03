@@ -4,11 +4,7 @@
 #include <awl/backends/x11/Xlib.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 Bool
@@ -16,8 +12,6 @@ to_x11_bool(
 	bool
 );
 
-}
-}
 }
 
 #endif

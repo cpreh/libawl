@@ -7,9 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL base
@@ -26,7 +24,6 @@ public:
 	~base();
 };
 
-}
 }
 
 #endif

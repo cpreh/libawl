@@ -5,15 +5,7 @@
 #include <awl/backends/x11/window/event/mask_function.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
-{
-namespace event
+namespace awl::backends::x11::window::event
 {
 
 void
@@ -22,10 +14,6 @@ mask_for_each(
 	awl::backends::x11::window::event::mask_function const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

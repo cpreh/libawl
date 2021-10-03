@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace posix
+namespace awl::backends::posix
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	awl::backends::posix::duration
 >;
 
-}
-}
 }
 
 #endif

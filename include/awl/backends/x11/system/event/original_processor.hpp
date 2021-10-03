@@ -30,15 +30,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace system
-{
-namespace event
+namespace awl::backends::x11::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL original_processor
@@ -163,10 +155,6 @@ private:
 	window_map windows_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -5,11 +5,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 AWL_DETAIL_SYMBOL
@@ -18,8 +14,6 @@ display_dispatch_pending(
 	awl::backends::wayland::display const &
 );
 
-}
-}
 }
 
 #endif

@@ -16,13 +16,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 class AWL_DETAIL_CLASS_SYMBOL wrapped
@@ -97,9 +91,6 @@ private:
 	awl::backends::x11::window::optional_class_hint const class_hint_;
 };
 
-}
-}
-}
 }
 
 #endif

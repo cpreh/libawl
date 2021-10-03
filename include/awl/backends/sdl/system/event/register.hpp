@@ -6,15 +6,7 @@
 #include <fcppt/optional/object_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
-{
-namespace event
+namespace awl::backends::sdl::system::event
 {
 
 AWL_DETAIL_SYMBOL
@@ -23,10 +15,6 @@ fcppt::optional::object<
 >
 register_();
 
-}
-}
-}
-}
 }
 
 #endif

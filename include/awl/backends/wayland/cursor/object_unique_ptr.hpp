@@ -5,13 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::unique_ptr<
 	awl::backends::wayland::cursor::object
 >;
 
-}
-}
-}
 }
 
 #endif

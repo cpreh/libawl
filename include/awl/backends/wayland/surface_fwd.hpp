@@ -2,17 +2,11 @@
 #define AWL_BACKENDS_WAYLAND_SURFACE_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 class surface;
 
-}
-}
 }
 
 #endif

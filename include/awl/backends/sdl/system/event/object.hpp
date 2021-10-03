@@ -11,15 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
-{
-namespace event
+namespace awl::backends::sdl::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -48,10 +40,6 @@ private:
 	SDL_Event const event_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

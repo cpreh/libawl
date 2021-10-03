@@ -8,13 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace window
+namespace awl::backends::sdl::window
 {
 
 class holder
@@ -37,9 +31,6 @@ private:
 	SDL_Window *const window_;
 };
 
-}
-}
-}
 }
 
 #endif

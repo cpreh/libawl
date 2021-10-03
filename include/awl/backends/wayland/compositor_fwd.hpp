@@ -7,19 +7,13 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 AWL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT_FWD(
 	compositor
 );
 
-}
-}
 }
 
 #endif

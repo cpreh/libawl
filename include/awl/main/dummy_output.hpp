@@ -6,9 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 class dummy_output
@@ -27,7 +25,6 @@ public:
 	override;
 };
 
-}
 }
 
 #endif

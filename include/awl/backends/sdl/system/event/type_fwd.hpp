@@ -7,15 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
-{
-namespace event
+namespace awl::backends::sdl::system::event
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -23,10 +15,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	type
 );
 
-}
-}
-}
-}
 }
 
 #endif

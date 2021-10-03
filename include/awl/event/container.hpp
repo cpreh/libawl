@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 using
@@ -19,7 +17,6 @@ std::vector<
 	awl::event::base_unique_ptr
 >;
 
-}
 }
 
 #endif

@@ -11,13 +11,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 class predefined
@@ -44,9 +38,6 @@ private:
 	wl_cursor *const impl_;
 };
 
-}
-}
-}
 }
 
 #endif

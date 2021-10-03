@@ -5,13 +5,7 @@
 #include <awl/backends/x11/window/rect.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 awl::backends::x11::window::rect
@@ -19,9 +13,6 @@ get_geometry(
 	awl::backends::x11::window::base const &
 );
 
-}
-}
-}
 }
 
 #endif

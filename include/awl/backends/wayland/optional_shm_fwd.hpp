@@ -5,11 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::optional::object<
 	awl::backends::wayland::shm
 >;
 
-}
-}
 }
 
 #endif

@@ -9,11 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace window
-{
-namespace event
+namespace awl::window::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL close
@@ -35,8 +31,6 @@ public:
 	override;
 };
 
-}
-}
 }
 
 #endif

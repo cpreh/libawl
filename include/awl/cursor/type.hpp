@@ -4,9 +4,7 @@
 #include <awl/cursor/type_fwd.hpp>
 
 
-namespace awl
-{
-namespace cursor
+namespace awl::cursor
 {
 
 enum class type
@@ -16,7 +14,6 @@ enum class type
 	hand
 };
 
-}
 }
 
 #endif

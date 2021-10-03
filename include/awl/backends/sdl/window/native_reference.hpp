@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace window
+namespace awl::backends::sdl::window
 {
 
 using
@@ -23,9 +17,6 @@ fcppt::reference<
 	SDL_Window
 >;
 
-}
-}
-}
 }
 
 #endif

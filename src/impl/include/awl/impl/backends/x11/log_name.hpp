@@ -4,21 +4,12 @@
 #include <fcppt/log/name.hpp>
 
 
-namespace awl
-{
-namespace impl
-{
-namespace backends
-{
-namespace x11
+namespace awl::impl::backends::x11
 {
 
 fcppt::log::name
 log_name();
 
-}
-}
-}
 }
 
 #endif

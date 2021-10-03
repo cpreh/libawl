@@ -11,11 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace system
-{
-namespace event
+namespace awl::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL processor
@@ -52,8 +48,6 @@ public:
 	~processor();
 };
 
-}
-}
 }
 
 #endif

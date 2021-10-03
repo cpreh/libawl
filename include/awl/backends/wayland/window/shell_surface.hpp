@@ -10,13 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace window
+namespace awl::backends::wayland::window
 {
 
 class shell_surface
@@ -39,9 +33,6 @@ private:
 	wl_shell_surface *impl_;
 };
 
-}
-}
-}
 }
 
 #endif

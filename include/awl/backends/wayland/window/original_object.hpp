@@ -21,13 +21,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace window
+namespace awl::backends::wayland::window
 {
 
 class AWL_DETAIL_CLASS_SYMBOL original_object
@@ -92,9 +86,6 @@ private:
 	awl::backends::wayland::window::event::data data_;
 };
 
-}
-}
-}
 }
 
 #endif

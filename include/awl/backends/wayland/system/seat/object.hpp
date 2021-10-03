@@ -12,15 +12,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace seat
+namespace awl::backends::wayland::system::seat
 {
 
 class object
@@ -70,10 +62,6 @@ private:
 	awl::backends::wayland::system::seat::data data_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

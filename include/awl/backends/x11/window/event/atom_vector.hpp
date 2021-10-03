@@ -7,15 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
-{
-namespace event
+namespace awl::backends::x11::window::event
 {
 
 using
@@ -25,10 +17,6 @@ std::vector<
 	Atom
 >;
 
-}
-}
-}
-}
 }
 
 #endif

@@ -18,13 +18,7 @@
 #include <fcppt/log/object.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
+namespace awl::backends::wayland::system
 {
 
 class original_object
@@ -83,9 +77,6 @@ private:
 	awl::backends::wayland::cursor::theme const cursor_theme_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -4,11 +4,7 @@
 #include <awl/backends/x11/free.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 struct deleter
@@ -28,8 +24,6 @@ struct deleter
 
 };
 
-}
-}
 }
 
 #endif

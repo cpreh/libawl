@@ -2,9 +2,7 @@
 #define AWL_WINDOW_SIZE_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace window
+namespace awl::window
 {
 
 using
@@ -12,7 +10,6 @@ size
 =
 unsigned;
 
-}
 }
 
 #endif

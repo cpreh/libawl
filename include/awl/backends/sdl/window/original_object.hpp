@@ -13,13 +13,7 @@
 #include <fcppt/optional/reference.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace window
+namespace awl::backends::sdl::window
 {
 
 class AWL_DETAIL_CLASS_SYMBOL original_object
@@ -66,9 +60,6 @@ private:
 	awl::backends::sdl::window::holder const impl_;
 };
 
-}
-}
-}
 }
 
 #endif

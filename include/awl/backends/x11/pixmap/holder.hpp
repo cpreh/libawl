@@ -8,13 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace pixmap
+namespace awl::backends::x11::pixmap
 {
 
 class holder
@@ -42,9 +36,6 @@ private:
 	Pixmap const pixmap_;
 };
 
-}
-}
-}
 }
 
 #endif

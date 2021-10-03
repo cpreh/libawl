@@ -190,7 +190,7 @@ awl::backends::x11::system::event::original_processor::add_window(
 							id
 						)
 						!=
-						1u
+						1U
 					)
 					{
 						throw

@@ -9,15 +9,7 @@
 #include <fcppt/log/object_reference.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace window
-{
-namespace event
+namespace awl::backends::wayland::window::event
 {
 
 class data
@@ -48,10 +40,6 @@ public:
 
 };
 
-}
-}
-}
-}
 }
 
 #endif

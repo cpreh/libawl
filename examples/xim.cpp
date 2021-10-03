@@ -395,7 +395,7 @@ try
 				>(
 					lookup(
 						nullptr,
-						0u
+						0U
 					),
 					lookup
 				)

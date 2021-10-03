@@ -7,11 +7,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
+namespace awl::backends::sdl
 {
 
 class AWL_DETAIL_CLASS_SYMBOL exception
@@ -53,8 +49,6 @@ public:
 	override;
 };
 
-}
-}
 }
 
 #endif

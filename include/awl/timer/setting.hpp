@@ -7,9 +7,7 @@
 #include <awl/timer/setting_fwd.hpp>
 
 
-namespace awl
-{
-namespace timer
+namespace awl::timer
 {
 
 class setting
@@ -36,7 +34,6 @@ private:
 	awl::timer::period period_;
 };
 
-}
 }
 
 #endif

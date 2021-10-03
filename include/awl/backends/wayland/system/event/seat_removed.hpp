@@ -10,15 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace event
+namespace awl::backends::wayland::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL seat_removed
@@ -40,10 +32,6 @@ public:
 	override;
 };
 
-}
-}
-}
-}
 }
 
 #endif

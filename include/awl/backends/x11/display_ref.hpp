@@ -5,11 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::reference<
 	awl::backends::x11::display
 >;
 
-}
-}
 }
 
 #endif

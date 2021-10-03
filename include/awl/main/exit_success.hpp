@@ -5,16 +5,13 @@
 #include <awl/main/exit_code.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 AWL_DETAIL_SYMBOL
 awl::main::exit_code
 exit_success();
 
-}
 }
 
 #endif

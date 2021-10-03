@@ -7,22 +7,13 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace window
+namespace awl::backends::sdl::window
 {
 
 AWL_DETAIL_SYMBOL
 std::string
 object_data_name();
 
-}
-}
-}
 }
 
 #endif

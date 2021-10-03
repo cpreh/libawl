@@ -5,15 +5,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
-{
-namespace event
+namespace awl::backends::sdl::system::event
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -21,10 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	timer_type
 );
 
-}
-}
-}
-}
 }
 
 #endif

@@ -8,15 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
-{
-namespace event
+namespace awl::backends::sdl::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL processor
@@ -35,10 +27,6 @@ public:
 	override;
 };
 
-}
-}
-}
-}
 }
 
 #endif

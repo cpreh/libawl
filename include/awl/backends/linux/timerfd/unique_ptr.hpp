@@ -5,13 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace timerfd
+namespace awl::backends::linux::timerfd
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::unique_ptr<
 	awl::backends::linux::timerfd::object
 >;
 
-}
-}
-}
 }
 
 #endif

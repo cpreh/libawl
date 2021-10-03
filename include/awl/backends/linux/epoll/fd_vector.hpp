@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace epoll
+namespace awl::backends::linux::epoll
 {
 
 using
@@ -23,9 +17,6 @@ std::vector<
 	awl::backends::posix::fd
 >;
 
-}
-}
-}
 }
 
 #endif

@@ -9,15 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace system
-{
-namespace event
+namespace awl::backends::x11::system::event
 {
 
 // NOLINTNEXTLINE(fuchsia-multiple-inheritance)
@@ -38,10 +30,6 @@ public:
 	override;
 };
 
-}
-}
-}
-}
 }
 
 #endif

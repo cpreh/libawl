@@ -6,9 +6,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace timer
+namespace awl::timer
 {
 
 using
@@ -16,7 +14,6 @@ duration
 =
 std::chrono::milliseconds;
 
-}
 }
 
 #endif

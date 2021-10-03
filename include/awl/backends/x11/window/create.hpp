@@ -11,13 +11,7 @@
 #include <awl/window/optional_dim_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 AWL_DETAIL_SYMBOL
@@ -31,9 +25,6 @@ create(
 	awl::backends::x11::cursor::const_optional_object_ref const &
 );
 
-}
-}
-}
 }
 
 #endif

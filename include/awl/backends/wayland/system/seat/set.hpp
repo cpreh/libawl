@@ -5,15 +5,7 @@
 #include <awl/backends/wayland/system/seat/object.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace seat
+namespace awl::backends::wayland::system::seat
 {
 
 using
@@ -23,10 +15,6 @@ awl::backends::wayland::id_set<
 	awl::backends::wayland::system::seat::object
 >;
 
-}
-}
-}
-}
 }
 
 #endif

@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -21,9 +15,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	name
 );
 
-}
-}
-}
 }
 
 #endif

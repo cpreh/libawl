@@ -4,13 +4,7 @@
 #include <fcppt/iterator/range_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 template<
@@ -23,9 +17,6 @@ fcppt::iterator::range<
 	Data const *
 >;
 
-}
-}
-}
 }
 
 #endif

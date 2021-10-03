@@ -10,13 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace timer
+namespace awl::backends::linux::timer
 {
 
 class object
@@ -52,9 +46,6 @@ private:
 	awl::event::connection_unique_ptr const connection_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -4,11 +4,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 AWL_DETAIL_SYMBOL
@@ -17,8 +13,6 @@ free(
 	void *
 );
 
-}
-}
 }
 
 #endif

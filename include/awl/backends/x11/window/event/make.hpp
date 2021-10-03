@@ -6,15 +6,7 @@
 #include <awl/event/base_unique_ptr.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
-{
-namespace event
+namespace awl::backends::x11::window::event
 {
 
 awl::event::base_unique_ptr
@@ -23,10 +15,6 @@ make(
 	awl::backends::x11::window::event::object const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

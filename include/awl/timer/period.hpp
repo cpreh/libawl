@@ -6,9 +6,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace awl
-{
-namespace timer
+namespace awl::timer
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -16,7 +14,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	period
 );
 
-}
 }
 
 #endif

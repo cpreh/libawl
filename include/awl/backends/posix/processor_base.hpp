@@ -8,11 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace posix
+namespace awl::backends::posix
 {
 
 class AWL_DETAIL_CLASS_SYMBOL processor_base
@@ -34,8 +30,6 @@ public:
 	fd_processor() = 0;
 };
 
-}
-}
 }
 
 #endif

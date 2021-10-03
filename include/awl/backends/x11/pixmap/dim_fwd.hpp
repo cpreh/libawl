@@ -5,13 +5,7 @@
 #include <fcppt/math/dim/static_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace pixmap
+namespace awl::backends::x11::pixmap
 {
 
 using
@@ -22,9 +16,6 @@ fcppt::math::dim::static_<
 	2
 >;
 
-}
-}
-}
 }
 
 #endif

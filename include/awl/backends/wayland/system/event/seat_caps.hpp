@@ -11,15 +11,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace event
+namespace awl::backends::wayland::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL seat_caps
@@ -49,10 +41,6 @@ private:
 	awl::backends::wayland::system::seat::caps_field const caps_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

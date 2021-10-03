@@ -7,13 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace cursor
+namespace awl::backends::sdl::cursor
 {
 
 class AWL_DETAIL_CLASS_SYMBOL invisible
@@ -38,9 +32,6 @@ public:
 	override;
 };
 
-}
-}
-}
 }
 
 #endif

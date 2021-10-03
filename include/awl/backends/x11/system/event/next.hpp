@@ -6,15 +6,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace system
-{
-namespace event
+namespace awl::backends::x11::system::event
 {
 
 AWL_DETAIL_SYMBOL
@@ -23,10 +15,6 @@ next(
 	awl::backends::x11::display const &
 );
 
-}
-}
-}
-}
 }
 
 #endif

@@ -8,13 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
+namespace awl::backends::sdl::system
 {
 
 class init
@@ -35,9 +29,6 @@ private:
 	std::uint32_t const systems_;
 };
 
-}
-}
-}
 }
 
 #endif

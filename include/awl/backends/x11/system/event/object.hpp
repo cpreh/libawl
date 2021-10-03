@@ -6,15 +6,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace system
-{
-namespace event
+namespace awl::backends::x11::system::event
 {
 
 class object
@@ -39,10 +31,6 @@ private:
 	XEvent event_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

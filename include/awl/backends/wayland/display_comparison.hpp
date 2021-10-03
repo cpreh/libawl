@@ -5,11 +5,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 AWL_DETAIL_SYMBOL
@@ -19,8 +15,6 @@ operator==(
 	awl::backends::wayland::display const &
 );
 
-}
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <fcppt/optional/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::optional::object<
 	awl::event::base_unique_ptr
 >;
 
-}
 }
 
 #endif

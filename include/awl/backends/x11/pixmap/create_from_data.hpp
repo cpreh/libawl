@@ -7,13 +7,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace pixmap
+namespace awl::backends::x11::pixmap
 {
 
 AWL_DETAIL_SYMBOL
@@ -24,9 +18,6 @@ create_from_data(
 	char const *
 );
 
-}
-}
-}
 }
 
 #endif

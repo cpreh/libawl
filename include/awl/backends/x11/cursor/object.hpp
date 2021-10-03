@@ -10,13 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace cursor
+namespace awl::backends::x11::cursor
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -45,9 +39,6 @@ private:
 	awl::backends::x11::cursor::holder_unique_ptr const holder_;
 };
 
-}
-}
-}
 }
 
 #endif

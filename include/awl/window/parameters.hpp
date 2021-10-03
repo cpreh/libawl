@@ -12,9 +12,7 @@
 #include <fcppt/string.hpp>
 
 
-namespace awl
-{
-namespace window
+namespace awl::window
 {
 
 class parameters
@@ -88,7 +86,6 @@ private:
 	awl::cursor::const_optional_object_ref cursor_;
 };
 
-}
 }
 
 #endif

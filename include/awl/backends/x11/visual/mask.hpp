@@ -5,13 +5,7 @@
 #include <fcppt/strong_typedef_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace visual
+namespace awl::backends::x11::visual
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -19,9 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	mask
 );
 
-}
-}
-}
 }
 
 #endif

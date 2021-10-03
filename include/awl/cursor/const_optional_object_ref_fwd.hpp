@@ -5,9 +5,7 @@
 #include <fcppt/optional/reference_fwd.hpp>
 
 
-namespace awl
-{
-namespace cursor
+namespace awl::cursor
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::optional::reference<
 	awl::cursor::object const
 >;
 
-}
 }
 
 #endif

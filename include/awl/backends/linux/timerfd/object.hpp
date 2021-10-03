@@ -10,13 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace timerfd
+namespace awl::backends::linux::timerfd
 {
 
 class object
@@ -50,9 +44,6 @@ private:
 	awl::backends::posix::fd const fd_;
 };
 
-}
-}
-}
 }
 
 #endif

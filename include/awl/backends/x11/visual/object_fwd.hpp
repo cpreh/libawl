@@ -2,20 +2,11 @@
 #define AWL_BACKENDS_X11_VISUAL_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace visual
+namespace awl::backends::x11::visual
 {
 
 class object;
 
-}
-}
-}
 }
 
 #endif

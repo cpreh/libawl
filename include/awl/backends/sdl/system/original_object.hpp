@@ -18,13 +18,7 @@
 #include <fcppt/log/object.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
+namespace awl::backends::sdl::system
 {
 
 class AWL_DETAIL_CLASS_SYMBOL original_object
@@ -78,9 +72,6 @@ private:
 	> const event_processor_;
 };
 
-}
-}
-}
 }
 
 #endif

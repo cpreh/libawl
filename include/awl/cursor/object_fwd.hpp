@@ -2,14 +2,11 @@
 #define AWL_CURSOR_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace cursor
+namespace awl::cursor
 {
 
 class object;
 
-}
 }
 
 #endif

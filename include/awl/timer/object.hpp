@@ -7,9 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace timer
+namespace awl::timer
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -26,7 +24,6 @@ public:
 	~object();
 };
 
-}
 }
 
 #endif

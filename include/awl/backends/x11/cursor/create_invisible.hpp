@@ -6,13 +6,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace cursor
+namespace awl::backends::x11::cursor
 {
 
 AWL_DETAIL_SYMBOL
@@ -21,9 +15,6 @@ create_invisible(
 	awl::backends::x11::display_ref
 );
 
-}
-}
-}
 }
 
 #endif

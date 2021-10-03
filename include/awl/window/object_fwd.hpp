@@ -2,14 +2,11 @@
 #define AWL_WINDOW_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace window
+namespace awl::window
 {
 
 class object;
 
-}
 }
 
 #endif

@@ -4,15 +4,12 @@
 #include <fcppt/log/name.hpp>
 
 
-namespace awl
-{
-namespace impl
+namespace awl::impl
 {
 
 fcppt::log::name
 log_name();
 
-}
 }
 
 #endif

@@ -7,25 +7,13 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace system
-{
-namespace event
+namespace awl::backends::sdl::system::event
 {
 
 AWL_DETAIL_SYMBOL
 SDL_Event
 wait();
 
-}
-}
-}
-}
 }
 
 #endif

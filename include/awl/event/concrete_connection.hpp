@@ -7,9 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 class concrete_connection
@@ -31,7 +29,6 @@ private:
 	awl::event::connection_function const function_;
 };
 
-}
 }
 
 #endif

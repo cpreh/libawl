@@ -8,11 +8,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
+namespace awl::backends::sdl
 {
 
 AWL_DETAIL_SYMBOL
@@ -21,8 +17,6 @@ fcppt::optional::object<
 >
 get_error();
 
-}
-}
 }
 
 #endif

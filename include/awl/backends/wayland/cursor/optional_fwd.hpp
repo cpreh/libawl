@@ -7,13 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 using
@@ -23,9 +17,6 @@ fcppt::optional::object<
 	wl_cursor *
 >;
 
-}
-}
-}
 }
 
 #endif

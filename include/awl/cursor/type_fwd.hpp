@@ -2,14 +2,11 @@
 #define AWL_CURSOR_TYPE_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace cursor
+namespace awl::cursor
 {
 
 enum class type;
 
-}
 }
 
 #endif

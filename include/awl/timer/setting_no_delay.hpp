@@ -5,9 +5,7 @@
 #include <awl/timer/setting.hpp>
 
 
-namespace awl
-{
-namespace timer
+namespace awl::timer
 {
 
 AWL_DETAIL_SYMBOL
@@ -16,7 +14,6 @@ setting_no_delay(
 	awl::timer::period
 );
 
-}
 }
 
 #endif

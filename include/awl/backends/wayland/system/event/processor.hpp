@@ -14,15 +14,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace event
+namespace awl::backends::wayland::system::event
 {
 
 // NOLINTNEXTLINE(fuchsia-multiple-inheritance)
@@ -69,10 +61,6 @@ public:
 	seats() const = 0;
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -6,13 +6,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 AWL_DETAIL_SYMBOL
@@ -22,9 +16,6 @@ set_wm_protocols(
 	awl::backends::x11::window::atoms const &
 );
 
-}
-}
-}
 }
 
 #endif

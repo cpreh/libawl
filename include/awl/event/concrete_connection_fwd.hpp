@@ -2,14 +2,11 @@
 #define AWL_EVENT_CONCRETE_CONNECTION_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 class concrete_connection;
 
-}
 }
 
 #endif

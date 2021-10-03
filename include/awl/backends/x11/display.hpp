@@ -7,11 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 class AWL_DETAIL_CLASS_SYMBOL display
@@ -33,8 +29,6 @@ public:
 	~display();
 };
 
-}
-}
 }
 
 #endif

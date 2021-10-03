@@ -9,11 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 class original_display
@@ -40,8 +36,6 @@ private:
 	wl_display *const ptr_;
 };
 
-}
-}
 }
 
 #endif

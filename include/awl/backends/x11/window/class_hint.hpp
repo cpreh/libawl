@@ -10,13 +10,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 class class_hint
@@ -53,9 +47,6 @@ private:
 	res_class_type res_class_;
 };
 
-}
-}
-}
 }
 
 #endif

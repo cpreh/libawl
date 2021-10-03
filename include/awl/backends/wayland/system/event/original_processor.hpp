@@ -26,15 +26,7 @@
 #include <fcppt/log/object_reference.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace event
+namespace awl::backends::wayland::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL original_processor
@@ -145,10 +137,6 @@ private:
 	awl::backends::posix::fd const fd_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

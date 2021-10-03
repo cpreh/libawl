@@ -9,13 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace visual
+namespace awl::backends::sdl::visual
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -49,9 +43,6 @@ private:
 	awl::backends::sdl::visual::flags const flags_;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::reference<
 	awl::event::container
 >;
 
-}
 }
 
 #endif

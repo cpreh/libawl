@@ -9,9 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 AWL_DETAIL_SYMBOL
@@ -21,7 +19,6 @@ create_output(
 	std::filesystem::path const &
 );
 
-}
 }
 
 #endif

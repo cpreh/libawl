@@ -9,13 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace epoll
+namespace awl::backends::linux::epoll
 {
 
 AWL_DETAIL_SYMBOL
@@ -27,9 +21,6 @@ ctl(
 	epoll_event *
 );
 
-}
-}
-}
 }
 
 #endif

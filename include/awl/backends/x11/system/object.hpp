@@ -10,13 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace system
+namespace awl::backends::x11::system
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -45,9 +39,6 @@ public:
 	screen() const = 0;
 };
 
-}
-}
-}
 }
 
 #endif

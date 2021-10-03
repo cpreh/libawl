@@ -2,20 +2,11 @@
 #define AWL_BACKENDS_SDL_VISUAL_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace visual
+namespace awl::backends::sdl::visual
 {
 
 class object;
 
-}
-}
-}
 }
 
 #endif

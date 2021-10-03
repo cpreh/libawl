@@ -5,13 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace pixmap
+namespace awl::backends::x11::pixmap
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::unique_ptr<
 	awl::backends::x11::pixmap::holder
 >;
 
-}
-}
-}
 }
 
 #endif

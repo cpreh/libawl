@@ -6,11 +6,7 @@
 #include <awl/event/base_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace posix
+namespace awl::backends::posix
 {
 
 AWL_DETAIL_SYMBOL
@@ -20,8 +16,6 @@ match(
 	awl::backends::posix::fd
 );
 
-}
-}
 }
 
 #endif

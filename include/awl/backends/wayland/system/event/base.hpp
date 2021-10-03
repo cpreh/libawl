@@ -10,15 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace event
+namespace awl::backends::wayland::system::event
 {
 
 class base
@@ -47,10 +39,6 @@ private:
 	awl::backends::wayland::display_reference const display_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

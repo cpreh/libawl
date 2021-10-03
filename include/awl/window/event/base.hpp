@@ -9,11 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace window
-{
-namespace event
+namespace awl::window::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL base
@@ -42,8 +38,6 @@ private:
 	awl::window::reference const window_;
 };
 
-}
-}
 }
 
 #endif

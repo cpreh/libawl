@@ -6,9 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 class connection
@@ -24,7 +22,6 @@ public:
 	~connection();
 };
 
-}
 }
 
 #endif

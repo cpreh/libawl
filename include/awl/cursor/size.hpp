@@ -2,9 +2,7 @@
 #define AWL_CURSOR_SIZE_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace cursor
+namespace awl::cursor
 {
 
 using
@@ -12,7 +10,6 @@ size
 =
 unsigned;
 
-}
 }
 
 #endif

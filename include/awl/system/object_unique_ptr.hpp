@@ -5,9 +5,7 @@
 #include <fcppt/unique_ptr_impl.hpp>
 
 
-namespace awl
-{
-namespace system
+namespace awl::system
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::unique_ptr<
 	awl::system::object
 >;
 
-}
 }
 
 #endif

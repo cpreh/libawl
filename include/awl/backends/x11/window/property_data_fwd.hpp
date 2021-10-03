@@ -5,13 +5,7 @@
 #include <fcppt/variant/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 using
@@ -29,9 +23,6 @@ fcppt::variant::object<
 	>
 >;
 
-}
-}
-}
 }
 
 #endif

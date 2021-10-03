@@ -5,11 +5,7 @@
 #include <fcppt/shared_ptr_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
+namespace awl::backends::wayland
 {
 
 template<
@@ -66,8 +62,6 @@ struct id_less
 	}
 };
 
-}
-}
 }
 
 #endif

@@ -17,13 +17,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace system
+namespace awl::backends::x11::system
 {
 
 class original_object
@@ -97,9 +91,6 @@ private:
 	> const processor_;
 };
 
-}
-}
-}
 }
 
 #endif

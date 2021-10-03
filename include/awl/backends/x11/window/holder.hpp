@@ -7,13 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 class holder
@@ -50,9 +44,6 @@ private:
 	bool destroyed_;
 };
 
-}
-}
-}
 }
 
 #endif

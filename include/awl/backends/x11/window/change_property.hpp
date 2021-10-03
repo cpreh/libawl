@@ -9,13 +9,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 AWL_DETAIL_SYMBOL
@@ -28,9 +22,6 @@ change_property(
 	awl::backends::x11::window::property_data const &
 );
 
-}
-}
-}
 }
 
 #endif

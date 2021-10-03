@@ -6,9 +6,7 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 
 
-namespace awl
-{
-namespace system
+namespace awl::system
 {
 
 AWL_DETAIL_SYMBOL
@@ -17,7 +15,6 @@ create(
 	fcppt::log::context_reference
 );
 
-}
 }
 
 #endif

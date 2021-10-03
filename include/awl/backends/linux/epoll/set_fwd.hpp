@@ -2,20 +2,11 @@
 #define AWL_BACKENDS_LINUX_EPOLL_SET_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace epoll
+namespace awl::backends::linux::epoll
 {
 
 class set;
 
-}
-}
-}
 }
 
 #endif

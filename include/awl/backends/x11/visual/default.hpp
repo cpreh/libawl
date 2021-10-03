@@ -7,13 +7,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace visual
+namespace awl::backends::x11::visual
 {
 
 AWL_DETAIL_SYMBOL
@@ -23,9 +17,6 @@ default_(
 	awl::backends::x11::screen
 );
 
-}
-}
-}
 }
 
 #endif

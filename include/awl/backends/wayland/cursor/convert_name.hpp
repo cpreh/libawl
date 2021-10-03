@@ -5,13 +5,7 @@
 #include <awl/cursor/type_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 awl::backends::wayland::cursor::name
@@ -19,9 +13,6 @@ convert_name(
 	awl::cursor::type
 );
 
-}
-}
-}
 }
 
 #endif

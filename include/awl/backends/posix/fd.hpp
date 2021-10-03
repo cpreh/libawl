@@ -5,11 +5,7 @@
 #include <fcppt/strong_typedef.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace posix
+namespace awl::backends::posix
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -17,8 +13,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	fd
 );
 
-}
-}
 }
 
 #endif

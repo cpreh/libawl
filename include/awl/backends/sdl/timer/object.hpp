@@ -12,13 +12,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace timer
+namespace awl::backends::sdl::timer
 {
 
 class object
@@ -55,9 +49,6 @@ private:
 	SDL_TimerID const id_;
 };
 
-}
-}
-}
 }
 
 #endif

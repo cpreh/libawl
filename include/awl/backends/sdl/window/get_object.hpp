@@ -6,13 +6,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace window
+namespace awl::backends::sdl::window
 {
 
 AWL_DETAIL_SYMBOL
@@ -21,9 +15,6 @@ get_object(
 	awl::backends::sdl::window::native_reference
 );
 
-}
-}
-}
 }
 
 #endif

@@ -7,13 +7,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace epoll
+namespace awl::backends::linux::epoll
 {
 
 class fd
@@ -35,9 +29,6 @@ private:
 	awl::backends::posix::fd const fd_;
 };
 
-}
-}
-}
 }
 
 #endif

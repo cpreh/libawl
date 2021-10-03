@@ -6,15 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
-{
-namespace event
+namespace awl::backends::x11::window::event
 {
 
 class wm_protocols
@@ -33,10 +25,6 @@ private:
 	// TODO(philipp): unset what was given here again!
 };
 
-}
-}
-}
-}
 }
 
 #endif

@@ -7,13 +7,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 class atoms
@@ -40,9 +34,6 @@ private:
 	awl::backends::x11::window::atom_count count_;
 };
 
-}
-}
-}
 }
 
 #endif

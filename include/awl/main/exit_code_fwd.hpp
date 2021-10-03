@@ -4,9 +4,7 @@
 #include <fcppt/make_strong_typedef.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 FCPPT_MAKE_STRONG_TYPEDEF(
@@ -14,7 +12,6 @@ FCPPT_MAKE_STRONG_TYPEDEF(
 	exit_code
 );
 
-}
 }
 
 #endif

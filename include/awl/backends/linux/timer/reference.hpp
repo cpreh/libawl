@@ -5,13 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace timer
+namespace awl::backends::linux::timer
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::reference<
 	awl::backends::linux::timer::object
 >;
 
-}
-}
-}
 }
 
 #endif

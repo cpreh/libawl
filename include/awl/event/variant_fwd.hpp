@@ -7,9 +7,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 template<
@@ -25,7 +23,6 @@ fcppt::variant::object<
 	Type
 >;
 
-}
 }
 
 #endif

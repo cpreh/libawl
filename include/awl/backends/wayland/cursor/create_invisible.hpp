@@ -4,21 +4,12 @@
 #include <awl/backends/wayland/cursor/object_unique_ptr.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 awl::backends::wayland::cursor::object_unique_ptr
 create_invisible();
 
-}
-}
-}
 }
 
 #endif

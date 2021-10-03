@@ -6,15 +6,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
-{
-namespace event
+namespace awl::backends::x11::window::event
 {
 
 AWL_DETAIL_SYMBOL
@@ -24,10 +16,6 @@ change_mask(
 	awl::backends::x11::window::event::mask
 );
 
-}
-}
-}
-}
 }
 
 #endif

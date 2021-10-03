@@ -10,13 +10,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace window
+namespace awl::backends::sdl::window
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -55,9 +49,6 @@ public:
 	set_cursor() = 0;
 };
 
-}
-}
-}
 }
 
 #endif

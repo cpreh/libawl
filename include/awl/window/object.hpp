@@ -8,9 +8,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace window
+namespace awl::window
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -41,7 +39,6 @@ public:
 	~object();
 };
 
-}
 }
 
 #endif

@@ -9,13 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 class AWL_DETAIL_CLASS_SYMBOL object
@@ -39,9 +33,6 @@ public:
 	get() const = 0;
 };
 
-}
-}
-}
 }
 
 #endif

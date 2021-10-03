@@ -6,11 +6,7 @@
 #include <fcppt/function_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace posix
+namespace awl::backends::posix
 {
 
 awl::event::container
@@ -22,8 +18,6 @@ extract_event(
 	>
 );
 
-}
-}
 }
 
 #endif

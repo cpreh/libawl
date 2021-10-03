@@ -6,9 +6,7 @@
 #include <awl/timer/object_fwd.hpp>
 
 
-namespace awl
-{
-namespace timer
+namespace awl::timer
 {
 
 AWL_DETAIL_SYMBOL
@@ -18,7 +16,6 @@ match(
 	awl::timer::object const &
 );
 
-}
 }
 
 #endif

@@ -7,9 +7,7 @@
 #include <awl/event/connection_unique_ptr.hpp>
 
 
-namespace awl
-{
-namespace event
+namespace awl::event
 {
 
 AWL_DETAIL_SYMBOL
@@ -18,7 +16,6 @@ make_connection(
 	awl::event::connection_function &&
 );
 
-}
 }
 
 #endif

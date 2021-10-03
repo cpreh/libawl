@@ -9,13 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace visual
+namespace awl::backends::x11::visual
 {
 
 class AWL_DETAIL_CLASS_SYMBOL copy_from_parent
@@ -52,9 +46,6 @@ public:
 	override;
 };
 
-}
-}
-}
 }
 
 #endif

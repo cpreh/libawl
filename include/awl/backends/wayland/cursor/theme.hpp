@@ -9,13 +9,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 class theme
@@ -38,9 +32,6 @@ private:
 	wl_cursor_theme *const impl_;
 };
 
-}
-}
-}
 }
 
 #endif

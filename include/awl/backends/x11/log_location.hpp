@@ -5,19 +5,13 @@
 #include <fcppt/log/location.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 AWL_DETAIL_SYMBOL
 fcppt::log::location
 log_location();
 
-}
-}
 }
 
 #endif

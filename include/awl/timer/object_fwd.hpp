@@ -2,14 +2,11 @@
 #define AWL_TIMER_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace timer
+namespace awl::timer
 {
 
 class object;
 
-}
 }
 
 #endif

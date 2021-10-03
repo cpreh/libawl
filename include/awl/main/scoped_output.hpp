@@ -12,9 +12,7 @@
 #include <fcppt/config/external_end.hpp>
 
 
-namespace awl
-{
-namespace main
+namespace awl::main
 {
 
 class scoped_output
@@ -37,7 +35,6 @@ private:
 	> const impl_;
 };
 
-}
 }
 
 #endif

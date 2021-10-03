@@ -6,13 +6,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace cursor
+namespace awl::backends::wayland::cursor
 {
 
 class invisible
@@ -34,9 +28,6 @@ public:
 	override;
 };
 
-}
-}
-}
 }
 
 #endif

@@ -10,15 +10,7 @@
 #include <fcppt/optional/object_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
-{
-namespace seat
+namespace awl::backends::wayland::system::seat
 {
 
 struct data
@@ -54,10 +46,6 @@ public:
 	optional_shared_ptr pointer_;
 };
 
-}
-}
-}
-}
 }
 
 #endif

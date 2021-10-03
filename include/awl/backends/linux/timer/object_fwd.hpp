@@ -2,20 +2,11 @@
 #define AWL_BACKENDS_LINUX_TIMER_OBJECT_FWD_HPP_INCLUDED
 
 
-namespace awl
-{
-namespace backends
-{
-namespace linux
-{
-namespace timer
+namespace awl::backends::linux::timer
 {
 
 class object;
 
-}
-}
-}
 }
 
 #endif

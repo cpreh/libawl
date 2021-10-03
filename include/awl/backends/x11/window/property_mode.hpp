@@ -4,13 +4,7 @@
 #include <awl/backends/x11/window/property_mode_fwd.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace window
+namespace awl::backends::x11::window
 {
 
 enum class property_mode
@@ -20,9 +14,6 @@ enum class property_mode
 	append
 };
 
-}
-}
-}
 }
 
 #endif

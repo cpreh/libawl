@@ -7,13 +7,7 @@
 #include <awl/detail/symbol.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
-{
-namespace cursor
+namespace awl::backends::x11::cursor
 {
 
 AWL_DETAIL_SYMBOL
@@ -23,9 +17,6 @@ create_predefined(
 	awl::cursor::type
 );
 
-}
-}
-}
 }
 
 #endif

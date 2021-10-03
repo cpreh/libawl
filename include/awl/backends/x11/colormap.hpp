@@ -9,11 +9,7 @@
 #include <fcppt/nonmovable.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace x11
+namespace awl::backends::x11
 {
 
 class colormap
@@ -46,8 +42,6 @@ private:
 	Colormap colormap_;
 };
 
-}
-}
 }
 
 #endif
