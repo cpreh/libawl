@@ -5,13 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace sdl
-{
-namespace window
+namespace awl::backends::sdl::window
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::reference<
 	awl::backends::sdl::window::object
 >;
 
-}
-}
-}
 }
 
 #endif

@@ -5,9 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace system
+namespace awl::system
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::reference<
 	awl::system::object
 >;
 
-}
 }
 
 #endif

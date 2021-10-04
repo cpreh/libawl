@@ -5,9 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace timer
+namespace awl::timer
 {
 
 using
@@ -17,7 +15,6 @@ fcppt::reference<
 	awl::timer::object const
 >;
 
-}
 }
 
 #endif

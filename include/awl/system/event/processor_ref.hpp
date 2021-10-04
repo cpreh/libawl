@@ -5,11 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace system
-{
-namespace event
+namespace awl::system::event
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::reference<
 	awl::system::event::processor
 >;
 
-}
-}
 }
 
 #endif

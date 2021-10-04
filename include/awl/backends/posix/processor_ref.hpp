@@ -5,11 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace posix
+namespace awl::backends::posix
 {
 
 using
@@ -19,8 +15,6 @@ fcppt::reference<
 	awl::backends::posix::processor
 >;
 
-}
-}
 }
 
 #endif

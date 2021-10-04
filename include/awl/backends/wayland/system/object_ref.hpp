@@ -5,13 +5,7 @@
 #include <fcppt/reference_impl.hpp>
 
 
-namespace awl
-{
-namespace backends
-{
-namespace wayland
-{
-namespace system
+namespace awl::backends::wayland::system
 {
 
 using
@@ -21,9 +15,6 @@ fcppt::reference<
 	awl::backends::wayland::system::object
 >;
 
-}
-}
-}
 }
 
 #endif
