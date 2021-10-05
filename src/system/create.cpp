@@ -16,10 +16,10 @@
 #if defined(AWL_SDL_BACKEND)
 #include <awl/backends/sdl/system/original_object.hpp>
 #endif
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/function_impl.hpp>
 #include <fcppt/getenv.hpp>
-#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/not.hpp>
 #include <fcppt/string.hpp>
