@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_MESSAGE_TYPE_HPP_INCLUDED
 
 #include <awl/backends/windows/windows.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
@@ -13,7 +13,7 @@ namespace backends
 namespace windows
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	UINT,
 	message_type
 );

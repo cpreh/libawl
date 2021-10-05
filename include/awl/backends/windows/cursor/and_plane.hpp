@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WINDOWS_CURSOR_AND_PLANE_HPP_INCLUDED
 
 #include <awl/backends/windows/windows.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
@@ -15,7 +15,7 @@ namespace windows
 namespace cursor
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	VOID const *,
 	and_plane
 );

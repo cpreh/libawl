@@ -18,7 +18,7 @@
 #include <awl/timer/reference.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <unordered_map>
@@ -85,7 +85,7 @@ public:
 	awl::event::container_reference
 	next_events();
 private:
-	FCPPT_MAKE_STRONG_TYPEDEF(
+	FCPPT_DECLARE_STRONG_TYPEDEF(
 		DWORD,
 		timeout
 	);

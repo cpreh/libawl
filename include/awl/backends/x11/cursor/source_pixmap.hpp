@@ -2,14 +2,14 @@
 #define AWL_BACKENDS_X11_CURSOR_SOURCE_PIXMAP_HPP_INCLUDED
 
 #include <awl/backends/x11/pixmap/const_holder_ref.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
 
 namespace awl::backends::x11::cursor
 {
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	awl::backends::x11::pixmap::const_holder_ref,
 	source_pixmap
 );

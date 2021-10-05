@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/window/class_hint_fwd.hpp>
 #include <awl/detail/symbol.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <string>
@@ -16,12 +16,12 @@ namespace awl::backends::x11::window
 class class_hint
 {
 public:
-	FCPPT_MAKE_STRONG_TYPEDEF(
+	FCPPT_DECLARE_STRONG_TYPEDEF(
 		std::string,
 		res_name_type
 	);
 
-	FCPPT_MAKE_STRONG_TYPEDEF(
+	FCPPT_DECLARE_STRONG_TYPEDEF(
 		std::string,
 		res_class_type
 	);

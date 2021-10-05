@@ -19,7 +19,7 @@
 #include <fcppt/from_std_string.hpp>
 #include <fcppt/function_impl.hpp>
 #include <fcppt/getenv.hpp>
-#include <fcppt/make_strong_typedef.hpp>
+#include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/not.hpp>
 #include <fcppt/string.hpp>
@@ -201,7 +201,7 @@ get_backends(
 		};
 }
 
-FCPPT_MAKE_STRONG_TYPEDEF(
+FCPPT_DECLARE_STRONG_TYPEDEF(
 	std::string,
 	backend_name
 );
