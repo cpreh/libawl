@@ -6,7 +6,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,46 +15,30 @@ namespace windows
 
 class command_line_argv
 {
-	FCPPT_NONCOPYABLE(
-		command_line_argv
-	);
+  FCPPT_NONCOPYABLE(command_line_argv);
+
 public:
-	command_line_argv(
-		int argc,
-		awl::backends::windows::command_line_ptr &&
-	)
-	noexcept;
+  command_line_argv(int argc, awl::backends::windows::command_line_ptr &&) noexcept;
 
-	AWL_DETAIL_SYMBOL
-	command_line_argv(
-		command_line_argv &&
-	)
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  command_line_argv(command_line_argv &&) noexcept;
 
-	AWL_DETAIL_SYMBOL
-	command_line_argv &
-	operator=(
-		command_line_argv &&
-	)
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  command_line_argv &operator=(command_line_argv &&) noexcept;
 
-	AWL_DETAIL_SYMBOL
-	~command_line_argv()
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  ~command_line_argv() noexcept;
 
-	AWL_DETAIL_SYMBOL
-	int
-	argc() const
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  int argc() const noexcept;
 
-	AWL_DETAIL_SYMBOL
-	wchar_t **
-	argv() const
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  wchar_t **argv() const noexcept;
+
 private:
-	int argc_;
+  int argc_;
 
-	awl::backends::windows::command_line_ptr argv_;
+  awl::backends::windows::command_line_ptr argv_;
 };
 
 }

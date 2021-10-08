@@ -15,80 +15,46 @@
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-class AWL_DETAIL_CLASS_SYMBOL wrapped
-:
-	public awl::backends::x11::window::base
+class AWL_DETAIL_CLASS_SYMBOL wrapped : public awl::backends::x11::window::base
 {
-	FCPPT_NONMOVABLE(
-		wrapped
-	);
+  FCPPT_NONMOVABLE(wrapped);
+
 public:
-	AWL_DETAIL_SYMBOL
-	wrapped(
-		awl::backends::x11::display_ref,
-		awl::backends::x11::screen,
-		Window
-	);
+  AWL_DETAIL_SYMBOL
+  wrapped(awl::backends::x11::display_ref, awl::backends::x11::screen, Window);
 
-	AWL_DETAIL_SYMBOL
-	~wrapped()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~wrapped() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	bool
-	destroyed() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL bool destroyed() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::display_ref
-	display() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::display_ref display() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::screen
-	screen() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::screen screen() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::visual::object const &
-	x11_visual() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::visual::object const &
+  x11_visual() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::rect
-	rect() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::window::rect rect() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	Window
-	get() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL Window get() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::const_optional_class_hint_ref
-	class_hint() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::window::const_optional_class_hint_ref
+  class_hint() const override;
+
 private:
-	awl::backends::x11::display_ref const display_;
+  awl::backends::x11::display_ref const display_;
 
-	awl::backends::x11::screen const screen_;
+  awl::backends::x11::screen const screen_;
 
-	Window const window_;
+  Window const window_;
 
-	awl::backends::x11::visual::object_unique_ptr const visual_;
+  awl::backends::x11::visual::object_unique_ptr const visual_;
 
-	awl::backends::x11::window::optional_class_hint const class_hint_;
+  awl::backends::x11::window::optional_class_hint const class_hint_;
 };
 
 }

@@ -3,7 +3,6 @@
 
 #include <fcppt/math/dim/static_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -13,12 +12,7 @@ namespace windows
 namespace window
 {
 
-typedef
-fcppt::math::dim::static_<
-	int,
-	2
->
-signed_dim;
+typedef fcppt::math::dim::static_<int, 2> signed_dim;
 
 }
 }

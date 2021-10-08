@@ -12,45 +12,24 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
+awl::backends::x11::window::base::base() : awl::window::object() {}
 
-awl::backends::x11::window::base::base()
-:
-	awl::window::object()
+awl::backends::x11::window::base::~base() = default;
+
+void awl::backends::x11::window::base::show()
 {
+  // always returns 1
+  ::XMapRaised(this->display().get().get(), this->get());
+
+  awl::backends::x11::sync(this->display().get(), awl::backends::x11::discard{false});
 }
 
-awl::backends::x11::window::base::~base()
-= default;
-
-void
-awl::backends::x11::window::base::show()
+awl::window::dim awl::backends::x11::window::base::size() const
 {
-	// always returns 1
-	::XMapRaised(
-		this->display().get().get(),
-		this->get()
-	);
-
-	awl::backends::x11::sync(
-		this->display().get(),
-		awl::backends::x11::discard{
-			false
-		}
-	);
+  return fcppt::math::dim::to_unsigned(this->rect().size());
 }
 
-awl::window::dim
-awl::backends::x11::window::base::size() const
+awl::visual::object const &awl::backends::x11::window::base::visual() const
 {
-	return
-		fcppt::math::dim::to_unsigned(
-			this->rect().size()
-		);
-}
-
-awl::visual::object const &
-awl::backends::x11::window::base::visual() const
-{
-	return
-		this->x11_visual();
+  return this->x11_visual();
 }

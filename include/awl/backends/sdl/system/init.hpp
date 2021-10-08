@@ -7,26 +7,22 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::system
 {
 
 class init
 {
-	FCPPT_NONMOVABLE(
-		init
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	init(
-		std::uint32_t
-	);
+  FCPPT_NONMOVABLE(init);
 
-	AWL_DETAIL_SYMBOL
-	~init();
+public:
+  AWL_DETAIL_SYMBOL
+  explicit init(std::uint32_t);
+
+  AWL_DETAIL_SYMBOL
+  ~init();
+
 private:
-	std::uint32_t const systems_;
+  std::uint32_t const systems_;
 };
 
 }

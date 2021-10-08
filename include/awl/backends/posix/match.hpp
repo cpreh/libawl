@@ -5,16 +5,11 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/event/base_fwd.hpp>
 
-
 namespace awl::backends::posix
 {
 
 AWL_DETAIL_SYMBOL
-bool
-match(
-	awl::event::base const &,
-	awl::backends::posix::fd
-);
+bool match(awl::event::base const &, awl::backends::posix::fd);
 
 }
 

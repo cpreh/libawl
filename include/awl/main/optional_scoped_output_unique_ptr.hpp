@@ -4,5 +4,4 @@
 #include <awl/main/optional_scoped_output_unique_ptr_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

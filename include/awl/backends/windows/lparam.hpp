@@ -5,7 +5,6 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -13,10 +12,7 @@ namespace backends
 namespace windows
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	LPARAM,
-	lparam
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(LPARAM, lparam);
 
 }
 }

@@ -10,22 +10,15 @@
 #include <fcppt/io/cerr.hpp>
 #endif
 
-
-void
-awl::show_error(
-	fcppt::string const &_text
-)
+void awl::show_error(fcppt::string const &_text)
 {
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
-	awl::backends::windows::message_box(
-		awl::backends::windows::window::const_optional_object_ref(),
-		_text,
-		FCPPT_TEXT("Error"),
-		MB_OK | MB_ICONERROR
-	);
+  awl::backends::windows::message_box(
+      awl::backends::windows::window::const_optional_object_ref(),
+      _text,
+      FCPPT_TEXT("Error"),
+      MB_OK | MB_ICONERROR);
 #else
-	fcppt::io::cerr()
-		<< _text
-		<< FCPPT_TEXT('\n');
+  fcppt::io::cerr() << _text << FCPPT_TEXT('\n');
 #endif
 }

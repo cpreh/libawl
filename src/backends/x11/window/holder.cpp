@@ -6,62 +6,29 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::x11::window::holder::holder(
-	awl::backends::x11::display_ref const _display,
-	Window const _window
-)
-:
-	display_(
-		_display
-	),
-	window_(
-		_window
-	),
-	destroyed_{
-		false
-	}
+    awl::backends::x11::display_ref const _display, Window const _window)
+    : display_(_display), window_(_window), destroyed_{false}
 {
 }
 
-awl::backends::x11::window::holder::~holder()
+awl::backends::x11::window::holder::~holder() { this->do_destroy(); }
+
+void awl::backends::x11::window::holder::destroy()
 {
-	this->do_destroy();
+  this->do_destroy();
+
+  destroyed_ = true;
 }
 
-void
-awl::backends::x11::window::holder::destroy()
-{
-	this->do_destroy();
+bool awl::backends::x11::window::holder::destroyed() const { return destroyed_; }
 
-	destroyed_ =
-		true;
-}
+Window awl::backends::x11::window::holder::get() const { return window_; }
 
-bool
-awl::backends::x11::window::holder::destroyed() const
+void awl::backends::x11::window::holder::do_destroy()
 {
-	return
-		destroyed_;
-}
-
-Window
-awl::backends::x11::window::holder::get() const
-{
-	return
-		window_;
-}
-
-void
-awl::backends::x11::window::holder::do_destroy()
-{
-	if(
-		!this->destroyed()
-	)
-	{
-		::XDestroyWindow(
-			display_.get().get(),
-			window_
-		);
-	}
+  if (!this->destroyed())
+  {
+    ::XDestroyWindow(display_.get().get(), window_);
+  }
 }

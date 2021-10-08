@@ -4,7 +4,6 @@
 #include <awl/backends/windows/window/event/object_fwd.hpp>
 #include <awl/backends/windows/window/event/return_type.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -17,9 +16,7 @@ namespace event
 {
 
 awl::backends::windows::window::event::return_type
-handler(
-	awl::backends::windows::window::event::object const &
-);
+handler(awl::backends::windows::window::event::object const &);
 
 }
 }

@@ -7,15 +7,11 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl
 {
 
 AWL_DETAIL_SYMBOL
-fcppt::optional::object<
-	std::string
->
-get_error();
+fcppt::optional::object<std::string> get_error();
 
 }
 

@@ -6,14 +6,10 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland::cursor
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	std::string,
-	name
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(std::string, name);
 
 }
 

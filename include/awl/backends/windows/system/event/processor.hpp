@@ -8,7 +8,6 @@
 #include <awl/system/event/processor.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -20,24 +19,19 @@ namespace system
 namespace event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL processor
-:
-	public awl::system::event::processor
+class AWL_DETAIL_CLASS_SYMBOL processor : public awl::system::event::processor
 {
-	FCPPT_NONCOPYABLE(
-		processor
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	processor();
-public:
-	AWL_DETAIL_SYMBOL
-	~processor()
-	override;
+  FCPPT_NONCOPYABLE(processor);
 
-	virtual
-	awl::backends::windows::system::event::handle_unique_ptr
-	create_event_handle() = 0;
+protected:
+  AWL_DETAIL_SYMBOL
+  processor();
+
+public:
+  AWL_DETAIL_SYMBOL
+  ~processor() override;
+
+  virtual awl::backends::windows::system::event::handle_unique_ptr create_event_handle() = 0;
 };
 
 }

@@ -6,16 +6,12 @@
 #include <awl/backends/x11/cursor/shape.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::cursor
 {
 
 AWL_DETAIL_SYMBOL
 awl::backends::x11::cursor::holder_unique_ptr
-load_font(
-	awl::backends::x11::display_ref,
-	awl::backends::x11::cursor::shape
-);
+    load_font(awl::backends::x11::display_ref, awl::backends::x11::cursor::shape);
 
 }
 

@@ -3,16 +3,10 @@
 
 #include <fcppt/function_impl.hpp>
 
-
 namespace awl::event
 {
 
-using
-connection_function
-=
-fcppt::function<
-	void ()
->;
+using connection_function = fcppt::function<void()>;
 
 }
 

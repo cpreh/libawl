@@ -8,29 +8,22 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::cursor
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::cursor::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::cursor::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	object();
-public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  FCPPT_NONMOVABLE(object);
 
-	[[nodiscard]]
-	virtual
-	awl::backends::wayland::cursor::optional
-	get() const = 0;
+protected:
+  AWL_DETAIL_SYMBOL
+  object();
+
+public:
+  AWL_DETAIL_SYMBOL
+  ~object() override;
+
+  [[nodiscard]] virtual awl::backends::wayland::cursor::optional get() const = 0;
 };
 
 }

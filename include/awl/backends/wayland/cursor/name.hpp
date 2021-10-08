@@ -4,5 +4,4 @@
 #include <awl/backends/wayland/cursor/name_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/system/seat/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::wayland::system::seat
 {
 
-using
-object_ref
-=
-fcppt::reference<
-	awl::backends::wayland::system::seat::object
->;
+using object_ref = fcppt::reference<awl::backends::wayland::system::seat::object>;
 
 }
 

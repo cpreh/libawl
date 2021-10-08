@@ -5,15 +5,11 @@
 #include <awl/backends/x11/window/base_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 AWL_DETAIL_SYMBOL
-XWindowAttributes
-attributes(
-	awl::backends::x11::window::base const &
-);
+XWindowAttributes attributes(awl::backends::x11::window::base const &);
 
 }
 

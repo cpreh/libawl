@@ -4,7 +4,6 @@
 #include <awl/backends/windows/message_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -12,11 +11,7 @@ namespace backends
 namespace windows
 {
 
-typedef
-fcppt::optional::object<
-	awl::backends::windows::message
->
-optional_message;
+typedef fcppt::optional::object<awl::backends::windows::message> optional_message;
 
 }
 }

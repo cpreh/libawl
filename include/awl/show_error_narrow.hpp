@@ -6,15 +6,11 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl
 {
 
 AWL_DETAIL_SYMBOL
-void
-show_error_narrow(
-	std::string const &
-);
+void show_error_narrow(std::string const &);
 
 }
 

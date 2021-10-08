@@ -6,13 +6,11 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::window
 {
 
 AWL_DETAIL_SYMBOL
-std::string
-object_data_name();
+std::string object_data_name();
 
 }
 

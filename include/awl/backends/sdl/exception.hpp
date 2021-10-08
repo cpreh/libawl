@@ -6,47 +6,28 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace awl::backends::sdl
 {
 
-class AWL_DETAIL_CLASS_SYMBOL exception
-:
-	public awl::exception
+class AWL_DETAIL_CLASS_SYMBOL exception : public awl::exception
 {
 public:
-	explicit
-	exception(
-		fcppt::string &&
-	);
+  explicit exception(fcppt::string &&);
 
-	AWL_DETAIL_SYMBOL
-	exception(
-		exception const &
-	);
+  AWL_DETAIL_SYMBOL
+  exception(exception const &);
 
-	AWL_DETAIL_SYMBOL
-	exception(
-		exception &&
-	)
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  exception(exception &&) noexcept;
 
-	AWL_DETAIL_SYMBOL
-	exception &
-	operator=(
-		exception const &
-	);
+  AWL_DETAIL_SYMBOL
+  exception &operator=(exception const &);
 
-	AWL_DETAIL_SYMBOL
-	exception &
-	operator=(
-		exception &&
-	)
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  exception &operator=(exception &&) noexcept;
 
-	AWL_DETAIL_SYMBOL
-	~exception() noexcept
-	override;
+  AWL_DETAIL_SYMBOL
+  ~exception() noexcept override;
 };
 
 }

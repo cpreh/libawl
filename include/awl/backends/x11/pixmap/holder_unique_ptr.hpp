@@ -4,16 +4,10 @@
 #include <awl/backends/x11/pixmap/holder_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl::backends::x11::pixmap
 {
 
-using
-holder_unique_ptr
-=
-fcppt::unique_ptr<
-	awl::backends::x11::pixmap::holder
->;
+using holder_unique_ptr = fcppt::unique_ptr<awl::backends::x11::pixmap::holder>;
 
 }
 

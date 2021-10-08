@@ -4,5 +4,4 @@
 #include <awl/cursor/hotspot_fwd.hpp>
 #include <fcppt/math/vector/static.hpp>
 
-
 #endif

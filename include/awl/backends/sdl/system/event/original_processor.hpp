@@ -19,83 +19,45 @@
 #include <SDL_events.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL original_processor
-:
-	public awl::backends::sdl::system::event::processor
+    : public awl::backends::sdl::system::event::processor
 {
-	FCPPT_NONMOVABLE(
-		original_processor
-	);
+  FCPPT_NONMOVABLE(original_processor);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	original_processor(
-		fcppt::log::object_reference
-	);
+  AWL_DETAIL_SYMBOL
+  explicit original_processor(fcppt::log::object_reference);
 
-	AWL_DETAIL_SYMBOL
-	~original_processor()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_processor() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::system::event::result
-	poll()
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::system::event::result poll() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::system::event::result
-	next()
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::system::event::result next() override;
 
-	AWL_DETAIL_SYMBOL
-	void
-	quit(
-		awl::main::exit_code
-	)
-	override;
+  AWL_DETAIL_SYMBOL
+  void quit(awl::main::exit_code) override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::timer::unique_ptr
-	create_timer(
-		awl::timer::setting const &
-	)
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::timer::unique_ptr
+  create_timer(awl::timer::setting const &) override;
+
 private:
-	using
-	process_function
-	=
-	fcppt::function<
-		awl::event::container ()
-	>;
+  using process_function = fcppt::function<awl::event::container()>;
 
-	[[nodiscard]]
-	awl::system::event::result
-	process(
-		process_function const &
-	);
+  [[nodiscard]] awl::system::event::result process(process_function const &);
 
-	[[nodiscard]]
-	awl::event::container
-	process_events();
+  [[nodiscard]] awl::event::container process_events();
 
-	[[nodiscard]]
-	awl::event::base_unique_ptr
-	translate(
-		SDL_Event const &
-	) const;
+  [[nodiscard]] awl::event::base_unique_ptr translate(SDL_Event const &) const;
 
-	fcppt::log::object_reference const log_;
+  fcppt::log::object_reference const log_;
 
-	awl::backends::sdl::system::event::timer_type const timer_event_;
+  awl::backends::sdl::system::event::timer_type const timer_event_;
 
-	awl::main::optional_exit_code exit_code_;
+  awl::main::optional_exit_code exit_code_;
 };
 
 }

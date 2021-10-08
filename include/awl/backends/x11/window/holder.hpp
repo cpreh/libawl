@@ -6,42 +6,32 @@
 #include <awl/backends/x11/window/holder_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 class holder
 {
-	FCPPT_NONMOVABLE(
-		holder
-	);
+  FCPPT_NONMOVABLE(holder);
+
 public:
-	holder(
-		awl::backends::x11::display_ref,
-		Window
-	);
+  holder(awl::backends::x11::display_ref, Window);
 
-	~holder();
+  ~holder();
 
-	void
-	destroy();
+  void destroy();
 
-	[[nodiscard]]
-	bool
-	destroyed() const;
+  [[nodiscard]] bool destroyed() const;
 
-	[[nodiscard]]
-	Window
-	get() const;
+  [[nodiscard]] Window get() const;
+
 private:
-	void
-	do_destroy();
+  void do_destroy();
 
-	awl::backends::x11::display_ref const display_;
+  awl::backends::x11::display_ref const display_;
 
-	Window const window_;
+  Window const window_;
 
-	bool destroyed_;
+  bool destroyed_;
 };
 
 }

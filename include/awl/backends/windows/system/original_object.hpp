@@ -18,7 +18,6 @@
 #include <unordered_map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -28,73 +27,39 @@ namespace windows
 namespace system
 {
 
-class original_object
-:
-	public awl::backends::windows::system::object
+class original_object : public awl::backends::windows::system::object
 {
-	FCPPT_NONMOVABLE(
-		original_object
-	);
+  FCPPT_NONMOVABLE(original_object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	original_object(
-		fcppt::log::context_reference
-	);
+  AWL_DETAIL_SYMBOL
+  explicit original_object(fcppt::log::context_reference);
 
-	AWL_DETAIL_SYMBOL
-	~original_object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_object() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::window::object_unique_ptr
-	create_window(
-		awl::window::parameters const &
-	)
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::window::object_unique_ptr create_window(awl::window::parameters const &) override;
 
-	AWL_DETAIL_SYMBOL
-	awl::system::event::processor &
-	processor()
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::system::event::processor &processor() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::visual::object_unique_ptr
-	default_visual()
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::visual::object_unique_ptr default_visual() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::cursor::object_unique_ptr
-	create_cursor(
-		awl::cursor::optional_type const &
-	)
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::cursor::object_unique_ptr create_cursor(awl::cursor::optional_type const &) override;
+
 private:
-	void
-	unregister_wndclass(
-		fcppt::string const &
-	);
+  void unregister_wndclass(fcppt::string const &);
 
-	using
-	counted_wndclass_unique_ptr
-	=
-	fcppt::unique_ptr<
-		awl::backends::windows::counted_wndclass
-	>;
+  using counted_wndclass_unique_ptr = fcppt::unique_ptr<awl::backends::windows::counted_wndclass>;
 
-	using
-	wndclass_map
-	=
-	std::unordered_map<
-		fcppt::string,
-		counted_wndclass_unique_ptr
-	>;
+  using wndclass_map = std::unordered_map<fcppt::string, counted_wndclass_unique_ptr>;
 
-	wndclass_map wndclasses_;
+  wndclass_map wndclasses_;
 
-	fcppt::unique_ptr<
-		awl::backends::windows::system::event::original_processor
-	> const processor_;
+  fcppt::unique_ptr<awl::backends::windows::system::event::original_processor> const processor_;
 };
 
 }

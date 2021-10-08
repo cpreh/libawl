@@ -12,46 +12,20 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
-void
-awl::backends::windows::message_box_narrow(
-	awl::backends::windows::window::const_optional_object_ref const &_opt_window,
-	std::string const &_text,
-	std::string const &_title,
-	UINT const _type
-)
+void awl::backends::windows::message_box_narrow(
+    awl::backends::windows::window::const_optional_object_ref const &_opt_window,
+    std::string const &_text,
+    std::string const &_title,
+    UINT const _type)
 {
-	if(
-		::MessageBoxA(
-			fcppt::optional::maybe(
-				_opt_window,
-				fcppt::const_<
-					HWND
-				>(
-					nullptr
-				),
-				[](
-					fcppt::reference<
-						awl::backends::windows::window::object const
-					> const _window
-				)
-				{
-					return
-						_window.get().hwnd();
-				}
-			),
-			_text.c_str(),
-			_title.c_str(),
-			_type
-		)
-		== 0
-	)
-		throw
-			awl::exception(
-				FCPPT_TEXT("MessageBoxA failed: ")
-				+
-				fcppt::from_std_string(
-					_text
-				)
-			);
+  if (::MessageBoxA(
+          fcppt::optional::maybe(
+              _opt_window,
+              fcppt::const_<HWND>(nullptr),
+              [](fcppt::reference<awl::backends::windows::window::object const> const _window)
+              { return _window.get().hwnd(); }),
+          _text.c_str(),
+          _title.c_str(),
+          _type) == 0)
+    throw awl::exception(FCPPT_TEXT("MessageBoxA failed: ") + fcppt::from_std_string(_text));
 }

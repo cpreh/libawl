@@ -5,7 +5,6 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/timer/delay.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -17,9 +16,7 @@ namespace timer
 
 AWL_DETAIL_SYMBOL
 LARGE_INTEGER
-due_time(
-	awl::timer::delay
-);
+due_time(awl::timer::delay);
 
 }
 }

@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/compositor_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl::backends::wayland
 {
 
-using
-optional_compositor
-=
-fcppt::optional::object<
-	awl::backends::wayland::compositor
->;
+using optional_compositor = fcppt::optional::object<awl::backends::wayland::compositor>;
 
 }
 

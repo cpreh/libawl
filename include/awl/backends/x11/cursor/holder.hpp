@@ -7,33 +7,26 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::cursor
 {
 
 class holder
 {
-	FCPPT_NONMOVABLE(
-		holder
-	);
+  FCPPT_NONMOVABLE(holder);
+
 public:
-	AWL_DETAIL_SYMBOL
-	holder(
-		awl::backends::x11::display_ref,
-		Cursor
-	);
+  AWL_DETAIL_SYMBOL
+  holder(awl::backends::x11::display_ref, Cursor);
 
-	AWL_DETAIL_SYMBOL
-	~holder();
+  AWL_DETAIL_SYMBOL
+  ~holder();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	Cursor
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL Cursor get() const;
+
 private:
-	awl::backends::x11::display_ref const display_;
+  awl::backends::x11::display_ref const display_;
 
-	Cursor const cursor_;
+  Cursor const cursor_;
 };
 
 }

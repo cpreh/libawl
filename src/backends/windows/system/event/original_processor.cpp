@@ -58,496 +58,199 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::windows::system::event::original_processor::original_processor()
-:
-	awl::backends::windows::system::event::processor(),
-	handles_(),
-	timers_{},
-	exit_code_{},
-	next_events_{}
+    : awl::backends::windows::system::event::processor(),
+      handles_(),
+      timers_{},
+      exit_code_{},
+      next_events_{}
 {
 }
 
-awl::backends::windows::system::event::original_processor::~original_processor()
+awl::backends::windows::system::event::original_processor::~original_processor() {}
+
+awl::system::event::result awl::backends::windows::system::event::original_processor::poll()
 {
+  return this->process(timeout{0u});
 }
 
-awl::system::event::result
-awl::backends::windows::system::event::original_processor::poll()
+awl::system::event::result awl::backends::windows::system::event::original_processor::next()
 {
-	return
-		this->process(
-			timeout{
-				0u
-			}
-		);
+  return this->process(timeout{INFINITE});
 }
 
-awl::system::event::result
-awl::backends::windows::system::event::original_processor::next()
+void awl::backends::windows::system::event::original_processor::quit(
+    awl::main::exit_code const _exit_code)
 {
-	return
-		this->process(
-			timeout{
-				INFINITE
-			}
-		);
+  ::PostQuitMessage(_exit_code.get());
 }
 
-void
-awl::backends::windows::system::event::original_processor::quit(
-	awl::main::exit_code const _exit_code
-)
+awl::timer::unique_ptr awl::backends::windows::system::event::original_processor::create_timer(
+    awl::timer::setting const &_setting)
 {
-	::PostQuitMessage(
-		_exit_code.get()
-	);
-}
+  awl::backends::windows::timer::waitable_unique_ptr timer{
+      fcppt::make_unique_ptr<awl::backends::windows::timer::waitable>()};
 
-awl::timer::unique_ptr
-awl::backends::windows::system::event::original_processor::create_timer(
-	awl::timer::setting const &_setting
-)
-{
-	awl::backends::windows::timer::waitable_unique_ptr timer{
-		fcppt::make_unique_ptr<
-			awl::backends::windows::timer::waitable
-		>()
-	};
+  HANDLE const handle{timer->handle()};
 
-	HANDLE const handle{
-		timer->handle()
-	};
+  awl::event::connection_unique_ptr connection{
+      awl::event::make_connection(awl::event::connection_function{[handle, this]
+                                                                  {
+                                                                    this->remove_handle(handle);
 
-	awl::event::connection_unique_ptr connection{
-		awl::event::make_connection(
-			awl::event::connection_function{
-				[
-					handle,
-					this
-				]{
-					this->remove_handle(
-						handle
-					);
+                                                                    this->timers_.erase(handle);
+                                                                  }})};
 
-					this->timers_.erase(
-						handle
-					);
-				}
-			}
-		)
-	};
+  awl::timer::unique_ptr result{fcppt::unique_ptr_to_base<awl::timer::object>(
+      fcppt::make_unique_ptr<awl::backends::windows::timer::object>(
+          _setting, std::move(timer), std::move(connection)))};
 
-	awl::timer::unique_ptr result{
-		fcppt::unique_ptr_to_base<
-			awl::timer::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::timer::object
-			>(
-				_setting,
-				std::move(
-					timer
-				),
-				std::move(
-					connection
-				)
-			)
-		)
-	};
+  handles_.push_back(handle);
 
-	handles_.push_back(
-		handle
-	);
+  if (fcppt::not_(fcppt::container::insert(
+          timers_, timer_map::value_type{handle, fcppt::make_ref(*result)})))
+  {
+    throw awl::exception{FCPPT_TEXT("Dboule insert of Windows timer.")};
+  }
 
-	if(
-		fcppt::not_(
-			fcppt::container::insert(
-				timers_,
-				timer_map::value_type{
-					handle,
-					fcppt::make_ref(
-						*result
-					)
-				}
-			)
-		)
-	)
-	{
-		throw
-			awl::exception{
-				FCPPT_TEXT("Dboule insert of Windows timer.")
-			};
-	}
-
-	return
-		result;
-
+  return result;
 }
 
 awl::backends::windows::system::event::handle_unique_ptr
 awl::backends::windows::system::event::original_processor::create_event_handle()
 {
-	awl::backends::windows::system::event::handle_holder_unique_ptr holder{
-		fcppt::make_unique_ptr<
-			awl::backends::windows::system::event::handle_holder
-		>()
-	};
+  awl::backends::windows::system::event::handle_holder_unique_ptr holder{
+      fcppt::make_unique_ptr<awl::backends::windows::system::event::handle_holder>()};
 
-	HANDLE const handle{
-		holder->get()
-	};
+  HANDLE const handle{holder->get()};
 
-	awl::event::connection_unique_ptr connection{
-		awl::event::make_connection(
-			awl::event::connection_function{
-				[
-					handle,
-					this
-				]{
-					this->remove_handle(
-						handle
-					);
-				}
-			}
-		)
-	};
+  awl::event::connection_unique_ptr connection{awl::event::make_connection(
+      awl::event::connection_function{[handle, this] { this->remove_handle(handle); }})};
 
-	handles_.push_back(
-		handle
-	);
+  handles_.push_back(handle);
 
-	return
-		fcppt::unique_ptr_to_base<
-			awl::backends::windows::system::event::handle
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::system::event::original_handle
-			>(
-				std::move(
-					holder
-				),
-				std::move(
-					connection
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::backends::windows::system::event::handle>(
+      fcppt::make_unique_ptr<awl::backends::windows::system::event::original_handle>(
+          std::move(holder), std::move(connection)));
 }
 
 awl::event::container_reference
 awl::backends::windows::system::event::original_processor::next_events()
 {
-	return
-		fcppt::make_ref(
-			next_events_
-		);
+  return fcppt::make_ref(next_events_);
 }
 
 awl::system::event::result
-awl::backends::windows::system::event::original_processor::process(
-	timeout const _timeout
-)
+awl::backends::windows::system::event::original_processor::process(timeout const _timeout)
 {
-	return
-		fcppt::optional::maybe(
-			exit_code_,
-			[
-				_timeout,
-				this
-			]{
-				return
-					awl::system::event::result{
-						this->generic_multiple_wait(
-							_timeout
-						)
-					};
-			},
-			[](
-				awl::main::exit_code const _code
-			)
-			{
-				return
-					awl::system::event::result{
-						_code
-					};
-			}
-		);
+  return fcppt::optional::maybe(
+      exit_code_,
+      [_timeout, this]
+      { return awl::system::event::result{this->generic_multiple_wait(_timeout)}; },
+      [](awl::main::exit_code const _code) { return awl::system::event::result{_code}; });
 }
 
-awl::event::container
-awl::backends::windows::system::event::original_processor::poll_messages()
+awl::event::container awl::backends::windows::system::event::original_processor::poll_messages()
 {
-	// TODO: Make a range for this.
-	awl::event::container result;
+  // TODO: Make a range for this.
+  awl::event::container result;
 
-	while(
-		fcppt::optional::maybe(
-			awl::backends::windows::peek_message(
-				NULL
-			),
-			fcppt::const_(
-				false
-			),
-			[
-				&result,
-				this
-			](
-				awl::backends::windows::message const &_message
-			)
-			{
-				::TranslateMessage(
-					&_message.get()
-				);
+  while (fcppt::optional::maybe(
+      awl::backends::windows::peek_message(NULL),
+      fcppt::const_(false),
+      [&result, this](awl::backends::windows::message const &_message)
+      {
+        ::TranslateMessage(&_message.get());
 
-				::DispatchMessage(
-					&_message.get()
-				);
+        ::DispatchMessage(&_message.get());
 
-				bool const do_continue{
-					fcppt::optional::maybe(
-						this->process_system_message(
-							_message
-						),
-						fcppt::const_(
-							false
-						),
-						[
-							&result
-						](
-							awl::event::base_unique_ptr &&_event
-						){
-							result.push_back(
-								std::move(
-									_event
-								)
-							);
+        bool const do_continue{fcppt::optional::maybe(
+            this->process_system_message(_message),
+            fcppt::const_(false),
+            [&result](awl::event::base_unique_ptr &&_event)
+            {
+              result.push_back(std::move(_event));
 
-							return
-								true;
-						}
-					)
-				};
+              return true;
+            })};
 
-				result =
-					fcppt::container::join(
-						std::move(
-							result
-						),
-						fcppt::move_clear(
-							next_events_
-						)
-					);
+        result = fcppt::container::join(std::move(result), fcppt::move_clear(next_events_));
 
-				return
-					do_continue;
-			}
-		)
-	)
-		;
+        return do_continue;
+      }))
+    ;
 
-	return
-		result;
+  return result;
 }
 
 awl::event::optional_base_unique_ptr
 awl::backends::windows::system::event::original_processor::process_system_message(
-	awl::backends::windows::message const &_msg
-)
+    awl::backends::windows::message const &_msg)
 {
-	if(
-		_msg.get().message
-		==
-		WM_QUIT
-	)
-	{
-		exit_code_ =
-			awl::main::optional_exit_code{
-				awl::main::exit_code{
-					fcppt::cast::size<
-						int
-					>(
-						fcppt::cast::to_signed(
-							_msg.get().wParam
-						)
-					)
-				}
-			};
+  if (_msg.get().message == WM_QUIT)
+  {
+    exit_code_ = awl::main::optional_exit_code{
+        awl::main::exit_code{fcppt::cast::size<int>(fcppt::cast::to_signed(_msg.get().wParam))}};
 
-		return
-			awl::event::optional_base_unique_ptr{};
-	}
+    return awl::event::optional_base_unique_ptr{};
+  }
 
-	return
-		fcppt::optional::make_if(
-			_msg.get().hwnd
-			==
-			NULL,
-			[
-				&_msg,
-				this
-			]{
-				return
-					this->make_message(
-						_msg
-					);
-			}
-		);
+  return fcppt::optional::make_if(
+      _msg.get().hwnd == NULL, [&_msg, this] { return this->make_message(_msg); });
 }
 
-awl::event::base_unique_ptr
-awl::backends::windows::system::event::original_processor::make_message(
-	awl::backends::windows::message const &_msg
-)
+awl::event::base_unique_ptr awl::backends::windows::system::event::original_processor::make_message(
+    awl::backends::windows::message const &_msg)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::event::base
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::system::event::generic
-			>(
-				awl::backends::windows::system::event::object{
-					awl::backends::windows::message_type{
-						_msg.get().message
-					},
-					awl::backends::windows::wparam{
-						_msg.get().wParam
-					},
-					awl::backends::windows::lparam{
-						_msg.get().lParam
-					}
-				}
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::event::base>(
+      fcppt::make_unique_ptr<awl::backends::windows::system::event::generic>(
+          awl::backends::windows::system::event::object{
+              awl::backends::windows::message_type{_msg.get().message},
+              awl::backends::windows::wparam{_msg.get().wParam},
+              awl::backends::windows::lparam{_msg.get().lParam}}));
 }
 
 awl::system::event::result
 awl::backends::windows::system::event::original_processor::generic_multiple_wait(
-	timeout const _timeout
-)
+    timeout const _timeout)
 {
-	DWORD const count{
-		fcppt::cast::size<
-			DWORD
-		>(
-			handles_.size()
-		)
-	};
+  DWORD const count{fcppt::cast::size<DWORD>(handles_.size())};
 
-	DWORD const result(
-		::MsgWaitForMultipleObjects(
-			count,
-			handles_.data(),
-			FALSE,
-			_timeout.get(),
-			QS_ALLEVENTS
-		)
-	);
+  DWORD const result(
+      ::MsgWaitForMultipleObjects(count, handles_.data(), FALSE, _timeout.get(), QS_ALLEVENTS));
 
-	static_assert(
-		WAIT_OBJECT_0 == 0,
-		"This code assumes that WAIT_OBJECT_0 is 0"
-	);
+  static_assert(WAIT_OBJECT_0 == 0, "This code assumes that WAIT_OBJECT_0 is 0");
 
-	if(
-		result
-		==
-		WAIT_FAILED
-	)
-		throw
-			awl::exception{
-				FCPPT_TEXT("WaitForMultipleObjects() failed!")
-			};
+  if (result == WAIT_FAILED)
+    throw awl::exception{FCPPT_TEXT("WaitForMultipleObjects() failed!")};
 
-	return
-		awl::system::event::result{
-			result
-			==
-			WAIT_OBJECT_0
-			+
-			count
-			?
-				this->poll_messages()
-			:
-				result
-				<
-				WAIT_OBJECT_0
-				+
-				handles_.size()
-				?
-					fcppt::container::make<
-						awl::event::container
-					>(
-						this->handle_event(
-							result
-							-
-							WAIT_OBJECT_0
-						)
-					)
-				:
-					awl::event::container{}
-		};
+  return awl::system::event::result{
+      result == WAIT_OBJECT_0 + count            ? this->poll_messages()
+      : result < WAIT_OBJECT_0 + handles_.size() ? fcppt::container::make<awl::event::container>(
+                                                       this->handle_event(result - WAIT_OBJECT_0))
+                                                 : awl::event::container{}};
 }
 
 awl::event::base_unique_ptr
-awl::backends::windows::system::event::original_processor::handle_event(
-	DWORD const _index
-)
+awl::backends::windows::system::event::original_processor::handle_event(DWORD const _index)
 {
-	HANDLE const handle{
-		handles_[
-			_index
-		]
-	};
+  HANDLE const handle{handles_[_index]};
 
-	return
-		fcppt::optional::maybe(
-			fcppt::container::find_opt_mapped(
-				timers_,
-				handle
-			),
-			[
-				handle
-			]{
-				return
-					fcppt::unique_ptr_to_base<
-						awl::event::base
-					>(
-						fcppt::make_unique_ptr<
-							awl::backends::windows::system::event::handle_ready
-						>(
-							handle
-						)
-					);
-			},
-			[](
-				fcppt::reference<
-					awl::timer::reference
-				> const _ref
-			)
-			{
-				return
-					fcppt::unique_ptr_to_base<
-						awl::event::base
-					>(
-						fcppt::make_unique_ptr<
-							awl::timer::event
-						>(
-							_ref.get()
-						)
-					);
-			}
-		);
+  return fcppt::optional::maybe(
+      fcppt::container::find_opt_mapped(timers_, handle),
+      [handle]
+      {
+        return fcppt::unique_ptr_to_base<awl::event::base>(
+            fcppt::make_unique_ptr<awl::backends::windows::system::event::handle_ready>(handle));
+      },
+      [](fcppt::reference<awl::timer::reference> const _ref)
+      {
+        return fcppt::unique_ptr_to_base<awl::event::base>(
+            fcppt::make_unique_ptr<awl::timer::event>(_ref.get()));
+      });
 }
 
-void
-awl::backends::windows::system::event::original_processor::remove_handle(
-	HANDLE const _handle
-)
+void awl::backends::windows::system::event::original_processor::remove_handle(HANDLE const _handle)
 {
-	fcppt::algorithm::remove(
-		handles_,
-		_handle
-	);
+  fcppt::algorithm::remove(handles_, _handle);
 }

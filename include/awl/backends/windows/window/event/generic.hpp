@@ -11,7 +11,6 @@
 #include <awl/window/event/base.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -23,49 +22,41 @@ namespace window
 namespace event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL generic
-:
-	public awl::window::event::base
+class AWL_DETAIL_CLASS_SYMBOL generic : public awl::window::event::base
 {
-	FCPPT_NONCOPYABLE(
-		generic
-	);
+  FCPPT_NONCOPYABLE(generic);
+
 public:
-	AWL_DETAIL_SYMBOL
-	generic(
-		awl::backends::windows::window::reference,
-		awl::backends::windows::message_type,
-		awl::backends::windows::wparam,
-		awl::backends::windows::lparam
-	);
+  AWL_DETAIL_SYMBOL
+  generic(
+      awl::backends::windows::window::reference,
+      awl::backends::windows::message_type,
+      awl::backends::windows::wparam,
+      awl::backends::windows::lparam);
 
-	AWL_DETAIL_SYMBOL
-	~generic()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~generic() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::window::reference
-	get() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::window::reference get() const;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::message_type
-	type() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::message_type type() const;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::wparam
-	wparam() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::wparam wparam() const;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::lparam
-	lparam() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::lparam lparam() const;
+
 private:
-	awl::backends::windows::window::reference const window_;
+  awl::backends::windows::window::reference const window_;
 
-	awl::backends::windows::message_type const type_;
+  awl::backends::windows::message_type const type_;
 
-	awl::backends::windows::wparam const wparam_;
+  awl::backends::windows::wparam const wparam_;
 
-	awl::backends::windows::lparam const lparam_;
+  awl::backends::windows::lparam const lparam_;
 };
 
 }

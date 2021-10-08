@@ -4,7 +4,6 @@
 #include <awl/backends/windows/windows.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -13,10 +12,7 @@ namespace windows
 {
 
 AWL_DETAIL_SYMBOL
-void
-local_free(
-	HLOCAL
-);
+void local_free(HLOCAL);
 
 }
 }

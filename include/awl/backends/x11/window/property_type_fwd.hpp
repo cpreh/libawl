@@ -4,14 +4,10 @@
 #include <awl/backends/x11/atom_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	awl::backends::x11::atom,
-	property_type
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(awl::backends::x11::atom, property_type);
 
 }
 

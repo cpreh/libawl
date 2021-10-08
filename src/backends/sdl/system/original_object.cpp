@@ -36,125 +36,56 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::sdl::system::original_object::original_object(
-	fcppt::log::context_reference const _log_context
-)
-:
-	awl::backends::sdl::system::object{},
-	log_{
-		_log_context,
-		awl::log_location(),
-		fcppt::log::parameters{
-			awl::impl::backends::sdl::log_name(),
-			fcppt::log::format::optional_function()
-		}
-	},
-	init_{
-		SDL_INIT_TIMER
-		|
-		SDL_INIT_EVENTS
-	},
-	event_processor_{
-		fcppt::unique_ptr_to_base<
-			awl::system::event::processor
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::sdl::system::event::original_processor
-			>(
-				fcppt::make_ref(
-					this->log_
-				)
-			)
-		)
-	}
+    fcppt::log::context_reference const _log_context)
+    : awl::backends::sdl::system::object{},
+      log_{
+          _log_context,
+          awl::log_location(),
+          fcppt::log::parameters{
+              awl::impl::backends::sdl::log_name(), fcppt::log::format::optional_function()}},
+      init_{SDL_INIT_TIMER | SDL_INIT_EVENTS},
+      event_processor_{fcppt::unique_ptr_to_base<awl::system::event::processor>(
+          fcppt::make_unique_ptr<awl::backends::sdl::system::event::original_processor>(
+              fcppt::make_ref(this->log_)))}
 {
 }
 
-awl::backends::sdl::system::original_object::~original_object()
-= default;
+awl::backends::sdl::system::original_object::~original_object() = default;
 
-awl::window::object_unique_ptr
-awl::backends::sdl::system::original_object::create_window(
-	awl::window::parameters const &_parameters
-)
+awl::window::object_unique_ptr awl::backends::sdl::system::original_object::create_window(
+    awl::window::parameters const &_parameters)
 {
-	fcppt::optional::to_exception(
-		fcppt::cast::dynamic<
-			awl::backends::sdl::visual::object const
-		>(
-			_parameters.visual()
-		),
-		[]{
-			return
-				awl::exception{
-					FCPPT_TEXT("The visual passed to the SDL system is not an SDL visual.")
-				};
-		}
-	)->apply();
+  fcppt::optional::to_exception(
+      fcppt::cast::dynamic<awl::backends::sdl::visual::object const>(_parameters.visual()),
+      [] {
+        return awl::exception{
+            FCPPT_TEXT("The visual passed to the SDL system is not an SDL visual.")};
+      })
+      ->apply();
 
-	return
-		fcppt::unique_ptr_to_base<
-			awl::window::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::sdl::window::original_object
-			>(
-				_parameters
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::window::object>(
+      fcppt::make_unique_ptr<awl::backends::sdl::window::original_object>(_parameters));
 }
 
-awl::system::event::processor &
-awl::backends::sdl::system::original_object::processor()
+awl::system::event::processor &awl::backends::sdl::system::original_object::processor()
 {
-	return
-		*this->event_processor_;
+  return *this->event_processor_;
 }
 
-awl::visual::object_unique_ptr
-awl::backends::sdl::system::original_object::default_visual()
+awl::visual::object_unique_ptr awl::backends::sdl::system::original_object::default_visual()
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::visual::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::sdl::visual::object
-			>(
-				awl::backends::sdl::visual::flags{
-					std::uint32_t{
-						0
-					}
-				}
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::visual::object>(
+      fcppt::make_unique_ptr<awl::backends::sdl::visual::object>(
+          awl::backends::sdl::visual::flags{std::uint32_t{0}}));
 }
 
-awl::cursor::object_unique_ptr
-awl::backends::sdl::system::original_object::create_cursor(
-	awl::cursor::optional_type const &_optional_type
-)
+awl::cursor::object_unique_ptr awl::backends::sdl::system::original_object::create_cursor(
+    awl::cursor::optional_type const &_optional_type)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::cursor::object
-		>(
-			fcppt::optional::maybe(
-				_optional_type,
-				[]{
-					return
-						awl::backends::sdl::cursor::create_invisible();
-				},
-				[](
-					awl::cursor::type const _type
-				)
-				{
-					return
-						awl::backends::sdl::cursor::create_predefined(
-							_type
-						);
-				}
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::cursor::object>(fcppt::optional::maybe(
+      _optional_type,
+      [] { return awl::backends::sdl::cursor::create_invisible(); },
+      [](awl::cursor::type const _type)
+      { return awl::backends::sdl::cursor::create_predefined(_type); }));
 }

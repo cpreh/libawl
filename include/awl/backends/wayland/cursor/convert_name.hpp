@@ -4,14 +4,10 @@
 #include <awl/backends/wayland/cursor/name.hpp>
 #include <awl/cursor/type_fwd.hpp>
 
-
 namespace awl::backends::wayland::cursor
 {
 
-awl::backends::wayland::cursor::name
-convert_name(
-	awl::cursor::type
-);
+awl::backends::wayland::cursor::name convert_name(awl::cursor::type);
 
 }
 

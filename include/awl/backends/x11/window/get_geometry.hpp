@@ -4,14 +4,10 @@
 #include <awl/backends/x11/window/base_fwd.hpp>
 #include <awl/backends/x11/window/rect.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-awl::backends::x11::window::rect
-get_geometry(
-	awl::backends::x11::window::base const &
-);
+awl::backends::x11::window::rect get_geometry(awl::backends::x11::window::base const &);
 
 }
 

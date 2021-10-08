@@ -8,18 +8,12 @@
 #include <sys/epoll.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::linux::epoll
 {
 
 AWL_DETAIL_SYMBOL
-void
-ctl(
-	awl::backends::linux::epoll::fd const &,
-	int,
-	awl::backends::posix::fd const &,
-	epoll_event *
-);
+void ctl(
+    awl::backends::linux::epoll::fd const &, int, awl::backends::posix::fd const &, epoll_event *);
 
 }
 

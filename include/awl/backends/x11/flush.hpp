@@ -4,15 +4,11 @@
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11
 {
 
 AWL_DETAIL_SYMBOL
-void
-flush(
-	awl::backends::x11::display const &
-);
+void flush(awl::backends::x11::display const &);
 
 }
 

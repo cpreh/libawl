@@ -9,31 +9,24 @@
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland
 {
 
 class surface
 {
-	FCPPT_NONMOVABLE(
-		surface
-	);
+  FCPPT_NONMOVABLE(surface);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	surface(
-		awl::backends::wayland::compositor const &
-	);
+  AWL_DETAIL_SYMBOL
+  explicit surface(awl::backends::wayland::compositor const &);
 
-	AWL_DETAIL_SYMBOL
-	~surface();
+  AWL_DETAIL_SYMBOL
+  ~surface();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	wl_surface *
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL wl_surface *get() const;
+
 private:
-	wl_surface *impl_;
+  wl_surface *impl_;
 };
 
 }

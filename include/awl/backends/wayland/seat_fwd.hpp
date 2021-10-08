@@ -6,13 +6,10 @@
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland
 {
 
-AWL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT_FWD(
-	seat
-);
+AWL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT_FWD(seat);
 
 }
 

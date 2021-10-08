@@ -4,5 +4,4 @@
 #include <awl/event/variant_fwd.hpp>
 #include <fcppt/variant/object_impl.hpp>
 
-
 #endif

@@ -10,34 +10,24 @@
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland::window
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::window::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::window::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	object();
+  AWL_DETAIL_SYMBOL
+  object();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	[[nodiscard]]
-	virtual
-	wl_surface *
-	surface() const = 0;
+  [[nodiscard]] virtual wl_surface *surface() const = 0;
 
-	[[nodiscard]]
-	virtual
-	wl_shell_surface *
-	get() const = 0;
+  [[nodiscard]] virtual wl_shell_surface *get() const = 0;
 };
 
 }

@@ -3,7 +3,6 @@
 
 #include <fcppt/function_impl.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -11,11 +10,7 @@ namespace backends
 namespace windows
 {
 
-typedef
-fcppt::function<
-	void ()
->
-wndclass_remove_callback;
+typedef fcppt::function<void()> wndclass_remove_callback;
 
 }
 }

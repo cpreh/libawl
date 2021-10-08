@@ -12,7 +12,6 @@
 #include <fstream>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -22,34 +21,23 @@ namespace windows
 namespace main
 {
 
-class output
-:
-	public awl::main::output
+class output : public awl::main::output
 {
-	FCPPT_NONCOPYABLE(
-		output
-	);
+  FCPPT_NONCOPYABLE(output);
+
 public:
-	AWL_DETAIL_SYMBOL
-	output(
-		fcppt::io::ostream &,
-		std::filesystem::path const &
-	);
+  AWL_DETAIL_SYMBOL
+  output(fcppt::io::ostream &, std::filesystem::path const &);
 
-	AWL_DETAIL_SYMBOL
-	~output()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~output() override;
+
 private:
-	using
-	filebuf_type
-	=
-	std::basic_filebuf<
-		fcppt::char_type
-	>;
+  using filebuf_type = std::basic_filebuf<fcppt::char_type>;
 
-	filebuf_type filebuf_;
+  filebuf_type filebuf_;
 
-	fcppt::io::scoped_rdbuf const scoped_rdbuf_;
+  fcppt::io::scoped_rdbuf const scoped_rdbuf_;
 };
 
 }

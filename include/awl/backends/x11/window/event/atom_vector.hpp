@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::x11::window::event
 {
 
-using
-atom_vector
-=
-std::vector<
-	Atom
->;
+using atom_vector = std::vector<Atom>;
 
 }
 

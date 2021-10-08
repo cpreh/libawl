@@ -7,28 +7,16 @@
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_signed.hpp>
 
-
 awl::backends::x11::window::event::wm_protocols::wm_protocols(
-	awl::backends::x11::window::base const &_window,
-	awl::backends::x11::window::event::atom_vector const &_atoms
-)
+    awl::backends::x11::window::base const &_window,
+    awl::backends::x11::window::event::atom_vector const &_atoms)
 {
-	awl::backends::x11::window::set_wm_protocols(
-		_window,
-		awl::backends::x11::window::atoms(
-			_atoms.data(),
-			awl::backends::x11::window::atom_count(
-				fcppt::cast::size<
-					int
-				>(
-					fcppt::cast::to_signed(
-						_atoms.size()
-					)
-				)
-			)
-		)
-	);
+  awl::backends::x11::window::set_wm_protocols(
+      _window,
+      awl::backends::x11::window::atoms(
+          _atoms.data(),
+          awl::backends::x11::window::atom_count(
+              fcppt::cast::size<int>(fcppt::cast::to_signed(_atoms.size())))));
 }
 
-awl::backends::x11::window::event::wm_protocols::~wm_protocols()
-= default;
+awl::backends::x11::window::event::wm_protocols::~wm_protocols() = default;

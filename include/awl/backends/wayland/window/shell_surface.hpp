@@ -9,28 +9,22 @@
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland::window
 {
 
 class shell_surface
 {
-	FCPPT_NONMOVABLE(
-		shell_surface
-	);
+  FCPPT_NONMOVABLE(shell_surface);
+
 public:
-	shell_surface(
-		awl::backends::wayland::shell const &,
-		awl::backends::wayland::surface const &
-	);
+  shell_surface(awl::backends::wayland::shell const &, awl::backends::wayland::surface const &);
 
-	~shell_surface();
+  ~shell_surface();
 
-	[[nodiscard]]
-	wl_shell_surface *
-	get() const;
+  [[nodiscard]] wl_shell_surface *get() const;
+
 private:
-	wl_shell_surface *impl_;
+  wl_shell_surface *impl_;
 };
 
 }

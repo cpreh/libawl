@@ -5,15 +5,11 @@
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::posix::fd
-display_fd(
-	awl::backends::x11::display_ref
-);
+awl::backends::posix::fd display_fd(awl::backends::x11::display_ref);
 
 }
 

@@ -20,70 +20,47 @@
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland::window
 {
 
-class AWL_DETAIL_CLASS_SYMBOL original_object
-:
-	public awl::backends::wayland::window::object
+class AWL_DETAIL_CLASS_SYMBOL original_object : public awl::backends::wayland::window::object
 {
-	FCPPT_NONMOVABLE(
-		original_object
-	);
+  FCPPT_NONMOVABLE(original_object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	original_object(
-		fcppt::log::object_reference,
-		awl::event::container_reference,
-		awl::backends::wayland::display const &,
-		awl::backends::wayland::compositor const &,
-		awl::backends::wayland::shell const &,
-		awl::window::parameters const &
-	);
+  AWL_DETAIL_SYMBOL
+  original_object(
+      fcppt::log::object_reference,
+      awl::event::container_reference,
+      awl::backends::wayland::display const &,
+      awl::backends::wayland::compositor const &,
+      awl::backends::wayland::shell const &,
+      awl::window::parameters const &);
 
-	AWL_DETAIL_SYMBOL
-	~original_object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_object() override;
 
-	AWL_DETAIL_SYMBOL
-	void
-	show()
-	override;
+  AWL_DETAIL_SYMBOL
+  void show() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::window::dim
-	size() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::window::dim size() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::visual::object const &
-	visual() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::visual::object const &visual() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	wl_surface *
-	surface() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL wl_surface *surface() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	wl_shell_surface *
-	get() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL wl_shell_surface *get() const override;
+
 private:
-	awl::backends::wayland::display const &display_;
+  awl::backends::wayland::display const &display_;
 
-	awl::visual::object const &visual_;
+  awl::visual::object const &visual_;
 
-	awl::backends::wayland::surface surface_;
+  awl::backends::wayland::surface surface_;
 
-	awl::backends::wayland::window::shell_surface shell_surface_;
+  awl::backends::wayland::window::shell_surface shell_surface_;
 
-	awl::backends::wayland::window::event::data data_;
+  awl::backends::wayland::window::event::data data_;
 };
 
 }

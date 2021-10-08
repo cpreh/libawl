@@ -6,16 +6,12 @@
 #include <awl/backends/x11/window/base_unique_ptr.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 AWL_DETAIL_SYMBOL
 awl::backends::x11::window::base_unique_ptr
-root(
-	awl::backends::x11::display_ref,
-	awl::backends::x11::screen
-);
+    root(awl::backends::x11::display_ref, awl::backends::x11::screen);
 
 }
 

@@ -3,12 +3,10 @@
 
 #include <awl/backends/wayland/cursor/object_unique_ptr.hpp>
 
-
 namespace awl::backends::wayland::cursor
 {
 
-awl::backends::wayland::cursor::object_unique_ptr
-create_invisible();
+awl::backends::wayland::cursor::object_unique_ptr create_invisible();
 
 }
 

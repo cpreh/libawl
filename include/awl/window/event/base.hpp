@@ -8,34 +8,24 @@
 #include <awl/window/reference.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::window::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL base
-:
-	public awl::event::base
+class AWL_DETAIL_CLASS_SYMBOL base : public awl::event::base
 {
-	FCPPT_NONMOVABLE(
-		base
-	);
+  FCPPT_NONMOVABLE(base);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	base(
-		awl::window::reference
-	);
+  AWL_DETAIL_SYMBOL
+  explicit base(awl::window::reference);
 
-	AWL_DETAIL_SYMBOL
-	~base()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~base() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::window::object &
-	window() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::window::object &window() const;
+
 private:
-	awl::window::reference const window_;
+  awl::window::reference const window_;
 };
 
 }

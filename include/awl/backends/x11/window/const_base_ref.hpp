@@ -4,16 +4,10 @@
 #include <awl/backends/x11/window/base_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-using
-const_base_ref
-=
-fcppt::reference<
-	awl::backends::x11::window::base const
->;
+using const_base_ref = fcppt::reference<awl::backends::x11::window::base const>;
 
 }
 

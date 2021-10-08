@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/system/event/processor_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl::backends::wayland::system::event
 {
 
-using
-processor_unique_ptr
-=
-fcppt::unique_ptr<
-	awl::backends::wayland::system::event::processor
->;
+using processor_unique_ptr = fcppt::unique_ptr<awl::backends::wayland::system::event::processor>;
 
 }
 

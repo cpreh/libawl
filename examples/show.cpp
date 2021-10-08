@@ -27,94 +27,40 @@
 #include <cstdlib>
 #include <fcppt/config/external_end.hpp>
 
-
-int
-main()
+int main()
 try
 {
-	fcppt::log::context log_context{
-		fcppt::log::optional_level{
-			fcppt::log::level::debug
-		},
-		fcppt::log::default_level_streams()
-	};
+  fcppt::log::context log_context{
+      fcppt::log::optional_level{fcppt::log::level::debug}, fcppt::log::default_level_streams()};
 
-	awl::system::object_unique_ptr const system(
-		awl::system::create(
-			fcppt::make_ref(
-				log_context
-			)
-		)
-	);
+  awl::system::object_unique_ptr const system(awl::system::create(fcppt::make_ref(log_context)));
 
-	awl::visual::object_unique_ptr const visual(
-		system->default_visual()
-	);
+  awl::visual::object_unique_ptr const visual(system->default_visual());
 
-	awl::window::object_unique_ptr const window(
-		system->create_window(
-			awl::window::parameters(
-				*visual
-			)
-			.class_name(
-				FCPPT_TEXT("awlshow")
-			)
-			.size(
-				awl::window::dim(
-					1024U,
-					768U
-				)
-			)
-		)
-	);
+  awl::window::object_unique_ptr const window(
+      system->create_window(awl::window::parameters(*visual)
+                                .class_name(FCPPT_TEXT("awlshow"))
+                                .size(awl::window::dim(1024U, 768U))));
 
-	awl::system::event::processor &system_processor(
-		system->processor()
-	);
+  awl::system::event::processor &system_processor(system->processor());
 
-	window->show();
+  window->show();
 
-	return
-		awl::main::loop_next(
-			system_processor,
-			awl::main::loop_function{
-				[
-					&system_processor
-				](
-					awl::event::base const &_event
-				)
-				{
-					fcppt::optional::maybe_void(
-						fcppt::cast::dynamic<
-							awl::window::event::show const
-						>(
-							_event
-						),
-						[
-							&system_processor
-						](
-							fcppt::reference<
-								awl::window::event::show const
-							>
-						)
-						{
-							system_processor.quit(
-								awl::main::exit_success()
-							);
-						}
-					);
-				}
-			}
-		).get();
+  return awl::main::loop_next(
+             system_processor,
+             awl::main::loop_function{
+                 [&system_processor](awl::event::base const &_event)
+                 {
+                   fcppt::optional::maybe_void(
+                       fcppt::cast::dynamic<awl::window::event::show const>(_event),
+                       [&system_processor](fcppt::reference<awl::window::event::show const>)
+                       { system_processor.quit(awl::main::exit_success()); });
+                 }})
+      .get();
 }
-catch(
-	fcppt::exception const &_exception
-)
+catch (fcppt::exception const &_exception)
 {
-	fcppt::io::cerr()
-		<< _exception.string()
-		<< FCPPT_TEXT('\n');
+  fcppt::io::cerr() << _exception.string() << FCPPT_TEXT('\n');
 
-	return
-		EXIT_FAILURE;
+  return EXIT_FAILURE;
 }

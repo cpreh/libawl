@@ -36,243 +36,114 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace
 {
 
-void
-shell_surface_ping(
-	void *,
-	wl_shell_surface *const _shell_surface,
-	std::uint32_t _serial
-)
+void shell_surface_ping(void *, wl_shell_surface *const _shell_surface, std::uint32_t _serial)
 {
-	::wl_shell_surface_pong(
-		_shell_surface,
-		_serial
-	);
+  ::wl_shell_surface_pong(_shell_surface, _serial);
 }
 
-void
-shell_surface_configure(
-	void *const _data,
-	wl_shell_surface *,
-	std::uint32_t,
-	std::int32_t const _width,
-	std::int32_t const _height
-)
+void shell_surface_configure(
+    void *const _data,
+    wl_shell_surface *,
+    std::uint32_t,
+    std::int32_t const _width,
+    std::int32_t const _height)
 {
-	awl::backends::wayland::window::event::data &data{
-		*fcppt::cast::from_void_ptr<
-			awl::backends::wayland::window::event::data *
-		>(
-			_data
-		)
-	};
+  awl::backends::wayland::window::event::data &data{
+      *fcppt::cast::from_void_ptr<awl::backends::wayland::window::event::data *>(_data)};
 
-	awl::window::dim const size{
-		fcppt::cast::to_unsigned(
-			_width
-		),
-		fcppt::cast::to_unsigned(
-			_height
-		)
-	};
+  awl::window::dim const size{fcppt::cast::to_unsigned(_width), fcppt::cast::to_unsigned(_height)};
 
-	FCPPT_LOG_DEBUG(
-		data.log_.get(),
-		fcppt::log::out
-			<<
-			FCPPT_TEXT("Got resize event ")
-			<<
-			size
-	)
+  FCPPT_LOG_DEBUG(data.log_.get(), fcppt::log::out << FCPPT_TEXT("Got resize event ") << size)
 
-	data.size_ =
-		awl::window::optional_dim{
-			size
-		};
+  data.size_ = awl::window::optional_dim{size};
 
-	data.events_.get().push_back(
-		fcppt::unique_ptr_to_base<
-			awl::event::base
-		>(
-			fcppt::make_unique_ptr<
-				awl::window::event::resize
-			>(
-				data.reference_,
-				size
-			)
-		)
-	);
+  data.events_.get().push_back(fcppt::unique_ptr_to_base<awl::event::base>(
+      fcppt::make_unique_ptr<awl::window::event::resize>(data.reference_, size)));
 
-	// TODO(philipp): Add hide and show events
+  // TODO(philipp): Add hide and show events
 }
 
-void
-shell_surface_popup_done(
-	void *,
-	wl_shell_surface *
-)
-{
-}
+void shell_surface_popup_done(void *, wl_shell_surface *) {}
 
 wl_shell_surface_listener const shell_surface_listener{
-	shell_surface_ping,
-	shell_surface_configure,
-	shell_surface_popup_done
-};
+    shell_surface_ping, shell_surface_configure, shell_surface_popup_done};
 
 }
 
 awl::backends::wayland::window::original_object::original_object(
-	fcppt::log::object_reference const _log,
-	awl::event::container_reference const _events,
-	awl::backends::wayland::display const &_display,
-	awl::backends::wayland::compositor const &_compositor,
-	awl::backends::wayland::shell const &_shell,
-	awl::window::parameters const &_parameters
-)
-:
-	awl::backends::wayland::window::object(),
-	display_{
-		_display
-	},
-	visual_{
-		_parameters.visual()
-	},
-	surface_{
-		_compositor
-	},
-	shell_surface_{
-		_shell,
-		surface_
-	},
-	data_{
-		_log,
-		fcppt::reference_to_base<
-			awl::window::object
-		>(
-			fcppt::make_ref(
-				*this
-			)
-		),
-		_events
-	}
+    fcppt::log::object_reference const _log,
+    awl::event::container_reference const _events,
+    awl::backends::wayland::display const &_display,
+    awl::backends::wayland::compositor const &_compositor,
+    awl::backends::wayland::shell const &_shell,
+    awl::window::parameters const &_parameters)
+    : awl::backends::wayland::window::object(),
+      display_{_display},
+      visual_{_parameters.visual()},
+      surface_{_compositor},
+      shell_surface_{_shell, surface_},
+      data_{_log, fcppt::reference_to_base<awl::window::object>(fcppt::make_ref(*this)), _events}
 {
-	// TODO(philipp): We have to keep track of pointers that enter and set their cursors
-	fcppt::optional::maybe_void(
-		_parameters.title(),
-		[
-			&shell_surface = shell_surface_
-		](
-			fcppt::string const &_title
-		)
-		{
-			::wl_shell_surface_set_title(
-				shell_surface.get(),
-				fcppt::optional::to_exception(
-					fcppt::to_std_string(
-						_title
-					),
-					[
-						&_title
-					]{
-						return
-							awl::exception{
-								FCPPT_TEXT("Failed to convert window title: ")
-								+
-								_title
-							};
-					}
-				).c_str()
-			);
-		}
-	);
+  // TODO(philipp): We have to keep track of pointers that enter and set their cursors
+  fcppt::optional::maybe_void(
+      _parameters.title(),
+      [&shell_surface = shell_surface_](fcppt::string const &_title)
+      {
+        ::wl_shell_surface_set_title(
+            shell_surface.get(),
+            fcppt::optional::to_exception(
+                fcppt::to_std_string(_title),
+                [&_title]
+                { return awl::exception{FCPPT_TEXT("Failed to convert window title: ") + _title}; })
+                .c_str());
+      });
 
-	fcppt::optional::maybe_void(
-		_parameters.class_name(),
-		[
-			&shell_surface = shell_surface_
-		](
-			fcppt::string const &_class_name
-		)
-		{
-			::wl_shell_surface_set_class(
-				shell_surface.get(),
-				fcppt::optional::to_exception(
-					fcppt::to_std_string(
-						_class_name
-					),
-					[
-						&_class_name
-					]{
-						return
-							awl::exception{
-								FCPPT_TEXT("Failed to convert class name: ")
-								+
-								_class_name
-							};
-					}
-				).c_str()
-			);
-		}
-	);
+  fcppt::optional::maybe_void(
+      _parameters.class_name(),
+      [&shell_surface = shell_surface_](fcppt::string const &_class_name)
+      {
+        ::wl_shell_surface_set_class(
+            shell_surface.get(),
+            fcppt::optional::to_exception(
+                fcppt::to_std_string(_class_name),
+                [&_class_name] {
+                  return awl::exception{FCPPT_TEXT("Failed to convert class name: ") + _class_name};
+                })
+                .c_str());
+      });
 
-	::wl_shell_surface_add_listener(
-		shell_surface_.get(),
-		&shell_surface_listener,
-		&data_
-	);
+  ::wl_shell_surface_add_listener(shell_surface_.get(), &shell_surface_listener, &data_);
 }
 
-awl::backends::wayland::window::original_object::~original_object()
-= default;
+awl::backends::wayland::window::original_object::~original_object() = default;
 
-void
-awl::backends::wayland::window::original_object::show()
+void awl::backends::wayland::window::original_object::show()
 {
-	::wl_shell_surface_set_toplevel(
-		shell_surface_.get()
-	);
+  ::wl_shell_surface_set_toplevel(shell_surface_.get());
 
-	awl::backends::wayland::display_roundtrip(
-		display_
-	);
+  awl::backends::wayland::display_roundtrip(display_);
 }
 
-awl::window::dim
-awl::backends::wayland::window::original_object::size() const
+awl::window::dim awl::backends::wayland::window::original_object::size() const
 {
-	return
-		fcppt::optional::from(
-			data_.size_,
-			[]{
-				return
-					fcppt::math::dim::null<
-						awl::window::dim
-					>();
-			}
-		);
+  return fcppt::optional::from(
+      data_.size_, [] { return fcppt::math::dim::null<awl::window::dim>(); });
 }
 
-awl::visual::object const &
-awl::backends::wayland::window::original_object::visual() const
+awl::visual::object const &awl::backends::wayland::window::original_object::visual() const
 {
-	return
-		visual_;
+  return visual_;
 }
 
-wl_surface *
-awl::backends::wayland::window::original_object::surface() const
+wl_surface *awl::backends::wayland::window::original_object::surface() const
 {
-	return
-		surface_.get();
+  return surface_.get();
 }
 
-wl_shell_surface *
-awl::backends::wayland::window::original_object::get() const
+wl_shell_surface *awl::backends::wayland::window::original_object::get() const
 {
-	return
-		shell_surface_.get();
+  return shell_surface_.get();
 }

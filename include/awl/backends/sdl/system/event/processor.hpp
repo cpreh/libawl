@@ -7,24 +7,20 @@
 #include <awl/system/event/processor.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL processor
-:
-	public awl::system::event::processor
+class AWL_DETAIL_CLASS_SYMBOL processor : public awl::system::event::processor
 {
-	FCPPT_NONMOVABLE(
-		processor
-	);
+  FCPPT_NONMOVABLE(processor);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	processor();
+  AWL_DETAIL_SYMBOL
+  processor();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~processor()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~processor() override;
 };
 
 }

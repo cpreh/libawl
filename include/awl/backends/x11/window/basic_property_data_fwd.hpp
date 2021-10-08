@@ -3,19 +3,11 @@
 
 #include <fcppt/iterator/range_fwd.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-template<
-	typename Data
->
-using
-basic_property_data
-=
-fcppt::iterator::range<
-	Data const *
->;
+template <typename Data>
+using basic_property_data = fcppt::iterator::range<Data const *>;
 
 }
 

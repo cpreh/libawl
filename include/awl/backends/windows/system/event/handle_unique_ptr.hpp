@@ -4,7 +4,6 @@
 #include <awl/backends/windows/system/event/handle_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,11 +15,7 @@ namespace system
 namespace event
 {
 
-typedef
-fcppt::unique_ptr<
-	awl::backends::windows::system::event::handle
->
-handle_unique_ptr;
+typedef fcppt::unique_ptr<awl::backends::windows::system::event::handle> handle_unique_ptr;
 
 }
 }

@@ -4,7 +4,6 @@
 #include <awl/backends/windows/cursor/size.hpp>
 #include <fcppt/math/dim/static_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,12 +13,7 @@ namespace windows
 namespace cursor
 {
 
-typedef
-fcppt::math::dim::static_<
-	awl::backends::windows::cursor::size,
-	2
->
-dim;
+typedef fcppt::math::dim::static_<awl::backends::windows::cursor::size, 2> dim;
 
 }
 }

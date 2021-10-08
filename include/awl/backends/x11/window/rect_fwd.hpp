@@ -4,16 +4,10 @@
 #include <awl/window/unit.hpp>
 #include <fcppt/math/box/rect_fwd.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-using
-rect
-=
-fcppt::math::box::rect<
-	awl::window::unit
->;
+using rect = fcppt::math::box::rect<awl::window::unit>;
 
 }
 

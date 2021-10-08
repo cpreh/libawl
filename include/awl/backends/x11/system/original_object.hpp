@@ -16,79 +16,42 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
-
 namespace awl::backends::x11::system
 {
 
-class original_object
-:
-	public awl::backends::x11::system::object
+class original_object : public awl::backends::x11::system::object
 {
-	FCPPT_NONMOVABLE(
-		original_object
-	);
+  FCPPT_NONMOVABLE(original_object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	original_object(
-		fcppt::log::context_reference
-	);
+  AWL_DETAIL_SYMBOL
+  explicit original_object(fcppt::log::context_reference);
 
-	AWL_DETAIL_SYMBOL
-	~original_object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_object() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::window::object_unique_ptr
-	create_window(
-		awl::window::parameters const &
-	)
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::window::object_unique_ptr
+  create_window(awl::window::parameters const &) override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::system::event::processor &
-	processor()
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::system::event::processor &processor() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::visual::object_unique_ptr
-	default_visual()
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::visual::object_unique_ptr default_visual() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::cursor::object_unique_ptr
-	create_cursor(
-		awl::cursor::optional_type const &
-	)
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::cursor::object_unique_ptr
+  create_cursor(awl::cursor::optional_type const &) override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::display_ref
-	display()
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::display_ref display() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::screen
-	screen() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::screen screen() const override;
+
 private:
-	[[nodiscard]]
-	awl::backends::x11::display_ref
-	get_display();
+  [[nodiscard]] awl::backends::x11::display_ref get_display();
 
-	awl::backends::x11::original_display display_;
+  awl::backends::x11::original_display display_;
 
-	awl::backends::x11::screen const screen_;
+  awl::backends::x11::screen const screen_;
 
-	fcppt::unique_ptr<
-		awl::backends::x11::system::event::original_processor
-	> const processor_;
+  fcppt::unique_ptr<awl::backends::x11::system::event::original_processor> const processor_;
 };
 
 }

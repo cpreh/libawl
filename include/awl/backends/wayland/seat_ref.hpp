@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/seat_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::wayland
 {
 
-using
-seat_ref
-=
-fcppt::reference<
-	awl::backends::wayland::seat
->;
+using seat_ref = fcppt::reference<awl::backends::wayland::seat>;
 
 }
 

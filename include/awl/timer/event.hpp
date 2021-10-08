@@ -9,34 +9,24 @@
 #include <awl/timer/reference.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::timer
 {
 
-class AWL_DETAIL_CLASS_SYMBOL event
-:
-	public awl::event::base
+class AWL_DETAIL_CLASS_SYMBOL event : public awl::event::base
 {
-	FCPPT_NONMOVABLE(
-		event
-	);
+  FCPPT_NONMOVABLE(event);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	event(
-		awl::timer::reference
-	);
+  AWL_DETAIL_SYMBOL
+  explicit event(awl::timer::reference);
 
-	AWL_DETAIL_SYMBOL
-	~event()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~event() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::timer::object &
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::timer::object &get() const;
+
 private:
-	awl::timer::reference const timer_;
+  awl::timer::reference const timer_;
 };
 
 }

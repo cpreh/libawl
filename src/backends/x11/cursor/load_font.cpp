@@ -9,21 +9,9 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
-
-awl::backends::x11::cursor::holder_unique_ptr
-awl::backends::x11::cursor::load_font(
-	awl::backends::x11::display_ref const _display,
-	awl::backends::x11::cursor::shape const _shape
-)
+awl::backends::x11::cursor::holder_unique_ptr awl::backends::x11::cursor::load_font(
+    awl::backends::x11::display_ref const _display, awl::backends::x11::cursor::shape const _shape)
 {
-	return
-		fcppt::make_unique_ptr<
-			awl::backends::x11::cursor::holder
-		>(
-			_display,
-			::XCreateFontCursor(
-				_display.get().get(),
-				_shape.get()
-			)
-		);
+  return fcppt::make_unique_ptr<awl::backends::x11::cursor::holder>(
+      _display, ::XCreateFontCursor(_display.get().get(), _shape.get()));
 }

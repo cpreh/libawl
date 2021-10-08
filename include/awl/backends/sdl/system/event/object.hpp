@@ -10,34 +10,24 @@
 #include <SDL_events.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::event::base
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::event::base
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	object(
-		SDL_Event const &
-	);
+  AWL_DETAIL_SYMBOL
+  explicit object(SDL_Event const &);
 
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	SDL_Event const &
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL SDL_Event const &get() const;
+
 private:
-	SDL_Event const event_;
+  SDL_Event const event_;
 };
 
 }

@@ -12,43 +12,28 @@
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::posix
 {
 
 class AWL_DETAIL_CLASS_SYMBOL processor
 {
-	FCPPT_NONMOVABLE(
-		processor
-	);
+  FCPPT_NONMOVABLE(processor);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	processor();
+  AWL_DETAIL_SYMBOL
+  processor();
+
 public:
-	[[nodiscard]]
-	virtual
-	awl::event::connection_unique_ptr
-	register_fd(
-		awl::backends::posix::fd const &
-	) = 0;
+  [[nodiscard]] virtual awl::event::connection_unique_ptr
+  register_fd(awl::backends::posix::fd const &) = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::event::container
-	poll(
-		awl::backends::posix::optional_duration const &
-	) = 0;
+  [[nodiscard]] virtual awl::event::container
+  poll(awl::backends::posix::optional_duration const &) = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::timer::unique_ptr
-	create_timer(
-		awl::timer::setting const &
-	) = 0;
+  [[nodiscard]] virtual awl::timer::unique_ptr create_timer(awl::timer::setting const &) = 0;
 
-	AWL_DETAIL_SYMBOL
-	virtual
-	~processor();
+  AWL_DETAIL_SYMBOL
+  virtual ~processor();
 };
 
 }

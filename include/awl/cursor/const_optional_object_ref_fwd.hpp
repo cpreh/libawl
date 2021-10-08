@@ -4,16 +4,10 @@
 #include <awl/cursor/object_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace awl::cursor
 {
 
-using
-const_optional_object_ref
-=
-fcppt::optional::reference<
-	awl::cursor::object const
->;
+using const_optional_object_ref = fcppt::optional::reference<awl::cursor::object const>;
 
 }
 

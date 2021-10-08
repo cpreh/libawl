@@ -5,5 +5,4 @@
 #include <awl/backends/sdl/system/event/type.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 
-
 #endif

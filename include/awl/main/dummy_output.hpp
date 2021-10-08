@@ -5,24 +5,19 @@
 #include <awl/main/output.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::main
 {
 
-class dummy_output
-:
-	public awl::main::output
+class dummy_output : public awl::main::output
 {
-	FCPPT_NONMOVABLE(
-		dummy_output
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	dummy_output();
+  FCPPT_NONMOVABLE(dummy_output);
 
-	AWL_DETAIL_SYMBOL
-	~dummy_output()
-	override;
+public:
+  AWL_DETAIL_SYMBOL
+  dummy_output();
+
+  AWL_DETAIL_SYMBOL
+  ~dummy_output() override;
 };
 
 }

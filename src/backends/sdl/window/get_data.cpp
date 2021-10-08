@@ -8,29 +8,10 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
-fcppt::optional::object<
-	void *
->
-awl::backends::sdl::window::get_data(
-	awl::backends::sdl::window::native_reference const _window,
-	std::string const &_name
-)
+fcppt::optional::object<void *> awl::backends::sdl::window::get_data(
+    awl::backends::sdl::window::native_reference const _window, std::string const &_name)
 {
-	void *const result{
-		SDL_GetWindowData(
-			&_window.get(),
-			_name.c_str()
-		)
-	};
+  void *const result{SDL_GetWindowData(&_window.get(), _name.c_str())};
 
-	return
-		fcppt::optional::make_if(
-			result
-			!=
-			nullptr,
-			fcppt::const_(
-				result
-			)
-		);
+  return fcppt::optional::make_if(result != nullptr, fcppt::const_(result));
 }

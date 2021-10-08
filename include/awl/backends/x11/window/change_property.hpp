@@ -8,19 +8,16 @@
 #include <awl/backends/x11/window/property_type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 AWL_DETAIL_SYMBOL
-void
-change_property(
-	awl::backends::x11::window::base const &,
-	awl::backends::x11::window::property,
-	awl::backends::x11::window::property_type,
-	awl::backends::x11::window::property_mode,
-	awl::backends::x11::window::property_data const &
-);
+void change_property(
+    awl::backends::x11::window::base const &,
+    awl::backends::x11::window::property,
+    awl::backends::x11::window::property_type,
+    awl::backends::x11::window::property_mode,
+    awl::backends::x11::window::property_data const &);
 
 }
 

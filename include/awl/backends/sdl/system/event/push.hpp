@@ -9,20 +9,11 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
-[[nodiscard]]
-AWL_DETAIL_SYMBOL
-fcppt::either::error<
-	fcppt::optional::object<
-		std::string
-	>
->
-push(
-	SDL_Event const &
-);
+[[nodiscard]] AWL_DETAIL_SYMBOL fcppt::either::error<fcppt::optional::object<std::string>>
+push(SDL_Event const &);
 
 }
 

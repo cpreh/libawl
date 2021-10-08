@@ -9,34 +9,24 @@
 #include <awl/window/event/resize_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::window::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL resize
-:
-	public awl::window::event::base
+class AWL_DETAIL_CLASS_SYMBOL resize : public awl::window::event::base
 {
-	FCPPT_NONMOVABLE(
-		resize
-	);
+  FCPPT_NONMOVABLE(resize);
+
 public:
-	AWL_DETAIL_SYMBOL
-	resize(
-		awl::window::reference,
-		awl::window::dim
-	);
+  AWL_DETAIL_SYMBOL
+  resize(awl::window::reference, awl::window::dim);
 
-	AWL_DETAIL_SYMBOL
-	~resize()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~resize() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::window::dim const &
-	dim() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::window::dim const &dim() const;
+
 private:
-	awl::window::dim dim_;
+  awl::window::dim dim_;
 };
 
 }

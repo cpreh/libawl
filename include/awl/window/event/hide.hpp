@@ -8,27 +8,19 @@
 #include <awl/window/event/hide_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::window::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL hide
-:
-	public awl::window::event::base
+class AWL_DETAIL_CLASS_SYMBOL hide : public awl::window::event::base
 {
-	FCPPT_NONMOVABLE(
-		hide
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	hide(
-		awl::window::reference
-	);
+  FCPPT_NONMOVABLE(hide);
 
-	AWL_DETAIL_SYMBOL
-	~hide()
-	override;
+public:
+  AWL_DETAIL_SYMBOL
+  explicit hide(awl::window::reference);
+
+  AWL_DETAIL_SYMBOL
+  ~hide() override;
 };
 
 }

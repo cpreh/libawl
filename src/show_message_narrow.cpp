@@ -14,22 +14,15 @@
 #include <fcppt/config/external_end.hpp>
 #endif
 
-
-void
-awl::show_message_narrow(
-	std::string const &_text
-)
+void awl::show_message_narrow(std::string const &_text)
 {
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
-	awl::backends::windows::message_box_narrow(
-		awl::backends::windows::window::const_optional_object_ref(),
-		_text,
-		"Info",
-		MB_OK | MB_ICONINFORMATION
-	);
+  awl::backends::windows::message_box_narrow(
+      awl::backends::windows::window::const_optional_object_ref(),
+      _text,
+      "Info",
+      MB_OK | MB_ICONINFORMATION);
 #else
-	std::clog
-		<< _text
-		<< '\n';
+  std::clog << _text << '\n';
 #endif
 }

@@ -9,36 +9,20 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
-awl::backends::x11::atom
-awl::backends::x11::intern_atom(
-	awl::backends::x11::display_ref const _display,
-	std::string const &_name
-)
+awl::backends::x11::atom awl::backends::x11::intern_atom(
+    awl::backends::x11::display_ref const _display, std::string const &_name)
 {
-	Atom const ret(
-		::XInternAtom(
-			_display.get().get(),
-			_name.c_str(),
-			True // Create the atom if it does not exist
-		)
-	);
+  Atom const ret(::XInternAtom(
+      _display.get().get(),
+      _name.c_str(),
+      True // Create the atom if it does not exist
+      ));
 
-	// This should not happen
-	if(
-		ret
-		==
-		None
-	)
-	{
-		throw
-			awl::exception{
-				FCPPT_TEXT("XInternAtom() failed!")
-			};
-	}
+  // This should not happen
+  if (ret == None)
+  {
+    throw awl::exception{FCPPT_TEXT("XInternAtom() failed!")};
+  }
 
-	return
-		awl::backends::x11::atom(
-			ret
-		);
+  return awl::backends::x11::atom(ret);
 }

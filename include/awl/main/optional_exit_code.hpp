@@ -5,5 +5,4 @@
 #include <awl/main/optional_exit_code_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

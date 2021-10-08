@@ -5,7 +5,6 @@
 #include <awl/backends/windows/wndclass_remove_callback.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -17,24 +16,19 @@ namespace window
 
 class holder
 {
-	FCPPT_NONCOPYABLE(
-		holder
-	);
+  FCPPT_NONCOPYABLE(holder);
+
 public:
-	holder(
-		HWND,
-		awl::backends::windows::wndclass_remove_callback const &
-	);
+  holder(HWND, awl::backends::windows::wndclass_remove_callback const &);
 
-	~holder();
+  ~holder();
 
-	HWND
-	get() const;
+  HWND get() const;
+
 private:
-	HWND hwnd_;
+  HWND hwnd_;
 
-	awl::backends::windows::wndclass_remove_callback const remove_wndclass_;
-
+  awl::backends::windows::wndclass_remove_callback const remove_wndclass_;
 };
 
 }

@@ -4,7 +4,6 @@
 #include <awl/backends/windows/window/event/object_fwd.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,10 +15,7 @@ namespace window
 namespace event
 {
 
-awl::event::base_unique_ptr
-make(
-	awl::backends::windows::window::event::object const &
-);
+awl::event::base_unique_ptr make(awl::backends::windows::window::event::object const &);
 
 }
 }

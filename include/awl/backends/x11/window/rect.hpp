@@ -4,5 +4,4 @@
 #include <awl/backends/x11/window/rect_fwd.hpp>
 #include <fcppt/math/box/rect.hpp>
 
-
 #endif

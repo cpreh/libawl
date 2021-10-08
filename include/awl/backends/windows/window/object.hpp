@@ -9,7 +9,6 @@
 #include <awl/window/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -19,28 +18,21 @@ namespace windows
 namespace window
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::window::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::window::object
 {
-	FCPPT_NONCOPYABLE(
-		object
-	);
+  FCPPT_NONCOPYABLE(object);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	object();
+  AWL_DETAIL_SYMBOL
+  object();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	virtual
-	HWND
-	hwnd() const = 0;
+  virtual HWND hwnd() const = 0;
 
-	virtual
-	awl::backends::windows::cursor::const_optional_object_ref
-	cursor() const = 0;
+  virtual awl::backends::windows::cursor::const_optional_object_ref cursor() const = 0;
 };
 
 }

@@ -10,7 +10,6 @@
 #include <awl/timer/setting_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -20,28 +19,24 @@ namespace windows
 namespace timer
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::timer::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::timer::object
 {
-	FCPPT_NONCOPYABLE(
-		object
-	);
+  FCPPT_NONCOPYABLE(object);
+
 public:
-	AWL_DETAIL_CLASS_SYMBOL
-	object(
-		awl::timer::setting const &,
-		awl::backends::windows::timer::waitable_unique_ptr &&,
-		awl::event::connection_unique_ptr &&
-	);
+  AWL_DETAIL_CLASS_SYMBOL
+  object(
+      awl::timer::setting const &,
+      awl::backends::windows::timer::waitable_unique_ptr &&,
+      awl::event::connection_unique_ptr &&);
 
-	AWL_DETAIL_CLASS_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_CLASS_SYMBOL
+  ~object() override;
+
 private:
-	awl::backends::windows::timer::waitable_unique_ptr const timer_;
+  awl::backends::windows::timer::waitable_unique_ptr const timer_;
 
-	awl::event::connection_unique_ptr const connection_;
+  awl::event::connection_unique_ptr const connection_;
 };
 
 }

@@ -5,7 +5,6 @@
 #include <awl/backends/x11/window/base_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,11 +15,8 @@ namespace window
 {
 
 AWL_DETAIL_SYMBOL
-void
-set_wm_protocols(
-	awl::backends::x11::window::base const &,
-	awl::backends::x11::window::atoms const &
-);
+void set_wm_protocols(
+    awl::backends::x11::window::base const &, awl::backends::x11::window::atoms const &);
 
 }
 }

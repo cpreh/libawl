@@ -11,55 +11,35 @@
 #include <fcppt/enable_shared_from_this_decl.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::system::seat
 {
 
-class object
-:
-	public
-		fcppt::enable_shared_from_this<
-			awl::backends::wayland::system::seat::object
-		>
+class object : public fcppt::enable_shared_from_this<awl::backends::wayland::system::seat::object>
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	object(
-		awl::backends::wayland::seat &&,
-		awl::backends::wayland::display_reference,
-		awl::event::container_reference
-	);
+  object(
+      awl::backends::wayland::seat &&,
+      awl::backends::wayland::display_reference,
+      awl::event::container_reference);
 
-	~object();
+  ~object();
 
-	void
-	init_ptr();
+  void init_ptr();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::wayland::registry_id
-	name() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::wayland::registry_id name() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::wayland::seat &
-	get();
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::wayland::seat &get();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::wayland::seat const &
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::wayland::seat const &get() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::wayland::system::seat::caps_field
-	caps() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::wayland::system::seat::caps_field caps() const;
+
 private:
-	awl::backends::wayland::seat impl_;
+  awl::backends::wayland::seat impl_;
 
-	awl::backends::wayland::system::seat::data data_;
+  awl::backends::wayland::system::seat::data data_;
 };
 
 }

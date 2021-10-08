@@ -3,7 +3,6 @@
 
 #include <awl/backends/windows/windows.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -15,13 +14,7 @@ namespace window
 namespace event
 {
 
-LRESULT CALLBACK
-wnd_proc(
-	HWND,
-	UINT,
-	WPARAM,
-	LPARAM
-);
+LRESULT CALLBACK wnd_proc(HWND, UINT, WPARAM, LPARAM);
 
 }
 }

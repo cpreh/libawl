@@ -4,5 +4,4 @@
 #include <awl/main/exit_code_fwd.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 #endif

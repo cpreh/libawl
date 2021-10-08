@@ -7,18 +7,15 @@
 #include <fcppt/config/external_end.hpp>
 #endif
 
-
-awl::main::exit_code
-awl::main::exit_success()
+awl::main::exit_code awl::main::exit_success()
 {
-	return
-		awl::main::exit_code(
+  return awl::main::exit_code(
 #if defined(AWL_X11_BACKEND) || defined(AWL_WAYLAND_BACKEND)
-			EXIT_SUCCESS
+      EXIT_SUCCESS
 #elif defined(AWL_WINDOWS_BACKEND)
-			0 // TODO(philipp): what do we return here?
+      0 // TODO(philipp): what do we return here?
 #else
 #error "Don't know what exit_success should be"
 #endif
-		);
+  );
 }

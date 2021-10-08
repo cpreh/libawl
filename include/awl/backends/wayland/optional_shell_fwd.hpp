@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/shell_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl::backends::wayland
 {
 
-using
-optional_shell
-=
-fcppt::optional::object<
-	awl::backends::wayland::shell
->;
+using optional_shell = fcppt::optional::object<awl::backends::wayland::shell>;
 
 }
 

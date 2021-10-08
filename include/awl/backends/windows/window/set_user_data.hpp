@@ -4,7 +4,6 @@
 #include <awl/backends/windows/windows.hpp>
 #include <awl/backends/windows/window/user_data_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,11 +13,7 @@ namespace windows
 namespace window
 {
 
-void
-set_user_data(
-	HWND,
-	awl::backends::windows::window::user_data const &
-);
+void set_user_data(HWND, awl::backends::windows::window::user_data const &);
 
 }
 }

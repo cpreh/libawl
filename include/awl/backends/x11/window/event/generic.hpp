@@ -11,41 +11,29 @@
 #include <awl/window/event/base.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::window::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL generic
-:
-	public awl::window::event::base
+class AWL_DETAIL_CLASS_SYMBOL generic : public awl::window::event::base
 {
-	FCPPT_NONMOVABLE(
-		generic
-	);
+  FCPPT_NONMOVABLE(generic);
+
 public:
-	AWL_DETAIL_SYMBOL
-	generic(
-		awl::backends::x11::window::object_ref,
-		awl::backends::x11::window::event::object const &
-	);
+  AWL_DETAIL_SYMBOL
+  generic(
+      awl::backends::x11::window::object_ref, awl::backends::x11::window::event::object const &);
 
-	AWL_DETAIL_SYMBOL
-	~generic()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~generic() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::object &
-	window() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::window::object &window() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::event::object const &
-	event() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::window::event::object const &event() const;
+
 private:
-	awl::backends::x11::window::object_ref const window_;
+  awl::backends::x11::window::object_ref const window_;
 
-	awl::backends::x11::window::event::object const event_;
+  awl::backends::x11::window::event::object const event_;
 };
 
 }

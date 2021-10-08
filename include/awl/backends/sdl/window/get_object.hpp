@@ -5,15 +5,11 @@
 #include <awl/backends/sdl/window/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::sdl::window
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::sdl::window::object &
-get_object(
-	awl::backends::sdl::window::native_reference
-);
+awl::backends::sdl::window::object &get_object(awl::backends::sdl::window::native_reference);
 
 }
 

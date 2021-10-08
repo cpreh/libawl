@@ -3,14 +3,10 @@
 
 #include <awl/backends/x11/Xlib.hpp>
 
-
 namespace awl::backends::x11
 {
 
-Bool
-to_x11_bool(
-	bool
-);
+Bool to_x11_bool(bool);
 
 }
 

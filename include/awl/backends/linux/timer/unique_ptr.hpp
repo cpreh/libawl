@@ -4,16 +4,10 @@
 #include <awl/backends/linux/timer/object_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl::backends::linux::timer
 {
 
-using
-unique_ptr
-=
-fcppt::unique_ptr<
-	awl::backends::linux::timer::object
->;
+using unique_ptr = fcppt::unique_ptr<awl::backends::linux::timer::object>;
 
 }
 

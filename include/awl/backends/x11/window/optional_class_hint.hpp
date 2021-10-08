@@ -5,5 +5,4 @@
 #include <awl/backends/x11/window/optional_class_hint_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

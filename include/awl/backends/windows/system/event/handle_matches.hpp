@@ -5,7 +5,6 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/event/base_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -18,11 +17,8 @@ namespace event
 {
 
 AWL_DETAIL_SYMBOL
-bool
-handle_matches(
-	awl::event::base const &,
-	awl::backends::windows::system::event::handle const &
-);
+bool handle_matches(
+    awl::event::base const &, awl::backends::windows::system::event::handle const &);
 
 }
 }

@@ -4,14 +4,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace awl::backends::x11
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	int,
-	screen
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(int, screen);
 
 }
 

@@ -8,26 +8,22 @@
 #include <awl/system/event/processor.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::system::event
 {
 
 // NOLINTNEXTLINE(fuchsia-multiple-inheritance)
-class AWL_DETAIL_CLASS_SYMBOL processor
-:
-	public awl::system::event::processor,
-	public awl::backends::posix::processor_base
+class AWL_DETAIL_CLASS_SYMBOL processor : public awl::system::event::processor,
+                                          public awl::backends::posix::processor_base
 {
-	FCPPT_NONMOVABLE(
-		processor
-	);
+  FCPPT_NONMOVABLE(processor);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	processor();
+  AWL_DETAIL_SYMBOL
+  processor();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~processor()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~processor() override;
 };
 
 }

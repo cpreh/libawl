@@ -4,16 +4,10 @@
 #include <awl/window/dim.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl::window
 {
 
-using
-optional_dim
-=
-fcppt::optional::object<
-	awl::window::dim
->;
+using optional_dim = fcppt::optional::object<awl::window::dim>;
 
 }
 

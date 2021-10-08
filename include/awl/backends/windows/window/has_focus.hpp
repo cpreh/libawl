@@ -4,7 +4,6 @@
 #include <awl/backends/windows/window/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -15,10 +14,7 @@ namespace window
 {
 
 AWL_DETAIL_SYMBOL
-bool
-has_focus(
-	awl::backends::windows::window::object const &
-);
+bool has_focus(awl::backends::windows::window::object const &);
 
 }
 }

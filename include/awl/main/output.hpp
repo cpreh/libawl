@@ -6,22 +6,20 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/symbol/class.hpp>
 
-
 namespace awl::main
 {
 
 class FCPPT_SYMBOL_CLASS output
 {
-	FCPPT_NONMOVABLE(
-		output
-	);
+  FCPPT_NONMOVABLE(output);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	output();
+  AWL_DETAIL_SYMBOL
+  output();
+
 public:
-	AWL_DETAIL_SYMBOL
-	virtual
-	~output();
+  AWL_DETAIL_SYMBOL
+  virtual ~output();
 };
 
 }

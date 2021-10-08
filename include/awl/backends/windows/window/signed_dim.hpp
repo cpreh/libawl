@@ -4,5 +4,4 @@
 #include <awl/backends/windows/window/signed_dim_fwd.hpp>
 #include <fcppt/math/dim/static.hpp>
 
-
 #endif

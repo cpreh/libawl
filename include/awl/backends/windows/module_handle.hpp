@@ -4,7 +4,6 @@
 #include <awl/backends/windows/windows.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends

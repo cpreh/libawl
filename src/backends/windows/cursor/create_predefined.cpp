@@ -8,24 +8,11 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
 awl::backends::windows::cursor::object_unique_ptr
-awl::backends::windows::cursor::create_predefined(
-	awl::cursor::type const _type
-)
+awl::backends::windows::cursor::create_predefined(awl::cursor::type const _type)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::backends::windows::cursor::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::cursor::shared
-			>(
-				awl::backends::windows::cursor::load(
-					awl::backends::windows::cursor::convert_predefined(
-						_type
-					)
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::backends::windows::cursor::object>(
+      fcppt::make_unique_ptr<awl::backends::windows::cursor::shared>(
+          awl::backends::windows::cursor::load(
+              awl::backends::windows::cursor::convert_predefined(_type))));
 }

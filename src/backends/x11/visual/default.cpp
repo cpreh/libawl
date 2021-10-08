@@ -11,41 +11,17 @@
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
-awl::backends::x11::visual::object_unique_ptr
-awl::backends::x11::visual::default_(
-	awl::backends::x11::display_ref const _display,
-	awl::backends::x11::screen const _screen
-)
+awl::backends::x11::visual::object_unique_ptr awl::backends::x11::visual::default_(
+    awl::backends::x11::display_ref const _display, awl::backends::x11::screen const _screen)
 {
-	Visual *const visual(
-		::XDefaultVisual(
-			_display.get().get(),
-			_screen.get()
-		)
-	);
+  Visual *const visual(::XDefaultVisual(_display.get().get(), _screen.get()));
 
-	if(
-		visual == nullptr
-	)
-	{
-		throw
-			awl::exception{
-				FCPPT_TEXT("XDefaultVisual failed")
-			};
-	}
+  if (visual == nullptr)
+  {
+    throw awl::exception{FCPPT_TEXT("XDefaultVisual failed")};
+  }
 
-	return
-		fcppt::unique_ptr_to_base<
-			awl::backends::x11::visual::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::x11::visual::wrapped
-			>(
-				awl::backends::x11::visual::create_info(
-					_display.get(),
-					*visual
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::backends::x11::visual::object>(
+      fcppt::make_unique_ptr<awl::backends::x11::visual::wrapped>(
+          awl::backends::x11::visual::create_info(_display.get(), *visual)));
 }

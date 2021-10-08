@@ -17,64 +17,43 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
-
 namespace awl::backends::wayland::system
 {
 
-class original_object
-:
-	public awl::backends::wayland::system::object
+class original_object : public awl::backends::wayland::system::object
 {
-	FCPPT_NONMOVABLE(
-		original_object
-	);
+  FCPPT_NONMOVABLE(original_object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	original_object(
-		fcppt::log::context_reference
-	);
+  AWL_DETAIL_SYMBOL
+  explicit original_object(fcppt::log::context_reference);
 
-	AWL_DETAIL_SYMBOL
-	~original_object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_object() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::window::object_unique_ptr
-	create_window(
-		awl::window::parameters const &
-	)
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::window::object_unique_ptr create_window(awl::window::parameters const &) override;
 
-	AWL_DETAIL_SYMBOL
-	awl::system::event::processor &
-	processor()
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::system::event::processor &processor() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::visual::object_unique_ptr
-	default_visual()
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::visual::object_unique_ptr default_visual() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::cursor::object_unique_ptr
-	create_cursor(
-		awl::cursor::optional_type const &
-	)
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::cursor::object_unique_ptr create_cursor(awl::cursor::optional_type const &) override;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::wayland::display &
-	display()
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::backends::wayland::display &display() override;
+
 private:
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	awl::backends::wayland::original_display display_;
+  awl::backends::wayland::original_display display_;
 
-	awl::backends::wayland::system::event::processor_unique_ptr const processor_;
+  awl::backends::wayland::system::event::processor_unique_ptr const processor_;
 
-	awl::backends::wayland::cursor::theme const cursor_theme_;
+  awl::backends::wayland::cursor::theme const cursor_theme_;
 };
 
 }

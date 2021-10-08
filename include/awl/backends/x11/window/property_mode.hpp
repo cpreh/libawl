@@ -3,15 +3,14 @@
 
 #include <awl/backends/x11/window/property_mode_fwd.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 enum class property_mode
 {
-	replace,
-	prepend,
-	append
+  replace,
+  prepend,
+  append
 };
 
 }

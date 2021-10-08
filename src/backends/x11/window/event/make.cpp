@@ -18,94 +18,36 @@
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 
-
-awl::event::base_unique_ptr
-awl::backends::x11::window::event::make(
-	awl::backends::x11::window::object_ref const _window,
-	awl::backends::x11::window::event::object const &_event
-)
+awl::event::base_unique_ptr awl::backends::x11::window::event::make(
+    awl::backends::x11::window::object_ref const _window,
+    awl::backends::x11::window::event::object const &_event)
 {
-	awl::window::reference const window_base{
-		fcppt::reference_to_base<
-			awl::window::object
-		>(
-			_window
-		)
-	};
+  awl::window::reference const window_base{fcppt::reference_to_base<awl::window::object>(_window)};
 
-	switch(
-		_event.get().type
-	)
-	{
-	case ConfigureNotify:
-		{
-			XConfigureEvent const request(
-				_event.get().xconfigure
-			);
+  switch (_event.get().type)
+  {
+  case ConfigureNotify:
+  {
+    XConfigureEvent const request(_event.get().xconfigure);
 
-			return
-				fcppt::unique_ptr_to_base<
-					awl::event::base
-				>(
-					fcppt::make_unique_ptr<
-						awl::window::event::resize
-					>(
-						window_base,
-						awl::window::dim{
-							fcppt::cast::to_unsigned(
-								request.width
-							),
-							fcppt::cast::to_unsigned(
-								request.height
-							)
-						}
-					)
-				);
-		}
-	case MapNotify:
-		return
-			fcppt::unique_ptr_to_base<
-				awl::event::base
-			>(
-				fcppt::make_unique_ptr<
-					awl::window::event::show
-				>(
-					window_base
-				)
-			);
-	case UnmapNotify:
-		return
-			fcppt::unique_ptr_to_base<
-				awl::event::base
-			>(
-				fcppt::make_unique_ptr<
-					awl::window::event::hide
-				>(
-					window_base
-				)
-			);
-	case DestroyNotify:
-		return
-			fcppt::unique_ptr_to_base<
-				awl::event::base
-			>(
-				fcppt::make_unique_ptr<
-					awl::window::event::destroy
-				>(
-					window_base
-				)
-			);
-	}
+    return fcppt::unique_ptr_to_base<awl::event::base>(
+        fcppt::make_unique_ptr<awl::window::event::resize>(
+            window_base,
+            awl::window::dim{
+                fcppt::cast::to_unsigned(request.width),
+                fcppt::cast::to_unsigned(request.height)}));
+  }
+  case MapNotify:
+    return fcppt::unique_ptr_to_base<awl::event::base>(
+        fcppt::make_unique_ptr<awl::window::event::show>(window_base));
+  case UnmapNotify:
+    return fcppt::unique_ptr_to_base<awl::event::base>(
+        fcppt::make_unique_ptr<awl::window::event::hide>(window_base));
+  case DestroyNotify:
+    return fcppt::unique_ptr_to_base<awl::event::base>(
+        fcppt::make_unique_ptr<awl::window::event::destroy>(window_base));
+  }
 
-	return
-		fcppt::unique_ptr_to_base<
-			awl::event::base
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::x11::window::event::generic
-			>(
-				_window,
-				_event
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::event::base>(
+      fcppt::make_unique_ptr<awl::backends::x11::window::event::generic>(_window, _event));
 }

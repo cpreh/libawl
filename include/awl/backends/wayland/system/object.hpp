@@ -8,28 +8,22 @@
 #include <awl/system/object.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::system
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::system::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::system::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	object();
-public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  FCPPT_NONMOVABLE(object);
 
-	virtual
-	awl::backends::wayland::display &
-	display() = 0;
+protected:
+  AWL_DETAIL_SYMBOL
+  object();
+
+public:
+  AWL_DETAIL_SYMBOL
+  ~object() override;
+
+  virtual awl::backends::wayland::display &display() = 0;
 };
 
 }

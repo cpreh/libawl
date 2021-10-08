@@ -11,42 +11,31 @@
 #include <SDL_timer.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::timer
 {
 
-class object
-:
-	public awl::timer::object
+class object : public awl::timer::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	object(
-		fcppt::log::object_reference,
-		awl::timer::setting const &,
-		awl::backends::sdl::system::event::timer_type
-	);
+  object(
+      fcppt::log::object_reference,
+      awl::timer::setting const &,
+      awl::backends::sdl::system::event::timer_type);
 
-	~object()
-	override;
+  ~object() override;
+
 private:
-	static
-	Uint32
-	SDLCALL
-	process(
-		Uint32,
-		void *
-	);
+  static Uint32 SDLCALL process(Uint32, void *);
 
-	fcppt::log::object_reference const log_;
+  fcppt::log::object_reference const log_;
 
-	Uint32 const period_;
+  Uint32 const period_;
 
-	awl::backends::sdl::system::event::timer_type const event_type_;
+  awl::backends::sdl::system::event::timer_type const event_type_;
 
-	SDL_TimerID const id_;
+  SDL_TimerID const id_;
 };
 
 }

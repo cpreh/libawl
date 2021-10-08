@@ -6,20 +6,10 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::main::scoped_output::scoped_output(
-	fcppt::io::ostream &_stream,
-	std::filesystem::path const &_path
-)
-:
-	impl_(
-		awl::main::create_output(
-			_stream,
-			_path
-		)
-	)
+    fcppt::io::ostream &_stream, std::filesystem::path const &_path)
+    : impl_(awl::main::create_output(_stream, _path))
 {
 }
 
-awl::main::scoped_output::~scoped_output()
-= default;
+awl::main::scoped_output::~scoped_output() = default;

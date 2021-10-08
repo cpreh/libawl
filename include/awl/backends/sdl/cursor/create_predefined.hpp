@@ -5,15 +5,11 @@
 #include <awl/cursor/type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::sdl::cursor
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::sdl::cursor::object_unique_ptr
-create_predefined(
-	awl::cursor::type
-);
+awl::backends::sdl::cursor::object_unique_ptr create_predefined(awl::cursor::type);
 
 }
 

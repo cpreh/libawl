@@ -6,14 +6,10 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::visual
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	std::uint32_t,
-	flags
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(std::uint32_t, flags);
 
 }
 

@@ -7,4 +7,3 @@ class function_context;
 }
 
 #endif
-

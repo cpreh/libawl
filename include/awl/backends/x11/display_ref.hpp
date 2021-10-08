@@ -4,16 +4,10 @@
 #include <awl/backends/x11/display_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::x11
 {
 
-using
-display_ref
-=
-fcppt::reference<
-	awl::backends::x11::display
->;
+using display_ref = fcppt::reference<awl::backends::x11::display>;
 
 }
 

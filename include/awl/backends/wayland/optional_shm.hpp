@@ -5,5 +5,4 @@
 #include <awl/backends/wayland/shm.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

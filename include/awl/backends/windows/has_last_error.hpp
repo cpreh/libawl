@@ -3,7 +3,6 @@
 
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -12,8 +11,7 @@ namespace windows
 {
 
 AWL_DETAIL_SYMBOL
-bool
-has_last_error();
+bool has_last_error();
 
 }
 }

@@ -9,17 +9,12 @@
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::x11::visual
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::x11::visual::info_unique_ptr
-get_info(
-	awl::backends::x11::display const &,
-	awl::backends::x11::visual::mask,
-	XVisualInfo const &
-);
+awl::backends::x11::visual::info_unique_ptr get_info(
+    awl::backends::x11::display const &, awl::backends::x11::visual::mask, XVisualInfo const &);
 
 }
 

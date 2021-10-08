@@ -6,27 +6,24 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::linux::epoll
 {
 
 class fd
 {
-	FCPPT_NONMOVABLE(
-		fd
-	);
+  FCPPT_NONMOVABLE(fd);
+
 public:
-	AWL_DETAIL_SYMBOL
-	fd();
+  AWL_DETAIL_SYMBOL
+  fd();
 
-	AWL_DETAIL_SYMBOL
-	~fd();
+  AWL_DETAIL_SYMBOL
+  ~fd();
 
-	[[nodiscard]]
-	awl::backends::posix::fd
-	get() const;
+  [[nodiscard]] awl::backends::posix::fd get() const;
+
 private:
-	awl::backends::posix::fd const fd_;
+  awl::backends::posix::fd const fd_;
 };
 
 }

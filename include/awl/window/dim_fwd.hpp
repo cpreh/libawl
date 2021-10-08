@@ -4,17 +4,10 @@
 #include <awl/window/size.hpp>
 #include <fcppt/math/dim/static_fwd.hpp>
 
-
 namespace awl::window
 {
 
-using
-dim
-=
-fcppt::math::dim::static_<
-	awl::window::size,
-	2
->;
+using dim = fcppt::math::dim::static_<awl::window::size, 2>;
 
 }
 

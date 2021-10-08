@@ -4,16 +4,10 @@
 #include <awl/main/exit_code_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl::main
 {
 
-using
-optional_exit_code
-=
-fcppt::optional::object<
-	awl::main::exit_code
->;
+using optional_exit_code = fcppt::optional::object<awl::main::exit_code>;
 
 }
 

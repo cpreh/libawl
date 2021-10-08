@@ -6,13 +6,11 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::timer
 {
 
 AWL_DETAIL_SYMBOL
-std::int32_t
-event_code();
+std::int32_t event_code();
 
 }
 

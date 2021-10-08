@@ -5,5 +5,4 @@
 #include <awl/backends/x11/window/property_fwd.hpp>
 #include <fcppt/strong_typedef_impl.hpp>
 
-
 #endif

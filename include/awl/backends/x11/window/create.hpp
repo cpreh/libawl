@@ -10,20 +10,17 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/window/optional_dim_fwd.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 AWL_DETAIL_SYMBOL
-Window
-create(
-	awl::window::optional_dim const &,
-	awl::backends::x11::display_ref,
-	awl::backends::x11::screen,
-	awl::backends::x11::colormap const &,
-	awl::backends::x11::visual::object const &,
-	awl::backends::x11::cursor::const_optional_object_ref const &
-);
+Window create(
+    awl::window::optional_dim const &,
+    awl::backends::x11::display_ref,
+    awl::backends::x11::screen,
+    awl::backends::x11::colormap const &,
+    awl::backends::x11::visual::object const &,
+    awl::backends::x11::cursor::const_optional_object_ref const &);
 
 }
 

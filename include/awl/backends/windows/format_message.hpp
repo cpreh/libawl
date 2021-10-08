@@ -5,7 +5,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,10 +13,7 @@ namespace windows
 {
 
 AWL_DETAIL_SYMBOL
-fcppt::string
-format_message(
-	DWORD
-);
+fcppt::string format_message(DWORD);
 
 }
 }

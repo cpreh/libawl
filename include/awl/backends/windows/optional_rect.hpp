@@ -4,5 +4,4 @@
 #include <awl/backends/windows/optional_rect_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

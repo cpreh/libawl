@@ -6,32 +6,24 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11
 {
 
-class original_display
-:
-	public awl::backends::x11::display
+class original_display : public awl::backends::x11::display
 {
-	FCPPT_NONMOVABLE(
-		original_display
-	);
+  FCPPT_NONMOVABLE(original_display);
+
 public:
-	AWL_DETAIL_SYMBOL
-	original_display();
+  AWL_DETAIL_SYMBOL
+  original_display();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	Display *
-	get() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL Display *get() const override;
 
-	AWL_DETAIL_SYMBOL
-	~original_display()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_display() override;
+
 private:
-	Display *const ptr_;
+  Display *const ptr_;
 };
 
 }

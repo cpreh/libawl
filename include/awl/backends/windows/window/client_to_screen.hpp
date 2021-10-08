@@ -6,7 +6,6 @@
 #include <awl/backends/windows/window/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -18,10 +17,7 @@ namespace window
 
 AWL_DETAIL_SYMBOL
 awl::backends::windows::optional_point
-client_to_screen(
-	awl::backends::windows::window::object const &,
-	POINT const &
-);
+client_to_screen(awl::backends::windows::window::object const &, POINT const &);
 
 }
 }

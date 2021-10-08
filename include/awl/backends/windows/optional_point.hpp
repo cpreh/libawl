@@ -4,5 +4,4 @@
 #include <awl/backends/windows/optional_point_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

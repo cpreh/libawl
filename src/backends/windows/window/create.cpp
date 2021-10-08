@@ -8,63 +8,32 @@
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
-HWND
-awl::backends::windows::window::create(
-	awl::window::parameters const &_param,
-	awl::backends::windows::wndclass &_wndclass
-)
+HWND awl::backends::windows::window::create(
+    awl::window::parameters const &_param, awl::backends::windows::wndclass &_wndclass)
 {
-	DWORD const window_flags{
-		WS_OVERLAPPEDWINDOW
-	};
+  DWORD const window_flags{WS_OVERLAPPEDWINDOW};
 
-	awl::backends::windows::window::signed_dim const size{
-		awl::backends::windows::window::adjusted_size(
-			_param.size(),
-			window_flags
-		)
-	};
+  awl::backends::windows::window::signed_dim const size{
+      awl::backends::windows::window::adjusted_size(_param.size(), window_flags)};
 
-	HWND const ret{
-		CreateWindow(
-			_wndclass.name().c_str(),
-			fcppt::optional::maybe(
-				_param.title(),
-				[]()
-				-> LPCTSTR
-				{
-					return
-						nullptr;
-				},
-				[](
-					fcppt::string const &_title
-				)
-				{
-					return
-						_title.c_str();
-				}
-			),
-			window_flags,
-			CW_USEDEFAULT,
-			CW_USEDEFAULT,
-			size.w(),
-			size.h(),
-			nullptr,
-			nullptr,
-			awl::backends::windows::module_handle(),
-			nullptr
-		)
-	};
+  HWND const ret{CreateWindow(
+      _wndclass.name().c_str(),
+      fcppt::optional::maybe(
+          _param.title(),
+          []() -> LPCTSTR { return nullptr; },
+          [](fcppt::string const &_title) { return _title.c_str(); }),
+      window_flags,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      size.w(),
+      size.h(),
+      nullptr,
+      nullptr,
+      awl::backends::windows::module_handle(),
+      nullptr)};
 
-	if(
-		!ret
-	)
-		throw
-			awl::exception{
-				FCPPT_TEXT("CreateWindow() failed!")
-			};
+  if (!ret)
+    throw awl::exception{FCPPT_TEXT("CreateWindow() failed!")};
 
-	return
-		ret;
+  return ret;
 }

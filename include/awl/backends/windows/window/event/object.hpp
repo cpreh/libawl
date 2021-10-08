@@ -8,7 +8,6 @@
 #include <awl/backends/windows/window/event/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -23,37 +22,33 @@ namespace event
 class object
 {
 public:
-	AWL_DETAIL_SYMBOL
-	object(
-		awl::backends::windows::window::reference,
-		awl::backends::windows::message_type,
-		awl::backends::windows::wparam,
-		awl::backends::windows::lparam
-	);
+  AWL_DETAIL_SYMBOL
+  object(
+      awl::backends::windows::window::reference,
+      awl::backends::windows::message_type,
+      awl::backends::windows::wparam,
+      awl::backends::windows::lparam);
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::window::reference
-	window() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::window::reference window() const;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::message_type
-	type() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::message_type type() const;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::wparam
-	wparam() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::wparam wparam() const;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::lparam
-	lparam() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::lparam lparam() const;
+
 private:
-	awl::backends::windows::window::reference window_;
+  awl::backends::windows::window::reference window_;
 
-	awl::backends::windows::message_type type_;
+  awl::backends::windows::message_type type_;
 
-	awl::backends::windows::wparam wparam_;
+  awl::backends::windows::wparam wparam_;
 
-	awl::backends::windows::lparam lparam_;
+  awl::backends::windows::lparam lparam_;
 };
 
 }

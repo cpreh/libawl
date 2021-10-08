@@ -6,25 +6,20 @@
 #include <awl/visual/object.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::visual
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public
-		awl::visual::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::visual::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	object();
+  AWL_DETAIL_SYMBOL
+  object();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 };
 
 }

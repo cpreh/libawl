@@ -10,35 +10,27 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::system::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL seat_caps
-:
-	public awl::backends::wayland::system::event::seat_base
+class AWL_DETAIL_CLASS_SYMBOL seat_caps : public awl::backends::wayland::system::event::seat_base
 {
-	FCPPT_NONMOVABLE(
-		seat_caps
-	);
+  FCPPT_NONMOVABLE(seat_caps);
+
 public:
-	AWL_DETAIL_SYMBOL
-	seat_caps(
-		awl::backends::wayland::display_reference,
-		awl::backends::wayland::system::seat::shared_ptr,
-		awl::backends::wayland::system::seat::caps_field
-	);
+  AWL_DETAIL_SYMBOL
+  seat_caps(
+      awl::backends::wayland::display_reference,
+      awl::backends::wayland::system::seat::shared_ptr,
+      awl::backends::wayland::system::seat::caps_field);
 
-	AWL_DETAIL_SYMBOL
-	~seat_caps()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~seat_caps() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::wayland::system::seat::caps_field
-	caps() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::wayland::system::seat::caps_field caps() const;
+
 private:
-	awl::backends::wayland::system::seat::caps_field const caps_;
+  awl::backends::wayland::system::seat::caps_field const caps_;
 };
 
 }

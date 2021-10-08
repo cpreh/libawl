@@ -7,40 +7,15 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
-awl::backends::x11::visual::wrapped::wrapped(
-	awl::backends::x11::visual::info_unique_ptr &&_info
-)
-:
-	awl::backends::x11::visual::object(),
-	info_(
-		std::move(
-			_info
-		)
-	)
+awl::backends::x11::visual::wrapped::wrapped(awl::backends::x11::visual::info_unique_ptr &&_info)
+    : awl::backends::x11::visual::object(), info_(std::move(_info))
 {
 }
 
-awl::backends::x11::visual::wrapped::~wrapped()
-= default;
+awl::backends::x11::visual::wrapped::~wrapped() = default;
 
-Visual *
-awl::backends::x11::visual::wrapped::get() const
-{
-	return
-		info_->visual;
-}
+Visual *awl::backends::x11::visual::wrapped::get() const { return info_->visual; }
 
-XVisualInfo *
-awl::backends::x11::visual::wrapped::info() const
-{
-	return
-		info_.get_pointer();
-}
+XVisualInfo *awl::backends::x11::visual::wrapped::info() const { return info_.get_pointer(); }
 
-int
-awl::backends::x11::visual::wrapped::depth() const
-{
-	return
-		this->info()->depth;
-}
+int awl::backends::x11::visual::wrapped::depth() const { return this->info()->depth; }

@@ -5,15 +5,11 @@
 #include <awl/system/object_unique_ptr.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
-
 namespace awl::system
 {
 
 AWL_DETAIL_SYMBOL
-awl::system::object_unique_ptr
-create(
-	fcppt::log::context_reference
-);
+awl::system::object_unique_ptr create(fcppt::log::context_reference);
 
 }
 

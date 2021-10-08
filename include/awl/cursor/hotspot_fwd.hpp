@@ -4,17 +4,10 @@
 #include <awl/cursor/size.hpp>
 #include <fcppt/math/vector/static_fwd.hpp>
 
-
 namespace awl::cursor
 {
 
-using
-hotspot
-=
-fcppt::math::vector::static_<
-	awl::cursor::size,
-	2
->;
+using hotspot = fcppt::math::vector::static_<awl::cursor::size, 2>;
 
 }
 

@@ -4,14 +4,10 @@
 #include <awl/backends/sdl/system/event/type_fwd.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	awl::backends::sdl::system::event::type,
-	timer_type
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(awl::backends::sdl::system::event::type, timer_type);
 
 }
 

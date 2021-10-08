@@ -9,44 +9,20 @@
 #include <fcppt/text.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
-void
-awl::backends::windows::message_box(
-	awl::backends::windows::window::const_optional_object_ref const &_opt_window,
-	fcppt::string const &_text,
-	fcppt::string const &_title,
-	UINT const _type
-)
+void awl::backends::windows::message_box(
+    awl::backends::windows::window::const_optional_object_ref const &_opt_window,
+    fcppt::string const &_text,
+    fcppt::string const &_title,
+    UINT const _type)
 {
-	if(
-		::MessageBox(
-			fcppt::optional::maybe(
-				_opt_window,
-				fcppt::const_<
-					HWND
-				>(
-					nullptr
-				),
-				[](
-					fcppt::reference<
-						awl::backends::windows::window::object const
-					> const _window
-				)
-				{
-					return
-						_window.get().hwnd();
-				}
-			),
-			_text.c_str(),
-			_title.c_str(),
-			_type
-		)
-		== 0
-	)
-		throw
-			awl::exception(
-				FCPPT_TEXT("MessageBox failed: ")
-				+
-				_text
-			);
+  if (::MessageBox(
+          fcppt::optional::maybe(
+              _opt_window,
+              fcppt::const_<HWND>(nullptr),
+              [](fcppt::reference<awl::backends::windows::window::object const> const _window)
+              { return _window.get().hwnd(); }),
+          _text.c_str(),
+          _title.c_str(),
+          _type) == 0)
+    throw awl::exception(FCPPT_TEXT("MessageBox failed: ") + _text);
 }

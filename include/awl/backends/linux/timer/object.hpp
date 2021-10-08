@@ -9,41 +9,29 @@
 #include <awl/event/connection_unique_ptr.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::linux::timer
 {
 
-class object
-:
-	public awl::backends::posix::timer
+class object : public awl::backends::posix::timer
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	object(
-		awl::backends::linux::timerfd::unique_ptr &&,
-		awl::event::connection_unique_ptr &&
-	);
+  AWL_DETAIL_SYMBOL
+  object(awl::backends::linux::timerfd::unique_ptr &&, awl::event::connection_unique_ptr &&);
 
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::posix::fd
-	fd() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::posix::fd fd() const override;
 
-	AWL_DETAIL_SYMBOL
-	void
-	read();
+  AWL_DETAIL_SYMBOL
+  void read();
+
 private:
-	awl::backends::linux::timerfd::unique_ptr const timer_;
+  awl::backends::linux::timerfd::unique_ptr const timer_;
 
-	awl::event::connection_unique_ptr const connection_;
+  awl::event::connection_unique_ptr const connection_;
 };
 
 }

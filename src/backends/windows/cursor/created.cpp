@@ -10,56 +10,26 @@
 #include <fcppt/text.hpp>
 #include <fcppt/cast/to_signed.hpp>
 
-
 awl::backends::windows::cursor::created::created(
-	awl::cursor::hotspot const _hotspot,
-	awl::backends::windows::cursor::dim const _dim,
-	awl::backends::windows::cursor::and_plane const _and_plane,
-	awl::backends::windows::cursor::xor_plane const _xor_plane
-)
-:
-	awl::backends::windows::cursor::object(),
-	cursor_(
-		::CreateCursor(
-			awl::backends::windows::module_handle(),
-			fcppt::cast::to_signed(
-				_hotspot.x()
-			),
-			fcppt::cast::to_signed(
-				_hotspot.y()
-			),
-			fcppt::cast::to_signed(
-				_dim.w()
-			),
-			fcppt::cast::to_signed(
-				_dim.h()
-			),
-			_and_plane.get(),
-			_xor_plane.get()
-		)
-	)
+    awl::cursor::hotspot const _hotspot,
+    awl::backends::windows::cursor::dim const _dim,
+    awl::backends::windows::cursor::and_plane const _and_plane,
+    awl::backends::windows::cursor::xor_plane const _xor_plane)
+    : awl::backends::windows::cursor::object(),
+      cursor_(::CreateCursor(
+          awl::backends::windows::module_handle(),
+          fcppt::cast::to_signed(_hotspot.x()),
+          fcppt::cast::to_signed(_hotspot.y()),
+          fcppt::cast::to_signed(_dim.w()),
+          fcppt::cast::to_signed(_dim.h()),
+          _and_plane.get(),
+          _xor_plane.get()))
 {
-	if(
-		cursor_
-		==
-		nullptr
-	)
-		throw
-			awl::exception{
-				FCPPT_TEXT("CreateCursor failed")
-			};
+  if (cursor_ == nullptr)
+    throw awl::exception{FCPPT_TEXT("CreateCursor failed")};
 }
 
-awl::backends::windows::cursor::created::~created()
-{
-	::DestroyCursor(
-		cursor_
-	);
-}
+awl::backends::windows::cursor::created::~created() { ::DestroyCursor(cursor_); }
 
 HCURSOR
-awl::backends::windows::cursor::created::get() const
-{
-	return
-		cursor_;
-}
+awl::backends::windows::cursor::created::get() const { return cursor_; }

@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/system/seat/object_fwd.hpp>
 #include <fcppt/shared_ptr_impl.hpp>
 
-
 namespace awl::backends::wayland::system::seat
 {
 
-using
-shared_ptr
-=
-fcppt::shared_ptr<
-	awl::backends::wayland::system::seat::object
->;
+using shared_ptr = fcppt::shared_ptr<awl::backends::wayland::system::seat::object>;
 
 }
 

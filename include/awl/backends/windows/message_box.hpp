@@ -6,7 +6,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,13 +13,11 @@ namespace backends
 namespace windows
 {
 
-void
-message_box(
-	awl::backends::windows::window::const_optional_object_ref const &,
-	fcppt::string const &text,
-	fcppt::string const &title,
-	UINT type
-);
+void message_box(
+    awl::backends::windows::window::const_optional_object_ref const &,
+    fcppt::string const &text,
+    fcppt::string const &title,
+    UINT type);
 
 }
 }

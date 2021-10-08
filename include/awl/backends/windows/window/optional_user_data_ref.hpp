@@ -4,5 +4,4 @@
 #include <awl/backends/windows/window/optional_user_data_ref_fwd.hpp>
 #include <fcppt/optional/reference.hpp>
 
-
 #endif

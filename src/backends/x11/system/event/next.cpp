@@ -5,22 +5,13 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::x11::system::event::object
-awl::backends::x11::system::event::next(
-	awl::backends::x11::display const &_display
-)
+awl::backends::x11::system::event::next(awl::backends::x11::display const &_display)
 {
-	XEvent event;
+  XEvent event;
 
-	// always returns 0
-	::XNextEvent(
-		_display.get(),
-		&event
-	);
+  // always returns 0
+  ::XNextEvent(_display.get(), &event);
 
-	return
-		awl::backends::x11::system::event::object(
-			event
-		);
+  return awl::backends::x11::system::event::object(event);
 }

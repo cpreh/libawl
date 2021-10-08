@@ -6,16 +6,8 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::x11::screen
-awl::backends::x11::default_screen(
-	awl::backends::x11::display_ref const _display
-)
+awl::backends::x11::default_screen(awl::backends::x11::display_ref const _display)
 {
-	return
-		awl::backends::x11::screen(
-			::XDefaultScreen(
-				_display.get().get()
-			)
-		);
+  return awl::backends::x11::screen(::XDefaultScreen(_display.get().get()));
 }

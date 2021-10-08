@@ -4,18 +4,10 @@
 #include <awl/event/base_fwd.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace awl::main
 {
 
-using
-loop_function
-=
-fcppt::function<
-	void (
-		awl::event::base const &
-	)
->;
+using loop_function = fcppt::function<void(awl::event::base const &)>;
 
 }
 

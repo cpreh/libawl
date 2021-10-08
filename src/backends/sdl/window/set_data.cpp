@@ -5,17 +5,10 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
-void
-awl::backends::sdl::window::set_data(
-	awl::backends::sdl::window::native_reference const _window,
-	std::string const &_name,
-	void *const _data
-)
+void awl::backends::sdl::window::set_data(
+    awl::backends::sdl::window::native_reference const _window,
+    std::string const &_name,
+    void *const _data)
 {
-	SDL_SetWindowData(
-		&_window.get(),
-		_name.c_str(),
-		_data
-	);
+  SDL_SetWindowData(&_window.get(), _name.c_str(), _data);
 }

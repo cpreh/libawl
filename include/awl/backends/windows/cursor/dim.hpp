@@ -4,5 +4,4 @@
 #include <awl/backends/windows/cursor/dim_fwd.hpp>
 #include <fcppt/math/dim/static.hpp>
 
-
 #endif

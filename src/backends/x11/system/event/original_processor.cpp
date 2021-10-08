@@ -52,388 +52,165 @@
 #include <fcppt/container/join.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
 awl::backends::x11::system::event::original_processor::original_processor(
-	awl::backends::x11::display_ref const _display
-)
-:
-	awl::backends::x11::system::event::processor(),
-	display_(
-		_display
-	),
-	fd_{
-		awl::backends::x11::display_fd(
-			_display
-		)
-	},
-	fd_processor_{
-		awl::backends::posix::create_processor()
-	},
-	fd_connection_{
-		fd_processor_->register_fd(
-			fd_
-		)
-	},
-	wm_protocols_atom_(
-		awl::backends::x11::intern_atom(
-			_display,
-			"WM_PROTOCOLS"
-		)
-	),
-	wm_delete_window_atom_(
-		awl::backends::x11::intern_atom(
-			_display,
-			"WM_DELETE_WINDOW"
-		)
-	),
-	exit_code_(),
-	windows_()
+    awl::backends::x11::display_ref const _display)
+    : awl::backends::x11::system::event::processor(),
+      display_(_display),
+      fd_{awl::backends::x11::display_fd(_display)},
+      fd_processor_{awl::backends::posix::create_processor()},
+      fd_connection_{fd_processor_->register_fd(fd_)},
+      wm_protocols_atom_(awl::backends::x11::intern_atom(_display, "WM_PROTOCOLS")),
+      wm_delete_window_atom_(awl::backends::x11::intern_atom(_display, "WM_DELETE_WINDOW")),
+      exit_code_(),
+      windows_()
 {
 }
 
-awl::backends::x11::system::event::original_processor::~original_processor()
-= default;
+awl::backends::x11::system::event::original_processor::~original_processor() = default;
 
-awl::system::event::result
-awl::backends::x11::system::event::original_processor::poll()
+awl::system::event::result awl::backends::x11::system::event::original_processor::poll()
 {
-	return
-		this->process(
-			awl::backends::posix::optional_duration{
-				// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
-				awl::backends::posix::duration{
-					0
-				}
-			}
-		);
+  return this->process(
+      awl::backends::posix::optional_duration{// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
+                                              awl::backends::posix::duration{0}});
 }
 
-awl::system::event::result
-awl::backends::x11::system::event::original_processor::next()
+awl::system::event::result awl::backends::x11::system::event::original_processor::next()
 {
-	return
-		this->process(
-			awl::backends::posix::optional_duration{}
-		);
+  return this->process(awl::backends::posix::optional_duration{});
 }
 
-void
-awl::backends::x11::system::event::original_processor::quit(
-	awl::main::exit_code const _exit_code
-)
+void awl::backends::x11::system::event::original_processor::quit(
+    awl::main::exit_code const _exit_code)
 {
-	exit_code_ =
-		awl::main::optional_exit_code(
-			_exit_code
-		);
+  exit_code_ = awl::main::optional_exit_code(_exit_code);
 }
 
-awl::timer::unique_ptr
-awl::backends::x11::system::event::original_processor::create_timer(
-	awl::timer::setting const &_setting
-)
+awl::timer::unique_ptr awl::backends::x11::system::event::original_processor::create_timer(
+    awl::timer::setting const &_setting)
 {
-	return
-		fd_processor_->create_timer(
-			_setting
-		);
+  return fd_processor_->create_timer(_setting);
 }
 
 awl::backends::posix::processor &
 awl::backends::x11::system::event::original_processor::fd_processor()
 {
-	return
-		*fd_processor_;
+  return *fd_processor_;
 }
 
-awl::event::connection_unique_ptr
-awl::backends::x11::system::event::original_processor::add_window(
-	awl::backends::x11::window::object_ref const _window
-)
+awl::event::connection_unique_ptr awl::backends::x11::system::event::original_processor::add_window(
+    awl::backends::x11::window::object_ref const _window)
 {
-	Window const id{
-		_window.get().get()
-	};
+  Window const id{_window.get().get()};
 
-	if(
-		fcppt::not_(
-			fcppt::container::get_or_insert_with_result(
-				windows_,
-				id,
-				[
-					_window
-				](
-					Window
-				){
-					return
-						_window;
-				}
-			).inserted()
-		)
-	)
-	{
-		throw
-			awl::exception{
-				FCPPT_TEXT("x11::system: Double insert of a window.")
-			};
-	}
+  if (fcppt::not_(fcppt::container::get_or_insert_with_result(
+                      windows_, id, [_window](Window) { return _window; })
+                      .inserted()))
+  {
+    throw awl::exception{FCPPT_TEXT("x11::system: Double insert of a window.")};
+  }
 
-	return
-		awl::event::make_connection(
-			awl::event::connection_function{
-				[
-					this,
-					id
-				]{
-					if(
-						this->windows_.erase(
-							id
-						)
-						!=
-						1U
-					)
-					{
-						throw
-							awl::exception{
-								FCPPT_TEXT("Cannot erase x11::system window.")
-							};
-					}
-				}
-			}
-		);
+  return awl::event::make_connection(awl::event::connection_function{
+      [this, id]
+      {
+        if (this->windows_.erase(id) != 1U)
+        {
+          throw awl::exception{FCPPT_TEXT("Cannot erase x11::system window.")};
+        }
+      }});
 }
 
 awl::backends::x11::atom
 awl::backends::x11::system::event::original_processor::delete_window_atom() const
 {
-	return
-		wm_delete_window_atom_;
+  return wm_delete_window_atom_;
 }
 
-awl::system::event::result
-awl::backends::x11::system::event::original_processor::process(
-	awl::backends::posix::optional_duration const &_duration
-) const
+awl::system::event::result awl::backends::x11::system::event::original_processor::process(
+    awl::backends::posix::optional_duration const &_duration) const
 {
-	return
-		fcppt::optional::maybe(
-			exit_code_,
-			[
-				this,
-				&_duration
-			]{
-				return
-					awl::system::event::result{
-						this->process_fds(
-							_duration
-						)
-					};
-			},
-			[](
-				awl::main::exit_code const _code
-			)
-			{
-				return
-					awl::system::event::result{
-						_code
-					};
-			}
-		);
+  return fcppt::optional::maybe(
+      exit_code_,
+      [this, &_duration] { return awl::system::event::result{this->process_fds(_duration)}; },
+      [](awl::main::exit_code const _code) { return awl::system::event::result{_code}; });
 }
 
-awl::event::container
-awl::backends::x11::system::event::original_processor::process_fds(
-	awl::backends::posix::optional_duration const &_duration
-) const
+awl::event::container awl::backends::x11::system::event::original_processor::process_fds(
+    awl::backends::posix::optional_duration const &_duration) const
 {
-	awl::event::container result{
-		awl::backends::x11::pending(
-			display_.get()
-		)
-		> 0U
-		?
-			this->process_pending()
-		:
-			awl::event::container{}
-	};
+  awl::event::container result{
+      awl::backends::x11::pending(display_.get()) > 0U ? this->process_pending()
+                                                       : awl::event::container{}};
 
-	return
-		fcppt::container::join(
-			std::move(
-				result
-			),
-			awl::backends::posix::extract_event(
-				fd_processor_->poll(
-					_duration
-				),
-				fd_,
-				fcppt::function<
-					awl::event::container ()
-				>{
-					[
-						this
-					]{
-						awl::backends::x11::flush(
-							display_.get()
-						);
+  return fcppt::container::join(
+      std::move(result),
+      awl::backends::posix::extract_event(
+          fd_processor_->poll(_duration),
+          fd_,
+          fcppt::function<awl::event::container()>{[this]
+                                                   {
+                                                     awl::backends::x11::flush(display_.get());
 
-						return
-							this->process_pending();
-					}
-				}
-			)
-		);
+                                                     return this->process_pending();
+                                                   }}));
 }
 
-awl::event::container
-awl::backends::x11::system::event::original_processor::process_pending() const
+awl::event::container awl::backends::x11::system::event::original_processor::process_pending() const
 {
-	return
-		fcppt::algorithm::map_optional<
-			awl::event::container
-		>(
-			fcppt::make_int_range_count(
-				awl::backends::x11::pending(
-					display_.get()
-				)
-			),
-			[
-				this
-			](
-				unsigned
-			)
-			{
-				return
-					this->process_x11_event(
-						awl::backends::x11::system::event::next(
-							display_.get()
-						)
-					);
-			}
-		);
+  return fcppt::algorithm::map_optional<awl::event::container>(
+      fcppt::make_int_range_count(awl::backends::x11::pending(display_.get())),
+      [this](unsigned)
+      { return this->process_x11_event(awl::backends::x11::system::event::next(display_.get())); });
 }
 
 awl::event::optional_base_unique_ptr
 awl::backends::x11::system::event::original_processor::process_x11_event(
-	awl::backends::x11::system::event::object const &_event
-) const
+    awl::backends::x11::system::event::object const &_event) const
 {
-	return
-		awl::backends::x11::window::event::filter( // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
-			awl::backends::x11::window::event::object{
-				_event.get()
-			},
-			awl::backends::x11::window::const_optional_object_ref()
-		)
-		?
-			awl::event::optional_base_unique_ptr()
-		:
-			this->make_x11_event(
-				_event
-			)
-		;
+  return awl::backends::x11::window::event::
+                 filter( // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+                     awl::backends::x11::window::event::object{_event.get()},
+                     awl::backends::x11::window::const_optional_object_ref())
+             ? awl::event::optional_base_unique_ptr()
+             : this->make_x11_event(_event);
 }
-
 
 awl::event::optional_base_unique_ptr
 awl::backends::x11::system::event::original_processor::make_x11_event(
-	awl::backends::x11::system::event::object const &_event
-) const
+    awl::backends::x11::system::event::object const &_event) const
 {
-	return
-		_event.get().type
-		==
-		GenericEvent
-		?
-			awl::event::optional_base_unique_ptr{
-				fcppt::unique_ptr_to_base<
-					awl::event::base
-				>(
-					fcppt::make_unique_ptr<
-						awl::backends::x11::system::event::generic
-					>(
-						display_,
-						_event.get().xcookie
-					)
-				)
-			}
-		:
-			fcppt::optional::map(
-				fcppt::container::find_opt_mapped(
-					windows_,
-					_event.get().xany.window
-				),
-				[
-					this,
-					&_event
-				](
-					fcppt::reference<
-						awl::backends::x11::window::object_ref const
-					> const _window
-				)
-				{
-					return
-						this->process_window_event(
-							_window.get(),
-							awl::backends::x11::window::event::object{
-								_event.get()
-							}
-						);
-				}
-			)
-		;
+  return _event.get().type == GenericEvent
+             ? awl::event::optional_base_unique_ptr{fcppt::unique_ptr_to_base<awl::event::base>(
+                   fcppt::make_unique_ptr<awl::backends::x11::system::event::generic>(
+                       display_, _event.get().xcookie))}
+             : fcppt::optional::map(
+                   fcppt::container::find_opt_mapped(windows_, _event.get().xany.window),
+                   [this, &_event](
+                       fcppt::reference<awl::backends::x11::window::object_ref const> const _window)
+                   {
+                     return this->process_window_event(
+                         _window.get(), awl::backends::x11::window::event::object{_event.get()});
+                   });
 }
 
 awl::event::base_unique_ptr
 awl::backends::x11::system::event::original_processor::process_window_event(
-	awl::backends::x11::window::object_ref const _window_ref,
-	awl::backends::x11::window::event::object const &_event
-) const
+    awl::backends::x11::window::object_ref const _window_ref,
+    awl::backends::x11::window::event::object const &_event) const
 {
-	if(
-		_event.get().type
-		==
-		ClientMessage
-	)
-	{
-		XClientMessageEvent const request(
-			_event.get().xclient
-		);
+  if (_event.get().type == ClientMessage)
+  {
+    XClientMessageEvent const request(_event.get().xclient);
 
-		if(
-			request.message_type
-			==
-			wm_protocols_atom_.get()
-			&&
-			static_cast<
-				Atom
-			>(
-				request.data.l[0] // NOLINT(cppcoreguidelines-pro-type-union-access)
-			)
-			==
-			wm_delete_window_atom_.get()
-		)
-		{
-			return
-				fcppt::unique_ptr_to_base<
-					awl::event::base
-				>(
-					fcppt::make_unique_ptr<
-						awl::window::event::close
-					>(
-						fcppt::reference_to_base<
-							awl::window::object
-						>(
-							_window_ref
-						)
-					)
-				);
-		}
-	}
+    if (request.message_type == wm_protocols_atom_.get() &&
+        static_cast<Atom>(request.data.l[0] // NOLINT(cppcoreguidelines-pro-type-union-access)
+                          ) == wm_delete_window_atom_.get())
+    {
+      return fcppt::unique_ptr_to_base<awl::event::base>(
+          fcppt::make_unique_ptr<awl::window::event::close>(
+              fcppt::reference_to_base<awl::window::object>(_window_ref)));
+    }
+  }
 
-	return
-		awl::backends::x11::window::event::make(
-			_window_ref,
-			_event
-		);
+  return awl::backends::x11::window::event::make(_window_ref, _event);
 }

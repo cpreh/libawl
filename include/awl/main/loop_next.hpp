@@ -6,16 +6,13 @@
 #include <awl/main/loop_function.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 
-
 namespace awl::main
 {
 
 AWL_DETAIL_SYMBOL
-awl::main::exit_code
-loop_next(
-	awl::system::event::processor &, // NOLINT(google-runtime-references)
-	awl::main::loop_function const &
-);
+awl::main::exit_code loop_next(
+    awl::system::event::processor &, // NOLINT(google-runtime-references)
+    awl::main::loop_function const &);
 
 }
 

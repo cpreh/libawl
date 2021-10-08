@@ -4,16 +4,10 @@
 #include <awl/main/output_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl::main
 {
 
-using
-output_unique_ptr
-=
-fcppt::unique_ptr<
-	awl::main::output
->;
+using output_unique_ptr = fcppt::unique_ptr<awl::main::output>;
 
 }
 

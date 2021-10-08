@@ -3,15 +3,14 @@
 
 #include <awl/backends/wayland/system/seat/caps_fwd.hpp>
 
-
 namespace awl::backends::wayland::system::seat
 {
 
 enum class caps
 {
-	pointer,
-	keyboard,
-	fcppt_maximum = keyboard
+  pointer,
+  keyboard,
+  fcppt_maximum = keyboard
 };
 
 }

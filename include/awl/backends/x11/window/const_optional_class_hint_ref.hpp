@@ -4,5 +4,4 @@
 #include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
 #include <fcppt/optional/reference.hpp>
 
-
 #endif

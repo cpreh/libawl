@@ -33,187 +33,80 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::sdl::system::event::original_processor::original_processor(
-	fcppt::log::object_reference const _log
-)
-:
-	awl::backends::sdl::system::event::processor{},
-	log_{
-		_log
-	},
-	timer_event_{
-		fcppt::optional::to_exception(
-			awl::backends::sdl::system::event::register_(),
-			[]{
-				return
-					awl::exception{
-						FCPPT_TEXT("Unable to register SDL timer event!")
-					};
-			}
-		)
-	},
-	exit_code_{}
+    fcppt::log::object_reference const _log)
+    : awl::backends::sdl::system::event::processor{},
+      log_{_log},
+      timer_event_{fcppt::optional::to_exception(
+          awl::backends::sdl::system::event::register_(),
+          [] { return awl::exception{FCPPT_TEXT("Unable to register SDL timer event!")}; })},
+      exit_code_{}
 {
 }
 
-awl::backends::sdl::system::event::original_processor::~original_processor()
-= default;
+awl::backends::sdl::system::event::original_processor::~original_processor() = default;
 
-awl::system::event::result
-awl::backends::sdl::system::event::original_processor::poll()
+awl::system::event::result awl::backends::sdl::system::event::original_processor::poll()
 {
-	return
-		this->process(
-			awl::backends::sdl::system::event::original_processor::process_function{
-				[
-					this
-				]{
-					return
-						this->process_events();
-				}
-			}
-		);
+  return this->process(awl::backends::sdl::system::event::original_processor::process_function{
+      [this] { return this->process_events(); }});
 }
 
-awl::system::event::result
-awl::backends::sdl::system::event::original_processor::next()
+awl::system::event::result awl::backends::sdl::system::event::original_processor::next()
 {
-	return
-		this->process(
-			awl::backends::sdl::system::event::original_processor::process_function{
-				[
-					this
-				]{
-					awl::event::base_unique_ptr event{
-						this->translate(
-							awl::backends::sdl::system::event::wait()
-						)
-					};
+  return this->process(awl::backends::sdl::system::event::original_processor::process_function{
+      [this]
+      {
+        awl::event::base_unique_ptr event{
+            this->translate(awl::backends::sdl::system::event::wait())};
 
-					return
-						fcppt::container::join(
-							fcppt::container::make<
-								awl::event::container
-							>(
-								std::move(
-									event
-								)
-							),
-							this->process_events()
-						);
-				}
-			}
-		);
+        return fcppt::container::join(
+            fcppt::container::make<awl::event::container>(std::move(event)),
+            this->process_events());
+      }});
 }
 
-void
-awl::backends::sdl::system::event::original_processor::quit(
-	awl::main::exit_code const _code
-)
+void awl::backends::sdl::system::event::original_processor::quit(awl::main::exit_code const _code)
 {
-	this->exit_code_ =
-		awl::main::optional_exit_code{
-			_code
-		};
+  this->exit_code_ = awl::main::optional_exit_code{_code};
 }
 
-awl::timer::unique_ptr
-awl::backends::sdl::system::event::original_processor::create_timer(
-	awl::timer::setting const &_setting
-)
+awl::timer::unique_ptr awl::backends::sdl::system::event::original_processor::create_timer(
+    awl::timer::setting const &_setting)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::timer::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::sdl::timer::object
-			>(
-				this->log_,
-				_setting,
-				this->timer_event_
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::timer::object>(
+      fcppt::make_unique_ptr<awl::backends::sdl::timer::object>(
+          this->log_, _setting, this->timer_event_));
 }
 
 awl::system::event::result
-awl::backends::sdl::system::event::original_processor::process(
-	process_function const &_function
-)
+awl::backends::sdl::system::event::original_processor::process(process_function const &_function)
 {
-	return
-		fcppt::optional::maybe(
-			this->exit_code_,
-			[
-				&_function
-			]{
-				return
-					awl::system::event::result{
-						_function()
-					};
-			},
-			[](
-				awl::main::exit_code const _code
-			)
-			{
-				return
-					awl::system::event::result{
-						_code
-					};
-			}
-		);
+  return fcppt::optional::maybe(
+      this->exit_code_,
+      [&_function] { return awl::system::event::result{_function()}; },
+      [](awl::main::exit_code const _code) { return awl::system::event::result{_code}; });
 }
 
-awl::event::container
-awl::backends::sdl::system::event::original_processor::process_events()
+awl::event::container awl::backends::sdl::system::event::original_processor::process_events()
 {
-	awl::event::container result{};
+  awl::event::container result{};
 
-	fcppt::unit const error{
-		fcppt::either::loop(
-			[]{
-				return
-					fcppt::either::from_optional(
-						awl::backends::sdl::system::event::poll(),
-						fcppt::const_(
-							fcppt::unit{}
-						)
-					);
-			},
-			[
-				this,
-				&result
-			](
-				SDL_Event const &_event
-			)
-			{
-				result.push_back(
-					this->translate(
-						_event
-					)
-				);
-			}
-		)
-	};
+  fcppt::unit const error{fcppt::either::loop(
+      []
+      {
+        return fcppt::either::from_optional(
+            awl::backends::sdl::system::event::poll(), fcppt::const_(fcppt::unit{}));
+      },
+      [this, &result](SDL_Event const &_event) { result.push_back(this->translate(_event)); })};
 
-	FCPPT_USE(
-		error
-	);
+  FCPPT_USE(error);
 
-	return
-		result;
+  return result;
 }
-
 
 awl::event::base_unique_ptr
-awl::backends::sdl::system::event::original_processor::translate(
-	SDL_Event const &_event
-) const
+awl::backends::sdl::system::event::original_processor::translate(SDL_Event const &_event) const
 {
-	return
-		awl::backends::sdl::system::event::translate(
-			this->timer_event_,
-			_event
-		);
+  return awl::backends::sdl::system::event::translate(this->timer_event_, _event);
 }

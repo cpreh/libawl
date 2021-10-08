@@ -8,81 +8,27 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::event
 {
 
-template<
-	typename Result,
-	typename Source,
-	typename Function
->
-std::vector<
-	Result
->
-map_concat(
-	std::vector<
-		Source
-	> &&_source,
-	Function const &_function
-)
+template <typename Result, typename Source, typename Function>
+std::vector<Result> map_concat(std::vector<Source> &&_source, Function const &_function)
 {
-	std::vector<
-		Result
-	> result;
+  std::vector<Result> result;
 
-	// Estimate size.
-	result.reserve(
-		_source.size()
-	);
+  // Estimate size.
+  result.reserve(_source.size());
 
-	for(
-		Source &element
-		:
-		_source
-	)
-	{
-		fcppt::variant::match(
-			_function(
-				std::move(
-					element
-				)
-			),
-			[
-				&result
-			](
-				std::vector<
-					Result
-				> &&_container
-			)
-			{
-				result =
-					fcppt::container::join(
-						std::move(
-							result
-						),
-						std::move(
-							_container
-						)
-					);
-			},
-			[
-				&result
-			](
-				Result &&_inner
-			)
-			{
-				result.push_back(
-					std::move(
-						_inner
-					)
-				);
-			}
-		);
-	}
+  for (Source &element : _source)
+  {
+    fcppt::variant::match(
+        _function(std::move(element)),
+        [&result](std::vector<Result> &&_container)
+        { result = fcppt::container::join(std::move(result), std::move(_container)); },
+        [&result](Result &&_inner) { result.push_back(std::move(_inner)); });
+  }
 
-	return
-		result;
+  return result;
 }
 
 }

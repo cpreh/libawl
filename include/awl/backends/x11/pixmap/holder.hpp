@@ -7,33 +7,26 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::pixmap
 {
 
 class holder
 {
-	FCPPT_NONMOVABLE(
-		holder
-	);
+  FCPPT_NONMOVABLE(holder);
+
 public:
-	AWL_DETAIL_SYMBOL
-	holder(
-		awl::backends::x11::display_ref,
-		Pixmap
-	);
+  AWL_DETAIL_SYMBOL
+  holder(awl::backends::x11::display_ref, Pixmap);
 
-	AWL_DETAIL_SYMBOL
-	~holder();
+  AWL_DETAIL_SYMBOL
+  ~holder();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	Pixmap
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL Pixmap get() const;
+
 private:
-	awl::backends::x11::display_ref const display_;
+  awl::backends::x11::display_ref const display_;
 
-	Pixmap const pixmap_;
+  Pixmap const pixmap_;
 };
 
 }

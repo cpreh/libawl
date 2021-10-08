@@ -13,52 +13,33 @@
 #include <awl/system/event/processor.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::system::event
 {
 
 // NOLINTNEXTLINE(fuchsia-multiple-inheritance)
-class AWL_DETAIL_CLASS_SYMBOL processor
-:
-	public awl::system::event::processor,
-	public awl::backends::posix::processor_base
+class AWL_DETAIL_CLASS_SYMBOL processor : public awl::system::event::processor,
+                                          public awl::backends::posix::processor_base
 {
-	FCPPT_NONMOVABLE(
-		processor
-	);
+  FCPPT_NONMOVABLE(processor);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	processor();
+  AWL_DETAIL_SYMBOL
+  processor();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~processor()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~processor() override;
 
-	// TODO(philipp): Should this be here?
-	[[nodiscard]]
-	virtual
-	awl::event::container_reference
-	events() = 0;
+  // TODO(philipp): Should this be here?
+  [[nodiscard]] virtual awl::event::container_reference events() = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::wayland::compositor const &
-	compositor() const = 0;
+  [[nodiscard]] virtual awl::backends::wayland::compositor const &compositor() const = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::wayland::shell const &
-	shell() const = 0;
+  [[nodiscard]] virtual awl::backends::wayland::shell const &shell() const = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::wayland::shm const &
-	shm() const = 0;
+  [[nodiscard]] virtual awl::backends::wayland::shm const &shm() const = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::wayland::system::seat::set const &
-	seats() const = 0;
+  [[nodiscard]] virtual awl::backends::wayland::system::seat::set const &seats() const = 0;
 };
 
 }

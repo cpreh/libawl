@@ -14,33 +14,19 @@
 #include <awl/main/dummy_output.hpp>
 #endif
 
-
-awl::main::output_unique_ptr
-awl::main::create_output(
+awl::main::output_unique_ptr awl::main::create_output(
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
-	fcppt::io::ostream &_stream,
-	std::filesystem::path const &_path
+    fcppt::io::ostream &_stream, std::filesystem::path const &_path
 #else
-	fcppt::io::ostream &,
-	std::filesystem::path const &
+    fcppt::io::ostream &, std::filesystem::path const &
 #endif
 )
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::main::output
-		>(
+  return fcppt::unique_ptr_to_base<awl::main::output>(
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
-			fcppt::make_unique_ptr<
-				awl::backends::windows::main::output
-			>(
-				_stream,
-				_path
-			)
+      fcppt::make_unique_ptr<awl::backends::windows::main::output>(_stream, _path)
 #else
-			fcppt::make_unique_ptr<
-				awl::main::dummy_output
-			>()
+      fcppt::make_unique_ptr<awl::main::dummy_output>()
 #endif
-		);
+  );
 }

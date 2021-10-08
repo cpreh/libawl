@@ -4,7 +4,6 @@
 #include <awl/backends/windows/windows.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,11 +15,7 @@ namespace window
 namespace event
 {
 
-typedef
-fcppt::optional::object<
-	LRESULT
->
-return_type;
+typedef fcppt::optional::object<LRESULT> return_type;
 
 }
 }

@@ -5,14 +5,10 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::posix
 {
 
-using
-duration
-=
-std::chrono::milliseconds;
+using duration = std::chrono::milliseconds;
 
 }
 

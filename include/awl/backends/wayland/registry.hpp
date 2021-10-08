@@ -9,31 +9,24 @@
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland
 {
 
 class registry
 {
-	FCPPT_NONMOVABLE(
-		registry
-	);
+  FCPPT_NONMOVABLE(registry);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	registry(
-		awl::backends::wayland::display const &
-	);
+  AWL_DETAIL_SYMBOL
+  explicit registry(awl::backends::wayland::display const &);
 
-	AWL_DETAIL_SYMBOL
-	~registry();
+  AWL_DETAIL_SYMBOL
+  ~registry();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	wl_registry *
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL wl_registry *get() const;
+
 private:
-	wl_registry *ptr_;
+  wl_registry *ptr_;
 };
 
 }

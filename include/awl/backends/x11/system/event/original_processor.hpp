@@ -29,130 +29,74 @@
 #include <map>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::x11::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL original_processor
-:
-	public awl::backends::x11::system::event::processor
+    : public awl::backends::x11::system::event::processor
 {
-	FCPPT_NONMOVABLE(
-		original_processor
-	);
+  FCPPT_NONMOVABLE(original_processor);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	original_processor(
-		awl::backends::x11::display_ref
-	);
+  AWL_DETAIL_SYMBOL
+  explicit original_processor(awl::backends::x11::display_ref);
 
-	AWL_DETAIL_SYMBOL
-	~original_processor()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_processor() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::system::event::result
-	poll()
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::system::event::result poll() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::system::event::result
-	next()
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::system::event::result next() override;
 
-	AWL_DETAIL_SYMBOL
-	void
-	quit(
-		awl::main::exit_code
-	)
-	override;
+  AWL_DETAIL_SYMBOL
+  void quit(awl::main::exit_code) override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::timer::unique_ptr
-	create_timer(
-		awl::timer::setting const &
-	)
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::timer::unique_ptr
+  create_timer(awl::timer::setting const &) override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::posix::processor &
-	fd_processor()
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::posix::processor &fd_processor() override;
 
-	[[nodiscard]]
-	awl::event::connection_unique_ptr
-	add_window(
-		awl::backends::x11::window::object_ref
-	);
+  [[nodiscard]] awl::event::connection_unique_ptr
+      add_window(awl::backends::x11::window::object_ref);
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::atom
-	delete_window_atom() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::atom delete_window_atom() const;
+
 private:
-	[[nodiscard]]
-	awl::system::event::result
-	process(
-		awl::backends::posix::optional_duration const &
-	) const;
+  [[nodiscard]] awl::system::event::result
+  process(awl::backends::posix::optional_duration const &) const;
 
-	[[nodiscard]]
-	awl::event::container
-	process_fds(
-		awl::backends::posix::optional_duration const &
-	) const;
+  [[nodiscard]] awl::event::container
+  process_fds(awl::backends::posix::optional_duration const &) const;
 
-	[[nodiscard]]
-	awl::event::container
-	process_pending() const;
+  [[nodiscard]] awl::event::container process_pending() const;
 
-	[[nodiscard]]
-	awl::event::optional_base_unique_ptr
-	process_x11_event(
-		awl::backends::x11::system::event::object const &
-	) const;
+  [[nodiscard]] awl::event::optional_base_unique_ptr
+  process_x11_event(awl::backends::x11::system::event::object const &) const;
 
-	[[nodiscard]]
-	awl::event::optional_base_unique_ptr
-	make_x11_event(
-		awl::backends::x11::system::event::object const &
-	) const;
+  [[nodiscard]] awl::event::optional_base_unique_ptr
+  make_x11_event(awl::backends::x11::system::event::object const &) const;
 
-	[[nodiscard]]
-	awl::event::base_unique_ptr
-	process_window_event(
-		awl::backends::x11::window::object_ref,
-		awl::backends::x11::window::event::object const &
-	) const;
+  [[nodiscard]] awl::event::base_unique_ptr process_window_event(
+      awl::backends::x11::window::object_ref,
+      awl::backends::x11::window::event::object const &) const;
 
-	awl::backends::x11::display_ref const display_;
+  awl::backends::x11::display_ref const display_;
 
-	awl::backends::posix::fd const fd_;
+  awl::backends::posix::fd const fd_;
 
-	awl::backends::posix::processor_unique_ptr const fd_processor_;
+  awl::backends::posix::processor_unique_ptr const fd_processor_;
 
-	awl::event::connection_unique_ptr const fd_connection_;
+  awl::event::connection_unique_ptr const fd_connection_;
 
-	awl::backends::x11::atom const wm_protocols_atom_;
+  awl::backends::x11::atom const wm_protocols_atom_;
 
-	awl::backends::x11::atom const wm_delete_window_atom_;
+  awl::backends::x11::atom const wm_delete_window_atom_;
 
-	awl::main::optional_exit_code exit_code_;
+  awl::main::optional_exit_code exit_code_;
 
-	using
-	window_map
-	=
-	std::map<
-		Window,
-		awl::backends::x11::window::object_ref
-	>;
+  using window_map = std::map<Window, awl::backends::x11::window::object_ref>;
 
-	window_map windows_;
+  window_map windows_;
 };
 
 }

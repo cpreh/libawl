@@ -6,22 +6,11 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::event
 {
 
-template<
-	typename Type
->
-using
-variant
-=
-fcppt::variant::object<
-	std::vector<
-		Type
-	>,
-	Type
->;
+template <typename Type>
+using variant = fcppt::variant::object<std::vector<Type>, Type>;
 
 }
 

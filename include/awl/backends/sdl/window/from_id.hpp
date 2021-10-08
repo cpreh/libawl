@@ -8,17 +8,11 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::window
 {
 
 AWL_DETAIL_SYMBOL
-fcppt::optional::reference<
-	SDL_Window
->
-from_id(
-	std::uint32_t
-);
+fcppt::optional::reference<SDL_Window> from_id(std::uint32_t);
 
 }
 

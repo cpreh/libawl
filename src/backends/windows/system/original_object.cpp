@@ -34,156 +34,74 @@
 #include <functional>
 #include <fcppt/config/external_end.hpp>
 
-
-awl::backends::windows::system::original_object::original_object(
-	fcppt::log::context_reference
-)
-:
-	awl::backends::windows::system::object(),
-	wndclasses_(),
-	processor_{
-		fcppt::make_unique_ptr<
-			awl::backends::windows::system::event::original_processor
-		>()
-	}
+awl::backends::windows::system::original_object::original_object(fcppt::log::context_reference)
+    : awl::backends::windows::system::object(),
+      wndclasses_(),
+      processor_{
+          fcppt::make_unique_ptr<awl::backends::windows::system::event::original_processor>()}
 {
 }
 
-awl::backends::windows::system::original_object::~original_object()
+awl::backends::windows::system::original_object::~original_object() {}
+
+awl::window::object_unique_ptr awl::backends::windows::system::original_object::create_window(
+    awl::window::parameters const &_param)
 {
+  fcppt::string const class_name{
+      fcppt::optional::from(_param.class_name(), [] { return fcppt::string{}; })};
+
+  fcppt::container::get_or_insert_result<wndclass_map::mapped_type &> const result(
+      fcppt::container::get_or_insert_with_result(
+          wndclasses_,
+          class_name,
+          [](fcppt::string const &_class_name)
+          {
+            return fcppt::make_unique_ptr<awl::backends::windows::counted_wndclass>(
+                _class_name, awl::backends::windows::window::event::wnd_proc);
+          }));
+
+  // FIXME: This is not exception-safe
+  if (!result.inserted())
+    result.element()->add_ref();
+
+  return fcppt::unique_ptr_to_base<awl::window::object>(
+      fcppt::make_unique_ptr<awl::backends::windows::window::original_object>(
+          _param,
+          result.element()->wndclass(),
+          processor_->next_events(),
+          awl::backends::windows::wndclass_remove_callback{std::bind(
+              &awl::backends::windows::system::original_object::unregister_wndclass,
+              this,
+              class_name)}));
 }
 
-awl::window::object_unique_ptr
-awl::backends::windows::system::original_object::create_window(
-	awl::window::parameters const &_param
-)
+awl::system::event::processor &awl::backends::windows::system::original_object::processor()
 {
-	fcppt::string const class_name{
-		fcppt::optional::from(
-			_param.class_name(),
-			[]{
-				return
-					fcppt::string{};
-			}
-		)
-	};
-
-	fcppt::container::get_or_insert_result<
-		wndclass_map::mapped_type &
-	> const result(
-		fcppt::container::get_or_insert_with_result(
-			wndclasses_,
-			class_name,
-			[](
-				fcppt::string const &_class_name
-			)
-			{
-				return
-					fcppt::make_unique_ptr<
-						awl::backends::windows::counted_wndclass
-					>(
-						_class_name,
-						awl::backends::windows::window::event::wnd_proc
-					);
-			}
-		)
-	);
-
-	// FIXME: This is not exception-safe
-	if(
-		!result.inserted()
-	)
-		result.element()->add_ref();
-
-	return
-		fcppt::unique_ptr_to_base<
-			awl::window::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::window::original_object
-			>(
-				_param,
-				result.element()->wndclass(),
-				processor_->next_events(),
-				awl::backends::windows::wndclass_remove_callback{
-					std::bind(
-						&awl::backends::windows::system::original_object::unregister_wndclass,
-						this,
-						class_name
-					)
-				}
-			)
-		);
+  return *processor_;
 }
 
-awl::system::event::processor &
-awl::backends::windows::system::original_object::processor()
+awl::visual::object_unique_ptr awl::backends::windows::system::original_object::default_visual()
 {
-	return
-		*processor_;
+  return fcppt::unique_ptr_to_base<awl::visual::object>(
+      fcppt::make_unique_ptr<awl::backends::windows::visual::null_object>());
 }
 
-awl::visual::object_unique_ptr
-awl::backends::windows::system::original_object::default_visual()
+awl::cursor::object_unique_ptr awl::backends::windows::system::original_object::create_cursor(
+    awl::cursor::optional_type const &_optional_type)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::visual::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::windows::visual::null_object
-			>()
-		);
+  return fcppt::unique_ptr_to_base<awl::cursor::object>(fcppt::optional::maybe(
+      _optional_type,
+      [] { return awl::backends::windows::cursor::create_invisible(); },
+      [](awl::cursor::type const _type)
+      { return awl::backends::windows::cursor::create_predefined(_type); }));
 }
 
-awl::cursor::object_unique_ptr
-awl::backends::windows::system::original_object::create_cursor(
-	awl::cursor::optional_type const &_optional_type
-)
+void awl::backends::windows::system::original_object::unregister_wndclass(
+    fcppt::string const &_class_name)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::cursor::object
-		>(
-			fcppt::optional::maybe(
-				_optional_type,
-				[]{
-					return
-						awl::backends::windows::cursor::create_invisible();
-				},
-				[](
-					awl::cursor::type const _type
-				)
-				{
-					return
-						awl::backends::windows::cursor::create_predefined(
-							_type
-						);
-				}
-			)
-		);
-}
+  wndclass_map::iterator const it(
+      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_iterator(wndclasses_, _class_name)));
 
-void
-awl::backends::windows::system::original_object::unregister_wndclass(
-	fcppt::string const &_class_name
-)
-{
-	wndclass_map::iterator const it(
-		FCPPT_ASSERT_OPTIONAL_ERROR(
-			fcppt::container::find_opt_iterator(
-				wndclasses_,
-				_class_name
-			)
-		)
-	);
-
-	if(
-		it->second->release()
-		==
-		0u
-	)
-		wndclasses_.erase(
-			it
-		);
+  if (it->second->release() == 0u)
+    wndclasses_.erase(it);
 }

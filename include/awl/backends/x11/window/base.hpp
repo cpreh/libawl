@@ -15,76 +15,42 @@
 #include <awl/window/object.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-class AWL_DETAIL_CLASS_SYMBOL base
-:
-	public awl::window::object
+class AWL_DETAIL_CLASS_SYMBOL base : public awl::window::object
 {
-	FCPPT_NONMOVABLE(
-		base
-	);
+  FCPPT_NONMOVABLE(base);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	base();
+  AWL_DETAIL_SYMBOL
+  base();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~base()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~base() override;
 
-	[[nodiscard]]
-	virtual
-	bool
-	destroyed() const = 0;
+  [[nodiscard]] virtual bool destroyed() const = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::x11::display_ref
-	display() const = 0;
+  [[nodiscard]] virtual awl::backends::x11::display_ref display() const = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::x11::screen
-	screen() const = 0;
+  [[nodiscard]] virtual awl::backends::x11::screen screen() const = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::x11::visual::object const &
-	x11_visual() const = 0;
+  [[nodiscard]] virtual awl::backends::x11::visual::object const &x11_visual() const = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::x11::window::rect
-	rect() const = 0;
+  [[nodiscard]] virtual awl::backends::x11::window::rect rect() const = 0;
 
-	[[nodiscard]]
-	virtual
-	Window
-	get() const = 0;
+  [[nodiscard]] virtual Window get() const = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::x11::window::const_optional_class_hint_ref
-	class_hint() const = 0;
+  [[nodiscard]] virtual awl::backends::x11::window::const_optional_class_hint_ref
+  class_hint() const = 0;
 
-	AWL_DETAIL_SYMBOL
-	void
-	show()
-	override;
+  AWL_DETAIL_SYMBOL
+  void show() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::window::dim
-	size() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::window::dim size() const override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::visual::object const &
-	visual() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::visual::object const &visual() const override;
 };
 
 }

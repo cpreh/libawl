@@ -4,16 +4,10 @@
 #include <awl/backends/x11/visual/object_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl::backends::x11::visual
 {
 
-using
-object_unique_ptr
-=
-fcppt::unique_ptr<
-	awl::backends::x11::visual::object
->;
+using object_unique_ptr = fcppt::unique_ptr<awl::backends::x11::visual::object>;
 
 }
 

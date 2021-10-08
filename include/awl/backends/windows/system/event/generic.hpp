@@ -8,7 +8,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -20,29 +19,22 @@ namespace system
 namespace event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL generic
-:
-	public awl::backends::windows::system::event::base
+class AWL_DETAIL_CLASS_SYMBOL generic : public awl::backends::windows::system::event::base
 {
-	FCPPT_NONCOPYABLE(
-		generic
-	);
+  FCPPT_NONCOPYABLE(generic);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	generic(
-		awl::backends::windows::system::event::object const &
-	);
+  AWL_DETAIL_SYMBOL
+  explicit generic(awl::backends::windows::system::event::object const &);
 
-	AWL_DETAIL_SYMBOL
-	~generic()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~generic() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::system::event::object const &
-	get() const;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::system::event::object const &get() const;
+
 private:
-	awl::backends::windows::system::event::object const event_;
+  awl::backends::windows::system::event::object const event_;
 };
 
 }

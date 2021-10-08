@@ -6,20 +6,11 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::wayland::system::event::seat_removed::seat_removed(
-	awl::backends::wayland::display_reference const _display,
-	awl::backends::wayland::system::seat::shared_ptr _seat
-)
-:
-	awl::backends::wayland::system::event::seat_base{
-		_display,
-		std::move(
-			_seat
-		)
-	}
+    awl::backends::wayland::display_reference const _display,
+    awl::backends::wayland::system::seat::shared_ptr _seat)
+    : awl::backends::wayland::system::event::seat_base{_display, std::move(_seat)}
 {
 }
 
-awl::backends::wayland::system::event::seat_removed::~seat_removed()
-= default;
+awl::backends::wayland::system::event::seat_removed::~seat_removed() = default;

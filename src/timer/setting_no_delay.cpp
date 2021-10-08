@@ -3,17 +3,7 @@
 #include <awl/timer/setting.hpp>
 #include <awl/timer/setting_no_delay.hpp>
 
-
-awl::timer::setting
-awl::timer::setting_no_delay(
-	awl::timer::period const _period
-)
+awl::timer::setting awl::timer::setting_no_delay(awl::timer::period const _period)
 {
-	return
-		awl::timer::setting{
-			awl::timer::delay{
-				_period.get()
-			},
-			_period
-		};
+  return awl::timer::setting{awl::timer::delay{_period.get()}, _period};
 }

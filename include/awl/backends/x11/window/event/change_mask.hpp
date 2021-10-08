@@ -5,16 +5,11 @@
 #include <awl/backends/x11/window/event/mask.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::window::event
 {
 
 AWL_DETAIL_SYMBOL
-void
-change_mask(
-	awl::backends::x11::window::base const &,
-	awl::backends::x11::window::event::mask
-);
+void change_mask(awl::backends::x11::window::base const &, awl::backends::x11::window::event::mask);
 
 }
 

@@ -12,22 +12,19 @@ namespace awl::backends::x11::window
 
 class hints
 {
-	FCPPT_NONMOVABLE(
-		hints
-	);
+  FCPPT_NONMOVABLE(hints);
+
 public:
-	AWL_DETAIL_SYMBOL
-	hints();
+  AWL_DETAIL_SYMBOL
+  hints();
 
-	AWL_DETAIL_SYMBOL
-	~hints();
+  AWL_DETAIL_SYMBOL
+  ~hints();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	XWMHints *
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL XWMHints *get() const;
+
 private:
-	XWMHints *const hints_;
+  XWMHints *const hints_;
 };
 
 }

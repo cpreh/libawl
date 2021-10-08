@@ -6,18 +6,7 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
-fcppt::optional::reference<
-	SDL_Window
->
-awl::backends::sdl::window::from_id(
-	std::uint32_t const _id
-)
+fcppt::optional::reference<SDL_Window> awl::backends::sdl::window::from_id(std::uint32_t const _id)
 {
-	return
-		fcppt::optional::from_pointer(
-			SDL_GetWindowFromID(
-				_id
-			)
-		);
+  return fcppt::optional::from_pointer(SDL_GetWindowFromID(_id));
 }

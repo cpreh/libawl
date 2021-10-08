@@ -4,5 +4,4 @@
 #include <awl/backends/x11/window/event/optional_mask_bit_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

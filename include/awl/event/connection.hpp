@@ -5,21 +5,19 @@
 #include <awl/event/connection_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::event
 {
 
 class connection
 {
-	FCPPT_NONMOVABLE(
-		connection
-	);
+  FCPPT_NONMOVABLE(connection);
+
 protected:
-	connection();
+  connection();
+
 public:
-	AWL_DETAIL_SYMBOL
-	virtual
-	~connection();
+  AWL_DETAIL_SYMBOL
+  virtual ~connection();
 };
 
 }

@@ -4,26 +4,18 @@
 #include <fcppt/char_type.hpp>
 #include <fcppt/assert/unreachable.hpp>
 
-
 fcppt::char_type const *
-awl::backends::windows::cursor::convert_predefined(
-	awl::cursor::type const _type
-)
+awl::backends::windows::cursor::convert_predefined(awl::cursor::type const _type)
 {
-	switch(
-		_type
-	)
-	{
-	case awl::cursor::type::arrow:
-		return
-			IDC_ARROW;
-	case awl::cursor::type::cross:
-		return
-			IDC_CROSS;
-	case awl::cursor::type::hand:
-		return
-			IDC_HAND;
-	}
+  switch (_type)
+  {
+  case awl::cursor::type::arrow:
+    return IDC_ARROW;
+  case awl::cursor::type::cross:
+    return IDC_CROSS;
+  case awl::cursor::type::hand:
+    return IDC_HAND;
+  }
 
-	FCPPT_ASSERT_UNREACHABLE;
+  FCPPT_ASSERT_UNREACHABLE;
 }

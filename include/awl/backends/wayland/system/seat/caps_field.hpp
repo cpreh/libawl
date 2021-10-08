@@ -4,5 +4,4 @@
 #include <awl/backends/wayland/system/seat/caps_field_fwd.hpp>
 #include <fcppt/container/bitfield/object.hpp>
 
-
 #endif

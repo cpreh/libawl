@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/id_set.hpp>
 #include <awl/backends/wayland/system/seat/object.hpp>
 
-
 namespace awl::backends::wayland::system::seat
 {
 
-using
-set
-=
-awl::backends::wayland::id_set<
-	awl::backends::wayland::system::seat::object
->;
+using set = awl::backends::wayland::id_set<awl::backends::wayland::system::seat::object>;
 
 }
 

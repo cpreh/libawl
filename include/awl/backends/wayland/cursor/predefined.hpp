@@ -10,32 +10,23 @@
 #include <wayland-cursor.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland::cursor
 {
 
-class predefined
-:
-	public awl::backends::wayland::cursor::object
+class predefined : public awl::backends::wayland::cursor::object
 {
-	FCPPT_NONMOVABLE(
-		predefined
-	);
+  FCPPT_NONMOVABLE(predefined);
+
 public:
-	predefined(
-		awl::backends::wayland::cursor::theme const &,
-		awl::backends::wayland::cursor::name const &
-	);
+  predefined(
+      awl::backends::wayland::cursor::theme const &, awl::backends::wayland::cursor::name const &);
 
-	~predefined()
-	override;
+  ~predefined() override;
 
-	[[nodiscard]]
-	awl::backends::wayland::cursor::optional
-	get() const
-	override;
+  [[nodiscard]] awl::backends::wayland::cursor::optional get() const override;
+
 private:
-	wl_cursor *const impl_;
+  wl_cursor *const impl_;
 };
 
 }

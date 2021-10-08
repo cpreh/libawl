@@ -5,15 +5,11 @@
 #include <awl/backends/x11/cursor/object_unique_ptr.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::cursor
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::x11::cursor::object_unique_ptr
-create_invisible(
-	awl::backends::x11::display_ref
-);
+awl::backends::x11::cursor::object_unique_ptr create_invisible(awl::backends::x11::display_ref);
 
 }
 

@@ -4,5 +4,4 @@
 #include <awl/backends/posix/optional_duration_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

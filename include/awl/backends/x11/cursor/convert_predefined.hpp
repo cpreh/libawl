@@ -5,15 +5,11 @@
 #include <awl/cursor/type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::cursor
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::x11::cursor::shape
-convert_predefined(
-	awl::cursor::type
-);
+awl::backends::x11::cursor::shape convert_predefined(awl::cursor::type);
 
 }
 

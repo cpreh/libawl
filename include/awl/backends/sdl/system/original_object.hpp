@@ -17,59 +17,38 @@
 #include <fcppt/log/context_reference_fwd.hpp>
 #include <fcppt/log/object.hpp>
 
-
 namespace awl::backends::sdl::system
 {
 
-class AWL_DETAIL_CLASS_SYMBOL original_object
-:
-	public awl::backends::sdl::system::object
+class AWL_DETAIL_CLASS_SYMBOL original_object : public awl::backends::sdl::system::object
 {
-	FCPPT_NONMOVABLE(
-		original_object
-	);
+  FCPPT_NONMOVABLE(original_object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	original_object(
-		fcppt::log::context_reference
-	);
+  AWL_DETAIL_SYMBOL
+  explicit original_object(fcppt::log::context_reference);
 
-	AWL_DETAIL_SYMBOL
-	~original_object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_object() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::window::object_unique_ptr
-	create_window(
-		awl::window::parameters const &
-	)
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::window::object_unique_ptr create_window(awl::window::parameters const &) override;
 
-	AWL_DETAIL_SYMBOL
-	awl::system::event::processor &
-	processor()
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::system::event::processor &processor() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::visual::object_unique_ptr
-	default_visual()
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::visual::object_unique_ptr default_visual() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::cursor::object_unique_ptr
-	create_cursor(
-		awl::cursor::optional_type const &
-	)
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::cursor::object_unique_ptr create_cursor(awl::cursor::optional_type const &) override;
+
 private:
-	fcppt::log::object log_;
+  fcppt::log::object log_;
 
-	awl::backends::sdl::system::init const init_;
+  awl::backends::sdl::system::init const init_;
 
-	fcppt::unique_ptr<
-		awl::system::event::processor
-	> const event_processor_;
+  fcppt::unique_ptr<awl::system::event::processor> const event_processor_;
 };
 
 }

@@ -6,27 +6,22 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11
 {
 
 class AWL_DETAIL_CLASS_SYMBOL display
 {
-	FCPPT_NONMOVABLE(
-		display
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	display();
-public:
-	[[nodiscard]]
-	virtual
-	Display *
-	get() const = 0;
+  FCPPT_NONMOVABLE(display);
 
-	AWL_DETAIL_SYMBOL
-	virtual
-	~display();
+protected:
+  AWL_DETAIL_SYMBOL
+  display();
+
+public:
+  [[nodiscard]] virtual Display *get() const = 0;
+
+  AWL_DETAIL_SYMBOL
+  virtual ~display();
 };
 
 }

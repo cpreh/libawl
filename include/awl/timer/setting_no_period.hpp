@@ -4,15 +4,11 @@
 #include <awl/timer/delay.hpp>
 #include <awl/timer/setting.hpp>
 
-
 namespace awl::timer
 {
 
 AWL_DETAIL_SYMBOL
-awl::timer::setting
-setting_no_period(
-	awl::timer::delay
-);
+awl::timer::setting setting_no_period(awl::timer::delay);
 
 }
 

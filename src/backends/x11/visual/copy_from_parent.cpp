@@ -5,33 +5,15 @@
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::x11::visual::copy_from_parent::copy_from_parent()
-:
-	awl::backends::x11::visual::object()
+    : awl::backends::x11::visual::object()
 {
 }
 
-awl::backends::x11::visual::copy_from_parent::~copy_from_parent()
-= default;
+awl::backends::x11::visual::copy_from_parent::~copy_from_parent() = default;
 
-Visual *
-awl::backends::x11::visual::copy_from_parent::get() const
-{
-	return
-		CopyFromParent;
-}
+Visual *awl::backends::x11::visual::copy_from_parent::get() const { return CopyFromParent; }
 
-XVisualInfo *
-awl::backends::x11::visual::copy_from_parent::info() const
-{
-	return
-		nullptr;
-}
+XVisualInfo *awl::backends::x11::visual::copy_from_parent::info() const { return nullptr; }
 
-int
-awl::backends::x11::visual::copy_from_parent::depth() const
-{
-	return
-		CopyFromParent;
-}
+int awl::backends::x11::visual::copy_from_parent::depth() const { return CopyFromParent; }

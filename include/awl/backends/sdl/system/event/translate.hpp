@@ -8,16 +8,12 @@
 #include <SDL_events.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
 AWL_DETAIL_SYMBOL
 awl::event::base_unique_ptr
-translate(
-	awl::backends::sdl::system::event::timer_type,
-	SDL_Event const &
-);
+translate(awl::backends::sdl::system::event::timer_type, SDL_Event const &);
 
 }
 

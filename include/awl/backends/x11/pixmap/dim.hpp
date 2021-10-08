@@ -4,5 +4,4 @@
 #include <awl/backends/x11/pixmap/dim_fwd.hpp>
 #include <fcppt/math/dim/static.hpp>
 
-
 #endif

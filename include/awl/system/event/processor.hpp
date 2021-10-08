@@ -10,42 +10,28 @@
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::system::event
 {
 
 class AWL_DETAIL_CLASS_SYMBOL processor
 {
-	FCPPT_NONMOVABLE(
-		processor
-	);
+  FCPPT_NONMOVABLE(processor);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	processor();
+  AWL_DETAIL_SYMBOL
+  processor();
+
 public:
-	virtual
-	awl::system::event::result
-	poll() = 0;
+  virtual awl::system::event::result poll() = 0;
 
-	virtual
-	awl::system::event::result
-	next() = 0;
+  virtual awl::system::event::result next() = 0;
 
-	virtual
-	void
-	quit(
-		awl::main::exit_code
-	) = 0;
+  virtual void quit(awl::main::exit_code) = 0;
 
-	virtual
-	awl::timer::unique_ptr
-	create_timer(
-		awl::timer::setting const &
-	) = 0;
+  virtual awl::timer::unique_ptr create_timer(awl::timer::setting const &) = 0;
 
-	AWL_DETAIL_SYMBOL
-	virtual
-	~processor();
+  AWL_DETAIL_SYMBOL
+  virtual ~processor();
 };
 
 }

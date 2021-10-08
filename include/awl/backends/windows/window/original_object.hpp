@@ -16,7 +16,6 @@
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -26,58 +25,44 @@ namespace windows
 namespace window
 {
 
-class AWL_DETAIL_CLASS_SYMBOL original_object
-:
-	public awl::backends::windows::window::object
+class AWL_DETAIL_CLASS_SYMBOL original_object : public awl::backends::windows::window::object
 {
-	FCPPT_NONCOPYABLE(
-		original_object
-	);
+  FCPPT_NONCOPYABLE(original_object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	original_object(
-		awl::window::parameters const &,
-		awl::backends::windows::wndclass &,
-		awl::event::container_reference,
-		awl::backends::windows::wndclass_remove_callback const &
-	);
+  AWL_DETAIL_SYMBOL
+  original_object(
+      awl::window::parameters const &,
+      awl::backends::windows::wndclass &,
+      awl::event::container_reference,
+      awl::backends::windows::wndclass_remove_callback const &);
 
-	AWL_DETAIL_SYMBOL
-	~original_object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~original_object() override;
 
-	AWL_DETAIL_SYMBOL
-	void
-	show()
-	override;
+  AWL_DETAIL_SYMBOL
+  void show() override;
 
-	AWL_DETAIL_SYMBOL
-	awl::window::dim
-	size() const
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::window::dim size() const override;
 
-	AWL_DETAIL_SYMBOL
-	awl::visual::object const &
-	visual() const
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::visual::object const &visual() const override;
 
-	AWL_DETAIL_SYMBOL
-	HWND
-	hwnd() const
-	override;
+  AWL_DETAIL_SYMBOL
+  HWND hwnd() const override;
 
-	AWL_DETAIL_SYMBOL
-	awl::backends::windows::cursor::const_optional_object_ref
-	cursor() const
-	override;
+  AWL_DETAIL_SYMBOL
+  awl::backends::windows::cursor::const_optional_object_ref cursor() const override;
+
 private:
-	awl::visual::object const &visual_;
+  awl::visual::object const &visual_;
 
-	awl::backends::windows::window::holder const holder_;
+  awl::backends::windows::window::holder const holder_;
 
-	awl::backends::windows::cursor::const_optional_object_ref const cursor_;
+  awl::backends::windows::cursor::const_optional_object_ref const cursor_;
 
-	awl::backends::windows::window::user_data const user_data_;
+  awl::backends::windows::window::user_data const user_data_;
 };
 
 }

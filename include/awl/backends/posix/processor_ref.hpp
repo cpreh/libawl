@@ -4,16 +4,10 @@
 #include <awl/backends/posix/processor_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::posix
 {
 
-using
-processor_ref
-=
-fcppt::reference<
-	awl::backends::posix::processor
->;
+using processor_ref = fcppt::reference<awl::backends::posix::processor>;
 
 }
 

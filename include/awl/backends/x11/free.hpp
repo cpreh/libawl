@@ -3,15 +3,11 @@
 
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11
 {
 
 AWL_DETAIL_SYMBOL
-void
-free(
-	void *
-);
+void free(void *);
 
 }
 

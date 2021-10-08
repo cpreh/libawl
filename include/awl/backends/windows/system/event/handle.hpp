@@ -6,7 +6,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -20,20 +19,17 @@ namespace event
 
 class handle
 {
-	FCPPT_NONCOPYABLE(
-		handle
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	handle();
-public:
-	virtual
-	HANDLE
-	get() const = 0;
+  FCPPT_NONCOPYABLE(handle);
 
-	AWL_DETAIL_SYMBOL
-	virtual
-	~handle();
+protected:
+  AWL_DETAIL_SYMBOL
+  handle();
+
+public:
+  virtual HANDLE get() const = 0;
+
+  AWL_DETAIL_SYMBOL
+  virtual ~handle();
 };
 
 }

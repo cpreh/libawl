@@ -4,16 +4,10 @@
 #include <awl/backends/posix/processor_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl::backends::posix
 {
 
-using
-processor_unique_ptr
-=
-fcppt::unique_ptr<
-	awl::backends::posix::processor
->;
+using processor_unique_ptr = fcppt::unique_ptr<awl::backends::posix::processor>;
 
 }
 

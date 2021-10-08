@@ -5,17 +5,10 @@
 #include <awl/main/exit_code_fwd.hpp>
 #include <fcppt/either/object_fwd.hpp>
 
-
 namespace awl::system::event
 {
 
-using
-result
-=
-fcppt::either::object<
-	awl::main::exit_code,
-	awl::event::container
->;
+using result = fcppt::either::object<awl::main::exit_code, awl::event::container>;
 
 }
 

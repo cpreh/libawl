@@ -13,51 +13,35 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::linux::epoll
 {
 
 class set
 {
-	FCPPT_NONMOVABLE(
-		set
-	);
+  FCPPT_NONMOVABLE(set);
+
 public:
-	AWL_DETAIL_SYMBOL
-	set();
+  AWL_DETAIL_SYMBOL
+  set();
 
-	AWL_DETAIL_SYMBOL
-	~set();
+  AWL_DETAIL_SYMBOL
+  ~set();
 
-	AWL_DETAIL_SYMBOL
-	void
-	add(
-		awl::backends::posix::fd
-	);
+  AWL_DETAIL_SYMBOL
+  void add(awl::backends::posix::fd);
 
-	AWL_DETAIL_SYMBOL
-	void
-	remove(
-		awl::backends::posix::fd
-	);
+  AWL_DETAIL_SYMBOL
+  void remove(awl::backends::posix::fd);
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::linux::epoll::fd_vector
-	epoll(
-		awl::backends::posix::optional_duration const &
-	);
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::linux::epoll::fd_vector
+  epoll(awl::backends::posix::optional_duration const &);
+
 private:
-	awl::backends::linux::epoll::fd const epoll_fd_;
+  awl::backends::linux::epoll::fd const epoll_fd_;
 
-	using
-	event_vector
-	=
-	std::vector<
-		epoll_event
-	>;
+  using event_vector = std::vector<epoll_event>;
 
-	event_vector events_;
+  event_vector events_;
 };
 
 }

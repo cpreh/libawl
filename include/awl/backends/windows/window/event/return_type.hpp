@@ -4,5 +4,4 @@
 #include <awl/backends/windows/window/event/return_type_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

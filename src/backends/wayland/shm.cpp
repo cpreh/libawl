@@ -4,7 +4,4 @@
 #include <wayland-client-protocol.h>
 #include <fcppt/config/external_end.hpp>
 
-
-AWL_IMPL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT(
-	shm
-);
+AWL_IMPL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT(shm);

@@ -4,5 +4,4 @@
 #include <awl/event/optional_base_unique_ptr_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

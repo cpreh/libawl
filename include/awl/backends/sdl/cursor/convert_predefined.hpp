@@ -7,15 +7,11 @@
 #include <SDL_mouse.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::cursor
 {
 
 AWL_DETAIL_SYMBOL
-SDL_SystemCursor
-convert_predefined(
-	awl::cursor::type
-);
+SDL_SystemCursor convert_predefined(awl::cursor::type);
 
 }
 

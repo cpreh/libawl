@@ -3,12 +3,10 @@
 
 #include <fcppt/log/name.hpp>
 
-
 namespace awl::impl::backends::wayland
 {
 
-fcppt::log::name
-log_name();
+fcppt::log::name log_name();
 
 }
 

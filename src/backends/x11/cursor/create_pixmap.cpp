@@ -17,56 +17,29 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
-
-awl::backends::x11::cursor::holder_unique_ptr
-awl::backends::x11::cursor::create_pixmap(
-	awl::backends::x11::display_ref const _display,
-	awl::backends::x11::cursor::source_pixmap const &_source_pixmap,
-	awl::backends::x11::cursor::dest_pixmap const &_dest_pixmap,
-	awl::backends::x11::cursor::foreground_color const &_foreground_color,
-	awl::backends::x11::cursor::background_color const &_background_color,
-	awl::cursor::hotspot const &_hotspot
-)
+awl::backends::x11::cursor::holder_unique_ptr awl::backends::x11::cursor::create_pixmap(
+    awl::backends::x11::display_ref const _display,
+    awl::backends::x11::cursor::source_pixmap const &_source_pixmap,
+    awl::backends::x11::cursor::dest_pixmap const &_dest_pixmap,
+    awl::backends::x11::cursor::foreground_color const &_foreground_color,
+    awl::backends::x11::cursor::background_color const &_background_color,
+    awl::cursor::hotspot const &_hotspot)
 {
-	Cursor const result{
-		::XCreatePixmapCursor(
-			_display.get().get(),
-			_source_pixmap.get().get().get(),
-			_dest_pixmap.get().get().get(),
-			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
-			const_cast<
-				XColor *
-			>(
-				&_foreground_color.get()
-			),
-			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
-			const_cast<
-				XColor *
-			>(
-				&_background_color.get()
-			),
-			_hotspot.x(),
-			_hotspot.y()
-		)
-	};
+  Cursor const result{::XCreatePixmapCursor(
+      _display.get().get(),
+      _source_pixmap.get().get().get(),
+      _dest_pixmap.get().get().get(),
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+      const_cast<XColor *>(&_foreground_color.get()),
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+      const_cast<XColor *>(&_background_color.get()),
+      _hotspot.x(),
+      _hotspot.y())};
 
-	if(
-		result
-		==
-		None
-	)
-	{
-		throw
-			awl::exception{
-				FCPPT_TEXT("XCreatePixmapCursor failed!")
-			};
-	}
+  if (result == None)
+  {
+    throw awl::exception{FCPPT_TEXT("XCreatePixmapCursor failed!")};
+  }
 
-	return
-		fcppt::make_unique_ptr<
-			awl::backends::x11::cursor::holder
-		>(
-			_display,
-			result
-		);
+  return fcppt::make_unique_ptr<awl::backends::x11::cursor::holder>(_display, result);
 }

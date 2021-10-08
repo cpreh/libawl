@@ -6,16 +6,12 @@
 #include <awl/backends/x11/visual/object_unique_ptr.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::visual
 {
 
 AWL_DETAIL_SYMBOL
 awl::backends::x11::visual::object_unique_ptr
-default_(
-	awl::backends::x11::display_ref,
-	awl::backends::x11::screen
-);
+    default_(awl::backends::x11::display_ref, awl::backends::x11::screen);
 
 }
 

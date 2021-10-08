@@ -8,36 +8,29 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/log/object_reference.hpp>
 
-
 namespace awl::backends::wayland::window::event
 {
 
 class data
 {
-	FCPPT_NONMOVABLE(
-		data
-	);
+  FCPPT_NONMOVABLE(data);
+
 public:
-	data(
-		fcppt::log::object_reference,
-		awl::window::reference,
-		awl::event::container_reference
-	);
+  data(fcppt::log::object_reference, awl::window::reference, awl::event::container_reference);
 
-	~data(); // NOLINT(performance-trivially-destructible)
+  ~data(); // NOLINT(performance-trivially-destructible)
 
-	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
-	fcppt::log::object_reference const log_;
+  // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+  fcppt::log::object_reference const log_;
 
-	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
-	awl::window::reference const reference_;
+  // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+  awl::window::reference const reference_;
 
-	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
-	awl::event::container_reference const events_;
+  // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+  awl::event::container_reference const events_;
 
-	// NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
-	awl::window::optional_dim size_;
-
+  // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+  awl::window::optional_dim size_;
 };
 
 }

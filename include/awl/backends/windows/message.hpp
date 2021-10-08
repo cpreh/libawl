@@ -5,7 +5,6 @@
 #include <awl/backends/windows/windows.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,17 +15,14 @@ namespace windows
 class message
 {
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	message(
-		MSG const &
-	);
+  AWL_DETAIL_SYMBOL
+  explicit message(MSG const &);
 
-	AWL_DETAIL_SYMBOL
-	MSG const &
-	get() const;
+  AWL_DETAIL_SYMBOL
+  MSG const &get() const;
+
 private:
-	MSG msg_;
+  MSG msg_;
 };
 
 }

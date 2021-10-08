@@ -29,132 +29,57 @@
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
-awl::backends::x11::system::original_object::original_object(
-	fcppt::log::context_reference
-)
-:
-	awl::backends::x11::system::object(),
-	display_(),
-	screen_{
-		awl::backends::x11::default_screen(
-			this->get_display()
-		)
-	},
-	processor_(
-		fcppt::make_unique_ptr<
-			awl::backends::x11::system::event::original_processor
-		>(
-			this->get_display()
-		)
-	)
+awl::backends::x11::system::original_object::original_object(fcppt::log::context_reference)
+    : awl::backends::x11::system::object(),
+      display_(),
+      screen_{awl::backends::x11::default_screen(this->get_display())},
+      processor_(fcppt::make_unique_ptr<awl::backends::x11::system::event::original_processor>(
+          this->get_display()))
 {
 }
 
-awl::backends::x11::system::original_object::~original_object()
-= default;
+awl::backends::x11::system::original_object::~original_object() = default;
 
-awl::window::object_unique_ptr
-awl::backends::x11::system::original_object::create_window(
-	awl::window::parameters const &_parameters
-)
+awl::window::object_unique_ptr awl::backends::x11::system::original_object::create_window(
+    awl::window::parameters const &_parameters)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::window::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::x11::window::original_object
-			>(
-				this->display(),
-				screen_,
-				fcppt::make_ref(
-					*processor_
-				),
-				_parameters
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::window::object>(
+      fcppt::make_unique_ptr<awl::backends::x11::window::original_object>(
+          this->display(), screen_, fcppt::make_ref(*processor_), _parameters));
 }
 
-awl::system::event::processor &
-awl::backends::x11::system::original_object::processor()
+awl::system::event::processor &awl::backends::x11::system::original_object::processor()
 {
-	return
-		*processor_;
+  return *processor_;
 }
 
-awl::visual::object_unique_ptr
-awl::backends::x11::system::original_object::default_visual()
+awl::visual::object_unique_ptr awl::backends::x11::system::original_object::default_visual()
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::visual::object
-		>(
-			awl::backends::x11::visual::default_(
-				this->display(),
-				screen_
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::visual::object>(
+      awl::backends::x11::visual::default_(this->display(), screen_));
 }
 
-awl::cursor::object_unique_ptr
-awl::backends::x11::system::original_object::create_cursor(
-	awl::cursor::optional_type const &_optional_type
-)
+awl::cursor::object_unique_ptr awl::backends::x11::system::original_object::create_cursor(
+    awl::cursor::optional_type const &_optional_type)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::cursor::object
-		>(
-			fcppt::optional::maybe(
-				_optional_type,
-				[
-					this
-				]{
-					return
-						awl::backends::x11::cursor::create_invisible(
-							this->display()
-						);
-				},
-				[
-					this
-				](
-					awl::cursor::type const _type
-				)
-				{
-					return
-						awl::backends::x11::cursor::create_predefined(
-							this->display(),
-							_type
-						);
-				}
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::cursor::object>(fcppt::optional::maybe(
+      _optional_type,
+      [this] { return awl::backends::x11::cursor::create_invisible(this->display()); },
+      [this](awl::cursor::type const _type)
+      { return awl::backends::x11::cursor::create_predefined(this->display(), _type); }));
 }
 
-awl::backends::x11::display_ref
-awl::backends::x11::system::original_object::display()
+awl::backends::x11::display_ref awl::backends::x11::system::original_object::display()
 {
-	return
-		this->get_display();
+  return this->get_display();
 }
 
-awl::backends::x11::screen
-awl::backends::x11::system::original_object::screen() const
+awl::backends::x11::screen awl::backends::x11::system::original_object::screen() const
 {
-	return
-		screen_;
+  return screen_;
 }
 
-awl::backends::x11::display_ref
-awl::backends::x11::system::original_object::get_display()
+awl::backends::x11::display_ref awl::backends::x11::system::original_object::get_display()
 {
-	return
-		fcppt::reference_to_base<
-			awl::backends::x11::display
-		>(
-			fcppt::make_ref(
-				display_
-			)
-		);
+  return fcppt::reference_to_base<awl::backends::x11::display>(fcppt::make_ref(display_));
 }

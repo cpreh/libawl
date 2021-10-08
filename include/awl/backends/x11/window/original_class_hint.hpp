@@ -9,42 +9,30 @@
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 class original_class_hint
 {
-	FCPPT_NONMOVABLE(
-		original_class_hint
-	);
+  FCPPT_NONMOVABLE(original_class_hint);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	original_class_hint(
-		awl::backends::x11::window::class_hint &&
-	);
+  AWL_DETAIL_SYMBOL
+  explicit original_class_hint(awl::backends::x11::window::class_hint &&);
 
-	AWL_DETAIL_SYMBOL
-	~original_class_hint();
+  AWL_DETAIL_SYMBOL
+  ~original_class_hint();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	XClassHint *
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL XClassHint *get() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::window::class_hint const &
-	hint() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::window::class_hint const &hint() const;
+
 private:
-	class impl;
+  class impl;
 
-	fcppt::unique_ptr<
-		impl
-	> const impl_;
+  fcppt::unique_ptr<impl> const impl_;
 
-	awl::backends::x11::window::class_hint const hint_;
+  awl::backends::x11::window::class_hint const hint_;
 };
 
 }

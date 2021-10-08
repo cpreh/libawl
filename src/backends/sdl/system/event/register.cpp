@@ -9,36 +9,12 @@
 #include <cstdint>
 #include <fcppt/config/external_end.hpp>
 
-
-fcppt::optional::object<
-	awl::backends::sdl::system::event::type
->
+fcppt::optional::object<awl::backends::sdl::system::event::type>
 awl::backends::sdl::system::event::register_()
 {
-	std::uint32_t const result{
-		SDL_RegisterEvents(
-			1
-		)
-	};
+  std::uint32_t const result{SDL_RegisterEvents(1)};
 
-	return
-		fcppt::optional::make_if(
-			result
-			!=
-			fcppt::cast::to_unsigned(
-				fcppt::literal<
-					std::int32_t
-				>(
-					-1
-				)
-			),
-			[
-				result
-			]{
-				return
-					awl::backends::sdl::system::event::type{
-						result
-					};
-			}
-		);
+  return fcppt::optional::make_if(
+      result != fcppt::cast::to_unsigned(fcppt::literal<std::int32_t>(-1)),
+      [result] { return awl::backends::sdl::system::event::type{result}; });
 }

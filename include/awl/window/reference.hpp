@@ -4,16 +4,10 @@
 #include <awl/window/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::window
 {
 
-using
-reference
-=
-fcppt::reference<
-	awl::window::object
->;
+using reference = fcppt::reference<awl::window::object>;
 
 }
 

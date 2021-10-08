@@ -4,16 +4,10 @@
 #include <awl/event/base_unique_ptr.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl::event
 {
 
-using
-optional_base_unique_ptr
-=
-fcppt::optional::object<
-	awl::event::base_unique_ptr
->;
+using optional_base_unique_ptr = fcppt::optional::object<awl::event::base_unique_ptr>;
 
 }
 

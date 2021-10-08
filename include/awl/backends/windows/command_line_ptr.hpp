@@ -4,7 +4,6 @@
 #include <awl/backends/windows/local_free_deleter.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -12,12 +11,7 @@ namespace backends
 namespace windows
 {
 
-typedef
-fcppt::unique_ptr<
-	wchar_t *,
-	awl::backends::windows::local_free_deleter
->
-command_line_ptr;
+typedef fcppt::unique_ptr<wchar_t *, awl::backends::windows::local_free_deleter> command_line_ptr;
 
 }
 }

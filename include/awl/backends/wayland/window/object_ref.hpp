@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/window/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::wayland::window
 {
 
-using
-object_ref
-=
-fcppt::reference<
-	awl::backends::wayland::window::object
->;
+using object_ref = fcppt::reference<awl::backends::wayland::window::object>;
 
 }
 

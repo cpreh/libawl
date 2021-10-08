@@ -4,16 +4,10 @@
 #include <awl/backends/posix/duration.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl::backends::posix
 {
 
-using
-optional_duration
-=
-fcppt::optional::object<
-	awl::backends::posix::duration
->;
+using optional_duration = fcppt::optional::object<awl::backends::posix::duration>;
 
 }
 

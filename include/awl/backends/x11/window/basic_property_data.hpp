@@ -4,5 +4,4 @@
 #include <awl/backends/x11/window/basic_property_data_fwd.hpp>
 #include <fcppt/iterator/range_impl.hpp>
 
-
 #endif

@@ -11,28 +11,22 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::main
 {
 
 class scoped_output
 {
-	FCPPT_NONMOVABLE(
-		scoped_output
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	scoped_output(
-		fcppt::io::ostream &,
-		std::filesystem::path const &
-	);
+  FCPPT_NONMOVABLE(scoped_output);
 
-	AWL_DETAIL_SYMBOL
-	~scoped_output();
+public:
+  AWL_DETAIL_SYMBOL
+  scoped_output(fcppt::io::ostream &, std::filesystem::path const &);
+
+  AWL_DETAIL_SYMBOL
+  ~scoped_output();
+
 private:
-	fcppt::unique_ptr<
-		awl::main::output
-	> const impl_;
+  fcppt::unique_ptr<awl::main::output> const impl_;
 };
 
 }

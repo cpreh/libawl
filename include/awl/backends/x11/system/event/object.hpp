@@ -5,30 +5,21 @@
 #include <awl/backends/x11/system/event/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::system::event
 {
 
 class object
 {
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	object(
-		XEvent const &
-	);
+  AWL_DETAIL_SYMBOL
+  explicit object(XEvent const &);
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	XEvent const &
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL XEvent const &get() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	XEvent &
-	get();
+  [[nodiscard]] AWL_DETAIL_SYMBOL XEvent &get();
+
 private:
-	XEvent event_;
+  XEvent event_;
 };
 
 }

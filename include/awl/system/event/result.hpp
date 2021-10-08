@@ -5,5 +5,4 @@
 #include <awl/system/event/result_fwd.hpp>
 #include <fcppt/either/object_impl.hpp>
 
-
 #endif

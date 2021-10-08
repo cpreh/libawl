@@ -16,147 +16,89 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace
 {
 
-int
-convert_mode(
-	awl::backends::x11::window::property_mode const _type
-)
+int convert_mode(awl::backends::x11::window::property_mode const _type)
 {
-	switch(
-		_type
-	)
-	{
-	case awl::backends::x11::window::property_mode::replace:
-		return
-			PropModeReplace;
-	case awl::backends::x11::window::property_mode::prepend:
-		return
-			PropModePrepend;
-	case awl::backends::x11::window::property_mode::append:
-		return
-			PropModeAppend;
-	}
+  switch (_type)
+  {
+  case awl::backends::x11::window::property_mode::replace:
+    return PropModeReplace;
+  case awl::backends::x11::window::property_mode::prepend:
+    return PropModePrepend;
+  case awl::backends::x11::window::property_mode::append:
+    return PropModeAppend;
+  }
 
-	FCPPT_ASSERT_UNREACHABLE;
+  FCPPT_ASSERT_UNREACHABLE;
 }
 
-template<
-	typename Type
->
+template <typename Type>
 struct convert_format_impl;
 
-template<>
-struct convert_format_impl<
-	char
->
+template <>
+struct convert_format_impl<char>
 {
-	static constexpr const int value{8};
+  static constexpr const int value{8};
 };
 
-template<>
-struct convert_format_impl<
-	short // NOLINT(google-runtime-int)
->
+template <>
+struct convert_format_impl<short // NOLINT(google-runtime-int)
+                           >
 {
-	static constexpr const int value{16};
+  static constexpr const int value{16};
 };
 
-template<>
-struct convert_format_impl<
-	long // NOLINT(google-runtime-int)
->
+template <>
+struct convert_format_impl<long // NOLINT(google-runtime-int)
+                           >
 {
-	static constexpr const int value{32};
+  static constexpr const int value{32};
 };
 
-template<
-	typename Type
->
-constexpr
-int
-convert_format()
+template <typename Type>
+constexpr int convert_format()
 {
-	return
-		convert_format_impl<
-			Type
-		>::value;
+  return convert_format_impl<Type>::value;
 }
 
-template<
-	typename Type
->
-void
-change_property_impl(
-	awl::backends::x11::window::base const &_window,
-	awl::backends::x11::window::property const _name, // NOLINT(readability-avoid-const-params-in-decls)
-	awl::backends::x11::window::property_type const _type, // NOLINT(readability-avoid-const-params-in-decls)
-	awl::backends::x11::window::property_mode const _mode, // NOLINT(readability-avoid-const-params-in-decls)
-	awl::backends::x11::window::basic_property_data<
-		Type
-	> const _data // NOLINT(readability-avoid-const-params-in-decls)
+template <typename Type>
+void change_property_impl(
+    awl::backends::x11::window::base const &_window,
+    awl::backends::x11::window::property const
+        _name, // NOLINT(readability-avoid-const-params-in-decls)
+    awl::backends::x11::window::property_type const
+        _type, // NOLINT(readability-avoid-const-params-in-decls)
+    awl::backends::x11::window::property_mode const
+        _mode, // NOLINT(readability-avoid-const-params-in-decls)
+    awl::backends::x11::window::basic_property_data<Type> const
+        _data // NOLINT(readability-avoid-const-params-in-decls)
 )
 {
-	// Always returns 1
-	XChangeProperty(
-		_window.display().get().get(),
-		_window.get(),
-		_name.get().get(),
-		_type.get().get(),
-		convert_format<
-			Type
-		>(),
-		convert_mode(
-			_mode
-		),
-		fcppt::cast::to_char_ptr<
-			unsigned char const *
-		>(
-			_data.begin()
-		),
-		fcppt::cast::size<
-			int
-		>(
-			fcppt::cast::to_signed(
-				fcppt::range::size(
-					_data
-				)
-			)
-		)
-	);
+  // Always returns 1
+  XChangeProperty(
+      _window.display().get().get(),
+      _window.get(),
+      _name.get().get(),
+      _type.get().get(),
+      convert_format<Type>(),
+      convert_mode(_mode),
+      fcppt::cast::to_char_ptr<unsigned char const *>(_data.begin()),
+      fcppt::cast::size<int>(fcppt::cast::to_signed(fcppt::range::size(_data))));
 }
 
 }
 
-void
-awl::backends::x11::window::change_property(
-	awl::backends::x11::window::base const &_window,
-	awl::backends::x11::window::property const _name,
-	awl::backends::x11::window::property_type const _type,
-	awl::backends::x11::window::property_mode const _mode,
-	awl::backends::x11::window::property_data const &_data_variant
-)
+void awl::backends::x11::window::change_property(
+    awl::backends::x11::window::base const &_window,
+    awl::backends::x11::window::property const _name,
+    awl::backends::x11::window::property_type const _type,
+    awl::backends::x11::window::property_mode const _mode,
+    awl::backends::x11::window::property_data const &_data_variant)
 {
-	fcppt::variant::apply(
-		[
-			&_window,
-			_name,
-			_type,
-			_mode
-		](
-			auto const &_data
-		)
-		{
-			change_property_impl(
-				_window,
-				_name,
-				_type,
-				_mode,
-				_data
-			);
-		},
-		_data_variant
-	);
+  fcppt::variant::apply(
+      [&_window, _name, _type, _mode](auto const &_data)
+      { change_property_impl(_window, _name, _type, _mode, _data); },
+      _data_variant);
 }

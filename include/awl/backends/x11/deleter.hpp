@@ -3,25 +3,16 @@
 
 #include <awl/backends/x11/free.hpp>
 
-
 namespace awl::backends::x11
 {
 
 struct deleter
 {
-	template<
-		typename T
-	>
-	void
-	operator()(
-		T *const _param
-	) const
-	{
-		awl::backends::x11::free(
-			_param
-		);
-	}
-
+  template <typename T>
+  void operator()(T *const _param) const
+  {
+    awl::backends::x11::free(_param);
+  }
 };
 
 }

@@ -9,44 +9,29 @@
 #include <awl/window/object.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::sdl::window
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::window::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::window::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	object();
+  AWL_DETAIL_SYMBOL
+  object();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	AWL_DETAIL_SYMBOL
-	void
-	show()
-	override;
+  AWL_DETAIL_SYMBOL
+  void show() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::window::dim
-	size() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::window::dim size() const override;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::sdl::window::native_reference
-	get() const = 0;
+  [[nodiscard]] virtual awl::backends::sdl::window::native_reference get() const = 0;
 
-	virtual
-	void
-	set_cursor() = 0;
+  virtual void set_cursor() = 0;
 };
 
 }

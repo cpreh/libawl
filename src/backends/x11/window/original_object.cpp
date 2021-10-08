@@ -45,484 +45,212 @@
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
-
 awl::backends::x11::window::original_object::original_object(
-	awl::backends::x11::display_ref const _display,
-	awl::backends::x11::screen const _screen,
-	fcppt::reference<
-		awl::backends::x11::system::event::original_processor
-	> const _system_processor,
-	awl::window::parameters const &_params
-)
-:
-	awl::backends::x11::window::object(),
-	display_(
-		_display
-	),
-	screen_(
-		_screen
-	),
-	visual_(
-		fcppt::cast::static_downcast<
-			awl::backends::x11::visual::object const &
-		>(
-			_params.visual()
-		)
-	),
-	colormap_(
-		display_,
-		_screen,
-		visual_
-	),
-	hints_(),
-	class_hint_{
-		fcppt::optional::apply(
-			[](
-				fcppt::string const &_title,
-				fcppt::string const &_class_name
-			){
-				return
-					fcppt::make_unique_ptr<
-						awl::backends::x11::window::original_class_hint
-					>(
-						awl::backends::x11::window::class_hint{
-							awl::backends::x11::window::class_hint::res_name_type{
-								fcppt::optional::to_exception(
-									fcppt::to_std_string(
-										_title
-									),
-									[
-										&_title
-									]{
-										return
-											awl::exception{
-												FCPPT_TEXT("Failed to convert window title: ")
-												+
-												_title
-											};
-									}
-								)
-							},
-							awl::backends::x11::window::class_hint::res_class_type{
-								fcppt::optional::to_exception(
-									fcppt::to_std_string(
-										_class_name
-									),
-									[
-										&_class_name
-									]{
-										return
-											awl::exception{
-												FCPPT_TEXT("Failed to convert class name: ")
-												+
-												_class_name
-											};
-									}
-								)
-							}
-						}
-					);
-			},
-			_params.title(),
-			_params.class_name()
-		)
-	},
-	window_(
-		display_,
-		awl::backends::x11::window::create(
-			_params.size(),
-			display_,
-			screen_,
-			colormap_,
-			visual_,
-			fcppt::optional::map(
-				_params.cursor(),
-				[](
-					fcppt::reference<
-						awl::cursor::object const
-					> const _cursor
-				)
-				{
-					return
-						fcppt::make_cref(
-							fcppt::cast::static_downcast<
-								awl::backends::x11::cursor::object const &
-							>(
-								_cursor.get()
-							)
-						);
-				}
-			)
-		)
-	),
-	processor_connection_{
-		_system_processor.get().add_window(
-			fcppt::reference_to_base<
-				awl::backends::x11::window::object
-			>(
-				fcppt::make_ref(
-					*this
-				)
-			)
-		)
-	},
-	mask_counts_(),
-	event_mask_{
-		0L
-	},
-	wm_protocols_(
-		*this,
-		awl::backends::x11::window::event::atom_vector{
-			_system_processor.get().delete_window_atom().get()
-		}
-	),
-	client_message_connection_{
-		this->do_register_event(
-			awl::backends::x11::window::event::type(
-				ClientMessage
-			)
-		)
-	},
-	configure_connection_{
-		this->do_register_event(
-			awl::backends::x11::window::event::type(
-				ConfigureNotify
-			)
-		)
-	},
-	destroy_connection_{
-		this->do_register_event(
-			awl::backends::x11::window::event::type(
-				DestroyNotify
-			)
-		)
-	},
-	map_connection_{
-		this->do_register_event(
-			awl::backends::x11::window::event::type(
-				MapNotify
-			)
-		)
-	},
-	unmap_connection_{
-		this->do_register_event(
-			awl::backends::x11::window::event::type(
-				UnmapNotify
-			)
-		)
-	}
+    awl::backends::x11::display_ref const _display,
+    awl::backends::x11::screen const _screen,
+    fcppt::reference<awl::backends::x11::system::event::original_processor> const _system_processor,
+    awl::window::parameters const &_params)
+    : awl::backends::x11::window::object(),
+      display_(_display),
+      screen_(_screen),
+      visual_(fcppt::cast::static_downcast<awl::backends::x11::visual::object const &>(
+          _params.visual())),
+      colormap_(display_, _screen, visual_),
+      hints_(),
+      class_hint_{fcppt::optional::apply(
+          [](fcppt::string const &_title, fcppt::string const &_class_name)
+          {
+            return fcppt::make_unique_ptr<awl::backends::x11::window::original_class_hint>(
+                awl::backends::x11::window::class_hint{
+                    awl::backends::x11::window::class_hint::res_name_type{
+                        fcppt::optional::to_exception(
+                            fcppt::to_std_string(_title),
+                            [&_title] {
+                              return awl::exception{
+                                  FCPPT_TEXT("Failed to convert window title: ") + _title};
+                            })},
+                    awl::backends::x11::window::class_hint::res_class_type{
+                        fcppt::optional::to_exception(
+                            fcppt::to_std_string(_class_name),
+                            [&_class_name] {
+                              return awl::exception{
+                                  FCPPT_TEXT("Failed to convert class name: ") + _class_name};
+                            })}});
+          },
+          _params.title(),
+          _params.class_name())},
+      window_(
+          display_,
+          awl::backends::x11::window::create(
+              _params.size(),
+              display_,
+              screen_,
+              colormap_,
+              visual_,
+              fcppt::optional::map(
+                  _params.cursor(),
+                  [](fcppt::reference<awl::cursor::object const> const _cursor)
+                  {
+                    return fcppt::make_cref(
+                        fcppt::cast::static_downcast<awl::backends::x11::cursor::object const &>(
+                            _cursor.get()));
+                  }))),
+      processor_connection_{_system_processor.get().add_window(
+          fcppt::reference_to_base<awl::backends::x11::window::object>(fcppt::make_ref(*this)))},
+      mask_counts_(),
+      event_mask_{0L},
+      wm_protocols_(
+          *this,
+          awl::backends::x11::window::event::atom_vector{
+              _system_processor.get().delete_window_atom().get()}),
+      client_message_connection_{
+          this->do_register_event(awl::backends::x11::window::event::type(ClientMessage))},
+      configure_connection_{
+          this->do_register_event(awl::backends::x11::window::event::type(ConfigureNotify))},
+      destroy_connection_{
+          this->do_register_event(awl::backends::x11::window::event::type(DestroyNotify))},
+      map_connection_{this->do_register_event(awl::backends::x11::window::event::type(MapNotify))},
+      unmap_connection_{
+          this->do_register_event(awl::backends::x11::window::event::type(UnmapNotify))}
 {
-	// always returns 1
-	::XSetWMHints(
-		display_.get().get(),
-		window_.get(),
-		hints_.get()
-	);
+  // always returns 1
+  ::XSetWMHints(display_.get().get(), window_.get(), hints_.get());
 
-	fcppt::optional::maybe_void(
-		class_hint_,
-		[
-			this
-		](
-			original_class_hint_unique_ptr const &_class_hint
-		)
-		{
-			// always returns 1
-			::XSetClassHint(
-				display_.get().get(),
-				window_.get(),
-				_class_hint->get()
-			);
-		}
-	);
+  fcppt::optional::maybe_void(
+      class_hint_,
+      [this](original_class_hint_unique_ptr const &_class_hint)
+      {
+        // always returns 1
+        ::XSetClassHint(display_.get().get(), window_.get(), _class_hint->get());
+      });
 
-	fcppt::optional::maybe_void(
-		_params.title(),
-		[
-			this
-		](
-			fcppt::string const &_title
-		)
-		{
-			// always returns 1
-			::XStoreName(
-				display_.get().get(),
-				window_.get(),
-				fcppt::optional::to_exception(
-					fcppt::to_std_string(
-						_title
-					),
-					[
-						&_title
-					]{
-						return
-							awl::exception{
-								FCPPT_TEXT("Failed to convert windows title: ")
-								+
-								_title
-							};
-					}
-				).c_str()
-			);
-		}
-	);
+  fcppt::optional::maybe_void(
+      _params.title(),
+      [this](fcppt::string const &_title)
+      {
+        // always returns 1
+        ::XStoreName(
+            display_.get().get(),
+            window_.get(),
+            fcppt::optional::to_exception(
+                fcppt::to_std_string(_title),
+                [&_title] {
+                  return awl::exception{FCPPT_TEXT("Failed to convert windows title: ") + _title};
+                })
+                .c_str());
+      });
 }
 
-awl::backends::x11::window::original_object::~original_object()
-= default;
+awl::backends::x11::window::original_object::~original_object() = default;
 
-bool
-awl::backends::x11::window::original_object::destroyed() const
+bool awl::backends::x11::window::original_object::destroyed() const { return window_.destroyed(); }
+
+awl::backends::x11::display_ref awl::backends::x11::window::original_object::display() const
 {
-	return
-		window_.destroyed();
+  return display_;
 }
 
-awl::backends::x11::display_ref
-awl::backends::x11::window::original_object::display() const
+awl::backends::x11::screen awl::backends::x11::window::original_object::screen() const
 {
-	return
-		display_;
-}
-
-awl::backends::x11::screen
-awl::backends::x11::window::original_object::screen() const
-{
-	return
-		screen_;
+  return screen_;
 }
 
 awl::backends::x11::visual::object const &
 awl::backends::x11::window::original_object::x11_visual() const
 {
-	return
-		visual_;
+  return visual_;
 }
 
-awl::backends::x11::window::rect
-awl::backends::x11::window::original_object::rect() const
+awl::backends::x11::window::rect awl::backends::x11::window::original_object::rect() const
 {
-	return
-		awl::backends::x11::window::get_geometry(
-			*this
-		);
+  return awl::backends::x11::window::get_geometry(*this);
 }
 
-Window
-awl::backends::x11::window::original_object::get() const
-{
-	return
-		window_.get();
-}
+Window awl::backends::x11::window::original_object::get() const { return window_.get(); }
 
 awl::backends::x11::window::const_optional_class_hint_ref
 awl::backends::x11::window::original_object::class_hint() const
 {
-	return
-		fcppt::optional::map(
-			class_hint_,
-			[](
-				original_class_hint_unique_ptr const &_class_hint
-			)
-			{
-				return
-					fcppt::make_cref(
-						_class_hint->hint()
-					);
-			}
-		);
+  return fcppt::optional::map(
+      class_hint_,
+      [](original_class_hint_unique_ptr const &_class_hint)
+      { return fcppt::make_cref(_class_hint->hint()); });
 }
 
-void
-awl::backends::x11::window::original_object::destroy()
+void awl::backends::x11::window::original_object::destroy() { window_.destroy(); }
+
+awl::event::connection_unique_ptr awl::backends::x11::window::original_object::register_event(
+    awl::backends::x11::window::event::type const _event_type)
 {
-	window_.destroy();
+  return this->do_register_event(_event_type);
 }
 
-awl::event::connection_unique_ptr
-awl::backends::x11::window::original_object::register_event(
-	awl::backends::x11::window::event::type const _event_type
-)
+awl::event::connection_unique_ptr awl::backends::x11::window::original_object::add_event_mask(
+    awl::backends::x11::window::event::mask const _mask)
 {
-	return
-		this->do_register_event(
-			_event_type
-		);
+  awl::backends::x11::window::event::mask_for_each(
+      _mask,
+      awl::backends::x11::window::event::mask_function{
+          [this](awl::backends::x11::window::event::mask_bit const _mask_bit)
+          { this->add_mask_bit(_mask_bit); }});
+
+  return awl::event::make_connection(
+      awl::event::connection_function{[this, _mask] { return this->remove_event_mask(_mask); }});
 }
 
-awl::event::connection_unique_ptr
-awl::backends::x11::window::original_object::add_event_mask(
-	awl::backends::x11::window::event::mask const _mask
-)
+awl::event::connection_unique_ptr awl::backends::x11::window::original_object::do_register_event(
+    awl::backends::x11::window::event::type const _event_type)
 {
-	awl::backends::x11::window::event::mask_for_each(
-		_mask,
-		awl::backends::x11::window::event::mask_function{
-			[
-				this
-			](
-				awl::backends::x11::window::event::mask_bit const _mask_bit
-			)
-			{
-				this->add_mask_bit(
-					_mask_bit
-				);
-			}
-		}
-	);
+  fcppt::optional::maybe_void(
+      awl::backends::x11::window::event::to_mask(_event_type),
+      [this](awl::backends::x11::window::event::mask_bit const _mask)
+      { this->add_mask_bit(_mask); });
 
-	return
-		awl::event::make_connection(
-			awl::event::connection_function{
-				[
-					this,
-					_mask
-				]{
-					return
-						this->remove_event_mask(
-							_mask
-						);
-				}
-			}
-		);
+  return awl::event::make_connection(awl::event::connection_function{
+      [this, _event_type] { this->unregister_event(_event_type); }});
 }
 
-awl::event::connection_unique_ptr
-awl::backends::x11::window::original_object::do_register_event(
-	awl::backends::x11::window::event::type const _event_type
-)
+void awl::backends::x11::window::original_object::unregister_event(
+    awl::backends::x11::window::event::type const _event_type)
 {
-	fcppt::optional::maybe_void(
-		awl::backends::x11::window::event::to_mask(
-			_event_type
-		),
-		[
-			this
-		](
-			awl::backends::x11::window::event::mask_bit const _mask
-		)
-		{
-			this->add_mask_bit(
-				_mask
-			);
-		}
-	);
-
-	return
-		awl::event::make_connection(
-			awl::event::connection_function{
-				[
-					this,
-					_event_type
-				]{
-					this->unregister_event(
-						_event_type
-					);
-				}
-			}
-		);
+  fcppt::optional::maybe_void(
+      awl::backends::x11::window::event::to_mask(_event_type),
+      [this](awl::backends::x11::window::event::mask_bit const _old_mask)
+      { this->remove_mask_bit(_old_mask); });
 }
 
-void
-awl::backends::x11::window::original_object::unregister_event(
-	awl::backends::x11::window::event::type const _event_type
-)
+void awl::backends::x11::window::original_object::remove_event_mask(
+    awl::backends::x11::window::event::mask const _mask)
 {
-	fcppt::optional::maybe_void(
-		awl::backends::x11::window::event::to_mask(
-			_event_type
-		),
-		[
-			this
-		](
-			awl::backends::x11::window::event::mask_bit const _old_mask
-		)
-		{
-			this->remove_mask_bit(
-				_old_mask
-			);
-		}
-	);
+  awl::backends::x11::window::event::mask_for_each(
+      _mask,
+      awl::backends::x11::window::event::mask_function{
+          [this](awl::backends::x11::window::event::mask_bit const _mask_bit)
+          { this->remove_mask_bit(_mask_bit); }});
 }
 
-void
-awl::backends::x11::window::original_object::remove_event_mask(
-	awl::backends::x11::window::event::mask const _mask
-)
+void awl::backends::x11::window::original_object::add_mask_bit(
+    awl::backends::x11::window::event::mask_bit const _mask_bit)
 {
-	awl::backends::x11::window::event::mask_for_each(
-		_mask,
-		awl::backends::x11::window::event::mask_function{
-			[
-				this
-			](
-				awl::backends::x11::window::event::mask_bit const _mask_bit
-			)
-			{
-				this->remove_mask_bit(
-					_mask_bit
-				);
-			}
-		}
-	);
+  mask_count const count(++mask_counts_[_mask_bit]);
+
+  if (count == 1U)
+  {
+    event_mask_ |= awl::backends::x11::window::event::mask{_mask_bit.get()};
+
+    awl::backends::x11::window::event::change_mask(*this, event_mask_);
+  }
 }
 
-void
-awl::backends::x11::window::original_object::add_mask_bit(
-	awl::backends::x11::window::event::mask_bit const _mask_bit
-)
+void awl::backends::x11::window::original_object::remove_mask_bit(
+    awl::backends::x11::window::event::mask_bit const _mask_bit)
 {
-	mask_count const count(
-		++mask_counts_[
-			_mask_bit
-		]
-	);
+  mask_count const count(--mask_counts_[_mask_bit]);
 
-	if(
-		count
-		==
-		1U
-	)
-	{
-		event_mask_ |=
-			awl::backends::x11::window::event::mask{
-				_mask_bit.get()
-			};
+  if (count == 0U)
+  {
+    event_mask_ &= ~(awl::backends::x11::window::event::mask{_mask_bit.get()});
 
-		awl::backends::x11::window::event::change_mask(
-			*this,
-			event_mask_
-		);
-	}
-}
-
-void
-awl::backends::x11::window::original_object::remove_mask_bit(
-	awl::backends::x11::window::event::mask_bit const _mask_bit
-)
-{
-	mask_count const count(
-		--mask_counts_[
-			_mask_bit
-		]
-	);
-
-	if(
-		count
-		==
-		0U
-	)
-	{
-		event_mask_ &=
-			~(
-				awl::backends::x11::window::event::mask{
-					_mask_bit.get()
-				}
-			);
-
-		awl::backends::x11::window::event::change_mask(
-			*this,
-			event_mask_
-		);
-	}
+    awl::backends::x11::window::event::change_mask(*this, event_mask_);
+  }
 }

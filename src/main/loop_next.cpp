@@ -9,40 +9,15 @@
 #include <fcppt/algorithm/loop.hpp>
 #include <fcppt/either/loop.hpp>
 
-
-awl::main::exit_code
-awl::main::loop_next(
-	awl::system::event::processor &_processor,
-	awl::main::loop_function const &_function
-)
+awl::main::exit_code awl::main::loop_next(
+    awl::system::event::processor &_processor, awl::main::loop_function const &_function)
 {
-	return
-		fcppt::either::loop(
-			[
-				&_processor
-			]{
-				return
-					_processor.next();
-			},
-			[
-				&_function
-			](
-				awl::event::container const &_events
-			)
-			{
-				fcppt::algorithm::loop(
-					_events,
-					[
-						&_function
-					](
-						awl::event::base_unique_ptr const &_event
-					)
-					{
-						_function(
-							*_event
-						);
-					}
-				);
-			}
-		);
+  return fcppt::either::loop(
+      [&_processor] { return _processor.next(); },
+      [&_function](awl::event::container const &_events)
+      {
+        fcppt::algorithm::loop(
+            _events,
+            [&_function](awl::event::base_unique_ptr const &_event) { _function(*_event); });
+      });
 }

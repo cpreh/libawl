@@ -7,17 +7,10 @@
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::x11::visual
 {
 
-using
-info_unique_ptr
-=
-fcppt::unique_ptr<
-	XVisualInfo,
-	awl::backends::x11::deleter
->;
+using info_unique_ptr = fcppt::unique_ptr<XVisualInfo, awl::backends::x11::deleter>;
 
 }
 

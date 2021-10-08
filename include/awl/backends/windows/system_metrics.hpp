@@ -3,7 +3,6 @@
 
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -12,10 +11,7 @@ namespace windows
 {
 
 AWL_DETAIL_SYMBOL
-int
-system_metrics(
-	int
-);
+int system_metrics(int);
 
 }
 }

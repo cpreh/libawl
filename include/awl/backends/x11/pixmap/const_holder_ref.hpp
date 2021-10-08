@@ -4,16 +4,10 @@
 #include <awl/backends/x11/pixmap/holder_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::x11::pixmap
 {
 
-using
-const_holder_ref
-=
-fcppt::reference<
-	awl::backends::x11::pixmap::holder const
->;
+using const_holder_ref = fcppt::reference<awl::backends::x11::pixmap::holder const>;
 
 }
 

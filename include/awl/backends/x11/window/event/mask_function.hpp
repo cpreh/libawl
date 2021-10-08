@@ -4,18 +4,10 @@
 #include <awl/backends/x11/window/event/mask_bit.hpp>
 #include <fcppt/function_impl.hpp>
 
-
 namespace awl::backends::x11::window::event
 {
 
-using
-mask_function
-=
-fcppt::function<
-	void (
-		awl::backends::x11::window::event::mask_bit
-	)
->;
+using mask_function = fcppt::function<void(awl::backends::x11::window::event::mask_bit)>;
 
 }
 

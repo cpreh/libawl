@@ -7,7 +7,6 @@
 #include <awl/timer/setting_fwd.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -19,27 +18,24 @@ namespace timer
 
 class waitable
 {
-	FCPPT_NONCOPYABLE(
-		waitable
-	);
+  FCPPT_NONCOPYABLE(waitable);
+
 public:
-	AWL_DETAIL_SYMBOL
-	waitable();
+  AWL_DETAIL_SYMBOL
+  waitable();
 
-	AWL_DETAIL_SYMBOL
-	~waitable();
+  AWL_DETAIL_SYMBOL
+  ~waitable();
 
-	AWL_DETAIL_SYMBOL
-	void
-	set(
-		awl::timer::setting const &
-	);
+  AWL_DETAIL_SYMBOL
+  void set(awl::timer::setting const &);
 
-	AWL_DETAIL_SYMBOL
-	HANDLE
-	handle() const;
+  AWL_DETAIL_SYMBOL
+  HANDLE
+  handle() const;
+
 private:
-	HANDLE const handle_;
+  HANDLE const handle_;
 };
 
 }

@@ -10,46 +10,30 @@
 #include <awl/event/base.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::system::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL generic
-:
-	public awl::event::base
+class AWL_DETAIL_CLASS_SYMBOL generic : public awl::event::base
 {
-	FCPPT_NONMOVABLE(
-		generic
-	);
+  FCPPT_NONMOVABLE(generic);
+
 public:
-	AWL_DETAIL_SYMBOL
-	generic(
-		awl::backends::x11::display_ref,
-		XGenericEventCookie const &
-	);
+  AWL_DETAIL_SYMBOL
+  generic(awl::backends::x11::display_ref, XGenericEventCookie const &);
 
-	AWL_DETAIL_SYMBOL
-	~generic()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~generic() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	XGenericEventCookie const &
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL XGenericEventCookie const &get() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	void const *
-	data() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL void const *data() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::x11::display &
-	display() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::x11::display &display() const;
+
 private:
-	awl::backends::x11::display_ref const display_;
+  awl::backends::x11::display_ref const display_;
 
-	XGenericEventCookie event_;
+  XGenericEventCookie event_;
 };
 
 }

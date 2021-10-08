@@ -12,7 +12,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -22,32 +21,27 @@ namespace windows
 namespace cursor
 {
 
-class AWL_DETAIL_CLASS_SYMBOL created
-:
-	public awl::backends::windows::cursor::object
+class AWL_DETAIL_CLASS_SYMBOL created : public awl::backends::windows::cursor::object
 {
-	FCPPT_NONCOPYABLE(
-		created
-	);
+  FCPPT_NONCOPYABLE(created);
+
 public:
-	AWL_DETAIL_SYMBOL
-	created(
-		awl::cursor::hotspot,
-		awl::backends::windows::cursor::dim,
-		awl::backends::windows::cursor::and_plane,
-		awl::backends::windows::cursor::xor_plane
-	);
+  AWL_DETAIL_SYMBOL
+  created(
+      awl::cursor::hotspot,
+      awl::backends::windows::cursor::dim,
+      awl::backends::windows::cursor::and_plane,
+      awl::backends::windows::cursor::xor_plane);
 
-	AWL_DETAIL_SYMBOL
-	~created()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~created() override;
 
-	AWL_DETAIL_SYMBOL
-	HCURSOR
-	get() const
-	override;
+  AWL_DETAIL_SYMBOL
+  HCURSOR
+  get() const override;
+
 private:
-	HCURSOR const cursor_;
+  HCURSOR const cursor_;
 };
 
 }

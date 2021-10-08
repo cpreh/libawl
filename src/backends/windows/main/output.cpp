@@ -13,45 +13,16 @@
 #include <streambuf>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::windows::main::output::output(
-	fcppt::io::ostream &_stream,
-	std::filesystem::path const &_path
-)
-:
-	awl::main::output(),
-	filebuf_(
-		fcppt::filesystem::open_exn<
-			filebuf_type,
-			awl::exception
-		>(
-			_path,
-			std::ios_base::openmode{}
-		)
-	),
-	scoped_rdbuf_(
-		fcppt::reference_to_base<
-			std::basic_ios<
-				fcppt::char_type
-			>
-		>(
-			fcppt::make_ref(
-				_stream
-			)
-		),
-		fcppt::reference_to_base<
-			std::basic_streambuf<
-				fcppt::char_type
-			>
-		>(
-			fcppt::make_ref(
-				filebuf_
-			)
-		)
-	)
+    fcppt::io::ostream &_stream, std::filesystem::path const &_path)
+    : awl::main::output(),
+      filebuf_(fcppt::filesystem::open_exn<filebuf_type, awl::exception>(
+          _path, std::ios_base::openmode{})),
+      scoped_rdbuf_(
+          fcppt::reference_to_base<std::basic_ios<fcppt::char_type>>(fcppt::make_ref(_stream)),
+          fcppt::reference_to_base<std::basic_streambuf<fcppt::char_type>>(
+              fcppt::make_ref(filebuf_)))
 {
 }
 
-awl::backends::windows::main::output::~output()
-{
-}
+awl::backends::windows::main::output::~output() {}

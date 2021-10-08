@@ -7,7 +7,6 @@
 #include <awl/visual/object.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -17,26 +16,19 @@ namespace windows
 namespace visual
 {
 
-class object
-:
-	public awl::visual::object
+class object : public awl::visual::object
 {
-	FCPPT_NONCOPYABLE(
-		object
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	object();
-public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  FCPPT_NONCOPYABLE(object);
 
-	virtual
-	void
-	apply(
-		HWND
-	) const = 0;
+protected:
+  AWL_DETAIL_SYMBOL
+  object();
+
+public:
+  AWL_DETAIL_SYMBOL
+  ~object() override;
+
+  virtual void apply(HWND) const = 0;
 };
 
 }

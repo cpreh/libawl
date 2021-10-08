@@ -4,7 +4,6 @@
 #include <awl/backends/windows/cursor/object_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,11 +13,7 @@ namespace windows
 namespace cursor
 {
 
-typedef
-fcppt::unique_ptr<
-	awl::backends::windows::cursor::object
->
-object_unique_ptr;
+typedef fcppt::unique_ptr<awl::backends::windows::cursor::object> object_unique_ptr;
 
 }
 }

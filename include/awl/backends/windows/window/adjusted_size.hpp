@@ -6,7 +6,6 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/window/optional_dim_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -18,10 +17,7 @@ namespace window
 
 AWL_DETAIL_SYMBOL
 awl::backends::windows::window::signed_dim
-adjusted_size(
-	awl::window::optional_dim const &,
-	DWORD flags
-);
+adjusted_size(awl::window::optional_dim const &, DWORD flags);
 
 }
 }

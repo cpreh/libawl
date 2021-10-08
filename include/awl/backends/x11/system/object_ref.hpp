@@ -4,16 +4,10 @@
 #include <awl/backends/x11/system/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::x11::system
 {
 
-using
-object_ref
-=
-fcppt::reference<
-	awl::backends::x11::system::object
->;
+using object_ref = fcppt::reference<awl::backends::x11::system::object>;
 
 }
 

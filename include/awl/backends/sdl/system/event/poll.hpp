@@ -7,15 +7,11 @@
 #include <SDL_events.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
 AWL_DETAIL_SYMBOL
-fcppt::optional::object<
-	SDL_Event
->
-poll();
+fcppt::optional::object<SDL_Event> poll();
 
 }
 

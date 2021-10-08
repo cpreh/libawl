@@ -5,15 +5,11 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
 AWL_DETAIL_SYMBOL
-fcppt::optional::object<
-	awl::backends::sdl::system::event::type
->
-register_();
+fcppt::optional::object<awl::backends::sdl::system::event::type> register_();
 
 }
 

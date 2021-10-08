@@ -7,14 +7,8 @@
 #include <X11/Xlibint.h>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::posix::fd
-awl::backends::x11::display_fd(
-	awl::backends::x11::display_ref const _display
-)
+awl::backends::x11::display_fd(awl::backends::x11::display_ref const _display)
 {
-	return
-		awl::backends::posix::fd{
-			_display.get().get()->fd
-		};
+  return awl::backends::posix::fd{_display.get().get()->fd};
 }

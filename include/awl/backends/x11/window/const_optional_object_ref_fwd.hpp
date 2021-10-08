@@ -4,16 +4,11 @@
 #include <awl/backends/x11/window/object_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-using
-const_optional_object_ref
-=
-fcppt::optional::reference<
-	awl::backends::x11::window::object const
->;
+using const_optional_object_ref =
+    fcppt::optional::reference<awl::backends::x11::window::object const>;
 
 }
 

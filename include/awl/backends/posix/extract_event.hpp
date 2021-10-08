@@ -5,18 +5,11 @@
 #include <awl/event/container.hpp>
 #include <fcppt/function_fwd.hpp>
 
-
 namespace awl::backends::posix
 {
 
-awl::event::container
-extract_event(
-	awl::event::container &&,
-	awl::backends::posix::fd,
-	fcppt::function<
-		awl::event::container ()
-	>
-);
+awl::event::container extract_event(
+    awl::event::container &&, awl::backends::posix::fd, fcppt::function<awl::event::container()>);
 
 }
 

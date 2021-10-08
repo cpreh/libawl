@@ -4,7 +4,6 @@
 #include <awl/backends/windows/window/user_data_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,11 +13,8 @@ namespace windows
 namespace window
 {
 
-typedef
-fcppt::optional::reference<
-	awl::backends::windows::window::user_data const
->
-optional_user_data_ref;
+typedef fcppt::optional::reference<awl::backends::windows::window::user_data const>
+    optional_user_data_ref;
 
 }
 }

@@ -4,14 +4,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace awl::backends::x11::window::event
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	long,
-	mask_bit
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(long, mask_bit);
 
 }
 

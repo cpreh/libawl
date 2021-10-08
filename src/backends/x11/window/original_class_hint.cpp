@@ -8,108 +8,54 @@
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>
 
-
 class awl::backends::x11::window::original_class_hint::impl
 {
 public:
-	FCPPT_NONMOVABLE(
-		impl
-	);
+  FCPPT_NONMOVABLE(impl);
 
-	impl();
+  impl();
 
-	~impl();
+  ~impl();
 
-	[[nodiscard]]
-	XClassHint *
-	get() const;
+  [[nodiscard]] XClassHint *get() const;
+
 private:
-	XClassHint *const hint_;
+  XClassHint *const hint_;
 };
 
-
 awl::backends::x11::window::original_class_hint::original_class_hint(
-	awl::backends::x11::window::class_hint &&_hint
-)
-:
-	impl_(
-		fcppt::make_unique_ptr<
-			impl
-		>()
-	),
-	hint_(
-		std::move(
-			_hint
-		)
-	)
+    awl::backends::x11::window::class_hint &&_hint)
+    : impl_(fcppt::make_unique_ptr<impl>()), hint_(std::move(_hint))
 {
-	XClassHint *const hint(
-		this->get()
-	);
+  XClassHint *const hint(this->get());
 
-	hint->res_name =
-		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
-		const_cast<
-			char *
-		>(
-			hint_.res_name().c_str()
-		);
+  hint->res_name =
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+      const_cast<char *>(hint_.res_name().c_str());
 
-	hint->res_class =
-		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
-		const_cast<
-			char *
-		>(
-			hint_.res_class().c_str()
-		);
+  hint->res_class =
+      // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+      const_cast<char *>(hint_.res_class().c_str());
 }
 
-awl::backends::x11::window::original_class_hint::~original_class_hint()
-= default;
+awl::backends::x11::window::original_class_hint::~original_class_hint() = default;
 
-XClassHint *
-awl::backends::x11::window::original_class_hint::get() const
-{
-	return
-		impl_->get();
-}
+XClassHint *awl::backends::x11::window::original_class_hint::get() const { return impl_->get(); }
 
 awl::backends::x11::window::class_hint const &
 awl::backends::x11::window::original_class_hint::hint() const
 {
-	return
-		hint_;
+  return hint_;
 }
 
-awl::backends::x11::window::original_class_hint::impl::impl()
-:
-	hint_(
-		::XAllocClassHint()
-	)
+awl::backends::x11::window::original_class_hint::impl::impl() : hint_(::XAllocClassHint())
 {
-	if(
-		hint_
-		==
-		nullptr
-	)
-	{
-		throw
-			awl::exception{
-				FCPPT_TEXT("XAllocClassHint() failed!")
-			};
-	}
+  if (hint_ == nullptr)
+  {
+    throw awl::exception{FCPPT_TEXT("XAllocClassHint() failed!")};
+  }
 }
 
-awl::backends::x11::window::original_class_hint::impl::~impl()
-{
-	::XFree(
-		hint_
-	);
-}
+awl::backends::x11::window::original_class_hint::impl::~impl() { ::XFree(hint_); }
 
-XClassHint *
-awl::backends::x11::window::original_class_hint::impl::get() const
-{
-	return
-		hint_;
-}
+XClassHint *awl::backends::x11::window::original_class_hint::impl::get() const { return hint_; }

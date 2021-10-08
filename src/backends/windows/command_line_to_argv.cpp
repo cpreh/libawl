@@ -5,39 +5,16 @@
 #include <awl/backends/windows/windows.hpp>
 #include <fcppt/text.hpp>
 
-
 awl::backends::windows::command_line_argv
-awl::backends::windows::command_line_to_argv(
-	wchar_t const *const _command_line
-)
-noexcept(false)
+awl::backends::windows::command_line_to_argv(wchar_t const *const _command_line) noexcept(false)
 {
-	int argc{
-		-1
-	};
+  int argc{-1};
 
-	LPWSTR* const result{
-		::CommandLineToArgvW(
-			_command_line,
-			&argc
-		)
-	};
+  LPWSTR *const result{::CommandLineToArgvW(_command_line, &argc)};
 
-	if(
-		result
-		==
-		NULL
-	)
-		throw
-			awl::exception{
-				FCPPT_TEXT("CommandLineToArgvW failed")
-			};
+  if (result == NULL)
+    throw awl::exception{FCPPT_TEXT("CommandLineToArgvW failed")};
 
-	return
-		awl::backends::windows::command_line_argv{
-			argc,
-			awl::backends::windows::command_line_ptr{
-				result
-			}
-		};
+  return awl::backends::windows::command_line_argv{
+      argc, awl::backends::windows::command_line_ptr{result}};
 }

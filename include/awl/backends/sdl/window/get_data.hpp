@@ -8,18 +8,12 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::window
 {
 
 AWL_DETAIL_SYMBOL
-fcppt::optional::object<
-	void *
->
-get_data(
-	awl::backends::sdl::window::native_reference,
-	std::string const &
-);
+fcppt::optional::object<void *>
+get_data(awl::backends::sdl::window::native_reference, std::string const &);
 
 }
 

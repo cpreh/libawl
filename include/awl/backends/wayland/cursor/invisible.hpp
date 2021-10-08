@@ -5,27 +5,19 @@
 #include <awl/backends/wayland/cursor/optional_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::cursor
 {
 
-class invisible
-:
-	public awl::backends::wayland::cursor::object
+class invisible : public awl::backends::wayland::cursor::object
 {
-	FCPPT_NONMOVABLE(
-		invisible
-	);
+  FCPPT_NONMOVABLE(invisible);
+
 public:
-	invisible();
+  invisible();
 
-	~invisible()
-	override;
+  ~invisible() override;
 
-	[[nodiscard]]
-	awl::backends::wayland::cursor::optional
-	get() const
-	override;
+  [[nodiscard]] awl::backends::wayland::cursor::optional get() const override;
 };
 
 }

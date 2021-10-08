@@ -5,7 +5,6 @@
 #include <awl/cursor/type_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,10 +15,7 @@ namespace cursor
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::windows::cursor::object_unique_ptr
-create_predefined(
-	awl::cursor::type
-);
+awl::backends::windows::cursor::object_unique_ptr create_predefined(awl::cursor::type);
 
 }
 }

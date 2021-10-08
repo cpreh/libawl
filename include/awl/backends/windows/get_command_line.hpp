@@ -4,7 +4,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/char_type.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,9 +13,7 @@ namespace windows
 
 // TODO: string_view
 AWL_DETAIL_SYMBOL
-fcppt::char_type const *
-get_command_line()
-noexcept;
+fcppt::char_type const *get_command_line() noexcept;
 
 }
 }

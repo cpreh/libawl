@@ -6,32 +6,23 @@
 #include <awl/timer/period.hpp>
 #include <awl/timer/setting_fwd.hpp>
 
-
 namespace awl::timer
 {
 
 class setting
 {
 public:
-	AWL_DETAIL_SYMBOL
-	setting(
-		awl::timer::delay,
-		awl::timer::period
-	);
+  AWL_DETAIL_SYMBOL
+  setting(awl::timer::delay, awl::timer::period);
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::timer::delay
-	delay() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::timer::delay delay() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::timer::period
-	period() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::timer::period period() const;
+
 private:
-	awl::timer::delay delay_;
+  awl::timer::delay delay_;
 
-	awl::timer::period period_;
+  awl::timer::period period_;
 };
 
 }

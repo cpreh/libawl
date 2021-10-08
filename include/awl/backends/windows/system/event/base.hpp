@@ -7,7 +7,6 @@
 #include <awl/event/base.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -19,20 +18,16 @@ namespace system
 namespace event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL base
-:
-	public awl::event::base
+class AWL_DETAIL_CLASS_SYMBOL base : public awl::event::base
 {
-	FCPPT_NONCOPYABLE(
-		base
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	base();
+  FCPPT_NONCOPYABLE(base);
 
-	AWL_DETAIL_SYMBOL
-	~base()
-	override;
+public:
+  AWL_DETAIL_SYMBOL
+  base();
+
+  AWL_DETAIL_SYMBOL
+  ~base() override;
 };
 
 }

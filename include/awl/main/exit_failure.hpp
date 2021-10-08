@@ -4,13 +4,11 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/main/exit_code.hpp>
 
-
 namespace awl::main
 {
 
 AWL_DETAIL_SYMBOL
-awl::main::exit_code
-exit_failure();
+awl::main::exit_code exit_failure();
 
 }
 

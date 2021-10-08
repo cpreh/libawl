@@ -9,42 +9,27 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 class class_hint
 {
 public:
-	FCPPT_DECLARE_STRONG_TYPEDEF(
-		std::string,
-		res_name_type
-	);
+  FCPPT_DECLARE_STRONG_TYPEDEF(std::string, res_name_type);
 
-	FCPPT_DECLARE_STRONG_TYPEDEF(
-		std::string,
-		res_class_type
-	);
+  FCPPT_DECLARE_STRONG_TYPEDEF(std::string, res_class_type);
 
-	AWL_DETAIL_SYMBOL
-	class_hint(
-		res_name_type &&,
-		res_class_type &&
-	);
+  AWL_DETAIL_SYMBOL
+  class_hint(res_name_type &&, res_class_type &&);
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	std::string const &
-	res_name() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL std::string const &res_name() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	std::string const &
-	res_class() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL std::string const &res_class() const;
+
 private:
-	res_name_type res_name_;
+  res_name_type res_name_;
 
-	res_class_type res_class_;
+  res_class_type res_class_;
 };
 
 }

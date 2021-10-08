@@ -6,16 +6,12 @@
 #include <awl/backends/x11/window/optional_class_hint.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
 AWL_DETAIL_SYMBOL
 awl::backends::x11::window::optional_class_hint
-get_class_hint(
-	awl::backends::x11::display const &,
-	Window
-);
+get_class_hint(awl::backends::x11::display const &, Window);
 
 }
 

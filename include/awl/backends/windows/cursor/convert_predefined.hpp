@@ -5,7 +5,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/char_type.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,10 +15,7 @@ namespace cursor
 {
 
 AWL_DETAIL_SYMBOL
-fcppt::char_type const *
-convert_predefined(
-	awl::cursor::type
-);
+fcppt::char_type const *convert_predefined(awl::cursor::type);
 
 }
 }

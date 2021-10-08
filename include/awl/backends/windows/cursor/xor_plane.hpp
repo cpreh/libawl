@@ -5,7 +5,6 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -15,10 +14,7 @@ namespace windows
 namespace cursor
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	VOID const *,
-	xor_plane
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(VOID const *, xor_plane);
 
 }
 }

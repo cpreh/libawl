@@ -7,17 +7,11 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::window
 {
 
 AWL_DETAIL_SYMBOL
-void
-set_data(
-	awl::backends::sdl::window::native_reference,
-	std::string const &,
-	void *
-);
+void set_data(awl::backends::sdl::window::native_reference, std::string const &, void *);
 
 }
 

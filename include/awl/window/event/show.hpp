@@ -8,27 +8,19 @@
 #include <awl/window/event/show_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::window::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL show
-:
-	public awl::window::event::base
+class AWL_DETAIL_CLASS_SYMBOL show : public awl::window::event::base
 {
-	FCPPT_NONMOVABLE(
-		show
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	show(
-		awl::window::reference
-	);
+  FCPPT_NONMOVABLE(show);
 
-	AWL_DETAIL_SYMBOL
-	~show()
-	override;
+public:
+  AWL_DETAIL_SYMBOL
+  explicit show(awl::window::reference);
+
+  AWL_DETAIL_SYMBOL
+  ~show() override;
 };
 
 }

@@ -4,16 +4,10 @@
 #include <awl/backends/sdl/window/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::sdl::window
 {
 
-using
-object_ref
-=
-fcppt::reference<
-	awl::backends::sdl::window::object
->;
+using object_ref = fcppt::reference<awl::backends::sdl::window::object>;
 
 }
 

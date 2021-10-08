@@ -4,7 +4,6 @@
 #include <awl/backends/windows/windows.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -15,12 +14,7 @@ namespace window
 {
 
 AWL_DETAIL_SYMBOL
-void
-set_long_ptr(
-	HWND,
-	int,
-	LONG_PTR
-);
+void set_long_ptr(HWND, int, LONG_PTR);
 
 }
 }

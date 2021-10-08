@@ -9,34 +9,24 @@
 #include <awl/system/object.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::system
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::system::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::system::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	object();
+  AWL_DETAIL_SYMBOL
+  object();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::x11::display_ref
-	display() = 0;
+  [[nodiscard]] virtual awl::backends::x11::display_ref display() = 0;
 
-	[[nodiscard]]
-	virtual
-	awl::backends::x11::screen
-	screen() const = 0;
+  [[nodiscard]] virtual awl::backends::x11::screen screen() const = 0;
 };
 
 }

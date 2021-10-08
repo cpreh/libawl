@@ -9,34 +9,26 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::system::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL seat_base
-:
-	public awl::backends::wayland::system::event::base
+class AWL_DETAIL_CLASS_SYMBOL seat_base : public awl::backends::wayland::system::event::base
 {
-	FCPPT_NONMOVABLE(
-		seat_base
-	);
+  FCPPT_NONMOVABLE(seat_base);
+
 public:
-	AWL_DETAIL_SYMBOL
-	seat_base(
-		awl::backends::wayland::display_reference,
-		awl::backends::wayland::system::seat::shared_ptr
-	);
+  AWL_DETAIL_SYMBOL
+  seat_base(
+      awl::backends::wayland::display_reference, awl::backends::wayland::system::seat::shared_ptr);
 
-	AWL_DETAIL_SYMBOL
-	~seat_base()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~seat_base() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::wayland::system::seat::shared_ptr const &
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::wayland::system::seat::shared_ptr const &
+  get() const;
+
 private:
-	awl::backends::wayland::system::seat::shared_ptr const seat_;
+  awl::backends::wayland::system::seat::shared_ptr const seat_;
 };
 
 }

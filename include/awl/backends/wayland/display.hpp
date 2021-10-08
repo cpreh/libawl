@@ -9,27 +9,22 @@
 #include <wayland-client-core.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland
 {
 
 class AWL_DETAIL_CLASS_SYMBOL display
 {
-	FCPPT_NONMOVABLE(
-		display
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	display();
-public:
-	[[nodiscard]]
-	virtual
-	wl_display *
-	get() const = 0;
+  FCPPT_NONMOVABLE(display);
 
-	AWL_DETAIL_SYMBOL
-	virtual
-	~display();
+protected:
+  AWL_DETAIL_SYMBOL
+  display();
+
+public:
+  [[nodiscard]] virtual wl_display *get() const = 0;
+
+  AWL_DETAIL_SYMBOL
+  virtual ~display();
 };
 
 }

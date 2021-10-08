@@ -6,44 +6,19 @@
 #include <SDL_video.h>
 #include <fcppt/config/external_end.hpp>
 
+awl::backends::sdl::window::object::object() : awl::window::object{} {}
 
-awl::backends::sdl::window::object::object()
-:
-	awl::window::object{}
+awl::backends::sdl::window::object::~object() = default;
+
+void awl::backends::sdl::window::object::show() { SDL_ShowWindow(&this->get().get()); }
+
+awl::window::dim awl::backends::sdl::window::object::size() const
 {
-}
+  int w{0};
 
-awl::backends::sdl::window::object::~object()
-= default;
+  int h{0};
 
-void
-awl::backends::sdl::window::object::show()
-{
-	SDL_ShowWindow(
-		&this->get().get()
-	);
-}
+  SDL_GetWindowSize(&this->get().get(), &w, &h);
 
-awl::window::dim
-awl::backends::sdl::window::object::size() const
-{
-	int w{0};
-
-	int h{0};
-
-	SDL_GetWindowSize(
-		&this->get().get(),
-		&w,
-		&h
-	);
-
-	return
-		awl::window::dim{
-			fcppt::cast::to_unsigned(
-				w
-			),
-			fcppt::cast::to_unsigned(
-				h
-			)
-		};
+  return awl::window::dim{fcppt::cast::to_unsigned(w), fcppt::cast::to_unsigned(h)};
 }

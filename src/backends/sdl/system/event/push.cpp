@@ -10,33 +10,13 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
-fcppt::either::error<
-	fcppt::optional::object<
-		std::string
-	>
->
-awl::backends::sdl::system::event::push(
-	SDL_Event const &_event
-)
+fcppt::either::error<fcppt::optional::object<std::string>>
+awl::backends::sdl::system::event::push(SDL_Event const &_event)
 {
-	SDL_Event event{
-		_event
-	};
+  SDL_Event event{_event};
 
-	return
-		fcppt::either::construct(
-			SDL_PushEvent(
-				&event
-			)
-			!=
-			-1,
-			fcppt::const_(
-				fcppt::either::no_error{}
-			),
-			[]{
-				return
-					awl::backends::sdl::get_error();
-			}
-		);
+  return fcppt::either::construct(
+      SDL_PushEvent(&event) != -1,
+      fcppt::const_(fcppt::either::no_error{}),
+      [] { return awl::backends::sdl::get_error(); });
 }

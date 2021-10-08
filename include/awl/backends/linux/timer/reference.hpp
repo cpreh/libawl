@@ -4,16 +4,10 @@
 #include <awl/backends/linux/timer/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::linux::timer
 {
 
-using
-reference
-=
-fcppt::reference<
-	awl::backends::linux::timer::object
->;
+using reference = fcppt::reference<awl::backends::linux::timer::object>;
 
 }
 

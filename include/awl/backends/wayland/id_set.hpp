@@ -7,24 +7,11 @@
 #include <set>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland
 {
 
-template<
-	typename Type
->
-using
-id_set
-=
-std::set<
-	fcppt::shared_ptr<
-		Type
-	>,
-	awl::backends::wayland::id_less<
-		Type
-	>
->;
+template <typename Type>
+using id_set = std::set<fcppt::shared_ptr<Type>, awl::backends::wayland::id_less<Type>>;
 
 }
 

@@ -5,5 +5,4 @@
 #include <awl/backends/wayland/optional_compositor_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

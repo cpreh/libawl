@@ -67,493 +67,218 @@
 #include <utility>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace
 {
 
-void
-registry_add(
-	void *const _data,
-	wl_registry *const _registry,
-	std::uint32_t const _name,
-	char const *const _interface,
-	std::uint32_t // version
+void registry_add(
+    void *const _data,
+    wl_registry *const _registry,
+    std::uint32_t const _name,
+    char const *const _interface,
+    std::uint32_t // version
 )
 {
-	awl::backends::wayland::system::event::global_data &data(
-		*fcppt::cast::from_void_ptr<
-			awl::backends::wayland::system::event::global_data *
-		>(
-			_data
-		)
-	);
+  awl::backends::wayland::system::event::global_data &data(
+      *fcppt::cast::from_void_ptr<awl::backends::wayland::system::event::global_data *>(_data));
 
-	std::string const interface{
-		_interface
-	};
+  std::string const interface {
+    _interface
+  };
 
-	awl::backends::wayland::registry_id const name{
-		_name
-	};
+  awl::backends::wayland::registry_id const name{_name};
 
-	FCPPT_LOG_DEBUG(
-		data.log_.get(),
-		fcppt::log::out
-			<<
-			FCPPT_TEXT("Got registry object \"")
-			<<
-			fcppt::from_std_string(
-				interface
-			)
-			<<
-			FCPPT_TEXT("\" with id ")
-			<<
-			name
-	)
+  FCPPT_LOG_DEBUG(
+      data.log_.get(),
+      fcppt::log::out << FCPPT_TEXT("Got registry object \"") << fcppt::from_std_string(interface)
+                      << FCPPT_TEXT("\" with id ") << name)
 
-	if(
-		interface
-		==
-		"wl_compositor"
-	)
-	{
-		data.compositor_ =
-			awl::backends::wayland::optional_compositor{
-				awl::backends::wayland::compositor{
-					_registry,
-					name
-				}
-			};
-	}
-	else if(
-		interface
-		==
-		"wl_shell"
-	)
-	{
-		data.shell_ =
-			awl::backends::wayland::optional_shell{
-				awl::backends::wayland::shell{
-					_registry,
-					name
-				}
-			};
-	}
-	else if(
-		interface
-		==
-		"wl_shm"
-	)
-	{
-		data.shm_ =
-			awl::backends::wayland::optional_shm{
-				awl::backends::wayland::shm{
-					_registry,
-					name
-				}
-			};
-	}
-	else if(
-		interface
-		==
-		"wl_seat"
-	)
-	{
-		std::pair<
-			awl::backends::wayland::system::seat::set::iterator,
-			bool
-		> const result{
-			data.seats_.insert(
-				fcppt::make_shared_ptr<
-					awl::backends::wayland::system::seat::object
-				>(
-					awl::backends::wayland::seat{
-						_registry,
-						name
-					},
-					data.display_,
-					fcppt::make_ref(
-						data.last_events_
-					)
-				)
-			)
-		};
+  if (interface == "wl_compositor")
+  {
+    data.compositor_ = awl::backends::wayland::optional_compositor{
+        awl::backends::wayland::compositor{_registry, name}};
+  }
+  else if (interface == "wl_shell")
+  {
+    data.shell_ =
+        awl::backends::wayland::optional_shell{awl::backends::wayland::shell{_registry, name}};
+  }
+  else if (interface == "wl_shm")
+  {
+    data.shm_ = awl::backends::wayland::optional_shm{awl::backends::wayland::shm{_registry, name}};
+  }
+  else if (interface == "wl_seat")
+  {
+    std::pair<awl::backends::wayland::system::seat::set::iterator, bool> const result{
+        data.seats_.insert(fcppt::make_shared_ptr<awl::backends::wayland::system::seat::object>(
+            awl::backends::wayland::seat{_registry, name},
+            data.display_,
+            fcppt::make_ref(data.last_events_)))};
 
-		if(
-			!result.second
-		)
-		{
-			throw
-				awl::exception{
-					FCPPT_TEXT("Double insert of wayland seat")
-				};
-		}
+    if (!result.second)
+    {
+      throw awl::exception{FCPPT_TEXT("Double insert of wayland seat")};
+    }
 
-		(*result.first)->init_ptr();
+    (*result.first)->init_ptr();
 
-		data.last_events_.push_back(
-			fcppt::unique_ptr_to_base<
-				awl::event::base
-			>(
-				fcppt::make_unique_ptr<
-					awl::backends::wayland::system::event::seat_added
-				>(
-					data.display_,
-					*result.first
-				)
-			)
-		);
-	}
+    data.last_events_.push_back(fcppt::unique_ptr_to_base<awl::event::base>(
+        fcppt::make_unique_ptr<awl::backends::wayland::system::event::seat_added>(
+            data.display_, *result.first)));
+  }
 }
 
-void
-registry_remove(
-	void *const _data,
-	wl_registry *,
-	std::uint32_t const _name
-)
+void registry_remove(void *const _data, wl_registry *, std::uint32_t const _name)
 {
-	awl::backends::wayland::system::event::global_data &data(
-		*fcppt::cast::from_void_ptr<
-			awl::backends::wayland::system::event::global_data *
-		>(
-			_data
-		)
-	);
+  awl::backends::wayland::system::event::global_data &data(
+      *fcppt::cast::from_void_ptr<awl::backends::wayland::system::event::global_data *>(_data));
 
-	awl::backends::wayland::registry_id const name{
-		_name
-	};
+  awl::backends::wayland::registry_id const name{_name};
 
-	auto const process_global(
-		[
-			name,
-			&data
-		](
-			auto &_object
-		)
-		{
-			if(
-				fcppt::optional::maybe(
-					_object,
-					fcppt::const_(
-						false
-					),
-					[
-						name
-					](
-						auto const &_inner
-					)
-					{
-						return
-							_inner.name()
-							==
-							name;
-					}
-				)
-			)
-			{
-				data.exit_code_ =
-					awl::main::optional_exit_code{
-						awl::main::exit_failure()
-					};
+  auto const process_global(
+      [name, &data](auto &_object)
+      {
+        if (fcppt::optional::maybe(
+                _object,
+                fcppt::const_(false),
+                [name](auto const &_inner) { return _inner.name() == name; }))
+        {
+          data.exit_code_ = awl::main::optional_exit_code{awl::main::exit_failure()};
 
-				_object =
-					typename
-					std::decay<
-						decltype(
-							_object
-						)
-					>::type{};
-			}
-		}
-	);
+          _object = typename std::decay<decltype(_object)>::type{};
+        }
+      });
 
-	process_global(
-		data.compositor_
-	);
+  process_global(data.compositor_);
 
-	process_global(
-		data.shell_
-	);
+  process_global(data.shell_);
 
-	process_global(
-		data.shm_
-	);
+  process_global(data.shm_);
 
-	fcppt::optional::maybe_void(
-		fcppt::container::find_opt_iterator(
-			data.seats_,
-			name
-		),
-		[
-			&data
-		](
-			awl::backends::wayland::system::seat::set::iterator const _it
-		)
-		{
-			data.last_events_.push_back(
-				fcppt::unique_ptr_to_base<
-					awl::event::base
-				>(
-					fcppt::make_unique_ptr<
-						awl::backends::wayland::system::event::seat_removed
-					>(
-						data.display_,
-						*_it
-					)
-				)
-			);
+  fcppt::optional::maybe_void(
+      fcppt::container::find_opt_iterator(data.seats_, name),
+      [&data](awl::backends::wayland::system::seat::set::iterator const _it)
+      {
+        data.last_events_.push_back(fcppt::unique_ptr_to_base<awl::event::base>(
+            fcppt::make_unique_ptr<awl::backends::wayland::system::event::seat_removed>(
+                data.display_, *_it)));
 
-			data.seats_.erase(
-				_it
-			);
-		}
-	);
+        data.seats_.erase(_it);
+      });
 }
 
-wl_registry_listener const registry_listener{
-	registry_add,
-	registry_remove
-};
+wl_registry_listener const registry_listener{registry_add, registry_remove};
 
 }
 
 awl::backends::wayland::system::event::original_processor::original_processor(
-	fcppt::log::object_reference const _log,
-	awl::backends::wayland::display_reference const _display
-)
-:
-	awl::backends::wayland::system::event::processor(),
-	display_{
-		_display
-	},
-	fd_processor_{
-		awl::backends::posix::create_processor()
-	},
-	registry_{
-		_display.get()
-	},
-	global_data_{
-		_log,
-		_display
-	},
-	fd_{
-		::wl_display_get_fd(
-			_display.get().get()
-		)
-	}
+    fcppt::log::object_reference const _log,
+    awl::backends::wayland::display_reference const _display)
+    : awl::backends::wayland::system::event::processor(),
+      display_{_display},
+      fd_processor_{awl::backends::posix::create_processor()},
+      registry_{_display.get()},
+      global_data_{_log, _display},
+      fd_{::wl_display_get_fd(_display.get().get())}
 {
-	::wl_registry_add_listener(
-		registry_.get(),
-		&registry_listener,
-		&global_data_
-	);
+  ::wl_registry_add_listener(registry_.get(), &registry_listener, &global_data_);
 
-	awl::backends::wayland::display_roundtrip(
-		display_.get()
-	);
+  awl::backends::wayland::display_roundtrip(display_.get());
 }
 
-awl::backends::wayland::system::event::original_processor::~original_processor()
-= default;
+awl::backends::wayland::system::event::original_processor::~original_processor() = default;
 
-awl::system::event::result
-awl::backends::wayland::system::event::original_processor::poll()
+awl::system::event::result awl::backends::wayland::system::event::original_processor::poll()
 {
-	return
-		this->process(
-			awl::backends::posix::optional_duration{
-				// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
-				awl::backends::posix::duration{
-					0
-				}
-			}
-		);
+  return this->process(
+      awl::backends::posix::optional_duration{// NOLINTNEXTLINE(fuchsia-default-arguments-calls)
+                                              awl::backends::posix::duration{0}});
 }
 
-awl::system::event::result
-awl::backends::wayland::system::event::original_processor::next()
+awl::system::event::result awl::backends::wayland::system::event::original_processor::next()
 {
-	return
-		this->process(
-			awl::backends::posix::optional_duration()
-		);
+  return this->process(awl::backends::posix::optional_duration());
 }
 
-void
-awl::backends::wayland::system::event::original_processor::quit(
-	awl::main::exit_code const _exit_code
-)
+void awl::backends::wayland::system::event::original_processor::quit(
+    awl::main::exit_code const _exit_code)
 {
-	global_data_.exit_code_ =
-		awl::main::optional_exit_code(
-			_exit_code
-		);
+  global_data_.exit_code_ = awl::main::optional_exit_code(_exit_code);
 }
 
-awl::timer::unique_ptr
-awl::backends::wayland::system::event::original_processor::create_timer(
-	awl::timer::setting const &_setting
-)
+awl::timer::unique_ptr awl::backends::wayland::system::event::original_processor::create_timer(
+    awl::timer::setting const &_setting)
 {
-	return
-		fd_processor_->create_timer(
-			_setting
-		);
+  return fd_processor_->create_timer(_setting);
 }
 
-awl::event::container_reference
-awl::backends::wayland::system::event::original_processor::events()
+awl::event::container_reference awl::backends::wayland::system::event::original_processor::events()
 {
-	return
-		fcppt::make_ref(
-			global_data_.last_events_
-		);
+  return fcppt::make_ref(global_data_.last_events_);
 }
 
 awl::backends::wayland::compositor const &
 awl::backends::wayland::system::event::original_processor::compositor() const
 {
-	return
-		fcppt::optional::to_exception(
-			global_data_.compositor_,
-			[]{
-				return
-					awl::exception{
-						FCPPT_TEXT("Compositor is gone")
-					};
-			}
-		);
+  return fcppt::optional::to_exception(
+      global_data_.compositor_, [] { return awl::exception{FCPPT_TEXT("Compositor is gone")}; });
 }
 
 awl::backends::wayland::shell const &
 awl::backends::wayland::system::event::original_processor::shell() const
 {
-	return
-		fcppt::optional::to_exception(
-			global_data_.shell_,
-			[]{
-				return
-					awl::exception{
-						FCPPT_TEXT("Shell is gone")
-					};
-			}
-		);
+  return fcppt::optional::to_exception(
+      global_data_.shell_, [] { return awl::exception{FCPPT_TEXT("Shell is gone")}; });
 }
 
 awl::backends::wayland::shm const &
 awl::backends::wayland::system::event::original_processor::shm() const
 {
-	return
-		fcppt::optional::to_exception(
-			global_data_.shm_,
-			[]{
-				return
-					awl::exception{
-						FCPPT_TEXT("Shm is gone")
-					};
-			}
-		);
+  return fcppt::optional::to_exception(
+      global_data_.shm_, [] { return awl::exception{FCPPT_TEXT("Shm is gone")}; });
 }
 
 awl::backends::wayland::system::seat::set const &
 awl::backends::wayland::system::event::original_processor::seats() const
 {
-	return
-		global_data_.seats_;
+  return global_data_.seats_;
 }
 
 awl::backends::posix::processor &
 awl::backends::wayland::system::event::original_processor::fd_processor()
 {
-	return
-		*fd_processor_;
+  return *fd_processor_;
 }
 
-awl::system::event::result
-awl::backends::wayland::system::event::original_processor::process(
-	awl::backends::posix::optional_duration const &_duration
-)
+awl::system::event::result awl::backends::wayland::system::event::original_processor::process(
+    awl::backends::posix::optional_duration const &_duration)
 {
-	return
-		fcppt::optional::maybe(
-			global_data_.exit_code_,
-			[
-				this,
-				&_duration
-			]{
-				return
-					awl::system::event::result{
-						this->process_fds(
-							_duration
-						)
-					};
-			},
-			[](
-				awl::main::exit_code const _code
-			)
-			{
-				return
-					awl::system::event::result{
-						_code
-					};
-			}
-		);
+  return fcppt::optional::maybe(
+      global_data_.exit_code_,
+      [this, &_duration] { return awl::system::event::result{this->process_fds(_duration)}; },
+      [](awl::main::exit_code const _code) { return awl::system::event::result{_code}; });
 }
 
-awl::event::container
-awl::backends::wayland::system::event::original_processor::process_fds(
-	awl::backends::posix::optional_duration const &_duration
-)
+awl::event::container awl::backends::wayland::system::event::original_processor::process_fds(
+    awl::backends::posix::optional_duration const &_duration)
 {
-	awl::backends::wayland::display_flush(
-		display_.get()
-	);
+  awl::backends::wayland::display_flush(display_.get());
 
-	return
-		awl::backends::posix::extract_event(
-			fd_processor_->poll(
-				_duration
-			),
-			fd_,
-			fcppt::function<
-				awl::event::container ()
-			>{
-				[
-					this
-				]{
-					return
-						this->process_pending();
-				}
-			}
-		);
+  return awl::backends::posix::extract_event(
+      fd_processor_->poll(_duration), fd_, fcppt::function<awl::event::container()>{[this] {
+        return this->process_pending();
+      }});
 }
 
-awl::event::container
-awl::backends::wayland::system::event::original_processor::process_pending()
+awl::event::container awl::backends::wayland::system::event::original_processor::process_pending()
 {
-	while(
-		!awl::backends::wayland::display_prepare_read(
-			display_.get()
-		)
-	)
-	{
-		awl::backends::wayland::display_dispatch_pending(
-			display_.get()
-		);
-	}
+  while (!awl::backends::wayland::display_prepare_read(display_.get()))
+  {
+    awl::backends::wayland::display_dispatch_pending(display_.get());
+  }
 
-	awl::backends::wayland::display_read_events(
-		display_.get()
-	);
+  awl::backends::wayland::display_read_events(display_.get());
 
-	awl::backends::wayland::display_dispatch_pending(
-		display_.get()
-	);
+  awl::backends::wayland::display_dispatch_pending(display_.get());
 
-	return
-		fcppt::move_clear(
-			global_data_.last_events_
-		);
+  return fcppt::move_clear(global_data_.last_events_);
 }

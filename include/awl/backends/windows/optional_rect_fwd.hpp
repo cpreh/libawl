@@ -4,7 +4,6 @@
 #include <awl/backends/windows/windows.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -12,11 +11,7 @@ namespace backends
 namespace windows
 {
 
-typedef
-fcppt::optional::object<
-	RECT
->
-optional_rect;
+typedef fcppt::optional::object<RECT> optional_rect;
 
 }
 }

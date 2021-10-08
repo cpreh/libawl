@@ -4,16 +4,10 @@
 #include <awl/system/event/processor_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::system::event
 {
 
-using
-processor_ref
-=
-fcppt::reference<
-	awl::system::event::processor
->;
+using processor_ref = fcppt::reference<awl::system::event::processor>;
 
 }
 

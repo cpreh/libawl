@@ -9,27 +9,20 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::wayland::system::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL seat_removed
-:
-	public awl::backends::wayland::system::event::seat_base
+class AWL_DETAIL_CLASS_SYMBOL seat_removed : public awl::backends::wayland::system::event::seat_base
 {
-	FCPPT_NONMOVABLE(
-		seat_removed
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	seat_removed(
-		awl::backends::wayland::display_reference,
-		awl::backends::wayland::system::seat::shared_ptr
-	);
+  FCPPT_NONMOVABLE(seat_removed);
 
-	AWL_DETAIL_SYMBOL
-	~seat_removed()
-	override;
+public:
+  AWL_DETAIL_SYMBOL
+  seat_removed(
+      awl::backends::wayland::display_reference, awl::backends::wayland::system::seat::shared_ptr);
+
+  AWL_DETAIL_SYMBOL
+  ~seat_removed() override;
 };
 
 }

@@ -22,163 +22,67 @@
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
+awl::backends::linux::epoll::set::set() : epoll_fd_(), events_() {}
 
-awl::backends::linux::epoll::set::set()
-:
-	epoll_fd_(),
-	events_()
+awl::backends::linux::epoll::set::~set() = default;
+
+void awl::backends::linux::epoll::set::add(awl::backends::posix::fd const _fd)
 {
+  events_.push_back(epoll_event());
+
+  epoll_event ev{};
+  ev.events = EPOLLIN;
+  ev.data.fd = _fd.get();
+
+  awl::backends::linux::epoll::ctl(epoll_fd_, EPOLL_CTL_ADD, _fd, &ev);
 }
 
-awl::backends::linux::epoll::set::~set()
-= default;
-
-void
-awl::backends::linux::epoll::set::add(
-	awl::backends::posix::fd const _fd
-)
+void awl::backends::linux::epoll::set::remove(awl::backends::posix::fd const _fd)
 {
-	events_.push_back(
-		epoll_event()
-	);
+  awl::backends::linux::epoll::ctl(epoll_fd_, EPOLL_CTL_DEL, _fd, nullptr);
 
-	epoll_event ev{};
-	ev.events = EPOLLIN;
-	ev.data.fd = _fd.get();
-
-	awl::backends::linux::epoll::ctl(
-		epoll_fd_,
-		EPOLL_CTL_ADD,
-		_fd,
-		&ev
-	);
+  events_.pop_back();
 }
 
-void
-awl::backends::linux::epoll::set::remove(
-	awl::backends::posix::fd const _fd
-)
+awl::backends::linux::epoll::fd_vector awl::backends::linux::epoll::set::epoll(
+    awl::backends::posix::optional_duration const &_opt_duration)
 {
-	awl::backends::linux::epoll::ctl(
-		epoll_fd_,
-		EPOLL_CTL_DEL,
-		_fd,
-		nullptr
-	);
+  int const ret(::epoll_wait(
+      epoll_fd_.get().get(),
+      events_.data(),
+      fcppt::cast::size<int>(fcppt::cast::to_signed(events_.size())),
+      fcppt::optional::maybe(
+          _opt_duration,
+          fcppt::const_(-1),
+          [](awl::backends::posix::duration const _duration)
+          {
+            return fcppt::optional::to_exception(
+                fcppt::cast::truncation_check<int>(
+                    std::chrono::duration_cast<std::chrono::milliseconds>(_duration).count()),
+                [_duration]
+                {
+                  return awl::exception{
+                      FCPPT_TEXT("Duration value ") +
+                      fcppt::output_to_fcppt_string(_duration.count()) +
+                      FCPPT_TEXT(" is too large for epoll_wait")};
+                });
+          })));
 
-	events_.pop_back();
-}
+  if (ret == -1)
+  {
+    throw awl::exception{FCPPT_TEXT("epoll_wait failed!")};
+  }
 
-awl::backends::linux::epoll::fd_vector
-awl::backends::linux::epoll::set::epoll(
-	awl::backends::posix::optional_duration const &_opt_duration
-)
-{
-	int const ret(
-		::epoll_wait(
-			epoll_fd_.get().get(),
-			events_.data(),
-			fcppt::cast::size<
-				int
-			>(
-				fcppt::cast::to_signed(
-					events_.size()
-				)
-			),
-			fcppt::optional::maybe(
-				_opt_duration,
-				fcppt::const_(
-					-1
-				),
-				[](
-					awl::backends::posix::duration const _duration
-				)
-				{
-					return
-						fcppt::optional::to_exception(
-							fcppt::cast::truncation_check<
-								int
-							>(
-								std::chrono::duration_cast<
-									std::chrono::milliseconds
-								>(
-									_duration
-								).count()
-							),
-							[
-								_duration
-							]{
-								return
-									awl::exception{
-										FCPPT_TEXT("Duration value ")
-										+
-										fcppt::output_to_fcppt_string(
-											_duration.count()
-										)
-										+
-										FCPPT_TEXT(" is too large for epoll_wait")
-									};
-							}
-						);
-				}
-			)
-		)
-	);
+  unsigned const ready(fcppt::cast::to_unsigned(ret));
 
-	if(
-		ret
-		==
-		-1
-	)
-	{
-		throw
-			awl::exception{
-				FCPPT_TEXT("epoll_wait failed!")
-			};
-	}
+  return fcppt::algorithm::map_optional<awl::backends::linux::epoll::fd_vector>(
+      fcppt::make_int_range_count(ready),
+      [this](unsigned const _index)
+      {
+        epoll_event const &event(this->events_[_index]);
 
-	unsigned const ready(
-		fcppt::cast::to_unsigned(
-			ret
-		)
-	);
-
-	return
-		fcppt::algorithm::map_optional<
-			awl::backends::linux::epoll::fd_vector
-		>(
-			fcppt::make_int_range_count(
-				ready
-			),
-			[
-				this
-			](
-				unsigned const _index
-			)
-			{
-				epoll_event const &event(
-					this->events_[
-						_index
-					]
-				);
-
-				return
-					fcppt::optional::make_if(
-						(
-							event.events
-							&
-							EPOLLIN
-						)
-						!= 0,
-						[
-							&event
-						]{
-							return
-								awl::backends::posix::fd{
-									event.data.fd
-								};
-						}
-					);
-			}
-		);
+        return fcppt::optional::make_if(
+            (event.events & EPOLLIN) != 0,
+            [&event] { return awl::backends::posix::fd{event.data.fd}; });
+      });
 }

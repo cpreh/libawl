@@ -8,7 +8,6 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -18,30 +17,23 @@ namespace windows
 namespace cursor
 {
 
-class AWL_DETAIL_CLASS_SYMBOL shared
-:
-	public awl::backends::windows::cursor::object
+class AWL_DETAIL_CLASS_SYMBOL shared : public awl::backends::windows::cursor::object
 {
-	FCPPT_NONCOPYABLE(
-		shared
-	);
+  FCPPT_NONCOPYABLE(shared);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	shared(
-		HCURSOR
-	);
+  AWL_DETAIL_SYMBOL
+  explicit shared(HCURSOR);
 
-	AWL_DETAIL_SYMBOL
-	~shared()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~shared() override;
 
-	AWL_DETAIL_SYMBOL
-	HCURSOR
-	get() const
-	override;
+  AWL_DETAIL_SYMBOL
+  HCURSOR
+  get() const override;
+
 private:
-	HCURSOR const cursor_;
+  HCURSOR const cursor_;
 };
 
 }

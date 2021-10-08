@@ -10,55 +10,34 @@
 #include <wayland-util.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland
 {
 
-template<
-	typename Type,
-	wl_interface const &Interface,
-	void (&Destroy)(Type *)
->
+template <typename Type, wl_interface const &Interface, void (&Destroy)(Type *)>
 class registry_object
 {
-	FCPPT_NONCOPYABLE(
-		registry_object
-	);
+  FCPPT_NONCOPYABLE(registry_object);
+
 public:
-	registry_object(
-		wl_registry *,
-		awl::backends::wayland::registry_id
-	);
+  registry_object(wl_registry *, awl::backends::wayland::registry_id);
 
-	AWL_DETAIL_SYMBOL
-	registry_object(
-		registry_object &&
-	)
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  registry_object(registry_object &&) noexcept;
 
-	AWL_DETAIL_SYMBOL
-	registry_object &
-	operator=(
-		registry_object &&
-	)
-	noexcept;
+  AWL_DETAIL_SYMBOL
+  registry_object &operator=(registry_object &&) noexcept;
 
-	AWL_DETAIL_SYMBOL
-	~registry_object();
+  AWL_DETAIL_SYMBOL
+  ~registry_object();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	Type *
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL Type *get() const;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::wayland::registry_id
-	name() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::wayland::registry_id name() const;
+
 private:
-	Type *value_;
+  Type *value_;
 
-	awl::backends::wayland::registry_id name_;
+  awl::backends::wayland::registry_id name_;
 };
 
 }

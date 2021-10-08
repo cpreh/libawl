@@ -7,38 +7,14 @@
 #include <sys/epoll.h>
 #include <fcppt/config/external_end.hpp>
 
-
-awl::backends::linux::epoll::fd::fd()
-:
-	fd_{
-		::epoll_create1(
-			EPOLL_CLOEXEC
-		)
-	}
+awl::backends::linux::epoll::fd::fd() : fd_{::epoll_create1(EPOLL_CLOEXEC)}
 {
-	if(
-		fd_.get()
-		==
-		-1
-	)
-	{
-		throw
-			awl::exception{
-				FCPPT_TEXT("epoll_create failed!")
-			};
-	}
+  if (fd_.get() == -1)
+  {
+    throw awl::exception{FCPPT_TEXT("epoll_create failed!")};
+  }
 }
 
-awl::backends::linux::epoll::fd::~fd()
-{
-	::close(
-		fd_.get()
-	);
-}
+awl::backends::linux::epoll::fd::~fd() { ::close(fd_.get()); }
 
-awl::backends::posix::fd
-awl::backends::linux::epoll::fd::get() const
-{
-	return
-		fd_;
-}
+awl::backends::posix::fd awl::backends::linux::epoll::fd::get() const { return fd_; }

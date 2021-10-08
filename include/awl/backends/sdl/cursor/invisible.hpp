@@ -6,30 +6,22 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::sdl::cursor
 {
 
-class AWL_DETAIL_CLASS_SYMBOL invisible
-:
-	public awl::backends::sdl::cursor::object
+class AWL_DETAIL_CLASS_SYMBOL invisible : public awl::backends::sdl::cursor::object
 {
-	FCPPT_NONMOVABLE(
-		invisible
-	);
+  FCPPT_NONMOVABLE(invisible);
+
 public:
-	AWL_DETAIL_SYMBOL
-	invisible();
+  AWL_DETAIL_SYMBOL
+  invisible();
 
-	AWL_DETAIL_SYMBOL
-	~invisible()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~invisible() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::sdl::cursor::object::cursor_ref
-	get() const
-	override;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::sdl::cursor::object::cursor_ref
+  get() const override;
 };
 
 }

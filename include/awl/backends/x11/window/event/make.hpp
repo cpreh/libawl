@@ -5,15 +5,11 @@
 #include <awl/backends/x11/window/event/object_fwd.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 
-
 namespace awl::backends::x11::window::event
 {
 
 awl::event::base_unique_ptr
-make(
-	awl::backends::x11::window::object_ref,
-	awl::backends::x11::window::event::object const &
-);
+make(awl::backends::x11::window::object_ref, awl::backends::x11::window::event::object const &);
 
 }
 

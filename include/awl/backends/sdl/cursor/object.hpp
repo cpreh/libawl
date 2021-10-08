@@ -11,36 +11,23 @@
 #include <SDL_mouse.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::cursor
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::cursor::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::cursor::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	object();
+  AWL_DETAIL_SYMBOL
+  object();
 
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	using
-	cursor_ref
-	=
-	fcppt::optional::reference<
-		SDL_Cursor
-	>;
+  using cursor_ref = fcppt::optional::reference<SDL_Cursor>;
 
-	[[nodiscard]]
-	virtual
-	cursor_ref
-	get() const = 0;
+  [[nodiscard]] virtual cursor_ref get() const = 0;
 };
 
 }

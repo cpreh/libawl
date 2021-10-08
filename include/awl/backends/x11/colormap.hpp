@@ -8,38 +8,32 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11
 {
 
 class colormap
 {
-	FCPPT_NONMOVABLE(
-		colormap
-	);
+  FCPPT_NONMOVABLE(colormap);
+
 public:
-	AWL_DETAIL_SYMBOL
-	colormap(
-		awl::backends::x11::display_ref,
-		awl::backends::x11::screen,
-		awl::backends::x11::visual::object const &
-	);
+  AWL_DETAIL_SYMBOL
+  colormap(
+      awl::backends::x11::display_ref,
+      awl::backends::x11::screen,
+      awl::backends::x11::visual::object const &);
 
-	AWL_DETAIL_SYMBOL
-	~colormap();
+  AWL_DETAIL_SYMBOL
+  ~colormap();
 
-	AWL_DETAIL_SYMBOL
-	Colormap &
-	get();
+  AWL_DETAIL_SYMBOL
+  Colormap &get();
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	Colormap const &
-	get() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL Colormap const &get() const;
+
 private:
-	awl::backends::x11::display_ref const display_;
+  awl::backends::x11::display_ref const display_;
 
-	Colormap colormap_;
+  Colormap colormap_;
 };
 
 }

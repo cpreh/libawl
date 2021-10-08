@@ -31,139 +31,69 @@
 #include <fcppt/log/format/optional_function.hpp>
 #include <fcppt/optional/maybe.hpp>
 
-
 awl::backends::wayland::system::original_object::original_object(
-	fcppt::log::context_reference const _log_context
-)
-:
-	awl::backends::wayland::system::object(),
-	log_{
-		_log_context,
-		awl::log_location(),
-		fcppt::log::parameters{
-			awl::impl::backends::wayland::log_name(),
-			fcppt::log::format::optional_function()
-		}
-	},
-	display_{},
-	processor_{
-		fcppt::unique_ptr_to_base<
-			awl::backends::wayland::system::event::processor
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::wayland::system::event::original_processor
-			>(
-				fcppt::make_ref(
-					log_
-				),
-				fcppt::reference_to_base<
-					awl::backends::wayland::display
-				>(
-					fcppt::make_ref(
-						display_
-					)
-				)
-			)
-		)
-	},
-	cursor_theme_{
-		processor_->shm()
-	}
+    fcppt::log::context_reference const _log_context)
+    : awl::backends::wayland::system::object(),
+      log_{
+          _log_context,
+          awl::log_location(),
+          fcppt::log::parameters{
+              awl::impl::backends::wayland::log_name(), fcppt::log::format::optional_function()}},
+      display_{},
+      processor_{fcppt::unique_ptr_to_base<awl::backends::wayland::system::event::processor>(
+          fcppt::make_unique_ptr<awl::backends::wayland::system::event::original_processor>(
+              fcppt::make_ref(log_),
+              fcppt::reference_to_base<awl::backends::wayland::display>(
+                  fcppt::make_ref(display_))))},
+      cursor_theme_{processor_->shm()}
 {
 }
 
-awl::backends::wayland::system::original_object::~original_object()
-= default;
+awl::backends::wayland::system::original_object::~original_object() = default;
 
-awl::window::object_unique_ptr
-awl::backends::wayland::system::original_object::create_window(
-	awl::window::parameters const &_parameters
-)
+awl::window::object_unique_ptr awl::backends::wayland::system::original_object::create_window(
+    awl::window::parameters const &_parameters)
 {
-	awl::window::object_unique_ptr result{
-		fcppt::unique_ptr_to_base<
-			awl::window::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::wayland::window::original_object
-			>(
-				fcppt::make_ref(
-					log_
-				),
-				processor_->events(),
-				display_,
-				processor_->compositor(),
-				processor_->shell(),
-				_parameters
-			)
-		)
-	};
+  awl::window::object_unique_ptr result{fcppt::unique_ptr_to_base<awl::window::object>(
+      fcppt::make_unique_ptr<awl::backends::wayland::window::original_object>(
+          fcppt::make_ref(log_),
+          processor_->events(),
+          display_,
+          processor_->compositor(),
+          processor_->shell(),
+          _parameters))};
 
-	// TODO(philipp): Do we need this?
-	awl::backends::wayland::display_roundtrip(
-		display_
-	);
+  // TODO(philipp): Do we need this?
+  awl::backends::wayland::display_roundtrip(display_);
 
-	return
-		result;
+  return result;
 }
 
-awl::system::event::processor &
-awl::backends::wayland::system::original_object::processor()
+awl::system::event::processor &awl::backends::wayland::system::original_object::processor()
 {
-	return
-		*processor_;
+  return *processor_;
 }
 
-awl::visual::object_unique_ptr
-awl::backends::wayland::system::original_object::default_visual()
+awl::visual::object_unique_ptr awl::backends::wayland::system::original_object::default_visual()
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::visual::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::wayland::visual::null_object
-			>()
-		);
+  return fcppt::unique_ptr_to_base<awl::visual::object>(
+      fcppt::make_unique_ptr<awl::backends::wayland::visual::null_object>());
 }
 
-awl::cursor::object_unique_ptr
-awl::backends::wayland::system::original_object::create_cursor(
-	awl::cursor::optional_type const &_optional_type
-)
+awl::cursor::object_unique_ptr awl::backends::wayland::system::original_object::create_cursor(
+    awl::cursor::optional_type const &_optional_type)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::cursor::object
-		>(
-			fcppt::optional::maybe(
-				_optional_type,
-				[]{
-					return
-						awl::backends::wayland::cursor::create_invisible();
-				},
-				[
-					this
-				](
-					awl::cursor::type const _type
-				)
-				{
-					return
-						awl::backends::wayland::cursor::create_name(
-							this->cursor_theme_,
-							awl::backends::wayland::cursor::convert_name(
-								_type
-							)
-						);
-				}
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::cursor::object>(fcppt::optional::maybe(
+      _optional_type,
+      [] { return awl::backends::wayland::cursor::create_invisible(); },
+      [this](awl::cursor::type const _type)
+      {
+        return awl::backends::wayland::cursor::create_name(
+            this->cursor_theme_, awl::backends::wayland::cursor::convert_name(_type));
+      }));
 }
 
-awl::backends::wayland::display &
-awl::backends::wayland::system::original_object::display()
+awl::backends::wayland::display &awl::backends::wayland::system::original_object::display()
 {
-	return
-		display_;
+  return display_;
 }

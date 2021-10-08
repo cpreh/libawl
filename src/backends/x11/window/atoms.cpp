@@ -4,31 +4,15 @@
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 
-
 awl::backends::x11::window::atoms::atoms(
-	Atom const *const _atoms,
-	awl::backends::x11::window::atom_count const _count
-)
-:
-	atoms_(
-		_atoms
-	),
-	count_(
-		_count
-	)
+    Atom const *const _atoms, awl::backends::x11::window::atom_count const _count)
+    : atoms_(_atoms), count_(_count)
 {
 }
 
-Atom const *
-awl::backends::x11::window::atoms::get() const
-{
-	return
-		atoms_;
-}
+Atom const *awl::backends::x11::window::atoms::get() const { return atoms_; }
 
-awl::backends::x11::window::atom_count
-awl::backends::x11::window::atoms::count() const
+awl::backends::x11::window::atom_count awl::backends::x11::window::atoms::count() const
 {
-	return
-		count_;
+  return count_;
 }

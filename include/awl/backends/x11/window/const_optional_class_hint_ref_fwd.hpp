@@ -4,16 +4,11 @@
 #include <awl/backends/x11/window/class_hint_fwd.hpp>
 #include <fcppt/optional/reference_fwd.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-using
-const_optional_class_hint_ref
-=
-fcppt::optional::reference<
-	awl::backends::x11::window::class_hint const
->;
+using const_optional_class_hint_ref =
+    fcppt::optional::reference<awl::backends::x11::window::class_hint const>;
 
 }
 

@@ -5,7 +5,6 @@
 #include <awl/backends/windows/window/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -17,9 +16,7 @@ namespace window
 
 AWL_DETAIL_SYMBOL
 awl::backends::windows::optional_rect
-get_client_rect(
-	awl::backends::windows::window::object const &
-);
+get_client_rect(awl::backends::windows::window::object const &);
 
 }
 }

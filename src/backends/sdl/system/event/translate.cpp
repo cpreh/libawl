@@ -31,189 +31,71 @@
 #include <SDL_video.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace
 {
 
-fcppt::optional::object<
-	awl::event::base_unique_ptr
->
-translate_opt(
-	awl::backends::sdl::system::event::timer_type const _timer_event,
-	SDL_Event const &_event
-)
+fcppt::optional::object<awl::event::base_unique_ptr> translate_opt(
+    awl::backends::sdl::system::event::timer_type const _timer_event, SDL_Event const &_event)
 {
-	if(
-		_event.type
-		==
-		_timer_event.get().get()
-	)
-	{
-		return
-			fcppt::optional::make(
-				fcppt::unique_ptr_to_base<
-					awl::event::base
-				>(
-					fcppt::make_unique_ptr<
-						awl::timer::event
-					>(
-						fcppt::reference_to_base<
-							awl::timer::object
-						>(
-							fcppt::make_ref(
-								*fcppt::cast::from_void_ptr<
-									awl::backends::sdl::timer::object *
-								>(
-									_event.user.data1
-								)
-							)
-						)
-					)
-				)
-			);
-	}
+  if (_event.type == _timer_event.get().get())
+  {
+    return fcppt::optional::make(fcppt::unique_ptr_to_base<awl::event::base>(
+        fcppt::make_unique_ptr<awl::timer::event>(fcppt::reference_to_base<awl::timer::object>(
+            fcppt::make_ref(*fcppt::cast::from_void_ptr<awl::backends::sdl::timer::object *>(
+                _event.user.data1))))));
+  }
 
-	if(
-		_event.type
-		==
-		SDL_WINDOWEVENT
-	)
-	{
-		SDL_WindowEvent const &event{
-			_event.window
-		};
+  if (_event.type == SDL_WINDOWEVENT)
+  {
+    SDL_WindowEvent const &event{_event.window};
 
-		fcppt::reference<
-			SDL_Window
-		> const sdl_window{
-			FCPPT_ASSERT_OPTIONAL_ERROR(
-				awl::backends::sdl::window::from_id(
-					event.windowID
-				)
-			)
-		};
+    fcppt::reference<SDL_Window> const sdl_window{
+        FCPPT_ASSERT_OPTIONAL_ERROR(awl::backends::sdl::window::from_id(event.windowID))};
 
-		awl::backends::sdl::window::object &sdl_window_ref{
-			awl::backends::sdl::window::get_object(
-				sdl_window
-			)
-		};
+    awl::backends::sdl::window::object &sdl_window_ref{
+        awl::backends::sdl::window::get_object(sdl_window)};
 
-		awl::window::reference const window{
-			fcppt::reference_to_base<
-				awl::window::object
-			>(
-				fcppt::make_ref(
-					sdl_window_ref
-				)
-			)
-		};
+    awl::window::reference const window{
+        fcppt::reference_to_base<awl::window::object>(fcppt::make_ref(sdl_window_ref))};
 
-		switch(
-			event.event
-		)
-		{
-		case SDL_WINDOWEVENT_SHOWN:
-			return
-				fcppt::optional::make(
-					fcppt::unique_ptr_to_base<
-						awl::event::base
-					>(
-						fcppt::make_unique_ptr<
-							awl::window::event::show
-						>(
-							window
-						)
-					)
-				);
-		case SDL_WINDOWEVENT_HIDDEN:
-			return
-				fcppt::optional::make(
-					fcppt::unique_ptr_to_base<
-						awl::event::base
-					>(
-						fcppt::make_unique_ptr<
-							awl::window::event::hide
-						>(
-							window
-						)
-					)
-				);
-		case SDL_WINDOWEVENT_RESIZED:
-			return
-				fcppt::optional::make(
-					fcppt::unique_ptr_to_base<
-						awl::event::base
-					>(
-						fcppt::make_unique_ptr<
-							awl::window::event::resize
-						>(
-							window,
-							awl::window::dim{
-								fcppt::cast::to_unsigned(
-									event.data1
-								),
-								fcppt::cast::to_unsigned(
-									event.data2
-								)
-							}
-						)
-					)
-				);
-		case SDL_WINDOWEVENT_CLOSE:
-			return
-				fcppt::optional::make(
-					fcppt::unique_ptr_to_base<
-						awl::event::base
-					>(
-						fcppt::make_unique_ptr<
-							awl::window::event::close
-						>(
-							window
-						)
-					)
-				);
-		case SDL_WINDOWEVENT_ENTER:
-			sdl_window_ref.set_cursor();
-			break;
+    switch (event.event)
+    {
+    case SDL_WINDOWEVENT_SHOWN:
+      return fcppt::optional::make(fcppt::unique_ptr_to_base<awl::event::base>(
+          fcppt::make_unique_ptr<awl::window::event::show>(window)));
+    case SDL_WINDOWEVENT_HIDDEN:
+      return fcppt::optional::make(fcppt::unique_ptr_to_base<awl::event::base>(
+          fcppt::make_unique_ptr<awl::window::event::hide>(window)));
+    case SDL_WINDOWEVENT_RESIZED:
+      return fcppt::optional::make(fcppt::unique_ptr_to_base<awl::event::base>(
+          fcppt::make_unique_ptr<awl::window::event::resize>(
+              window,
+              awl::window::dim{
+                  fcppt::cast::to_unsigned(event.data1), fcppt::cast::to_unsigned(event.data2)})));
+    case SDL_WINDOWEVENT_CLOSE:
+      return fcppt::optional::make(fcppt::unique_ptr_to_base<awl::event::base>(
+          fcppt::make_unique_ptr<awl::window::event::close>(window)));
+    case SDL_WINDOWEVENT_ENTER:
+      sdl_window_ref.set_cursor();
+      break;
 
-		// TODO(philipp): Add destroy event
-		}
-	}
+      // TODO(philipp): Add destroy event
+    }
+  }
 
-	return
-		fcppt::optional::object<
-			awl::event::base_unique_ptr
-		>{};
+  return fcppt::optional::object<awl::event::base_unique_ptr>{};
 }
 
 }
 
-awl::event::base_unique_ptr
-awl::backends::sdl::system::event::translate(
-	awl::backends::sdl::system::event::timer_type const _timer_event,
-	SDL_Event const &_event
-)
+awl::event::base_unique_ptr awl::backends::sdl::system::event::translate(
+    awl::backends::sdl::system::event::timer_type const _timer_event, SDL_Event const &_event)
 {
-	return
-		fcppt::optional::from(
-			translate_opt(
-				_timer_event,
-				_event
-			),
-			[
-				&_event
-			]{
-				return
-					fcppt::unique_ptr_to_base<
-						awl::event::base
-					>(
-						fcppt::make_unique_ptr<
-							awl::backends::sdl::system::event::object
-						>(
-							_event
-						)
-					);
-			}
-		);
+  return fcppt::optional::from(
+      translate_opt(_timer_event, _event),
+      [&_event]
+      {
+        return fcppt::unique_ptr_to_base<awl::event::base>(
+            fcppt::make_unique_ptr<awl::backends::sdl::system::event::object>(_event));
+      });
 }

@@ -5,5 +5,4 @@
 #include <awl/window/optional_dim_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

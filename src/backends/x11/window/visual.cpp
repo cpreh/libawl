@@ -8,25 +8,11 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 
-
 awl::backends::x11::visual::object_unique_ptr
-awl::backends::x11::window::visual(
-	awl::backends::x11::window::base const &_window
-)
+awl::backends::x11::window::visual(awl::backends::x11::window::base const &_window)
 {
-	return
-		fcppt::unique_ptr_to_base<
-			awl::backends::x11::visual::object
-		>(
-			fcppt::make_unique_ptr<
-				awl::backends::x11::visual::wrapped
-			>(
-				awl::backends::x11::visual::create_info(
-					_window.display().get(),
-					*awl::backends::x11::window::attributes(
-						_window
-					).visual
-				)
-			)
-		);
+  return fcppt::unique_ptr_to_base<awl::backends::x11::visual::object>(
+      fcppt::make_unique_ptr<awl::backends::x11::visual::wrapped>(
+          awl::backends::x11::visual::create_info(
+              _window.display().get(), *awl::backends::x11::window::attributes(_window).visual)));
 }

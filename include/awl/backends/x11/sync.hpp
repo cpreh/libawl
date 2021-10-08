@@ -5,16 +5,11 @@
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11
 {
 
 AWL_DETAIL_SYMBOL
-void
-sync(
-	awl::backends::x11::display const &,
-	awl::backends::x11::discard
-);
+void sync(awl::backends::x11::display const &, awl::backends::x11::discard);
 
 }
 

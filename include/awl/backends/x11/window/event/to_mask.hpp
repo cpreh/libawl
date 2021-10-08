@@ -5,15 +5,12 @@
 #include <awl/backends/x11/window/event/type.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11::window::event
 {
 
 AWL_DETAIL_SYMBOL
 awl::backends::x11::window::event::optional_mask_bit
-to_mask(
-	awl::backends::x11::window::event::type
-);
+    to_mask(awl::backends::x11::window::event::type);
 
 }
 

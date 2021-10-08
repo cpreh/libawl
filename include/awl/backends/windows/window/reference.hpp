@@ -4,7 +4,6 @@
 #include <awl/backends/windows/window/object_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,11 +13,7 @@ namespace windows
 namespace window
 {
 
-typedef
-fcppt::reference<
-	awl::backends::windows::window::object
->
-reference;
+typedef fcppt::reference<awl::backends::windows::window::object> reference;
 
 }
 }

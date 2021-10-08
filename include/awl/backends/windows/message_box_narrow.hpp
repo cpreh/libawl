@@ -8,7 +8,6 @@
 #include <string>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,13 +15,11 @@ namespace backends
 namespace windows
 {
 
-void
-message_box_narrow(
-	awl::backends::windows::window::const_optional_object_ref const &,
-	std::string const &text,
-	std::string const &title,
-	UINT type
-);
+void message_box_narrow(
+    awl::backends::windows::window::const_optional_object_ref const &,
+    std::string const &text,
+    std::string const &title,
+    UINT type);
 
 }
 }

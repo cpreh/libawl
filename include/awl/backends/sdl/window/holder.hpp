@@ -7,28 +7,22 @@
 #include <SDL_video.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::window
 {
 
 class holder
 {
-	FCPPT_NONMOVABLE(
-		holder
-	);
+  FCPPT_NONMOVABLE(holder);
+
 public:
-	explicit
-	holder(
-		SDL_Window *
-	);
+  explicit holder(SDL_Window *);
 
-	~holder();
+  ~holder();
 
-	[[nodiscard]]
-	awl::backends::sdl::window::native_reference
-	get() const;
+  [[nodiscard]] awl::backends::sdl::window::native_reference get() const;
+
 private:
-	SDL_Window *const window_;
+  SDL_Window *const window_;
 };
 
 }

@@ -9,39 +9,26 @@
 #include <awl/visual/object.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::x11::visual
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::visual::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::visual::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 protected:
-	AWL_DETAIL_SYMBOL
-	object();
+  AWL_DETAIL_SYMBOL
+  object();
+
 public:
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	[[nodiscard]]
-	virtual
-	Visual *
-	get() const = 0;
+  [[nodiscard]] virtual Visual *get() const = 0;
 
-	[[nodiscard]]
-	virtual
-	XVisualInfo *
-	info() const = 0;
+  [[nodiscard]] virtual XVisualInfo *info() const = 0;
 
-	[[nodiscard]]
-	virtual
-	int
-	depth() const = 0;
+  [[nodiscard]] virtual int depth() const = 0;
 };
 
 }

@@ -8,39 +8,27 @@
 #include <awl/visual/object.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::sdl::visual
 {
 
-class AWL_DETAIL_CLASS_SYMBOL object
-:
-	public awl::visual::object
+class AWL_DETAIL_CLASS_SYMBOL object : public awl::visual::object
 {
-	FCPPT_NONMOVABLE(
-		object
-	);
+  FCPPT_NONMOVABLE(object);
+
 public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	object(
-		awl::backends::sdl::visual::flags
-	);
+  AWL_DETAIL_SYMBOL
+  explicit object(awl::backends::sdl::visual::flags);
 
-	AWL_DETAIL_SYMBOL
-	~object()
-	override;
+  AWL_DETAIL_SYMBOL
+  ~object() override;
 
-	[[nodiscard]]
-	AWL_DETAIL_SYMBOL
-	awl::backends::sdl::visual::flags
-	flags() const;
+  [[nodiscard]] AWL_DETAIL_SYMBOL awl::backends::sdl::visual::flags flags() const;
 
-	AWL_DETAIL_SYMBOL
-	virtual
-	void
-	apply() const;
+  AWL_DETAIL_SYMBOL
+  virtual void apply() const;
+
 private:
-	awl::backends::sdl::visual::flags const flags_;
+  awl::backends::sdl::visual::flags const flags_;
 };
 
 }

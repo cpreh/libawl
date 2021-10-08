@@ -8,29 +8,22 @@
 #include <awl/timer/object.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::posix
 {
 
-class AWL_DETAIL_CLASS_SYMBOL timer
-:
-	public awl::timer::object
+class AWL_DETAIL_CLASS_SYMBOL timer : public awl::timer::object
 {
-	FCPPT_NONMOVABLE(
-		timer
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	timer();
-public:
-	AWL_DETAIL_SYMBOL
-	~timer()
-	override;
+  FCPPT_NONMOVABLE(timer);
 
-	[[nodiscard]]
-	virtual
-	awl::backends::posix::fd
-	fd() const = 0;
+protected:
+  AWL_DETAIL_SYMBOL
+  timer();
+
+public:
+  AWL_DETAIL_SYMBOL
+  ~timer() override;
+
+  [[nodiscard]] virtual awl::backends::posix::fd fd() const = 0;
 };
 
 }

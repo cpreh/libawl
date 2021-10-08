@@ -4,17 +4,10 @@
 #include <awl/backends/x11/pixmap/size.hpp>
 #include <fcppt/math/dim/static_fwd.hpp>
 
-
 namespace awl::backends::x11::pixmap
 {
 
-using
-dim
-=
-fcppt::math::dim::static_<
-	awl::backends::x11::pixmap::size,
-	2
->;
+using dim = fcppt::math::dim::static_<awl::backends::x11::pixmap::size, 2>;
 
 }
 

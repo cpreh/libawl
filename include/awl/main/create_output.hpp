@@ -8,16 +8,11 @@
 #include <filesystem>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::main
 {
 
 AWL_DETAIL_SYMBOL
-awl::main::output_unique_ptr
-create_output(
-	fcppt::io::ostream &,
-	std::filesystem::path const &
-);
+awl::main::output_unique_ptr create_output(fcppt::io::ostream &, std::filesystem::path const &);
 
 }
 

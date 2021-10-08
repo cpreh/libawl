@@ -5,14 +5,10 @@
 #include <fcppt/declare_strong_typedef.hpp>
 #include <fcppt/strong_typedef.hpp>
 
-
 namespace awl::backends::x11::cursor
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	awl::backends::x11::pixmap::const_holder_ref,
-	source_pixmap
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(awl::backends::x11::pixmap::const_holder_ref, source_pixmap);
 
 }
 

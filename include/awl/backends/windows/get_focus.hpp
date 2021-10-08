@@ -3,7 +3,6 @@
 
 #include <awl/backends/windows/windows.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -11,8 +10,7 @@ namespace backends
 namespace windows
 {
 
-HWND
-get_focus();
+HWND get_focus();
 
 }
 }

@@ -7,7 +7,6 @@
 #include <awl/backends/windows/wparam.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -16,13 +15,11 @@ namespace windows
 {
 
 AWL_DETAIL_SYMBOL
-void
-post_message(
-	HWND,
-	awl::backends::windows::message_type,
-	awl::backends::windows::wparam,
-	awl::backends::windows::lparam
-);
+void post_message(
+    HWND,
+    awl::backends::windows::message_type,
+    awl::backends::windows::wparam,
+    awl::backends::windows::lparam);
 
 }
 }

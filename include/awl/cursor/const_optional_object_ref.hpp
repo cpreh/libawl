@@ -4,5 +4,4 @@
 #include <awl/cursor/const_optional_object_ref_fwd.hpp>
 #include <fcppt/optional/reference.hpp>
 
-
 #endif

@@ -4,7 +4,6 @@
 #include <awl/backends/windows/timer/waitable_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,11 +13,7 @@ namespace windows
 namespace timer
 {
 
-typedef
-fcppt::unique_ptr<
-	awl::backends::windows::timer::waitable
->
-waitable_unique_ptr;
+typedef fcppt::unique_ptr<awl::backends::windows::timer::waitable> waitable_unique_ptr;
 
 }
 }

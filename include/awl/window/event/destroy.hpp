@@ -8,27 +8,19 @@
 #include <awl/window/event/destroy_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::window::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL destroy
-:
-	public awl::window::event::base
+class AWL_DETAIL_CLASS_SYMBOL destroy : public awl::window::event::base
 {
-	FCPPT_NONMOVABLE(
-		destroy
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	destroy(
-		awl::window::reference
-	);
+  FCPPT_NONMOVABLE(destroy);
 
-	AWL_DETAIL_SYMBOL
-	~destroy()
-	override;
+public:
+  AWL_DETAIL_SYMBOL
+  explicit destroy(awl::window::reference);
+
+  AWL_DETAIL_SYMBOL
+  ~destroy() override;
 };
 
 }

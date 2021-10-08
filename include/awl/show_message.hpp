@@ -4,15 +4,11 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace awl
 {
 
 AWL_DETAIL_SYMBOL
-void
-show_message(
-	fcppt::string const &
-);
+void show_message(fcppt::string const &);
 
 }
 

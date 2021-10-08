@@ -22,79 +22,28 @@
 #include <fcppt/array/init.hpp>
 #include <fcppt/array/object_impl.hpp>
 
-
 awl::backends::x11::cursor::object_unique_ptr
-awl::backends::x11::cursor::create_invisible(
-	awl::backends::x11::display_ref const _display
-)
+awl::backends::x11::cursor::create_invisible(awl::backends::x11::display_ref const _display)
 {
-	awl::backends::x11::pixmap::size const size{
-		8
-	};
+  awl::backends::x11::pixmap::size const size{8};
 
-	auto const bm_no_data{
-		fcppt::array::init<
-			fcppt::array::object<
-				char,
-				size * size
-				/
-				8
-			>
-		>(
-			[](auto)
-			{
-				return
-					'\0';
-			}
-		)
-	};
+  auto const bm_no_data{
+      fcppt::array::init<fcppt::array::object<char, size * size / 8>>([](auto) { return '\0'; })};
 
-	awl::backends::x11::pixmap::holder_unique_ptr const pixmap(
-		awl::backends::x11::pixmap::create_from_data(
-			*awl::backends::x11::window::root(
-				_display,
-				awl::backends::x11::default_screen(
-					_display
-				)
-			),
-			awl::backends::x11::pixmap::dim(
-				size,
-				size
-			),
-			bm_no_data.data()
-		)
-	);
+  awl::backends::x11::pixmap::holder_unique_ptr const pixmap(
+      awl::backends::x11::pixmap::create_from_data(
+          *awl::backends::x11::window::root(_display, awl::backends::x11::default_screen(_display)),
+          awl::backends::x11::pixmap::dim(size, size),
+          bm_no_data.data()));
 
-	XColor const black{
-		0, 0, 0, 0, 0, 0
-	};
+  XColor const black{0, 0, 0, 0, 0, 0};
 
-	return
-		fcppt::make_unique_ptr<
-			awl::backends::x11::cursor::object
-		>(
-			awl::backends::x11::cursor::create_pixmap(
-				_display,
-				awl::backends::x11::cursor::source_pixmap(
-					fcppt::make_cref(
-						*pixmap
-					)
-				),
-				awl::backends::x11::cursor::dest_pixmap(
-					fcppt::make_cref(
-						*pixmap
-					)
-				),
-				awl::backends::x11::cursor::foreground_color(
-					black
-				),
-				awl::backends::x11::cursor::background_color(
-					black
-				),
-				awl::cursor::hotspot(
-					0U,
-					0U
-				)
-			)
-		);
+  return fcppt::make_unique_ptr<awl::backends::x11::cursor::object>(
+      awl::backends::x11::cursor::create_pixmap(
+          _display,
+          awl::backends::x11::cursor::source_pixmap(fcppt::make_cref(*pixmap)),
+          awl::backends::x11::cursor::dest_pixmap(fcppt::make_cref(*pixmap)),
+          awl::backends::x11::cursor::foreground_color(black),
+          awl::backends::x11::cursor::background_color(black),
+          awl::cursor::hotspot(0U, 0U)));
 }

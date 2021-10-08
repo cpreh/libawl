@@ -7,7 +7,6 @@
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/string.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -17,33 +16,25 @@ namespace windows
 
 class counted_wndclass
 {
-	FCPPT_NONCOPYABLE(
-		counted_wndclass
-	);
+  FCPPT_NONCOPYABLE(counted_wndclass);
+
 public:
-	typedef
-	unsigned
-	counter_type;
+  typedef unsigned counter_type;
 
-	counted_wndclass(
-		fcppt::string const &,
-		WNDPROC
-	);
+  counted_wndclass(fcppt::string const &, WNDPROC);
 
-	~counted_wndclass();
+  ~counted_wndclass();
 
-	void
-	add_ref();
+  void add_ref();
 
-	counter_type
-	release();
+  counter_type release();
 
-	awl::backends::windows::wndclass &
-	wndclass();
+  awl::backends::windows::wndclass &wndclass();
+
 private:
-	awl::backends::windows::wndclass wndclass_;
+  awl::backends::windows::wndclass wndclass_;
 
-	counter_type counter_;
+  counter_type counter_;
 };
 
 }

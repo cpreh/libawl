@@ -7,27 +7,22 @@
 #include <awl/detail/symbol.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::backends::posix
 {
 
 class AWL_DETAIL_CLASS_SYMBOL processor_base
 {
-	FCPPT_NONMOVABLE(
-		processor_base
-	);
-protected:
-	AWL_DETAIL_SYMBOL
-	processor_base();
-public:
-	AWL_DETAIL_SYMBOL
-	virtual
-	~processor_base();
+  FCPPT_NONMOVABLE(processor_base);
 
-	[[nodiscard]]
-	virtual
-	awl::backends::posix::processor &
-	fd_processor() = 0;
+protected:
+  AWL_DETAIL_SYMBOL
+  processor_base();
+
+public:
+  AWL_DETAIL_SYMBOL
+  virtual ~processor_base();
+
+  [[nodiscard]] virtual awl::backends::posix::processor &fd_processor() = 0;
 };
 
 }

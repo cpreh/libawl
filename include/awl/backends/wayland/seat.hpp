@@ -4,10 +4,6 @@
 #include <awl/backends/wayland/make_registry_object.hpp>
 #include <awl/backends/wayland/seat_fwd.hpp>
 
-
-AWL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT(
-	seat
-);
-
+AWL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT(seat);
 
 #endif

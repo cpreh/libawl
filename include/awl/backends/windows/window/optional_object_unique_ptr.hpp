@@ -4,5 +4,4 @@
 #include <awl/backends/windows/window/optional_object_unique_ptr_fwd.hpp>
 #include <fcppt/optional/object_impl.hpp>
 
-
 #endif

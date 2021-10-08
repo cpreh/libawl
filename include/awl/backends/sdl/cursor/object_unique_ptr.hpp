@@ -4,16 +4,10 @@
 #include <awl/backends/sdl/cursor/object_fwd.hpp>
 #include <fcppt/unique_ptr_impl.hpp>
 
-
 namespace awl::backends::sdl::cursor
 {
 
-using
-object_unique_ptr
-=
-fcppt::unique_ptr<
-	awl::backends::sdl::cursor::object
->;
+using object_unique_ptr = fcppt::unique_ptr<awl::backends::sdl::cursor::object>;
 
 }
 

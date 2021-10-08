@@ -5,15 +5,11 @@
 #include <awl/backends/wayland/display_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::wayland
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::posix::fd
-display_fd(
-	awl::backends::wayland::display const &
-);
+awl::backends::posix::fd display_fd(awl::backends::wayland::display const &);
 
 }
 

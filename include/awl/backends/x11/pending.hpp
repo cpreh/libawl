@@ -4,15 +4,11 @@
 #include <awl/backends/x11/display_fwd.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl::backends::x11
 {
 
 AWL_DETAIL_SYMBOL
-unsigned
-pending(
-	awl::backends::x11::display const &
-);
+unsigned pending(awl::backends::x11::display const &);
 
 }
 

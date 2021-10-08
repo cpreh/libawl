@@ -4,14 +4,10 @@
 #include <awl/backends/x11/X.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
 
-
 namespace awl::backends::x11
 {
 
-FCPPT_DECLARE_STRONG_TYPEDEF(
-	Atom,
-	atom
-);
+FCPPT_DECLARE_STRONG_TYPEDEF(Atom, atom);
 
 }
 

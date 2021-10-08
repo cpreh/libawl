@@ -6,13 +6,11 @@
 #include <SDL_events.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::sdl::system::event
 {
 
 AWL_DETAIL_SYMBOL
-SDL_Event
-wait();
+SDL_Event wait();
 
 }
 

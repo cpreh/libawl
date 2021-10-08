@@ -5,15 +5,10 @@
 #include <wayland-util.h>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::backends::wayland
 {
 
-template<
-	typename Type,
-	wl_interface const &Interface,
-	void (&Destroy)(Type *)
->
+template <typename Type, wl_interface const &Interface, void (&Destroy)(Type *)>
 class registry_object;
 
 }

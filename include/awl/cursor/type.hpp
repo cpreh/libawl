@@ -3,15 +3,14 @@
 
 #include <awl/cursor/type_fwd.hpp>
 
-
 namespace awl::cursor
 {
 
 enum class type
 {
-	arrow,
-	cross,
-	hand
+  arrow,
+  cross,
+  hand
 };
 
 }

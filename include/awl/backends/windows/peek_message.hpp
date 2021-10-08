@@ -5,7 +5,6 @@
 #include <awl/backends/windows/windows.hpp>
 #include <awl/detail/symbol.hpp>
 
-
 namespace awl
 {
 namespace backends
@@ -14,10 +13,7 @@ namespace windows
 {
 
 AWL_DETAIL_SYMBOL
-awl::backends::windows::optional_message
-peek_message(
-	HWND
-);
+awl::backends::windows::optional_message peek_message(HWND);
 
 }
 }

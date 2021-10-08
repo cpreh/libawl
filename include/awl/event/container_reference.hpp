@@ -4,16 +4,10 @@
 #include <awl/event/container.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::event
 {
 
-using
-container_reference
-=
-fcppt::reference<
-	awl::event::container
->;
+using container_reference = fcppt::reference<awl::event::container>;
 
 }
 

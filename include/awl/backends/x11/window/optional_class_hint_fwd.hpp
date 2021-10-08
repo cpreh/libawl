@@ -4,16 +4,10 @@
 #include <awl/backends/x11/window/class_hint_fwd.hpp>
 #include <fcppt/optional/object_fwd.hpp>
 
-
 namespace awl::backends::x11::window
 {
 
-using
-optional_class_hint
-=
-fcppt::optional::object<
-	awl::backends::x11::window::class_hint
->;
+using optional_class_hint = fcppt::optional::object<awl::backends::x11::window::class_hint>;
 
 }
 

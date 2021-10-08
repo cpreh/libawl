@@ -6,16 +6,10 @@
 #include <vector>
 #include <fcppt/config/external_end.hpp>
 
-
 namespace awl::event
 {
 
-using
-container
-=
-std::vector<
-	awl::event::base_unique_ptr
->;
+using container = std::vector<awl::event::base_unique_ptr>;
 
 }
 

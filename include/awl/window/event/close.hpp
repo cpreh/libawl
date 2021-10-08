@@ -8,27 +8,19 @@
 #include <awl/window/event/close_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
-
 namespace awl::window::event
 {
 
-class AWL_DETAIL_CLASS_SYMBOL close
-:
-	public awl::window::event::base
+class AWL_DETAIL_CLASS_SYMBOL close : public awl::window::event::base
 {
-	FCPPT_NONMOVABLE(
-		close
-	);
-public:
-	AWL_DETAIL_SYMBOL
-	explicit
-	close(
-		awl::window::reference
-	);
+  FCPPT_NONMOVABLE(close);
 
-	AWL_DETAIL_SYMBOL
-	~close()
-	override;
+public:
+  AWL_DETAIL_SYMBOL
+  explicit close(awl::window::reference);
+
+  AWL_DETAIL_SYMBOL
+  ~close() override;
 };
 
 }

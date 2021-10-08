@@ -4,16 +4,10 @@
 #include <awl/backends/wayland/display_fwd.hpp>
 #include <fcppt/reference_impl.hpp>
 
-
 namespace awl::backends::wayland
 {
 
-using
-display_reference
-=
-fcppt::reference<
-	awl::backends::wayland::display
->;
+using display_reference = fcppt::reference<awl::backends::wayland::display>;
 
 }
 
