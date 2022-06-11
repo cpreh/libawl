@@ -24,8 +24,9 @@ find_package(
 )
 
 set(
-	FCPPT_UTILS_CLANG_TIDY_HEADER_FILTER
-	"awl/.*"
+	FCPPT_UTILS_CLANG_TIDY_WHITELIST
+	"fcppt"
+	"awl"
 )
 
 include(
