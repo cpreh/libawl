@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/registry_id.hpp>
 #include <awl/backends/wayland/seat.hpp>
@@ -9,13 +10,14 @@
 #include <awl/event/container_reference.hpp>
 #include <fcppt/enable_shared_from_this_impl.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/bit/mask_c.hpp>
 #include <fcppt/bit/test.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/container/bitfield/operators.hpp>
 #include <fcppt/optional/make.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-protocol.h>
 #include <cstdint>
@@ -52,7 +54,10 @@ void wl_seat_capabilities(void *const _data, wl_seat *, std::uint32_t const _cap
 
   data.events_.get().push_back(fcppt::unique_ptr_to_base<awl::event::base>(
       fcppt::make_unique_ptr<awl::backends::wayland::system::event::seat_caps>(
-          data.display_, FCPPT_ASSERT_OPTIONAL_ERROR(data.pointer_), data.caps_)));
+          data.display_,
+          fcppt::optional::to_exception(
+              data.pointer_, [] { return awl::exception{FCPPT_TEXT("WL seat pointer not set.")}; }),
+          data.caps_)));
 }
 
 void wl_seat_name(void *, wl_seat *, char const *) {}

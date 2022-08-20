@@ -31,7 +31,6 @@
 #include <fcppt/nonmovable.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/cast/dynamic_fun.hpp>
 #include <fcppt/cast/size.hpp>
@@ -103,8 +102,9 @@ try
       awl::window::parameters{*visual}.size(awl::window::dim{400U, 100U}))};
 
   awl::backends::x11::window::object &x11_window{
-      FCPPT_ASSERT_OPTIONAL_ERROR(
-          fcppt::cast::dynamic<awl::backends::x11::window::object>(*awl_window))
+      fcppt::optional::to_exception(
+          fcppt::cast::dynamic<awl::backends::x11::window::object>(*awl_window),
+          [] { return awl::exception{FCPPT_TEXT("Window is not an X11 window.")}; })
           .get()};
 
   Window const win{x11_window.get()};

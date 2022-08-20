@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/sdl/system/event/object.hpp>
 #include <awl/backends/sdl/system/event/timer_type.hpp>
 #include <awl/backends/sdl/system/event/translate.hpp>
@@ -20,12 +21,13 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/make.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_events.h>
 #include <SDL_video.h>
@@ -49,8 +51,9 @@ fcppt::optional::object<awl::event::base_unique_ptr> translate_opt(
   {
     SDL_WindowEvent const &event{_event.window};
 
-    fcppt::reference<SDL_Window> const sdl_window{
-        FCPPT_ASSERT_OPTIONAL_ERROR(awl::backends::sdl::window::from_id(event.windowID))};
+    fcppt::reference<SDL_Window> const sdl_window{fcppt::optional::to_exception(
+        awl::backends::sdl::window::from_id(event.windowID),
+        [] { return awl::exception{FCPPT_TEXT("SDL window not found.")}; })};
 
     awl::backends::sdl::window::object &sdl_window_ref{
         awl::backends::sdl::window::get_object(sdl_window)};

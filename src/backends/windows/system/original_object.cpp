@@ -1,3 +1,4 @@
+#include <awl/exception.hpp>
 #include <awl/backends/windows/counted_wndclass.hpp>
 #include <awl/backends/windows/get_focus.hpp>
 #include <awl/backends/windows/wndclass_remove_callback.hpp>
@@ -22,14 +23,15 @@
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/assert/optional_error.hpp>
 #include <fcppt/container/find_opt_iterator.hpp>
 #include <fcppt/container/get_or_insert_result.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/log/context_reference.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <functional>
 #include <fcppt/config/external_end.hpp>
@@ -99,8 +101,9 @@ awl::cursor::object_unique_ptr awl::backends::windows::system::original_object::
 void awl::backends::windows::system::original_object::unregister_wndclass(
     fcppt::string const &_class_name)
 {
-  wndclass_map::iterator const it(
-      FCPPT_ASSERT_OPTIONAL_ERROR(fcppt::container::find_opt_iterator(wndclasses_, _class_name)));
+  wndclass_map::iterator const it{fcppt::optional::to_exception(
+      fcppt::container::find_opt_iterator(wndclasses_, _class_name),
+      [] { return awl::exception{FCPPT_TEXT("Unable to unregister wndclass.")}; })};
 
   if (it->second->release() == 0u)
     wndclasses_.erase(it);
