@@ -337,6 +337,11 @@ if(
 		REQUIRED
 	)
 
+	find_library(
+		SDL2_LIBRARY
+		SDL2
+	)
+
 	set(
 		AWL_SDL_BACKEND
 		TRUE
@@ -1336,16 +1341,17 @@ function(
 		if(
 			AWL_SDL_BACKEND
 		)
-			target_include_directories(
+			fcppt_utils_link_imported_targets(
 				${TARGETNAME}
 				PRIVATE
-				${SDL2_INCLUDE_DIRS}
+				SDL2::SDL2
 			)
 
+			# sdl2-config.cmake is broken
 			target_link_libraries(
 				${TARGETNAME}
 				PRIVATE
-				${SDL2_LIBRARIES}
+				${SDL2_LIBRARY}
 			)
 		endif()
 	endif()
