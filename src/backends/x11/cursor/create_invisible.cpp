@@ -5,22 +5,25 @@
 #include <awl/backends/x11/cursor/create_pixmap.hpp>
 #include <awl/backends/x11/cursor/dest_pixmap.hpp>
 #include <awl/backends/x11/cursor/foreground_color.hpp>
-#include <awl/backends/x11/cursor/holder.hpp>
+#include <awl/backends/x11/cursor/holder.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/cursor/object.hpp>
 #include <awl/backends/x11/cursor/object_unique_ptr.hpp>
 #include <awl/backends/x11/cursor/source_pixmap.hpp>
 #include <awl/backends/x11/pixmap/create_from_data.hpp>
 #include <awl/backends/x11/pixmap/dim.hpp>
-#include <awl/backends/x11/pixmap/holder.hpp>
+#include <awl/backends/x11/pixmap/holder.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/pixmap/holder_unique_ptr.hpp>
 #include <awl/backends/x11/pixmap/size.hpp>
-#include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/window/root.hpp>
 #include <awl/cursor/hotspot.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/array/init.hpp>
 #include <fcppt/array/object_impl.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <X11/Xlib.h>
+#include <fcppt/config/external_end.hpp>
 
 awl::backends::x11::cursor::object_unique_ptr
 awl::backends::x11::cursor::create_invisible(awl::backends::x11::display_ref const _display)

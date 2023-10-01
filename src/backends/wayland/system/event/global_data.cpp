@@ -1,6 +1,6 @@
 #include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/system/event/global_data.hpp>
-#include <awl/event/base.hpp>
+#include <awl/event/base.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/log/object_reference.hpp>
 
 awl::backends::wayland::system::event::global_data::global_data(

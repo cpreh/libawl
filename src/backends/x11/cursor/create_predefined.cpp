@@ -1,9 +1,9 @@
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/cursor/convert_predefined.hpp>
 #include <awl/backends/x11/cursor/create_predefined.hpp>
-#include <awl/backends/x11/cursor/holder.hpp>
+#include <awl/backends/x11/cursor/holder.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/cursor/load_font.hpp>
-#include <awl/backends/x11/cursor/object.hpp>
+#include <awl/backends/x11/cursor/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/cursor/object_unique_ptr.hpp>
 #include <awl/cursor/type.hpp>
 #include <fcppt/make_unique_ptr.hpp>

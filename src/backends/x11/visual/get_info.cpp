@@ -5,7 +5,6 @@
 #include <awl/backends/x11/visual/mask.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>
 

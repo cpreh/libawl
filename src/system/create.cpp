@@ -23,7 +23,7 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/not.hpp>
 #include <fcppt/string.hpp>
-#include <fcppt/strong_typedef_impl.hpp>
+#include <fcppt/strong_typedef_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/contains_if.hpp>

@@ -1,7 +1,7 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/Xlib.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/system/object.hpp>
 #include <awl/backends/x11/window/object.hpp>
 #include <awl/backends/x11/window/event/generic.hpp>
@@ -9,19 +9,19 @@
 #include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
 #include <awl/event/base.hpp>
-#include <awl/event/connection.hpp>
+#include <awl/event/connection.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/event/connection_unique_ptr.hpp>
 #include <awl/main/exit_success.hpp>
 #include <awl/main/loop_function.hpp>
 #include <awl/main/loop_next.hpp>
 #include <awl/system/create.hpp>
-#include <awl/system/object.hpp>
+#include <awl/system/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/system/object_unique_ptr.hpp>
 #include <awl/system/event/processor.hpp>
-#include <awl/visual/object.hpp>
+#include <awl/visual/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/dim.hpp>
-#include <awl/window/object.hpp>
+#include <awl/window/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <awl/window/event/close.hpp>

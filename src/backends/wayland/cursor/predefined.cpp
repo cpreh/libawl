@@ -13,7 +13,8 @@
 awl::backends::wayland::cursor::predefined::predefined(
     awl::backends::wayland::cursor::theme const &_theme,
     awl::backends::wayland::cursor::name const &_name)
-    : impl_{::wl_cursor_theme_get_cursor(_theme.get(), _name.get().c_str())}
+    : awl::backends::wayland::cursor::object{},
+      impl_{::wl_cursor_theme_get_cursor(_theme.get(), _name.get().c_str())}
 {
   if (impl_ == nullptr)
   {

@@ -1,13 +1,12 @@
 #include <awl/exception.hpp>
 #include <awl/backends/posix/create_processor.hpp>
 #include <awl/backends/posix/duration.hpp>
-#include <awl/backends/posix/event.hpp>
 #include <awl/backends/posix/extract_event.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/optional_duration.hpp>
 #include <awl/backends/posix/processor.hpp>
 #include <awl/backends/wayland/compositor.hpp>
-#include <awl/backends/wayland/display.hpp>
+#include <awl/backends/wayland/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/wayland/display_dispatch_pending.hpp>
 #include <awl/backends/wayland/display_flush.hpp>
 #include <awl/backends/wayland/display_prepare_read.hpp>
@@ -31,12 +30,11 @@
 #include <awl/event/base.hpp>
 #include <awl/event/container.hpp>
 #include <awl/event/container_reference.hpp>
-#include <awl/event/map_concat.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/exit_failure.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/result.hpp>
-#include <awl/timer/object.hpp>
+#include <awl/timer/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/const.hpp>
@@ -46,7 +44,7 @@
 #include <fcppt/make_shared_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/move_clear.hpp>
-#include <fcppt/strong_typedef_output.hpp>
+#include <fcppt/strong_typedef_output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/cast/from_void_ptr.hpp>
@@ -57,7 +55,6 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>
-#include <fcppt/signal/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
@@ -144,7 +141,7 @@ void registry_remove(void *const _data, wl_registry *, std::uint32_t const _name
         {
           data.exit_code_ = awl::main::optional_exit_code{awl::main::exit_failure()};
 
-          _object = typename std::decay<decltype(_object)>::type{};
+          _object = std::decay_t<decltype(_object)>{};
         }
       });
 

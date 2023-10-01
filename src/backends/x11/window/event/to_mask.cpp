@@ -128,6 +128,7 @@ awl::backends::x11::window::event::optional_mask_bit awl::backends::x11::window:
   case ClientMessage:
   case MappingNotify:
   case GenericEvent:
+  default:
     break;
   }
 

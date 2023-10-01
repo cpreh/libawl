@@ -1,5 +1,6 @@
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/window/base.hpp>
+#include <awl/backends/x11/window/basic_property_data.hpp>
 #include <awl/backends/x11/window/change_property.hpp>
 #include <awl/backends/x11/window/property.hpp>
 #include <awl/backends/x11/window/property_data.hpp>

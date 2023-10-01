@@ -1,4 +1,4 @@
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/window/event/change_mask.hpp>
 #include <awl/backends/x11/window/event/mask.hpp>

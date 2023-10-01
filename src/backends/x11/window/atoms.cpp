@@ -1,7 +1,7 @@
 #include <awl/backends/x11/window/atom_count.hpp>
 #include <awl/backends/x11/window/atoms.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <X11/Xlib.h>
+#include <X11/X.h>
 #include <fcppt/config/external_end.hpp>
 
 awl::backends::x11::window::atoms::atoms(

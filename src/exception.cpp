@@ -1,4 +1,5 @@
 #include <awl/exception.hpp>
+#include <fcppt/exception.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>

@@ -1,6 +1,8 @@
 #include <awl/exception.hpp>
+#include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/Xlib.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/Xutil.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/cursor/object.hpp>
@@ -20,15 +22,12 @@
 #include <awl/backends/x11/window/event/mask_bit.hpp>
 #include <awl/backends/x11/window/event/mask_for_each.hpp>
 #include <awl/backends/x11/window/event/mask_function.hpp>
-#include <awl/backends/x11/window/event/object.hpp>
 #include <awl/backends/x11/window/event/to_mask.hpp>
 #include <awl/backends/x11/window/event/type.hpp>
 #include <awl/cursor/object.hpp>
 #include <awl/event/connection_function.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
 #include <awl/event/make_connection.hpp>
-#include <awl/visual/object.hpp>
-#include <awl/window/object.hpp>
 #include <awl/window/parameters.hpp>
 #include <fcppt/make_cref.hpp>
 #include <fcppt/make_ref.hpp>
@@ -42,7 +41,6 @@
 #include <fcppt/optional/apply.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
-#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/to_exception.hpp>
 
 awl::backends::x11::window::original_object::original_object(

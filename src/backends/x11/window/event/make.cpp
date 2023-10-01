@@ -1,10 +1,11 @@
 #include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/Xlib.hpp>
-#include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/window/object_ref.hpp>
 #include <awl/backends/x11/window/event/generic.hpp>
 #include <awl/backends/x11/window/event/make.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
+#include <awl/event/base.hpp>
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/object.hpp>
@@ -46,6 +47,8 @@ awl::event::base_unique_ptr awl::backends::x11::window::event::make(
   case DestroyNotify:
     return fcppt::unique_ptr_to_base<awl::event::base>(
         fcppt::make_unique_ptr<awl::window::event::destroy>(window_base));
+  default:
+    break;
   }
 
   return fcppt::unique_ptr_to_base<awl::event::base>(

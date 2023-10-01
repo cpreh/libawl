@@ -3,6 +3,7 @@
 #include <awl/backends/wayland/registry_id.hpp>
 #include <awl/backends/wayland/seat.hpp>
 #include <awl/backends/wayland/system/event/seat_caps.hpp>
+#include <awl/backends/wayland/system/seat/caps.hpp>
 #include <awl/backends/wayland/system/seat/caps_field.hpp>
 #include <awl/backends/wayland/system/seat/data.hpp>
 #include <awl/backends/wayland/system/seat/object.hpp>

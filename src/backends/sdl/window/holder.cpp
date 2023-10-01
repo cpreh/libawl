@@ -1,5 +1,6 @@
 #include <awl/backends/sdl/exception.hpp>
 #include <awl/backends/sdl/window/holder.hpp>
+#include <awl/backends/sdl/window/native_reference.hpp>
 #include <fcppt/make_ref.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>

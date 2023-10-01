@@ -27,7 +27,7 @@
 #include <fcppt/log/object_reference.hpp>
 #include <fcppt/log/out.hpp>
 #include <fcppt/math/dim/null.hpp>
-#include <fcppt/math/dim/output.hpp>
+#include <fcppt/math/dim/output.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/to_exception.hpp>

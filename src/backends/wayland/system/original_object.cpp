@@ -4,7 +4,7 @@
 #include <awl/backends/wayland/cursor/convert_name.hpp>
 #include <awl/backends/wayland/cursor/create_invisible.hpp>
 #include <awl/backends/wayland/cursor/create_name.hpp>
-#include <awl/backends/wayland/cursor/object.hpp>
+#include <awl/backends/wayland/cursor/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/wayland/system/object.hpp>
 #include <awl/backends/wayland/system/original_object.hpp>
 #include <awl/backends/wayland/system/event/original_processor.hpp>

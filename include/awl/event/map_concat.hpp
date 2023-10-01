@@ -12,6 +12,7 @@ namespace awl::event
 {
 
 template <typename Result, typename Source, typename Function>
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 std::vector<Result> map_concat(std::vector<Source> &&_source, Function const &_function)
 {
   std::vector<Result> result;

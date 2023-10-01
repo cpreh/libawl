@@ -1,5 +1,5 @@
 #include <awl/backends/x11/default_screen.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <fcppt/config/external_begin.hpp>

@@ -1,11 +1,11 @@
-#include <awl/event/base.hpp>
+#include <awl/event/base.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
 #include <awl/main/exit_code.hpp>
 #include <awl/main/loop_function.hpp>
 #include <awl/main/loop_next.hpp>
 #include <awl/system/event/processor.hpp>
-#include <awl/system/event/result.hpp>
+#include <awl/system/event/result.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/algorithm/loop.hpp>
 #include <fcppt/either/loop.hpp>
 

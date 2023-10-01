@@ -1,5 +1,5 @@
 #include <awl/exception.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/window/attributes.hpp>
 #include <awl/backends/x11/window/base.hpp>
 #include <fcppt/text.hpp>

@@ -1,7 +1,7 @@
 #include <awl/show_message.hpp>
 #include <fcppt/string.hpp>
 #include <fcppt/text.hpp>
-#include <fcppt/config/platform.hpp>
+#include <fcppt/config/platform.hpp> // NOLINT(misc-include-cleaner)
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
 #include <awl/backends/windows/message_box.hpp>
 #include <awl/backends/windows/windows.hpp>

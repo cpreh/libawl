@@ -3,12 +3,13 @@
 #include <awl/main/loop_function.hpp>
 #include <awl/main/loop_next.hpp>
 #include <awl/system/create.hpp>
-#include <awl/system/object.hpp>
+#include <awl/system/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/system/object_unique_ptr.hpp>
 #include <awl/system/event/processor.hpp>
-#include <awl/visual/object.hpp>
+#include <awl/visual/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/visual/object_unique_ptr.hpp>
-#include <awl/window/object.hpp>
+#include <awl/window/dim.hpp>
+#include <awl/window/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>
 #include <awl/window/event/close.hpp>

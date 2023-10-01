@@ -3,7 +3,7 @@
 #include <awl/main/output_unique_ptr.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
-#include <fcppt/config/platform.hpp>
+#include <fcppt/config/platform.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/io/ostream_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <filesystem>

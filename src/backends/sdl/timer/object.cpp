@@ -23,6 +23,7 @@
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/optional/object_impl.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <SDL_events.h>
 #include <SDL_stdinc.h>
 #include <SDL_timer.h>
 #include <chrono>
@@ -62,6 +63,8 @@ awl::backends::sdl::timer::object::object(
 
 awl::backends::sdl::timer::object::~object() { SDL_RemoveTimer(this->id_); }
 
+// No idea where SDLCALL is defined.
+// NOLINTNEXTLINE(misc-include-cleaner)
 Uint32 SDLCALL awl::backends::sdl::timer::object::process(Uint32, void *const _data)
 {
   awl::backends::sdl::timer::object &timer{

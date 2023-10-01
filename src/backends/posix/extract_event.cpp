@@ -1,13 +1,12 @@
 #include <awl/backends/posix/extract_event.hpp>
 #include <awl/backends/posix/fd.hpp>
 #include <awl/backends/posix/match.hpp>
-#include <awl/event/base.hpp>
+#include <awl/event/base.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
 #include <awl/event/map_concat.hpp>
 #include <awl/event/variant.hpp>
 #include <fcppt/function_impl.hpp>
-#include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>

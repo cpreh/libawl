@@ -1,5 +1,5 @@
 #include <awl/exception.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/visual/create_info.hpp>
@@ -10,6 +10,9 @@
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <X11/Xlib.h>
+#include <fcppt/config/external_end.hpp>
 
 awl::backends::x11::visual::object_unique_ptr awl::backends::x11::visual::default_(
     awl::backends::x11::display_ref const _display, awl::backends::x11::screen const _screen)

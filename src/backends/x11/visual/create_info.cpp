@@ -6,7 +6,6 @@
 #include <fcppt/config/external_begin.hpp>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include <utility>
 #include <fcppt/config/external_end.hpp>
 
 awl::backends::x11::visual::info_unique_ptr awl::backends::x11::visual::create_info(

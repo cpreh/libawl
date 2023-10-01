@@ -19,7 +19,7 @@
 #include <awl/backends/x11/system/event/original_processor.hpp>
 #include <awl/backends/x11/system/event/processor.hpp>
 #include <awl/backends/x11/window/const_optional_object_ref.hpp>
-#include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/window/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/window/object_ref.hpp>
 #include <awl/backends/x11/window/event/filter.hpp>
 #include <awl/backends/x11/window/event/make.hpp>
@@ -34,7 +34,7 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/result.hpp>
-#include <awl/timer/object.hpp>
+#include <awl/timer/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <awl/window/object.hpp>
@@ -42,6 +42,7 @@
 #include <fcppt/function_impl.hpp>
 #include <fcppt/make_int_range_count.hpp>
 #include <fcppt/make_unique_ptr.hpp>
+#include <fcppt/not.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/text.hpp>
@@ -51,6 +52,10 @@
 #include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/container/join.hpp>
 #include <fcppt/optional/maybe.hpp>
+#include <fcppt/optional/map.hpp>
+#include <fcppt/config/external_begin.hpp>
+#include <utility>
+#include <fcppt/config/external_end.hpp>
 
 awl::backends::x11::system::event::original_processor::original_processor(
     awl::backends::x11::display_ref const _display)

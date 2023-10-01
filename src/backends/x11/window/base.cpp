@@ -1,7 +1,7 @@
 #include <awl/backends/x11/discard.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/sync.hpp>
-#include <awl/backends/x11/visual/object.hpp>
+#include <awl/backends/x11/visual/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/window/rect.hpp>
 #include <awl/visual/object.hpp>

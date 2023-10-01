@@ -3,13 +3,13 @@
 #include <awl/main/loop_function.hpp>
 #include <awl/main/loop_next.hpp>
 #include <awl/system/create.hpp>
-#include <awl/system/object.hpp>
+#include <awl/system/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/system/object_unique_ptr.hpp>
 #include <awl/system/event/processor.hpp>
 #include <awl/timer/delay.hpp>
 #include <awl/timer/duration.hpp>
 #include <awl/timer/match.hpp>
-#include <awl/timer/object.hpp>
+#include <awl/timer/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/timer/period.hpp>
 #include <awl/timer/setting.hpp>
 #include <awl/timer/unique_ptr.hpp>

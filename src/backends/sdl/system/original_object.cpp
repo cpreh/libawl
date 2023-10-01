@@ -2,7 +2,7 @@
 #include <awl/log_location.hpp>
 #include <awl/backends/sdl/cursor/create_invisible.hpp>
 #include <awl/backends/sdl/cursor/create_predefined.hpp>
-#include <awl/backends/sdl/cursor/object.hpp>
+#include <awl/backends/sdl/cursor/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/sdl/system/object.hpp>
 #include <awl/backends/sdl/system/original_object.hpp>
 #include <awl/backends/sdl/system/event/original_processor.hpp>
@@ -14,7 +14,6 @@
 #include <awl/cursor/optional_type.hpp>
 #include <awl/cursor/type.hpp>
 #include <awl/impl/backends/sdl/log_name.hpp>
-#include <awl/system/object.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/visual/object.hpp>
 #include <awl/visual/object_unique_ptr.hpp>

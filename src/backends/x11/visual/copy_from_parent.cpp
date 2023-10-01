@@ -1,6 +1,7 @@
 #include <awl/backends/x11/visual/copy_from_parent.hpp>
 #include <awl/backends/x11/visual/object.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <fcppt/config/external_end.hpp>

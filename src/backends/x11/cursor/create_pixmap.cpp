@@ -1,14 +1,14 @@
 #include <awl/exception.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/cursor/background_color.hpp>
 #include <awl/backends/x11/cursor/create_pixmap.hpp>
 #include <awl/backends/x11/cursor/dest_pixmap.hpp>
 #include <awl/backends/x11/cursor/foreground_color.hpp>
-#include <awl/backends/x11/cursor/holder.hpp>
+#include <awl/backends/x11/cursor/holder.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/cursor/holder_unique_ptr.hpp>
 #include <awl/backends/x11/cursor/source_pixmap.hpp>
-#include <awl/backends/x11/pixmap/holder.hpp>
+#include <awl/backends/x11/pixmap/holder.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/cursor/hotspot.hpp>
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>

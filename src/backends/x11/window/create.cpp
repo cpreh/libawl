@@ -1,5 +1,5 @@
 #include <awl/backends/x11/colormap.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/cursor/const_optional_object_ref.hpp>
@@ -16,6 +16,7 @@
 #include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/maybe_void.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <X11/X.h>
 #include <X11/Xlib.h>
 #include <fcppt/config/external_end.hpp>
 

@@ -4,13 +4,13 @@
 #include <awl/backends/x11/screen.hpp>
 #include <awl/backends/x11/cursor/create_invisible.hpp>
 #include <awl/backends/x11/cursor/create_predefined.hpp>
-#include <awl/backends/x11/cursor/object.hpp>
+#include <awl/backends/x11/cursor/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/system/object.hpp>
 #include <awl/backends/x11/system/original_object.hpp>
 #include <awl/backends/x11/system/event/original_processor.hpp>
 #include <awl/backends/x11/visual/default.hpp>
-#include <awl/backends/x11/visual/object.hpp>
-#include <awl/backends/x11/window/object.hpp>
+#include <awl/backends/x11/visual/object.hpp> // NOLINT(misc-include-cleaner)
+#include <awl/backends/x11/window/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/window/original_object.hpp>
 #include <awl/cursor/object.hpp>
 #include <awl/cursor/object_unique_ptr.hpp>

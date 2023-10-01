@@ -5,7 +5,7 @@
 #include <fcppt/tag_type.hpp>
 #include <fcppt/use.hpp>
 #include <fcppt/algorithm/loop.hpp>
-#include <fcppt/algorithm/loop_break_mpl.hpp>
+#include <fcppt/algorithm/loop_break_mpl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/bit/mask.hpp>
 #include <fcppt/bit/shifted_mask_c.hpp>
 #include <fcppt/bit/test.hpp>

@@ -1,4 +1,4 @@
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/cursor/holder.hpp>
 #include <awl/backends/x11/cursor/holder_unique_ptr.hpp>

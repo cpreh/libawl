@@ -1,10 +1,11 @@
 #include <awl/exception.hpp>
 #include <awl/backends/x11/atom.hpp>
-#include <awl/backends/x11/display.hpp>
+#include <awl/backends/x11/display.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/intern_atom.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/config/external_begin.hpp>
+#include <X11/X.h>
 #include <X11/Xlib.h>
 #include <string>
 #include <fcppt/config/external_end.hpp>

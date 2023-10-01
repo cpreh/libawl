@@ -1,4 +1,5 @@
 #include <awl/cursor/const_optional_object_ref.hpp>
+#include <awl/cursor/object_fwd.hpp>
 #include <awl/visual/object_fwd.hpp>
 #include <awl/window/dim.hpp>
 #include <awl/window/optional_dim.hpp>

@@ -6,16 +6,17 @@
 #include <awl/backends/sdl/system/event/translate.hpp>
 #include <awl/backends/sdl/system/event/wait.hpp>
 #include <awl/backends/sdl/timer/object.hpp>
-#include <awl/event/base.hpp>
+#include <awl/event/base.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/event/base_unique_ptr.hpp>
 #include <awl/event/container.hpp>
 #include <awl/main/exit_code.hpp>
+#include <awl/main/optional_exit_code.hpp>
 #include <awl/system/event/result.hpp>
 #include <awl/timer/object.hpp>
 #include <awl/timer/setting_fwd.hpp>
 #include <awl/timer/unique_ptr.hpp>
 #include <fcppt/const.hpp>
-#include <fcppt/function_impl.hpp>
+#include <fcppt/function_impl.hpp> // NOLINT(misc-include-cleaner)
 #include <fcppt/make_unique_ptr.hpp>
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>

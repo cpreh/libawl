@@ -2,6 +2,7 @@
 #include <awl/backends/x11/window/object_ref.hpp>
 #include <awl/backends/x11/window/event/generic.hpp>
 #include <awl/backends/x11/window/event/object.hpp>
+#include <awl/window/object.hpp>
 #include <awl/window/event/base.hpp>
 #include <fcppt/reference_to_base.hpp>
 

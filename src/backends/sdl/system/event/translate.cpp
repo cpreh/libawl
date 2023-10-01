@@ -27,6 +27,7 @@
 #include <fcppt/cast/to_unsigned.hpp>
 #include <fcppt/optional/from.hpp>
 #include <fcppt/optional/make.hpp>
+#include <fcppt/optional/object_impl.hpp>
 #include <fcppt/optional/to_exception.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <SDL_events.h>
@@ -81,7 +82,8 @@ fcppt::optional::object<awl::event::base_unique_ptr> translate_opt(
     case SDL_WINDOWEVENT_ENTER:
       sdl_window_ref.set_cursor();
       break;
-
+    default:
+      break;
       // TODO(philipp): Add destroy event
     }
   }
