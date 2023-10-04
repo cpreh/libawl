@@ -31,7 +31,7 @@ private:
 
   Window const window_;
 
-  bool destroyed_; // NOLINT(cppcoreguidelines-use-default-member-init)
+  bool destroyed_; // NOLINT(cppcoreguidelines-use-default-member-init,modernize-use-default-member-init)
 };
 
 }
