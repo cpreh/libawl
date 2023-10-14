@@ -1,6 +1,6 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/function_context.hpp>
-#include <fcppt/config/platform.hpp>
+#include <fcppt/config/platform.hpp> // NOLINT(misc-include-cleaner)
 #if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
 #if !defined(FCPPT_NARROW_STRING)
 #include <awl/backends/windows/command_line_argv.hpp>
