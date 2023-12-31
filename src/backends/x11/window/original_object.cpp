@@ -35,6 +35,9 @@
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/string.hpp>
+#include <fcppt/strong_typedef_assignment.hpp>
+#include <fcppt/strong_typedef_bitwise.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/to_std_string.hpp>
 #include <fcppt/cast/static_downcast.hpp>

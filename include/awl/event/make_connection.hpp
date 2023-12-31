@@ -2,7 +2,7 @@
 #define AWL_EVENT_MAKE_CONNECTION_HPP_INCLUDED
 
 #include <awl/detail/symbol.hpp>
-#include <awl/event/connection.hpp>
+#include <awl/event/connection.hpp> // IWYU pragma: keep
 #include <awl/event/connection_function.hpp>
 #include <awl/event/connection_unique_ptr.hpp>
 

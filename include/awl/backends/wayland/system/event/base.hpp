@@ -12,7 +12,7 @@
 namespace awl::backends::wayland::system::event
 {
 
-class base : public awl::event::base
+class AWL_DETAIL_CLASS_SYMBOL base : public awl::event::base
 {
   FCPPT_NONMOVABLE(base);
 

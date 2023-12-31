@@ -4,7 +4,7 @@
 #include <awl/detail/symbol.hpp>
 #include <awl/timer/delay.hpp>
 #include <awl/timer/period.hpp>
-#include <awl/timer/setting_fwd.hpp>
+#include <awl/timer/setting_fwd.hpp> // IWYU pragma: keep
 
 namespace awl::timer
 {

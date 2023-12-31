@@ -1,9 +1,10 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_WRAPPED_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_WRAPPED_HPP_INCLUDED
 
-#include <awl/backends/x11/Xlib.hpp>
+#include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>
+#include <awl/backends/x11/visual/object_fwd.hpp>
 #include <awl/backends/x11/visual/object_unique_ptr.hpp>
 #include <awl/backends/x11/window/base.hpp>
 #include <awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp>
@@ -11,8 +12,6 @@
 #include <awl/backends/x11/window/rect_fwd.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/window/object.hpp>
-#include <awl/window/parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
 
 namespace awl::backends::x11::window

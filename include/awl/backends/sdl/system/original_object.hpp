@@ -7,7 +7,6 @@
 #include <awl/cursor/optional_type_fwd.hpp>
 #include <awl/detail/class_symbol.hpp>
 #include <awl/detail/symbol.hpp>
-#include <awl/system/object.hpp>
 #include <awl/system/event/processor_fwd.hpp>
 #include <awl/visual/object_unique_ptr.hpp>
 #include <awl/window/object_unique_ptr.hpp>

@@ -1,7 +1,6 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_EVENT_GENERIC_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_EVENT_GENERIC_HPP_INCLUDED
 
-#include <awl/backends/x11/Xlib.hpp>
 #include <awl/backends/x11/window/object_fwd.hpp>
 #include <awl/backends/x11/window/object_ref.hpp>
 #include <awl/backends/x11/window/event/generic_fwd.hpp>

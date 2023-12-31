@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_WAYLAND_REGISTRY_OBJECT_DECL_HPP_INCLUDED
 
 #include <awl/backends/wayland/registry_id.hpp>
-#include <awl/backends/wayland/registry_object_fwd.hpp>
+#include <awl/backends/wayland/registry_object_fwd.hpp> // IWYU pragma: keep
 #include <awl/detail/symbol.hpp>
 #include <fcppt/noncopyable.hpp>
 #include <fcppt/config/external_begin.hpp>

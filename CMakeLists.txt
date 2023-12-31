@@ -1,6 +1,6 @@
 cmake_minimum_required(
 	VERSION
-	3.7.0
+	3.27.0
 )
 
 project(
@@ -29,7 +29,8 @@ set(
 	"awl"
 )
 
-set(
+list(
+	APPEND
 	FCPPT_UTILS_CLANG_TIDY_ADDITIONAL_CHECKS
 	"-cppcoreguidelines-avoid-const-or-ref-data-members"
 )
@@ -1181,8 +1182,9 @@ list(
 	${AWL_INCLUDE_FILES}
 )
 
-fcppt_utils_add_source_groups(
+fcppt_utils_append_source_dir_and_make_groups(
 	"${AWL_FILES}"
+	AWL_FILES_ABS
 )
 
 fcppt_utils_static_shared()
@@ -1209,7 +1211,7 @@ function(
 		add_library(
 			${TARGETNAME}
 			${VARIANT}
-			${AWL_FILES}
+			${AWL_FILES_ABS}
 		)
 	endif()
 

@@ -9,7 +9,7 @@ namespace awl::backends::wayland
 {
 
 template <typename Type, wl_interface const &Interface, void (&Destroy)(Type *)>
-class registry_object;
+class registry_object; // IWYU pragma: export
 
 }
 

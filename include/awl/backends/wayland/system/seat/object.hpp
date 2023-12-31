@@ -4,6 +4,7 @@
 #include <awl/backends/wayland/display_reference.hpp>
 #include <awl/backends/wayland/registry_id.hpp>
 #include <awl/backends/wayland/seat.hpp>
+#include <awl/backends/wayland/system/seat/caps_field_fwd.hpp>
 #include <awl/backends/wayland/system/seat/data.hpp>
 #include <awl/backends/wayland/system/seat/object_fwd.hpp>
 #include <awl/detail/symbol.hpp>

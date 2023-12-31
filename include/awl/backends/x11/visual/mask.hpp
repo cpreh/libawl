@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_VISUAL_MASK_HPP_INCLUDED
 
 #include <fcppt/declare_strong_typedef.hpp>
-#include <fcppt/strong_typedef_impl.hpp>
+#include <fcppt/strong_typedef_impl.hpp> // IWYU pragma: keep
 
 namespace awl::backends::x11::visual
 {

@@ -5,6 +5,7 @@
 #include <X11/X.h> // IWYU pragma: export
 #include <fcppt/config/external_end.hpp>
 
+// NOLINTNEXTLINE(misc-include-cleaner)
 #undef Success
 
 #endif

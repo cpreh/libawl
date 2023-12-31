@@ -4,7 +4,7 @@
 namespace awl::backends::x11::window::event
 {
 
-class object;
+class object; // IWYU pragma: export
 
 }
 

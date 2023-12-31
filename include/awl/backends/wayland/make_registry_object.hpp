@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT_HPP_INCLUDED
 #define AWL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT_HPP_INCLUDED
 
-#include <awl/backends/wayland/registry_object_decl.hpp>
+#include <awl/backends/wayland/registry_object_decl.hpp> // IWYU pragma: keep
 #include <awl/detail/export_class_instantiation.hpp>
 
 #define AWL_BACKENDS_WAYLAND_MAKE_REGISTRY_OBJECT(name) \

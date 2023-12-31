@@ -4,7 +4,7 @@
 namespace awl::backends::wayland::system::seat
 {
 
-enum class caps;
+enum class caps; // IWYU pragma: export
 
 }
 

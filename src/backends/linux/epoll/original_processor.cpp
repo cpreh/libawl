@@ -23,6 +23,7 @@
 #include <fcppt/not.hpp>
 #include <fcppt/reference_impl.hpp>
 #include <fcppt/reference_to_base.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 #include <fcppt/text.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/algorithm/map.hpp>

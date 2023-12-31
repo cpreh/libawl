@@ -4,6 +4,7 @@
 #include <awl/event/base_fwd.hpp>
 #include <fcppt/const.hpp>
 #include <fcppt/reference_impl.hpp>
+#include <fcppt/strong_typedef_comparison.hpp>
 #include <fcppt/cast/dynamic.hpp>
 #include <fcppt/optional/maybe.hpp>
 

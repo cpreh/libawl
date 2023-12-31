@@ -1,10 +1,10 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_CLASS_HINT_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_CLASS_HINT_HPP_INCLUDED
 
-#include <awl/backends/x11/window/class_hint_fwd.hpp>
+#include <awl/backends/x11/window/class_hint_fwd.hpp> // IWYU pragma: keep
 #include <awl/detail/symbol.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
-#include <fcppt/strong_typedef.hpp>
+#include <fcppt/strong_typedef_impl.hpp> // IWYU pragma: keep
 #include <fcppt/config/external_begin.hpp>
 #include <string>
 #include <fcppt/config/external_end.hpp>

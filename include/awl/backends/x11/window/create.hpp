@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_CREATE_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_CREATE_HPP_INCLUDED
 
-#include <awl/backends/x11/Xlib.hpp>
+#include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/colormap_fwd.hpp>
 #include <awl/backends/x11/display_ref.hpp>
 #include <awl/backends/x11/screen.hpp>

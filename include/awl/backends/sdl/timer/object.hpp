@@ -27,6 +27,7 @@ public:
   ~object() override;
 
 private:
+  // NOLINTNEXTLINE(misc-include-cleaner)
   static Uint32 SDLCALL process(Uint32, void *);
 
   fcppt::log::object_reference const log_;

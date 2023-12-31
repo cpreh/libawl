@@ -4,7 +4,7 @@
 namespace awl::backends::x11::window
 {
 
-class atoms;
+class atoms; // IWYU pragma: export
 
 }
 

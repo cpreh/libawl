@@ -14,6 +14,7 @@
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters_fwd.hpp>
 #include <fcppt/nonmovable.hpp>
+#include <fcppt/unique_ptr_impl.hpp>
 #include <fcppt/log/context_reference_fwd.hpp>
 
 namespace awl::backends::x11::system

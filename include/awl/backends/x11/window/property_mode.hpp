@@ -1,7 +1,7 @@
 #ifndef AWL_BACKENDS_X11_WINDOW_PROPERTY_MODE_HPP_INCLUDED
 #define AWL_BACKENDS_X11_WINDOW_PROPERTY_MODE_HPP_INCLUDED
 
-#include <awl/backends/x11/window/property_mode_fwd.hpp>
+#include <awl/backends/x11/window/property_mode_fwd.hpp> // IWYU pragma: keep
 
 namespace awl::backends::x11::window
 {

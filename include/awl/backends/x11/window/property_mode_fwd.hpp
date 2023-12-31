@@ -4,7 +4,7 @@
 namespace awl::backends::x11::window
 {
 
-enum class property_mode;
+enum class property_mode; // IWYU pragma: export
 
 }
 

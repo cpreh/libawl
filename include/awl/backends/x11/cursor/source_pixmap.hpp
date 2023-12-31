@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/pixmap/const_holder_ref.hpp>
 #include <fcppt/declare_strong_typedef.hpp>
-#include <fcppt/strong_typedef.hpp>
+#include <fcppt/strong_typedef_impl.hpp> // IWYU pragma: keep
 
 namespace awl::backends::x11::cursor
 {

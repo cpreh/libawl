@@ -3,7 +3,7 @@
 
 #include <awl/backends/x11/X.hpp>
 #include <awl/backends/x11/window/atom_count.hpp>
-#include <awl/backends/x11/window/atoms_fwd.hpp>
+#include <awl/backends/x11/window/atoms_fwd.hpp> // IWYU pragma: keep
 #include <awl/detail/symbol.hpp>
 
 namespace awl::backends::x11::window

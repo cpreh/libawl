@@ -2,7 +2,7 @@
 #define AWL_BACKENDS_X11_SYSTEM_EVENT_OBJECT_HPP_INCLUDED
 
 #include <awl/backends/x11/Xlib.hpp>
-#include <awl/backends/x11/system/event/object_fwd.hpp>
+#include <awl/backends/x11/system/event/object_fwd.hpp> // IWYU pragma: keep
 #include <awl/detail/symbol.hpp>
 
 namespace awl::backends::x11::system::event

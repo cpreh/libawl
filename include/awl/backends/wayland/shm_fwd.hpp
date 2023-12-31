@@ -3,7 +3,7 @@
 
 #include <awl/backends/wayland/make_registry_object_fwd.hpp>
 #include <fcppt/config/external_begin.hpp>
-#include <wayland-client-protocol.h>
+#include <wayland-client-protocol.h> // IWYU pragma: keep
 #include <fcppt/config/external_end.hpp>
 
 namespace awl::backends::wayland

@@ -4,7 +4,7 @@
 namespace awl::cursor
 {
 
-enum class type;
+enum class type; // IWYU pragma: export
 
 }
 

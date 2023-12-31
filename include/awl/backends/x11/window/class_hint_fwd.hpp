@@ -4,7 +4,7 @@
 namespace awl::backends::x11::window
 {
 
-class class_hint;
+class class_hint; // IWYU pragma: export
 
 }
 

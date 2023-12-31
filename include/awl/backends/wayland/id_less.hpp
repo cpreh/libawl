@@ -3,6 +3,7 @@
 
 #include <awl/backends/wayland/registry_id.hpp>
 #include <fcppt/shared_ptr_impl.hpp>
+#include <fcppt/strong_typedef_comparison.hpp> // IWYU pragma: keep
 
 namespace awl::backends::wayland
 {
