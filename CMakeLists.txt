@@ -163,14 +163,11 @@ set(
 	include/awl/main/loop_next.hpp
 	include/awl/main/optional_exit_code.hpp
 	include/awl/main/optional_exit_code_fwd.hpp
-	include/awl/main/optional_scoped_output_unique_ptr.hpp
-	include/awl/main/optional_scoped_output_unique_ptr_fwd.hpp
 	include/awl/main/output.hpp
 	include/awl/main/output_fwd.hpp
 	include/awl/main/output_unique_ptr.hpp
 	include/awl/main/scoped_output.hpp
 	include/awl/main/scoped_output_fwd.hpp
-	include/awl/main/scoped_output_unique_ptr.hpp
 	include/awl/show_error.hpp
 	include/awl/show_error_narrow.hpp
 	include/awl/show_message.hpp
@@ -525,7 +522,6 @@ set(
 	include/awl/backends/x11/window/basic_property_data.hpp
 	include/awl/backends/x11/window/basic_property_data_fwd.hpp
 	include/awl/backends/x11/window/change_property.hpp
-	include/awl/backends/x11/window/change_wm_protocols.hpp
 	include/awl/backends/x11/window/class_hint.hpp
 	include/awl/backends/x11/window/class_hint_fwd.hpp
 	include/awl/backends/x11/window/const_base_ref.hpp
@@ -561,11 +557,8 @@ set(
 	include/awl/backends/x11/window/object.hpp
 	include/awl/backends/x11/window/object_fwd.hpp
 	include/awl/backends/x11/window/object_ref.hpp
-	include/awl/backends/x11/window/object_unique_ptr.hpp
 	include/awl/backends/x11/window/optional_class_hint.hpp
 	include/awl/backends/x11/window/optional_class_hint_fwd.hpp
-	include/awl/backends/x11/window/optional_object_unique_ptr.hpp
-	include/awl/backends/x11/window/optional_object_unique_ptr_fwd.hpp
 	include/awl/backends/x11/window/original_class_hint.hpp
 	include/awl/backends/x11/window/original_object.hpp
 	include/awl/backends/x11/window/original_object_fwd.hpp
