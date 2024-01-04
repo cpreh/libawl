@@ -1,6 +1,7 @@
 #ifndef AWL_TIMER_SETTING_NO_PERIOD_HPP_INCLUDED
 #define AWL_TIMER_SETTING_NO_PERIOD_HPP_INCLUDED
 
+#include <awl/detail/symbol.hpp>
 #include <awl/timer/delay.hpp>
 #include <awl/timer/setting.hpp>
 
