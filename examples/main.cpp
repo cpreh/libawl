@@ -1,9 +1,9 @@
 #include <awl/system/create.hpp>
-#include <awl/window/dim.hpp>
 #include <awl/system/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/system/object_unique_ptr.hpp>
 #include <awl/visual/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/visual/object_unique_ptr.hpp>
+#include <awl/window/dim.hpp>
 #include <awl/window/object.hpp> // NOLINT(misc-include-cleaner)
 #include <awl/window/object_unique_ptr.hpp>
 #include <awl/window/parameters.hpp>

@@ -51,8 +51,8 @@
 #include <fcppt/container/find_opt_mapped.hpp>
 #include <fcppt/container/get_or_insert_with_result.hpp>
 #include <fcppt/container/join.hpp>
-#include <fcppt/optional/maybe.hpp>
 #include <fcppt/optional/map.hpp>
+#include <fcppt/optional/maybe.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <utility>
 #include <fcppt/config/external_end.hpp>
