@@ -6,10 +6,10 @@
 #include <awl/backends/x11/window/property_data.hpp>
 #include <awl/backends/x11/window/property_mode.hpp>
 #include <awl/backends/x11/window/property_type.hpp>
-#include <fcppt/assert/unreachable.hpp>
 #include <fcppt/cast/size.hpp>
 #include <fcppt/cast/to_char_ptr.hpp>
 #include <fcppt/cast/to_signed.hpp>
+#include <fcppt/enum/make_invalid.hpp>
 #include <fcppt/range/size.hpp>
 #include <fcppt/variant/apply.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -32,7 +32,7 @@ int convert_mode(awl::backends::x11::window::property_mode const _type)
     return PropModeAppend;
   }
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_type);
 }
 
 template <typename Type>

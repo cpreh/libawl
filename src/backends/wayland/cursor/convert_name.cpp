@@ -1,7 +1,7 @@
 #include <awl/backends/wayland/cursor/convert_name.hpp>
 #include <awl/backends/wayland/cursor/name.hpp>
 #include <awl/cursor/type.hpp>
-#include <fcppt/assert/unreachable.hpp>
+#include <fcppt/enum/make_invalid.hpp>
 #include <fcppt/config/external_begin.hpp>
 #include <string>
 #include <fcppt/config/external_end.hpp>
@@ -19,5 +19,5 @@ awl::backends::wayland::cursor::convert_name(awl::cursor::type const _type)
     return awl::backends::wayland::cursor::name{std::string{"hand1"}};
   }
 
-  FCPPT_ASSERT_UNREACHABLE;
+  throw fcppt::enum_::make_invalid(_type);
 }
