@@ -196,7 +196,7 @@ awl::event::connection_unique_ptr awl::backends::x11::window::original_object::a
           { this->add_mask_bit(_mask_bit); }});
 
   return awl::event::make_connection(
-      awl::event::connection_function{[this, _mask] { return this->remove_event_mask(_mask); }});
+      awl::event::connection_function{[this, _mask] { this->remove_event_mask(_mask); }});
 }
 
 awl::event::connection_unique_ptr awl::backends::x11::window::original_object::do_register_event(

@@ -10,6 +10,9 @@
 #include <fcppt/cast/to_char_ptr.hpp>
 #include <fcppt/cast/to_signed.hpp>
 #include <fcppt/enum/make_invalid.hpp>
+#include <fcppt/preprocessor/disable_gcc_warning.hpp>
+#include <fcppt/preprocessor/pop_warning.hpp>
+#include <fcppt/preprocessor/push_warning.hpp>
 #include <fcppt/range/size.hpp>
 #include <fcppt/variant/apply.hpp>
 #include <fcppt/config/external_begin.hpp>
@@ -22,6 +25,8 @@ namespace
 
 int convert_mode(awl::backends::x11::window::property_mode const _type)
 {
+  FCPPT_PP_PUSH_WARNING
+  FCPPT_PP_DISABLE_GCC_WARNING(-Wswitch-default)
   switch (_type)
   {
   case awl::backends::x11::window::property_mode::replace:
@@ -31,6 +36,7 @@ int convert_mode(awl::backends::x11::window::property_mode const _type)
   case awl::backends::x11::window::property_mode::append:
     return PropModeAppend;
   }
+  FCPPT_PP_POP_WARNING
 
   throw fcppt::enum_::make_invalid(_type);
 }
