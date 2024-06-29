@@ -42,8 +42,6 @@
 #include <fcppt/log/error.hpp>
 #include <fcppt/log/object.hpp>
 #include <fcppt/log/out.hpp>
-#include <fcppt/log/parameters.hpp>
-#include <fcppt/log/format/optional_function.hpp>
 #include <fcppt/optional/make_if.hpp>
 #include <fcppt/optional/map.hpp>
 #include <fcppt/optional/maybe_void.hpp>
@@ -165,10 +163,7 @@ awl::system::object_unique_ptr awl::system::create(fcppt::log::context_reference
                 [&_backend](std::pair<std::string, function_type> const &_cur)
                 { return _cur.first == _backend.get(); })))
         {
-          fcppt::log::object log{
-              _log_context,
-              fcppt::log::parameters{
-                  awl::impl::log_name(), fcppt::log::format::optional_function{}}};
+          fcppt::log::object const log{_log_context, awl::impl::log_name()};
 
           FCPPT_LOG_ERROR(
               log,

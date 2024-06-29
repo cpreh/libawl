@@ -27,18 +27,12 @@
 #include <fcppt/reference_to_base.hpp>
 #include <fcppt/unique_ptr_to_base.hpp>
 #include <fcppt/log/context_reference.hpp>
-#include <fcppt/log/parameters.hpp>
-#include <fcppt/log/format/optional_function.hpp>
 #include <fcppt/optional/maybe.hpp>
 
 awl::backends::wayland::system::original_object::original_object(
     fcppt::log::context_reference const _log_context)
     : awl::backends::wayland::system::object(),
-      log_{
-          _log_context,
-          awl::log_location(),
-          fcppt::log::parameters{
-              awl::impl::backends::wayland::log_name(), fcppt::log::format::optional_function()}},
+      log_{_log_context, awl::log_location(), awl::impl::backends::wayland::log_name()},
       display_{},
       processor_{fcppt::unique_ptr_to_base<awl::backends::wayland::system::event::processor>(
           fcppt::make_unique_ptr<awl::backends::wayland::system::event::original_processor>(
