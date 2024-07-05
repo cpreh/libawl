@@ -1,1469 +1,273 @@
-cmake_minimum_required(
-	VERSION
-	3.27.0
-)
+cmake_minimum_required(VERSION 3.27.0)
 
-project(
-	awl
-)
+project(awl)
 
-include(
-	GNUInstallDirs
-)
+include(GNUInstallDirs)
 
-set_property(
-	GLOBAL
-	PROPERTY
-	USE_FOLDERS
-	ON
-)
+include(CMakeParseArguments)
 
-find_package(
-	fcppt
-	REQUIRED
-)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-set(
-	FCPPT_UTILS_CLANG_TIDY_WHITELIST
-	"fcppt"
-	"awl"
-)
+find_package(fcppt REQUIRED)
 
-list(
-	APPEND
-	FCPPT_UTILS_CLANG_TIDY_ADDITIONAL_CHECKS
-	"-cppcoreguidelines-avoid-const-or-ref-data-members"
-)
+set(FCPPT_UTILS_CLANG_TIDY_WHITELIST "fcppt" "awl")
 
-include(
-	FcpptCMakeUtils
-)
+list(APPEND FCPPT_UTILS_CLANG_TIDY_ADDITIONAL_CHECKS
+     "-cppcoreguidelines-avoid-const-or-ref-data-members")
 
-set(
-	CMAKE_MODULES_SOURCE_DIR
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake/modules
-)
+include(FcpptCMakeUtils)
 
-set(
-	CMAKE_MODULES_PUBLIC
-	${CMAKE_MODULES_SOURCE_DIR}/public
-)
+set(CMAKE_MODULES_SOURCE_DIR ${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake/modules)
 
-list(
-	APPEND
-	CMAKE_MODULE_PATH
-	"${CMAKE_MODULES_PUBLIC}"
-	"${CMAKE_MODULES_SOURCE_DIR}/private"
-)
+set(CMAKE_MODULES_PUBLIC ${CMAKE_MODULES_SOURCE_DIR}/public)
 
-include(
-	FcpptSymbol
-)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_MODULES_PUBLIC}"
+     "${CMAKE_MODULES_SOURCE_DIR}/private")
 
-fcppt_utils_handle_so_version(
-	AWL_SO_VERSION
-	AWL_USED_SO_VERSION
-	"0.1"
-)
+include(FcpptSymbol)
 
-set(
-	AWL_BASE_SRC_FILES
-	src/cursor/object.cpp
-	src/event/base.cpp
-	src/event/concrete_connection.cpp
-	src/event/connection.cpp
-	src/event/make_connection.cpp
-	src/exception.cpp
-	src/impl/include/awl/impl/backends/sdl/log_name.hpp
-	src/impl/include/awl/impl/backends/wayland/log_name.hpp
-	src/impl/include/awl/impl/backends/wayland/make_registry_object.hpp
-	src/impl/include/awl/impl/backends/x11/log_name.hpp
-	src/impl/include/awl/impl/log_name.hpp
-	src/impl/src/backends/sdl/log_name.cpp
-	src/impl/src/backends/wayland/log_name.cpp
-	src/impl/src/backends/x11/log_name.cpp
-	src/impl/src/log_name.cpp
-	src/log_location.cpp
-	src/main/create_output.cpp
-	src/main/dummy_output.cpp
-	src/main/exit_failure.cpp
-	src/main/exit_success.cpp
-	src/main/function_context.cpp
-	src/main/loop_next.cpp
-	src/main/output.cpp
-	src/main/scoped_output.cpp
-	src/show_error.cpp
-	src/show_error_narrow.cpp
-	src/show_message.cpp
-	src/show_message_narrow.cpp
-	src/system/create.cpp
-	src/system/event/processor.cpp
-	src/system/object.cpp
-	src/timer/event.cpp
-	src/timer/match.cpp
-	src/timer/object.cpp
-	src/timer/setting.cpp
-	src/timer/setting_no_delay.cpp
-	src/timer/setting_no_period.cpp
-	src/visual/object.cpp
-	src/window/event/base.cpp
-	src/window/event/close.cpp
-	src/window/event/destroy.cpp
-	src/window/event/hide.cpp
-	src/window/event/resize.cpp
-	src/window/event/show.cpp
-	src/window/object.cpp
-	src/window/parameters.cpp
-)
+fcppt_utils_handle_so_version(AWL_SO_VERSION AWL_USED_SO_VERSION "0.1")
 
-set(
-	AWL_BASE_INCLUDE_FILES
-	include/awl/cursor/const_optional_object_ref.hpp
-	include/awl/cursor/const_optional_object_ref_fwd.hpp
-	include/awl/cursor/hotspot.hpp
-	include/awl/cursor/hotspot_fwd.hpp
-	include/awl/cursor/object.hpp
-	include/awl/cursor/object_fwd.hpp
-	include/awl/cursor/object_unique_ptr.hpp
-	include/awl/cursor/optional_type.hpp
-	include/awl/cursor/optional_type_fwd.hpp
-	include/awl/cursor/size.hpp
-	include/awl/cursor/type.hpp
-	include/awl/cursor/type_fwd.hpp
-	include/awl/detail/class_symbol.hpp
-	include/awl/detail/export_class_instantiation.hpp
-	include/awl/event/base.hpp
-	include/awl/event/base_fwd.hpp
-	include/awl/event/base_unique_ptr.hpp
-	include/awl/event/concrete_connection.hpp
-	include/awl/event/concrete_connection_fwd.hpp
-	include/awl/event/connection.hpp
-	include/awl/event/connection_function.hpp
-	include/awl/event/connection_fwd.hpp
-	include/awl/event/connection_unique_ptr.hpp
-	include/awl/event/container.hpp
-	include/awl/event/container_reference.hpp
-	include/awl/event/make_connection.hpp
-	include/awl/event/map_concat.hpp
-	include/awl/event/optional_base_unique_ptr.hpp
-	include/awl/event/optional_base_unique_ptr_fwd.hpp
-	include/awl/event/variant.hpp
-	include/awl/event/variant_fwd.hpp
-	include/awl/exception.hpp
-	include/awl/log_location.hpp
-	include/awl/main/create_output.hpp
-	include/awl/main/dummy_output.hpp
-	include/awl/main/exit_code.hpp
-	include/awl/main/exit_code_fwd.hpp
-	include/awl/main/exit_failure.hpp
-	include/awl/main/exit_success.hpp
-	include/awl/main/function_context.hpp
-	include/awl/main/function_context_fwd.hpp
-	include/awl/main/loop_function.hpp
-	include/awl/main/loop_next.hpp
-	include/awl/main/optional_exit_code.hpp
-	include/awl/main/optional_exit_code_fwd.hpp
-	include/awl/main/output.hpp
-	include/awl/main/output_fwd.hpp
-	include/awl/main/output_unique_ptr.hpp
-	include/awl/main/scoped_output.hpp
-	include/awl/main/scoped_output_fwd.hpp
-	include/awl/show_error.hpp
-	include/awl/show_error_narrow.hpp
-	include/awl/show_message.hpp
-	include/awl/show_message_narrow.hpp
-	include/awl/system/create.hpp
-	include/awl/system/event/processor.hpp
-	include/awl/system/event/processor_fwd.hpp
-	include/awl/system/event/processor_ref.hpp
-	include/awl/system/event/result.hpp
-	include/awl/system/event/result_fwd.hpp
-	include/awl/system/object.hpp
-	include/awl/system/object_fwd.hpp
-	include/awl/system/object_ref.hpp
-	include/awl/system/object_unique_ptr.hpp
-	include/awl/system/reference.hpp
-	include/awl/timer/const_reference.hpp
-	include/awl/timer/delay.hpp
-	include/awl/timer/duration.hpp
-	include/awl/timer/event.hpp
-	include/awl/timer/event_fwd.hpp
-	include/awl/timer/match.hpp
-	include/awl/timer/object.hpp
-	include/awl/timer/object_fwd.hpp
-	include/awl/timer/period.hpp
-	include/awl/timer/reference.hpp
-	include/awl/timer/setting.hpp
-	include/awl/timer/setting_fwd.hpp
-	include/awl/timer/setting_no_delay.hpp
-	include/awl/timer/setting_no_period.hpp
-	include/awl/timer/unique_ptr.hpp
-	include/awl/visual/object.hpp
-	include/awl/visual/object_fwd.hpp
-	include/awl/visual/object_unique_ptr.hpp
-	include/awl/window/dim.hpp
-	include/awl/window/dim_fwd.hpp
-	include/awl/window/event/base.hpp
-	include/awl/window/event/base_fwd.hpp
-	include/awl/window/event/close.hpp
-	include/awl/window/event/close_fwd.hpp
-	include/awl/window/event/destroy.hpp
-	include/awl/window/event/destroy_fwd.hpp
-	include/awl/window/event/hide.hpp
-	include/awl/window/event/hide_fwd.hpp
-	include/awl/window/event/resize.hpp
-	include/awl/window/event/resize_fwd.hpp
-	include/awl/window/event/show.hpp
-	include/awl/window/event/show_fwd.hpp
-	include/awl/window/object.hpp
-	include/awl/window/object_fwd.hpp
-	include/awl/window/object_ref.hpp
-	include/awl/window/object_unique_ptr.hpp
-	include/awl/window/optional_dim.hpp
-	include/awl/window/optional_dim_fwd.hpp
-	include/awl/window/parameters.hpp
-	include/awl/window/parameters_fwd.hpp
-	include/awl/window/reference.hpp
-	include/awl/window/size.hpp
-	include/awl/window/unit.hpp
-)
+include(FindPkgConfig)
 
-include(
-	FindPkgConfig
-)
+if(WIN32)
+  set(AWL_WINDOWS_BACKEND TRUE)
+elseif(UNIX)
+  set(AWL_POSIX_BACKEND TRUE)
 
-if(
-	WIN32
-)
-	set(
-		AWL_WINDOWS_BACKEND
-		TRUE
-	)
-elseif(
-	UNIX
-)
-	set(
-		AWL_POSIX_BACKEND
-		TRUE
-	)
+  pkg_check_modules(X11 IMPORTED_TARGET x11)
 
-	pkg_check_modules(
-		X11
-		IMPORTED_TARGET
-		x11
-	)
+  option(ENABLE_X11 "Build the X11 backend" ${X11_FOUND})
 
-	option(
-		ENABLE_X11
-		"Build the X11 backend"
-		${X11_FOUND}
-	)
+  if(ENABLE_X11)
+    set(AWL_X11_BACKEND TRUE)
+  endif()
 
-	if(
-		ENABLE_X11
-	)
-		set(
-			AWL_X11_BACKEND
-			TRUE
-		)
-	endif()
+  pkg_check_modules(WAYLAND IMPORTED_TARGET wayland-client wayland-cursor)
 
-	pkg_check_modules(
-		WAYLAND
-		IMPORTED_TARGET
-		wayland-client
-		wayland-cursor
-	)
+  option(ENABLE_WAYLAND "Build the wayland backend" ${WAYLAND_FOUND})
 
-	option(
-		ENABLE_WAYLAND
-		"Build the wayland backend"
-		${WAYLAND_FOUND}
-	)
+  if(ENABLE_WAYLAND)
+    set(AWL_WAYLAND_BACKEND TRUE)
+  endif()
 
-	if(
-		ENABLE_WAYLAND
-	)
-		set(
-			AWL_WAYLAND_BACKEND
-			TRUE
-		)
-	endif()
-
-	if(
-		NOT
-		ENABLE_X11
-		AND
-		NOT
-		ENABLE_WAYLAND
-	)
-		message(
-			FATAL_ERROR
-			"Neither X11 nor Wayland is enabled."
-		)
-	endif()
+  if(NOT ENABLE_X11 AND NOT ENABLE_WAYLAND)
+    message(FATAL_ERROR "Neither X11 nor Wayland is enabled.")
+  endif()
 else()
-	message(
-		FATAL_ERROR
-		"This configuration is not supported!"
-	)
+  message(FATAL_ERROR "This configuration is not supported!")
 endif()
 
-if(
-	${CMAKE_SYSTEM_NAME} STREQUAL "Linux"
-)
-	set(
-		AWL_LINUX_BACKEND
-		TRUE
-	)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+  set(AWL_LINUX_BACKEND TRUE)
 endif()
 
-if(
-	NOT DEFINED ENABLE_SDL
-)
-	find_package(
-		SDL2
-	)
+if(NOT DEFINED ENABLE_SDL)
+  find_package(SDL2)
 endif()
 
-option(
-	ENABLE_SDL
-	"Enable the SDL2 backend"
-	${SDL2_FOUND}
-)
+option(ENABLE_SDL "Enable the SDL2 backend" ${SDL2_FOUND})
 
-if(
-	ENABLE_SDL
-)
-	find_package(
-		SDL2
-		REQUIRED
-	)
+if(ENABLE_SDL)
+  find_package(SDL2 REQUIRED)
 
-	find_library(
-		SDL2_LIBRARY
-		SDL2
-	)
+  find_library(SDL2_LIBRARY SDL2)
 
-	set(
-		AWL_SDL_BACKEND
-		TRUE
-	)
+  set(AWL_SDL_BACKEND TRUE)
 endif()
 
-configure_file(
-	${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake/config.hpp.in
-	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include/awl/config.hpp
-)
+configure_file(${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake/config.hpp.in
+               ${FCPPT_UTILS_PROJECT_BINARY_DIR}/include/awl/config.hpp)
 
-set(
-	AWL_STATIC_LINK_FLAG
-	AWL_STATIC_LINK
-)
+set(AWL_STATIC_LINK_FLAG AWL_STATIC_LINK)
 
-fcppt_generate_symbol_header(
-	STATIC_LINK_FLAG
-		${AWL_STATIC_LINK_FLAG}
-	EXPORTS_NAME
-		awl
-	SYMBOL_NAME
-		AWL_DETAIL
-)
+fcppt_generate_symbol_header(STATIC_LINK_FLAG ${AWL_STATIC_LINK_FLAG}
+                             EXPORTS_NAME awl SYMBOL_NAME AWL_DETAIL)
 
-set(
-	AWL_X11_SRC_FILES
-	src/backends/x11/colormap.cpp
-	src/backends/x11/cursor/convert_predefined.cpp
-	src/backends/x11/cursor/create_invisible.cpp
-	src/backends/x11/cursor/create_pixmap.cpp
-	src/backends/x11/cursor/create_predefined.cpp
-	src/backends/x11/cursor/holder.cpp
-	src/backends/x11/cursor/load_font.cpp
-	src/backends/x11/cursor/object.cpp
-	src/backends/x11/default_screen.cpp
-	src/backends/x11/display.cpp
-	src/backends/x11/display_fd.cpp
-	src/backends/x11/flush.cpp
-	src/backends/x11/free.cpp
-	src/backends/x11/intern_atom.cpp
-	src/backends/x11/log_location.cpp
-	src/backends/x11/original_display.cpp
-	src/backends/x11/pending.cpp
-	src/backends/x11/pixmap/create_from_data.cpp
-	src/backends/x11/pixmap/holder.cpp
-	src/backends/x11/sync.cpp
-	src/backends/x11/system/event/generic.cpp
-	src/backends/x11/system/event/next.cpp
-	src/backends/x11/system/event/object.cpp
-	src/backends/x11/system/event/original_processor.cpp
-	src/backends/x11/system/event/processor.cpp
-	src/backends/x11/system/object.cpp
-	src/backends/x11/system/original_object.cpp
-	src/backends/x11/to_x11_bool.cpp
-	src/backends/x11/visual/copy_from_parent.cpp
-	src/backends/x11/visual/create_info.cpp
-	src/backends/x11/visual/default.cpp
-	src/backends/x11/visual/get_info.cpp
-	src/backends/x11/visual/object.cpp
-	src/backends/x11/visual/wrapped.cpp
-	src/backends/x11/window/atoms.cpp
-	src/backends/x11/window/attributes.cpp
-	src/backends/x11/window/base.cpp
-	src/backends/x11/window/change_property.cpp
-	src/backends/x11/window/class_hint.cpp
-	src/backends/x11/window/create.cpp
-	src/backends/x11/window/delete_property.cpp
-	src/backends/x11/window/event/change_mask.cpp
-	src/backends/x11/window/event/filter.cpp
-	src/backends/x11/window/event/generic.cpp
-	src/backends/x11/window/event/make.cpp
-	src/backends/x11/window/event/mask_for_each.cpp
-	src/backends/x11/window/event/object.cpp
-	src/backends/x11/window/event/send.cpp
-	src/backends/x11/window/event/to_mask.cpp
-	src/backends/x11/window/event/wm_protocols.cpp
-	src/backends/x11/window/get_class_hint.cpp
-	src/backends/x11/window/get_geometry.cpp
-	src/backends/x11/window/hints.cpp
-	src/backends/x11/window/holder.cpp
-	src/backends/x11/window/object.cpp
-	src/backends/x11/window/original_class_hint.cpp
-	src/backends/x11/window/original_object.cpp
-	src/backends/x11/window/root.cpp
-	src/backends/x11/window/set_wm_protocols.cpp
-	src/backends/x11/window/visual.cpp
-	src/backends/x11/window/wrapped.cpp
-)
+fcppt_utils_load_source_files(awl_base_files.txt AWL_BASE_FILES)
+list(APPEND AWL_FILES ${AWL_BASE_FILES})
 
-set(
-	AWL_X11_INCLUDE_FILES
-	include/awl/backends/x11/X.hpp
-	include/awl/backends/x11/Xlib.hpp
-	include/awl/backends/x11/Xutil.hpp
-	include/awl/backends/x11/atom.hpp
-	include/awl/backends/x11/atom_fwd.hpp
-	include/awl/backends/x11/colormap.hpp
-	include/awl/backends/x11/colormap_fwd.hpp
-	include/awl/backends/x11/const_display_ref.hpp
-	include/awl/backends/x11/cursor/background_color.hpp
-	include/awl/backends/x11/cursor/const_optional_object_ref.hpp
-	include/awl/backends/x11/cursor/const_optional_object_ref_fwd.hpp
-	include/awl/backends/x11/cursor/convert_predefined.hpp
-	include/awl/backends/x11/cursor/create_invisible.hpp
-	include/awl/backends/x11/cursor/create_pixmap.hpp
-	include/awl/backends/x11/cursor/create_predefined.hpp
-	include/awl/backends/x11/cursor/dest_pixmap.hpp
-	include/awl/backends/x11/cursor/foreground_color.hpp
-	include/awl/backends/x11/cursor/holder.hpp
-	include/awl/backends/x11/cursor/holder_fwd.hpp
-	include/awl/backends/x11/cursor/holder_unique_ptr.hpp
-	include/awl/backends/x11/cursor/load_font.hpp
-	include/awl/backends/x11/cursor/object.hpp
-	include/awl/backends/x11/cursor/object_fwd.hpp
-	include/awl/backends/x11/cursor/object_ref.hpp
-	include/awl/backends/x11/cursor/object_unique_ptr.hpp
-	include/awl/backends/x11/cursor/shape.hpp
-	include/awl/backends/x11/cursor/source_pixmap.hpp
-	include/awl/backends/x11/default_screen.hpp
-	include/awl/backends/x11/deleter.hpp
-	include/awl/backends/x11/discard.hpp
-	include/awl/backends/x11/display.hpp
-	include/awl/backends/x11/display_fd.hpp
-	include/awl/backends/x11/display_fwd.hpp
-	include/awl/backends/x11/display_ref.hpp
-	include/awl/backends/x11/flush.hpp
-	include/awl/backends/x11/free.hpp
-	include/awl/backends/x11/intern_atom.hpp
-	include/awl/backends/x11/log_location.hpp
-	include/awl/backends/x11/original_display.hpp
-	include/awl/backends/x11/pending.hpp
-	include/awl/backends/x11/pixmap/const_holder_ref.hpp
-	include/awl/backends/x11/pixmap/create_from_data.hpp
-	include/awl/backends/x11/pixmap/dim.hpp
-	include/awl/backends/x11/pixmap/dim_fwd.hpp
-	include/awl/backends/x11/pixmap/holder.hpp
-	include/awl/backends/x11/pixmap/holder_fwd.hpp
-	include/awl/backends/x11/pixmap/holder_unique_ptr.hpp
-	include/awl/backends/x11/pixmap/size.hpp
-	include/awl/backends/x11/screen.hpp
-	include/awl/backends/x11/sync.hpp
-	include/awl/backends/x11/system/event/generic.hpp
-	include/awl/backends/x11/system/event/generic_fwd.hpp
-	include/awl/backends/x11/system/event/next.hpp
-	include/awl/backends/x11/system/event/object.hpp
-	include/awl/backends/x11/system/event/object_fwd.hpp
-	include/awl/backends/x11/system/event/original_processor.hpp
-	include/awl/backends/x11/system/event/original_processor_fwd.hpp
-	include/awl/backends/x11/system/event/processor.hpp
-	include/awl/backends/x11/system/event/processor_fwd.hpp
-	include/awl/backends/x11/system/object.hpp
-	include/awl/backends/x11/system/object_fwd.hpp
-	include/awl/backends/x11/system/object_ref.hpp
-	include/awl/backends/x11/system/original_object.hpp
-	include/awl/backends/x11/to_x11_bool.hpp
-	include/awl/backends/x11/visual/copy_from_parent.hpp
-	include/awl/backends/x11/visual/create_info.hpp
-	include/awl/backends/x11/visual/default.hpp
-	include/awl/backends/x11/visual/get_info.hpp
-	include/awl/backends/x11/visual/info_unique_ptr.hpp
-	include/awl/backends/x11/visual/mask.hpp
-	include/awl/backends/x11/visual/object.hpp
-	include/awl/backends/x11/visual/object_fwd.hpp
-	include/awl/backends/x11/visual/object_unique_ptr.hpp
-	include/awl/backends/x11/visual/wrapped.hpp
-	include/awl/backends/x11/window/atom_count.hpp
-	include/awl/backends/x11/window/atoms.hpp
-	include/awl/backends/x11/window/atoms_fwd.hpp
-	include/awl/backends/x11/window/attributes.hpp
-	include/awl/backends/x11/window/base.hpp
-	include/awl/backends/x11/window/base_fwd.hpp
-	include/awl/backends/x11/window/base_ref.hpp
-	include/awl/backends/x11/window/base_unique_ptr.hpp
-	include/awl/backends/x11/window/basic_property_data.hpp
-	include/awl/backends/x11/window/basic_property_data_fwd.hpp
-	include/awl/backends/x11/window/change_property.hpp
-	include/awl/backends/x11/window/class_hint.hpp
-	include/awl/backends/x11/window/class_hint_fwd.hpp
-	include/awl/backends/x11/window/const_base_ref.hpp
-	include/awl/backends/x11/window/const_optional_class_hint_ref.hpp
-	include/awl/backends/x11/window/const_optional_class_hint_ref_fwd.hpp
-	include/awl/backends/x11/window/const_optional_object_ref.hpp
-	include/awl/backends/x11/window/const_optional_object_ref_fwd.hpp
-	include/awl/backends/x11/window/create.hpp
-	include/awl/backends/x11/window/delete_property.hpp
-	include/awl/backends/x11/window/event/atom_vector.hpp
-	include/awl/backends/x11/window/event/change_mask.hpp
-	include/awl/backends/x11/window/event/filter.hpp
-	include/awl/backends/x11/window/event/generic.hpp
-	include/awl/backends/x11/window/event/generic_fwd.hpp
-	include/awl/backends/x11/window/event/make.hpp
-	include/awl/backends/x11/window/event/mask.hpp
-	include/awl/backends/x11/window/event/mask_bit.hpp
-	include/awl/backends/x11/window/event/mask_for_each.hpp
-	include/awl/backends/x11/window/event/mask_function.hpp
-	include/awl/backends/x11/window/event/object.hpp
-	include/awl/backends/x11/window/event/object_fwd.hpp
-	include/awl/backends/x11/window/event/optional_mask_bit.hpp
-	include/awl/backends/x11/window/event/optional_mask_bit_fwd.hpp
-	include/awl/backends/x11/window/event/send.hpp
-	include/awl/backends/x11/window/event/to_mask.hpp
-	include/awl/backends/x11/window/event/type.hpp
-	include/awl/backends/x11/window/event/wm_protocols.hpp
-	include/awl/backends/x11/window/get_class_hint.hpp
-	include/awl/backends/x11/window/get_geometry.hpp
-	include/awl/backends/x11/window/hints.hpp
-	include/awl/backends/x11/window/holder.hpp
-	include/awl/backends/x11/window/holder_fwd.hpp
-	include/awl/backends/x11/window/object.hpp
-	include/awl/backends/x11/window/object_fwd.hpp
-	include/awl/backends/x11/window/object_ref.hpp
-	include/awl/backends/x11/window/optional_class_hint.hpp
-	include/awl/backends/x11/window/optional_class_hint_fwd.hpp
-	include/awl/backends/x11/window/original_class_hint.hpp
-	include/awl/backends/x11/window/original_object.hpp
-	include/awl/backends/x11/window/original_object_fwd.hpp
-	include/awl/backends/x11/window/property.hpp
-	include/awl/backends/x11/window/property_data.hpp
-	include/awl/backends/x11/window/property_data_fwd.hpp
-	include/awl/backends/x11/window/property_fwd.hpp
-	include/awl/backends/x11/window/property_mode.hpp
-	include/awl/backends/x11/window/property_mode_fwd.hpp
-	include/awl/backends/x11/window/property_type.hpp
-	include/awl/backends/x11/window/property_type_fwd.hpp
-	include/awl/backends/x11/window/rect.hpp
-	include/awl/backends/x11/window/rect_fwd.hpp
-	include/awl/backends/x11/window/root.hpp
-	include/awl/backends/x11/window/set_wm_protocols.hpp
-	include/awl/backends/x11/window/visual.hpp
-	include/awl/backends/x11/window/wrapped.hpp
-)
+function(add_awl_backend BACKEND)
+  set(option_args HAS_IMPL_DIR)
+  cmake_parse_arguments("" "${option_args}" "" "" ${ARGN})
 
-set(
-	AWL_WAYLAND_INCLUDE_FILES
-	include/awl/backends/wayland/compositor.hpp
-	include/awl/backends/wayland/compositor_fwd.hpp
-	include/awl/backends/wayland/cursor/convert_name.hpp
-	include/awl/backends/wayland/cursor/create_invisible.hpp
-	include/awl/backends/wayland/cursor/create_name.hpp
-	include/awl/backends/wayland/cursor/invisible.hpp
-	include/awl/backends/wayland/cursor/name.hpp
-	include/awl/backends/wayland/cursor/name_fwd.hpp
-	include/awl/backends/wayland/cursor/object.hpp
-	include/awl/backends/wayland/cursor/object_fwd.hpp
-	include/awl/backends/wayland/cursor/object_unique_ptr.hpp
-	include/awl/backends/wayland/cursor/optional.hpp
-	include/awl/backends/wayland/cursor/optional_fwd.hpp
-	include/awl/backends/wayland/cursor/predefined.hpp
-	include/awl/backends/wayland/cursor/theme.hpp
-	include/awl/backends/wayland/cursor/theme_fwd.hpp
-	include/awl/backends/wayland/display.hpp
-	include/awl/backends/wayland/display_comparison.hpp
-	include/awl/backends/wayland/display_dispatch_pending.hpp
-	include/awl/backends/wayland/display_fd.hpp
-	include/awl/backends/wayland/display_flush.hpp
-	include/awl/backends/wayland/display_fwd.hpp
-	include/awl/backends/wayland/display_prepare_read.hpp
-	include/awl/backends/wayland/display_read_events.hpp
-	include/awl/backends/wayland/display_ref.hpp
-	include/awl/backends/wayland/display_reference.hpp
-	include/awl/backends/wayland/display_roundtrip.hpp
-	include/awl/backends/wayland/id_less.hpp
-	include/awl/backends/wayland/id_set.hpp
-	include/awl/backends/wayland/make_registry_object.hpp
-	include/awl/backends/wayland/make_registry_object_fwd.hpp
-	include/awl/backends/wayland/optional_compositor.hpp
-	include/awl/backends/wayland/optional_compositor_fwd.hpp
-	include/awl/backends/wayland/optional_shell.hpp
-	include/awl/backends/wayland/optional_shell_fwd.hpp
-	include/awl/backends/wayland/optional_shm.hpp
-	include/awl/backends/wayland/optional_shm_fwd.hpp
-	include/awl/backends/wayland/original_display.hpp
-	include/awl/backends/wayland/registry.hpp
-	include/awl/backends/wayland/registry_fwd.hpp
-	include/awl/backends/wayland/registry_id.hpp
-	include/awl/backends/wayland/registry_object_decl.hpp
-	include/awl/backends/wayland/registry_object_fwd.hpp
-	include/awl/backends/wayland/registry_object_impl.hpp
-	include/awl/backends/wayland/seat.hpp
-	include/awl/backends/wayland/seat_fwd.hpp
-	include/awl/backends/wayland/seat_ref.hpp
-	include/awl/backends/wayland/shell.hpp
-	include/awl/backends/wayland/shell_fwd.hpp
-	include/awl/backends/wayland/shm.hpp
-	include/awl/backends/wayland/shm_fwd.hpp
-	include/awl/backends/wayland/surface.hpp
-	include/awl/backends/wayland/surface_fwd.hpp
-	include/awl/backends/wayland/system/event/base.hpp
-	include/awl/backends/wayland/system/event/base_fwd.hpp
-	include/awl/backends/wayland/system/event/global_data.hpp
-	include/awl/backends/wayland/system/event/global_data_fwd.hpp
-	include/awl/backends/wayland/system/event/original_processor.hpp
-	include/awl/backends/wayland/system/event/processor.hpp
-	include/awl/backends/wayland/system/event/processor_fwd.hpp
-	include/awl/backends/wayland/system/event/processor_unique_ptr.hpp
-	include/awl/backends/wayland/system/event/seat_added.hpp
-	include/awl/backends/wayland/system/event/seat_added_fwd.hpp
-	include/awl/backends/wayland/system/event/seat_base.hpp
-	include/awl/backends/wayland/system/event/seat_base_fwd.hpp
-	include/awl/backends/wayland/system/event/seat_caps.hpp
-	include/awl/backends/wayland/system/event/seat_caps_fwd.hpp
-	include/awl/backends/wayland/system/event/seat_removed.hpp
-	include/awl/backends/wayland/system/event/seat_removed_fwd.hpp
-	include/awl/backends/wayland/system/object.hpp
-	include/awl/backends/wayland/system/object_fwd.hpp
-	include/awl/backends/wayland/system/object_ref.hpp
-	include/awl/backends/wayland/system/original_object.hpp
-	include/awl/backends/wayland/system/seat/caps.hpp
-	include/awl/backends/wayland/system/seat/caps_field.hpp
-	include/awl/backends/wayland/system/seat/caps_field_fwd.hpp
-	include/awl/backends/wayland/system/seat/caps_fwd.hpp
-	include/awl/backends/wayland/system/seat/data.hpp
-	include/awl/backends/wayland/system/seat/data_fwd.hpp
-	include/awl/backends/wayland/system/seat/object.hpp
-	include/awl/backends/wayland/system/seat/object_fwd.hpp
-	include/awl/backends/wayland/system/seat/object_ref.hpp
-	include/awl/backends/wayland/system/seat/set.hpp
-	include/awl/backends/wayland/system/seat/shared_ptr.hpp
-	include/awl/backends/wayland/visual/null_object.hpp
-	include/awl/backends/wayland/visual/object.hpp
-	include/awl/backends/wayland/window/event/data.hpp
-	include/awl/backends/wayland/window/event/data_fwd.hpp
-	include/awl/backends/wayland/window/object.hpp
-	include/awl/backends/wayland/window/object_fwd.hpp
-	include/awl/backends/wayland/window/object_ref.hpp
-	include/awl/backends/wayland/window/original_object.hpp
-	include/awl/backends/wayland/window/shell_surface.hpp
-	include/awl/backends/wayland/window/shell_surface_fwd.hpp
-)
+  set(BACKEND_DIR backends/${BACKEND})
+  fcppt_utils_load_source_files(${BACKEND_DIR}/files.txt BACKEND_FILES)
+  list(APPEND AWL_FILES ${BACKEND_FILES})
 
-set(
-	AWL_WAYLAND_SRC_FILES
-	src/backends/wayland/compositor.cpp
-	src/backends/wayland/cursor/convert_name.cpp
-	src/backends/wayland/cursor/create_invisible.cpp
-	src/backends/wayland/cursor/create_name.cpp
-	src/backends/wayland/cursor/invisible.cpp
-	src/backends/wayland/cursor/object.cpp
-	src/backends/wayland/cursor/predefined.cpp
-	src/backends/wayland/cursor/theme.cpp
-	src/backends/wayland/display.cpp
-	src/backends/wayland/display_comparison.cpp
-	src/backends/wayland/display_dispatch_pending.cpp
-	src/backends/wayland/display_fd.cpp
-	src/backends/wayland/display_flush.cpp
-	src/backends/wayland/display_prepare_read.cpp
-	src/backends/wayland/display_read_events.cpp
-	src/backends/wayland/display_roundtrip.cpp
-	src/backends/wayland/original_display.cpp
-	src/backends/wayland/registry.cpp
-	src/backends/wayland/seat.cpp
-	src/backends/wayland/shell.cpp
-	src/backends/wayland/shm.cpp
-	src/backends/wayland/surface.cpp
-	src/backends/wayland/system/event/base.cpp
-	src/backends/wayland/system/event/global_data.cpp
-	src/backends/wayland/system/event/original_processor.cpp
-	src/backends/wayland/system/event/processor.cpp
-	src/backends/wayland/system/event/seat_added.cpp
-	src/backends/wayland/system/event/seat_base.cpp
-	src/backends/wayland/system/event/seat_caps.cpp
-	src/backends/wayland/system/event/seat_removed.cpp
-	src/backends/wayland/system/object.cpp
-	src/backends/wayland/system/original_object.cpp
-	src/backends/wayland/system/seat/data.cpp
-	src/backends/wayland/system/seat/object.cpp
-	src/backends/wayland/visual/null_object.cpp
-	src/backends/wayland/visual/object.cpp
-	src/backends/wayland/window/event/data.cpp
-	src/backends/wayland/window/object.cpp
-	src/backends/wayland/window/original_object.cpp
-	src/backends/wayland/window/shell_surface.cpp
-)
+  set(BACKEND_INCLUDE_DIR ${BACKEND_DIR}/include)
+  install(DIRECTORY ${BACKEND_INCLUDE_DIR}/
+          DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  list(APPEND AWL_INCLUDE_DIRS ${BACKEND_INCLUDE_DIR})
 
-set(
-	AWL_POSIX_INCLUDE_FILES
-	include/awl/backends/posix/create_processor.hpp
-	include/awl/backends/posix/duration.hpp
-	include/awl/backends/posix/event.hpp
-	include/awl/backends/posix/event_fwd.hpp
-	include/awl/backends/posix/extract_event.hpp
-	include/awl/backends/posix/fd.hpp
-	include/awl/backends/posix/match.hpp
-	include/awl/backends/posix/optional_duration.hpp
-	include/awl/backends/posix/optional_duration_fwd.hpp
-	include/awl/backends/posix/processor.hpp
-	include/awl/backends/posix/processor_base.hpp
-	include/awl/backends/posix/processor_base_fwd.hpp
-	include/awl/backends/posix/processor_fwd.hpp
-	include/awl/backends/posix/processor_ref.hpp
-	include/awl/backends/posix/processor_unique_ptr.hpp
-	include/awl/backends/posix/timer.hpp
-	include/awl/backends/posix/timer_fwd.hpp
-)
+  if(${_HAS_IMPL_DIR})
+    list(APPEND AWL_IMPL_INCLUDE_DIRS ${BACKEND_DIR}/impl/include)
+  endif()
 
-set(
-	AWL_POSIX_SRC_FILES
-	src/backends/posix/create_processor.cpp
-	src/backends/posix/event.cpp
-	src/backends/posix/extract_event.cpp
-	src/backends/posix/match.cpp
-	src/backends/posix/processor.cpp
-	src/backends/posix/processor_base.cpp
-	src/backends/posix/timer.cpp
-)
+  set(AWL_FILES
+      ${AWL_FILES}
+      PARENT_SCOPE)
+  set(AWL_INCLUDE_DIRS
+      ${AWL_INCLUDE_DIRS}
+      PARENT_SCOPE)
+  set(AWL_IMPL_INCLUDE_DIRS
+      ${AWL_IMPL_INCLUDE_DIRS}
+      PARENT_SCOPE)
+endfunction()
 
-set(
-	AWL_LINUX_INCLUDE_FILES
-	include/awl/backends/linux/epoll/ctl.hpp
-	include/awl/backends/linux/epoll/fd.hpp
-	include/awl/backends/linux/epoll/fd_fwd.hpp
-	include/awl/backends/linux/epoll/fd_vector.hpp
-	include/awl/backends/linux/epoll/original_processor.hpp
-	include/awl/backends/linux/epoll/set.hpp
-	include/awl/backends/linux/epoll/set_fwd.hpp
-	include/awl/backends/linux/timer/object.hpp
-	include/awl/backends/linux/timer/object_fwd.hpp
-	include/awl/backends/linux/timer/reference.hpp
-	include/awl/backends/linux/timer/unique_ptr.hpp
-	include/awl/backends/linux/timerfd/object.hpp
-	include/awl/backends/linux/timerfd/object_fwd.hpp
-	include/awl/backends/linux/timerfd/unique_ptr.hpp
-)
-
-set(
-	AWL_LINUX_SRC_FILES
-	src/backends/linux/epoll/ctl.cpp
-	src/backends/linux/epoll/fd.cpp
-	src/backends/linux/epoll/original_processor.cpp
-	src/backends/linux/epoll/set.cpp
-	src/backends/linux/timer/object.cpp
-	src/backends/linux/timerfd/object.cpp
-)
-
-set(
-	AWL_WINDOWS_SRC_FILES
-	src/backends/windows/clear_last_error.cpp
-	src/backends/windows/command_line_argv.cpp
-	src/backends/windows/command_line_to_argv.cpp
-	src/backends/windows/counted_wndclass.cpp
-	src/backends/windows/cursor/convert_predefined.cpp
-	src/backends/windows/cursor/create_invisible.cpp
-	src/backends/windows/cursor/create_predefined.cpp
-	src/backends/windows/cursor/created.cpp
-	src/backends/windows/cursor/load.cpp
-	src/backends/windows/cursor/object.cpp
-	src/backends/windows/cursor/shared.cpp
-	src/backends/windows/format_message.cpp
-	src/backends/windows/get_command_line.cpp
-	src/backends/windows/get_focus.cpp
-	src/backends/windows/has_last_error.cpp
-	src/backends/windows/local_free.cpp
-	src/backends/windows/main/output.cpp
-	src/backends/windows/message.cpp
-	src/backends/windows/message_box.cpp
-	src/backends/windows/message_box_narrow.cpp
-	src/backends/windows/module_handle.cpp
-	src/backends/windows/peek_message.cpp
-	src/backends/windows/post_message.cpp
-	src/backends/windows/scoped_local_memory.cpp
-	src/backends/windows/system/event/base.cpp
-	src/backends/windows/system/event/generic.cpp
-	src/backends/windows/system/event/handle.cpp
-	src/backends/windows/system/event/handle_holder.cpp
-	src/backends/windows/system/event/handle_matches.cpp
-	src/backends/windows/system/event/handle_ready.cpp
-	src/backends/windows/system/event/object.cpp
-	src/backends/windows/system/event/original_handle.cpp
-	src/backends/windows/system/event/original_processor.cpp
-	src/backends/windows/system/event/processor.cpp
-	src/backends/windows/system/object.cpp
-	src/backends/windows/system/original_object.cpp
-	src/backends/windows/system_metrics.cpp
-	src/backends/windows/timer/due_time.cpp
-	src/backends/windows/timer/object.cpp
-	src/backends/windows/timer/waitable.cpp
-	src/backends/windows/visual/null_object.cpp
-	src/backends/windows/visual/object.cpp
-	src/backends/windows/window/adjusted_size.cpp
-	src/backends/windows/window/client_to_screen.cpp
-	src/backends/windows/window/create.cpp
-	src/backends/windows/window/event/generic.cpp
-	src/backends/windows/window/event/handler.cpp
-	src/backends/windows/window/event/make.cpp
-	src/backends/windows/window/event/object.cpp
-	src/backends/windows/window/event/wnd_proc.cpp
-	src/backends/windows/window/get_client_rect.cpp
-	src/backends/windows/window/get_long_ptr.cpp
-	src/backends/windows/window/get_rect.cpp
-	src/backends/windows/window/get_user_data.cpp
-	src/backends/windows/window/has_focus.cpp
-	src/backends/windows/window/holder.cpp
-	src/backends/windows/window/object.cpp
-	src/backends/windows/window/original_object.cpp
-	src/backends/windows/window/screen_to_client.cpp
-	src/backends/windows/window/set_long_ptr.cpp
-	src/backends/windows/window/set_user_data.cpp
-	src/backends/windows/window/user_data.cpp
-	src/backends/windows/wndclass.cpp
-)
-
-set(
-	AWL_WINDOWS_INCLUDE_FILES
-	include/awl/backends/windows/clear_last_error.hpp
-	include/awl/backends/windows/command_line_argv.hpp
-	include/awl/backends/windows/command_line_argv_fwd.hpp
-	include/awl/backends/windows/command_line_ptr.hpp
-	include/awl/backends/windows/command_line_to_argv.hpp
-	include/awl/backends/windows/counted_wndclass.hpp
-	include/awl/backends/windows/counted_wndclass_fwd.hpp
-	include/awl/backends/windows/cursor/and_plane.hpp
-	include/awl/backends/windows/cursor/const_optional_object_ref.hpp
-	include/awl/backends/windows/cursor/const_optional_object_ref_fwd.hpp
-	include/awl/backends/windows/cursor/convert_predefined.hpp
-	include/awl/backends/windows/cursor/create_invisible.hpp
-	include/awl/backends/windows/cursor/create_predefined.hpp
-	include/awl/backends/windows/cursor/created.hpp
-	include/awl/backends/windows/cursor/created_fwd.hpp
-	include/awl/backends/windows/cursor/dim.hpp
-	include/awl/backends/windows/cursor/dim_fwd.hpp
-	include/awl/backends/windows/cursor/load.hpp
-	include/awl/backends/windows/cursor/object.hpp
-	include/awl/backends/windows/cursor/object_fwd.hpp
-	include/awl/backends/windows/cursor/object_unique_ptr.hpp
-	include/awl/backends/windows/cursor/shared.hpp
-	include/awl/backends/windows/cursor/shared_fwd.hpp
-	include/awl/backends/windows/cursor/size.hpp
-	include/awl/backends/windows/cursor/xor_plane.hpp
-	include/awl/backends/windows/format_message.hpp
-	include/awl/backends/windows/get_command_line.hpp
-	include/awl/backends/windows/get_focus.hpp
-	include/awl/backends/windows/has_last_error.hpp
-	include/awl/backends/windows/local_free.hpp
-	include/awl/backends/windows/local_free_deleter.hpp
-	include/awl/backends/windows/local_free_deleter_fwd.hpp
-	include/awl/backends/windows/lparam.hpp
-	include/awl/backends/windows/main/output.hpp
-	include/awl/backends/windows/message.hpp
-	include/awl/backends/windows/message_box.hpp
-	include/awl/backends/windows/message_box_narrow.hpp
-	include/awl/backends/windows/message_fwd.hpp
-	include/awl/backends/windows/message_type.hpp
-	include/awl/backends/windows/module_handle.hpp
-	include/awl/backends/windows/optional_message.hpp
-	include/awl/backends/windows/optional_message_fwd.hpp
-	include/awl/backends/windows/optional_point.hpp
-	include/awl/backends/windows/optional_point_fwd.hpp
-	include/awl/backends/windows/optional_rect.hpp
-	include/awl/backends/windows/optional_rect_fwd.hpp
-	include/awl/backends/windows/peek_message.hpp
-	include/awl/backends/windows/post_message.hpp
-	include/awl/backends/windows/scoped_local_memory.hpp
-	include/awl/backends/windows/system/event/base.hpp
-	include/awl/backends/windows/system/event/base_fwd.hpp
-	include/awl/backends/windows/system/event/generic.hpp
-	include/awl/backends/windows/system/event/generic_fwd.hpp
-	include/awl/backends/windows/system/event/handle.hpp
-	include/awl/backends/windows/system/event/handle_fwd.hpp
-	include/awl/backends/windows/system/event/handle_holder.hpp
-	include/awl/backends/windows/system/event/handle_holder_fwd.hpp
-	include/awl/backends/windows/system/event/handle_holder_unique_ptr.hpp
-	include/awl/backends/windows/system/event/handle_matches.hpp
-	include/awl/backends/windows/system/event/handle_ready.hpp
-	include/awl/backends/windows/system/event/handle_ready_fwd.hpp
-	include/awl/backends/windows/system/event/handle_unique_ptr.hpp
-	include/awl/backends/windows/system/event/object.hpp
-	include/awl/backends/windows/system/event/object_fwd.hpp
-	include/awl/backends/windows/system/event/original_handle.hpp
-	include/awl/backends/windows/system/event/original_processor.hpp
-	include/awl/backends/windows/system/event/original_processor_fwd.hpp
-	include/awl/backends/windows/system/event/processor.hpp
-	include/awl/backends/windows/system/event/processor_fwd.hpp
-	include/awl/backends/windows/system/object.hpp
-	include/awl/backends/windows/system/object_fwd.hpp
-	include/awl/backends/windows/system/original_object.hpp
-	include/awl/backends/windows/system_metrics.hpp
-	include/awl/backends/windows/timer/due_time.hpp
-	include/awl/backends/windows/timer/object.hpp
-	include/awl/backends/windows/timer/object_fwd.hpp
-	include/awl/backends/windows/timer/waitable.hpp
-	include/awl/backends/windows/timer/waitable_fwd.hpp
-	include/awl/backends/windows/timer/waitable_unique_ptr.hpp
-	include/awl/backends/windows/visual/null_object.hpp
-	include/awl/backends/windows/visual/object.hpp
-	include/awl/backends/windows/visual/object_fwd.hpp
-	include/awl/backends/windows/visual/object_unique_ptr.hpp
-	include/awl/backends/windows/window/adjusted_size.hpp
-	include/awl/backends/windows/window/client_to_screen.hpp
-	include/awl/backends/windows/window/const_optional_object_ref.hpp
-	include/awl/backends/windows/window/const_optional_object_ref_fwd.hpp
-	include/awl/backends/windows/window/create.hpp
-	include/awl/backends/windows/window/event/generic.hpp
-	include/awl/backends/windows/window/event/generic_fwd.hpp
-	include/awl/backends/windows/window/event/handler.hpp
-	include/awl/backends/windows/window/event/make.hpp
-	include/awl/backends/windows/window/event/object.hpp
-	include/awl/backends/windows/window/event/object_fwd.hpp
-	include/awl/backends/windows/window/event/return_type.hpp
-	include/awl/backends/windows/window/event/return_type_fwd.hpp
-	include/awl/backends/windows/window/event/wnd_proc.hpp
-	include/awl/backends/windows/window/get_client_rect.hpp
-	include/awl/backends/windows/window/get_long_ptr.hpp
-	include/awl/backends/windows/window/get_rect.hpp
-	include/awl/backends/windows/window/get_user_data.hpp
-	include/awl/backends/windows/window/has_focus.hpp
-	include/awl/backends/windows/window/holder.hpp
-	include/awl/backends/windows/window/object.hpp
-	include/awl/backends/windows/window/object_fwd.hpp
-	include/awl/backends/windows/window/object_unique_ptr.hpp
-	include/awl/backends/windows/window/optional_object_unique_ptr.hpp
-	include/awl/backends/windows/window/optional_object_unique_ptr_fwd.hpp
-	include/awl/backends/windows/window/optional_user_data_ref.hpp
-	include/awl/backends/windows/window/optional_user_data_ref_fwd.hpp
-	include/awl/backends/windows/window/original_object.hpp
-	include/awl/backends/windows/window/reference.hpp
-	include/awl/backends/windows/window/screen_to_client.hpp
-	include/awl/backends/windows/window/set_long_ptr.hpp
-	include/awl/backends/windows/window/set_user_data.hpp
-	include/awl/backends/windows/window/signed_dim.hpp
-	include/awl/backends/windows/window/signed_dim_fwd.hpp
-	include/awl/backends/windows/window/user_data.hpp
-	include/awl/backends/windows/window/user_data_fwd.hpp
-	include/awl/backends/windows/windows.hpp
-	include/awl/backends/windows/wndclass.hpp
-	include/awl/backends/windows/wndclass_fwd.hpp
-	include/awl/backends/windows/wndclass_remove_callback.hpp
-	include/awl/backends/windows/wparam.hpp
-)
-
-set(
-	AWL_SDL_INCLUDE_FILES
-	include/awl/backends/sdl/cursor/convert_predefined.hpp
-	include/awl/backends/sdl/cursor/create_invisible.hpp
-	include/awl/backends/sdl/cursor/create_predefined.hpp
-	include/awl/backends/sdl/cursor/invisible.hpp
-	include/awl/backends/sdl/cursor/object.hpp
-	include/awl/backends/sdl/cursor/object_fwd.hpp
-	include/awl/backends/sdl/cursor/object_unique_ptr.hpp
-	include/awl/backends/sdl/cursor/predefined.hpp
-	include/awl/backends/sdl/exception.hpp
-	include/awl/backends/sdl/get_error.hpp
-	include/awl/backends/sdl/system/event/object.hpp
-	include/awl/backends/sdl/system/event/object_fwd.hpp
-	include/awl/backends/sdl/system/event/original_processor.hpp
-	include/awl/backends/sdl/system/event/poll.hpp
-	include/awl/backends/sdl/system/event/processor.hpp
-	include/awl/backends/sdl/system/event/processor_fwd.hpp
-	include/awl/backends/sdl/system/event/push.hpp
-	include/awl/backends/sdl/system/event/register.hpp
-	include/awl/backends/sdl/system/event/timer_type.hpp
-	include/awl/backends/sdl/system/event/timer_type_fwd.hpp
-	include/awl/backends/sdl/system/event/translate.hpp
-	include/awl/backends/sdl/system/event/type.hpp
-	include/awl/backends/sdl/system/event/type_fwd.hpp
-	include/awl/backends/sdl/system/event/wait.hpp
-	include/awl/backends/sdl/system/init.hpp
-	include/awl/backends/sdl/system/object.hpp
-	include/awl/backends/sdl/system/object_fwd.hpp
-	include/awl/backends/sdl/system/object_ref.hpp
-	include/awl/backends/sdl/system/original_object.hpp
-	include/awl/backends/sdl/timer/event_code.hpp
-	include/awl/backends/sdl/timer/object.hpp
-	include/awl/backends/sdl/visual/flags.hpp
-	include/awl/backends/sdl/visual/flags_fwd.hpp
-	include/awl/backends/sdl/visual/object.hpp
-	include/awl/backends/sdl/visual/object_fwd.hpp
-	include/awl/backends/sdl/window/from_id.hpp
-	include/awl/backends/sdl/window/get_data.hpp
-	include/awl/backends/sdl/window/get_object.hpp
-	include/awl/backends/sdl/window/holder.hpp
-	include/awl/backends/sdl/window/native_reference.hpp
-	include/awl/backends/sdl/window/object.hpp
-	include/awl/backends/sdl/window/object_data_name.hpp
-	include/awl/backends/sdl/window/object_fwd.hpp
-	include/awl/backends/sdl/window/object_ref.hpp
-	include/awl/backends/sdl/window/original_object.hpp
-	include/awl/backends/sdl/window/reference.hpp
-	include/awl/backends/sdl/window/set_data.hpp
-	include/awl/backends/sdl/window/set_object.hpp
-)
-
-set(
-	AWL_SDL_SRC_FILES
-	src/backends/sdl/cursor/convert_predefined.cpp
-	src/backends/sdl/cursor/create_invisible.cpp
-	src/backends/sdl/cursor/create_predefined.cpp
-	src/backends/sdl/cursor/invisible.cpp
-	src/backends/sdl/cursor/object.cpp
-	src/backends/sdl/cursor/predefined.cpp
-	src/backends/sdl/exception.cpp
-	src/backends/sdl/get_error.cpp
-	src/backends/sdl/system/event/object.cpp
-	src/backends/sdl/system/event/original_processor.cpp
-	src/backends/sdl/system/event/poll.cpp
-	src/backends/sdl/system/event/processor.cpp
-	src/backends/sdl/system/event/push.cpp
-	src/backends/sdl/system/event/register.cpp
-	src/backends/sdl/system/event/translate.cpp
-	src/backends/sdl/system/event/wait.cpp
-	src/backends/sdl/system/init.cpp
-	src/backends/sdl/system/object.cpp
-	src/backends/sdl/system/original_object.cpp
-	src/backends/sdl/timer/event_code.cpp
-	src/backends/sdl/timer/object.cpp
-	src/backends/sdl/visual/object.cpp
-	src/backends/sdl/window/from_id.cpp
-	src/backends/sdl/window/get_data.cpp
-	src/backends/sdl/window/get_object.cpp
-	src/backends/sdl/window/holder.cpp
-	src/backends/sdl/window/object.cpp
-	src/backends/sdl/window/object_data_name.cpp
-	src/backends/sdl/window/original_object.cpp
-	src/backends/sdl/window/set_data.cpp
-	src/backends/sdl/window/set_object.cpp
-)
-
-set(
-	AWL_INCLUDE_FILES
-	"${AWL_BASE_INCLUDE_FILES}"
-)
-
-set(
-	AWL_SRC_FILES
-	"${AWL_BASE_SRC_FILES}"
-)
-
-if(
-	AWL_X11_BACKEND
-)
-	list(
-		APPEND
-		AWL_INCLUDE_FILES
-		${AWL_X11_INCLUDE_FILES}
-	)
-
-	list(
-		APPEND
-		AWL_SRC_FILES
-		${AWL_X11_SRC_FILES}
-	)
+if(AWL_X11_BACKEND)
+  add_awl_backend(x11 HAS_IMPL_DIR)
 endif()
 
-if(
-	AWL_WAYLAND_BACKEND
-)
-	list(
-		APPEND
-		AWL_INCLUDE_FILES
-		${AWL_WAYLAND_INCLUDE_FILES}
-	)
-
-	list(
-		APPEND
-		AWL_SRC_FILES
-		${AWL_WAYLAND_SRC_FILES}
-	)
+if(AWL_WAYLAND_BACKEND)
+  add_awl_backend(wayland HAS_IMPL_DIR)
 endif()
 
-if(
-	AWL_POSIX_BACKEND
-)
-	list(
-		APPEND
-		AWL_INCLUDE_FILES
-		${AWL_POSIX_INCLUDE_FILES}
-	)
-
-	list(
-		APPEND
-		AWL_SRC_FILES
-		${AWL_POSIX_SRC_FILES}
-	)
+if(AWL_POSIX_BACKEND)
+  add_awl_backend(posix)
 endif()
 
-if(
-	AWL_LINUX_BACKEND
-)
-	list(
-		APPEND
-		AWL_INCLUDE_FILES
-		${AWL_LINUX_INCLUDE_FILES}
-	)
-
-	list(
-		APPEND
-		AWL_SRC_FILES
-		${AWL_LINUX_SRC_FILES}
-	)
+if(AWL_LINUX_BACKEND)
+  add_awl_backend(linux)
 endif()
 
-if(
-	AWL_WINDOWS_BACKEND
-)
-	list(
-		APPEND
-		AWL_INCLUDE_FILES
-		${AWL_WINDOWS_INCLUDE_FILES}
-	)
-
-	list(
-		APPEND
-		AWL_SRC_FILES
-		${AWL_WINDOWS_SRC_FILES}
-	)
+if(AWL_WINDOWS_BACKEND)
+  add_awl_backend(windows)
 endif()
 
-if(
-	AWL_SDL_BACKEND
-)
-	list(
-		APPEND
-		AWL_INCLUDE_FILES
-		${AWL_SDL_INCLUDE_FILES}
-	)
-
-	list(
-		APPEND
-		AWL_SRC_FILES
-		${AWL_SDL_SRC_FILES}
-	)
+if(AWL_SDL_BACKEND)
+  add_awl_backend(sdl HAS_IMPL_DIR)
 endif()
 
-list(
-	APPEND
-	AWL_FILES
-	${AWL_SRC_FILES}
-	${AWL_INCLUDE_FILES}
-)
-
-fcppt_utils_append_source_dir_and_make_groups(
-	"${AWL_FILES}"
-	AWL_FILES_ABS
-)
+fcppt_utils_append_source_dir_and_make_groups("${AWL_FILES}" AWL_FILES_ABS)
 
 fcppt_utils_static_shared()
 
-fcppt_utils_link_target(
-	awl
-)
+fcppt_utils_link_target(awl)
 
-function(
-	make_awl_library
-	TARGETNAME
-	VARIANT
-)
-	if(
-		${VARIANT}
-		STREQUAL
-		INTERFACE
-	)
-		add_library(
-			${TARGETNAME}
-			${VARIANT}
-		)
-	else()
-		add_library(
-			${TARGETNAME}
-			${VARIANT}
-			${AWL_FILES_ABS}
-		)
-	endif()
+function(make_awl_library TARGETNAME VARIANT)
+  if(${VARIANT} STREQUAL INTERFACE)
+    add_library(${TARGETNAME} ${VARIANT})
+  else()
+    add_library(${TARGETNAME} ${VARIANT} ${AWL_FILES_ABS})
+  endif()
 
-	if(
-		NOT
-		${VARIANT}
-		STREQUAL
-		INTERFACE
-	)
-		set_target_properties(
-			${TARGETNAME}
-			PROPERTIES
-			VERSION
-			${AWL_USED_SO_VERSION}
-		)
+  if(NOT ${VARIANT} STREQUAL INTERFACE)
+    set_target_properties(${TARGETNAME} PROPERTIES VERSION
+                                                   ${AWL_USED_SO_VERSION})
 
-		fcppt_utils_set_target_compiler_flags(
-			${TARGETNAME}
-		)
-	endif()
+    fcppt_utils_set_target_compiler_flags(${TARGETNAME})
+  endif()
 
-	fcppt_utils_interface_static_link(
-		${TARGETNAME}
-		${VARIANT}
-		${AWL_STATIC_LINK_FLAG}
-	)
+  fcppt_utils_interface_static_link(${TARGETNAME} ${VARIANT}
+                                    ${AWL_STATIC_LINK_FLAG})
 
-	set(
-		PUBLIC_INCLUDES
-		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_BINARY_DIR}/include>"
-		"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include>"
-	)
+  foreach(CUR_DIR ${AWL_INCLUDE_DIRS})
+    list(APPEND AWL_BUILD_INCLUDE_DIRS
+         "$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/${CUR_DIR}>")
+  endforeach()
 
-	target_include_directories(
-		${TARGETNAME}
-		INTERFACE
-		${PUBLIC_INCLUDES}
-	)
+  set(PUBLIC_INCLUDES
+      "$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_BINARY_DIR}/include>"
+      "$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include>"
+      "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+      ${AWL_BUILD_INCLUDE_DIRS})
 
-	target_link_libraries(
-		${TARGETNAME}
-		INTERFACE
-		fcppt_core_interface
-		fcppt_log_interface
-	)
+  target_include_directories(${TARGETNAME} INTERFACE ${PUBLIC_INCLUDES})
 
-	if(
-		AWL_WINDOWS_BACKEND
-	)
-		target_link_libraries(
-			${TARGETNAME}
-			INTERFACE
-			fcppt_filesystem_interface
-		)
-	endif()
+  target_link_libraries(${TARGETNAME} INTERFACE fcppt_core_interface
+                                                fcppt_log_interface)
 
-	if(
-		NOT
-		FCPPT_NARROW_STRING
-	)
-		set(
-			WINDOWS_COMPILE_DEFINITIONS
-			_UNICODE
-			UNICODE
-		)
-	endif()
+  if(AWL_WINDOWS_BACKEND)
+    target_link_libraries(${TARGETNAME} INTERFACE fcppt_filesystem_interface)
+  endif()
 
-	if(
-		NOT
-		${VARIANT}
-		STREQUAL
-		INTERFACE
-	)
-		set_target_properties(
-			${TARGETNAME}
-			PROPERTIES
-			FOLDER
-			awl
-		)
+  if(NOT FCPPT_NARROW_STRING)
+    set(WINDOWS_COMPILE_DEFINITIONS _UNICODE UNICODE)
+  endif()
 
-		target_include_directories(
-			${TARGETNAME}
-			PRIVATE
-			${PUBLIC_INCLUDES}
-			"$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/src/impl/include>"
-		)
+  if(NOT ${VARIANT} STREQUAL INTERFACE)
+    set_target_properties(${TARGETNAME} PROPERTIES FOLDER awl)
 
-		target_link_libraries(
-			${TARGETNAME}
-			PRIVATE
-			${fcppt_core_TARGET}
-			${fcppt_log_TARGET}
-		)
+    foreach(CUR_DIR ${AWL_IMPL_INCLUDE_DIRS})
+      list(APPEND AWL_BUILD_IMPL_INCLUDE_DIRS
+           "$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/${CUR_DIR}>")
+    endforeach()
 
-# FIXME: This is broken. Clients that use the backends must also
-#include this
-		if(
-			AWL_X11_BACKEND
-		)
-			fcppt_utils_link_imported_targets(
-				${TARGETNAME}
-				PRIVATE
-				PkgConfig::X11
-			)
-		endif()
+    set(PRIVATE_INCLUDES
+        "$<BUILD_INTERFACE:${FCPPT_UTILS_PROJECT_SOURCE_DIR}/impl/include>"
+        ${AWL_BUILD_IMPL_INCLUDE_DIRS})
 
-		if(
-			AWL_WAYLAND_BACKEND
-		)
-			fcppt_utils_link_imported_targets(
-				${TARGETNAME}
-				PRIVATE
-				PkgConfig::WAYLAND
-			)
-		endif()
+    target_include_directories(${TARGETNAME} PRIVATE ${PUBLIC_INCLUDES}
+                                                     ${PRIVATE_INCLUDES})
 
-		# TODO: Link to certain windows libs
-		if(
-			AWL_WINDOWS_BACKEND
-		)
-			target_compile_definitions(
-				${TARGETNAME}
-				PRIVATE
-				${WINDOWS_COMPILE_DEFINITIONS}
-			)
+    target_link_libraries(${TARGETNAME} PRIVATE ${fcppt_core_TARGET}
+                                                ${fcppt_log_TARGET})
 
-			target_link_libraries(
-				${TARGETNAME}
-				PRIVATE
-				${fcppt_filesystem_TARGET}
-			)
-		endif()
+    # FIXME: This is broken. Clients that use the backends must also include
+    # this
+    if(AWL_X11_BACKEND)
+      fcppt_utils_link_imported_targets(${TARGETNAME} PRIVATE PkgConfig::X11)
+    endif()
 
-		if(
-			AWL_SDL_BACKEND
-		)
-			fcppt_utils_link_imported_targets(
-				${TARGETNAME}
-				PRIVATE
-				SDL2::SDL2
-			)
+    if(AWL_WAYLAND_BACKEND)
+      fcppt_utils_link_imported_targets(${TARGETNAME} PRIVATE
+                                        PkgConfig::WAYLAND)
+    endif()
 
-			# sdl2-config.cmake is broken
-			target_link_libraries(
-				${TARGETNAME}
-				PRIVATE
-				${SDL2_LIBRARY}
-			)
-		endif()
-	endif()
+    # TODO: Link to certain windows libs
+    if(AWL_WINDOWS_BACKEND)
+      target_compile_definitions(${TARGETNAME}
+                                 PRIVATE ${WINDOWS_COMPILE_DEFINITIONS})
 
-	if(
-		AWL_WINDOWS_BACKEND
-	)
-		target_compile_definitions(
-			${TARGETNAME}
-			INTERFACE
-			${WINDOWS_COMPILE_DEFINITIONS}
-		)
-	endif()
+      target_link_libraries(${TARGETNAME} PRIVATE ${fcppt_filesystem_TARGET})
+    endif()
 
-	fcppt_utils_export_install_target(
-		${TARGETNAME}
-	)
+    if(AWL_SDL_BACKEND)
+      fcppt_utils_link_imported_targets(${TARGETNAME} PRIVATE SDL2::SDL2)
+
+      # sdl2-config.cmake is broken
+      target_link_libraries(${TARGETNAME} PRIVATE ${SDL2_LIBRARY})
+    endif()
+  endif()
+
+  if(AWL_WINDOWS_BACKEND)
+    target_compile_definitions(${TARGETNAME}
+                               INTERFACE ${WINDOWS_COMPILE_DEFINITIONS})
+  endif()
+
+  fcppt_utils_export_install_target(${TARGETNAME})
 endfunction()
 
-fcppt_utils_interface_link_name(
-	awl
-	INTERFACE_NAME
-)
+fcppt_utils_interface_link_name(awl INTERFACE_NAME)
 
-make_awl_library(
-	${INTERFACE_NAME}
-	INTERFACE
-)
+make_awl_library(${INTERFACE_NAME} INTERFACE)
 
-if(
-	ENABLE_STATIC
-)
-	fcppt_utils_static_link_name(
-		awl
-		STATIC_NAME
-	)
+if(ENABLE_STATIC)
+  fcppt_utils_static_link_name(awl STATIC_NAME)
 
-	make_awl_library(
-		${STATIC_NAME}
-		STATIC
-	)
+  make_awl_library(${STATIC_NAME} STATIC)
 endif()
 
-if(
-	ENABLE_SHARED
-)
-	make_awl_library(
-		awl
-		SHARED
-	)
+if(ENABLE_SHARED)
+  make_awl_library(awl SHARED)
 endif()
 
-option(
-	ENABLE_EXAMPLES
-	"Build the examples"
-	ON
-)
+option(ENABLE_EXAMPLES "Build the examples" ON)
 
-if(
-	ENABLE_EXAMPLES
-)
-	add_subdirectory(
-		examples
-	)
+if(ENABLE_EXAMPLES)
+  add_subdirectory(examples)
 endif()
 
-foreach(
-	CUR_FILE
-	${AWL_INCLUDE_FILES}
-)
-	# Cut the filename
-	get_filename_component(
-		REL_PATH
-		${CUR_FILE}
-		PATH
-	)
+fcppt_utils_generate_config(CONFIG_PATH ${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake
+                            MODULES_PATH ${CMAKE_MODULES_PUBLIC})
 
-	# Replace the leading include/
-	string(
-		REPLACE
-		"include/"
-		""
-		TRIMMED_PATH
-		"${REL_PATH}"
-	)
+install(DIRECTORY ${FCPPT_UTILS_PROJECT_SOURCE_DIR}/include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-	install(
-		FILES
-		${FCPPT_UTILS_PROJECT_SOURCE_DIR}/${CUR_FILE}
-		DESTINATION
-		${CMAKE_INSTALL_INCLUDEDIR}/${TRIMMED_PATH}
-	)
-endforeach()
+install(DIRECTORY ${FCPPT_UTILS_PROJECT_BINARY_DIR}/include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-fcppt_utils_generate_config(
-	CONFIG_PATH
-		${FCPPT_UTILS_PROJECT_SOURCE_DIR}/cmake
-	MODULES_PATH
-		${CMAKE_MODULES_PUBLIC}
-)
-
-install(
-	DIRECTORY
-	${FCPPT_UTILS_PROJECT_BINARY_DIR}/include/
-	DESTINATION
-	${CMAKE_INSTALL_INCLUDEDIR}
-)
-
-install(
-	FILES
-	${CMAKE_MODULES_PUBLIC}/AwlMainGenerator.cmake
-	${CMAKE_MODULES_PUBLIC}/main_prototype.cpp.in
-	DESTINATION
-	${FCPPT_UTILS_INSTALL_CMAKEMODULES_DIR}
-)
+install(FILES ${CMAKE_MODULES_PUBLIC}/AwlMainGenerator.cmake
+              ${CMAKE_MODULES_PUBLIC}/main_prototype.cpp.in
+        DESTINATION ${FCPPT_UTILS_INSTALL_CMAKEMODULES_DIR})
