@@ -13,9 +13,7 @@ update_backend()
 	local backend_dir=backends/"$1"
 	update_cmake.sh \
 		"${backend_dir}"/files.txt \
-		"${backend_dir}"/include \
-		"${backend_dir}"/src \
-		"${backend_dir}"/impl
+		"${backend_dir}"
 }
 
 BACKENDS=(
