@@ -33,20 +33,20 @@ void awl::backends::linux::timerfd::object::set_time(awl::timer::setting const &
       [](awl::backends::posix::duration const _duration) -> timespec
       {
         return timespec{
-            std::chrono::duration_cast<std::chrono::seconds>(_duration).count(),
-            std::chrono::duration_cast<std::chrono::nanoseconds>(
-                _duration % std::chrono::duration_cast<awl::backends::posix::duration>(
-                                // NOLINTNEXTLINE(fuchsia-default-arguments-calls)
-                                std::chrono::seconds(1)))
-                .count()};
+            .tv_sec = std::chrono::duration_cast<std::chrono::seconds>(_duration).count(),
+            .tv_nsec = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                           _duration % std::chrono::duration_cast<awl::backends::posix::duration>(
+                                           // NOLINTNEXTLINE(fuchsia-default-arguments-calls)
+                                           std::chrono::seconds(1)))
+                           .count()};
       });
 
   // NOLINTNEXTLINE(misc-include-cleaner)
   itimerspec const time_spec{
-      convert_time(_setting.period().get()),
+      .it_interval = convert_time(_setting.period().get()),
       // A delay of 0 makes the timer inactive,
       // so use the smallest delay possible instead.
-      convert_time(
+      .it_value = convert_time(
           _setting.delay().get() ==
                   // NOLINTNEXTLINE(fuchsia-default-arguments-calls)
                   awl::timer::duration{0}

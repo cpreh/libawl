@@ -63,7 +63,7 @@ void wl_seat_capabilities(void *const _data, wl_seat *, std::uint32_t const _cap
 
 void wl_seat_name(void *, wl_seat *, char const *) {}
 
-wl_seat_listener const seat_listener{&wl_seat_capabilities, &wl_seat_name};
+wl_seat_listener const seat_listener{.capabilities = &wl_seat_capabilities, .name = &wl_seat_name};
 
 }
 

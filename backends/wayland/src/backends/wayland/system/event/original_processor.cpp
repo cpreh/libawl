@@ -163,7 +163,7 @@ void registry_remove(void *const _data, wl_registry *, std::uint32_t const _name
       });
 }
 
-wl_registry_listener const registry_listener{registry_add, registry_remove};
+wl_registry_listener const registry_listener{.global = registry_add, .global_remove = registry_remove};
 
 }
 

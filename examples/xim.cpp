@@ -53,7 +53,6 @@
 #include <cstdlib>
 #include <exception>
 #include <iostream>
-#include <ostream>
 #include <stdexcept>
 #include <string>
 #include <fcppt/config/external_end.hpp>
@@ -131,7 +130,7 @@ try
     XIM impl_;
   };
 
-  xim_wrapper xim{dpy};
+  xim_wrapper const xim{dpy};
 
   XIM im{xim.get()};
 
@@ -164,7 +163,7 @@ try
     XIC impl_;
   };
 
-  xic_wrapper xic{im, win};
+  xic_wrapper const xic{im, win};
 
   XIC ic{xic.get()};
 

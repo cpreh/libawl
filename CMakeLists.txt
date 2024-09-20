@@ -121,6 +121,8 @@ endif()
 
 if(AWL_WAYLAND_BACKEND)
   add_awl_backend(wayland HAS_IMPL_DIR)
+  # TODO: clang-tidy 19 crashes on this
+  set_source_files_properties(backends/wayland/src/backends/wayland/window/original_object.cpp PROPERTIES SKIP_LINTING ON)
 endif()
 
 if(AWL_POSIX_BACKEND)
