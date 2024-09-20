@@ -9,7 +9,6 @@
 #include <string>
 #if !defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
 #include <iostream>
-#include <ostream>
 #endif
 #include <fcppt/config/external_end.hpp>
 
