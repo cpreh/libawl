@@ -208,7 +208,7 @@ awl::backends::x11::system::event::original_processor::process_window_event(
     XClientMessageEvent const request(_event.get().xclient);
 
     if (request.message_type == wm_protocols_atom_.get() &&
-        static_cast<Atom>(request.data.l[0] // NOLINT(cppcoreguidelines-pro-type-union-access)
+        static_cast<Atom>(request.data.l[0] // NOLINT(cppcoreguidelines-pro-type-union-access,modernize-use-integer-sign-comparison)
                           ) == wm_delete_window_atom_.get())
     {
       return fcppt::unique_ptr_to_base<awl::event::base>(
