@@ -69,8 +69,9 @@ void shell_surface_configure(
 void shell_surface_popup_done(void *, wl_shell_surface *) {}
 
 wl_shell_surface_listener const shell_surface_listener{
-    shell_surface_ping, shell_surface_configure, shell_surface_popup_done};
-
+    .ping = shell_surface_ping,
+    .configure = shell_surface_configure,
+    .popup_done = shell_surface_popup_done};
 }
 
 awl::backends::wayland::window::original_object::original_object(
