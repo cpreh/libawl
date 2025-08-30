@@ -9,7 +9,7 @@
 #include <time.h> // NOLINT(hicpp-deprecated-headers,modernize-deprecated-headers)
 #include <unistd.h>
 #include <sys/timerfd.h>
-#include <sys/types.h>
+#include <sys/types.h> // IWYU pragma: keep
 #include <chrono>
 #include <fcppt/config/external_end.hpp>
 
@@ -65,6 +65,7 @@ awl::backends::linux::timerfd::object::value_type awl::backends::linux::timerfd:
 {
   value_type ret{0};
 
+  // NOLINTNEXTLINE(misc-include-cleaner)
   if (::read(fd_.get(), &ret, sizeof(value_type)) != static_cast<ssize_t>(sizeof(value_type)))
   {
     throw awl::exception{FCPPT_TEXT("Invalid read in linux::timerfd")};

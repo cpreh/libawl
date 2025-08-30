@@ -4,16 +4,16 @@
 #include <awl/system/create.hpp>
 #include <awl/system/object.hpp>
 #include <awl/system/object_unique_ptr.hpp>
-#if defined(AWL_X11_BACKEND)
+#ifdef AWL_X11_BACKEND
 #include <awl/backends/x11/system/original_object.hpp>
 #endif
-#if defined(AWL_WAYLAND_BACKEND)
+#ifdef AWL_WAYLAND_BACKEND
 #include <awl/backends/wayland/system/original_object.hpp>
 #endif
-#if defined(AWL_WINDOWS_BACKEND)
+#ifdef AWL_WINDOWS_BACKEND
 #include <awl/backends/windows/system/original_object.hpp>
 #endif
-#if defined(AWL_SDL_BACKEND)
+#ifdef AWL_SDL_BACKEND
 #include <awl/backends/sdl/system/original_object.hpp>
 #endif
 #include <fcppt/declare_strong_typedef.hpp>
@@ -80,22 +80,22 @@ backend_list get_backends(fcppt::log::context_reference const _log_context)
 {
   return backend_list
   {
-#if defined(AWL_WAYLAND_BACKEND)
+#ifdef AWL_WAYLAND_BACKEND
     std::make_pair(
         std::string{"wayland"},
         try_create<awl::backends::wayland::system::original_object>(_log_context)),
 #endif
-#if defined(AWL_X11_BACKEND)
+#ifdef AWL_X11_BACKEND
         std::make_pair(
             std::string{"X11"},
             try_create<awl::backends::x11::system::original_object>(_log_context)),
 #endif
-#if defined(AWL_WINDOWS_BACKEND)
+#ifdef AWL_WINDOWS_BACKEND
         std::make_pair(
             std::string{"Windows"},
             try_create<awl::backends::windows::system::original_object>(_log_context)),
 #endif
-#if defined(AWL_SDL_BACKEND)
+#ifdef AWL_SDL_BACKEND
         std::make_pair(
             std::string{"SDL"},
             try_create<awl::backends::sdl::system::original_object>(_log_context)),
