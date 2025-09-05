@@ -1,8 +1,8 @@
 #include <awl/main/exit_code.hpp>
 #include <awl/main/function_context.hpp>
 #include <fcppt/config/platform.hpp> // NOLINT(misc-include-cleaner)
-#if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
-#if !defined(FCPPT_NARROW_STRING)
+#ifdef FCPPT_CONFIG_WINDOWS_PLATFORM
+#ifndef FCPPT_NARROW_STRING
 #include <awl/backends/windows/command_line_argv.hpp>
 #include <awl/backends/windows/command_line_to_argv.hpp>
 #include <awl/backends/windows/get_command_line.hpp>
@@ -24,7 +24,7 @@ awl::main::exit_code
 
 @AWL_UTILS_MAIN_FUNCTION_NAMESPACES_END@
 
-#if defined(FCPPT_CONFIG_WINDOWS_PLATFORM)
+#ifdef FCPPT_CONFIG_WINDOWS_PLATFORM
 int
 CALLBACK
 WinMain(
@@ -34,7 +34,7 @@ WinMain(
 	int
 )
 {
-#if defined (FCPPT_NARROW_STRING)
+#ifdef FCPPT_NARROW_STRING
 	awl::main::function_context const main_context{
 		__argc,
 		__argv
